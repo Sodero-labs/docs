@@ -9,6 +9,10 @@ theme:
     primary: blue
     accent: cyan
 
+extra_css:
+  - styles/side_bar.css
+  - styles/theme.css
+
 nav:
   - Home: index.md
   - Stellar X:
