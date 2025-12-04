@@ -1,0 +1,10 @@
+/* Left sidebar width (primary nav) */
+:root {
+  --md-sidebar-width: 300px;   /* default ~256px */
+  --md-sidebar-width-narrow: 200px;
+}
+
+/* Optional: Adjust second-level sidebar (toc on the right) */
+:root {
+  --md-sidebar-secondary-width: 300px; /* default ~240px */
+}
