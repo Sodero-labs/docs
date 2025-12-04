@@ -1,4 +1,4 @@
-# Welcome to Sodero Docs
+# Welcome to Sodero-Labs Documents
 
 ## Commands
 

@@ -1,7 +1,9 @@
-site_name: STELLAR Docs
+site_name: Sodero Documents
 
 theme:
   name: material
+  features:
+    - navigation.expand
   palette:
   - scheme: slate
     primary: blue
@@ -9,11 +11,18 @@ theme:
 
 nav:
   - Home: index.md
-  - What is STELLAR: what.md 
-  - Getting Started: getting-started.md
-  - Tutorials:
-      - Install SDR: tutorials/install-sdr.md
-      - Connect Controller: tutorials/connect-controller.md
-  - Architecture:
-      - Middleware: architecture/middleware.md
-      - Components: architecture/components.md
+  - Stellar X:
+    - What is Stellar X: stellarx/what_is_stellarx.md
+    - Quick Start: stellarx/quick_start.md
+    - Tutorials:
+      - Stellar Designer:
+        - About Stellar Deigner: stellarx/tutorials/stellar_designer/about_stellar_designer.md
+        - 1. Kinematic Structure: stellarx/tutorials/stellar_designer/define_kinematic_structure.md
+        - 2. Configure System Parameters: stellarx/tutorials/stellar_designer/configure_system_parameters.md
+        - 3. Map Actuators: stellarx/tutorials/stellar_designer/map_actuators.md
+        - 4. Verify Configuration: stellarx/tutorials/stellar_designer/verify_configuration.md
+        - Start from Templates: stellarx/tutorials/stellar_designer/start_from_templates.md
+      - Stellar Motion:
+        - About Stellar Motion: stellarx/tutorials/stellar_motion/about_stellar_motion.md
+
+
