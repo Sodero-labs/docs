@@ -1,0 +1,19 @@
+site_name: STELLAR Docs
+
+theme:
+  name: material
+  palette:
+  - scheme: slate
+    primary: blue
+    accent: cyan
+
+nav:
+  - Home: index.md
+  - What is STELLAR: what.md 
+  - Getting Started: getting-started.md
+  - Tutorials:
+      - Install SDR: tutorials/install-sdr.md
+      - Connect Controller: tutorials/connect-controller.md
+  - Architecture:
+      - Middleware: architecture/middleware.md
+      - Components: architecture/components.md
