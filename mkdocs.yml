@@ -1,0 +1,63 @@
+site_name: Sodero Documents
+site_url: https://docs.sodero.io/
+theme:
+  name: material
+  custom_dir: docs/overrides
+  font:
+    text: "Inter"
+    code: "JetBrains Mono"
+  palette:
+    - scheme: slate
+      primary: black
+      accent: white
+  features:
+    - navigation.expand
+    - navigation.path 
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  extra:
+    version:
+      provider: mike
+extra_css:
+  - styles/layout.css
+  - styles/color.css
+  - styles/font.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+nav:
+  - Home: index.md
+  - Stellar X:
+    - What is Stellar X: stellarx/what_is_stellarx/index.md
+    - Quick Start: stellarx/quick_start/index.md
+    - Tutorials:
+      - Stellar Designer:
+        - Introduction: stellarx/tutorials/stellar_designer/introduction/index.md
+        - Create New Robot:
+          - Step 1. Robot Structure: stellarx/tutorials/stellar_designer/robot_structure/index.md
+          - Step 2. Robot System Parameters: stellarx/tutorials/stellar_designer/configure_system_parameters/index.md
+          - Step 3. Actuator Mapping: stellarx/tutorials/stellar_designer/map_actuators/index.md
+          - Step 4. Virtual Verification: stellarx/tutorials/stellar_designer/verify_configuration/index.md
+        - Start from Templates: stellarx/tutorials/stellar_designer/start_from_templates/index.md
+      - Stellar Motion:
+        - About Stellar Motion: stellarx/tutorials/stellar_motion/about_stellar_motion/index.md
+      - Simulation & Virtual Control:
+        - Virtual Control Overview: stellarx/tutorials/simulation/virtual_control_overview/index.md
+        - Isaac Sim:
+          - Introduction: stellarx/tutorials/simulation/introduction/index.md
+          - Extension Installation: stellarx/tutorials/simulation/extension_installation/index.md
+          - Robot Setup: stellarx/tutorials/simulation/robot_setup/index.md
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption
+  - pymdownx.arithmatex:
+      generic: true
+
+plugins:
+  - glightbox
