@@ -1,0 +1,87 @@
+@media (max-width: 76.24em) {
+  .md-content > nav, 
+  .md-content .md-breadcrumbs {
+    display: none !important;
+  }
+
+  .md-sidebar--secondary .md-nav__title {
+      display: none !important;
+  }
+
+  .md-footer-meta {
+    display: none !important;
+  }
+}
+
+/* 2. 큰 화면 (PC 데스크탑) */
+@media (min-width: 76.25em) {
+  :is(h1, h2, h3, h4, h5, h6)::before {
+    content: "";
+    display: block;
+    height: 20px; 
+    margin-top: -20px; 
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) {
+    scroll-margin-top: 50px !important; 
+  }
+
+  .md-main__inner {
+    margin-top: 0;
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .md-content {
+    display: flex !important;
+    justify-content: flex-end;    
+  }
+
+  .md-content__inner {
+    width: 680px;
+    max-width: 100%;
+    padding : 20px 
+  }
+
+  .md-content > nav, 
+  .md-content .md-breadcrumbs {
+    display: none !important;
+  }
+
+  .md-typeset img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .md-typeset .grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .md-sidebar--primary .md-nav__title {
+    display: none !important;
+  }
+
+  .md-sidebar--secondary .md-nav__title {
+      display: none !important;
+  }
+
+  .md-sidebar--primary {
+    width: 280px;
+    height: calc(100vh - 60px) !important;
+    border-right: 1px solid #333;
+  }
+
+  .md-sidebar--secondary {
+    width: 600px !important;
+    height: calc(100vh - 60px) !important;
+  }
+
+  .md-footer-meta {
+    display: none !important;
+  }
+
+}
