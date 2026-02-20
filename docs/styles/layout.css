@@ -40,8 +40,9 @@
   }
 
   .md-content__inner {
-    width: 500px;
+    width: 680px;
     max-width: 100%;
+    padding : 20px 
   }
 
   .md-content > nav, 
