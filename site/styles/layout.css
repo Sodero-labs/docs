@@ -40,7 +40,7 @@
   }
 
   .md-content__inner {
-    width: 700px;
+    width: 700px !important;
     max-width: 100%;
   }
 
