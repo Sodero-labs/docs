@@ -44,7 +44,7 @@ nav:
           - Step 4. Virtual Verification: stellarx/tutorials/stellar_designer/verify_configuration/index.md
         - Start from Templates: stellarx/tutorials/stellar_designer/start_from_templates/index.md
       - Stellar Motion:
-        - About Stellar Motion: stellarx/tutorials/stellar_motion/about_stellar_motion/index.md
+        - About Stellar Motion: stellarx/tutorials/stellar_motion_studio/about_stellar_motion/index.md
       - Simulation & Virtual Control:
         - Virtual Control Overview: stellarx/tutorials/simulation/virtual_control_overview/index.md
         - Isaac Sim:
