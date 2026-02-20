@@ -19,8 +19,7 @@
 
 /* 2. 사이드바 링크 상세 (기본, 호버, 활성) */
 .md-nav__link {
-    /* color: #9e9e9e !important; */
-    color: red;
+    color: #9e9e9e !important;
     transition: color 0.2s ease;
 }
 
