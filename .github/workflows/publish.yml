@@ -1,0 +1,25 @@
+name: publish site
+on:
+  push:
+    branches:
+      - main  # 메인 브랜치에 push될 때 실행 (master라면 master로 변경)
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Configure Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install mkdocs-material 
+          # 추가로 사용하는 테마나 플러그인이 있다면 여기에 작성하세요.
+
+      - name: Deploy to GitHub Pages
+        run: mkdocs gh-deploy --force
