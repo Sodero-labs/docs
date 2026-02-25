@@ -110,11 +110,47 @@ You'll be then able to see the full robot model.
     ![models](images/isaacsim_assembly_28.png)
     ![models](images/isaacsim_assembly_29.png)
 </figure>
-And that's it! You just made your own robot model. Save and open up new file. Click `Create` -> `Environments` -> `Flat Grid`. Drag the robot model file to `Stage` on the right, and you'll see the robot in the world!
+And that's the end of robot preparation. Save and open up new file. Click `Create` -> `Environments` -> `Flat Grid`. Drag the robot model file to `Stage` on the right, and you'll see the robot in the world!
 
-(Insert example gif here)
+&nbsp;
 
-Change the robot's name to your StellarX's robot name and click `Play` button on the left side. Jog the robot via StellarX and you'll see the robot is moving accordingly. You can also write your own python script to move the robot at your need.
+Next step is StellarX configuration. For convenience, download already configured stellar robot definition file below.
+
+ - [**Robot definition download link**](models/example_robot.sdd)
+
+<figure markdown="span">
+    ![stellar](images/stellar_01.png)
+    ![stellar](images/stellar_02.png)
+</figure>
+On the main page, click `Import File` button and load example_robot definition. Double-click to enter the project.
+
+<figure markdown="span">
+    ![stellar](images/stellar_03.png)
+    ![stellar](images/stellar_04.png)
+</figure>
+There's nothing for us to configure in this step. Click `Step 4: Virtual Verification` and click `Activate Simulation`.
+
+<figure markdown="span">
+    ![stellar](images/stellar_05.png)
+    ![stellar](images/stellar_06.png)
+    ![stellar](images/stellar_07.png)
+    ![stellar](images/stellar_08.png)
+</figure>
+If there's no problem, you'll see no issues here. Click `Ok`. Change `EtherCAT` default setting to `Isaac Sim`. Click `Apply`.
+
+<figure markdown="span">
+    ![stellar](images/stellar_09.png)
+    ![stellar](images/stellar_10.png)
+    ![stellar](images/stellar_11.png)
+</figure>
+Enter the robot's name in `Name`, and your PC's IP address in `IP`. Click `Apply` and `Apply`. Finally, click `Go to Motion Studio`.
+
+<figure markdown="span">
+    ![stellar](images/stellar_12.png)
+    ![stellar](images/stellar_13.png)
+    ![stellar](images/stellar_final_result.gif)
+</figure>
+This is Stellar Motion Studio. Open up jog-panel by clicking joystick icon on top-right. Click `Servo On`. On Isaac Sim, click `Play` button on the left side. Jog the robot via `Jog Control` and you'll see the robot is moving accordingly. You can also write your own python script to move the robot at your need.
 
 You can download final robot model below.
 
