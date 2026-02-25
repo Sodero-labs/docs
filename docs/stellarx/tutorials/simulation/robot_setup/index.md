@@ -42,38 +42,38 @@ Most of the time, you'll be using [urdf](https://wiki.ros.org/urdf) format. If y
 <figure markdown="span">
     ![models](images/isaacsim_assembly_04.png)
     ![models](images/isaacsim_assembly_05.png){ width="1000" }
-    ![models](images/isaacsim_assembly_07.png){ width="1000" }
+    ![models](images/isaacsim_assembly_06.png){ width="1000" }
 </figure>
 - If you take a look at the file's directory, you'll see a new `.usd` format file with the same name. Click `File` -> `Open` and open the `.usd` file.
 You'll be then able to see the full robot model.
 
 <figure markdown="span">
+    ![models](images/isaacsim_assembly_07.png)
     ![models](images/isaacsim_assembly_08.png)
-    ![models](images/isaacsim_assembly_09.png)
 </figure>
 - Open up all the joint prims and you'll see the full stage tree. Right-click on the empty part of the stage and click `Create` -> `Scope`. This will create scope for organizing the stage. Create two scopes and name them `links` and `joints`. 
 
 <figure markdown="span">
+    ![models](images/isaacsim_assembly_09.png)
     ![models](images/isaacsim_assembly_10.png)
-    ![models](images/isaacsim_assembly_11.png)
 </figure>
 - Drag all the links to `links` scope and delete joint prims.
 
 <figure markdown="span">
+    ![models](images/isaacsim_assembly_11.png)
     ![models](images/isaacsim_assembly_12.png)
-    ![models](images/isaacsim_assembly_13.png)
 </figure>
 - Select all the links and right-click. Click `Add` -> `Physics` -> `Rigid Body` to make them rigid-bodies. You can verify it by scrolling down on the property tab.
 
 <figure markdown="span">
+    ![models](images/isaacsim_assembly_13.png)
     ![models](images/isaacsim_assembly_14.png)
-    ![models](images/isaacsim_assembly_15.png)
 </figure>
 - Next, open the link prim and select mesh prim. Right-click and click `Add` -> `Physics` -> `Collider`. This will add collider to mesh and you can also verify it by scrolling down. Default collider type is `trimesh`, but since the parent prim is rigid-body, it is automatically set to `Convex Hull`. Repeat this for all the other link meshes.
 
 <figure markdown="span">
-    ![models](images/isaacsim_assembly_16_1.png)
-    ![models](images/isaacsim_assembly_16_2.png)
+    ![models](images/isaacsim_assembly_15.png)
+    ![models](images/isaacsim_assembly_16.png)
 </figure>
 - Now, we need to add joints. First, select `link0` and right-click. Click `Create` -> `Physics` -> `Joint` -> `Fixed Joint`. This will create `FixedJoint` under `link0`. This joint is like an anchor that fixes base link of the robot to the world. You can see this by looking at the Body settings of `FixedJoint`. Empty Body 0 means it is fixed to world. You can explicitly set this To `/World` prim.
 
@@ -96,24 +96,19 @@ You'll be then able to see the full robot model.
 - Repeat the same process for the other joints. And move them to `joints` scope.
 
 <figure markdown="span">
-    ![models](images/isaacsim_assembly_23.png)
-    ![models](images/isaacsim_assembly_24.png)
-</figure>
-- Select all the active joints and scroll down to `Drive` property. Set `Stiffness` and `Damping` to `100000.0` and `10000.0`, resplectively. This is only to set the joints fixed when not using Stellar X. You can choose arbitrary values, only if `Stiffness` is higher than `Damping`.
-
-<figure markdown="span">
     ![models](images/isaacsim_assembly_25.png)
 </figure>
 - Select `J1` and scroll down to `Revolute Joint` section. Click `Axis` and selelct Z. Repeat same process for `J4` and `J6`.
 
 <figure markdown="span">
     ![models](images/isaacsim_assembly_26.png)
+    ![models](images/isaacsim_assembly_27.png)
 </figure>
-- Finally, select FixedJoint and right-click. Select `Add` -> `Physics` -> `Articulation Root`. `Articulation Root` is what defines robot in Isaac Sim. For more information, check out [this documentation](https://docs.isaacsim.omniverse.nvidia.com/5.0.0/robot_setup_tutorials/tutorial_gui_simple_robot.html#add-articulation).
+- Finally, select FixedJoint and right-click. Select `Add` -> `Physics` -> `Articulation Root`. `Articulation Root` is what defines robot in Isaac Sim. For more information, check out [this documentation](https://docs.isaacsim.omniverse.nvidia.com/5.0.0/robot_setup_tutorials/tutorial_gui_simple_robot.html#add-articulation). Change the joint's name to 'example_robot'. The name of the prim that has articulation root is recognized as that robot's name. 
 
 <figure markdown="span">
-    ![models](images/isaacsim_assembly_27.png)
     ![models](images/isaacsim_assembly_28.png)
+    ![models](images/isaacsim_assembly_29.png)
 </figure>
 And that's it! You just made your own robot model. Save and open up new file. Click `Create` -> `Environments` -> `Flat Grid`. Drag the robot model file to `Stage` on the right, and you'll see the robot in the world!
 
