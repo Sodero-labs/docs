@@ -2,7 +2,9 @@
 
 ## Nvidia Isaac Sim
 
-(Insert example gif here)
+<figure markdown="span">
+    ![isaacsim](images/isaac_sim.png)
+</figure>
 
 [NVIDIA Isaac Sim](https://developer.nvidia.com/isaac/sim) is a robotics simulator for developers to build, simulate and test robots in physically-based virtual environments.
 Users can use StellarX with Isaac Sim to design, plan and verify robot motions before deploying to the real world.
