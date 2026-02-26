@@ -19,6 +19,7 @@ This parameter defines the physical reach of the robot based on its kinematics. 
 - **Function**: This value is used to limit the joint speed effectively to prevent the TCP from exceeding safe velocities.
 
 > **⚠️ Caution**
+
 > * This value **must be reasonably accurate**, as it affects motion constraints.
 > * However, **perfect precision is not required** — an error margin of **±10%** is acceptable.
 
@@ -68,12 +69,14 @@ Defines the moment of inertia limits for the robot's wrist joints.
 Defines the kinematic constraints **in task space**, i.e., relative to the robot’s **Tool Center Point (TCP)**. These limits constrain the Cartesian linear motion of the end-effector.
 
 ### Parameters
+
 * **Max Speed**: Maximum linear velocity of the TCP when moving toward the target (Unit: mm/s or m/s).
 * **Max Accel**: Maximum linear acceleration of the TCP while following the trajectory (Unit: mm/s² or m/s²).
 * **Max Jerk**: Maximum linear jerk (rate of change of acceleration) of the TCP (Unit: mm/s³ or m/s³).
 
 > **⚠️ Caution**
 > These values should be defined based on:
+
 > * The **mechanical and structural limits** of the robot.
 > * The desired **task performance and safety**.
 > * Excessively high values can lead to unstable or unsafe robot behavior.

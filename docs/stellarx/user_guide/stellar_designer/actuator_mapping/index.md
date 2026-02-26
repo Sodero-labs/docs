@@ -4,6 +4,7 @@ This guide provides a detailed explanation of the Actuator Mapping process, incl
 
 ## 1. Motor Information
 This section defines the physical characteristics of the motor hardware.
+
 * **Source:** Values must be taken directly from the manufacturer's **Specification Sheet**.
 * **Scope:** Enter only the raw motor data here. Gear reducers and transmission elements are configured in a separate "Transmission" step to ensure accurate dynamics modeling.
 
@@ -41,10 +42,10 @@ The Position/Velocity commands issued to each **actuator** (motor) are converted
 * **1 : 1 Mapping:** Each actuator drives exactly one joint (e.g., Simple 2-Bar Robot).
 * **n : 1 Composite Mapping:** Two or more actuators share one joint (e.g., SCARA Z-axis + Θ4, or Differential Wrists).
 
-![simple direction](/description/image/simpleDirectionImage.png)
+![simple direction](images/simpleDirectionImage.png)
 *Figure 1: 1:1 Mapping*
 
-![multi direction](/description/image/multiDirectionImage.png)
+![multi direction](images/multiDirectionImage.png)
 *Figure 2: Composite Mapping*
 
 | Term | Meaning |
@@ -53,23 +54,31 @@ The Position/Velocity commands issued to each **actuator** (motor) are converted
 | **Edge Value** | Conversion coefficient *Actuator i → Joint j* |
 
 ### B. How to Calculate Edge Values
+
 The controller computes the joint vector $q$ using the matrix $U$:
-$$q = U \cdot a$$
+
+$$
+q = U \cdot a
+$$
+
 *(Where $q$ is the joint vector and $a$ is the actuator vector)*
 
 #### Case 1: 1 : 1 Mapping (Standard)
-1.  **Add an edge** connecting Actuator $i$ to Joint $i$.
-2.  **Enter the scale coefficient**:
+
+1. **Add an edge** connecting Actuator $i$ to Joint $i$.
+2. **Enter the scale coefficient**:
     * **Gearbox:** $1 / \text{Gear Ratio}$
         * *Example:* 1 : 50 gearbox → `1.0 / 50.0 = 0.02`
     * **Ballscrew:** $\text{Lead} / (2 \pi)$
         * *Example:* Lead = 0.020 m → `0.02 / (2π) ≈ 0.0031831`
-3.  **Reverse Direction:** If the joint moves opposite to the command, flip the sign (e.g., `-0.02`).
+3. **Reverse Direction:** If the joint moves opposite to the command, flip the sign (e.g., `-0.02`).
 
 #### Case 2: Composite Mapping (Differential)
+
 For complex mechanisms where multiple motors drive a single axis (like a SCARA Z-axis/Theta combined), you must fill the **Upper-Triangular Matrix**.
 
 **Example Matrix Form:**
+
 ```text
       ┌                                     ┐
       │ 0.02      0        0        0       │
@@ -77,6 +86,7 @@ U  =  │   0     0.02       0        0       │
       │   0       0     0.00254  0.000254   │
       │   0       0        0      0.1       │
       └                                     ┘
+```
 
 This implies:
 

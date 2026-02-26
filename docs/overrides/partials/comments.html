@@ -26,17 +26,16 @@
 
         var ref = document.querySelector("[data-md-component=config]")
         var observer = new MutationObserver(function() {
-        var palette = __md_get("__palette")
-        var theme = palette.color.scheme === "slate" ? "dark" : "light"
+            var palette = __md_get("__palette")
+            var theme = palette.color.scheme === "slate" ? "dark" : "light"
 
-        /* giscus 프레임에 메시지 전송 */
-        var frame = document.querySelector(".giscus-frame")
-        if (frame) {
-            frame.contentWindow.postMessage(
-                { giscus: { setConfig: { theme } } },
-                "https://giscus.app"
-            )
-        }
+            var frame = document.querySelector(".giscus-frame")
+            if (frame) {
+                frame.contentWindow.postMessage(
+                    { giscus: { setConfig: { theme } } },
+                    "https://giscus.app"
+                )
+            }
         })
         observer.observe(ref, { attributes: true })
     </script>         

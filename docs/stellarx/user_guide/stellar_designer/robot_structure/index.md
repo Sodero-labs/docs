@@ -54,6 +54,7 @@ These are **software-defined hard stops**. If a target position is outside `[Low
 
 ### 2. Kinematic Limits
 Defines the maximum motion capabilities.
+
 * **Max Speed/Accel/Jerk:** Limits applied during motion generation.
 * **Units:**
     * Revolute Joints: `deg`, `deg/s`, `deg/s²`
@@ -79,9 +80,11 @@ This defines the joint friction model. The friction torque ($\tau_{friction}$) i
 
 ### 4. Collision Threshold
 The sensitivity for collision detection.
+
 * If **External Torque > Threshold**, the robot triggers a collision error and stops.
 * Set this carefully: Too low causes false alarms during fast motion; too high makes the robot unsafe.
 
 ### 5. Goal Tolerance
 Determines when a motion command is considered "finished."
+
 * If `|Current Pos - Target Pos| <= Tolerance`, the action reports **Success**.

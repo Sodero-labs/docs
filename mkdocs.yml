@@ -11,9 +11,10 @@ theme:
       primary: black
       accent: white
   features:
-    - navigation.expand
-    - navigation.path 
-    - navigation.tracking
+    # - navigation.expand
+    - navigation.instant
+    # - navigation.path 
+    # - navigation.tracking
     - search.suggest
     - search.highlight
     - content.code.copy
@@ -34,6 +35,9 @@ extra:
       input_position: bottom
       theme: dark
       lang: en
+  navigation:
+    expand: true
+
 extra_css:
   - styles/layout.css
   - styles/color.css
