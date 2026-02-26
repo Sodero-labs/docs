@@ -5,8 +5,6 @@
       
       
       
-        <link rel="canonical" href="https://docs.sodero.io/stellarx/quick_start/">
-      
       
         <link rel="prev" href="../what_is_stellarx/">
       
@@ -18,7 +16,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
@@ -26,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -43,16 +41,14 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
       <link rel="stylesheet" href="../../styles/layout.css">
     
       <link rel="stylesheet" href="../../styles/color.css">
-    
-      <link rel="stylesheet" href="../../styles/font.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -80,7 +76,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="white">
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -89,7 +85,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#getting-started-with-stellarx" class="md-skip">
+        <a href="#stellarx-motion-controller-quick-start" class="md-skip">
           Skip to content
         </a>
       
@@ -98,138 +94,66 @@
       
     </div>
     
-    
-  <style>
-    
-    .md-header {
-      height: 60px !important;
-      background: #111 !important;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid #333;
-    }
-
-    /* --- [1] 모바일 화면 (max-width: 76.24em) --- */
-    @media (max-width: 76.24em) {
-      .pc-only { display: none !important; }
-      
-      .mobile-header-inner {
-        display: flex;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-        padding: 0 12px;
-        gap: 10px;
-      }
-
-      .md-header__button.md-icon {
-        color: #fff;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        margin-left: -8px; 
-      }
-
-      .mobile-site-title {
-        font-size: 0.8rem;
-        font-weight: 500;
-        color: #fff;
-      }
-    }
-
-    /* --- [2] 큰 화면 (min-width: 76.25em) --- */
-    @media (min-width: 76.25em) {
-      .mobile-only { display: none !important; }
-
-      .md-header__inner {
-        height: 100%;
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-
-      .custom-header-inner {
-        height: 100%;
-        display: grid;
-        grid-template-columns: 280px 1fr;
-        align-items: center;
-        width: 100%;
-        box-sizing: border-box;
-      }
-
-      .header-left, .header-center, .header-right {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        padding: 0 12px;
-      }
-
-      .header-left {    
-        gap: 15px;        
-        border-right: 1px solid #333;
-      }
-
-      .header-icon-link, .header-home-btn {
-        display: flex; align-items: center; height: 100%;
-        text-decoration: none; color: #fff;
-      }
-
-      .site-title { font-size: 0.8rem; font-weight: 500; }
-      .header-breadcrumbs { font-size: 14px; color: #bdbdbd; display: flex; gap: 6px; }
-      .header-breadcrumbs a { color: #bdbdbd; text-decoration: none; }
-      .header-right { justify-content: flex-end; }
-    }
-
-  </style>
-
-  <header class="md-header" data-md-component="header">
-    <div class="md-header__inner" style="width: 100%;">
-      
-      <div class="mobile-header-inner mobile-only">
-        <label class="md-header__button md-icon" for="__drawer">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-            <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path>
-          </svg>
-        </label>
-        <div class="mobile-site-title">Sodero Documents</div>
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
       </div>
+    
+    
+      
 
-      <div class="custom-header-inner pc-only">
-        <div class="header-left">
-          <a href="https://www.sodero.io" class="header-icon-link" title="Sodero Home" target="_blank" rel="noopener">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
-            </svg>
-          </a>
-          <a href="../.." class="header-home-btn">
-            <span class="site-title">Sodero Documents</span>
-          </a>
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sodero Documents" class="md-header__button md-logo" aria-label="Sodero Documents" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sodero Documents
+          </span>
         </div>
-
-        <div class="header-center">
-          <nav class="header-breadcrumbs">
-            <a href="../..">Home</a>
-              
-                
-                  <span>&gt;</span>
-                  <a href="../..">Stellar X</a>
-                
-              
-              
-                <span>&gt;</span>
-                <span class="current">Quick Start</span>
-              
-          </nav>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Quick Start
+            
+          </span>
         </div>
-
-        <!-- <div class="header-right"></div> -->
       </div>
-
     </div>
-  </header>
-
-
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan" aria-hidden="true" type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
     <div class="md-container" data-md-component="container">
       
       
@@ -433,10 +357,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-whats-in-the-box" class="md-nav__link">
+  <a href="#power-on" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. What's in the Box
+        Power on
       
     </span>
   </a>
@@ -444,74 +368,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-device-overview" class="md-nav__link">
+  <a href="#connect-to-a-pc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Device Overview
+        Connect to a PC
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-hardware-setup-power-on" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Hardware Setup &amp; Power On
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-network-configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Network Configuration
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-hardware-factory-reset" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Hardware Factory Reset
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Hardware Factory Reset">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-procedure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Procedure
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -911,7 +774,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/stellar_motion_studio/about_stellar_motion/" class="md-nav__link">
+      <a href="../tutorials/stellar_motion/about_stellar_motion/" class="md-nav__link">
         
   
   
@@ -1208,10 +1071,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-whats-in-the-box" class="md-nav__link">
+  <a href="#power-on" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. What's in the Box
+        Power on
       
     </span>
   </a>
@@ -1219,74 +1082,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-device-overview" class="md-nav__link">
+  <a href="#connect-to-a-pc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Device Overview
+        Connect to a PC
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-hardware-setup-power-on" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Hardware Setup &amp; Power On
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-network-configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Network Configuration
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-hardware-factory-reset" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Hardware Factory Reset
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Hardware Factory Reset">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-procedure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Procedure
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1301,226 +1103,27 @@
           
             <div class="md-content" data-md-component="content">
               
-                
-
-
-
-  
-
-
-  <nav class="md-path" aria-label="Navigation">
-    <ol class="md-path__list">
-      
-        
-  
-  
-    <li class="md-path__item">
-      <a href="../.." class="md-path__link">
-        
-  <span class="md-ellipsis">
-    Home
-  </span>
-
-      </a>
-    </li>
-  
-
-      
-      
-        
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../what_is_stellarx/" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    Stellar X
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ol>
-  </nav>
-
-              
               <article class="md-content__inner md-typeset">
                 
                   
 
 
 
-<h1 id="getting-started-with-stellarx">Getting Started with StellarX</h1>
-<p>Welcome to the StellarX family! We’re excited to have you on board. This guide will walk you through everything you need to get up and running—from unboxing and hardware assembly to establishing your first network connection with your PC.</p>
-<hr>
-<h2 id="1-whats-in-the-box">1. What's in the Box</h2>
-<p>Before we begin, please check that your package includes all the following components. If anything is missing, please contact our support team.</p>
-<figure>
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/product_stellar_x.jpeg" data-desc-position="bottom"><img alt="Stellar X Main Unit" src="images/product_stellar_x.jpeg" width="750"></a>
-<br>
-<figcaption>StellarX Main Unit</figcaption>
-</figure>
-<figure>
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/power_adapter.jpeg" data-desc-position="bottom"><img alt="24V Power Adapter" src="images/power_adapter.jpeg" width="500"></a>
-<br>
-<figcaption>24V Power Adapter</figcaption>
-</figure>
-<figure>
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/power_cable.jpeg" data-desc-position="bottom"><img alt="Power Cable" src="images/power_cable.jpeg" width="500"></a>
-<br>
-<figcaption>Power Cable</figcaption>
-</figure>
-<hr>
-<h2 id="2-device-overview">2. Device Overview</h2>
-<p>Take a moment to familiarize yourself with the StellarX interface. Knowing the ports now will make the setup process much smoother.</p>
-<figure>
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/hardware_interface.png" data-desc-position="bottom"><img alt="Hardware Interface" src="images/hardware_interface.png" width="500"></a>
-<br>
-<figcaption>StellarX Interface1</figcaption>
-</figure>
-<figure>
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/hardware_interface2.jpeg" data-desc-position="bottom"><img alt="Hardware Interface" src="images/hardware_interface2.jpeg" width="500"></a>
-<br>
-<figcaption>StellarX Interface2</figcaption>
-</figure>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Port / Button</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>1. Eth1 (Static IP)</strong></td>
-<td style="text-align: left;">Pre-configured with a <strong>Static IP</strong> for direct connection.<br>• IP: <code>10.0.0.1</code><br>• Subnet Mask: <code>255.255.255.0</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>2. Eth2 (DHCP)</strong></td>
-<td style="text-align: left;">Configured for <strong>DHCP</strong>. Connect this to a router or switch to receive an IP address automatically.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>3. EtherCAT Out</strong></td>
-<td style="text-align: left;">EtherCAT Master output. Connect this to the <strong>IN</strong> port of your first EtherCAT slave device.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>4. DC 24V In</strong></td>
-<td style="text-align: left;">Power input port.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>5. Reset Button</strong></td>
-<td style="text-align: left;">Used to restore the device to factory settings.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="3-hardware-setup-power-on">3. Hardware Setup &amp; Power On</h2>
-<p>To ensure the longevity of your device and prevent electrical damage, please follow these steps in order.</p>
+<h1 id="stellarx-motion-controller-quick-start">StellarX Motion Controller Quick Start</h1>
+<p>Follow these steps to power up and connect the controller to your PC.</p>
+<h2 id="power-on">Power on</h2>
 <ol>
-<li>
-<p><strong>Prepare the Adapter:</strong> Connect the power cable to the 24V power adapter. <strong>Stop! Do not plug it into the wall outlet just yet.</strong></p>
-</li>
-<li>
-<p><strong>Connect to StellarX:</strong> Insert the adapter's output cable into the <strong>DC 24V In</strong> port on the unit.</p>
-<blockquote>
-<p><strong>⚠️ Safety First:</strong> To prevent <strong>electrical arcing (sparks)</strong> or connection issues, always connect the cable to the <strong>StellarX unit first</strong>, and <em>then</em> plug the power adapter into the wall.</p>
-<p><strong>💡 Pro Tip:</strong> The connector features a small guide notch inside. If it doesn't slide in easily, <strong>gently rotate the cable</strong> until the notch aligns with the port.</p>
-</blockquote>
-<p></p><figure markdown="span">
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/power_port_direction.jpeg" data-desc-position="bottom"><img alt="Connector Alignment" src="images/power_port_direction.jpeg" width="500"></a>
-  <figcaption>Aligning the connector notch</figcaption>
-</figure><p></p>
-</li>
-<li>
-<p><strong>Secure the Connection:</strong> Once fully inserted, hand-tighten the metal nut on the connector to ensure it stays securely locked in place.</p>
-<p></p><figure markdown="span">
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/fasten_nut_of_power_connector.jpeg" data-desc-position="bottom"><img alt="Fasten Nut" src="images/fasten_nut_of_power_connector.jpeg" width="500"></a>
-  <figcaption>Securing the locking nut</figcaption>
-</figure><p></p>
-</li>
-<li>
-<p><strong>Power Up:</strong> Finally, plug the power cable into a standard wall outlet. Your StellarX will power on automatically.</p>
-</li>
+<li>Connect a power adapter to the controller's power port.</li>
+<li>Plug the power adapter into a wall outlet.</li>
+<li>The controller powers on automatically once it receives power.</li>
 </ol>
-<hr>
-<h2 id="4-network-configuration">4. Network Configuration</h2>
-<p>To talk to StellarX, your PC needs to be on the same "wavelength" (network subnet).</p>
+<h2 id="connect-to-a-pc">Connect to a PC</h2>
 <ol>
-<li>
-<p><strong>Physical Connection:</strong> Connect an Ethernet (LAN) cable to <strong>Eth1 (Port 1)</strong> on the StellarX unit and the other end to your PC’s LAN port.</p>
-<p></p><figure markdown="span">
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/lan_connection.jpeg" data-desc-position="bottom"><img alt="LAN Port Connection" src="images/lan_connection.jpeg" width="500"></a>
-  <figcaption>Connecting to Eth1</figcaption>
-</figure><p></p>
-</li>
-<li>
-<p><strong>Configure Your PC:</strong>
-   Since StellarX's Eth1 is fixed at <code>10.0.0.1</code>, you must set your PC to a static IP in the same range (e.g., <code>10.0.0.2</code>).</p>
-<blockquote>
-<p><strong>⚠️ Note:</strong> Avoid using <code>10.0.0.1</code> for your PC, as this will cause an IP conflict.</p>
-</blockquote>
-<ul>
-<li>
-<p><strong>For Ubuntu Users:</strong></p>
-<ol>
-<li>Go to <strong>Settings &gt; Network</strong>.</li>
-<li>Click the <strong>gear icon</strong> next to your wired connection.</li>
-<li>Select the <strong>IPv4</strong> tab and choose <strong>Manual</strong>.</li>
-<li>Set Address: <code>10.0.0.2</code> / Netmask: <code>255.255.255.0</code>.</li>
+<li>Connect the controller directly to your PC with an Ethernet cable.</li>
+<li>Configure your PC's network interface with an IP address in the 10.0.0.x range (do not use <code>10.0.0.1</code>). Example: <code>10.0.0.2</code> with subnet mask <code>255.255.255.0</code>.</li>
+<li>Access the controller at the default address <code>10.0.0.1</code>. You can verify connectivity with <code>ping 10.0.0.1</code> or your preferred client.</li>
+<li>Open any web browser, and navigate to <code>10.0.0.1</code>. If the controller is correctly powered and connected, you will briefly see a loading screen, followed by the home screen of Stellar Designer.</li>
 </ol>
-</li>
-<li>
-<p><strong>For Windows Users:</strong></p>
-<ol>
-<li>Go to <strong>Settings &gt; Network &amp; Internet &gt; Ethernet</strong>.</li>
-<li>Find <strong>IP assignment</strong> and click <strong>Edit</strong>.</li>
-<li>Select <strong>Manual</strong>, toggle <strong>IPv4 On</strong>, and enter:</li>
-<li>IP address: <code>10.0.0.2</code></li>
-<li>Subnet mask: <code>255.255.255.0</code></li>
-</ol>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Verify the Connection:</strong>
-   Open your preferred web browser (Chrome, Edge, etc.) and type the following into the address bar:
-   <code>http://10.0.0.1</code></p>
-</li>
-<li>
-<p><strong>Success!</strong>
-   If the <strong>Stellar Designer</strong> welcome screen appears, you are officially ready to start your project!</p>
-<p></p><figure markdown="span">
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/welcome_screen.png" data-desc-position="bottom"><img alt="Welcome Screen" src="images/welcome_screen.png" width="800"></a>
-  <figcaption>Stellar Designer Welcome Screen</figcaption>
-</figure><p></p>
-</li>
-</ol>
-<hr>
-<h2 id="5-hardware-factory-reset">5. Hardware Factory Reset</h2>
-<p>If you ever forget your IP settings or need a fresh start, you can perform a factory reset.</p>
-<figure>
-    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/reset_button.jpeg" data-desc-position="bottom"><img alt="Reset Button" src="images/reset_button.jpeg" width="500"></a>
-    <figcaption>Reset Button Location</figcaption>
-</figure>
-<h3 id="the-procedure"><strong>The Procedure</strong></h3>
-<ol>
-<li>Locate the <strong>Reset Button</strong> on the bottom of the unit.</li>
-<li>Press and hold the button for <strong>more than 3 seconds</strong>.</li>
-<li>The system will automatically reboot.</li>
-<li>Once back up, <strong>Eth1</strong> will be restored to the default IP: <code>10.0.0.1</code>.</li>
-</ol>
-<h3 id="troubleshooting"><strong>Troubleshooting</strong></h3>
-<p>If the reset doesn't seem to trigger, try these steps:
-1. <strong>Power Cycle:</strong> Unplug the power, wait 10 seconds, and plug it back in.
-2. <strong>Wait &amp; Retry:</strong> Give the system about <strong>1 minute</strong> to fully initialize, then try holding the reset button for 3 seconds again.</p>
-<blockquote>
-<p><strong>⚠️ Warning:</strong> A factory reset will <strong>permanently erase all stored data</strong>, including projects, scripts, and custom settings. Please use this feature with caution.</p>
-</blockquote>
 
 
 
@@ -1570,10 +1173,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.expand", "navigation.path", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.expand"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
         <script src="../../javascripts/mathjax.js"></script>
       

@@ -5,8 +5,6 @@
       
       
       
-        <link rel="canonical" href="https://docs.sodero.io/stellarx/tutorials/stellar_designer/map_actuators/">
-      
       
         <link rel="prev" href="../configure_system_parameters/">
       
@@ -18,7 +16,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
@@ -26,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.618322db.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -43,16 +41,14 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
       <link rel="stylesheet" href="../../../../styles/layout.css">
     
       <link rel="stylesheet" href="../../../../styles/color.css">
-    
-      <link rel="stylesheet" href="../../../../styles/font.css">
     
     <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -80,7 +76,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="white">
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -88,163 +84,71 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#tutorial-building-a-simple-2-bar-robot-actuator-mapping" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
     </div>
     
-    
-  <style>
-    
-    .md-header {
-      height: 60px !important;
-      background: #111 !important;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid #333;
-    }
-
-    /* --- [1] 모바일 화면 (max-width: 76.24em) --- */
-    @media (max-width: 76.24em) {
-      .pc-only { display: none !important; }
-      
-      .mobile-header-inner {
-        display: flex;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-        padding: 0 12px;
-        gap: 10px;
-      }
-
-      .md-header__button.md-icon {
-        color: #fff;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        margin-left: -8px; 
-      }
-
-      .mobile-site-title {
-        font-size: 0.8rem;
-        font-weight: 500;
-        color: #fff;
-      }
-    }
-
-    /* --- [2] 큰 화면 (min-width: 76.25em) --- */
-    @media (min-width: 76.25em) {
-      .mobile-only { display: none !important; }
-
-      .md-header__inner {
-        height: 100%;
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-
-      .custom-header-inner {
-        height: 100%;
-        display: grid;
-        grid-template-columns: 280px 1fr;
-        align-items: center;
-        width: 100%;
-        box-sizing: border-box;
-      }
-
-      .header-left, .header-center, .header-right {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        padding: 0 12px;
-      }
-
-      .header-left {    
-        gap: 15px;        
-        border-right: 1px solid #333;
-      }
-
-      .header-icon-link, .header-home-btn {
-        display: flex; align-items: center; height: 100%;
-        text-decoration: none; color: #fff;
-      }
-
-      .site-title { font-size: 0.8rem; font-weight: 500; }
-      .header-breadcrumbs { font-size: 14px; color: #bdbdbd; display: flex; gap: 6px; }
-      .header-breadcrumbs a { color: #bdbdbd; text-decoration: none; }
-      .header-right { justify-content: flex-end; }
-    }
-
-  </style>
-
-  <header class="md-header" data-md-component="header">
-    <div class="md-header__inner" style="width: 100%;">
-      
-      <div class="mobile-header-inner mobile-only">
-        <label class="md-header__button md-icon" for="__drawer">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-            <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path>
-          </svg>
-        </label>
-        <div class="mobile-site-title">Sodero Documents</div>
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
       </div>
+    
+    
+      
 
-      <div class="custom-header-inner pc-only">
-        <div class="header-left">
-          <a href="https://www.sodero.io" class="header-icon-link" title="Sodero Home" target="_blank" rel="noopener">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
-            </svg>
-          </a>
-          <a href="../../../.." class="header-home-btn">
-            <span class="site-title">Sodero Documents</span>
-          </a>
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Sodero Documents" class="md-header__button md-logo" aria-label="Sodero Documents" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sodero Documents
+          </span>
         </div>
-
-        <div class="header-center">
-          <nav class="header-breadcrumbs">
-            <a href="../../../..">Home</a>
-              
-                
-                  <span>&gt;</span>
-                  <a href="../../../..">Stellar X</a>
-                
-              
-                
-                  <span>&gt;</span>
-                  <a href="../../../..">Tutorials</a>
-                
-              
-                
-                  <span>&gt;</span>
-                  <a href="../../../..">Stellar Designer</a>
-                
-              
-                
-                  <span>&gt;</span>
-                  <a href="../../../..">Create New Robot</a>
-                
-              
-              
-                <span>&gt;</span>
-                <span class="current">Step 3. Actuator Mapping</span>
-              
-          </nav>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Step 3. Actuator Mapping
+            
+          </span>
         </div>
-
-        <!-- <div class="header-right"></div> -->
       </div>
-
     </div>
-  </header>
-
-
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan" aria-hidden="true" type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
     <div class="md-container" data-md-component="container">
       
       
@@ -653,26 +557,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Step 3. Actuator Mapping
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -690,86 +574,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#setting-up-actuators-example-synapticon-jd-series" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Setting up Actuators (Example: Synapticon JD Series)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Setting up Actuators (Example: Synapticon JD Series)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#step-1-verify-actuator-nodes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 1: Verify Actuator Nodes
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-2-input-motor-specifications" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 2: Input Motor Specifications
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-3-configure-ethercat-communication" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 3: Configure EtherCAT Communication
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-4-configure-transmission-actuator-joint-mapping" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 4: Configure Transmission (Actuator-Joint Mapping)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -904,7 +708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stellar_motion_studio/about_stellar_motion/" class="md-nav__link">
+      <a href="../../stellar_motion/about_stellar_motion/" class="md-nav__link">
         
   
   
@@ -1191,77 +995,6 @@
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#setting-up-actuators-example-synapticon-jd-series" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Setting up Actuators (Example: Synapticon JD Series)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Setting up Actuators (Example: Synapticon JD Series)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#step-1-verify-actuator-nodes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 1: Verify Actuator Nodes
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-2-input-motor-specifications" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 2: Input Motor Specifications
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-3-configure-ethercat-communication" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 3: Configure EtherCAT Communication
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-4-configure-transmission-actuator-joint-mapping" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 4: Configure Transmission (Actuator-Joint Mapping)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -1272,261 +1005,15 @@
           
             <div class="md-content" data-md-component="content">
               
-                
-
-
-
-  
-
-
-  <nav class="md-path" aria-label="Navigation">
-    <ol class="md-path__list">
-      
-        
-  
-  
-    <li class="md-path__item">
-      <a href="../../../.." class="md-path__link">
-        
-  <span class="md-ellipsis">
-    Home
-  </span>
-
-      </a>
-    </li>
-  
-
-      
-      
-        
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../../../what_is_stellarx/" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    Stellar X
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-    
-    
-      
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../introduction/" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    Tutorials
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-    
-  
-
-      
-        
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../introduction/" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    Stellar Designer
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../robot_structure/" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    Create New Robot
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ol>
-  </nav>
-
-              
               <article class="md-content__inner md-typeset">
                 
                   
 
 
 
-<h1 id="tutorial-building-a-simple-2-bar-robot-actuator-mapping">Tutorial: Building a Simple 2-Bar Robot - Actuator Mapping</h1>
-<h2 id="setting-up-actuators-example-synapticon-jd-series">Setting up Actuators (Example: Synapticon JD Series)</h2>
-<p>In the previous section, we completed the modeling of the robot's kinematics and dynamics. Now, we must map this theoretical model to the physical hardware: the <strong>Actuators</strong>.</p>
-<p>This tutorial guides you through mapping your theoretical robot model to physical Synapticon JD8/JD10 actuators. Follow these steps to get your robot running quickly. The goal is to mount a <strong>JD10 on Joint 1</strong> and a <strong>JD8 on Joint 2</strong>.</p>
-<h3 id="step-1-verify-actuator-nodes">Step 1: Verify Actuator Nodes</h3>
-<p>Upon entering the <strong>Actuator Mapping</strong> page, verify that the actuator and joint nodes have been automatically generated based on your previous robot structure configuration.
-* <strong>Status:</strong> Ensure nodes are visible (currently in an <strong>Unlinked</strong> state).</p>
-<blockquote>
-<p><strong>⚠️ Troubleshooting: Node Count Mismatch</strong>
-If the number of Actuators and Joints does not appear as expected (2 pairs for this tutorial), please return to the <strong>Robot Structure</strong> tab.
-* <strong>Check Joint Type:</strong> Verify that the Joint Type is set to <strong>Rotation Z</strong>. If set to <strong>None</strong>, it is not counted as a valid Degree of Freedom (DoF) and will not generate a mapping node.</p>
-</blockquote>
-<figure>
-    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/actuator_mapping_initial_state.png" data-desc-position="bottom"><img alt="actuator_mapping_initial_state" src="images/actuator_mapping_initial_state.png"></a>
-    <figcaption>Screen displaying actuators and joints.</figcaption>
-</figure>
-<h3 id="step-2-input-motor-specifications">Step 2: Input Motor Specifications</h3>
-<ol>
-<li>Click the <strong>[Motor Information]</strong> button on the actuator node.</li>
-<li>Refer to the specifications below and enter the data into the right panel.</li>
-</ol>
-<p><strong>Actuator 1 (Joint 1): Synapticon JD10</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Parameter</th>
-<th style="text-align: left;">Specification</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>Product Name</strong></td>
-<td style="text-align: left;">ACTILINK-JD Circulo 10</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Rated Torque</strong></td>
-<td style="text-align: left;">2.2222 Nm</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Peak Torque</strong></td>
-<td style="text-align: left;">6.6667 Nm</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Rated Output Power</strong></td>
-<td style="text-align: left;">380 W</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>No-Load Speed</strong></td>
-<td style="text-align: left;">1,890 rpm</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Rated Load Speed</strong></td>
-<td style="text-align: left;">1,620 rpm</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Actuator 2 (Joint 2): Synapticon JD8</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Parameter</th>
-<th style="text-align: left;">Specification</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>Product Name</strong></td>
-<td style="text-align: left;">ACTILINK-JD Circulo 8</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Rated Torque</strong></td>
-<td style="text-align: left;">0.774 Nm</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Peak Torque</strong></td>
-<td style="text-align: left;">2.194 Nm</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Rated Output Power</strong></td>
-<td style="text-align: left;">170 W</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>No-Load Speed</strong></td>
-<td style="text-align: left;">3,100 rpm</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Rated Load Speed</strong></td>
-<td style="text-align: left;">2,131 rpm</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>Note:</strong> Ignore the <strong>Gear Ratio</strong> field in this step; it will be handled in the Transmission setup (Step 4).</p>
-</blockquote>
-<figure>
-    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/actuator1_motor_config.png" data-desc-position="bottom"><img alt="actuator1_motor_config" src="images/actuator1_motor_config.png"></a>
-    <figcaption>Actuator 1 specs entered (Referencing Synapticon JD10).</figcaption>
-</figure>
-<h3 id="step-3-configure-ethercat-communication">Step 3: Configure EtherCAT Communication</h3>
-<p>Click <strong>[EtherCAT Settings]</strong> to configure the driver communication.</p>
-<ol>
-<li><strong>SDO Settings:</strong> For Synapticon drives, <strong>skip the SDO Entry 1</strong>.<ul>
-<li><em>Note:</em> These drives use a transactional safety model. Perform the Absolute Encoder Reset using the manufacturer's dedicated software instead.</li>
-</ul>
-</li>
-<li><strong>PDO Settings:</strong> Set the indices for <strong>User-Defined Mapping</strong>.<ul>
-<li><strong>RxPDO (Master to Driver):</strong> Set mapping index to <strong>0x1600</strong>. Ensure it maps <code>Control Word</code>, <code>Target Position</code>, etc.</li>
-<li><strong>TxPDO (Driver to Master):</strong> Set mapping index to <strong>0x1A00</strong>. Ensure it maps <code>Status Word</code>, <code>Actual Position</code>, etc.</li>
-</ul>
-</li>
-</ol>
-<figure>
-    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ethercat_config1.png" data-desc-position="bottom"><img alt="ethercat_config1" src="images/ethercat_config1.png"></a>
-    <figcaption>Edit the SDO and RxPDO settings.</figcaption>
-</figure>
-<h3 id="step-4-configure-transmission-actuator-joint-mapping">Step 4: Configure Transmission (Actuator-Joint Mapping)</h3>
-<p>Finally, we connect the actuators to the joints. For this 2-Bar robot, we use a simple <strong>1:1 Mapping</strong> strategy where each motor drives exactly one joint.</p>
-<p><strong>Procedure:</strong>
-1.  Switch the view to <strong>Diagram Mode</strong>.
-2.  Click <strong>Add Edge</strong> to draw connection lines.
-3.  Connect <strong>Actuator 1</strong> to <strong>Joint 1</strong>.
-4.  Connect <strong>Actuator 2</strong> to <strong>Joint 2</strong>.</p>
-<p><strong>(Insert image of 2 actuators connected to 2 joints here)</strong></p>
-<p><strong>Setting the Transmission Values:</strong>
-You must input the reduction ratio (inverse of gear ratio) for each connection.</p>
-<blockquote>
-<p><strong>Important:</strong> Do not enter fractions (e.g., <code>1/9</code>). You must calculate and enter the <strong>decimal value</strong>.</p>
-</blockquote>
-<p><strong>Connection 1 (JD10 → Joint 1):</strong>
-* The JD10 has a gear ratio of <strong>9 : 1</strong>.
-* Calculation: <code>1.0 / 9.0 ≈ 0.111111</code>
-* <strong>Input Value:</strong> <code>0.111111</code></p>
-<p><strong>Connection 2 (JD8 → Joint 2):</strong>
-* The JD8 has a gear ratio of <strong>7.75 : 1</strong>.
-* Calculation: <code>1.0 / 7.75 ≈ 0.129032</code>
-* <strong>Input Value:</strong> <code>0.129032</code></p>
-<blockquote>
-<p><strong>Direction Tip:</strong> If a joint rotates in the opposite direction of the command during testing, simply change this value to a negative number (e.g., <code>-0.111111</code>).</p>
-</blockquote>
+  <h1>Step 3. Actuator Mapping</h1>
+
+<p>이 파트에서는 </p>
 
 
 
@@ -1576,10 +1063,10 @@ You must input the reduction ratio (inverse of gear ratio) for each connection.<
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.expand", "navigation.path", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.expand"], "search": "../../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
         <script src="../../../../javascripts/mathjax.js"></script>
       

@@ -5,8 +5,6 @@
       
       
       
-        <link rel="canonical" href="https://docs.sodero.io/stellarx/tutorials/stellar_designer/configure_system_parameters/">
-      
       
         <link rel="prev" href="../robot_structure/">
       
@@ -18,7 +16,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
@@ -26,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.618322db.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -43,16 +41,14 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
       <link rel="stylesheet" href="../../../../styles/layout.css">
     
       <link rel="stylesheet" href="../../../../styles/color.css">
-    
-      <link rel="stylesheet" href="../../../../styles/font.css">
     
     <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -80,7 +76,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="white">
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -89,7 +85,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tutorial-building-a-simple-2-bar-robot-robot-system-parameters" class="md-skip">
+        <a href="#robot-system-parameters" class="md-skip">
           Skip to content
         </a>
       
@@ -98,153 +94,66 @@
       
     </div>
     
-    
-  <style>
-    
-    .md-header {
-      height: 60px !important;
-      background: #111 !important;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid #333;
-    }
-
-    /* --- [1] 모바일 화면 (max-width: 76.24em) --- */
-    @media (max-width: 76.24em) {
-      .pc-only { display: none !important; }
-      
-      .mobile-header-inner {
-        display: flex;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-        padding: 0 12px;
-        gap: 10px;
-      }
-
-      .md-header__button.md-icon {
-        color: #fff;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        margin-left: -8px; 
-      }
-
-      .mobile-site-title {
-        font-size: 0.8rem;
-        font-weight: 500;
-        color: #fff;
-      }
-    }
-
-    /* --- [2] 큰 화면 (min-width: 76.25em) --- */
-    @media (min-width: 76.25em) {
-      .mobile-only { display: none !important; }
-
-      .md-header__inner {
-        height: 100%;
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-
-      .custom-header-inner {
-        height: 100%;
-        display: grid;
-        grid-template-columns: 280px 1fr;
-        align-items: center;
-        width: 100%;
-        box-sizing: border-box;
-      }
-
-      .header-left, .header-center, .header-right {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        padding: 0 12px;
-      }
-
-      .header-left {    
-        gap: 15px;        
-        border-right: 1px solid #333;
-      }
-
-      .header-icon-link, .header-home-btn {
-        display: flex; align-items: center; height: 100%;
-        text-decoration: none; color: #fff;
-      }
-
-      .site-title { font-size: 0.8rem; font-weight: 500; }
-      .header-breadcrumbs { font-size: 14px; color: #bdbdbd; display: flex; gap: 6px; }
-      .header-breadcrumbs a { color: #bdbdbd; text-decoration: none; }
-      .header-right { justify-content: flex-end; }
-    }
-
-  </style>
-
-  <header class="md-header" data-md-component="header">
-    <div class="md-header__inner" style="width: 100%;">
-      
-      <div class="mobile-header-inner mobile-only">
-        <label class="md-header__button md-icon" for="__drawer">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-            <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path>
-          </svg>
-        </label>
-        <div class="mobile-site-title">Sodero Documents</div>
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
       </div>
+    
+    
+      
 
-      <div class="custom-header-inner pc-only">
-        <div class="header-left">
-          <a href="https://www.sodero.io" class="header-icon-link" title="Sodero Home" target="_blank" rel="noopener">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
-            </svg>
-          </a>
-          <a href="../../../.." class="header-home-btn">
-            <span class="site-title">Sodero Documents</span>
-          </a>
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Sodero Documents" class="md-header__button md-logo" aria-label="Sodero Documents" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sodero Documents
+          </span>
         </div>
-
-        <div class="header-center">
-          <nav class="header-breadcrumbs">
-            <a href="../../../..">Home</a>
-              
-                
-                  <span>&gt;</span>
-                  <a href="../../../..">Stellar X</a>
-                
-              
-                
-                  <span>&gt;</span>
-                  <a href="../../../..">Tutorials</a>
-                
-              
-                
-                  <span>&gt;</span>
-                  <a href="../../../..">Stellar Designer</a>
-                
-              
-                
-                  <span>&gt;</span>
-                  <a href="../../../..">Create New Robot</a>
-                
-              
-              
-                <span>&gt;</span>
-                <span class="current">Step 2. Robot System Parameters</span>
-              
-          </nav>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Step 2. Robot System Parameters
+            
+          </span>
         </div>
-
-        <!-- <div class="header-right"></div> -->
       </div>
-
     </div>
-  </header>
-
-
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan" aria-hidden="true" type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
     <div class="md-container" data-md-component="container">
       
       
@@ -679,35 +588,86 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-arm-reach-setup" class="md-nav__link">
+  <a href="#1-arm-reach" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Arm Reach Setup
+        1. Arm Reach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Arm Reach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-note-on-max-arm-reach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Note on Max Arm Reach
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#2-gravity-vector-setup" class="md-nav__link">
+  <a href="#2-gravity-vector" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Gravity Vector Setup
+        2. Gravity Vector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Gravity Vector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-note-on-gravity-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Note on Gravity Vector
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#3-max-payload-setup" class="md-nav__link">
+  <a href="#3-max-payload" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Max Payload Setup
+        3. Max Payload
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="3. Max Payload">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-note-on-max-payload-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Note on Max Payload Information
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -730,6 +690,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="5. Task Space Limits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-note-on-task-space-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Note on Task Space Limits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -920,7 +897,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stellar_motion_studio/about_stellar_motion/" class="md-nav__link">
+      <a href="../../stellar_motion/about_stellar_motion/" class="md-nav__link">
         
   
   
@@ -1217,35 +1194,86 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-arm-reach-setup" class="md-nav__link">
+  <a href="#1-arm-reach" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Arm Reach Setup
+        1. Arm Reach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Arm Reach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-note-on-max-arm-reach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Note on Max Arm Reach
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#2-gravity-vector-setup" class="md-nav__link">
+  <a href="#2-gravity-vector" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Gravity Vector Setup
+        2. Gravity Vector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Gravity Vector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-note-on-gravity-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Note on Gravity Vector
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#3-max-payload-setup" class="md-nav__link">
+  <a href="#3-max-payload" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Max Payload Setup
+        3. Max Payload
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="3. Max Payload">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-note-on-max-payload-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Note on Max Payload Information
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1268,6 +1296,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="5. Task Space Limits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#important-note-on-task-space-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Note on Task Space Limits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1304,191 +1349,151 @@
           
             <div class="md-content" data-md-component="content">
               
-                
-
-
-
-  
-
-
-  <nav class="md-path" aria-label="Navigation">
-    <ol class="md-path__list">
-      
-        
-  
-  
-    <li class="md-path__item">
-      <a href="../../../.." class="md-path__link">
-        
-  <span class="md-ellipsis">
-    Home
-  </span>
-
-      </a>
-    </li>
-  
-
-      
-      
-        
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../../../what_is_stellarx/" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    Stellar X
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-    
-    
-      
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../introduction/" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    Tutorials
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-    
-  
-
-      
-        
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../introduction/" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    Stellar Designer
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../robot_structure/" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    Create New Robot
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ol>
-  </nav>
-
-              
               <article class="md-content__inner md-typeset">
                 
                   
 
 
 
-<h1 id="tutorial-building-a-simple-2-bar-robot-robot-system-parameters">Tutorial: Building a Simple 2-Bar Robot - Robot System Parameters</h1>
-<p>In this tutorial, we will configure the global parameters for the robot, including arm reach, gravity, and payload settings. Please follow the steps below and input the values as specified for this example project.</p>
+<h1 id="robot-system-parameters">Robot System Parameters</h1>
+<p>In this section, we will configure the parameters that apply to the robot as a whole. Unlike the previous settings which were specific to individual joints or links, these settings define global properties such as the robot's arm reach, gravity vector, payload limits, and task space constraints.</p>
 <hr>
-<h2 id="1-arm-reach-setup">1. Arm Reach Setup</h2>
-<p>We need to define the total reach of the robot. For this example, the total length from the base to the Tool Center Point (TCP) corresponds to <strong>600 mm</strong>.</p>
-<ul>
-<li><strong>Input Value</strong>: <code>600</code></li>
-</ul>
+<h2 id="1-arm-reach">1. Arm Reach</h2>
+<p>This parameter defines the physical reach of the robot based on its kinematics. It is calculated as the radius from the <strong>base joint's rotation axis</strong> to the <strong>Tool Center Point (TCP)</strong> when the robot is fully extended.</p>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/arm_reach_diagram.png" data-desc-position="bottom"><img alt="arm_reach" src="images/arm_reach_diagram.png"></a>
+    <figcaption>Definition of Max Arm Reach</figcaption>
+</figure>
+<p>For this example, the total length from the base to the TCP corresponds to <strong>600 mm</strong>, so we will input <code>600</code>.</p>
 <figure>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/arm_reach.png" data-desc-position="bottom"><img alt="arm_reach" src="images/arm_reach.png"></a>
-    <figcaption>Setting Max Arm Reach</figcaption>
+    <figcaption>Definition of Max Arm Reach</figcaption>
 </figure>
-<hr>
-<h2 id="2-gravity-vector-setup">2. Gravity Vector Setup</h2>
-<p>Set the gravitational acceleration relative to the World Coordinate System. In our setup, gravity acts downwards along the negative Z-axis.</p>
+<h3 id="important-note-on-max-arm-reach">Important Note on Max Arm Reach</h3>
+<p>Defines the <strong>maximum reach</strong> of the robot arm (Base to TCP).</p>
 <ul>
-<li><strong>Input Values</strong>:<ul>
-<li>X: <code>0</code></li>
-<li>Y: <code>0</code></li>
-<li>Z: <code>-9,810</code> (unit: mm/s²)</li>
+<li><strong>Unit</strong>: mm</li>
+<li>This value is used to <strong>limit the joint speed</strong> effectively.</li>
 </ul>
-</li>
+<blockquote>
+<p><strong>⚠️ Caution</strong></p>
+<ul>
+<li>This value <strong>must be reasonably accurate</strong>, as it affects motion constraints.</li>
+<li>However, <strong>perfect precision is not required</strong> — an error margin of <strong>±10%</strong> is acceptable.</li>
 </ul>
+</blockquote>
+<hr>
+<h2 id="2-gravity-vector">2. Gravity Vector</h2>
+<p>The gravity vector defines the direction and magnitude of gravitational acceleration relative to the <strong>World Coordinate System</strong>.</p>
+<p>For example, if the World Coordinate System is defined such that the XY plane represents the ground and the Z-axis points towards the sky, gravity acts downwards along the negative Z-axis.</p>
+<p>In this example, we define the vector as:
+<strong>X: 0, Y: 0, Z: -9,810</strong> (unit: mm/s²)</p>
 <figure>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/gravity_vector.png" data-desc-position="bottom"><img alt="gravity_vector" src="images/gravity_vector.png"></a>
-    <figcaption>Setting Gravity Vector</figcaption>
+    <figcaption>Gravity Vector Setup</figcaption>
 </figure>
-<hr>
-<h2 id="3-max-payload-setup">3. Max Payload Setup</h2>
-<p>Set the maximum weight capacity. For this example, we will use a value of <strong>10,000 g</strong>.</p>
+<h3 id="important-note-on-gravity-vector">Important Note on Gravity Vector</h3>
+<p>Defines the <strong>gravity acceleration vector</strong> in space.
+This vector indicates the <strong>direction and magnitude</strong> of gravity as experienced by the robot.</p>
 <ul>
-<li><strong>Input Value</strong>: <code>10,000</code></li>
+<li>The vector should point <strong>in the direction of gravity</strong> (usually downward in the Z axis).</li>
+<li>The magnitude should reflect the local gravitational acceleration.</li>
 </ul>
+<blockquote>
+<p><strong>⚠️ Caution</strong>
+Be careful with the <strong>unit</strong>: Ensure consistent use of <strong>mm/s²</strong> or <strong>m/s²</strong> depending on your global unit settings.</p>
+</blockquote>
+<hr>
+<h2 id="3-max-payload">3. Max Payload</h2>
+<p>This setting establishes the maximum weight capacity for the robot.</p>
+<p>For this example, we set the value to <strong>10,000 g</strong>.</p>
 <figure>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/max_payload.png" data-desc-position="bottom"><img alt="max_payload" src="images/max_payload.png"></a>
-    <figcaption>Setting Max Payload</figcaption>
+    <figcaption>Max Payload Setup</figcaption>
 </figure>
+<p><strong>Note on Planar Robots:</strong>
+In this specific example, the robot operates on a plane <strong>parallel to the ground</strong>. Since the gravity vector is perpendicular to the joints' plane of motion, <strong>gravity creates no load (torque)</strong> on the actuators. Therefore, while we input a value for completeness, this parameter has <strong>no actual effect</strong> on gravity compensation or dynamics for this specific robot configuration.</p>
+<h3 id="important-note-on-max-payload-information">Important Note on Max Payload Information</h3>
+<p>Specifies the <strong>maximum payload capacity</strong> of the robot.</p>
+<ul>
+<li><strong>Unit</strong>: g (grams)</li>
+</ul>
+<p>This value defines the <strong>upper limit for gravity compensation</strong>, regardless of the actual payload data set in the tool configuration.</p>
+<p><strong>How It Works</strong>
+Even if a tool is configured with a payload that <strong>exceeds</strong> this value (e.g., by mistake or tool change), the system will <strong>limit gravity compensation</strong> to the value specified here.</p>
 <blockquote>
-<p><strong>Note on this Example:</strong>
-Since this specific robot operates on a plane parallel to the ground, gravity creates no load (torque) on the actuators. However, we input this value for completeness.</p>
+<p><strong>⚠️ Caution</strong>
+Always set this value according to the <strong>robot's mechanical and control limits</strong> to prevent incorrect torque output or safety issues.</p>
 </blockquote>
 <hr>
 <h2 id="4-max-allowable-inertia">4. Max Allowable Inertia</h2>
-<p>This feature is currently reserved for future use. Set the value to 0.</p>
+<p>This parameter defines the moment of inertia limits for the robot's wrist joints.</p>
+<blockquote>
+<p><strong>⚠️ Future Feature (Currently Inactive)</strong></p>
+<p>This parameter is <strong>reserved for future use</strong> and is currently <strong>not operational</strong>.</p>
 <ul>
-<li><strong>Input Value</strong>: <code>0</code></li>
+<li>Inputting any value will have <strong>no effect</strong> on the actuator's behavior in the current version.</li>
+<li>The definition below describes the intended functionality for future updates.</li>
 </ul>
+</blockquote>
+<p>Therefore, for this example, we will set the value to <strong>0</strong>.</p>
 <figure>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/max_allowable_inertia.png" data-desc-position="bottom"><img alt="max_allowable_inertia" src="images/max_allowable_inertia.png"></a>
-    <figcaption>Setting Max Allowable Inertia</figcaption>
+    <figcaption>Max Allowable Inertia Setup</figcaption>
 </figure>
 <hr>
 <h2 id="5-task-space-limits">5. Task Space Limits</h2>
-<p>Configure the kinematic limits for the Task Space (TCP motion). Enter the values exactly as shown in the image below:</p>
+<p>In the previous chapter, we set the <em>Kinematic Limits</em> for individual joints. In this section, we define the kinematic limits for the <strong>Task Space</strong> (the robot's TCP).</p>
+<p>These limits constrain the Cartesian linear motion of the end-effector.</p>
+<p>For this example, we configure the settings as follows:</p>
 <figure>
-    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/task_space_limits.png" data-desc-position="bottom"><img alt="task_space_limits" src="images/task_space_limits.png"></a>
-    <figcaption>Setting Task Space Limits</figcaption>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/task_space_limits.png" data-desc-position="bottom"><img alt="max_payload" src="images/task_space_limits.png"></a>
+    <figcaption>Task Space Limits Setup</figcaption>
 </figure>
+<h3 id="important-note-on-task-space-limits">Important Note on Task Space Limits</h3>
+<p>Defines the kinematic constraints <strong>in task space</strong>, i.e., relative to the robot’s <strong>Tool Center Point (TCP)</strong>, not individual joints.</p>
+<p>These limits apply to:
+- Cartesian linear motion of the end-effector
+- Speed, acceleration, and jerk calculated in <strong>millimeters</strong> and <strong>mm-based units</strong> or <strong>meters</strong> and <strong>m-based units</strong></p>
+<p><strong>Max Speed</strong>
+- Maximum linear velocity of the TCP <strong>when moving toward the current target</strong>.
+- <strong>Unit</strong>: mm/s or m/s</p>
+<p><strong>Max Accel</strong>
+- Maximum linear acceleration of the TCP while following the trajectory.
+- <strong>Unit</strong>: mm/s² or m/s²</p>
+<p><strong>Max Jerk</strong>
+- Maximum linear jerk (rate of change of acceleration) of the TCP.
+- <strong>Unit</strong>: mm/s³ or m/s³</p>
+<blockquote>
+<p><strong>⚠️ Caution</strong></p>
+<p>These values should be defined based on:</p>
+<ul>
+<li>The <strong>mechanical and structural limits</strong> of the robot</li>
+<li>The desired <strong>task performance and safety</strong></li>
+<li>The characteristics of <strong>tooling and payload</strong></li>
+</ul>
+<p>Excessively high values can lead to unstable or unsafe robot behavior during fast or precise motion.</p>
+</blockquote>
 <hr>
 <h2 id="6-goal-tolerance">6. Goal Tolerance</h2>
-<p>Define the arrival criteria for the TCP. Set the values as shown below:</p>
+<p>This parameter defines the <strong>arrival criteria</strong> for the Tool Center Point (TCP).</p>
+<p>In this example, we set the values as shown below:</p>
 <figure>
-    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/goal_tolerance.png" data-desc-position="bottom"><img alt="goal_tolerance" src="images/goal_tolerance.png"></a>
-    <figcaption>Setting Goal Tolerance</figcaption>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/goal_tolerance.png" data-desc-position="bottom"><img alt="max_payload" src="images/goal_tolerance.png"></a>
+    <figcaption>Goal Tolerance Setup</figcaption>
 </figure>
+<ul>
+<li><strong>Usage</strong>: When executing task-space commands (like <code>move_linear</code>), the robot is considered to have reached the target when the TCP position error is within this tolerance value.</li>
+<li><strong>Unit</strong>: mm</li>
+</ul>
 <hr>
 <h2 id="summary">Summary</h2>
-<p>You have successfully configured the global system parameters.
-* <strong>Next Step</strong>: Proceed to the <strong>Actuator Mapping</strong> section to connect these settings to physical motors.</p>
+<p>With this, we have completed the definition of the <strong>ideal robot</strong>, excluding the hardware interfaces. We have covered:
+1.  <strong>Robot Structure</strong> (Links and Joints)
+2.  <strong>Dynamics</strong> (Mass and Inertia)
+3.  <strong>Joint Constraints</strong> (Limits and Friction)
+4.  <strong>Global Parameters</strong> (Gravity, Reach, and Task Space Limits)</p>
+<p>In the next part, we will cover the <strong>Actuator Mapping</strong>, which bridges the gap between this ideal robot model and the actual physical actuators (motors) that drive it.</p>
 
 
 
@@ -1538,10 +1543,10 @@ Since this specific robot operates on a plane parallel to the ground, gravity cr
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.expand", "navigation.path", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.expand"], "search": "../../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
         <script src="../../../../javascripts/mathjax.js"></script>
       

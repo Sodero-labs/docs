@@ -29,6 +29,7 @@ extra_javascript:
   - javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
 nav:
   - Home: index.md
   - Stellar X:
@@ -43,8 +44,12 @@ nav:
           - Step 3. Actuator Mapping: stellarx/tutorials/stellar_designer/map_actuators/index.md
           - Step 4. Virtual Verification: stellarx/tutorials/stellar_designer/verify_configuration/index.md
         - Start from Templates: stellarx/tutorials/stellar_designer/start_from_templates/index.md
-      - Stellar Motion:
-        - About Stellar Motion: stellarx/tutorials/stellar_motion_studio/about_stellar_motion/index.md
+      - Stellar Motion Studio:
+        - About Stellar Motion Studio: stellarx/tutorials/stellar_motion_studio/about_stellar_motion_studio/index.md
+        - Home: stellarx/tutorials/stellar_motion_studio/home/index.md
+        - Tool: stellarx/tutorials/stellar_motion_studio/tool/index.md
+        - Pose: stellarx/tutorials/stellar_motion_studio/pose/index.md
+        - Motion: stellarx/tutorials/stellar_motion_studio/motion/index.md
       - Simulation & Virtual Control:
         - Virtual Control Overview: stellarx/tutorials/simulation/virtual_control_overview/index.md
         - Isaac Sim:
@@ -56,6 +61,9 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - pymdownx.blocks.caption
+  - pymdownx.arithmatex:
+      generic: true
+
   - pymdownx.arithmatex:
       generic: true
 
