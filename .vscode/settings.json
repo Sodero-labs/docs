@@ -1,6 +1,0 @@
-// .vscode/settings.json
-{
-    "pasteImage.path": "${currentFileDir}/images", // 현재 md 파일 옆 images 폴더에 저장
-    "pasteImage.namePrefix": "",                   // 접두어 (필요시 설정)
-    "pasteImage.defaultName": "Y-MM-DD-HH-mm-ss"   // 기본 이름 (붙여넣기 시 이름 물어보게 할 수도 있음)
-}

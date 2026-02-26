@@ -17,9 +17,23 @@ theme:
     - search.suggest
     - search.highlight
     - content.code.copy
-  extra:
-    version:
-      provider: mike
+extra:
+  version:
+    provider: mike
+  comments:
+    provider: giscus
+    options:
+      repo: Sodero-labs/docs
+      repo_id: R_kgDOQiK7fQ  
+      category: Q&A   
+      category_id: DIC_kwDOQiK7fc4C3JkV
+      mapping: pathname
+      strict: 0
+      reactions_enabled: 1
+      emit_metadata: 0
+      input_position: bottom
+      theme: dark
+      lang: en
 extra_css:
   - styles/layout.css
   - styles/color.css
@@ -44,6 +58,7 @@ nav:
           - Step 3. Actuator Mapping: stellarx/tutorials/stellar_designer/map_actuators/index.md
           - Step 4. Virtual Verification: stellarx/tutorials/stellar_designer/verify_configuration/index.md
         - Start from Templates: stellarx/tutorials/stellar_designer/start_from_templates/index.md
+
       - Stellar Motion Studio:
         - About Stellar Motion Studio: stellarx/tutorials/stellar_motion_studio/about_stellar_motion_studio/index.md
         - Home: stellarx/tutorials/stellar_motion_studio/home/index.md
@@ -56,6 +71,15 @@ nav:
           - Introduction: stellarx/tutorials/simulation/introduction/index.md
           - Extension Installation: stellarx/tutorials/simulation/extension_installation/index.md
           - Robot Setup: stellarx/tutorials/simulation/robot_setup/index.md
+    - User Guide:
+      - Remote Control:
+        - Understanding Remote Control: stellarx/user_guide/remote_control/understanding_remote_control/index.md
+      - APIS: stellarx/user_guide/apis/index.md
+      - Stellar Designer:
+        - Setup:
+          - Robot Structure: stellarx/user_guide/stellar_designer/robot_structure
+          - Robot System Parameters: stellarx/user_guide/stellar_designer/robot_system_parameters
+          - Actuator Mapping: stellarx/user_guide/stellar_designer/actuator_mapping
 
 markdown_extensions:
   - attr_list
@@ -64,8 +88,12 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
 
-  - pymdownx.arithmatex:
-      generic: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
 
 plugins:
   - glightbox

@@ -1,3 +1,7 @@
+---
+comments: false
+---
+
 # What is StellarX?
 
 StellarX is Sodero's motion-control platform for building, testing, and deploying motion solutions with consistent, deterministic performance. It pairs tightly integrated hardware with a software stack that simplifies the transition from prototyping to production.
