@@ -2,6 +2,11 @@
 
 In the previous chapter, we mapped the theoretical robot structure to the actual hardware. Now that the mapping is complete, we will verify the robot's movement through a virtual simulation before deploying it to the real hardware.
 
+<<<<<<< HEAD
+> **Prerequisite:** This tutorial assumes that the EtherCAT slaves (servo drivers) are properly configured, connected, and ready for operation.
+
+=======
+>>>>>>> kate
 **Goal:** Verify the `test_robot` configuration via simulation and activate the EtherCAT Master for real-world control.
 
 <figure markdown="span">
@@ -13,7 +18,11 @@ In the previous chapter, we mapped the theoretical robot structure to the actual
 
 ## Step 1: Virtual Verification
 
+<<<<<<< HEAD
+First, we must verify that the appropriate parameters were entered in the previous steps.
+=======
 First, we must validate that the parameters entered in the previous steps cause no conflicts.
+>>>>>>> kate
 
 1. Click the **Activate Simulation** button.
 2. The system will verify the robot parameters. Once verified, the simulation will start automatically.

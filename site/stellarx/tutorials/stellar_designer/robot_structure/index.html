@@ -5,8 +5,6 @@
       
       
       
-        <link rel="canonical" href="https://docs.sodero.io/stellarx/tutorials/stellar_designer/robot_structure/">
-      
       
         <link rel="prev" href="../introduction/">
       
@@ -18,7 +16,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
@@ -26,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.618322db.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -43,16 +41,14 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
       <link rel="stylesheet" href="../../../../styles/layout.css">
     
       <link rel="stylesheet" href="../../../../styles/color.css">
-    
-      <link rel="stylesheet" href="../../../../styles/font.css">
     
     <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -80,7 +76,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="white">
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -89,7 +85,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tutorial-building-a-simple-2-bar-robot-robot-structure" class="md-skip">
+        <a href="#robot-structure" class="md-skip">
           Skip to content
         </a>
       
@@ -98,153 +94,66 @@
       
     </div>
     
-    
-  <style>
-    
-    .md-header {
-      height: 60px !important;
-      background: #111 !important;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid #333;
-    }
-
-    /* --- [1] 모바일 화면 (max-width: 76.24em) --- */
-    @media (max-width: 76.24em) {
-      .pc-only { display: none !important; }
-      
-      .mobile-header-inner {
-        display: flex;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-        padding: 0 12px;
-        gap: 10px;
-      }
-
-      .md-header__button.md-icon {
-        color: #fff;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        margin-left: -8px; 
-      }
-
-      .mobile-site-title {
-        font-size: 0.8rem;
-        font-weight: 500;
-        color: #fff;
-      }
-    }
-
-    /* --- [2] 큰 화면 (min-width: 76.25em) --- */
-    @media (min-width: 76.25em) {
-      .mobile-only { display: none !important; }
-
-      .md-header__inner {
-        height: 100%;
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-
-      .custom-header-inner {
-        height: 100%;
-        display: grid;
-        grid-template-columns: 280px 1fr;
-        align-items: center;
-        width: 100%;
-        box-sizing: border-box;
-      }
-
-      .header-left, .header-center, .header-right {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        padding: 0 12px;
-      }
-
-      .header-left {    
-        gap: 15px;        
-        border-right: 1px solid #333;
-      }
-
-      .header-icon-link, .header-home-btn {
-        display: flex; align-items: center; height: 100%;
-        text-decoration: none; color: #fff;
-      }
-
-      .site-title { font-size: 0.8rem; font-weight: 500; }
-      .header-breadcrumbs { font-size: 14px; color: #bdbdbd; display: flex; gap: 6px; }
-      .header-breadcrumbs a { color: #bdbdbd; text-decoration: none; }
-      .header-right { justify-content: flex-end; }
-    }
-
-  </style>
-
-  <header class="md-header" data-md-component="header">
-    <div class="md-header__inner" style="width: 100%;">
-      
-      <div class="mobile-header-inner mobile-only">
-        <label class="md-header__button md-icon" for="__drawer">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-            <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path>
-          </svg>
-        </label>
-        <div class="mobile-site-title">Sodero Documents</div>
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
       </div>
+    
+    
+      
 
-      <div class="custom-header-inner pc-only">
-        <div class="header-left">
-          <a href="https://www.sodero.io" class="header-icon-link" title="Sodero Home" target="_blank" rel="noopener">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
-            </svg>
-          </a>
-          <a href="../../../.." class="header-home-btn">
-            <span class="site-title">Sodero Documents</span>
-          </a>
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Sodero Documents" class="md-header__button md-logo" aria-label="Sodero Documents" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sodero Documents
+          </span>
         </div>
-
-        <div class="header-center">
-          <nav class="header-breadcrumbs">
-            <a href="../../../..">Home</a>
-              
-                
-                  <span>&gt;</span>
-                  <a href="../../../..">Stellar X</a>
-                
-              
-                
-                  <span>&gt;</span>
-                  <a href="../../../..">Tutorials</a>
-                
-              
-                
-                  <span>&gt;</span>
-                  <a href="../../../..">Stellar Designer</a>
-                
-              
-                
-                  <span>&gt;</span>
-                  <a href="../../../..">Create New Robot</a>
-                
-              
-              
-                <span>&gt;</span>
-                <span class="current">Step 1. Robot Structure</span>
-              
-          </nav>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Step 1. Robot Structure
+            
+          </span>
         </div>
-
-        <!-- <div class="header-right"></div> -->
       </div>
-
     </div>
-  </header>
-
-
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="cyan" aria-hidden="true" type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
     <div class="md-container" data-md-component="container">
       
       
@@ -651,33 +560,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#step-1-create-a-new-robot" class="md-nav__link">
+  <a href="#1-robot-structure-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 1: Create a New Robot
+        1. Robot Structure Setup
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-2-structure-setup-dh-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 2: Structure Setup (DH Parameters)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Step 2: Structure Setup (DH Parameters)">
+    <nav class="md-nav" aria-label="1. Robot Structure Setup">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-add-joints" class="md-nav__link">
+  <a href="#1-adding-joints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Add Joints
+        1. Adding Joints
       
     </span>
   </a>
@@ -685,10 +583,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-configure-link-1" class="md-nav__link">
+  <a href="#2-setting-dh-parameters-link-1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Configure Link 1
+        2. Setting DH Parameters (Link 1)
       
     </span>
   </a>
@@ -696,10 +594,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-configure-link-2" class="md-nav__link">
+  <a href="#3-adding-the-second-link" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Configure Link 2
+        3. Adding the Second Link
       
     </span>
   </a>
@@ -707,10 +605,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-verify-movement" class="md-nav__link">
+  <a href="#4-jogging-and-testing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Verify Movement
+        4. Jogging and Testing
       
     </span>
   </a>
@@ -723,22 +621,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-dynamics-configuration" class="md-nav__link">
+  <a href="#2-dynamics-settings" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 3: Dynamics Configuration
+        2. Dynamics Settings
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Step 3: Dynamics Configuration">
+    <nav class="md-nav" aria-label="2. Dynamics Settings">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#link-1-settings" class="md-nav__link">
+  <a href="#1-mass" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Link 1 Settings
+        1. Mass
       
     </span>
   </a>
@@ -746,10 +644,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#link-2-settings" class="md-nav__link">
+  <a href="#2-center-of-mass-com" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Link 2 Settings
+        2. Center of Mass (CoM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rotational-inertia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Rotational Inertia
       
     </span>
   </a>
@@ -762,22 +671,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-constraints-setup" class="md-nav__link">
+  <a href="#3-constraints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 4: Constraints Setup
+        3. Constraints
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Step 4: Constraints Setup">
+    <nav class="md-nav" aria-label="3. Constraints">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#joint-1-constraints" class="md-nav__link">
+  <a href="#1-joint-limits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Joint 1 Constraints
+        1. Joint Limits
       
     </span>
   </a>
@@ -785,10 +694,54 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#joint-2-constraints" class="md-nav__link">
+  <a href="#2-kinematic-limits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Joint 2 Constraints
+        2. Kinematic Limits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-friction-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Friction Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-collision-threshold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Collision Threshold
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-goal-tolerance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Goal Tolerance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Example
       
     </span>
   </a>
@@ -801,10 +754,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
+  <a href="#4-summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Summary
+        4. Summary
       
     </span>
   </a>
@@ -1004,7 +957,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stellar_motion_studio/about_stellar_motion/" class="md-nav__link">
+      <a href="../../stellar_motion/about_stellar_motion/" class="md-nav__link">
         
   
   
@@ -1301,33 +1254,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#step-1-create-a-new-robot" class="md-nav__link">
+  <a href="#1-robot-structure-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 1: Create a New Robot
+        1. Robot Structure Setup
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-2-structure-setup-dh-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 2: Structure Setup (DH Parameters)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Step 2: Structure Setup (DH Parameters)">
+    <nav class="md-nav" aria-label="1. Robot Structure Setup">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-add-joints" class="md-nav__link">
+  <a href="#1-adding-joints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Add Joints
+        1. Adding Joints
       
     </span>
   </a>
@@ -1335,10 +1277,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-configure-link-1" class="md-nav__link">
+  <a href="#2-setting-dh-parameters-link-1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Configure Link 1
+        2. Setting DH Parameters (Link 1)
       
     </span>
   </a>
@@ -1346,10 +1288,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-configure-link-2" class="md-nav__link">
+  <a href="#3-adding-the-second-link" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Configure Link 2
+        3. Adding the Second Link
       
     </span>
   </a>
@@ -1357,10 +1299,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-verify-movement" class="md-nav__link">
+  <a href="#4-jogging-and-testing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Verify Movement
+        4. Jogging and Testing
       
     </span>
   </a>
@@ -1373,22 +1315,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-dynamics-configuration" class="md-nav__link">
+  <a href="#2-dynamics-settings" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 3: Dynamics Configuration
+        2. Dynamics Settings
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Step 3: Dynamics Configuration">
+    <nav class="md-nav" aria-label="2. Dynamics Settings">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#link-1-settings" class="md-nav__link">
+  <a href="#1-mass" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Link 1 Settings
+        1. Mass
       
     </span>
   </a>
@@ -1396,10 +1338,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#link-2-settings" class="md-nav__link">
+  <a href="#2-center-of-mass-com" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Link 2 Settings
+        2. Center of Mass (CoM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rotational-inertia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Rotational Inertia
       
     </span>
   </a>
@@ -1412,22 +1365,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-constraints-setup" class="md-nav__link">
+  <a href="#3-constraints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 4: Constraints Setup
+        3. Constraints
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Step 4: Constraints Setup">
+    <nav class="md-nav" aria-label="3. Constraints">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#joint-1-constraints" class="md-nav__link">
+  <a href="#1-joint-limits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Joint 1 Constraints
+        1. Joint Limits
       
     </span>
   </a>
@@ -1435,10 +1388,54 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#joint-2-constraints" class="md-nav__link">
+  <a href="#2-kinematic-limits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Joint 2 Constraints
+        2. Kinematic Limits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-friction-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Friction Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-collision-threshold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Collision Threshold
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-goal-tolerance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Goal Tolerance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Example
       
     </span>
   </a>
@@ -1451,10 +1448,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
+  <a href="#4-summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Summary
+        4. Summary
       
     </span>
   </a>
@@ -1472,160 +1469,38 @@
           
             <div class="md-content" data-md-component="content">
               
-                
-
-
-
-  
-
-
-  <nav class="md-path" aria-label="Navigation">
-    <ol class="md-path__list">
-      
-        
-  
-  
-    <li class="md-path__item">
-      <a href="../../../.." class="md-path__link">
-        
-  <span class="md-ellipsis">
-    Home
-  </span>
-
-      </a>
-    </li>
-  
-
-      
-      
-        
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../../../what_is_stellarx/" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    Stellar X
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-    
-    
-      
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../introduction/" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    Tutorials
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-    
-  
-
-      
-        
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../introduction/" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    Stellar Designer
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-    
-    
-      <li class="md-path__item">
-        <a href="./" class="md-path__link">
-          
-  <span class="md-ellipsis">
-    Create New Robot
-  </span>
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ol>
-  </nav>
-
-              
               <article class="md-content__inner md-typeset">
                 
                   
 
 
 
-<h1 id="tutorial-building-a-simple-2-bar-robot-robot-structure">Tutorial: Building a Simple 2-Bar Robot - Robot Structure</h1>
-<p>In this tutorial, we will walk through the process of creating a simple "2-bar" robot. By following these steps, you will learn the basic workflow of robot creation, structure setup, and parameter configuration without getting bogged down in complex theories.</p>
-<p><strong>Goal:</strong> Create a 2-link robot named <code>test_robot</code>.</p>
+<h1 id="robot-structure">Robot Structure</h1>
+<p>In this example, we will create the simplest "2-bar" robot example. As the name suggests, it consists of two links and two actuators.</p>
 <figure>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/two_bar.png" data-desc-position="bottom"><img alt="alt text" src="images/two_bar.png"></a>
     <figcaption>Conceptual Image of a 2-Bar Robot</figcaption>
 </figure>
-<hr>
-<h2 id="step-1-create-a-new-robot">Step 1: Create a New Robot</h2>
-<ol>
-<li>Navigate to the <strong>Home</strong> screen.</li>
-<li>Click the <strong>Create New Robot</strong> button.</li>
-</ol>
+<p>First, navigate to the <strong>Home</strong> screen and click <strong>Create New Robot</strong>. </p>
 <figure>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/create_new_robot1.png" data-desc-position="bottom"><img alt="create_robot" src="images/create_new_robot1.png" width="1000"></a>
-    <figcaption>Click the <strong>Create New Robot</strong> button</figcaption>
+    <figcaption>Navigate to the Home screen and click the <strong>Create New Robot</strong> button</figcaption>
 </figure>
-<ol>
-<li>In the setup screen:<ul>
-<li>Select <strong>EmptyRobot</strong>.</li>
-<li>Enter the name: <code>test_robot</code>.</li>
-<li>Click <strong>Create</strong>.</li>
-</ul>
-</li>
-</ol>
+<p>The following screen will appear. Select <strong>EmptyRobot</strong> and enter your desired robot name. In this example, we named it <code>test_robot</code>. Click <strong>Create</strong> to move to the robot editing window.</p>
 <figure>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/create_new_robot2.png" data-desc-position="bottom"><img alt="create_robot" src="images/create_new_robot2.png" width="1000"></a>
-    <figcaption>Select <strong>EmptyRobot</strong> and name it <code>test_robot</code></figcaption>
+    <figcaption>Select <strong>EmptyRobot</strong>, enter the name <code>test_robot</code>, and click Create</figcaption>
 </figure>
 <hr>
-<h2 id="step-2-structure-setup-dh-parameters">Step 2: Structure Setup (DH Parameters)</h2>
-<p>We will construct the skeleton of the robot by adding joints and setting their lengths.</p>
-<h3 id="1-add-joints">1. Add Joints</h3>
+<h2 id="1-robot-structure-setup">1. Robot Structure Setup</h2>
+<p>First, we will construct the skeleton of the robot.</p>
+<h3 id="1-adding-joints">1. Adding Joints</h3>
 <ul>
-<li>Click the <code>+</code> button on the right side of the <strong>Joint Section</strong> to add two joints.</li>
+<li>Click the <code>+</code> button on the right side of the <strong>Joint Section</strong> to add a joint.</li>
+<li>You can continue adding joints as needed, but for non-<code>None</code> type joints, you can add up to a maximum of <strong>7 axes</strong>.</li>
 </ul>
-<h3 id="2-configure-link-1">2. Configure Link 1</h3>
-<p>Enter the parameters as follows to create a 300mm link along the Y-axis:</p>
+<h3 id="2-setting-dh-parameters-link-1">2. Setting DH Parameters (Link 1)</h3>
+<p>Enter the parameters as follows:</p>
 <table>
 <thead>
 <tr>
@@ -1655,78 +1530,148 @@
 <td style="text-align: center;">0</td>
 <td style="text-align: center;">mm</td>
 </tr>
-<tr>
-<td style="text-align: center;"><strong>Joint Type</strong></td>
-<td style="text-align: center;">Rotation Z</td>
-<td style="text-align: center;">-</td>
-</tr>
 </tbody>
 </table>
+<p>By doing this, a link extended 300mm along the Y-axis relative to the Base Coordinate System (the initial World Coordinate System) will be drawn, as shown in the picture below.</p>
 <figure>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/creation_link1.png" data-desc-position="bottom"><img alt="create_robot" src="images/creation_link1.png" width="1000"></a>
     <figcaption>Creation of Link 1</figcaption>
 </figure>
-<h3 id="3-configure-link-2">3. Configure Link 2</h3>
-<p>Set up the second link with the following values:
-- <strong>a</strong>: 300
-- <strong>theta, d, alpha</strong>: 0
-- <strong>Joint Type</strong>: Rotation Z</p>
+<ul>
+<li>Setting the <strong>Joint Type</strong> to <code>Rotation Z</code> indicates that it rotates around the Z-axis of the previous coordinate system.</li>
+</ul>
+<h3 id="3-adding-the-second-link">3. Adding the Second Link</h3>
+<p>Add another link. Set <code>a</code> to <strong>300</strong>, leave the others at <strong>0</strong>, and set the rotation to <code>Rotation Z</code>.</p>
 <figure>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/creation_link2.png" data-desc-position="bottom"><img alt="create_robot" src="images/creation_link2.png" width="1000"></a>
     <figcaption>Creation of Link 2</figcaption>
 </figure>
-<h3 id="4-verify-movement">4. Verify Movement</h3>
-<p>Use the <strong>Jog</strong> tab to ensure the joints rotate correctly.
-- <strong>Jog</strong>: Moves the robot.
-- <strong>Jog Reset</strong>: Returns the moved robot to its origin.</p>
+<h3 id="4-jogging-and-testing">4. Jogging and Testing</h3>
+<p>Once the skeleton is built, you can use the <strong>Jog</strong> button to check if the rotation direction is correct or to move it slightly for testing.</p>
 <figure>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/jog_button.png" data-desc-position="bottom"><img alt="jog_control" src="images/jog_button.png"></a>
     <figcaption>Jog Control Interface</figcaption>
 </figure>
+<ul>
+<li><strong>Jog</strong>: Moves the robot.</li>
+<li><strong>Jog Reset</strong>: Returns the moved robot to its origin.</li>
+</ul>
+<p>With this, we have constructed the robot's skeleton using DH parameters.</p>
 <hr>
-<h2 id="step-3-dynamics-configuration">Step 3: Dynamics Configuration</h2>
-<p>Now we apply physical properties to the robot. For this tutorial, simply input the approximate values provided in the screenshots.</p>
+<h2 id="2-dynamics-settings">2. Dynamics Settings</h2>
+<p>Next, let's configure the robot's dynamics. Clicking <strong>Dynamics</strong> in each Joint Section allows you to configure the dynamics settings for the link connecting that joint's coordinate system to the coordinate system offset by its DH parameters (Advanced settings appear on the right). </p>
 <blockquote>
-<p><strong>Note:</strong> For detailed definitions of Coordinate Systems and Mass calculations, please refer to the <strong>User Guide</strong>.</p>
+<p><strong>Note:</strong> This is indicated in blue on the 3D model. Conversely, clicking the link part of the 3D model will also display the corresponding tab on the right.</p>
 </blockquote>
-<ol>
-<li>Click <strong>Dynamics</strong> in the Joint Section.</li>
-<li>Enter the values for <strong>Mass</strong>, <strong>Center of Mass</strong>, and <strong>Inertia</strong> as shown below.</li>
-</ol>
-<h3 id="link-1-settings">Link 1 Settings</h3>
+<p>To accurately configure the settings below, we need to define the coordinate systems used. Please refer to the diagrams below showing the <strong>Output Coordinate System</strong> for each link.</p>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/link1_output_coord.png" data-desc-position="bottom"><img alt="create_robot" src="images/link1_output_coord.png"></a>
+    <figcaption>Link 1 Output Coordinate System</figcaption>
+</figure>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/link2_output_coord.png" data-desc-position="bottom"><img alt="create_robot" src="images/link2_output_coord.png"></a>
+    <figcaption>Link 2 Output Coordinate System</figcaption>
+</figure>
+<h3 id="1-mass">1. Mass</h3>
+<p>This refers to the mass of the corresponding link. 
+- Input the mass of the link that the joint supports, specifically the section from the <strong>Output Coordinate System</strong> of the current joint to the <strong>Output Coordinate System</strong> of the next joint.
+- Typically, you derive the physical properties from the CAD file by measuring the mass between the output stage (after the reducer) of the current joint and the output stage of the next joint.</p>
+<h3 id="2-center-of-mass-com">2. Center of Mass (CoM)</h3>
+<p>The Center of Mass must be defined relative to a specific reference frame.
+- The reference is the coordinate system advanced by the DH parameters from the current joint's coordinate system. We will refer to this as the <strong>Output Coordinate System</strong>.
+- Enter the center of mass of the link relative to this <strong>Output Coordinate System</strong>.
+- This can be obtained by defining a coordinate system in a CAD program (like SolidWorks) and calculating the center of mass coordinates based on it.</p>
+<h3 id="3-rotational-inertia">3. Rotational Inertia</h3>
+<ul>
+<li>The reference coordinate system for inertia is centered at the <strong>Center of Mass</strong>.</li>
+<li>The orientation of its coordinate vectors (Rotation) must match the <strong>Output Coordinate System</strong>.</li>
+<li>This value is also typically derived via CAD software.</li>
+</ul>
+<p>For this 2-bar example, since it is virtual, we have entered approximate values as shown below.</p>
 <figure>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/link1_cog.png" data-desc-position="bottom"><img alt="create_robot" src="images/link1_cog.png" width="1000"></a>
-    <figcaption>Link 1 Inertia Settings</figcaption>
+    <figcaption>Link 1 Inertia Settings &amp; Reference Coordinate System</figcaption>
 </figure>
-<h3 id="link-2-settings">Link 2 Settings</h3>
 <figure>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/link2_cog.png" data-desc-position="bottom"><img alt="create_robot" src="images/link2_cog.png" width="1000"></a>
-    <figcaption>Link 2 Inertia Settings</figcaption>
+    <figcaption>Link 2 Inertia Settings &amp; Reference Coordinate System</figcaption>
 </figure>
 <hr>
-<h2 id="step-4-constraints-setup">Step 4: Constraints Setup</h2>
-<p>Finally, we configure the safety limits and friction parameters.</p>
-<ol>
-<li>Click the <strong>Constraints</strong> button in the Joint Section.</li>
-<li>Match the settings in the images below for each joint.</li>
-</ol>
-<h3 id="joint-1-constraints">Joint 1 Constraints</h3>
+<h2 id="3-constraints">3. Constraints</h2>
+<p>Now that the robot's inertial information has been entered, let's input the detailed limit values and parameters for each joint. These settings are crucial for the safety.</p>
+<p>To access these settings, click the <strong>Constraints</strong> button in the Joint Section as shown below. This will open the configuration panel on the right side of the screen. You will notice that the selected joint is highlighted in the 3D model to indicate which part you are editing. Conversely, clicking a joint directly within the 3D model will also open the corresponding editing panel.</p>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/constraints.png" data-desc-position="bottom"><img alt="constraints" src="images/constraints.png"></a>
+    <figcaption>Constraints Configuration Panel</figcaption>
+</figure>
+<p>The specific parameters available in this section are defined as follows:</p>
+<h3 id="1-joint-limits">1. Joint Limits</h3>
+<p>Joint limits serve as <strong>software-defined boundaries</strong>. If a target joint position <strong>falls outside the range defined by the Lower Limit and Upper Limit</strong>, control will stop <strong>immediately</strong> to prevent unsafe motion.</p>
+<h3 id="2-kinematic-limits">2. Kinematic Limits</h3>
+<p>This section defines the kinematic constraints for the joint, including maximum speed, acceleration, and jerk.</p>
+<blockquote>
+<p>⚠️ <strong>Important Note on Units</strong>
+Units may vary depending on the joint type:
+- For <strong>revolute joints</strong>: typically in degrees (°), deg/s, deg/s², etc.
+- For <strong>prismatic joints</strong>: typically in millimeters (mm), mm/s, mm/s², etc.</p>
+</blockquote>
+<p>Define these limits based on the <strong>final actuator-level constraints</strong>, taking into account motor specifications, gear reduction ratios, and other mechanical characteristics.</p>
+<ul>
+<li><strong>Max Speed</strong>: The maximum speed allowed during motion <strong>toward the current target</strong>.</li>
+<li><strong>Max Acceleration</strong>: The maximum acceleration allowed <strong>while moving toward the current target</strong>.</li>
+<li><strong>Max Jerk</strong>: The maximum jerk (rate of change of acceleration) allowed during target-directed motion.</li>
+</ul>
+<h3 id="3-friction-parameters">3. Friction Parameters</h3>
+<p>This defines the <strong>joint friction model</strong>, assuming that friction is purely a function of joint velocity. The friction output from this model is always bounded within the range: <code>-Max Friction ≤ τ_friction ≤ Max Friction</code>.</p>
+<p><strong>Model Description</strong>
+As shown in the diagram below:
+- When <code>-w1 &lt; w &lt; w1</code>, the friction curve follows a <strong>smooth quadratic transition</strong>.
+- When <code>|w| &gt; w1</code>, the function transitions into <strong>linear segments</strong>.
+- The entire curve is modeled as an <strong>origin-symmetric function</strong>.</p>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/friction_parameter.png" data-desc-position="bottom"><img alt="constraints" src="images/friction_parameter.png"></a>
+    <figcaption>Friction Model Curve</figcaption>
+</figure>
+<p>The curve is defined by three key parameters:
+1.  <strong>Low-speed point (<code>w1</code>, <code>f1</code>)</strong>: <code>w1</code> is the low velocity threshold (deg/s or mm/s), and <code>f1</code> is the corresponding friction torque/force (Nm or N).
+2.  <strong>High-speed point (<code>w2</code>, <code>f2</code>)</strong>: <code>w2</code> is the high velocity threshold, and <code>f2</code> is the corresponding friction torque/force.
+3.  <strong>Maximum Friction</strong>: The upper bound for the friction output (Nm or N).</p>
+<h3 id="4-collision-threshold">4. Collision Threshold</h3>
+<p>Defines the <strong>default torque/force threshold</strong> for detecting collisions on this joint.</p>
+<ul>
+<li>If the <strong>estimated external force or torque</strong> on the joint <strong>exceeds this threshold</strong>, a <strong>collision detection error</strong> will be triggered immediately to ensure safety.</li>
+<li><strong>Unit</strong>: Nm (for revolute joints) or N (for prismatic joints).</li>
+</ul>
+<blockquote>
+<p>⚠️ Set this value carefully based on your system’s environment and sensitivity requirements.</p>
+</blockquote>
+<h3 id="5-goal-tolerance">5. Goal Tolerance</h3>
+<p><strong>Goal Joint Tolerance</strong> serves as the threshold for determining whether the robot has successfully reached its target when executing <strong>joint space commands</strong> (e.g., <code>move_joint</code>).</p>
+<ul>
+<li>If the difference between the current joint position and the target position falls within this value, the motion is considered complete.</li>
+<li><strong>Revolute Joints:</strong> The value is typically in <strong>degrees</strong> or <strong>radians</strong>.</li>
+<li><strong>Prismatic Joints:</strong> The value is typically in <strong>millimeters</strong> or <strong>meters</strong>.</li>
+</ul>
+<blockquote>
+<p>⚠️ <strong>Caution:</strong> Pay close attention to the <strong>units</strong>, which depend on the type of joint.</p>
+</blockquote>
+<hr>
+<h3 id="configuration-example">Configuration Example</h3>
+<p>For this example, please configure the constraints for each joint using the values shown in the screenshots below:</p>
 <figure>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/joint1_constraints.png" data-desc-position="bottom"><img alt="constraints" src="images/joint1_constraints.png"></a>
     <figcaption>Constraints Settings for Joint 1</figcaption>
 </figure>
-<h3 id="joint-2-constraints">Joint 2 Constraints</h3>
 <figure>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/joint2_constraints.png" data-desc-position="bottom"><img alt="constraints" src="images/joint2_constraints.png"></a>
     <figcaption>Constraints Settings for Joint 2</figcaption>
 </figure>
-<hr>
-<h2 id="summary">Summary</h2>
-<p>Congratulations! You have successfully:
-1. Created a robot skeleton using DH parameters.
-2. Applied dynamic properties.
-3. Configured safety constraints.</p>
-<p>Your <code>test_robot</code> is now ready for simulation or control tasks.</p>
+<h2 id="4-summary">4. Summary</h2>
+<p>In this chapter, we covered the process of:
+1. Constructing the robot skeleton using <strong>DH Parameters</strong>.
+2. Setting <strong>Inertia/Physical Properties</strong> for each link, paying close attention to the <strong>Output Coordinate System</strong>.
+3. Configuring detailed <strong>Limits and Constraints</strong> (Kinematic limits, Joint limits, Friction models, etc.)</p>
+<p>These steps cover the settings for individual joints and links. In the next section, we will proceed with configuring the overall parameters for the constructed robot.</p>
 
 
 
@@ -1776,10 +1721,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.expand", "navigation.path", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.expand"], "search": "../../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
         <script src="../../../../javascripts/mathjax.js"></script>
       
