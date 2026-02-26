@@ -1,0 +1,2037 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.sodero.io/stellarx/tutorials/simulation/robot_setup/">
+      
+      
+        <link rel="prev" href="../extension_installation/">
+      
+      
+        <link rel="next" href="../../../user_guide/remote_control/understanding_remote_control/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Robot Setup - Sodero Documents</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../styles/layout.css">
+    
+      <link rel="stylesheet" href="../../../../styles/color.css">
+    
+      <link rel="stylesheet" href="../../../../styles/font.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="white">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prepare-robot-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+  <style>
+    
+    .md-header {
+      height: 60px !important;
+      background: #111 !important;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #333;
+    }
+
+    /* --- [1] 모바일 화면 (max-width: 76.24em) --- */
+    @media (max-width: 76.24em) {
+      .pc-only { display: none !important; }
+      
+      .mobile-header-inner {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        padding: 0 12px;
+        gap: 10px;
+      }
+
+      .md-header__button.md-icon {
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        margin-left: -8px; 
+      }
+
+      .mobile-site-title {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #fff;
+      }
+    }
+
+    /* --- [2] 큰 화면 (min-width: 76.25em) --- */
+    @media (min-width: 76.25em) {
+      .mobile-only { display: none !important; }
+
+      .md-header__inner {
+        height: 100%;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .custom-header-inner {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .header-left, .header-center, .header-right {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+      }
+
+      .header-left {    
+        gap: 15px;        
+        border-right: 1px solid #333;
+      }
+
+      .header-icon-link, .header-home-btn {
+        display: flex; align-items: center; height: 100%;
+        text-decoration: none; color: #fff;
+      }
+
+      .site-title { font-size: 0.8rem; font-weight: 500; }
+      .header-breadcrumbs { font-size: 14px; color: #bdbdbd; display: flex; gap: 6px; }
+      .header-breadcrumbs a { color: #bdbdbd; text-decoration: none; }
+      .header-right { justify-content: flex-end; }
+    }
+
+  </style>
+
+  <header class="md-header" data-md-component="header">
+    <div class="md-header__inner" style="width: 100%;">
+      
+      <div class="mobile-header-inner mobile-only">
+        <label class="md-header__button md-icon" for="__drawer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path>
+          </svg>
+        </label>
+        <div class="mobile-site-title">Sodero Documents</div>
+      </div>
+
+      <div class="custom-header-inner pc-only">
+        <div class="header-left">
+          <a href="https://www.sodero.io" class="header-icon-link" title="Sodero Home" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+            </svg>
+          </a>
+          <a href="../../../.." class="header-home-btn">
+            <span class="site-title">Sodero Documents</span>
+          </a>
+        </div>
+
+        <div class="header-center">
+          <nav class="header-breadcrumbs">
+            <a href="../../../..">Home</a>
+              
+                
+                  <span>&gt;</span>
+                  <a href="../../../..">Stellar X</a>
+                
+              
+                
+                  <span>&gt;</span>
+                  <a href="../../../..">Tutorials</a>
+                
+              
+                
+                  <span>&gt;</span>
+                  <a href="../../../..">Simulation &amp; Virtual Control</a>
+                
+              
+                
+                  <span>&gt;</span>
+                  <a href="../../../..">Isaac Sim</a>
+                
+              
+              
+                <span>&gt;</span>
+                <span class="current">Robot Setup</span>
+              
+          </nav>
+        </div>
+
+        <!-- <div class="header-right"></div> -->
+      </div>
+
+    </div>
+  </header>
+
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Sodero Documents" class="md-nav__button md-logo" aria-label="Sodero Documents" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Sodero Documents
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stellar X
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stellar X
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../what_is_stellarx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What is Stellar X
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../quick_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_1">
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1" id="__nav_2_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stellar Designer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stellar Designer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stellar_designer/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_1_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_2" id="__nav_2_3_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create New Robot
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Create New Robot
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stellar_designer/robot_structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Step 1. Robot Structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stellar_designer/configure_system_parameters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Step 2. Robot System Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stellar_designer/map_actuators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Step 3. Actuator Mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stellar_designer/verify_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Step 4. Virtual Verification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stellar_designer/start_from_templates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start from Templates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_2" id="__nav_2_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stellar Motion Studio
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stellar Motion Studio
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stellar_motion_studio/about_stellar_motion_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About Stellar Motion Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stellar_motion_studio/home/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stellar_motion_studio/tool/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stellar_motion_studio/pose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stellar_motion_studio/motion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Motion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_3" id="__nav_2_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulation &amp; Virtual Control
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Simulation &amp; Virtual Control
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../virtual_control_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual Control Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_3_2" id="__nav_2_3_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Isaac Sim
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Isaac Sim
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extension_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extension Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Setup
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#using-provided-robot-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Provided Robot Models
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-robot-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building Robot model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Building Robot model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#making-robot-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Making Robot Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4">
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_1">
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_1" id="__nav_2_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Remote Control
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Remote Control
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/remote_control/understanding_remote_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Understanding Remote Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/apis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_3">
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_3" id="__nav_2_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stellar Designer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stellar Designer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_3_1">
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_3_1" id="__nav_2_4_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_4_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/stellar_designer/robot_structure" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/stellar_designer/robot_system_parameters" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot System Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guide/stellar_designer/actuator_mapping" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actuator Mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#using-provided-robot-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Provided Robot Models
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-robot-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building Robot model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Building Robot model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#making-robot-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Making Robot Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="prepare-robot-model">Prepare Robot Model</h1>
+<h2 id="using-provided-robot-models">Using Provided Robot Models</h2>
+<p>Isaac Sim provides various robot models from popular manufacturers like Universal Robots, Unitree, Franka Robotics etc. by default.  </p>
+<p>You can access these models by clicking <code>Window</code> -&gt; <code>Browsers</code> -&gt; <code>Isaac Sim Assets</code>.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_models_01.png" data-desc-position="bottom"><img alt="isaac sim asset" src="images/isaacsim_models_01.png"></a>
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_models_02.png" data-desc-position="bottom"><img alt="isaac sim asset" src="images/isaacsim_models_02.png" width="1000"></a></p>
+<p>There should be a new tab appeared next to the <code>Content</code> tab. You may have to wait for a while for Isaac Sim to load all the assets. There are plenty of robot models here. But if you need your own robot to be implemented, please follow below general setup guide.</p>
+<h2 id="building-robot-model">Building Robot model</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>You can make any robot with all the shapes and sizes you'd like, but there are some rules that need to be addressed.</p>
+<ul>
+<li>The name of your robot prim must match the name from StellarX.</li>
+<li>Robot must contain only one <a href="https://docs.isaacsim.omniverse.nvidia.com/5.0.0/robot_setup_tutorials/tutorial_gui_simple_robot.html#add-articulation">articulation root</a>.</li>
+<li>All the links in the robot must be rigid-bodies. Collision or weight settings is not mandatory, but is recommanded for accurate physics simulation.</li>
+<li>Closed-loop articulation is not supported. You can <a href="https://docs.isaacsim.omniverse.nvidia.com/5.0.0/robot_setup_tutorials/rig_closed_loop_structures.html">exclude</a> some joints from articulation, but this may result in inaccurate simulation result.</li>
+</ul>
+<p>Most of the time, you'll be using <a href="https://wiki.ros.org/urdf">urdf</a> format. If you wish to use urdf, please refer to <a href="https://docs.isaacsim.omniverse.nvidia.com/5.0.0/importer_exporter/import_urdf.html">this guide</a>. In this tutorial, we'll be rigging the robot ourselves. Before starting, please download the result robot model from <a href="../../stellar_designer/3dmodel_creation/"><strong>3D Model Creation</strong></a> guide.</p>
+<ul>
+<li><a href="models/example_manipulator_assembly_vis.glb"><strong>3D Model download link</strong></a></li>
+</ul>
+<h3 id="making-robot-model">Making Robot Model</h3>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_01.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_01.png"></a>
+</figure>
+<ul>
+<li>Open up new file. From main screen, Click <code>File</code> -&gt; <code>Import</code>.</li>
+</ul>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_02.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_02.png" width="1000"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_03.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_03.png" width="1000"></a>
+</figure>
+<ul>
+<li>Go to downloaded file's directory. Select the file and enable <code>Use Meter as World Unit</code>. Click box next to <code>Up-axis</code> and select <code>Z-up</code> and import. The result should look like bottom picture.</li>
+</ul>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_04.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_04.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_05.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_05.png" width="1000"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_06.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_06.png" width="1000"></a>
+</figure>
+<ul>
+<li>If you take a look at the file's directory, you'll see a new <code>.usd</code> format file with the same name. Click <code>File</code> -&gt; <code>Open</code> and open the <code>.usd</code> file.
+You'll be then able to see the full robot model.</li>
+</ul>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_07.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_07.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_08.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_08.png"></a>
+</figure>
+<ul>
+<li>Open up all the joint prims and you'll see the full stage tree. Right-click on the empty part of the stage and click <code>Create</code> -&gt; <code>Scope</code>. This will create scope for organizing the stage. Create two scopes and name them <code>links</code> and <code>joints</code>. </li>
+</ul>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_09.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_09.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_10.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_10.png"></a>
+</figure>
+<ul>
+<li>Drag all the links to <code>links</code> scope and delete joint prims.</li>
+</ul>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_11.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_11.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_12.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_12.png"></a>
+</figure>
+<ul>
+<li>Select all the links and right-click. Click <code>Add</code> -&gt; <code>Physics</code> -&gt; <code>Rigid Body</code> to make them rigid-bodies. You can verify it by scrolling down on the property tab.</li>
+</ul>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_13.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_13.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_14.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_14.png"></a>
+</figure>
+<ul>
+<li>Next, open the link prim and select mesh prim. Right-click and click <code>Add</code> -&gt; <code>Physics</code> -&gt; <code>Collider</code>. This will add collider to mesh and you can also verify it by scrolling down. Default collider type is <code>trimesh</code>, but since the parent prim is rigid-body, it is automatically set to <code>Convex Hull</code>. Repeat this for all the other link meshes.</li>
+</ul>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_15.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_15.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_16.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_16.png"></a>
+</figure>
+<ul>
+<li>Now, we need to add joints. First, select <code>link0</code> and right-click. Click <code>Create</code> -&gt; <code>Physics</code> -&gt; <code>Joint</code> -&gt; <code>Fixed Joint</code>. This will create <code>FixedJoint</code> under <code>link0</code>. This joint is like an anchor that fixes base link of the robot to the world. You can see this by looking at the Body settings of <code>FixedJoint</code>. Empty Body 0 means it is fixed to world. You can explicitly set this To <code>/World</code> prim.</li>
+</ul>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_17.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_17.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_18.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_18.png"></a>
+</figure>
+<ul>
+<li>Next, we will add revolute joint. Select <code>link0</code> and then ctrl-click <code>link1</code>. Order matters in this part. Selecting <code>link1</code> then <code>link0</code> will result in <code>link0</code> trying to revolute relative to <code>link1</code> and not vice versa. Right-click on <code>link1</code> and click <code>Create</code> -&gt; <code>Physics</code> -&gt; <code>Joint</code> -&gt; <code>Revolute Joint</code>. This will create revolute joint under <code>link1</code>.</li>
+</ul>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_19.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_19.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_20.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_20.png"></a>
+</figure>
+<ul>
+<li>Rename joint to <code>J1</code> for consistency. Right-click on <code>J1</code> and select <code>Add</code> -&gt; <code>Physics</code> -&gt; <code>Angular Drive</code>. We can only control joints with drive property, and joints without them can only move passively.</li>
+</ul>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_21.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_21.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_22.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_22.png"></a>
+</figure>
+<ul>
+<li>Repeat the same process for the other joints. And move them to <code>joints</code> scope.</li>
+</ul>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_25.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_25.png"></a>
+</figure>
+<ul>
+<li>Select <code>J1</code> and scroll down to <code>Revolute Joint</code> section. Click <code>Axis</code> and selelct Z. Repeat same process for <code>J4</code> and <code>J6</code>.</li>
+</ul>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_26.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_26.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_27.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_27.png"></a>
+</figure>
+<ul>
+<li>Finally, select FixedJoint and right-click. Select <code>Add</code> -&gt; <code>Physics</code> -&gt; <code>Articulation Root</code>. <code>Articulation Root</code> is what defines robot in Isaac Sim. For more information, check out <a href="https://docs.isaacsim.omniverse.nvidia.com/5.0.0/robot_setup_tutorials/tutorial_gui_simple_robot.html#add-articulation">this documentation</a>. Change the joint's name to 'example_robot'. The name of the prim that has articulation root is recognized as that robot's name. </li>
+</ul>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_28.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_28.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaacsim_assembly_29.png" data-desc-position="bottom"><img alt="models" src="images/isaacsim_assembly_29.png"></a>
+</figure>
+<p>And that's the end of robot preparation. Save and open up new file. Click <code>Create</code> -&gt; <code>Environments</code> -&gt; <code>Flat Grid</code>. Drag the robot model file to <code>Stage</code> on the right, and you'll see the robot in the world!</p>
+<p>&nbsp;</p>
+<p>Next step is StellarX configuration. For convenience, download already configured stellar robot definition file below.</p>
+<ul>
+<li><a href="models/example_robot.sdd"><strong>Robot definition download link</strong></a></li>
+</ul>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/stellar_01.png" data-desc-position="bottom"><img alt="stellar" src="images/stellar_01.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/stellar_02.png" data-desc-position="bottom"><img alt="stellar" src="images/stellar_02.png"></a>
+</figure>
+<p>On the main page, click <code>Import File</code> button and load example_robot definition. Double-click to enter the project.</p>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/stellar_03.png" data-desc-position="bottom"><img alt="stellar" src="images/stellar_03.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/stellar_04.png" data-desc-position="bottom"><img alt="stellar" src="images/stellar_04.png"></a>
+</figure>
+<p>There's nothing for us to configure in this step. Click <code>Step 4: Virtual Verification</code> and click <code>Activate Simulation</code>.</p>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/stellar_05.png" data-desc-position="bottom"><img alt="stellar" src="images/stellar_05.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/stellar_06.png" data-desc-position="bottom"><img alt="stellar" src="images/stellar_06.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/stellar_07.png" data-desc-position="bottom"><img alt="stellar" src="images/stellar_07.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/stellar_08.png" data-desc-position="bottom"><img alt="stellar" src="images/stellar_08.png"></a>
+</figure>
+<p>If there's no problem, you'll see no issues here. Click <code>Ok</code>. Change <code>EtherCAT</code> default setting to <code>Isaac Sim</code>. Click <code>Apply</code>.</p>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/stellar_09.png" data-desc-position="bottom"><img alt="stellar" src="images/stellar_09.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/stellar_10.png" data-desc-position="bottom"><img alt="stellar" src="images/stellar_10.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/stellar_11.png" data-desc-position="bottom"><img alt="stellar" src="images/stellar_11.png"></a>
+</figure>
+<p>Enter the robot's name in <code>Name</code>, and your PC's IP address in <code>IP</code>. Click <code>Apply</code> and <code>Apply</code>. Finally, click <code>Go to Motion Studio</code>.</p>
+<figure>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/stellar_12.png" data-desc-position="bottom"><img alt="stellar" src="images/stellar_12.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/stellar_13.png" data-desc-position="bottom"><img alt="stellar" src="images/stellar_13.png"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/stellar_final_result.gif" data-desc-position="bottom"><img alt="stellar" src="images/stellar_final_result.gif"></a>
+</figure>
+<p>This is Stellar Motion Studio. Open up jog-panel by clicking joystick icon on top-right. Click <code>Servo On</code>. On Isaac Sim, click <code>Play</code> button on the left side. Jog the robot via <code>Jog Control</code> and you'll see the robot is moving accordingly. You can also write your own python script to move the robot at your need.</p>
+<p>You can download final robot model below.</p>
+<ul>
+<li><a href="models/example_manipulator_assembly.usd"><strong>Download link</strong></a></li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this tutorial, we set up robot eligible for Isaac Sim environment. Isaac Sim is a powerful tool for robot simulation with numerous features. Check out <a href="https://docs.isaacsim.omniverse.nvidia.com/5.0.0/index.html">official Isaac Sim Documentation</a> for more information. If you have questions regarding Isaac Sim, please check out <a href="https://forums.developer.nvidia.com/c/omniverse/simulation/69">Isaac Sim Forum</a>.
+&nbsp;</p>
+
+
+
+
+
+
+
+
+
+
+
+
+    <h2></h2>
+    <script src="https://giscus.app/client.js" data-repo="Sodero-labs/docs" data-repo-id="R_kgDOQiK7fQ" data-category="Q&amp;A" data-category-id="DIC_kwDOQiK7fc4C3JkV" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="dark" data-lang="en" crossorigin="anonymous" async>
+    </script>
+
+    <script>
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+            var theme = palette.color.scheme === "slate" ? "dark" : "light"
+            var script = document.querySelector("script[src^='https://giscus.app/client.js']")
+            script.setAttribute("data-theme", theme)
+        }
+
+        var ref = document.querySelector("[data-md-component=config]")
+        var observer = new MutationObserver(function() {
+            var palette = __md_get("__palette")
+            var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+            var frame = document.querySelector(".giscus-frame")
+            if (frame) {
+                frame.contentWindow.postMessage(
+                    { giscus: { setConfig: { theme } } },
+                    "https://giscus.app"
+                )
+            }
+        })
+        observer.observe(ref, { attributes: true })
+    </script>         
+    <style>
+        .custom-btn-gray {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            font-size: 14px;
+            
+            color: #9e9e9e !important;
+            border: 0.5px solid #9e9e9e !important;
+            background-color: transparent !important;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        .custom-btn-gray:hover {
+            color: #ffffff !important;
+            border-color: #ffffff !important;
+        }
+
+        .custom-btn-gray .twemoji svg {
+            fill: currentColor;
+        }
+    </style>
+
+    <div style="margin-top: 2rem; display: flex; gap: 10px; flex-wrap: wrap;">
+        
+        <a href="https://github.com/Sodero-labs/docs/issues/new?title=[BUG] Robot%20Setup&amp;body=Path: https%3A//docs.sodero.io/stellarx/tutorials/simulation/robot_setup/" class="custom-btn-gray" target="_blank" rel="noopener noreferrer">
+            <span class="twemoji">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
+            </span>
+            Raise Issues
+        </a>
+
+    </div>
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.instant", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
