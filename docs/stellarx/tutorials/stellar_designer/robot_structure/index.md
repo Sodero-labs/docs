@@ -43,13 +43,12 @@ We will construct the skeleton of the robot by adding joints and setting their l
 ### 2. Configure Link 1
 Enter the parameters as follows to create a 300mm link along the Y-axis:
 
-| Parameter | Value | Unit |
-|:---:|:---:|:---:|
-| **theta** ($\theta$) | 90 | deg |
-| **d** | 0 | mm |
-| **a** | 300 | mm |
-| **alpha** ($\alpha$) | 0 | mm |
-| **Joint Type** | Rotation Z | - |
+* **Input Values**:
+    * Theta (θ) : <code class="select-all">90</code> deg
+    * D: <code class="select-all">0</code> mm
+    * A: <code class="select-all">300</code> mm
+    * Alpha (α) : <code class="select-all">0</code> deg
+    * Joint Type: <code class="select-all">Rotation Z</code> 
 
 <figure markdown="span">
     ![create_robot](images/creation_link1.png){ width="1000" }
@@ -58,9 +57,13 @@ Enter the parameters as follows to create a 300mm link along the Y-axis:
 
 ### 3. Configure Link 2
 Set up the second link with the following values:
-- **a**: 300
-- **theta, d, alpha**: 0
-- **Joint Type**: Rotation Z
+
+* **Input Values**:
+    * Theta (θ) : <code class="select-all">0</code> deg
+    * D: <code class="select-all">0</code> mm
+    * A: <code class="select-all">300</code> mm
+    * Alpha (α) : <code class="select-all">0</code> deg
+    * Joint Type: <code class="select-all">Rotation Z</code> 
 
 <figure markdown="span">
     ![create_robot](images/creation_link2.png){ width="1000" }
@@ -68,7 +71,9 @@ Set up the second link with the following values:
 </figure>
 
 ### 4. Verify Movement
+
 Use the **Jog** tab to ensure the joints rotate correctly.
+
 - **Jog**: Moves the robot.
 - **Jog Reset**: Returns the moved robot to its origin.
 
@@ -110,12 +115,42 @@ Finally, we configure the safety limits and friction parameters.
 2. Match the settings in the images below for each joint.
 
 ### Joint 1 Constraints
+
+* **Input Values**:
+    * Lower Limit (θ): <code class="select-all">-180</code> deg
+    * Upper Limit: <code class="select-all">180</code> deg
+    * Max Speed: <code class="select-all">270</code> deg/s
+    * Max Accel: <code class="select-all">1,350</code> deg/s²
+    * Max Jerk: <code class="select-all">13,500</code> deg/s³
+    * w1: <code class="select-all">0</code> deg/s
+    * f1: <code class="select-all">0</code> Nm
+    * w2: <code class="select-all">0</code> deg/s
+    * f2: <code class="select-all">0</code> Nm
+    * Max Friction: <code class="select-all">0</code> Nm
+    * Collision Threshold: <code class="select-all">100</code> Nm
+    * Join Goal Tolerance: <code class="select-all">0.5729577951308232</code> deg
+
 <figure markdown="span">
     ![constraints](images/joint1_constraints.png)
     <figcaption>Constraints Settings for Joint 1</figcaption>
 </figure>
 
 ### Joint 2 Constraints
+
+* **Input Values**:
+    * Lower Limit (θ): <code class="select-all">-180</code> deg
+    * Upper Limit: <code class="select-all">180</code> deg
+    * Max Speed: <code class="select-all">412.5</code> deg/s
+    * Max Accel: <code class="select-all">2062.5</code> deg/s²
+    * Max Jerk: <code class="select-all">20,625</code> deg/s³
+    * w1: <code class="select-all">0</code> deg/s
+    * f1: <code class="select-all">0</code> Nm
+    * w2: <code class="select-all">0</code> deg/s
+    * f2: <code class="select-all">0</code> Nm
+    * Max Friction: <code class="select-all">0</code> Nm
+    * Collision Threshold: <code class="select-all">100</code> Nm
+    * Join Goal Tolerance: <code class="select-all">0.5729577951308232</code> deg
+
 <figure markdown="span">
     ![constraints](images/joint2_constraints.png)
     <figcaption>Constraints Settings for Joint 2</figcaption>
@@ -124,7 +159,9 @@ Finally, we configure the safety limits and friction parameters.
 ---
 
 ## Summary
+
 Congratulations! You have successfully:
+
 1. Created a robot skeleton using DH parameters.
 2. Applied dynamic properties.
 3. Configured safety constraints.

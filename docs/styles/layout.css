@@ -84,4 +84,15 @@
     display: none !important;
   }
 
+  .md-nav__item[data-keep-open="true"] > .md-nav {
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    opacity: 1 !important;
+  }
+
+  .md-nav__item[data-keep-open="true"] .md-nav__list {
+    transition: none !important;
+  }
+
 }

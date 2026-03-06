@@ -8,11 +8,11 @@ This tutorial guides you through mapping your theoretical robot model to physica
 
 ### Step 1: Verify Actuator Nodes
 Upon entering the **Actuator Mapping** page, verify that the actuator and joint nodes have been automatically generated based on your previous robot structure configuration.
-* **Status:** Ensure nodes are visible (currently in an **Unlinked** state).
+**Status:** Ensure nodes are visible (currently in an **Unlinked** state).
 
 > **⚠️ Troubleshooting: Node Count Mismatch**
 > If the number of Actuators and Joints does not appear as expected (2 pairs for this tutorial), please return to the **Robot Structure** tab.
-> * **Check Joint Type:** Verify that the Joint Type is set to **Rotation Z**. If set to **None**, it is not counted as a valid Degree of Freedom (DoF) and will not generate a mapping node.
+> **Check Joint Type:** Verify that the Joint Type is set to **Rotation Z**. If set to **None**, it is not counted as a valid Degree of Freedom (DoF) and will not generate a mapping node.
 
 <figure markdown="span">
     ![actuator_mapping_initial_state](images/actuator_mapping_initial_state.png)

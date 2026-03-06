@@ -131,7 +131,9 @@ If you ever forget your IP settings or need a fresh start, you can perform a fac
 4. Once back up, **Eth1** will be restored to the default IP: `10.0.0.1`.
 
 ### **Troubleshooting**
+
 If the reset doesn't seem to trigger, try these steps:
+
 1. **Power Cycle:** Unplug the power, wait 10 seconds, and plug it back in.
 2. **Wait & Retry:** Give the system about **1 minute** to fully initialize, then try holding the reset button for 3 seconds again.
 

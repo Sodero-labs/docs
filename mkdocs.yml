@@ -14,7 +14,7 @@ theme:
     # - navigation.expand
     - navigation.instant
     # - navigation.path 
-    # - navigation.tracking
+    - navigation.tracking
     - search.suggest
     - search.highlight
     - content.code.copy
@@ -37,17 +37,16 @@ extra:
       lang: en
   navigation:
     expand: true
-
 extra_css:
   - styles/layout.css
   - styles/color.css
   - styles/font.css
-
 extra_javascript:
   - javascripts/mathjax.js
+  - javascripts/keep_open.js
+  - javascripts/select_all.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-
 nav:
   - Home: index.md
   - Stellar X:
@@ -62,7 +61,6 @@ nav:
           - Step 3. Actuator Mapping: stellarx/tutorials/stellar_designer/map_actuators/index.md
           - Step 4. Virtual Verification: stellarx/tutorials/stellar_designer/verify_configuration/index.md
         - Start from Templates: stellarx/tutorials/stellar_designer/start_from_templates/index.md
-
       - Stellar Motion Studio:
         - About Stellar Motion Studio: stellarx/tutorials/stellar_motion_studio/about_stellar_motion_studio/index.md
         - Home: stellarx/tutorials/stellar_motion_studio/home/index.md
@@ -84,20 +82,16 @@ nav:
           - Robot Structure: stellarx/user_guide/stellar_designer/robot_structure
           - Robot System Parameters: stellarx/user_guide/stellar_designer/robot_system_parameters
           - Actuator Mapping: stellarx/user_guide/stellar_designer/actuator_mapping
-
 markdown_extensions:
   - attr_list
   - md_in_html
   - pymdownx.blocks.caption
   - pymdownx.arithmatex:
       generic: true
-
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-
-
 plugins:
   - glightbox
