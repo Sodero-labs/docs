@@ -1,0 +1,177 @@
+# Robot System Parameters
+
+In this section, we will configure the parameters that apply to the robot as a whole. Unlike the previous settings which were specific to individual joints or links, these settings define global properties such as the robot's arm reach, gravity vector, payload limits, and task space constraints.
+
+---
+
+## 1. Arm Reach
+This parameter defines the physical reach of the robot based on its kinematics. It is calculated as the radius from the **base joint's rotation axis** to the **Tool Center Point (TCP)** when the robot is fully extended.
+
+<figure markdown="span">
+    ![arm_reach](images/arm_reach_diagram.png)
+    <figcaption>Definition of Max Arm Reach</figcaption>
+</figure>
+
+For this example, the total length from the base to the TCP corresponds to **600 mm**, so we will input `600`.
+
+<figure markdown="span">
+    ![arm_reach](images/arm_reach.png)
+    <figcaption>Definition of Max Arm Reach</figcaption>
+</figure>
+
+### Important Note on Max Arm Reach
+
+Defines the **maximum reach** of the robot arm (Base to TCP).
+
+- **Unit**: mm
+- This value is used to **limit the joint speed** effectively.
+
+> **⚠️ Caution**
+>
+>   * This value **must be reasonably accurate**, as it affects motion constraints.
+>   * However, **perfect precision is not required** — an error margin of **±10%** is acceptable.
+
+---
+
+## 2. Gravity Vector
+The gravity vector defines the direction and magnitude of gravitational acceleration relative to the **World Coordinate System**.
+
+For example, if the World Coordinate System is defined such that the XY plane represents the ground and the Z-axis points towards the sky, gravity acts downwards along the negative Z-axis.
+
+In this example, we define the vector as:
+**X: 0, Y: 0, Z: -9,810** (unit: mm/s²)
+
+<figure markdown="span">
+    ![gravity_vector](images/gravity_vector.png)
+    <figcaption>Gravity Vector Setup</figcaption>
+</figure>
+
+### Important Note on Gravity Vector
+
+Defines the **gravity acceleration vector** in space.
+This vector indicates the **direction and magnitude** of gravity as experienced by the robot.
+
+- The vector should point **in the direction of gravity** (usually downward in the Z axis).
+- The magnitude should reflect the local gravitational acceleration.
+
+> **⚠️ Caution**
+> Be careful with the **unit**: Ensure consistent use of **mm/s²** or **m/s²** depending on your global unit settings.
+
+---
+
+## 3. Max Payload
+This setting establishes the maximum weight capacity for the robot.
+
+For this example, we set the value to **10,000 g**.
+
+<figure markdown="span">
+    ![max_payload](images/max_payload.png)
+    <figcaption>Max Payload Setup</figcaption>
+</figure>
+
+**Note on Planar Robots:**
+In this specific example, the robot operates on a plane **parallel to the ground**. Since the gravity vector is perpendicular to the joints' plane of motion, **gravity creates no load (torque)** on the actuators. Therefore, while we input a value for completeness, this parameter has **no actual effect** on gravity compensation or dynamics for this specific robot configuration.
+
+### Important Note on Max Payload Information
+
+Specifies the **maximum payload capacity** of the robot.
+
+- **Unit**: g (grams)
+
+This value defines the **upper limit for gravity compensation**, regardless of the actual payload data set in the tool configuration.
+
+**How It Works**
+Even if a tool is configured with a payload that **exceeds** this value (e.g., by mistake or tool change), the system will **limit gravity compensation** to the value specified here.
+
+> **⚠️ Caution**
+> Always set this value according to the **robot's mechanical and control limits** to prevent incorrect torque output or safety issues.
+
+---
+
+## 4. Max Allowable Inertia
+This parameter defines the moment of inertia limits for the robot's wrist joints.
+
+> **⚠️ Future Feature (Currently Inactive)**
+>
+> This parameter is **reserved for future use** and is currently **not operational**.
+>
+>   * Inputting any value will have **no effect** on the actuator's behavior in the current version.
+>   * The definition below describes the intended functionality for future updates.
+
+Therefore, for this example, we will set the value to **0**.
+
+<figure markdown="span">
+    ![max_allowable_inertia](images/max_allowable_inertia.png)
+    <figcaption>Max Allowable Inertia Setup</figcaption>
+</figure>
+
+---
+
+## 5. Task Space Limits
+In the previous chapter, we set the *Kinematic Limits* for individual joints. In this section, we define the kinematic limits for the **Task Space** (the robot's TCP).
+
+These limits constrain the Cartesian linear motion of the end-effector.
+
+For this example, we configure the settings as follows:
+
+<figure markdown="span">
+    ![max_payload](images/task_space_limits.png)
+    <figcaption>Task Space Limits Setup</figcaption>
+</figure>
+
+### Important Note on Task Space Limits
+
+Defines the kinematic constraints **in task space**, i.e., relative to the robot’s **Tool Center Point (TCP)**, not individual joints.
+
+These limits apply to:
+- Cartesian linear motion of the end-effector
+- Speed, acceleration, and jerk calculated in **millimeters** and **mm-based units** or **meters** and **m-based units**
+
+**Max Speed**
+- Maximum linear velocity of the TCP **when moving toward the current target**.
+- **Unit**: mm/s or m/s
+
+**Max Accel**
+- Maximum linear acceleration of the TCP while following the trajectory.
+- **Unit**: mm/s² or m/s²
+
+**Max Jerk**
+- Maximum linear jerk (rate of change of acceleration) of the TCP.
+- **Unit**: mm/s³ or m/s³
+
+> **⚠️ Caution**
+>
+> These values should be defined based on:
+>
+>   * The **mechanical and structural limits** of the robot
+>   * The desired **task performance and safety**
+>   * The characteristics of **tooling and payload**
+>
+> Excessively high values can lead to unstable or unsafe robot behavior during fast or precise motion.
+
+---
+
+## 6. Goal Tolerance
+This parameter defines the **arrival criteria** for the Tool Center Point (TCP).
+
+In this example, we set the values as shown below:
+
+<figure markdown="span">
+    ![max_payload](images/goal_tolerance.png)
+    <figcaption>Goal Tolerance Setup</figcaption>
+</figure>
+
+
+* **Usage**: When executing task-space commands (like `move_linear`), the robot is considered to have reached the target when the TCP position error is within this tolerance value.
+* **Unit**: mm
+
+---
+
+## Summary
+With this, we have completed the definition of the **ideal robot**, excluding the hardware interfaces. We have covered:
+1.  **Robot Structure** (Links and Joints)
+2.  **Dynamics** (Mass and Inertia)
+3.  **Joint Constraints** (Limits and Friction)
+4.  **Global Parameters** (Gravity, Reach, and Task Space Limits)
+
+In the next part, we will cover the **Actuator Mapping**, which bridges the gap between this ideal robot model and the actual physical actuators (motors) that drive it.
