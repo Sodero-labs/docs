@@ -112,4 +112,4 @@ Once the connection is successful, click **Go to Motion Studio** to enter the ma
 
 Congratulations! You have successfully completed the **Real Robot Setup** for your 2-bar robot. 
 
-In the next chapter, we will introduce the features and capabilities of **Motion Studio**.
+In the next chapter, we will introduce the features and capabilities of [**Motion Studio**](../../stellar_motion_studio/about_stellar_motion_studio/index.md).

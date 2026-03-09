@@ -13,7 +13,7 @@ Once you have configured a robot using Stellar Designer, you need an interface t
 
 In this tutorial, we will explore the features of Motion Studio by first creating a 4-axis SCARA robot using Stellar Designer. 
 
-To get started, let's generate a SCARA robot from [Start from Templates](insert_link_here). Once generated, click **Apply** while the Isaac Sim environment is running. 
+To get started, let's generate a SCARA robot from [Start from Templates](../../stellar_designer/start_from_templates/index.md). Once generated, click **Apply** while the Isaac Sim environment is running. 
 
 Set the robot's name to `scara` and the IP address to the IP of your PC where Isaac Sim is running, as shown in the configuration below:
 
@@ -28,3 +28,5 @@ After applying the settings, click the **Go to Motion Studio** button. The Motio
     ![setup_screen](images/motion_studio.png){ width="1000" }
     <figcaption>The initial interface of Stellar Motion Studio</figcaption>
 </figure>
+
+Proceed to the [next chapter](../home/index.md) to explore the Home screen and learn basic jog control.

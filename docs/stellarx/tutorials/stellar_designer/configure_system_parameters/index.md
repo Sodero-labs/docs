@@ -93,4 +93,4 @@ Define the arrival criteria for the TCP. Set the values as shown below:
 ## Summary
 You have successfully configured the global system parameters.
 
-* **Next Step**: Proceed to the **Actuator Mapping** section to connect these settings to physical motors.
+* **Next Step**: Proceed to [Step 3: Actuator Mapping](../map_actuators/index.md) to connect these settings to physical motors.

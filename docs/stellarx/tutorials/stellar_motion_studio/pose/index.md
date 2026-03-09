@@ -99,3 +99,5 @@ Congratulations! You have successfully:
 2. Learned how to manually input precise coordinates and safely use the "Press and Hold" Test Move feature.
 3. Paired exact Cartesian poses with joint values using `Set from current`.
 4. Created and verified a sequence of points forming a square path.
+
+Proceed to the [next chapter](../motion/index.md) to write a motion program and execute these saved poses.

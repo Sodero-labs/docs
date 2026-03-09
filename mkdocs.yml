@@ -79,9 +79,9 @@ nav:
       - APIS: stellarx/user_guide/apis/index.md
       - Stellar Designer:
         - Setup:
-          - Robot Structure: stellarx/user_guide/stellar_designer/robot_structure
-          - Robot System Parameters: stellarx/user_guide/stellar_designer/robot_system_parameters
-          - Actuator Mapping: stellarx/user_guide/stellar_designer/actuator_mapping
+          - Robot Structure: stellarx/user_guide/stellar_designer/robot_structure/index.md
+          - Robot System Parameters: stellarx/user_guide/stellar_designer/robot_system_parameters/index.md
+          - Actuator Mapping: stellarx/user_guide/stellar_designer/actuator_mapping/index.md
 markdown_extensions:
   - attr_list
   - md_in_html
@@ -95,3 +95,14 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
 plugins:
   - glightbox
+  - llmstxt:
+      full_output: llms-full.txt
+      sections:
+        Tutorials - Stellar Designer:
+          - stellarx/tutorials/stellar_designer/**/*.md
+        Tutorials - Stellar Motion Studio:
+          - stellarx/tutorials/stellar_motion_studio/**/*.md
+        Tutorials - Simulation & Virtual Control:
+          - stellarx/tutorials/simulation/**/*.md
+        User Guide:
+          - stellarx/user_guide/**/*.md

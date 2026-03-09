@@ -50,5 +50,5 @@ Since the template pre-fills the structural and dynamic configurations, you can 
 
 You have successfully set up a SCARA robot using a provided template! 
 
-Since physical servo motors are likely not connected or prepared at this stage, you can test your setup in a simulated environment. The tutorial for integrating and communicating with Isaac Sim (via the Stellar Bridge extension) is covered in detail here: [Link to Isaac Sim Integration Tutorial](#)
+Since physical servo motors are likely not connected or prepared at this stage, you can test your setup in a simulated environment. The tutorial for integrating and communicating with Isaac Sim (via the Stellar Bridge extension) is covered in detail here: [Link to Isaac Sim Integration Tutorial](../../simulation/introduction/index.md)
 

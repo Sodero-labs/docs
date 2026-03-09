@@ -105,4 +105,4 @@ Congratulations! You have successfully:
 2. Applied the correct payload parameters for gravity compensation.
 3. Verified the setup using both system status and physical free drive checks.
 
-Your tool setup is now complete. In the next part, we will use this configured tool to perform an actual teaching task.
+Your tool setup is now complete. In the [next part](../pose/index.md), we will use this configured tool to perform an actual teaching task.

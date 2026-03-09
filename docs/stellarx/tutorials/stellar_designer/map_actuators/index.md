@@ -93,3 +93,5 @@ You must input the reduction ratio (inverse of gear ratio) for each connection.
 * **Input Value:** `0.129032`
 
 > **Direction Tip:** If a joint rotates in the opposite direction of the command during testing, simply change this value to a negative number (e.g., `-0.111111`).
+
+Proceed to [Step 4: Virtual Verification](../verify_configuration/index.md) to verify the robot's movement through simulation.

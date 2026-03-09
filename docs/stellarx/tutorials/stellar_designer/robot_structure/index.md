@@ -166,4 +166,4 @@ Congratulations! You have successfully:
 2. Applied dynamic properties.
 3. Configured safety constraints.
 
-Your `test_robot` is now ready for simulation or control tasks.
+Your `test_robot` is now ready for simulation or control tasks. Proceed to [Step 2: Robot System Parameters](../configure_system_parameters/index.md) to configure the global robot parameters.

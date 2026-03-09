@@ -9,3 +9,5 @@ This process allows you to:
 - Observe how a robot with those specific dynamics reacts to the controller. For example, if proper torque compensation is applied when switching to direct teaching mode, the robot will maintain its position without sagging.
 
 Currently, we support communication with **Isaac Sim**. This seamless integration is made possible through an Isaac Sim extension called **Stellar Bridge**.
+
+To get started, follow [the next chapter](../introduction/index.md) to set up Isaac Sim.

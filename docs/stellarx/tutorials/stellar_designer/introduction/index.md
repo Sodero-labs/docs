@@ -77,4 +77,4 @@ On this page, you can set the Stellar X device name recognized by routers, and s
 
 ---
 
-Now that the basic introduction is complete, let's proceed to the next page and start building a robot.
+Now that the basic introduction is complete, let's proceed to the [next page](../robot_structure/index.md) and start building a robot.

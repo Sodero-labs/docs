@@ -92,3 +92,5 @@ Congratulations! You have successfully learned how to:
 2. Access the Jog panel.
 3. Enable the servo motors.
 4. Manually control the robot using the press-and-hold jog buttons.
+
+Proceed to the [next chapter](../tool/index.md) to configure your tool and payload settings.
