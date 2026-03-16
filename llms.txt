@@ -1,0 +1,37 @@
+# Sodero Documents
+
+## Tutorials - Stellar Designer
+
+- [3D Model Creation](https://docs.sodero.io/stellarx/tutorials/stellar_designer/3dmodel_creation/index.md)
+- [Step 2. Robot System Parameters](https://docs.sodero.io/stellarx/tutorials/stellar_designer/configure_system_parameters/index.md)
+- [Introduction](https://docs.sodero.io/stellarx/tutorials/stellar_designer/introduction/index.md)
+- [Step 3. Actuator Mapping](https://docs.sodero.io/stellarx/tutorials/stellar_designer/map_actuators/index.md)
+- [Step 1. Robot Structure](https://docs.sodero.io/stellarx/tutorials/stellar_designer/robot_structure/index.md)
+- [Start from Templates](https://docs.sodero.io/stellarx/tutorials/stellar_designer/start_from_templates/index.md)
+- [Step 4. Virtual Verification](https://docs.sodero.io/stellarx/tutorials/stellar_designer/verify_configuration/index.md)
+
+## Tutorials - Stellar Motion Studio
+
+- [Index](https://docs.sodero.io/stellarx/tutorials/stellar_motion_studio/about_stellar_motion/index.md)
+- [About Stellar Motion Studio](https://docs.sodero.io/stellarx/tutorials/stellar_motion_studio/about_stellar_motion_studio/index.md)
+- [Home](https://docs.sodero.io/stellarx/tutorials/stellar_motion_studio/home/index.md)
+- [Motion](https://docs.sodero.io/stellarx/tutorials/stellar_motion_studio/motion/index.md)
+- [Pose](https://docs.sodero.io/stellarx/tutorials/stellar_motion_studio/pose/index.md)
+- [Tool](https://docs.sodero.io/stellarx/tutorials/stellar_motion_studio/tool/index.md)
+
+## Tutorials - Simulation & Virtual Control
+
+- [Extension Installation](https://docs.sodero.io/stellarx/tutorials/simulation/extension_installation/index.md)
+- [Introduction](https://docs.sodero.io/stellarx/tutorials/simulation/introduction/index.md)
+- [Robot Setup](https://docs.sodero.io/stellarx/tutorials/simulation/robot_setup/index.md)
+- [Virtual Control Overview](https://docs.sodero.io/stellarx/tutorials/simulation/virtual_control_overview/index.md)
+
+## User Guide
+
+- [APIS](https://docs.sodero.io/stellarx/user_guide/apis/index.md)
+- [Understanding Remote Control](https://docs.sodero.io/stellarx/user_guide/remote_control/understanding_remote_control/index.md)
+- [Actuator Mapping](https://docs.sodero.io/stellarx/user_guide/stellar_designer/actuator_mapping/index.md)
+- [Robot Structure](https://docs.sodero.io/stellarx/user_guide/stellar_designer/robot_structure/index.md)
+- [Robot System Parameters](https://docs.sodero.io/stellarx/user_guide/stellar_designer/robot_system_parameters/index.md)
+- [Index](https://docs.sodero.io/stellarx/user_guide/stellar_designer/virtual_verification/index.md)
+

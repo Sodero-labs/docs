@@ -1,0 +1,5112 @@
+# Sodero Documents
+
+# Tutorials - Stellar Designer
+
+# 3D Model Creation
+
+In this chapter, we will assemble 3d model parts for visualization in Stellar X. In terms of applying to real workflow, we're going to assume that you finished your CAD design and have 3d model files for each links. If you are using manufactured robots, you should have your technical specification ready for DH-parameters, joint limits, physics property etc. This step is purely for visualization and optional, so you can skip it and have no problem moving forward. We'll be using 6-axis manipulator for this example. Please download 3d models from link below and unzip it.
+
+- **[download link](https://docs.sodero.io/stellarx/tutorials/stellar_designer/3dmodel_creation/models/example_manipulator_parts.zip)**
+
+Rendered Image of Example Manipulator
+
+______________________________________________________________________
+
+## 1. Basic Design Criteria
+
+We'll be using blender for this step. Blender accepts most of major 3d model formats except some proprietary ones. You don't have to use blender, but the naming convention, model tree, output file format must be matched.
+
+- [**Blender Installation**](https://www.blender.org/download/)
+
+### 1. Blender Preferences
+
+- First, open blender and delete default `Camera`, `Cube` and `Light`.
+
+### 2. Joint and Link Creation
+
+#### 1. Naming Conventions
+
+##### Base
+
+| Classification | Name  |
+| -------------- | ----- |
+| Joint          | J0    |
+| Link           | link0 |
+
+##### Joint
+
+- `J1` ~ `Jn`
+
+##### Link
+
+- `link1` ~ `linkn`
+  > `n` increases with the number of joints.
+
+#### 2. Create Joints
+
+- Click `Add` -> `Empty` -> `Plain Axes` to add axes. Add total of 7 axes and rename them to J0 ~ J7. These names act as joints in Designer and their name must be `J{number}`.
+
+#### 3. Add links
+
+- Now, we are going to add 3d models. Click `File` -> `Import` -> `Wavefront`. Go to saved directory and import all 7 of them. Be aware of import settings. If imported successfully, it should look like bottom picture.
+
+- Click `link0` -> `Rotation X` and enter `0`. The part should now stand up. Repeat this for all the other parts.
+
+#### 4. Joint–Link Connection
+
+Each link model must be moved under its corresponding joint.
+
+- Select `link0` and shift-drag the link to the `J0` joint. `link0` should now lay under `J0`. Repeat it for all the other links.
+
+______________________________________________________________________
+
+## 2. Hierarchical Structure
+
+The robot must be configured in a serial manipulator configuration.
+
+### 1. Basic Structure
+
+```
+World
+└── root
+    └── links
+        └── J0
+            ├── link0
+            └── J1
+                ├── link1
+                └── J2
+                    ├── link2
+                    └── J3
+                        ├── link3
+                        └── J4
+                            ├── link4
+                            └── J5
+                                ├── link5
+                                └── J6
+                                    └── link6
+```
+
+### 2. Structure Description
+
+| Item        | Description         |
+| ----------- | ------------------- |
+| World       | 3D Tool Basic Scene |
+| root        | Robot Base Node     |
+| links       | Joint Group         |
+| J0~Jn       | Joint Nodes         |
+| link0~linkn | Link Model          |
+
+### 3. Precautions when Creating a Structure
+
+- All joints (`Jn`) must be set as children of the parent link.
+- Each link (`linkn`) must be set as a child of its corresponding joint (`Jn`).
+- If the hierarchy is incorrect, the robot structure will not function properly.
+
+______________________________________________________________________
+
+## 3. Model Creation Method (Blender-Based Example)
+
+This section describes the process of importing an existing robot model into Blender and then modifying its structure and settings to conform to the Structure Specification.
+
+### 1. Basic Environment Settings
+
+1. Launch Blender
+
+### 2. Importing an Existing Robot Model
+
+1. Import an existing robot model file.
+   - File → Import → (Select Model Type)
+
+### 3. Resetting Joint and Link Structure
+
+#### 1. Setting Joint Node Names
+
+1. Setting Joint Names
+   - Joint: `J0` ~ `Jn`
+1. Setting Link Names
+   - Link: `link1` ~ `linkn`
+
+#### 2. Resetting Parent-Child Relationships
+
+- Rearrange each joint and link to the following structure:
+
+```
+Jn
+├ linkn
+└ J(n+1)
+```
+
+### 3. How to set up a hierarchy in Blender
+
+### 4. Setting Coordinate Axes and Rotation Axes
+
+- Set the rotation axis of each joint (`Jn`) based on the DH parameters.
+- Use rotation based on the Local Axis.
+- Do not use rotation based on the World Axis.
+
+Robot Structure
+
+Blender
+
+______________________________________________________________________
+
+## 4. How to Export GLB Files (Blender)
+
+### 1. Export Menu
+
+- File → Export → glTF 2.0 (.glb/.gltf)
+
+### 2. Required Export Options
+
+- Set the following in the Export window:
+
+#### Transform Settings
+
+- `+Y Up`: Disabled
+
+  > This must be disabled to prevent coordinate transformation errors.
+
+- Select `J1` and shift-drag the joint to `J0` joint. Both `J1` and `link1` should be under J0. Repeat same process for `J2` to `J1`, `J3` to `J2` etc. Result should look like picture below.
+
+### 4. Aligning DH Parameters with Model Structure
+
+The joint structure set in Blender must match the DH parameters in Stellar Designer.
+
+#### 1. DH Parameter
+
+DH parameters are defined by transforming each joint coordinate system in the following order: |
+
+```
+Application order:
+
+1. Z-axis rotation (θ)
+2. Z-axis translation (d)
+3. X-axis translation (a)
+4. X-axis rotation (α)
+
+This order cannot be changed and is the default rule for coordinate system calculations.
+```
+
+#### 2. Matching modeling and dh parameters in Blender
+
+- Shows the joint hierarchy in Blender.
+
+- Shows the DH parameter settings for J1 in Stellar Designer.
+
+This means that J1 is transformed in the following order:
+
+```
+1. No rotation about the Z-axis (θ = 0)
+2. Translation of 205 mm along the Z-axis (d = 205)
+3. No translation along the X-axis (a = 0)
+4. No rotation about the X-axis (α = 0)
+
+As a result, the coordinate frame of J2 is generated at a position
+205 mm above J1 along the Z-axis.
+```
+
+- Click `J2` -> `Location z` and enter `0.205`.
+
+- `link2` and all the other links under `J2` should move upward.
+
+- These values are same as DH-parameters, so if you have your own robot, you should follow your own values.
+
+- For `J3`, enter `0.27`, and for `J5`, enter `0.23`. Final result should look like bottom picture.
+
+When making your own robot, your parts may not align with the axes from DH-parameters. In that case, you have to adjust the position of the mesh itself from your CAD program. The base's position and joint positions when assembled should be { 0.0, 0.0, 0.0 } and 0, respectively.
+
+______________________________________________________________________
+
+## 3. How to Export GLB Files (Blender)
+
+- For exporting, click `File` -> `Export` -> `glTF`.
+
+- Disable `Y Up` option. Name your model and export.
+
+And that should be it. For those who are having troubles, i'll leave download links for final assembly.
+
+- **[.blend download link](https://docs.sodero.io/stellarx/tutorials/stellar_designer/3dmodel_creation/models/example_manipulator_assembly_vis.blend)**
+- **[.glb download link](https://docs.sodero.io/stellarx/tutorials/stellar_designer/3dmodel_creation/models/example_manipulator_assembly_vis.glb)**
+
+______________________________________________________________________
+
+## 4. Notes
+
+- Only `.glb` files are used in the final system.
+- Blender is a production example tool and is not a required tool.
+- The same structure and naming conventions must be maintained when using other tools.
+
+# Tutorial: Building a Simple 2-Bar Robot - Robot System Parameters
+
+In this tutorial, we will configure the global parameters for the robot, including arm reach, gravity, and payload settings. Please follow the steps below and input the values as specified for this example project.
+
+______________________________________________________________________
+
+## 1. Arm Reach Setup
+
+We need to define the total reach of the robot. For this example, the total length from the base to the Tool Center Point (TCP) corresponds to **600 mm**.
+
+- **Input Value**:
+  - Max Arm Reach: `600` mm
+
+Setting Max Arm Reach
+
+______________________________________________________________________
+
+## 2. Gravity Vector Setup
+
+Set the gravitational acceleration relative to the World Coordinate System. In our setup, gravity acts downwards along the negative Z-axis.
+
+- **Input Value**:
+  - X: `0` mm/s²
+  - Y: `0` mm/s²
+  - Z: `-9,810` mm/s²
+
+Setting Gravity Vector
+
+______________________________________________________________________
+
+## 3. Max Payload Setup
+
+Set the maximum weight capacity. For this example, we will use a value of **10,000 g**.
+
+- **Input Value**:
+  - Max Payload: `10,000` g
+
+Setting Max Payload
+
+> **Note on this Example:** Since this specific robot operates on a plane parallel to the ground, gravity creates no load (torque) on the actuators. However, we input this value for completeness.
+
+______________________________________________________________________
+
+## 4. Max Allowable Inertia
+
+This feature is currently reserved for future use. Set the value to 0.
+
+- **Input Value**:
+  - Max Allowable Inertia: `0` g/mm²
+
+Setting Max Allowable Inertia
+
+______________________________________________________________________
+
+## 5. Task Space Limits
+
+Configure the kinematic limits for the Task Space (TCP motion). Enter the values exactly as shown in the image below:
+
+- **Input Value**:
+  - Max Speed: `1,000` mm/s
+  - Max Accel: `5,000` mm/s²
+  - Max Jerk: `50,000` mm/s²
+
+Setting Task Space Limits
+
+______________________________________________________________________
+
+## 6. Goal Tolerance
+
+Define the arrival criteria for the TCP. Set the values as shown below:
+
+- **Input Value**:
+  - Position Goal Tolerance: `5` mm
+  - Orientation Goal Tolerance: `0.5729577951308232` deg
+
+Setting Goal Tolerance
+
+______________________________________________________________________
+
+## Summary
+
+You have successfully configured the global system parameters.
+
+- **Next Step**: Proceed to [Step 3: Actuator Mapping](https://docs.sodero.io/stellarx/tutorials/stellar_designer/map_actuators/index.md) to connect these settings to physical motors.
+
+# Introduction
+
+## What is Stellar Designer?
+
+Stellar Designer is a software toolkit for defining the structure of a serial manipulator. You can easily configure the structure of manipulators by using an intuitive GUI. It also allows you to map kinematic structures to actuators, accounting for transmission chains like gearbox reduction ratios.
+
+## Main Screen and Basic Buttons
+
+Main Screen of Stellar Designer
+
+Side Navigation Bar Overview
+
+### 1. Menu Button
+
+Expanded Main Menu Options
+
+Clicking this icon expands the menu window as shown below. The File tab is particularly useful for adjusting themes within the Preferences section or for directly accessing Stellar Motion Studio.
+
+### 2. Home Button
+
+Click this icon to return to the Home screen. From here, you can start a project by creating a new robot ① or importing an existing Stellar SDD file ②. Additionally, recently opened files are displayed here, allowing you to resume a project immediately by clicking on it.
+
+Home Screen Dashboard
+
+### 3. File Button
+
+This section lists all project files currently stored in Stellar Designer.
+
+File Management Interface
+
+① Displays a list of all project files within Stellar Designer, as shown on the right. ② Retains deleted files in the Trash. From here, you can either restore files or permanently delete them (making them unrecoverable).
+
+### 4. Setup Button
+
+This window is where the core robot configuration begins. Here, you define kinematics and dynamics settings, as well as global robot parameters and hardware connectivity specifications (such as reduction ratios and EtherCAT configurations).
+
+Robot Configuration Interface
+
+### 5. Settings Button
+
+This is the settings window for Stellar X. You can configure the Stellar X hostname, administrator password, network settings, and check the device update status on this page.
+
+System Setup Configuration
+
+① General On this page, you can set the Stellar X device name recognized by routers, and specify the default project to be loaded at startup. You can also set the administrator password (initial password: `sodero`) and configure the product image displayed on the loading page.
+
+② Network : Allows you to configure IP settings for each Ethernet port. `eth1` is fixed to 10.0.0.1 by default.
+
+③ Update : Allows you to check the update status of the device.
+
+______________________________________________________________________
+
+Now that the basic introduction is complete, let's proceed to the [next page](https://docs.sodero.io/stellarx/tutorials/stellar_designer/robot_structure/index.md) and start building a robot.
+
+# Tutorial: Building a Simple 2-Bar Robot - Actuator Mapping
+
+## Setting up Actuators (Example: Synapticon JD Series)
+
+In the previous section, we completed the modeling of the robot's kinematics and dynamics. Now, we must map this theoretical model to the physical hardware: the **Actuators**.
+
+This tutorial guides you through mapping your theoretical robot model to physical Synapticon JD8/JD10 actuators. Follow these steps to get your robot running quickly. The goal is to mount a **JD10 on Joint 1** and a **JD8 on Joint 2**.
+
+### Step 1: Verify Actuator Nodes
+
+Upon entering the **Actuator Mapping** page, verify that the actuator and joint nodes have been automatically generated based on your previous robot structure configuration. **Status:** Ensure nodes are visible (currently in an **Unlinked** state).
+
+> **⚠️ Troubleshooting: Node Count Mismatch** If the number of Actuators and Joints does not appear as expected (2 pairs for this tutorial), please return to the **Robot Structure** tab. **Check Joint Type:** Verify that the Joint Type is set to **Rotation Z**. If set to **None**, it is not counted as a valid Degree of Freedom (DoF) and will not generate a mapping node.
+
+Screen displaying actuators and joints.
+
+### Step 2: Input Motor Specifications
+
+1. Click the **[Motor Information]** button on the actuator node.
+1. Refer to the specifications below and enter the data into the right panel.
+
+**Actuator 1 (Joint 1): Synapticon JD10**
+
+| Parameter              | Specification          |
+| ---------------------- | ---------------------- |
+| **Product Name**       | ACTILINK-JD Circulo 10 |
+| **Rated Torque**       | 2.2222 Nm              |
+| **Peak Torque**        | 6.6667 Nm              |
+| **Rated Output Power** | 380 W                  |
+| **No-Load Speed**      | 1,890 rpm              |
+| **Rated Load Speed**   | 1,620 rpm              |
+
+**Actuator 2 (Joint 2): Synapticon JD8**
+
+| Parameter              | Specification         |
+| ---------------------- | --------------------- |
+| **Product Name**       | ACTILINK-JD Circulo 8 |
+| **Rated Torque**       | 0.774 Nm              |
+| **Peak Torque**        | 2.194 Nm              |
+| **Rated Output Power** | 170 W                 |
+| **No-Load Speed**      | 3,100 rpm             |
+| **Rated Load Speed**   | 2,131 rpm             |
+
+> **Note:** Ignore the **Gear Ratio** field in this step; it will be handled in the Transmission setup (Step 4).
+
+Actuator 1 specs entered (Referencing Synapticon JD10).
+
+### Step 3: Configure EtherCAT Communication
+
+Click **[EtherCAT Settings]** to configure the driver communication.
+
+1. **SDO Settings:** For Synapticon drives, **skip the SDO Entry 1**.
+   - *Note:* These drives use a transactional safety model. Perform the Absolute Encoder Reset using the manufacturer's dedicated software instead.
+1. **PDO Settings:** Set the indices for **User-Defined Mapping**.
+   - **RxPDO (Master to Driver):** Set mapping index to **0x1600**. Ensure it maps `Control Word`, `Target Position`, etc.
+   - **TxPDO (Driver to Master):** Set mapping index to **0x1A00**. Ensure it maps `Status Word`, `Actual Position`, etc.
+
+Edit the SDO and RxPDO settings.
+
+### Step 4: Configure Transmission (Actuator-Joint Mapping)
+
+Finally, we connect the actuators to the joints. For this 2-Bar robot, we use a simple **1:1 Mapping** strategy where each motor drives exactly one joint.
+
+**Procedure:**
+
+1. Switch the view to **Diagram Mode**.
+1. Click **Add Edge** to draw connection lines.
+1. Connect **Actuator 1** to **Joint 1**.
+1. Connect **Actuator 2** to **Joint 2**.
+
+**(Insert image of 2 actuators connected to 2 joints here)**
+
+**Setting the Transmission Values:** You must input the reduction ratio (inverse of gear ratio) for each connection.
+
+> **Important:** Do not enter fractions (e.g., `1/9`). You must calculate and enter the **decimal value**.
+
+**Connection 1 (JD10 → Joint 1):** * The JD10 has a gear ratio of **9 : 1**. * Calculation: `1.0 / 9.0 ≈ 0.111111` * **Input Value:** `0.111111`
+
+**Connection 2 (JD8 → Joint 2):** * The JD8 has a gear ratio of **7.75 : 1**. * Calculation: `1.0 / 7.75 ≈ 0.129032` * **Input Value:** `0.129032`
+
+> **Direction Tip:** If a joint rotates in the opposite direction of the command during testing, simply change this value to a negative number (e.g., `-0.111111`).
+
+Proceed to [Step 4: Virtual Verification](https://docs.sodero.io/stellarx/tutorials/stellar_designer/verify_configuration/index.md) to verify the robot's movement through simulation.
+
+# Tutorial: Building a Simple 2-Bar Robot - Robot Structure
+
+In this tutorial, we will walk through the process of creating a simple "2-bar" robot. By following these steps, you will learn the basic workflow of robot creation, structure setup, and parameter configuration without getting bogged down in complex theories.
+
+**Goal:** Create a 2-link robot named `test_robot`.
+
+Conceptual Image of a 2-Bar Robot
+
+______________________________________________________________________
+
+## Step 1: Create a New Robot
+
+1. Navigate to the **Home** screen.
+1. Click the **Create New Robot** button.
+
+Click the **Create New Robot** button
+
+1. In the setup screen:
+   - Select **EmptyRobot**.
+   - Enter the name: `test_robot`.
+   - Click **Create**.
+
+Select **EmptyRobot** and name it `test_robot`
+
+______________________________________________________________________
+
+## Step 2: Structure Setup (DH Parameters)
+
+We will construct the skeleton of the robot by adding joints and setting their lengths.
+
+### 1. Add Joints
+
+- Click the `+` button on the right side of the **Joint Section** to add two joints.
+
+### 2. Configure Link 1
+
+Enter the parameters as follows to create a 300mm link along the Y-axis:
+
+- **Input Values**:
+  - Theta (θ) : `90` deg
+  - D: `0` mm
+  - A: `300` mm
+  - Alpha (α) : `0` deg
+  - Joint Type: `Rotation Z`
+
+Creation of Link 1
+
+### 3. Configure Link 2
+
+Set up the second link with the following values:
+
+- **Input Values**:
+  - Theta (θ) : `0` deg
+  - D: `0` mm
+  - A: `300` mm
+  - Alpha (α) : `0` deg
+  - Joint Type: `Rotation Z`
+
+Creation of Link 2
+
+### 4. Verify Movement
+
+Use the **Jog** tab to ensure the joints rotate correctly.
+
+- **Jog**: Moves the robot.
+- **Jog Reset**: Returns the moved robot to its origin.
+
+Jog Control Interface
+
+______________________________________________________________________
+
+## Step 3: Dynamics Configuration
+
+Now we apply physical properties to the robot. For this tutorial, simply input the approximate values provided in the screenshots.
+
+> **Note:** For detailed definitions of Coordinate Systems and Mass calculations, please refer to the **User Guide**.
+
+1. Click **Dynamics** in the Joint Section.
+1. Enter the values for **Mass**, **Center of Mass**, and **Inertia** as shown below.
+
+### Link 1 Settings
+
+Link 1 Inertia Settings
+
+### Link 2 Settings
+
+Link 2 Inertia Settings
+
+______________________________________________________________________
+
+## Step 4: Constraints Setup
+
+Finally, we configure the safety limits and friction parameters.
+
+1. Click the **Constraints** button in the Joint Section.
+1. Match the settings in the images below for each joint.
+
+### Joint 1 Constraints
+
+- **Input Values**:
+  - Lower Limit (θ): `-180` deg
+  - Upper Limit: `180` deg
+  - Max Speed: `270` deg/s
+  - Max Accel: `1,350` deg/s²
+  - Max Jerk: `13,500` deg/s³
+  - w1: `0` deg/s
+  - f1: `0` Nm
+  - w2: `0` deg/s
+  - f2: `0` Nm
+  - Max Friction: `0` Nm
+  - Collision Threshold: `100` Nm
+  - Join Goal Tolerance: `0.5729577951308232` deg
+
+Constraints Settings for Joint 1
+
+### Joint 2 Constraints
+
+- **Input Values**:
+  - Lower Limit (θ): `-180` deg
+  - Upper Limit: `180` deg
+  - Max Speed: `412.5` deg/s
+  - Max Accel: `2062.5` deg/s²
+  - Max Jerk: `20,625` deg/s³
+  - w1: `0` deg/s
+  - f1: `0` Nm
+  - w2: `0` deg/s
+  - f2: `0` Nm
+  - Max Friction: `0` Nm
+  - Collision Threshold: `100` Nm
+  - Join Goal Tolerance: `0.5729577951308232` deg
+
+Constraints Settings for Joint 2
+
+______________________________________________________________________
+
+## Summary
+
+Congratulations! You have successfully:
+
+1. Created a robot skeleton using DH parameters.
+1. Applied dynamic properties.
+1. Configured safety constraints.
+
+Your `test_robot` is now ready for simulation or control tasks. Proceed to [Step 2: Robot System Parameters](https://docs.sodero.io/stellarx/tutorials/stellar_designer/configure_system_parameters/index.md) to configure the global robot parameters.
+
+# Tutorial: Creating a Robot from a Template (4-Axis SCARA)
+
+In the previous example, we took the time to build a 2-bar robot project from scratch. This time, we will explore how to start with a pre-configured template.
+
+Currently, templates are available for 2-axis, 4-axis, and 7-axis robots. In this chapter, we will create a 4-axis SCARA robot using its respective template.
+
+______________________________________________________________________
+
+## Step 1: Create a New Robot
+
+First, navigate to the **Home** screen and click the **Create New Robot** button.
+
+Click the **Create New Robot** button on the Home screen
+
+______________________________________________________________________
+
+## Step 2: Select the Template
+
+1. In the creation menu, select **Robot Template**.
+1. Choose the **4-Axis SCARA** option from the list.
+1. Enter your desired robot name.
+1. Click **Create**.
+
+Select **Robot Template**, choose the 4-Axis SCARA, and click Create
+
+______________________________________________________________________
+
+## Step 3: Virtual Verification
+
+Once the robot is created, you will be directed to the main setup screen.
+
+Main Setup Screen for the SCARA Robot
+
+Since the template pre-fills the structural and dynamic configurations, you can bypass those steps and test the robot immediately:
+
+1. Navigate directly to the **Virtual Verification** tab.
+1. Click **Activate Simulation**.
+
+______________________________________________________________________
+
+## Conclusion
+
+You have successfully set up a SCARA robot using a provided template!
+
+Since physical servo motors are likely not connected or prepared at this stage, you can test your setup in a simulated environment. The tutorial for integrating and communicating with Isaac Sim (via the Stellar Bridge extension) is covered in detail here: [Link to Isaac Sim Integration Tutorial](https://docs.sodero.io/stellarx/tutorials/simulation/introduction/index.md)
+
+# Tutorial: Building a Simple 2-Bar Robot - Virtual Verification
+
+In the previous chapter, we mapped the theoretical robot structure to the actual hardware. Now that the mapping is complete, we will verify the robot's movement through a virtual simulation before deploying it to the real hardware.
+
+> **Prerequisite:** This tutorial assumes that the EtherCAT slaves (servo drivers) are properly configured, connected, and ready for operation.
+
+**Goal:** Verify the `test_robot` configuration via simulation and activate the EtherCAT Master for real-world control.
+
+Virtual Verification Interface
+
+______________________________________________________________________
+
+## Step 1: Virtual Verification
+
+First, we must verify that the appropriate parameters were entered in the previous steps.
+
+1. Click the **Activate Simulation** button.
+1. The system will verify the robot parameters. Once verified, the simulation will start automatically.
+
+### Verification Results
+
+If there are no issues with the parameters, the system log will display a success message.
+
+> **Status:** `Activate Simulation Success`
+
+Simulation Success Log
+
+______________________________________________________________________
+
+## Step 2: Jog Control & Monitoring
+
+Once the simulation is active, you can manually control the robot to check its behavior.
+
+1. Locate the **Jog Panel** on the right side of the screen.
+1. Click **Servo On** to enable motor control.
+1. Use the **Jog Control** buttons to move the robot joints.
+
+Jog Control Panel
+
+### Monitoring Command Values
+
+As you move the robot, you can monitor the target values being sent to the servo drivers in real-time.
+
+Actuator Command Preview
+
+______________________________________________________________________
+
+## Step 3: Real Robot Activation (EtherCAT)
+
+After verifying the motion in the simulator, we will activate the EtherCAT Master to operate the real robot.
+
+1. Click the **Apply** button located at the top right of the screen.
+
+Location of the Apply Button
+
+1. A confirmation dialog will appear.
+1. Check the box to confirm that you have verified the target values via simulation.
+1. Click **Apply** to proceed.
+
+Safety Confirmation Checkbox
+
+______________________________________________________________________
+
+## Step 4: Final Validation
+
+The system will attempt to initialize the EtherCAT communication.
+
+### Scenario A: Success
+
+If successful, the logs will show the connection details, and a **Go to Motion Studio** button will appear in the top right corner.
+
+EtherCAT Connection Success
+
+### Scenario B: Failure
+
+If the connection fails, the log will display the specific reason (e.g., communication timeout, parameter mismatch).
+
+Error Log Example
+
+> **Troubleshooting:** If you encounter an error, correct the indicated parameters in the previous sections, return to the **Virtual Verification** page, and repeat the process.
+
+______________________________________________________________________
+
+## Setup Complete
+
+Once the connection is successful, click **Go to Motion Studio** to enter the main control interface.
+
+Motion Studio Interface
+
+Congratulations! You have successfully completed the **Real Robot Setup** for your 2-bar robot.
+
+In the next chapter, we will introduce the features and capabilities of [**Motion Studio**](https://docs.sodero.io/stellarx/tutorials/stellar_motion_studio/about_stellar_motion_studio/index.md).
+# Tutorials - Stellar Motion Studio
+
+
+# What is Stellar Motion Studio?
+
+Once you have configured a robot using Stellar Designer, you need an interface to teach and control it. While robot manufacturers typically provide a physical teach pendant, the StellarX platform delivers this functionality through a streamlined web application: Stellar Motion Studio.
+
+- **Web-based teach pendant**: Replaces traditional hardware interfaces with an accessible, browser-based program for robot teaching and control.
+- **Comprehensive control suite**: Provides the essential tools you need to operate your robot, including manual jogging, tool configuration, and saving taught poses.
+- **Real-time diagnostics**: Allows you to monitor live robot status values and run API tests directly within the studio environment.
+- **Universal adaptability**: Delivers a consistent user experience. Even if your robot's physical configuration or kinematics change, you can continue working within the exact same interface.
+
+______________________________________________________________________
+
+## Motion Studio Tutorial: Getting Started
+
+In this tutorial, we will explore the features of Motion Studio by first creating a 4-axis SCARA robot using Stellar Designer.
+
+To get started, let's generate a SCARA robot from [Start from Templates](https://docs.sodero.io/stellarx/tutorials/stellar_designer/start_from_templates/index.md). Once generated, click **Apply** while the Isaac Sim environment is running.
+
+Set the robot's name to `scara` and the IP address to the IP of your PC where Isaac Sim is running, as shown in the configuration below:
+
+Configuring the SCARA robot name and IP address in Stellar Designer
+
+After applying the settings, click the **Go to Motion Studio** button. The Motion Studio interface will launch and appear as follows:
+
+The initial interface of Stellar Motion Studio
+
+Proceed to the [next chapter](https://docs.sodero.io/stellarx/tutorials/stellar_motion_studio/home/index.md) to explore the Home screen and learn basic jog control.
+
+# Tutorial: Home Screen Overview and Basic Jog Control
+
+In this tutorial, we will explore the main dashboard of the robot interface and learn how to perform basic manual movements (jogging). By following these steps, you will understand how to monitor the robot's current state and safely operate its joints.
+
+**Goal:** Understand the Home screen indicators and learn how to use the Jog panel to move the robot.
+
+______________________________________________________________________
+
+## Part 1: Exploring the Home Screen
+
+The Home screen is your primary dashboard. Here, you can monitor the real-time status of each joint, the TCP (Tool Center Point), and the currently equipped tool.
+
+Overview of the Home Screen
+
+### 1. Joint Status
+
+This section displays the current state of the robot's axes. Since this is a 4-axis robot, you will see the status values for joints **J1 through J4**.
+
+Joint Status Indicator (J1 - J4)
+
+### 2. TCP Status
+
+This panel shows the pose (position and orientation) of the robot's end effector.
+
+> **Note:** For the orientation values in the TCP status, the system uses the **Rotation Vector Convention**.
+
+TCP (Tool Center Point) Status
+
+### 3. Active Tool Status
+
+This section displays the status of the currently equipped tool. Since no tool is currently mounted, you can see that the values for Position (Tool), Orientation (Tool), Center of Mass (Tool), and Payload Mass are all zero.
+
+Active Tool Status Panel
+
+______________________________________________________________________
+
+## Part 2: Operating the Robot (Jogging)
+
+Now that we understand the interface, let's learn how to manually move the robot using the Jog panel.
+
+### Step 1: Open the Jog Panel
+
+To begin, locate and click the **Joystick icon** situated in the top right corner of the screen.
+
+Click the Joystick icon in the top right
+
+Clicking this will open the **Jog Panel** on the right side of the screen, providing you with the necessary controls to move the robot.
+
+The Jog Panel appears on the right tab
+
+### Step 2: Enable Servo On
+
+Before the robot can physically move, you must supply power to the joint motors. This process is called turning the "Servo On."
+
+- Click the **Servo On** button. You will see an indication that the servos are now active and ready for commands.
+
+Click to turn the Servo On
+
+### Step 3: Use the Jog Controls
+
+With the servos active, you can now move individual joints.
+
+1. Locate the **`+`** and **`-`** buttons for each joint within the Jog control panel.
+1. Click and **hold** a button to move the corresponding joint.
+1. **Release** the mouse button to stop the movement immediately.
+
+Press and hold the + / - buttons to jog the robot
+
+______________________________________________________________________
+
+## Summary
+
+Congratulations! You have successfully learned how to:
+
+1. Read the Joint, TCP, and Active Tool status on the Home screen.
+1. Access the Jog panel.
+1. Enable the servo motors.
+1. Manually control the robot using the press-and-hold jog buttons.
+
+Proceed to the [next chapter](https://docs.sodero.io/stellarx/tutorials/stellar_motion_studio/tool/index.md) to configure your tool and payload settings.
+
+# Tutorial: Executing Programmed Movements - Robot Programming
+
+In this part, we will load the poses we saved in the previous section and write a Python program to move the robot through these points.
+
+> **Warning:** For all methods belonging to the `robot` object in this section, you **must explicitly specify the argument names** (keyword arguments). Positional arguments will not work.
+
+**Goal:** Write a Python script to fetch saved poses, turn on the servo, avoid singularities, and execute precise linear and joint movements.
+
+______________________________________________________________________
+
+## Setup: Creating a New Motion File
+
+Clicking the Motion icon and + button
+
+1. Click the **Motion** icon on the left side of the screen.
+1. Click the **+** button on the right side.
+1. A new file named `untitled 1` will be created. This is where we will be writing our code from now on.
+1. First, let's rename this file to `test_motion` and click save.
+
+Renaming the file to test_motion and saving
+
+______________________________________________________________________
+
+## Step 1: Fetching and Verifying Pose Data
+
+First, let's load the poses we saved earlier.
+
+1. In the code editor, start typing `robot.get_pose` and the auto-complete list will appear.
+1. Select or complete it to `robot.get_pose_bank_data`.
+
+Auto-complete suggestions for get_pose
+
+1. Write the following code:
+
+```
+robot.get_pose_bank_data(name="p1")
+```
+
+1. Click **Save** in the top right corner. The system will perform basic syntax checking and save your code.
+
+Wait! Before we execute the program, let's set this script as the Default Motion.
+
+Setting the script as the Default Motion
+
+1. Click the **Play** button to run the program. **Notice that nothing happens.**
+
+Clicking the Play button to execute the script
+
+This is because the function was called, but we didn't print its returned value. Let's use the `console` function to view it. Update your code to:
+
+```
+robot.console(message=robot.get_pose_bank_data(name="p1")[1][3])
+robot.console(message=robot.get_pose_bank_data(name="p2")[1][3])
+robot.console(message=robot.get_pose_bank_data(name="p3")[1][3])
+robot.console(message=robot.get_pose_bank_data(name="p4")[1][3])
+```
+
+Save and run. On the **Home** screen's **Console Output**, you will see the TCP pose data printed out:
+
+Viewing output in the Home screen's Console
+
+> **Note:** The data we actually need is located at index `[1][3]` of the returned list. This is the raw TCP pose data.
+
+______________________________________________________________________
+
+## Step 2: Setting Up Target Variables
+
+Now, let's assign these extracted poses to variables and define the velocity (`vel`) and acceleration (`acc`) for each movement.
+
+```
+p1 = robot.get_pose_bank_data(name="p1")[1][3]
+p2 = robot.get_pose_bank_data(name="p2")[1][3]
+p3 = robot.get_pose_bank_data(name="p3")[1][3]
+p4 = robot.get_pose_bank_data(name="p4")[1][3]
+
+p1_target = {'pose': p1, 'vel': 0.5, 'acc': 0.5}
+p2_target = {'pose': p2, 'vel': 0.5, 'acc': 0.5}
+p3_target = {'pose': p3, 'vel': 0.5, 'acc': 0.5}
+p4_target = {'pose': p4, 'vel': 0.5, 'acc': 0.5}
+```
+
+______________________________________________________________________
+
+## Step 3: Servo Control and Avoiding Singularity
+
+To move the robot via programming, we must turn the servo on, just like clicking the Servo On button in the Jog tab.
+
+1. Type `robot.set_servo` and press `Tab` to auto-complete.
+
+Auto-complete for set_servo_on_off
+
+1. The auto-completed signature looks like `robot.set_servo_on_off(state: bool)`. Modify it as follows:
+
+```
+robot.set_servo_on_off(state=True)
+sleep(1) # Adds a small delay to ensure brakes are fully released
+```
+
+Next, to avoid the singularity position (fully stretched arm), we will do an initial joint movement to slightly bend Joint 2 (the elbow).
+
+```
+home_q_target = {'q': [0, 1.57, 0, 0], 'vel': 0.3, 'acc': 0.3}
+
+robot.move_joint(waypoints=[home_q_target])
+while robot.check_finish()[1] is False:
+    sleep(0.1)
+```
+
+______________________________________________________________________
+
+## Step 4: Basic Linear Movements (Using Sleep)
+
+Let's move the robot through the square using `move_linear`.
+
+1. Type `robot.move_l` and press Enter to auto-complete `robot.move_linear`.
+1. The signature will look like `robot.move_linear(waypoints: list, blocking: bool, finish_mode: typing.Literal['FINE', 'ROUGH'])`.
+1. Remove the extra arguments for now and use hardcoded delays (`sleep(3)`) to separate the movements.
+
+### Intermediate Code:
+
+```
+robot.move_linear(waypoints=[p1_target])
+sleep(3)
+robot.move_linear(waypoints=[p2_target])
+sleep(3)
+robot.move_linear(waypoints=[p3_target])
+sleep(3)
+robot.move_linear(waypoints=[p4_target])
+sleep(3)
+```
+
+If you save and run this, the robot will move to `p1`, pause for 3 seconds, move to `p2`, pause for 3 seconds, and so on. However, using fixed `sleep()` timers is an unreliable workaround. A proper program needs to verify that the robot has actually reached its target.
+
+______________________________________________________________________
+
+## Step 5: Advanced Logic using check_finish()
+
+To properly check if the robot has arrived, we use `robot.check_finish()`.
+
+If you auto-complete it, you get `robot.check_finish(finish_mode: typing.Literal['FINE', 'ROUGH'])`. Leaving it empty defaults to `finish_mode='FINE'`.
+
+- **FINE mode:** Checks that the planned trajectory has finished *and* verifies that the actual joint encoder values are within a specific threshold of the target.
+
+When the robot reaches the target, the boolean at index `[1]` becomes `True`.
+
+### Updated Reliable Code:
+
+Replace the `sleep(3)` lines with `while` loops that wait until the movement is finished:
+
+```
+robot.move_linear(waypoints=[p1_target])
+while robot.check_finish()[1] is False:
+    sleep(0.1)
+
+robot.move_linear(waypoints=[p2_target])
+while robot.check_finish()[1] is False:
+    sleep(0.1)
+
+robot.move_linear(waypoints=[p3_target])
+while robot.check_finish()[1] is False:
+    sleep(0.1)
+
+robot.move_linear(waypoints=[p4_target])
+while robot.check_finish()[1] is False:
+    sleep(0.1)
+```
+
+Save and run. The robot will now transition to the next target exactly when it arrives at the current one, without unnecessary delays.
+
+______________________________________________________________________
+
+## Step 6: Continuous Movement (Combining Waypoints)
+
+Instead of sending distinct commands for each point, you can bundle them into a single command for a smooth, continuous trajectory.
+
+### Final Refined Code:
+
+```
+p1 = robot.get_pose_bank_data(name="p1")[1][3]
+p2 = robot.get_pose_bank_data(name="p2")[1][3]
+p3 = robot.get_pose_bank_data(name="p3")[1][3]
+p4 = robot.get_pose_bank_data(name="p4")[1][3]
+
+p1_target = {'pose': p1, 'vel': 0.5, 'acc': 0.5}
+p2_target = {'pose': p2, 'vel': 0.5, 'acc': 0.5}
+p3_target = {'pose': p3, 'vel': 0.5, 'acc': 0.5}
+p4_target = {'pose': p4, 'vel': 0.5, 'acc': 0.5}
+
+home_q_target = {'q': [0, 1.57, 0, 0], 'vel': 0.3, 'acc': 0.3}
+
+robot.set_servo_on_off(state=True)
+sleep(1)
+
+robot.move_joint(waypoints=[home_q_target])
+while robot.check_finish()[1] is False:
+    sleep(0.1)
+
+robot.move_linear(waypoints=[p1_target, p2_target, p3_target, p4_target])
+while robot.check_finish()[1] is False:
+    sleep(0.1)
+```
+
+> **Pro Tip:** When executing multiple waypoints in a single `move_linear` command, you may notice slight circular blending (arc interpolation) as the robot passes through the corners. If you want sharp, complete stops at every point instead, you can specify a `radius` of `0` in your target definitions.
+
+______________________________________________________________________
+
+## Step 7: Executing Joint Movements (Using move_joint)
+
+In the previous steps, we used `move_linear` to move the TCP in a perfectly straight line between points. However, you can also move the robot by directly driving its specific joint angles to their saved states. This is done using the `move_joint` command.
+
+When we fetched the Cartesian pose data earlier, we used index `[1][3]` (`[x, y, z, rx, ry, rz]`). To get the raw joint angles (`[q1, q2, q3, q4, ...]`), we simply change the index to `[1][4]`.
+
+> **Concept:** While `move_linear` forces the tool tip to travel in a straight line, `move_joint` calculates the most efficient way for the individual motors to reach their target angles. This often results in a slightly curved, sweeping motion in 3D space, which is typically faster and smoother for the mechanical joints.
+
+### Fetching Joint Data and Setting Targets
+
+Let's extract the joint angles and set up new target dictionaries. Notice that we use the key `'q'` instead of `'pose'`:
+
+```
+# Fetching raw joint angles (index [1][4]) instead of Cartesian poses
+q1 = robot.get_pose_bank_data(name="p1")[1][4]
+q2 = robot.get_pose_bank_data(name="p2")[1][4]
+q3 = robot.get_pose_bank_data(name="p3")[1][4]
+q4 = robot.get_pose_bank_data(name="p4")[1][4]
+
+# Defining the targets using the 'q' key
+q1_target = {'q': q1, 'vel': 0.5, 'acc': 0.5}
+q2_target = {'q': q2, 'vel': 0.5, 'acc': 0.5}
+q3_target = {'q': q3, 'vel': 0.5, 'acc': 0.5}
+q4_target = {'q': q4, 'vel': 0.5, 'acc': 0.5}
+```
+
+### Executing the Sequence
+
+Just like with `move_linear`, you can execute these targets sequentially and use `check_finish()` to ensure the robot has successfully reached each point before issuing the next command:
+
+```
+robot.move_joint(waypoints=[q1_target])
+while robot.check_finish()[1] is False:
+    sleep(0.1)
+
+robot.move_joint(waypoints=[q2_target])
+while robot.check_finish()[1] is False:
+    sleep(0.1)
+
+robot.move_joint(waypoints=[q3_target])
+while robot.check_finish()[1] is False:
+    sleep(0.1)
+
+robot.move_joint(waypoints=[q4_target])
+while robot.check_finish()[1] is False:
+    sleep(0.1)
+```
+
+> **Pro Tip:** Exactly like our continuous linear movements, you can also bundle these joint targets into a single command for a smooth, uninterrupted trajectory: `robot.move_joint(waypoints=[q1_target, q2_target, q3_target, q4_target])`
+
+______________________________________________________________________
+
+## Summary
+
+Congratulations! You have successfully:
+
+1. Created and saved a new motion script.
+1. Retrieved saved Cartesian and Joint poses directly via Python code.
+1. Programmatically controlled the servo state and handled singularities.
+1. Mastered the logic for executing linear sequences (`move_linear`).
+1. Learned the difference between arbitrary delays (`sleep`) and robust state-checking (`check_finish`).
+1. Understood how to execute sweeping, motor-efficient movements using raw joint angles (`move_joint`).
+
+# Tutorial: Teaching and Saving Points - Basic Robot Movements
+
+In this part of the tutorial, we will learn how to specify teaching points and save them so they can be loaded and executed later.
+
+**Goal:** Use the Jog interface to teach and save a 100mm square path, pairing Cartesian poses with their corresponding joint angles to understand the difference between joint and linear movements in later sections.
+
+______________________________________________________________________
+
+## Step 1: Pre-requisite - Handling Singularity and Base Coordinates
+
+Before we begin saving poses, let's assume the robot is currently in a fully stretched out (fully extended) state.
+
+Robot in a fully stretched state
+
+If we try to control the TCP based on the Base coordinate system right now, we will encounter a **singularity** (where the robot arms align, causing a loss of degrees of freedom). While avoiding singularities isn't the primary goal of this tutorial, it is a necessary first step.
+
+1. To avoid this, use the Joint Jog to slightly bend **Joint 2 (the elbow)**.
+1. Once the arm is slightly bent, select **Base** to control the TCP relative to the Base coordinate system.
+
+Slightly bending Joint 2 and selecting Base coordinates
+
+______________________________________________________________________
+
+## Step 2: Adding and Teaching the First Pose
+
+Now, let's create our first reference point.
+
+1. Click the `+` button in the top left corner to add a new pose.
+1. Our target for the first point is:
+1. **X:** 225mm, **Y:** 275mm, **Z:** 0
+1. **RX:** 0, **RY:** 0, **RZ:** 90deg
+1. Try using the Jog buttons to get the robot's TCP as close to these coordinates as possible.
+
+Jogging close to the target, resulting in messy decimals
+
+In actual field teaching, jogging often results in messy decimal numbers. However, there are many cases where you want exact, clean numbers if a precise posture is required for your task.
+
+______________________________________________________________________
+
+## Step 3: Direct Input and Test Moves
+
+When you want precise numbers, you can input them directly.
+
+1. Type the exact target coordinates directly into the Position fields on the left.
+
+Directly inputting clean coordinate numbers
+
+1. Without saving, **press and hold** the **Test Move (Linear)** button. The robot will move and cleanly align itself with the exact coordinates you entered.
+   > **Crucial Safety Note:** You must keep the button pressed. If you release it, the robot will stop immediately. This is a critical safety feature in real-world applications to prevent collisions due to interference, allowing you to inch toward the target and verify the path safely.
+1. To update the joint angles for this new exact position, click the **Set from current** button.
+1. Click **Save** to lock in the point.
+
+> **Note:** Even after clicking `Set from current`, you can still manually adjust the numbers if you wish to round off a specific axis.
+
+### Understanding Test Moves
+
+- **Test Move (Joint):** The robot interpolates movement in the *Joint Space*, moving from its current joint angles to the target joint angles. The TCP path may be curved.
+- **Test Move (Linear):** The robot interpolates movement in the *Task Space*, moving the TCP in a straight line from the current position to the target.
+
+Applying 'Set from current' after the Test Move
+
+______________________________________________________________________
+
+## Step 4: Creating a Square Path
+
+Now, let's create the remaining three points using the direct input method to complete a 100mm square pattern.
+
+Repeat the process (Input -> Press & Hold Move -> Set from current -> Save) for the following three points:
+
+- **Point 2:** X=225mm, Y=375mm, Z=0, RX=0, RY=0, RZ=90deg
+- **Point 3:** X=125mm, Y=375mm, Z=0, RX=0, RY=0, RZ=90deg
+- **Point 4:** X=125mm, Y=275mm, Z=0, RX=0, RY=0, RZ=90deg
+
+> **Why are we saving Joint Angles for a Linear move?** > Strictly speaking, if you only plan to execute a linear motion (`move_linear`), you don't necessarily need to physically move the robot there to extract the joint angles, as linear moves rely purely on the Cartesian pose target. However, in this tutorial, we are intentionally pairing the target pose with its corresponding joint angles. Saving both as a pair will allow us to clearly observe the difference between Joint movement and Linear movement when we write the motion program in the next tutorial.
+
+Once all four points are saved, click **Test Move (Linear)** for points 1 through 4 in sequence. You will see the robot's TCP moving in perfect straight lines, drawing a 100mm square.
+
+______________________________________________________________________
+
+## Summary
+
+Congratulations! You have successfully:
+
+1. Prepared the robot by moving it out of a kinematic singularity.
+1. Learned how to manually input precise coordinates and safely use the "Press and Hold" Test Move feature.
+1. Paired exact Cartesian poses with joint values using `Set from current`.
+1. Created and verified a sequence of points forming a square path.
+
+Proceed to the [next chapter](https://docs.sodero.io/stellarx/tutorials/stellar_motion_studio/motion/index.md) to write a motion program and execute these saved poses.
+
+# Tutorial: Setting Up Tool and Payload - Tool Configuration
+
+Before starting robot teaching, we first need to specify the tool we will use. In this tutorial, we will walk through the process of setting up a new tool, configuring its Tool Center Point (TCP) offset, and defining the payload for accurate gravity compensation.
+
+**Goal:** Create a tool named `vacuum gripper`, configure a 100mm TCP offset, and set a 500g payload.
+
+______________________________________________________________________
+
+## Step 1: Open the Tool Tab
+
+1. Navigate to the **Home** screen.
+1. Click the **Tool** icon (drill shape) on the left tab.
+
+Click the **Tool** icon on the Home screen
+
+1. Once the Tool tab appears, click the `+` button to add a new tool.
+
+Click the **+** button to add a tool
+
+______________________________________________________________________
+
+## Step 2: Configure Tool Name and TCP Offset
+
+Now we will name the tool and set its offset relative to the robot's flange.
+
+1. In the right tab, enter `vacuum gripper` for the **Tool Name**. (You can name this freely based on your application, but we will use this for the tutorial).
+1. Under the **Tool Center Point** section, enter the offset values.
+   - To simulate a gripper extending 100mm forward, enter `100` in the **X** axis.
+   - This creates a new TCP offset from the tool flange coordinate system.
+
+Name the tool and set the TCP X offset to 100mm
+
+1. Click the **Save and Apply** button in the top right corner. You can verify that the tool configuration has been applied immediately.
+
+TCP offset applied in the Jog interface
+
+______________________________________________________________________
+
+## Step 3: Configure Payload
+
+Next, we must specify the payload. This value is critical for calculating gravity compensation during free drive (hand-guiding) or position control. You should enter the mass of the actual end-effector as accurately as possible.
+
+1. In the Payload section, enter `500` for the **Mass**.
+1. For this tutorial, assume the center of mass and rotational inertia are `0`.
+
+Enter 500 in the Mass field
+
+1. Click **Save and Apply** in the top right corner to save your settings.
+
+______________________________________________________________________
+
+## Step 4: Verify the Setup
+
+There are two ways to confirm that your tool and payload settings have been applied correctly: an indirect method and a direct method.
+
+### 1. Indirect Verification (Home Screen)
+
+Navigate back to the **Home** screen and look at the **Active Tool Status**. On the right side of this section, you should see the **Payload Mass** successfully applied as `500g`.
+
+Verify the 500g Payload in Active Tool Status
+
+### 2. Direct Verification (Free Drive)
+
+1. Go to the right **Jog** tab, click **Free Drive**, and turn **Servo On**.
+1. Observe the robot's coordinates. You will notice the Z-axis in the Pose section, or Joint 3, slowly rising.
+
+> **Why does this happen?** The robot is applying an upward force to compensate for a 500g load. Since there is currently no physical 500g gripper attached to pull it down, the robot drifts upward. If the actual gripper were attached, it would remain perfectly balanced.
+
+Activating Servo On and Free Drive in the Jog Tab
+
+### 3. Disable Free Drive
+
+To stop the robot from rising, you need to exit Free Drive mode. To do this, click on any of the other jog mode buttons (**Axis**, **Base TCP**, or **Tool TCP**). Selecting any mode other than Free Drive will disable it and switch the robot back to standard Position Control.
+
+Disabling Free Drive mode
+
+______________________________________________________________________
+
+## Summary
+
+Congratulations! You have successfully:
+
+1. Created a new tool and configured its TCP offset.
+1. Applied the correct payload parameters for gravity compensation.
+1. Verified the setup using both system status and physical free drive checks.
+
+Your tool setup is now complete. In the [next part](https://docs.sodero.io/stellarx/tutorials/stellar_motion_studio/pose/index.md), we will use this configured tool to perform an actual teaching task.
+# Tutorials - Simulation & Virtual Control
+
+# StellarX Isaac Sim Extension Installation
+
+You need a dedicated Isaac Sim extension to control robots with StellarX in the simulator.
+
+## Extension Installation
+
+1. When you open Isaac Sim, you'll see the above default main screen.
+
+1. Click the 'Window' tab and select the 'Extensions' menu.
+
+1. On the extensions window, click the `THIRD PARTY` button. Delete default `feature`, and search for `stellar`.
+
+1. Open up `Community` tab, and you'll see `STELLAR BRIDGE` extension. Toggle the button to enable it.
+
+1. Or you can click the extension and turn on `AUTOLOAD` to automatically enable stellar_bridge when you re-open Isaac Sim.
+
+And that's it! Your Isaac Sim is now prepared for StellarX. Follow [the next chapter](https://docs.sodero.io/stellarx/tutorials/simulation/robot_setup/index.md) to learn how to prepare a robot model.
+
+# Introduction
+
+## Nvidia Isaac Sim
+
+[NVIDIA Isaac Sim](https://developer.nvidia.com/isaac/sim) is a robotics simulator for developers to build, simulate and test robots in physically-based virtual environments. Users can use StellarX with Isaac Sim to design, plan and verify robot motions before deploying to the real world.
+
+Install Isaac Sim by following the instructions from the link below.
+
+[Isaac Sim Installation](https://docs.isaacsim.omniverse.nvidia.com/5.0.0/installation/index.html)
+
+**\* This tutorial is based on Isaac Sim Version 5.0.0 and Ubuntu 22.04**
+
+Once Isaac Sim is installed, follow [the next chapter](https://docs.sodero.io/stellarx/tutorials/simulation/extension_installation/index.md) to install the StellarX extension.
+
+# Prepare Robot Model
+
+## Using Provided Robot Models
+
+Isaac Sim provides various robot models from popular manufacturers like Universal Robots, Unitree, Franka Robotics etc. by default.
+
+You can access these models by clicking `Window` -> `Browsers` -> `Isaac Sim Assets`.
+
+There should be a new tab appeared next to the `Content` tab. You may have to wait for a while for Isaac Sim to load all the assets. There are plenty of robot models here. But if you need your own robot to be implemented, please follow below general setup guide.
+
+## Building Robot model
+
+### Prerequisites
+
+You can make any robot with all the shapes and sizes you'd like, but there are some rules that need to be addressed.
+
+- The name of your robot prim must match the name from StellarX.
+- Robot must contain only one [articulation root](https://docs.isaacsim.omniverse.nvidia.com/5.0.0/robot_setup_tutorials/tutorial_gui_simple_robot.html#add-articulation).
+- All the links in the robot must be rigid-bodies. Collision or weight settings is not mandatory, but is recommanded for accurate physics simulation.
+- Closed-loop articulation is not supported. You can [exclude](https://docs.isaacsim.omniverse.nvidia.com/5.0.0/robot_setup_tutorials/rig_closed_loop_structures.html) some joints from articulation, but this may result in inaccurate simulation result.
+
+Most of the time, you'll be using [urdf](https://wiki.ros.org/urdf) format. If you wish to use urdf, please refer to [this guide](https://docs.isaacsim.omniverse.nvidia.com/5.0.0/importer_exporter/import_urdf.html). In this tutorial, we'll be rigging the robot ourselves. Before starting, please download the result robot model from [**3D Model Creation**](https://docs.sodero.io/stellarx/tutorials/stellar_designer/3dmodel_creation/index.md) guide.
+
+- [**3D Model download link**](https://docs.sodero.io/stellarx/tutorials/simulation/robot_setup/models/example_manipulator_assembly_vis.glb)
+
+### Making Robot Model
+
+- Open up new file. From main screen, Click `File` -> `Import`.
+
+- Go to downloaded file's directory. Select the file and enable `Use Meter as World Unit`. Click box next to `Up-axis` and select `Z-up` and import. The result should look like bottom picture.
+
+- If you take a look at the file's directory, you'll see a new `.usd` format file with the same name. Click `File` -> `Open` and open the `.usd` file. You'll be then able to see the full robot model.
+
+- Open up all the joint prims and you'll see the full stage tree. Right-click on the empty part of the stage and click `Create` -> `Scope`. This will create scope for organizing the stage. Create two scopes and name them `links` and `joints`.
+
+- Drag all the links to `links` scope and delete joint prims.
+
+- Select all the links and right-click. Click `Add` -> `Physics` -> `Rigid Body` to make them rigid-bodies. You can verify it by scrolling down on the property tab.
+
+- Next, open the link prim and select mesh prim. Right-click and click `Add` -> `Physics` -> `Collider`. This will add collider to mesh and you can also verify it by scrolling down. Default collider type is `trimesh`, but since the parent prim is rigid-body, it is automatically set to `Convex Hull`. Repeat this for all the other link meshes.
+
+- Now, we need to add joints. First, select `link0` and right-click. Click `Create` -> `Physics` -> `Joint` -> `Fixed Joint`. This will create `FixedJoint` under `link0`. This joint is like an anchor that fixes base link of the robot to the world. You can see this by looking at the Body settings of `FixedJoint`. Empty Body 0 means it is fixed to world. You can explicitly set this To `/World` prim.
+
+- Next, we will add revolute joint. Select `link0` and then ctrl-click `link1`. Order matters in this part. Selecting `link1` then `link0` will result in `link0` trying to revolute relative to `link1` and not vice versa. Right-click on `link1` and click `Create` -> `Physics` -> `Joint` -> `Revolute Joint`. This will create revolute joint under `link1`.
+
+- Rename joint to `J1` for consistency. Right-click on `J1` and select `Add` -> `Physics` -> `Angular Drive`. We can only control joints with drive property, and joints without them can only move passively.
+
+- Repeat the same process for the other joints. And move them to `joints` scope.
+
+- Select `J1` and scroll down to `Revolute Joint` section. Click `Axis` and selelct Z. Repeat same process for `J4` and `J6`.
+
+- Finally, select FixedJoint and right-click. Select `Add` -> `Physics` -> `Articulation Root`. `Articulation Root` is what defines robot in Isaac Sim. For more information, check out [this documentation](https://docs.isaacsim.omniverse.nvidia.com/5.0.0/robot_setup_tutorials/tutorial_gui_simple_robot.html#add-articulation). Change the joint's name to 'example_robot'. The name of the prim that has articulation root is recognized as that robot's name.
+
+And that's the end of robot preparation. Save and open up new file. Click `Create` -> `Environments` -> `Flat Grid`. Drag the robot model file to `Stage` on the right, and you'll see the robot in the world!
+
+Next step is StellarX configuration. For convenience, download already configured stellar robot definition file below.
+
+- [**Robot definition download link**](https://docs.sodero.io/stellarx/tutorials/simulation/robot_setup/models/example_robot.sdd)
+
+On the main page, click `Import File` button and load example_robot definition. Double-click to enter the project.
+
+There's nothing for us to configure in this step. Click `Step 4: Virtual Verification` and click `Activate Simulation`.
+
+If there's no problem, you'll see no issues here. Click `Ok`. Change `EtherCAT` default setting to `Isaac Sim`. Click `Apply`.
+
+Enter the robot's name in `Name`, and your PC's IP address in `IP`. Click `Apply` and `Apply`. Finally, click `Go to Motion Studio`.
+
+This is Stellar Motion Studio. Open up jog-panel by clicking joystick icon on top-right. Click `Servo On`. On Isaac Sim, click `Play` button on the left side. Jog the robot via `Jog Control` and you'll see the robot is moving accordingly. You can also write your own python script to move the robot at your need.
+
+You can download final robot model below.
+
+- [**Download link**](https://docs.sodero.io/stellarx/tutorials/simulation/robot_setup/models/example_manipulator_assembly.usd)
+
+## Conclusion
+
+In this tutorial, we set up robot eligible for Isaac Sim environment. Isaac Sim is a powerful tool for robot simulation with numerous features. Check out [official Isaac Sim Documentation](https://docs.isaacsim.omniverse.nvidia.com/5.0.0/index.html) for more information. If you have questions regarding Isaac Sim, please check out [Isaac Sim Forum](https://forums.developer.nvidia.com/c/omniverse/simulation/69).
+
+Virtual Control via Simulation
+
+Virtual control is achieved by communicating with a simulated robot instead of a physical EtherCAT slave. By transmitting target commands to the simulator and receiving state values in return, you can treat and operate the robot within the simulator exactly as you would a real one.
+
+Using the controller configured through **Step 1** and **Step 2** (dynamics from Step 3 are not considered for the controller side), you can control a robot with specific kinematics and dynamics in the simulated world.
+
+This process allows you to:
+
+- Verify if your kinematics settings are accurate.
+- Observe how a robot with those specific dynamics reacts to the controller. For example, if proper torque compensation is applied when switching to direct teaching mode, the robot will maintain its position without sagging.
+
+Currently, we support communication with **Isaac Sim**. This seamless integration is made possible through an Isaac Sim extension called **Stellar Bridge**.
+
+To get started, follow [the next chapter](https://docs.sodero.io/stellarx/tutorials/simulation/introduction/index.md) to set up Isaac Sim.
+# User Guide
+
+# Stellar X API Documentation
+
+## Index
+
+- **[API](#api)**
+- **[A. Initialization and Default State](#a-initialization-and-default-state)**
+  - [is_ready](#is_ready)
+  - [get_status](#get_status)
+  - [get_operating_status](#get_operating_status)
+  - [get_error_status](#get_error_status)
+  - [get_alarm](#get_alarm)
+  - [reset_trigger](#reset_trigger)
+- **[B. Operational Mode](#b-operational-mode)**
+  - [get_operational_mode](#get_operational_mode)
+  - [set_operational_mode](#set_operational_mode)
+  - [set_direct_teaching_on_off](#set_direct_teaching_on_off)
+- **[C. Collision Detection](#c-collision-detection)**
+  - [set_collision_detection_sensitivity](#set_collision_detection_sensitivity)
+  - [set_post_collision_mode](#set_post_collision_mode)
+  - [get_collision_joint_status](#get_collision_joint_status)
+  - [reset_collision_state](#reset_collision_state)
+- **[D. Movement and Control](#d-movement-and-control)**
+  - [set_servo_on_off](#set_servo_on_off)
+  - [stop](#stop)
+  - [pause](#pause)
+  - [resume](#resume)
+  - [move_jog](#move_jog)
+  - [move_home](#move_home)
+  - [move_joint](#move_joint)
+  - [move_linear](#move_linear)
+  - [move_circle](#move_circle)
+  - [check_finish](#check_finish)
+  - [set_feed_rate](#set_feed_rate)
+  - [get_feed_rate](#get_feed_rate)
+- **[E. Program Execution](#e-program-execution)**
+  - [execute_internal_program](#execute_internal_program)
+  - [stop_executing_internal_program](#stop_executing_internal_program)
+- **[F. Joint and Pose Status](#f-joint-and-pose-status)**
+  - [get_trajectory_status](#get_trajectory_status)
+  - [get_actual_joint_velocity_utilization](#get_actual_joint_velocity_utilization)
+  - [get_actual_joint_position](#get_actual_joint_position)
+  - [get_actual_joint_velocity](#get_actual_joint_velocity)
+  - [get_actual_joint_effort](#get_actual_joint_effort)
+  - [get_residual_effort](#get_residual_effort)
+  - [get_actual_pose](#get_actual_pose)
+  - [get_actual_twist](#get_actual_twist)
+  - [get_actual_wrench](#get_actual_wrench)
+  - [get_actual_tcp_wrench](#get_actual_tcp_wrench)
+  - [get_target_joint_position](#get_target_joint_position)
+  - [get_target_joint_velocity](#get_target_joint_velocity)
+  - [get_target_joint_effort](#get_target_joint_effort)
+  - [get_target_pose](#get_target_pose)
+  - [get_target_twist](#get_target_twist)
+  - [get_target_wrench](#get_target_wrench)
+  - [get_joint_temperature](#get_joint_temperature)
+  - [get_default_joint_limit](#get_default_joint_limit)
+  - [get_user_joint_limit](#get_user_joint_limit)
+  - [get_current_joint_limit](#get_current_joint_limit)
+  - [set_user_joint_limit](#set_user_joint_limit)
+  - [set_user_joint_limit_on_off_state](#set_user_joint_limit_on_off_state)
+  - [get_current_user_joint_limit_on_off_state](#get_current_user_joint_limit_on_off_state)
+- **[G. Configuration Changes (TCP, Payload)](#g-configuration-changes-tcp-payload)**
+  - [get_tcp](#get_tcp)
+  - [get_payload](#get_payload)
+  - [set_tcp](#set_tcp)
+  - [set_payload](#set_payload)
+  - [set_tcp_with_bank](#set_tcp_with_bank)
+  - [set_payload_with_bank](#set_payload_with_bank)
+- **[H. Bank Data Management](#h-bank-data-management)**
+  - [get_tcp_bank_data](#get_tcp_bank_data)
+  - [add_tcp_bank_data](#add_tcp_bank_data)
+  - [update_tcp_bank_data](#update_tcp_bank_data)
+  - [remove_tcp_bank_data](#remove_tcp_bank_data)
+  - [get_payload_bank_data](#get_payload_bank_data)
+  - [add_payload_bank_data](#add_payload_bank_data)
+  - [update_payload_bank_data](#update_payload_bank_data)
+  - [remove_payload_bank_data](#remove_payload_bank_data)
+  - [get_pose_bank_data](#get_pose_bank_data)
+  - [add_pose_bank_data](#add_pose_bank_data)
+  - [update_pose_bank_data](#update_pose_bank_data)
+  - [remove_pose_bank_data](#remove_pose_bank_data)
+- **[I. Kinematics Computation](#i-kinematics-computation)**
+  - [solve_forward_kinematics](#solve_forward_kinematics)
+  - [solve_inverse_kinematics](#solve_inverse_kinematics)
+- **[J. TCP and Payload Measurement](#j-tcp-and-payload-measurement)**
+  - [calculate_tcp](#calculate_tcp)
+  - [measure_payload_start](#measure_payload_start)
+  - [append_pose_wrench_sample](#append_pose_wrench_sample)
+  - [remove_pose_wrench_sample](#remove_pose_wrench_sample)
+  - [get_pose_wrench_sample_list](#get_pose_wrench_sample_list)
+  - [calculate_payload](#calculate_payload)
+
+______________________________________________________________________
+
+## API
+
+From this point onward, the main functions of the Stellar X API are categorized and explained by functionality.
+
+### General Notes
+
+- **Rotation Representation:**\
+  Stellar X API uses the **Rotation Vector convention** as its orientation convention.
+- **Function Argument Passing:**\
+  Stellar X API **does not support positional arguments**, so argument names (**keyword arguments**) must be explicitly specified when providing inputs.
+- **Function Return Values:** All functions invoked via the remote library include, as the first element of their return value, a bool indicating the communication status with Stellar X. For example, the `is_ready` function, which originally returns a bool, will return a value structured as `[True, <return value of is_ready>]` when called through Stellar X. Here, the first element, `True`, indicates that communication with Stellar X was successful. Therefore, please refer to the **second element** (index 1) of the return value as the final result of any function. If something goes wrong and the function returns `False`, the second element of the return value is error code in `str` type.
+- **Units:**
+- **Pose:** Position is expressed in meters (m), and rotation in radians (rad)
+- **Joint Vector:** radians (rad)
+- **Force/Torque:** Force is expressed in newtons (N), and torque in newton-meters (Nm)
+- **Miscellaneous:** Mass is expressed in kilograms (kg), the center of mass in meters (m), and inertia in kg·m²
+
+______________________________________________________________________
+
+### A. Initialization and Default State
+
+#### `is_ready`
+
+**Signature:**
+
+```
+def is_ready(self) -> bool
+```
+
+**Usage:**
+
+```
+robot.is_ready()
+```
+
+**Description:**\
+Checks whether the robot is currently in an operable state. Returns `False` if the robot cannot operate due to conditions such as an emergency stop or collision detection, and `True` if it is in a normal state.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type | Description                                  |
+| ----------- | -------------------------------------------- |
+| `bool`      | `True` if robot is operational, else `False` |
+
+**Example Output:**
+
+```
+[True, True] # The second element corresponds to the return value of is_ready.
+```
+
+______________________________________________________________________
+
+#### `get_status`
+
+**Signature:**
+
+```
+def get_status(self) -> Dict
+```
+
+**Usage:**
+
+```
+robot.get_status()
+```
+
+**Description:**\
+Returns a dictionary containing the robot’s overall status information. It includes various details such as error status, motion status, and servo status.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type | Description                                                    |
+| ----------- | -------------------------------------------------------------- |
+| `dict`      | A dictionary containing the robot’s overall status information |
+
+**Example Output:**
+
+```
+# The second element corresponds to the return value of get_status.
+[True,
+ {'count_down_time': -2111.9530835214264,
+  'error_status': {'alarm': {'alarm_code': '', 'alarm_description': ''},
+                   'collision_detected': False,
+                   'drive_error': False,
+                   'emergency': False,
+                   'joint_limit': False,
+                   'not_following': False,
+                   'processing_overload': False,
+                   'safe_guard': False,
+                   'self_collision': False,
+                   'total_error': False},
+  'internal_io_status': {'in': [1, 1, 8, 0, 0, 0, 0, 0],
+                         'out': [1, 1, 0, 0, 0, 0, 0, 0]},
+  'joint_temperature': [0, 0, 0, 0, 0, 0, 0],
+  'model': None,
+  'motion_pause_resume_state': 1,
+  'operation_status': {'auto_mode': False,
+                       'free_drive_mode': False,
+                       'manual_mode': True,
+                       'moving': False,
+                       'paused': False,
+                       'program': False,
+                       'ready': True,
+                       'remote_mode': False,
+                       'safety_controller_check_enable': False,
+                       'safety_controller_normal': False,
+                       'strict_operation_policy': True},
+  'serial_number': None,
+  'servo_status': {'servo_drive_coe_mode_of_operation': [8, 8, 8, 0, 0, 0, 0],
+                   'servo_drive_coe_pds': [4, 4, 4, -1, -1, -1, -1],
+                   'servo_drive_error': [0, 0, 0, 0, 0, 0, 0],
+                   'servo_on': True},
+  'trajectory_status': {'actual_joint_effort': [35.00772476196289,
+                                                6.51925802230835e-08,
+                                                1.4901161193847656e-07,
+                                                0.0,
+                                                0.0,
+                                                0.0,
+                                                0.0],
+                        'actual_joint_position': [0.21831373870372772,
+                                                  -0.03177299723029137,
+                                                  -0.8192387819290161,
+                                                  0.0,
+                                                  0.0,
+                                                  0.0,
+                                                  0.0],
+                        'actual_joint_velocity': [0.0,
+                                                  0.0,
+                                                  0.0,
+                                                  0.0,
+                                                  0.0,
+                                                  0.0,
+                                                  0.0],
+                        'actual_pose': [0.15463924134614646,
+                                        0.1716203457161464,
+                                        0.5038137387037277,
+                                        0.0,
+                                        0.0,
+                                        2.2905808744304856],
+                        'actual_twist': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+                        'actual_wrench': [0, 0, 0, 0, 0, 0],
+                        'collision_joint_status': [0, 0, 0, 0, 0, 0, 0],
+                        'feed_rate': 1.0,
+                        'joint_temperature': [],
+                        'residual_effort': [37.087829138037115,
+                                            -0.0,
+                                            -0.0,
+                                            0.0,
+                                            0.0,
+                                            0.0,
+                                            0.0],
+                        'target_joint_effort': [0, 0, 0, 0, 0, 0, 0],
+                        'target_joint_position': [0.21831373870372772,
+                                                  -0.03177299723029137,
+                                                  -0.8192387819290161,
+                                                  0.0,
+                                                  0.0,
+                                                  0.0,
+                                                  5.325169965892e-310],
+                        'target_joint_velocity': [1.3155372962047583e-53,
+                                                  1.3572550297507825e-56,
+                                                  -2.194467079681263e-55,
+                                                  0.0,
+                                                  0.0,
+                                                  0.0,
+                                                  0.0],
+                        'target_pose': [0.15463924134614646,
+                                        0.1716203457161464,
+                                        0.5038137387037277,
+                                        0.0,
+                                        0.0,
+                                        2.2905808744304856],
+                        'target_twist': [3.752118437230104e-56,
+                                         3.7035264430471718e-56,
+                                         1.3155372962047583e-53,
+                                         0.0,
+                                         0.0,
+                                         -2.058741576706185e-55],
+                        'target_wrench': [0, 0, 0, 0, 0, 0],
+                        'time_stamp': 2190.5200000013933}}]
+```
+
+______________________________________________________________________
+
+#### `get_operating_status`
+
+**Signature:**
+
+```
+def get_operating_status(self) -> Dict
+```
+
+**Usage:**
+
+```
+robot.get_operating_status()
+```
+
+**Description:**\
+Returns a dictionary containing the robot’s operational state (automatic/manual, direct teaching, motion pause, etc.).
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type | Description                                                       |
+| ----------- | ----------------------------------------------------------------- |
+| `dict`      | A dictionary that includes flags related to the operational state |
+
+**Example Output:**
+
+```
+[True,
+ {'auto_mode': False,
+  'free_drive_mode': False,
+  'manual_mode': True,
+  'moving': False,
+  'paused': False,
+  'program': False,
+  'ready': True,
+  'remote_mode': False,
+  'safety_controller_check_enable': False,
+  'safety_controller_normal': False,
+  'strict_operation_policy': True}]
+```
+
+______________________________________________________________________
+
+#### `get_error_status`
+
+**Signature:**
+
+```
+def get_error_status(self) -> Dict
+```
+
+**Usage:**
+
+```
+robot.get_error_status()
+```
+
+**Description:**\
+Returns comprehensive error information provided by the manufacturer, including collisions, emergency events, and other error details.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type | Description                                                |
+| ----------- | ---------------------------------------------------------- |
+| `dict`      | A dictionary containing error status and alarm information |
+
+**Example Output:**
+
+```
+[True,
+ {'alarm': {'alarm_code': '', 'alarm_description': ''},
+  'collision_detected': False,
+  'drive_error': False,
+  'emergency': False,
+  'joint_limit': False,
+  'not_following': False,
+  'processing_overload': False,
+  'safe_guard': False,
+  'self_collision': False,
+  'total_error': False}]
+```
+
+______________________________________________________________________
+
+#### `get_alarm`
+
+**Signature:**
+
+```
+def get_alarm(self) -> Dict
+```
+
+**Usage:**
+
+```
+robot.get_alarm()
+```
+
+**Description:**\
+Returns the most recent alarm code and its description provided by the manufacturer.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type | Description                                                     |
+| ----------- | --------------------------------------------------------------- |
+| `dict`      | A dictionary containing the last alarm code and its description |
+
+**Example Output:**
+
+```
+[True, {'alarm_code': '', 'alarm_description': ''}]
+```
+
+______________________________________________________________________
+
+#### `reset_trigger`
+
+**Signature:**
+
+```
+def reset_trigger(self) -> bool
+```
+
+**Usage:**
+
+```
+robot.reset_trigger()
+```
+
+**Description:**\
+Clears errors caused by conditions such as an emergency stop or a collision.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type | Description                                                                                                                              |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `bool`      | Returns True if the command is successfully issued and False if it fails (this does not indicate whether the error was actually cleared) |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+### B. Operational mode
+
+#### `get_operational_mode`
+
+**Signature:**
+
+```
+def get_operational_mode(self) -> str
+```
+
+**Usage:**
+
+```
+robot.get_operational_mode()
+```
+
+**Description:**\
+Returns the current operation mode.\
+Returns "AUTO" for automatic mode and "MANUAL" for manual mode.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type | Description            |
+| ----------- | ---------------------- |
+| `str`       | `"AUTO"` or `"MANUAL"` |
+
+**Example Output:**
+
+```
+[True, 'AUTO']
+```
+
+______________________________________________________________________
+
+#### `set_operational_mode`
+
+**Signature:**
+
+```
+def set_operational_mode(self, *, operational_mode: str) -> bool
+```
+
+**Usage:**
+
+```
+robot.set_operational_mode(operational_mode='AUTO')
+```
+
+**Description:**\
+Sets the robot’s operation mode. In MANUAL mode, the TCP speed is limited to 250 mm/sec.
+
+**Parameters:**
+
+| Parameter          | Type  | Description            |
+| ------------------ | ----- | ---------------------- |
+| `operational_mode` | `str` | `"AUTO"` or `"MANUAL"` |
+
+**Return Value:**
+
+| Return Type | Description    |
+| ----------- | -------------- |
+| `bool`      | Returns `True` |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `set_direct_teaching_on_off`
+
+**Signature:**
+
+```
+def set_direct_teaching_on_off(self, state: bool) -> bool
+```
+
+**Usage:**
+
+```
+robot.set_direct_teaching_on_off(state=True)
+```
+
+**Description:**\
+Used to switch to direct teaching mode.\
+If `state` is `True`, the robot switches to direct teaching mode; if `False`, it switches to position control mode.
+
+**Parameters:**
+
+| Parameter | Type   | Description                                                                      |
+| --------- | ------ | -------------------------------------------------------------------------------- |
+| `state`   | `bool` | `True`: switch to direct teaching mode, `False`: switch to position control mode |
+
+**Return Value:**
+
+| Return Type      | Description    |
+| ---------------- | -------------- |
+| `bool` or `None` | Returns `True` |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+### C. Collision Detection
+
+#### `set_collision_detection_sensitivity`
+
+**Signature:**
+
+```
+def set_collision_detection_sensitivity(self, *, sensitivity: float) -> bool
+```
+
+**Usage:**
+
+```
+robot.set_collision_detection_sensitivity(sensitivity=100)
+```
+
+**Description:**\
+Sets the collision detection sensitivity to a value between 0 and 100.
+
+**Parameters:**
+
+| Parameter     | Type    | Description                                  |
+| ------------- | ------- | -------------------------------------------- |
+| `sensitivity` | `float` | 0 (very insensitive) to 100 (very sensitive) |
+
+**Return Value:**
+
+| Return Type | Description    |
+| ----------- | -------------- |
+| `bool`      | Returns `True` |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `set_post_collision_mode`
+
+**Signature:**
+
+```
+def set_post_collision_mode(self, *, mode: int) -> bool
+```
+
+**Usage:**
+
+```
+robot.set_post_collision_mode(mode=2)
+```
+
+**Description:**\
+Sets the mode the robot will switch to when a collision occurs.
+
+- `0` : Servo Off (motor power off)
+- `1` : Free Drive (free drive mode)
+- `2` : Pause (pause at the current state)
+
+**Parameters:**
+
+| Parameter | Type  | Description                             |
+| --------- | ----- | --------------------------------------- |
+| `mode`    | `int` | Post-collision operation mode (0, 1, 2) |
+
+**Return Value:**
+
+| Return Type | Description                        |
+| ----------- | ---------------------------------- |
+| `bool`      | Whether the setting was successful |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `get_collision_joint_status`
+
+**Signature:**
+
+```
+def get_collision_joint_status(self) -> list[int]
+```
+
+**Usage:**
+
+```
+robot.get_collision_joint_status()
+```
+
+**Description:**\
+Returns the collision status of each joint. Each element indicates 0 (normal) or 1 (collision).
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type | Description                                                 |
+| ----------- | ----------------------------------------------------------- |
+| `list[int]` | Collision status for each joint (0 = normal, 1 = collision) |
+
+**Example Output:**
+
+```
+[True, [0, 0, 0, 0, 0, 0, 0]]
+# Example: collision detected on joint 2
+[True, [0, 0, 1, 0, 0, 0, 0]]
+```
+
+______________________________________________________________________
+
+#### `reset_collision_state`
+
+**Signature:**
+
+```
+def reset_collision_state(self) -> bool
+```
+
+**Usage:**
+
+```
+robot.reset_collision_state()
+```
+
+**Description:**\
+Resets the collision detection status. After this call, the values returned by `get_collision_joint_status` are reset to 0.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type | Description                      |
+| ----------- | -------------------------------- |
+| `bool`      | Whether the reset was successful |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+### D. Movement and Control
+
+#### `set_servo_on_off`
+
+**Signature:**
+
+```
+def set_servo_on_off(self, *, state: bool) -> bool
+```
+
+**Usage:**
+
+```
+robot.set_servo_on_off(state=True)
+```
+
+**Description:**\
+Turns the motor power on or off.
+
+**Parameters:**
+
+| Parameter | Type | Description                           |
+| --------- | ---- | ------------------------------------- |
+| `state`   | bool | `True`: power on, `False`: power off. |
+
+**Return Value:**
+
+| Return Type | Description    |
+| ----------- | -------------- |
+| `bool`      | Returns `True` |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `stop`
+
+**Signature:**
+
+```
+def stop(self, *, ramp_time: float = -1) -> bool
+```
+
+**Usage:**
+
+```
+robot.stop()
+```
+
+**Description:**\
+Stops the motion currently in progress. `ramp_time` is the deceleration time, and the robot switches to manual mode after stopping.
+
+**Parameters:**
+
+| Parameter   | Type    | Description       | Default Value |
+| ----------- | ------- | ----------------- | ------------- |
+| `ramp_time` | `float` | Deceleration time | -1            |
+
+**Return Value:**
+
+| Return Type | Description    |
+| ----------- | -------------- |
+| `bool`      | Returns `True` |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `pause`
+
+**Signature:**
+
+```
+def pause(self, *, ramp_time: float = -1) -> bool
+```
+
+**Usage:**
+
+```
+robot.pause()
+```
+
+**Description:**\
+Pauses the current motion.
+
+**Parameters:**
+
+| Parameter   | Type    | Description       | Default Value |
+| ----------- | ------- | ----------------- | ------------- |
+| `ramp_time` | `float` | Deceleration time | -1            |
+
+**Return Value:**
+
+| Return Type | Description    |
+| ----------- | -------------- |
+| `bool`      | Returns `True` |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `resume`
+
+**Signature:**
+
+```
+def resume(self, *, ramp_time: float = -1) -> bool
+```
+
+**Usage:**
+
+```
+robot.resume()
+```
+
+**Description:**\
+Resumes a paused motion.
+
+**Parameters:**
+
+| Parameter   | Type    | Description             | Default Value |
+| ----------- | ------- | ----------------------- | ------------- |
+| `ramp_time` | `float` | Time required to resume | -1            |
+
+**Return Value:**
+
+| Return Type | Description    |
+| ----------- | -------------- |
+| `bool`      | Returns `True` |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `move_jog`
+
+**Signature:**
+
+```
+def move_jog(self, *, mode: int, type: int, index: int, direction: int, speed_level: int) -> bool
+```
+
+**Usage:**
+
+```
+robot.move_jog(mode=0, type=0, index=5, direction=-1, speed_level=1)
+```
+
+**Description:**\
+A jog function with the following parameters:
+
+- `mode`: 0 = Joint jog, 1 = Task jog (base coordinate frame), 2 = Task jog (tool coordinate frame)
+- `type`: 0 = Continuous jog, 1 = Tick jog
+- `index`: 0–5 for joint jog, or one of [x, y, z, rx, ry, rz] for task jog
+- `direction`: 1 = positive direction, -1 = negative direction
+- `speed_level`: 1–10 (speed level) When used, the robot switches to manual mode, and returns True on success.
+
+**Parameters:**
+
+| Parameter     | Type  | Description                                                                    |
+| ------------- | ----- | ------------------------------------------------------------------------------ |
+| `mode`        | `int` | 0: Joint jog, 1: Task jog (base), 2: Task jog (tool)                           |
+| `type`        | `int` | 0: Continuous jog, 1: Tick jog                                                 |
+| `index`       | `int` | Joint number (0–5) for joint jog, or one of [x, y, z, rx, ry, rz] for task jog |
+| `direction`   | `int` | 1: Positive direction, -1: Negative direction                                  |
+| `speed_level` | `int` | 1–10 (speed level)                                                             |
+
+**Return Value:**
+
+| Return Type | Description                                                 |
+| ----------- | ----------------------------------------------------------- |
+| `bool`      | Returns `True` if the command succeeds, `False` if it fails |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `move_home`
+
+**Signature:**
+
+```
+def move_home(self) -> bool
+```
+
+**Usage:**
+
+```
+robot.move_home()
+```
+
+**Description:**\
+Moves the robot to its home pose. The robot moves using the move_joint command to the default pose specified in Motion Studio.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type | Description    |
+| ----------- | -------------- |
+| `bool`      | Returns `True` |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `move_joint`
+
+**Signature:**
+
+```
+def move_joint(self, *, waypoints: list[dict]) -> tuple[bool, float]
+```
+
+**Usage:**
+
+```
+robot.move_joint(waypoints=[
+    {'q': [0, 0, 1.0], 'vel': 0.5, 'acc': 0.5, 'radius': 0.0},
+    {'q': [0, -1, math.pi/2.0], 'vel': 0.5, 'acc': 0.5, 'radius': 0.0}
+])
+```
+
+**Description:**\
+Moves sequentially through waypoints using a joint command. Each waypoint consists of q (joint angles, rad), vel (velocity, rad/sec), acc (acceleration, rad/sec²), and radius (blending radius).
+
+**Parameters:**
+
+| Parameter   | Type         | Description                                                                                             |
+| ----------- | ------------ | ------------------------------------------------------------------------------------------------------- |
+| `waypoints` | `list[dict]` | A list of waypoint dictionaries. Each dict: `{'q': [...], 'vel': float, 'acc': float, 'radius': float}` |
+
+**Return Value:**
+
+| Return Type | Description                                                 |
+| ----------- | ----------------------------------------------------------- |
+| `bool`      | Returns `True` if the command succeeds, `False` if it fails |
+
+**Example Output:**
+
+```
+[True, (True, 0.0)]
+```
+
+______________________________________________________________________
+
+#### `move_linear`
+
+**Signature:**
+
+```
+def move_linear(self, *, waypoints: list[dict]) -> tuple[bool, float]
+```
+
+**Usage:**
+
+```
+robot.set_ignore_orientation_for_ik_on_off_state(state=True) # Solves inverse kinematics while ignoring orientation.
+
+robot.move_linear(waypoints=[
+    {'pose': [0.3, 0.2, 0.3, 0, 0, 0], 'vel': 0.1, 'acc': 0.1, 'radius': 0.01},
+    {'pose': [0.4, 0.3, 0.3, 0, 0, 0], 'vel': 0.1, 'acc': 0.1, 'radius': 0.01},
+    {'pose': [0.3, 0.1, 0.3, 0, 0, 0], 'vel': 0.1, 'acc': 0.1, 'radius': 0.0}
+])
+```
+
+**Description:**\
+Moves sequentially through waypoints along a linear path using a linear command. `pose` is specified as `[x, y, z, rx, ry, rz]` (m, rad).
+
+**Parameters:**
+
+| Parameter   | Type         | Description                                                                                                |
+| ----------- | ------------ | ---------------------------------------------------------------------------------------------------------- |
+| `waypoints` | `list[dict]` | A list of waypoint dictionaries. Each dict: `{'pose': [...], 'vel': float, 'acc': float, 'radius': float}` |
+
+**Return Value:**
+
+| Return Type | Description                                                 |
+| ----------- | ----------------------------------------------------------- |
+| `bool`      | Returns `True` if the command succeeds, `False` if it fails |
+
+**Example Output:**
+
+```
+[True, (True, 0.0)]
+```
+
+______________________________________________________________________
+
+#### `move_circle`
+
+**Signature:**
+
+```
+def move_circle(
+    self,
+    *,
+    pose: list[float],
+    via_position: list[float],
+    arc_angle: float = -1,
+    orientation_fix: bool = False,
+    vel: float = -1,
+    acc: float = -1
+) -> tuple[bool, float]
+```
+
+**Usage:**
+
+```
+robot.move_circle(
+    pose=[0.2, 0.2, 0.4, 0, 0.0, 0],
+    via_position=[0.3, 0.3, 0.3],
+    arc_angle=-1,
+    orientation_fix=True,
+    vel=0.1,
+    acc=0.1
+)
+```
+
+**Description:**\
+Starting from the current position, performs an arc motion that passes through a specified via position and reaches the final pose.
+
+- If `arc_angle` is negative, the robot moves to the target pose and then stops.
+- If `arc_angle` is greater than 0, the robot rotates by the specified angle.
+- If `orientation_fix` is `True`, the starting orientation is fixed; if `False`, the orientation is interpolated and rotated.
+
+**Parameters:**
+
+| Parameter         | Type          | Description                                                                                                                                 |
+| ----------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pose`            | `list[float]` | Final target pose `[x, y, z, rx, ry, rz]` (m, rad)                                                                                          |
+| `via_position`    | `list[float]` | Via position `[x, y, z]` (m)                                                                                                                |
+| `arc_angle`       | `float`       | Arc angle (rad), default is -1 (a negative value such as -1 means the robot draws an arc through the via position to reach the target pose) |
+| `orientation_fix` | `bool`        | `True`: fix the starting orientation, `False`: interpolate and rotate                                                                       |
+| `vel`             | `float`       | Velocity (m/sec)                                                                                                                            |
+| `acc`             | `float`       | Acceleration (m/sec²)                                                                                                                       |
+
+**Return Value:**
+
+| Return Type | Description                                   |
+| ----------- | --------------------------------------------- |
+| `bool`      | Returns `True` on success, `False` on failure |
+
+**Example Output:**
+
+```
+[True, (True, 0.0)]
+```
+
+______________________________________________________________________
+
+#### `check_finish`
+
+**Signature:**
+
+```
+def check_finish(self, *, finish_mode: str = 'FINE') -> bool
+```
+
+**Usage:**
+
+```
+robot.check_finish()
+```
+
+**Description:**\
+Checks whether the current motion has reached its target.
+
+**Parameters:**
+
+| Parameter     | Type  | Description                                                                                                                                                             |
+| ------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `finish_mode` | `str` | `'FINE'`: Checks whether the robot has actually reached the target position based on encoder values. `'ROUGH'`: Returns `True` once the planned trajectory is completed |
+
+**Return Value:**
+
+| Return Type | Description                                                      |
+| ----------- | ---------------------------------------------------------------- |
+| `bool`      | Returns `True` if the target has been reached, `False` otherwise |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `set_feed_rate`
+
+**Signature:**
+
+```
+def set_feed_rate(self, *, feed_rate: float) -> bool
+```
+
+**Usage:**
+
+```
+robot.set_feed_rate(feed_rate=0.5)
+```
+
+**Description:**\
+Sets the feed rate (speed ratio) (0.1 ≤ feed_rate ≤ 1.5 ) It serves the same function as the feed rate adjustment slider on the web interface and is applied starting from subsequent commands.
+
+**Parameters:**
+
+| Parameter | Type    | Description           |
+| --------- | ------- | --------------------- |
+| feed_rate | `float` | 0.1 ≤ feed_rate ≤ 1.5 |
+
+**Return Value:**
+
+| Return Type | Description                                   |
+| ----------- | --------------------------------------------- |
+| `bool`      | Returns `True` on success, `False` on failure |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `get_feed_rate`
+
+**Signature:**
+
+```
+def get_feed_rate(self) -> Union[float, None]
+```
+
+**Usage:**
+
+```
+robot.get_feed_rate()
+```
+
+**Description:**\
+Returns the currently configured feed rate value.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type       | Description             |
+| ----------------- | ----------------------- |
+| `float` or *None* | Current feed rate value |
+
+**Example Output:**
+
+```
+[True, 0.5]
+```
+
+______________________________________________________________________
+
+### E. Program Execution
+
+#### `execute_internal_program`
+
+**Signature:**
+
+```
+def execute_internal_program(self, *, program_id: str) -> bool
+```
+
+**Usage:**
+
+```
+robot.execute_internal_program(program_id='default_script')
+```
+
+**Description:**\
+Executes a program on the web interface. Be careful: if `program_id` contains whitespace characters, it may be interpreted as a different name.
+
+**Parameters:**
+
+| Parameter    | Type  | Description                     |
+| ------------ | ----- | ------------------------------- |
+| `program_id` | `str` | Title of the program to execute |
+
+**Return Value:**
+
+| Return Type | Description                                   |
+| ----------- | --------------------------------------------- |
+| `bool`      | Returns `True` on success, `False` on failure |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `stop_executing_internal_program`
+
+**Signature:**
+
+```
+def stop_executing_internal_program(self) -> bool
+```
+
+**Usage:**
+
+```
+robot.stop_executing_internal_program()
+```
+
+**Description:**\
+Stops the internal program that is currently running.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type | Description                          |
+| ----------- | ------------------------------------ |
+| `bool`      | Returns True if the command succeeds |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+### F. Joint and Pose Status
+
+#### `get_trajectory_status`
+
+**Signature:**
+
+```
+def get_trajectory_status(self) -> Dict
+```
+
+**Usage:**
+
+```
+robot.get_trajectory_status()
+```
+
+**Description:**\
+Returns a dictionary containing joint and task status information.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type | Description                                                                             |
+| ----------- | --------------------------------------------------------------------------------------- |
+| `dict`      | A dictionary that includes state information such as joints, pose, velocity, and torque |
+
+**Example Output:**
+
+```
+[True,
+ {'actual_joint_effort': [-1.0968292951583862,
+                          -51.081275939941406,
+                          -45.3602180480957,
+                          4.267107009887695,
+                          -1.883137583732605,
+                          -0.9523519277572632,
+                          0.0],
+  'actual_joint_position': [0.5585400483113837,
+                            0.00565151755594642,
+                            1.4713047563692259,
+                            -0.0005265977459574519,
+                            1.3927553526495569,
+                            0.5563672084675018,
+                            0.0],
+  'actual_joint_velocity': [-0.15509339720423812,
+                            -0.0005539124095640995,
+                            -0.13436095443408028,
+                            -0.0,
+                            -0.1067753992308215,
+                            -0.14942199592583263,
+                            0.0],
+  'actual_pose': [0.5306729125976563,
+                  0.3697042236328125,
+                  0.5142694702148437,
+                  0.0009823458193079307,
+                  2.9034452644463578,
+                  0.209994957089481],
+  'actual_twist': [0.11467050170898438,
+                   -0.04673583221435547,
+                   0.09596857452392578,
+                   0.09351894066084204,
+                   -0.2264775160767786,
+                   -0.011254475074188227],
+  'actual_wrench': [4.989142894744873,
+                    7.498985290527344,
+                    4.928271770477295,
+                    -2.98199725151062,
+                    1.9668713808059692,
+                    -1.2975391149520874],
+  'collision_joint_status': [],
+  'feed_rate': 1.0,
+  'joint_temperature': [-273.1499938964844,
+                        -273.1499938964844,
+                        -273.1499938964844,
+                        -273.1499938964844,
+                        -273.1499938964844,
+                        -273.1499938964844],
+  'residual_effort': [0.8374617099761963,
+                      3.030996799468994,
+                      -2.037428140640259,
+                      -0.42755478620529175,
+                      0.2849666178226471,
+                      0.8491820693016052,
+                      0.0],
+  'target_joint_effort': [-0.0006173491710796952,
+                          -48.9547119140625,
+                          -42.57754898071289,
+                          3.9992575645446777,
+                          0.5115765333175659,
+                          0.04202323779463768,
+                          0.0],
+  'target_joint_position': [0.5576234881327193,
+                            0.005693802000183883,
+                            1.470586368665177,
+                            -0.0005339404243809096,
+                            1.3921602693039785,
+                            0.5555522811739375,
+                            0.0],
+  'target_joint_velocity': [-0.15382716397444632,
+                            -0.0015707040628272875,
+                            -0.12981693582413256,
+                            0.00014729390681101397,
+                            -0.1081821391752502,
+                            -0.15325579940732664,
+                            0.0],
+  'target_pose': [0.5312263793945312,
+                  0.3694648742675781,
+                  0.5146617431640625,
+                  0.0011285743791562448,
+                  2.902426837258773,
+                  0.21047647170812725],
+  'target_twist': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+  'target_wrench': [],
+  'time_stamp': 1739615796.9633026}]
+```
+
+______________________________________________________________________
+
+#### `get_actual_joint_velocity_utilization`
+
+**Signature:**
+
+```
+def get_actual_joint_velocity_utilization(self) -> list[float]
+```
+
+**Usage:**
+
+```
+robot.get_actual_joint_velocity_utilization()
+```
+
+**Description:**\
+Returns the ratio of the current speed of each joint relative to its maximum speed.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type   | Description                                                    |
+| ------------- | -------------------------------------------------------------- |
+| `list[float]` | A list of joint speed utilization ratios. (ex: [-0.0727, ...]) |
+
+**Example Output:**
+
+```
+[True,
+ [-0.0727253278096517,
+  -0.0003424342100818952,
+  -0.041764473915100096,
+  -0.0,
+  -0.027298683590359158,
+  -0.0391118409898546]]
+```
+
+______________________________________________________________________
+
+#### `get_actual_joint_position`
+
+**Signature:**
+
+```
+def get_actual_joint_position(self) -> Union[list[float], None]
+```
+
+**Usage:**
+
+```
+robot.get_actual_joint_position()
+```
+
+**Description:**\
+Returns the current actual angle (rad) of each joint (the first six joints are used).
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                      |
+| ----------------------- | -------------------------------- |
+| `list[float]` or *None* | A list of joint angles (radians) |
+
+**Example Output:**
+
+```
+[True,
+ [0.5563801913778158,
+  0.005630928511917395,
+  1.4695007310468062,
+  -0.0005240696284607344,
+  1.391253063478643,
+  0.5542385105186878,
+  0.0]]
+```
+
+______________________________________________________________________
+
+#### `get_actual_joint_velocity`
+
+**Signature:**
+
+```
+def get_actual_joint_velocity(self) -> Union[list[float], None]
+```
+
+**Usage:**
+
+```
+robot.get_actual_joint_velocity()
+```
+
+**Description:**\
+Returns the actual velocity (rad/sec) of each joint.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                              |
+| ----------------------- | ---------------------------------------- |
+| `list[float]` or *None* | A list of joint velocities (radians/sec) |
+
+**Example Output:**
+
+```
+[True,
+ [-0.15476, -0.000773, -0.13366, 2.58e-06, -0.10626, -0.15581, 0.0]]
+```
+
+______________________________________________________________________
+
+#### `get_actual_joint_effort`
+
+**Signature:**
+
+```
+def get_actual_joint_effort(self) -> Union[list[float], None]
+```
+
+**Usage:**
+
+```
+robot.get_actual_joint_effort()
+```
+
+**Description:**\
+Returns the torque applied to each joint (Nm) (control torque).
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                  |
+| ----------------------- | ---------------------------- |
+| `list[float]` or *None* | A list of joint torques (Nm) |
+
+**Example Output:**
+
+```
+[True,
+ [-0.40564, -50.26886, -44.47928, 4.25959, -1.94794, -1.00433, 0.0]]
+```
+
+______________________________________________________________________
+
+#### `get_residual_effort`
+
+**Signature:**
+
+```
+def get_residual_effort(self) -> Union[list[float], None]
+```
+
+**Usage:**
+
+```
+robot.get_residual_effort()
+```
+
+**Description:**\
+Returns the external torque acting on each joint (Nm).
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                     |
+| ----------------------- | ------------------------------- |
+| `list[float]` or *None* | A list of external torques (Nm) |
+
+**Example Output:**
+
+```
+[True,
+ [0.69302, 2.92925, -2.20712, -0.43450, 0.25531, 0.84002, 0.0]]
+```
+
+______________________________________________________________________
+
+#### `get_actual_pose`
+
+**Signature:**
+
+```
+def get_actual_pose(self) -> Union[list[float], None]
+```
+
+**Usage:**
+
+```
+robot.get_actual_pose()
+```
+
+**Description:**\
+Returns the current TCP pose `[x, y, z, rx, ry, rz]` (m, rad).\
+(Note: the rotation convention is not ZYZ; it uses the rotation vector representation.)
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                                |
+| ----------------------- | ------------------------------------------ |
+| `list[float]` or *None* | TA list representing the TCP pose (m, rad) |
+
+**Example Output:**
+
+```
+[True,
+ [0.53338, 0.36857, 0.51652, 0.0009746, 2.89784, 0.21278]]
+```
+
+______________________________________________________________________
+
+#### `get_actual_twist`
+
+**Signature:**
+
+```
+def get_actual_twist(self) -> Union[list[float], None]
+```
+
+**Usage:**
+
+```
+robot.get_actual_twist()
+```
+
+**Description:**\
+Returns the current TCP twist `[vel_x, vel_y, vel_z, vel_rx, vel_ry, vel_rz]` (m/sec, rad/sec).
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                                        |
+| ----------------------- | -------------------------------------------------- |
+| `list[float]` or *None* | A list representing the TCP twist (m/sec, rad/sec) |
+
+**Example Output:**
+
+```
+[True,
+ [0.11384, -0.04760, 0.09602, 0.08997, -0.22732, -0.00501]]
+```
+
+______________________________________________________________________
+
+#### `get_actual_wrench`
+
+**Signature:**
+
+```
+def get_actual_wrench(self) -> Union[list[float], None]
+```
+
+**Usage:**
+
+```
+robot.get_actual_wrench()
+```
+
+**Description:**\
+Returns the force/torque acting on the TCP in the base coordinate frame (N, Nm).
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                                      |
+| ----------------------- | ------------------------------------------------ |
+| `list[float]` or *None* | A list representing the TCP force/torque (N, Nm) |
+
+**Example Output:**
+
+```
+[True,
+ [5.12109, 7.16200, 5.31352, -2.89485, 2.06011, -1.27893]]
+```
+
+______________________________________________________________________
+
+#### `get_actual_tcp_wrench`
+
+**Signature:**
+
+```
+def get_actual_tcp_wrench(self) -> Union[list[list[float], float], None]
+```
+
+**Usage:**
+
+```
+robot.get_actual_tcp_wrench()
+```
+
+**Description:**\
+Returns the force/torque acting on the TCP in the tool coordinate frame along with a timestamp.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                        |
+| ----------------------- | ---------------------------------- |
+| `list[float]` or *None* | [TCP force/torque list, timestamp] |
+
+**Example Output:**
+
+```
+[True,
+ [[-5.86882, 8.02504, -2.71073, 3.23542, 1.82216, 0.85161],
+  1739615797.0013]]
+```
+
+______________________________________________________________________
+
+#### `get_target_joint_position`
+
+**Signature:**
+
+```
+def get_target_joint_position(self) -> Union[list[float], None]
+```
+
+**Usage:**
+
+```
+robot.get_target_joint_position()
+```
+
+**Description:**\
+Returns the target joint angles (rad).
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                             |
+| ----------------------- | --------------------------------------- |
+| `list[float]` or *None* | A list of target joint angles (radians) |
+
+**Example Output:**
+
+```
+[True,
+ [0.55239, 0.00564, 1.46617, -0.0005289, 1.38848, 0.55034, 0.0]]
+```
+
+______________________________________________________________________
+
+#### `get_target_joint_velocity`
+
+**Signature:**
+
+```
+def get_target_joint_velocity(self) -> Union[list[float], None]
+```
+
+**Usage:**
+
+```
+robot.get_target_joint_velocity()
+```
+
+**Description:**\
+Returns the target joint velocities (rad/sec).
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                                 |
+| ----------------------- | ------------------------------------------- |
+| `list[float]` or *None* | A list of target joint velocities (rad/sec) |
+
+**Example Output:**
+
+```
+[True,
+ [-0.15383, -0.0015707, -0.12982, 0.0001473, -0.10818, -0.15326, 0.0]]
+```
+
+______________________________________________________________________
+
+#### `get_target_joint_effort`
+
+**Signature:**
+
+```
+def get_target_joint_effort(self) -> Union[list[float], None]
+```
+
+**Usage:**
+
+```
+robot.get_target_joint_effort()
+```
+
+**Description:**\
+Returns the target joint torques (Nm).
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                         |
+| ----------------------- | ----------------------------------- |
+| `list[float]` or *None* | A list of target joint torques (Nm) |
+
+**Example Output:**
+
+```
+[True,
+ [-0.00061735, -48.95471, -42.57755, 3.99926, 0.51158, 0.042023, 0.0]]
+```
+
+______________________________________________________________________
+
+#### `get_target_pose`
+
+**Signature:**
+
+```
+def get_target_pose(self) -> Union[list[float], None]
+```
+
+**Usage:**
+
+```
+robot.get_target_pose()
+```
+
+**Description:**\
+Returns the target TCP pose [x, y, z, rx, ry, rz] (m, rad).
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                                      |
+| ----------------------- | ------------------------------------------------ |
+| `list[float]` or *None* | A list representing the target TCP pose (m, rad) |
+
+**Example Output:**
+
+```
+[True,
+ [0.53619, 0.36737, 0.51881, 0.0011658, 2.89209, 0.21556]]
+```
+
+______________________________________________________________________
+
+#### `get_target_twist`
+
+**Signature:**
+
+```
+def get_target_twist(self) -> Union[list[float], None]
+```
+
+**Usage:**
+
+```
+robot.get_target_twist()
+```
+
+**Description:**\
+Returns the target TCP twist `[vel_x, vel_y, vel_z, vel_rx, vel_ry, vel_rz]` (m/sec, rad/sec).
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                                               |
+| ----------------------- | --------------------------------------------------------- |
+| `list[float]` or *None* | A list representing the target TCP twist (m/sec, rad/sec) |
+
+**Example Output:**
+
+```
+[True, [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
+```
+
+______________________________________________________________________
+
+#### `get_target_wrench`
+
+**Signature:**
+
+```
+def get_target_wrench(self) -> Union[list[float], None]
+```
+
+**Usage:**
+
+```
+robot.get_target_wrench()
+```
+
+**Description:**\
+Returns the target TCP wrench.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                               |
+| ----------------------- | ----------------------------------------- |
+| `list[float]` or *None* | A list representing the target TCP wrench |
+
+**Example Output:**
+
+```
+[True, [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
+```
+
+______________________________________________________________________
+
+#### `get_joint_temperature`
+
+**Signature:**
+
+```
+def get_joint_temperature(self) -> Union[list[float], None]
+```
+
+**Usage:**
+
+```
+robot.get_joint_temperature()
+```
+
+**Description:**\
+Returns the temperature (°C) of each joint.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                       |
+| ----------------------- | --------------------------------- |
+| `list[float]` or *None* | A list of joint temperatures (°C) |
+
+**Example Output:**
+
+```
+[True,
+ [-273.15, -273.15, -273.15, -273.15, -273.15, -273.15]]
+```
+
+______________________________________________________________________
+
+#### `get_default_joint_limit`
+
+**Signature:**
+
+```
+def get_default_joint_limit(self, *, joint_index: int) -> list[float, float]
+```
+
+**Usage:**
+
+```
+robot.get_default_joint_limit(joint_index=0)
+```
+
+**Description:**\
+Returns the system (model) default joint limits. These are **default values** independent of any user-defined limits.
+
+**Parameters:**
+
+| Parameter     | Type  | Description                    |
+| ------------- | ----- | ------------------------------ |
+| `joint_index` | `int` | Joint index (0-based) to query |
+
+**Return Value:**
+
+| Return Type          | Description          |
+| -------------------- | -------------------- |
+| `list[float, float]` | (negative, positive) |
+
+**Example Output:**
+
+```
+[True, [0.0, 0.225]]
+```
+
+______________________________________________________________________
+
+#### `get_user_joint_limit`
+
+**Signature:**
+
+```
+def get_user_joint_limit(self, *, joint_index: int) -> Union[list[float, float], None]
+```
+
+**Usage:**
+
+```
+robot.get_user_joint_limit(joint_index=0)
+```
+
+**Description:**\
+Returns the **user-defined joint limits** set by the user. Returns `None` if no user-defined limits are configured.
+
+**Parameters:**
+
+| Parameter     | Type  | Description                    |
+| ------------- | ----- | ------------------------------ |
+| `joint_index` | `int` | Joint index (0-based) to query |
+
+**Return Value:**
+
+| Return Type                    | Description                    |
+| ------------------------------ | ------------------------------ |
+| `list[float, float]` or *None* | (negative, positive) or *None* |
+
+**Example Output:**
+
+```
+[True, [-2.0, 2.0]]
+# or
+[True, None]
+```
+
+______________________________________________________________________
+
+#### `get_current_joint_limit`
+
+**Signature:**
+
+```
+def get_current_joint_limit(self, *, joint_index: int) -> list[float, float]
+```
+
+**Usage:**
+
+```
+robot.get_current_joint_limit(joint_index=0)
+```
+
+**Description:**\
+Returns the joint limits that are **currently in effect**. If user-defined limits are enabled, the user limits are applied; otherwise, the default limits are used.
+
+**Parameters:**
+
+| Parameter     | Type  | Description                    |
+| ------------- | ----- | ------------------------------ |
+| `joint_index` | `int` | Joint index (0-based) to query |
+
+**Return Value:**
+
+| Return Type          | Description          |
+| -------------------- | -------------------- |
+| `list[float, float]` | (negative, positive) |
+
+**Example Output:**
+
+```
+[True, [0.0, 0.225]]
+```
+
+______________________________________________________________________
+
+#### `set_user_joint_limit`
+
+**Signature:**
+
+```
+def set_user_joint_limit(self, *, joint_index: int, negative_limit: float, positive_limit: float) -> bool
+```
+
+**Usage:**
+
+```
+robot.set_user_joint_limit(joint_index=0, negative_limit=-2.0, positive_limit=2.0)
+```
+
+**Description:**\
+Stores the **user-defined limit values** for a specific joint. **Note:** This only saves the values; to apply them, you must enable them using `set_user_joint_limit_on_off_state(state=True)`.
+
+**Parameters:**
+
+| Parameter        | Type    | Description                  |
+| ---------------- | ------- | ---------------------------- |
+| `joint_index`    | `int`   | Target joint index (0-based) |
+| `negative_limit` | `float` | Negative direction limit     |
+| `positive_limit` | `float` | Positive direction limit     |
+
+**Return Value:**
+
+| Return Type | Description                        |
+| ----------- | ---------------------------------- |
+| `bool`      | Whether the setting was successful |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `set_user_joint_limit_on_off_state`
+
+**Signature:**
+
+```
+def set_user_joint_limit_on_off_state(self, *, state: bool) -> bool
+```
+
+**Usage:**
+
+```
+# 사용자 리밋 적용 활성화
+robot.set_user_joint_limit_on_off_state(state=True)
+```
+
+**Description:**\
+Enables or disables the application of user-defined limits globally. If `True`, the user-defined limits are reflected in `get_current_joint_limit`.
+
+**Parameters:**
+
+| Parameter | Type   | Description               |
+| --------- | ------ | ------------------------- |
+| `state`   | `bool` | Enable state (True/False) |
+
+**Return Value:**
+
+| Return Type | Description                        |
+| ----------- | ---------------------------------- |
+| `bool`      | Whether the setting was successful |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `get_current_user_joint_limit_on_off_state`
+
+**Signature:**
+
+```
+def get_current_user_joint_limit_on_off_state(self) -> Union[bool, None]
+```
+
+**Usage:**
+
+```
+robot.get_current_user_joint_limit_on_off_state()
+```
+
+**Description:**\
+Returns the current user-defined limit application state.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type      | Description                         |
+| ---------------- | ----------------------------------- |
+| `bool` or *None* | Enable state (True/False) or `None` |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+### G. Configuration Changes (TCP, Payload)
+
+#### get_tcp
+
+**Signature:**
+
+```
+def get_tcp(self) -> Union[list[float], None]
+```
+
+**Usage:**
+
+```
+robot.get_tcp()
+```
+
+**Description:**\
+Returns the currently set TCP offset values. The return value is a list in the form `[x, y, z, rx, ry, rz]` (units: m, rad), where the orientation is represented using the rotation vector convention.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type             | Description                                         |
+| ----------------------- | --------------------------------------------------- |
+| `list[float]` or *None* | A list of TCP offset values ([x, y, z, rx, ry, rz]) |
+
+**Example Output:**
+
+```
+[True, [0.0, 0.0, 0.2, 0.0, 0.0, 0.0]]
+```
+
+______________________________________________________________________
+
+#### `get_payload`
+
+**Signature:**
+
+```
+def get_payload(self) -> Union[list[float, list[float], list[float]], None]
+```
+
+**Usage:**
+
+```
+robot.get_payload()
+```
+
+**Description:**\
+Returns the currently configured payload information. The return value is in the form `[mass, center_of_mass, inertia]`, where
+
+- mass: kg
+- center_of_mass: [x, y, z] (m)
+- inertia: [Ixx, Iyy, Izz, Ixy, Iyz, Ixz] (kg·m²)
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type                                       | Description                                            |
+| ------------------------------------------------- | ------------------------------------------------------ |
+| `list[float, list[float], list[float]]` or *None* | payload information: `[mass, center_of_mass, inertia]` |
+
+**Example Output:**
+
+```
+[True,
+ [1.7330000400543213,
+  [-0.045, -0.009, 0.085],
+  [0.0038488577120006084,
+   0.0038488577120006084,
+   0.0038488577120006084,
+   0.0,
+   0.0,
+   0.0]]]
+```
+
+______________________________________________________________________
+
+#### `set_tcp`
+
+**Signature:**
+
+```
+def set_tcp(self, *, tcp: list[float]) -> bool
+```
+
+**Usage:**
+
+```
+robot.set_tcp(tcp=[0.0, 0.0, 0.2, math.pi/2.0, 0, 0])
+```
+
+**Description:**\
+Sets the TCP offset with respect to the flange coordinate frame. When providing arguments, the argument name `tcp` must be explicitly specified. The list should be formatted as `[x, y, z, rx, ry, rz]` (units: m, rad). **Note:** This function cannot be used when the servo is turned off in AUTO mode.
+
+**Parameters:**
+
+| Parameter | Type          | Description                      |
+| --------- | ------------- | -------------------------------- |
+| `tcp`     | `list[float]` | `[x, y, z, rx, ry, rz]` (m, rad) |
+
+**Return Value:**
+
+| Return Type | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `bool`      | Returns `True` on success and `False` on failure |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `set_payload`
+
+**Signature:**
+
+```
+def set_payload(self, *, payload: dict) -> bool
+```
+
+**Usage:**
+
+```
+robot.set_payload(payload={'mass': 1.733, 'center_of_mass': [-0.045, 0.009, 0.085], 'inertia': [0, 0, 0, 0, 0, 0]})
+```
+
+**Description:**\
+Sets the payload information
+
+- mass: kg
+- center_of_mass: [x, y, z] (m)
+- inertia: [Ixx, Iyy, Izz, Ixy, Ixz, Iyz] (kg·m²)\
+  **Note:** This function cannot be used when the servo is turned off in AUTO mode.
+
+**Parameters:**
+
+| Parameter | Type   | Description                                                    |
+| --------- | ------ | -------------------------------------------------------------- |
+| `payload` | `dict` | payload information. Keys: `mass`, `center_of_mass`, `inertia` |
+
+**Return Value:**
+
+| Return Type | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `bool`      | Returns `True` on success and `False` on failure |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `set_tcp_with_bank`
+
+**Signature:**
+
+```
+def set_tcp_with_bank(self, *, name: str) -> bool
+```
+
+**Usage:**
+
+```
+robot.set_tcp_with_bank(name='default_tool')
+```
+
+**Description:**\
+Applies the TCP information stored in the Tool tab of the web teaching interface to the robot. This function sets only the TCP and does not modify the payload information.
+
+**Parameters:**
+
+| Parameter | Type  | Description     |
+| --------- | ----- | --------------- |
+| `name`    | `str` | tool bank title |
+
+**Return Value:**
+
+| Return Type | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `bool`      | Returns `True` on success and `False` on failure |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `set_payload_with_bank`
+
+**Signature:**
+
+```
+def set_payload_with_bank(self, *, name: str) -> bool
+```
+
+**Usage:**
+
+```
+robot.set_payload_with_bank(name='default_tool')
+```
+
+**Description:**\
+Applies the payload information stored in the Tool tab of the web teaching interface using the specified index. This function sets only the payload and does not modify the TCP information.
+
+**Parameters:**
+
+| Parameter | Type  | Description     |
+| --------- | ----- | --------------- |
+| `name`    | `str` | tool bank title |
+
+**Return Value:**
+
+| Return Type | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `bool`      | Returns `True` on success and `False` on failure |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+### H. Bank Data Management
+
+#### `get_tcp_bank_data`
+
+**Signature:**
+
+```
+def get_tcp_bank_data(self, *, name: str) -> list[bool, list[str], str, list[float]]
+```
+
+**Usage:**
+
+```
+robot.get_tcp_bank_data(name='default_tool')
+```
+
+**Description:**\
+Loads the TCP information registered in the web teaching interface. The return value is (status, hash tag, description, TCP offset list).
+
+**Parameters:**
+
+| Parameter | Type  | Description                   |
+| --------- | ----- | ----------------------------- |
+| `name`    | `str` | Tool title of the TCP to load |
+
+**Return Value:**
+
+| Return Type                               | Description                                      |
+| ----------------------------------------- | ------------------------------------------------ |
+| `list[bool, list[str], str, list[float]]` | (status, hash tag, description, TCP offset list) |
+
+**Example Output:**
+
+```
+[True, [True, [], '', [0, 0, 0.123, 0, 0, 0]]]
+```
+
+______________________________________________________________________
+
+#### `add_tcp_bank_data`
+
+**Signature:**
+
+```
+def add_tcp_bank_data(self, *, name: str, hashtags: list[str], tcp: list[float], description: str = "") -> bool
+```
+
+**Usage:**
+
+```
+robot.add_tcp_bank_data(
+    name="gripper",
+    hashtags=["endtool", "default"],
+    tcp=[0.0, 0.0, 0.150, 0, 0, 0],
+    description="basic gripper tool"
+)
+```
+
+**Description:**\
+Adds new TCP information to the tool bank in the web teaching interface. **Note:** If a TCP with the same name already exists, this function returns False. To modify an existing TCP, use `update_tcp_bank_data`.
+
+**Parameters:**
+
+| Parameter     | Type          | Description                                            |
+| ------------- | ------------- | ------------------------------------------------------ |
+| `name`        | `str`         | Name of the TCP to save                                |
+| `hashtags`    | `list[str]`   | list of hash tags to associate with the TCP            |
+| `tcp`         | `list[float]` | TCP offset list `[x, y, z, rx, ry, rz]` (m, rad)       |
+| `description` | `str`         | TCP description (optional, default is an empty string) |
+
+**Return Value:**
+
+| Return Type | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `bool`      | Returns `True` on success and `False` on failure |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `update_tcp_bank_data`
+
+**Signature:**
+
+```
+def update_tcp_bank_data(self, *, name: str, hashtags: list[str], tcp: list[float], description: str = "") -> bool
+```
+
+**Usage:**
+
+```
+robot.update_tcp_bank_data(
+    name="gripper",
+    hashtags=["endtool", "v2"],
+    tcp=[0.0, 0.0, 0.180, 0, 0, 0],
+    description="updated gripper tool"
+)
+```
+
+**Description:**\
+Updates an existing registered TCP information.
+
+**Parameters:**
+
+| Parameter     | Type          | Description                                            |
+| ------------- | ------------- | ------------------------------------------------------ |
+| `name`        | `str`         | Name of the TCP to modify                              |
+| `hashtags`    | `list[str]`   | New list of hash tags to apply                         |
+| `tcp`         | `list[float]` | New TCP offset `[x, y, z, rx, ry, rz]` (m, rad)        |
+| `description` | `str`         | New description (optional, default is an empty string) |
+
+**Return Value:**
+
+| Return Type | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `bool`      | Returns `True` on success and `False` on failure |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `remove_tcp_bank_data`
+
+**Signature:**
+
+```
+def remove_tcp_bank_data(self, *, name: str) -> bool
+```
+
+**Usage:**
+
+```
+robot.remove_tcp_bank_data(name="gripper")
+```
+
+**Description:**\
+Deletes the specified TCP from the tool bank in the web teaching interface.
+
+**Parameters:**
+
+| Parameter | Type  | Description               |
+| --------- | ----- | ------------------------- |
+| `name`    | `str` | Name of the TCP to delete |
+
+**Return Value:**
+
+| Return Type | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `bool`      | Returns `True` on success and `False` on failure |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `get_payload_bank_data`
+
+**Signature:**
+
+```
+def get_payload_bank_data(self, *, name: str) -> list[bool, list[str], str, Dict]
+```
+
+**Usage:**
+
+```
+robot.get_payload_bank_data(name="default_tool")
+```
+
+**Description:**\
+Loads the payload information registered in the web teaching interface. The return value is (status, hash tag, description, payload information dictionary).
+
+**Parameters:**
+
+| Parameter | Type  | Description                 |
+| --------- | ----- | --------------------------- |
+| `name`    | `str` | Name of the payload to load |
+
+**Return Value:**
+
+| Return Type                        | Description                                                     |
+| ---------------------------------- | --------------------------------------------------------------- |
+| `list[bool, list[str], str, dict]` | (status, hash tag, description, payload information dictionary) |
+
+**Example Output:**
+
+```
+[True, [True, [], '', {'mass': 0.2, 'center_of_mass': [0.1, -0.01, 0], 'inertia': [0, 0, 0, 0, 0, 0]}]]
+```
+
+______________________________________________________________________
+
+#### `add_payload_bank_data`
+
+**Signature:**
+
+```
+def add_payload_bank_data(self, *, name: str, hashtags: list[str], description: str, payload: dict) -> bool
+```
+
+**Usage:**
+
+```
+robot.add_payload_bank_data(
+    name="vacuum_payload",
+    hashtags=["vacuum", "tool"],
+    description="vacuum tool payload",
+    payload={
+        "mass": 1.2,
+        "center_of_mass": [0, 0, 0.08],
+        "inertia": [0.005, 0, 0, 0.005, 0, 0.005]
+    }
+)
+```
+
+**Description:**\
+Adds new payload information to the Payload bank in the web teaching interface. **Note:** If a payload with the same name already exists, this function returns `False`. To modify an existing payload, use `update_payload_bank_data`.
+
+**Parameters:**
+
+| Parameter     | Type        | Description                                                                                                   |
+| ------------- | ----------- | ------------------------------------------------------------------------------------------------------------- |
+| `name`        | `str`       | Name of the payload to save                                                                                   |
+| `hashtags`    | `list[str]` | list of hash tags to associate with the payload                                                               |
+| `description` | `str`       | Payload description                                                                                           |
+| `payload`     | `dict`      | Payload information `{ "mass": float, "center_of_mass": [x,y,z], "inertia": [ixx, ixy, ixz, iyy, iyz, izz] }` |
+
+**Return Value:**
+
+| Return Type | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `bool`      | Returns `True` on success and `False` on failure |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `update_payload_bank_data`
+
+**Signature:**
+
+```
+def update_payload_bank_data(self, *, name: str, hashtags: list[str], description: str, payload: dict) -> bool
+```
+
+**Usage:**
+
+```
+robot.update_payload_bank_data(
+    name="vacuum_payload",
+    hashtags=["vacuum", "tool", "rev2"],
+    description="updated vacuum tool payload",
+    payload={
+        "mass": 1.3,
+        "center_of_mass": [0, 0, 0.09],
+        "inertia": [0.006, 0, 0, 0.006, 0, 0.006]
+    }
+)
+```
+
+**Description:**\
+Updates existing registered payload information.
+
+**Parameters:**
+
+| Parameter     | Type        | Description                                                                                 |
+| ------------- | ----------- | ------------------------------------------------------------------------------------------- |
+| `name`        | `str`       | Name of the payload to modify                                                               |
+| `hashtags`    | `list[str]` | New list of hash tags to apply                                                              |
+| `description` | `str`       | New description                                                                             |
+| `payload`     | `dict`      | Upated payload information `{ "mass": float, "center_of_mass": [x,y,z], "inertia": [...] }` |
+
+**Return Value:**
+
+| Return Type | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `bool`      | Returns `True` on success and `False` on failure |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `remove_payload_bank_data`
+
+**Signature:**
+
+```
+def remove_payload_bank_data(self, *, name: str) -> bool
+```
+
+**Usage:**
+
+```
+robot.remove_payload_bank_data(name="vacuum_payload")
+```
+
+**Description:**\
+Deletes the specified payload information from the Payload bank in the web teaching interface.
+
+**Parameters:**
+
+| Parameter | Type  | Description                   |
+| --------- | ----- | ----------------------------- |
+| `name`    | `str` | Name of the payload to delete |
+
+**Return Value:**
+
+| Return Type | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `bool`      | Returns `True` on success and `False` on failure |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `get_pose_bank_data`
+
+**Signature:**
+
+```
+def get_pose_bank_data(self, *, name: str) -> list[bool, list[str], str, list[float], list[float]]
+```
+
+**Usage:**
+
+```
+robot.get_pose_bank_data(name="home_pose")
+```
+
+**Description:**\
+Loads the pose information registered in the web teaching interface. The return value is (status, hash tag, description, pose list, joint list).
+
+**Parameters:**
+
+| Parameter | Type  | Description              |
+| --------- | ----- | ------------------------ |
+| `name`    | `str` | Name of the pose to load |
+
+**Return Value:**
+
+| Return Type                                            | Description                                                        |
+| ------------------------------------------------------ | ------------------------------------------------------------------ |
+| `list[bool, list[str], str, list[float], list[float]]` | (status, hash tag, description, [x, y, z, rx, ry, rz], joint list) |
+
+**Example Output:**
+
+```
+[True, [True, [], '', [0.688218505859375, -0.05760165786743164, 0.6952191772460937, 1.209862261852436, 1.2082374332873191, 1.2083641231430755], [0, 0, 1.5707963267948966, 0, 1.5707963267948966, 0, 0]]]
+```
+
+______________________________________________________________________
+
+#### `add_pose_bank_data`
+
+**Signature:**
+
+```
+def add_pose_bank_data(
+    self,
+    *,
+    name: str,
+    hashtags: list[str],
+    description: str,
+    pose: list[float],
+    joint_positions: list[float]
+) -> bool
+```
+
+**Usage:**
+
+```
+robot.add_pose_bank_data(
+    name="pick_pose",
+    hashtags=["pick", "object"],
+    description="pick position",
+    pose=[0.2, 0.1, 0.15, 0, 3.14, 0],
+    joint_positions=[0.1, -1.2, 1.4, 0, 1.57, 0]
+)
+```
+
+**Description:**\
+Adds new pose information to the Pose bank in the web teaching interface. **Note:** If a pose with the same name already exists, this function returns `False`. To modify an existing pose, use `update_pose_bank_data`.
+
+**Parameters:**
+
+| Parameter         | Type          | Description                                    |
+| ----------------- | ------------- | ---------------------------------------------- |
+| `name`            | `str`         | Name of the pose to save                       |
+| `hashtags`        | `list[str]`   | list of hash tags to associate with the pose   |
+| `description`     | `str`         | Pose description                               |
+| `pose`            | `list[float]` | Pose offset `[x, y, z, rx, ry, rz]` (m, rad)   |
+| `joint_positions` | `list[float]` | list of joint values corresponding to the pose |
+
+**Return Value:**
+
+| Return Type | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `bool`      | Returns `True` on success and `False` on failure |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `update_pose_bank_data`
+
+**Signature:**
+
+```
+def update_pose_bank_data(
+    self,
+    *,
+    name: str,
+    hashtags: list[str],
+    description: str,
+    pose: list[float],
+    joint_positions: list[float]
+) -> bool
+```
+
+**Usage:**
+
+```
+robot.update_pose_bank_data(
+    name="pick_pose",
+    hashtags=["pick", "object", "rev2"],
+    description="updated pick pose",
+    pose=[0.25, 0.1, 0.18, 0, 3.14, 0],
+    joint_positions=[0.15, -1.25, 1.45, 0, 1.57, 0]
+)
+```
+
+**Description:**\
+Updates existing registered pose information.
+
+**Parameters:**
+
+| Parameter         | Type          | Description                                      |
+| ----------------- | ------------- | ------------------------------------------------ |
+| `name`            | `str`         | Name of the pose to modify                       |
+| `hashtags`        | `list[str]`   | New list of hash tags to apply                   |
+| `description`     | `str`         | New description                                  |
+| `pose`            | `list[float]` | New pose offset `[x, y, z, rx, ry, rz]` (m, rad) |
+| `joint_positions` | `list[float]` | New list of joint values to apply                |
+
+**Return Value:**
+
+| Return Type | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `bool`      | Returns `True` on success and `False` on failure |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `remove_pose_bank_data`
+
+**Signature:**
+
+```
+def remove_pose_bank_data(self, *, name: str) -> bool
+```
+
+**Usage:**
+
+```
+robot.remove_pose_bank_data(name="pick_pose")
+```
+
+**Description:**\
+Deletes the specified pose information from the Pose bank in the web teaching interface.
+
+**Parameters:**
+
+| Parameter | Type  | Description                |
+| --------- | ----- | -------------------------- |
+| `name`    | `str` | Name of the pose to delete |
+
+**Return Value:**
+
+| Return Type | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `bool`      | Returns `True` on success and `False` on failure |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+### I. Kinematics Computation
+
+#### `solve_forward_kinematics`
+
+**Signature:**
+
+```
+def solve_forward_kinematics(
+    self,
+    *,
+    target_q: list[float],
+    tcp: list[float] | None = None
+) -> list[bool, list[float] | None]
+```
+
+**Usage:**
+
+```
+robot.solve_forward_kinematics(
+    target_q=[
+        0.7365882795706941,
+        0.2465629272153449,
+        1.2036360278436509
+    ]
+)
+```
+
+**Description:**\
+Computes the TCP pose using the given joint angles (`target_q`). The return value is composed of (calculation success status, TCP pose).
+
+**Parameters:**
+
+| Parameter  | Type          | Description                |
+| ---------- | ------------- | -------------------------- |
+| `target_q` | `list[float]` | Joint angle list (rad)     |
+| `tcp`      | `list[float]` | TCP offset (default: None) |
+
+**Return Value:**
+
+| Return Type               | Description                            |
+| ------------------------- | -------------------------------------- |
+| `list[bool, list[float]]` | (calculation success status, TCP pose) |
+
+**Example Output:**
+
+```
+[True,
+ [True,
+  [0.50103, 0.49837, 0.57559, -0.0043026, -3.14136, -0.0004011]]]
+```
+
+______________________________________________________________________
+
+#### `solve_inverse_kinematics`
+
+**Signature:**
+
+```
+def solve_inverse_kinematics(
+    self,
+    *,
+    target_p: list[float],
+    seed_q: list[float] | None = None,
+    tcp: list[float] | None = None
+) -> list[int, list[float] | None]
+```
+
+**Usage:**
+
+```
+robot.set_ignore_orientation_for_ik_on_off_state(state=True) # Solves inverse kinematics while ignoring orientation.
+robot.solve_inverse_kinematics(
+    target_p=[0.3, 0.3, 0.3, 0, 0, 0],
+    seed_q=[0, 0, 0]
+)
+```
+
+**Description:**\
+Computes the joint angles required to reach the target pose (`target_p`). If `seed_q` is provided as an option, a solution close to it is returned. As with forward kinematics, the TCP argument is not used.
+
+**Parameters:**
+
+| Parameter  | Type          | Description                                  |
+| ---------- | ------------- | -------------------------------------------- |
+| `target_p` | `list[float]` | Target pose `[x, y, z, rx, ry, rz]` (m, rad) |
+| `seed_q`   | `list[float]` | (Optional) Initial joint angles (rad)        |
+| `tcp`      | `list[float]` | (Optional) TCP offset; omit or pass None     |
+
+**Return Value:**
+
+| Return Type              | Description                    |
+| ------------------------ | ------------------------------ |
+| `list[int, list[float]]` | (error code, joint angle list) |
+
+**Example Output:**
+
+```
+[True, 
+[0, [0.014500000000000035, 0.1878823471042462, -1.7235809182862791, 0.0, 0.0, 0.0, 0.0]]]
+```
+
+______________________________________________________________________
+
+### J. TCP and Payload Measurement
+
+#### `calculate_tcp`
+
+**Signature:**
+
+```
+def calculate_tcp(self, *, sample_pose_list: list[list[float]]) -> listlist[bool, list[float], float]
+```
+
+**Usage:**
+
+```
+robot.calculate_tcp(sample_pose_list=[
+    [0.55893, 0.11289, 0.44632, 0.06411, -2.94076, 1.07034],
+    [0.45922, 0.11287, 0.40890, 0.26171, 2.31932, -0.86081],
+    [0.45910, -0.13073, 0.42216, 0.85044, 2.45128, 1.11725]
+])
+```
+
+**Description:**\
+Calculates the TCP offset and error based on multiple sample poses. The sample poses must be pivoted poses measured with a zero TCP (flange coordinate frame).
+
+**Parameters:**
+
+| Parameter          | Type                | Description                                                    |
+| ------------------ | ------------------- | -------------------------------------------------------------- |
+| `sample_pose_list` | `list[list[float]]` | list of sample pose values, each pose: `[x, y, z, rx, ry, rz]` |
+
+**Return Value:**
+
+| Return Type                      | Description                                                |
+| -------------------------------- | ---------------------------------------------------------- |
+| `list[bool, list[float], float]` | (calculation success status, TCP offset list, error value) |
+
+**Example Output:**
+
+```
+[True, [True, [-7.01592e-06, 3.11402e-06, 0.19998], 1.17771e-05]]
+```
+
+______________________________________________________________________
+
+#### `measure_payload_start`
+
+**Signature:**
+
+```
+def measure_payload_start(self) -> bool
+```
+
+**Usage:**
+
+```
+robot.measure_payload_start()
+```
+
+**Description:**\
+Sets the TCP and payload to zero and initializes the measurement buffer for payload measurement. After executing this function, no separate termination command is required.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type | Description    |
+| ----------- | -------------- |
+| `bool`      | Returns `True` |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `append_pose_wrench_sample`
+
+**Signature:**
+
+```
+def append_pose_wrench_sample(self) -> bool
+```
+
+**Usage:**
+
+```
+robot.append_pose_wrench_sample()
+```
+
+**Description:**\
+Adds the current pose and end-effector wrench data to the measurement buffer.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type | Description               |
+| ----------- | ------------------------- |
+| `bool`      | Returns `True` on success |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `remove_pose_wrench_sample`
+
+**Signature:**
+
+```
+def remove_pose_wrench_sample(self) -> bool
+```
+
+**Usage:**
+
+```
+robot.remove_pose_wrench_sample()
+```
+
+**Description:**\
+Removes the most recently added pose–wrench data from the measurement buffer.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type | Description                                 |
+| ----------- | ------------------------------------------- |
+| `bool`      | Returns `True` if the removal is successful |
+
+**Example Output:**
+
+```
+[True, True]
+```
+
+______________________________________________________________________
+
+#### `get_pose_wrench_sample_list`
+
+**Signature:**
+
+```
+def get_pose_wrench_sample_list(self) -> list[float]
+```
+
+**Usage:**
+
+```
+robot.get_pose_wrench_sample_list()
+```
+
+**Description:**\
+Returns the pose–wrench data currently stored in the measurement buffer.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| *None*    |      | N/A         |
+
+**Return Value:**
+
+| Return Type   | Description                       |
+| ------------- | --------------------------------- |
+| `list[float]` | A list of pose–wrench sample data |
+
+**Example Output:**
+
+```
+[True, []]
+```
+
+______________________________________________________________________
+
+#### `calculate_payload`
+
+**Signature:**
+
+```
+def calculate_payload(self, *, sample_pose_wrench_list: Optional[list[float]] = None) -> list[bool, float, list[float]]
+```
+
+**Usage:**
+
+```
+robot.calculate_payload()
+```
+
+**Description:**\
+Calculates the payload based on the internal measurement buffer (or a provided list of pose–wrench samples). The return value is composed of (calculation success status, mass (float), center of mass [x, y, z]).
+
+**Parameters:**
+
+| Parameter                        | Type                   | Description                                                                      |
+| -------------------------------- | ---------------------- | -------------------------------------------------------------------------------- |
+| `sample_pose_wrench_list` (opt.) | `Optional[list[float]` | Pose–wrench sample data list (optional; if omitted, the internal buffer is used) |
+
+**Return Value:**
+
+| Return Type                      | Description                                                                 |
+| -------------------------------- | --------------------------------------------------------------------------- |
+| `list[bool, float, list[float]]` | (calculation success status, mass, center of mass [x, y, z]) (units: kg, m) |
+
+**Example Output:**
+
+```
+[True, [False, 0, [0.0, 0.0, 0.0]]]
+```
+
+______________________________________________________________________
+
+# Understanding Remote Control
+
+```
+flowchart LR
+    subgraph StellarX ["Stellar X Environment"]
+        InternalScript["Script written in<br>Stellar Motion Studio"]
+        APIServer["Stellar X API Server"]
+    end
+
+    ExternalProgram["Python Program<br>(via stellarx_remote)"]
+
+    InternalScript --> APIServer
+    ExternalProgram --> APIServer
+```
+
+## Overview
+
+Within **Stellar Motion Studio**, users can write Python scripts directly in the Motion tab to execute robotic movements. However, this method relies on internal communication confined strictly within the Stellar X device. Because it is isolated from external networks, this internal scripting approach cannot be used when an upper-level (host) controller needs to manage Stellar X alongside other peripheral devices.
+
+## The `stellarx_remote` SDK
+
+To enable external integration, upper-level controllers can utilize **`stellarx_remote`**, an SDK provided by Sodero. This SDK allows external programs to issue Remote Procedure Calls (RPC) seamlessly to the Stellar X system.
+
+You can access the official SDK repository here:\
+🔗 **[Sodero-labs/stellarx_remote on GitHub](https://github.com/Sodero-labs/stellarx_remote)**
+
+### Key Advantages
+
+- **Unified API Experience:** Controlling the robot externally via the SDK feels incredibly familiar. You can call APIs in the exact same manner as you would use the `robot` object within the Motion tab of Stellar Motion Studio, ensuring a smooth transition from internal testing to external control.
+- **Language Independence:** While the official `stellarx_remote` SDK is provided in Python, the underlying architecture handles network communication without any language restrictions. As long as your custom application adheres to the defined communication protocol, you can interface with Stellar X using any programming language of your choice.
+
+# User Guide: Actuator Mapping & Configuration Details
+
+This guide provides a detailed explanation of the Actuator Mapping process, including EtherCAT protocols, transmission theory, and parameter definitions.
+
+## 1. Motor Information
+
+This section defines the physical characteristics of the motor hardware.
+
+- **Source:** Values must be taken directly from the manufacturer's **Specification Sheet**.
+- **Scope:** Enter only the raw motor data here. Gear reducers and transmission elements are configured in a separate "Transmission" step to ensure accurate dynamics modeling.
+
+## 2. EtherCAT Settings (Advanced)
+
+EtherCAT settings define how the controller communicates with the servo driver. Incorrect settings here can lead to initialization failures or erratic motion.
+
+### A. SDO Settings (Initialization Parameters)
+
+SDOs (Service Data Objects) are used for non-real-time configuration, typically during the startup phase.
+
+- **Absolute Encoder Object:** This object is used to clear absolute encoder errors (e.g., after battery replacement). **The method of resetting varies by drive architecture.**
+
+  1. **Atomic Execution Model (Supported via SDO):**
+
+     - **Description:** Standard drives allow the encoder to be reset by writing a single value (e.g., `1`) to a designated SDO Index.
+     - **Action:** Enter the register address here. The system will automatically trigger the reset during initialization.
+
+  1. **Transactional Execution Model (Requires Direct Connection):**
+
+     - **Description:** High-performance drives (e.g., **Synapticon SOMANET**) use a safety handshake protocol (Request → Processing → Response) rather than a simple register write.
+     - **Action:** **Leave the SDO Entry 1 field blank.** Connect directly to the servo drive using the manufacturer's tool to perform the reset.
+
+### B. PDO Mapping (Real-time Data)
+
+PDOs (Process Data Objects) handle periodic, high-speed data exchange.
+
+- **RxPDO (Controller → Driver):** Must include `Control Word`, `Target Position`, `Target Torque`, `Torque Offset`, `Mode of Operation`.
+- **TxPDO (Driver → Controller):** Must include `Status Word`, `Position Actual Value`, `Velocity Actual Value`, `Torque Actual Value`, `Mode of Operation Display`.
+
+> **⚠️ Critical Warning: Verify PDO Mapping Indices** Ensure you use **User-Defined Mapping** indices (e.g., `0x1600`/`0x1A00` for Synapticon). Using "Manufacturer Specific" or reserved areas will result in EtherCAT application errors.
+
+## 3. Transmission System (Actuator-Joint Relationship)
+
+The Position/Velocity commands issued to each **actuator** (motor) are converted through a **linear transformation** before reaching the robot link’s **ideal joint**.
+
+### A. Overview & Terminology
+
+- **1 : 1 Mapping:** Each actuator drives exactly one joint (e.g., Simple 2-Bar Robot).
+- **n : 1 Composite Mapping:** Two or more actuators share one joint (e.g., SCARA Z-axis + Θ4, or Differential Wrists).
+
+*Figure 1: 1:1 Mapping*
+
+*Figure 2: Composite Mapping*
+
+| Term           | Meaning                                       |
+| -------------- | --------------------------------------------- |
+| **Gear ratio** | Input-shaft angle / Output-shaft angle        |
+| **Edge Value** | Conversion coefficient *Actuator i → Joint j* |
+
+### B. How to Calculate Edge Values
+
+The controller computes the joint vector (q) using the matrix (U):
+
+[ q = U \\cdot a ]
+
+*(Where (q) is the joint vector and (a) is the actuator vector)*
+
+#### Case 1: 1 : 1 Mapping (Standard)
+
+1. **Add an edge** connecting Actuator (i) to Joint (i).
+1. **Enter the scale coefficient**:
+   - **Gearbox:** (1 / \\text{Gear Ratio})
+     - *Example:* 1 : 50 gearbox → `1.0 / 50.0 = 0.02`
+   - **Ballscrew:** (\\text{Lead} / (2 \\pi))
+     - *Example:* Lead = 0.020 m → `0.02 / (2π) ≈ 0.0031831`
+1. **Reverse Direction:** If the joint moves opposite to the command, flip the sign (e.g., `-0.02`).
+
+#### Case 2: Composite Mapping (Differential)
+
+For complex mechanisms where multiple motors drive a single axis (like a SCARA Z-axis/Theta combined), you must fill the **Upper-Triangular Matrix**.
+
+**Example Matrix Form:**
+
+```
+      ┌                                     ┐
+      │ 0.02      0        0        0       │
+U  =  │   0     0.02       0        0       │
+      │   0       0     0.00254  0.000254   │
+      │   0       0        0      0.1       │
+      └                                     ┘
+```
+
+This implies:
+
+- `q3` is affected by both `a3` and `a4` (Main lead + Secondary mechanical offset).
+- `q4` is driven by `a4`.
+
+### C. FAQ
+
+- **Q. I have a two-stage gearbox. What do I enter?**
+
+  - A. Multiply the two ratios to get the final ratio, then input `1 / (Final Ratio)`.
+
+- **Q. I’m confused about the sign.**
+
+  - A. If the joint moves opposite to the command, simply flip the edge’s sign to negative.
+
+# User Guide: Robot Configuration Details
+
+This guide provides in-depth explanations of the parameters and theories used in the Robot Creation tool. It is intended to supplement the basic Tutorial.
+
+______________________________________________________________________
+
+## 1. Dynamics Settings
+
+When configuring **Dynamics**, you are defining the physical properties of the link connecting the *Current Joint Coordinate System* to the *Next Joint Coordinate System*.
+
+### Understanding Coordinate Systems
+
+To accurately configure dynamics, you must understand the **Output Coordinate System**. This refers to the coordinate system advanced by the DH parameters from the current joint.
+
+- **Mass & Inertia Reference:** All physical properties (Center of Mass, Inertia Tensor) must be defined relative to this **Output Coordinate System**.
+
+**Reference Diagrams:**
+
+Link 1 Output Coordinate System
+
+Link 2 Output Coordinate System
+
+### Parameters Detail
+
+#### 1. Mass
+
+- Input the mass of the link physically connecting the current joint to the next.
+- **Tip:** Derive this from your CAD model by measuring the mass between the output stage of the current joint and the output stage of the next.
+
+#### 2. Center of Mass (CoM)
+
+- **Reference Frame:** The Output Coordinate System (as shown above).
+- **How to measure:** Define a coordinate system in your CAD software (e.g., SolidWorks) matching the Output Coordinate System and measure the CoM relative to it.
+
+#### 3. Rotational Inertia
+
+- **Reference Point:** The Center of Mass.
+- **Orientation:** Must match the orientation of the Output Coordinate System.
+
+______________________________________________________________________
+
+## 2. Constraints & Safety
+
+The **Constraints** section handles safety boundaries and physical limitations of the actuators.
+
+Constraints Configuration Panel
+
+### 1. Joint Limits
+
+These are **software-defined hard stops**. If a target position is outside `[Lower Limit, Upper Limit]`, the controller will immediately halt operation to prevent mechanical damage.
+
+### 2. Kinematic Limits
+
+Defines the maximum motion capabilities.
+
+- **Max Speed/Accel/Jerk:** Limits applied during motion generation.
+- **Units:**
+  - Revolute Joints: `deg`, `deg/s`, `deg/s²`
+  - Prismatic Joints: `mm`, `mm/s`, `mm/s²`
+
+> ⚠️ **Warning:** Always set these values based on your actuator's specifications (motor curve, gear ratio) to prevent overheating or damage.
+
+### 3. Friction Parameters
+
+This defines the joint friction model. The friction torque ((\\tau\_{friction})) is calculated based on joint velocity ((w)).
+
+**Friction Model Curve:**
+
+Friction Model Curve
+
+- **Smooth Transition (`-w1 < w < w1`):** The curve follows a quadratic function to avoid discontinuities at zero velocity.
+- **Linear Region (`|w| > w1`):** The friction increases linearly.
+- **Parameters:**
+  - `w1`, `f1`: Low-speed threshold and corresponding friction.
+  - `w2`, `f2`: High-speed threshold and corresponding friction.
+  - `Max Friction`: The absolute upper limit of friction torque.
+
+### 4. Collision Threshold
+
+The sensitivity for collision detection.
+
+- If **External Torque > Threshold**, the robot triggers a collision error and stops.
+- Set this carefully: Too low causes false alarms during fast motion; too high makes the robot unsafe.
+
+### 5. Goal Tolerance
+
+Determines when a motion command is considered "finished."
+
+- If `|Current Pos - Target Pos| <= Tolerance`, the action reports **Success**.
+
+# User Guide: Robot System Parameters
+
+This guide provides a detailed explanation of the global system parameters found in the Robot Configuration settings. These settings define the robot's physical properties and safety constraints.
+
+______________________________________________________________________
+
+## 1. Arm Reach
+
+### Definition
+
+This parameter defines the physical reach of the robot based on its kinematics. It is calculated as the radius from the **base joint's rotation axis** to the **Tool Center Point (TCP)** when the robot is fully extended.
+
+Diagram: Definition of Max Arm Reach
+
+### Details
+
+- **Unit**: mm
+- **Function**: This value is used to limit the joint speed effectively to prevent the TCP from exceeding safe velocities.
+
+> **⚠️ Caution**
+>
+> - This value **must be reasonably accurate**, as it affects motion constraints.
+> - However, **perfect precision is not required** — an error margin of **±10%** is acceptable.
+
+______________________________________________________________________
+
+## 2. Gravity Vector
+
+### Definition
+
+The gravity vector defines the direction and magnitude of gravitational acceleration relative to the **World Coordinate System**.
+
+### Details
+
+- The vector must point **in the direction of gravity** (usually downward in the Z-axis).
+- The magnitude should reflect the local gravitational acceleration (approx. 9.81 m/s²).
+
+> **⚠️ Caution** Be careful with the **unit**: Ensure consistent use of **mm/s²** (e.g., -9810) or **m/s²** (e.g., -9.81) depending on your global unit settings.
+
+______________________________________________________________________
+
+## 3. Max Payload
+
+### Definition
+
+Specifies the **maximum payload capacity** of the robot (Unit: g). This value defines the **upper limit for gravity compensation**, regardless of the actual payload data set in the tool configuration.
+
+### How It Works
+
+Even if a tool is configured with a payload that **exceeds** this value (e.g., by mistake or tool change), the system will **limit gravity compensation** to the value specified here to protect the robot.
+
+> **⚠️ Caution** Always set this value according to the **robot's mechanical and control limits** to prevent incorrect torque output or safety issues.
+
+______________________________________________________________________
+
+## 4. Max Allowable Inertia
+
+### Definition
+
+Defines the moment of inertia limits for the robot's wrist joints.
+
+> **ℹ️ Status: Future Feature**
+>
+> This parameter is **reserved for future use** and is currently **not operational**. Inputting any value will have **no effect** on the actuator's behavior in the current version.
+
+______________________________________________________________________
+
+## 5. Task Space Limits
+
+### Definition
+
+Defines the kinematic constraints **in task space**, i.e., relative to the robot’s **Tool Center Point (TCP)**. These limits constrain the Cartesian linear motion of the end-effector.
+
+### Parameters
+
+- **Max Speed**: Maximum linear velocity of the TCP when moving toward the target (Unit: mm/s or m/s).
+- **Max Accel**: Maximum linear acceleration of the TCP while following the trajectory (Unit: mm/s² or m/s²).
+- **Max Jerk**: Maximum linear jerk (rate of change of acceleration) of the TCP (Unit: mm/s³ or m/s³).
+
+> **⚠️ Caution** These values should be defined based on:
+>
+> - The **mechanical and structural limits** of the robot.
+> - The desired **task performance and safety**.
+> - Excessively high values can lead to unstable or unsafe robot behavior.
+
+______________________________________________________________________
+
+## 6. Goal Tolerance
+
+### Definition
+
+This parameter defines the **arrival criteria** for the Tool Center Point (TCP).
+
+### Usage
+
+- When executing task-space commands (like `move_linear`), the robot is considered to have reached the target when the TCP position error is within this tolerance value.
+- **Unit**: mm
+

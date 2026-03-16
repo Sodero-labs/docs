@@ -1,0 +1,23 @@
+/* Override SLATE (dark mode) */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #0b0b0d;     /* dark background */
+  --md-default-fg-color: #e5e5e5;     /* light text */
+}
+
+/* Additional text override (optional) */
+[data-md-color-scheme="slate"] .md-typeset {
+  color: #e2e2e2;
+}
+
+/* link color */
+[data-md-color-scheme="slate"] .md-typeset a {
+  color: #448aff;                 
+  border-bottom: 1px solid rgba(68, 138, 255, 0.3); 
+  transition: all 0.2s ease;        
+}
+
+/* link color (Hover) */
+[data-md-color-scheme="slate"] .md-typeset a:hover {
+  color: #82b1ff;                    
+  border-bottom: 1px solid #82b1ff;  
+}
