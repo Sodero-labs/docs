@@ -1,8 +1,8 @@
 name: publish site
 on:
   push:
-    branches:
-      - main  # 메인 브랜치에 push될 때 실행 (master라면 master로 변경)
+    tags:
+      - 'v*'
 permissions:
   contents: write
 jobs:
@@ -20,5 +20,21 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Deploy to GitHub Pages
-        run: mkdocs gh-deploy --force
+      - name: Configure Git User
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Deploy with mike
+        run: |
+          # 현재 푸시된 태그 이름을 버전명으로 사용 (예: v1.0)
+          TAG_NAME=${GITHUB_REF_NAME}
+          
+          # gh-pages 동기화
+          git fetch origin gh-pages:gh-pages || true
+          
+          # 태그 이름을 버전으로 배포하고 latest 별칭 부여
+          mike deploy --push --update-aliases $TAG_NAME latest
+          
+          # 가장 최근 태그를 기본 페이지로 설정
+          mike set-default --push latest
