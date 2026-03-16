@@ -95,4 +95,42 @@
     transition: none !important;
   }
 
+  .version-dropdown {
+    margin-right: 14px;
+  }
+
+  .version-dropdown select {
+    background: #1a1a1a;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+
+  /* 버전 드롭다운 스타일 커스텀 */
+  .md-header__option {
+    margin-left: 20px; /* 검색창과의 간격 */
+    display: flex;
+    align-items: center;
+  }
+
+  .md-select__inner {
+    background: rgba(255, 255, 255, 0.1); /* 배경 살짝 밝게 */
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .md-select__inner option {
+    background: #1a1a1a; /* 옵션 목록 배경색 */
+    color: #fff;
+  }
+
 }
