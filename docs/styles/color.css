@@ -1,23 +1,181 @@
 /* Override SLATE (dark mode) */
 [data-md-color-scheme="slate"] {
-  --md-default-bg-color: #0b0b0d;     /* dark background */
-  --md-default-fg-color: #e5e5e5;     /* light text */
+  --md-default-bg-color: #0a0b0c;     
+  --md-default-fg-color: #b4bac0;   
+  --md-accent-fg-color: #6fa6dd;        /* 강조색 (사이드바 하이라이트 등에 영향) */
+  --md-accent-fg-color--transparent: #0070dd; 
+}
+
+[data-md-color-scheme="slate"] ::selection {
+  background-color: #0070dd; 
+  color: #f0f1f2;           
 }
 
 /* Additional text override (optional) */
 [data-md-color-scheme="slate"] .md-typeset {
-  color: #e2e2e2;
+  color: #b4bac0;
 }
 
 /* link color */
 [data-md-color-scheme="slate"] .md-typeset a {
-  color: #448aff;                 
-  border-bottom: 1px solid rgba(68, 138, 255, 0.3); 
+  color: #6fa6dd;                 
+  border-bottom: 1px solid #6fa6dd; 
   transition: all 0.2s ease;        
 }
 
 /* link color (Hover) */
 [data-md-color-scheme="slate"] .md-typeset a:hover {
-  color: #82b1ff;                    
-  border-bottom: 1px solid #82b1ff;  
+  color: #0070dd;                    
+  border-bottom: 1px solid #0070dd;  
+}
+
+/* link image */
+[data-md-color-scheme="slate"] .md-typeset a img {
+  border: none;
+}
+
+/* link image (remove border-bottom) */
+[data-md-color-scheme="slate"] .md-typeset a:has(img):not(.card-box) {
+  border-bottom: none !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset figure a:not(.card-box) {
+  border-bottom: none !important;
+}
+
+/* TOC color */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav__link:focus,
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav__link--active {
+  color: #6fa6dd !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset code {
+  background-color: #0a0b0c !important; 
+  border: 1px solid #333;
+  border-radius: 4px;
+
+  font-size: 14px !important;
+  line-height: 18px;
+  
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .admonition {
+  border-radius: 6px;
+  border-width: 1px;
+  border-style: solid;
+  box-shadow: none;
+  margin: 1.5em 0;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .admonition-title {
+  font-weight: 400 !important; 
+  font-size: 14px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .admonition-title::before {
+  background-color: currentColor !important; 
+  width: 18px !important;
+  height: 18px !important;
+
+  -webkit-mask-size: 15px !important;
+  mask-size: 15px !important;
+
+  flex-shrink: 0; 
+  margin-top: -6px !important;
+}
+
+/* 🔵 INFO */
+[data-md-color-scheme="slate"] .md-typeset .admonition.info {
+  border-color: #0070dd;                
+  background-color: rgba(0, 112, 221, 0.1) !important; 
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.info .admonition-title::before {
+  -webkit-mask-image: url('https://api.iconify.design/material-symbols:error-outline.svg');
+  mask-image: url('https://api.iconify.design/material-symbols:error-outline.svg');
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.info .admonition-title {
+  background-color: transparent !important;
+  color: #6fa6dd !important;            
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.info,
+[data-md-color-scheme="slate"] .md-typeset .admonition.info p,
+[data-md-color-scheme="slate"] .md-typeset .admonition.info li {
+  color: #6fa6dd !important;
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.info code {
+  color: #6fa6dd !important;
+  border-color: rgba(111, 166, 221, 0.4);
+}
+
+/* 🟠 Software WARNING */
+[data-md-color-scheme="slate"] .md-typeset .admonition.warning {
+  border-color: #fff468;
+  background-color: rgba(255, 244, 104, 0.1) !important;
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.warning .admonition-title::before {
+  -webkit-mask-image: url('https://api.iconify.design/material-symbols:warning-outline-rounded.svg');
+  mask-image: url('https://api.iconify.design/material-symbols:warning-outline-rounded.svg');
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.warning .admonition-title {
+  background-color: transparent !important;
+  color: #FFF680 !important;
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.warning,
+[data-md-color-scheme="slate"] .md-typeset .admonition.warning p,
+[data-md-color-scheme="slate"] .md-typeset .admonition.warning li {
+  color: #FFF680 !important;
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.warning code {
+  color: #FFF680 !important;
+  border-color: rgba(255, 246, 128, 0.4);
+}
+
+/* 🔴 Hardware WARNING */
+[data-md-color-scheme="slate"] .md-typeset .admonition.error {
+  border-color: #C41E3A;
+  background-color: rgba(196, 30, 58, 0.1) !important;
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.error .admonition-title::before {
+  -webkit-mask-image: url('https://api.iconify.design/material-symbols:report-outline-rounded.svg');
+  mask-image: url('https://api.iconify.design/material-symbols:report-outline-rounded.svg');
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.error .admonition-title {
+  background-color: transparent !important;
+  color: #C46273 !important;
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.error,
+[data-md-color-scheme="slate"] .md-typeset .admonition.error p,
+[data-md-color-scheme="slate"] .md-typeset .admonition.error li {
+  color: #C46273 !important;
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.error code {
+  color: #C46273 !important;
+  border-color: rgba(196, 98, 115, 0.4);
+}
+
+/* green IDEA */
+[data-md-color-scheme="slate"] .md-typeset .admonition.idea {
+  border-color: #00FF98;
+  background-color: rgba(0, 255, 152, 0.1) !important;
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.idea .admonition-title::before {
+  -webkit-mask-image: url('https://api.iconify.design/material-symbols:lightbulb-outline-rounded.svg');
+  mask-image: url('https://api.iconify.design/material-symbols:lightbulb-outline-rounded.svg');
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.idea .admonition-title {
+  background-color: transparent !important;
+  color: #80FFCB !important;
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.idea,
+[data-md-color-scheme="slate"] .md-typeset .admonition.idea p,
+[data-md-color-scheme="slate"] .md-typeset .admonition.idea li {
+  color: #80FFCB !important;
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.idea code {
+  color: #80FFCB !important;
+  border-color: rgba(128, 255, 203, 0.4);
 }

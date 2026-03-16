@@ -48,7 +48,7 @@
             font-size: 14px;
             
             color: #9e9e9e !important;
-            border: 0.5px solid #9e9e9e !important;
+            border: 1px solid #9e9e9e !important;
             background-color: transparent !important;
             transition: all 0.3s ease;
             border-radius: 10px;
@@ -78,4 +78,18 @@
         </a>
 
     </div>
+{% endif %}
+
+{% if page.meta.show_intro %}
+<div class="footer-company-intro" style="margin-top: 50px; background: #0a0b0c;">
+    <h3>About Sodero</h3>
+    <p style="font-size: 14px;">
+        Written by the 
+        <a href="https://www.sodero.io" target="_blank">Sodero engineering team.</a>
+    </p>
+    <p style="font-size: 14px;">
+        Sodero is a unified robotics operating and control platform integrating standalone hardware controllers with web-based software modules. 
+        Users can seamlessly combine various controllers (Stellar Series) and software tools to achieve highly scalable and controllable robotics applications, from motion to locomotion. Sodero's software suite is free for virtual environments and runs natively on your local standalone controllers or edge devices.
+    </p>
+</div>
 {% endif %}

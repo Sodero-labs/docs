@@ -2,6 +2,7 @@ site_name: Sodero Documents
 site_url: https://docs.sodero.io/
 theme:
   name: material
+  favicon: assets/tab_icon.svg
   custom_dir: docs/overrides
   font:
     text: "Inter"
@@ -11,13 +12,16 @@ theme:
       primary: black
       accent: white
   features:
-    # - navigation.expand
-    - navigation.instant
-    # - navigation.path 
+    - navigation.path
+    - navigation.sections
     - navigation.tracking
+    - navigation.instant
+    - navigation.instant.progress
+    - content.code.copy
     - search.suggest
     - search.highlight
-    - content.code.copy
+    - search.share
+    
 extra:
   version:
     provider: mike
@@ -35,57 +39,69 @@ extra:
       input_position: bottom
       theme: dark
       lang: en
-  navigation:
-    expand: true
+
 extra_css:
   - styles/layout.css
   - styles/color.css
   - styles/font.css
 extra_javascript:
   - javascripts/mathjax.js
-  - javascripts/keep_open.js
-  - javascripts/select_all.js
+  - javascripts/select-all.js
+  - javascripts/nav-state.js
   - javascripts/version.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 nav:
-  - Home: index.md
-  - Stellar X:
-    - What is Stellar X: stellarx/what_is_stellarx/index.md
-    - Quick Start: stellarx/quick_start/index.md
-    - Tutorials:
-      - Stellar Designer:
-        - Introduction: stellarx/tutorials/stellar_designer/introduction/index.md
-        - Create New Robot:
-          - Step 1. Robot Structure: stellarx/tutorials/stellar_designer/robot_structure/index.md
-          - Step 2. Robot System Parameters: stellarx/tutorials/stellar_designer/configure_system_parameters/index.md
-          - Step 3. Actuator Mapping: stellarx/tutorials/stellar_designer/map_actuators/index.md
-          - Step 4. Virtual Verification: stellarx/tutorials/stellar_designer/verify_configuration/index.md
-        - Start from Templates: stellarx/tutorials/stellar_designer/start_from_templates/index.md
-      - Stellar Motion Studio:
-        - About Stellar Motion Studio: stellarx/tutorials/stellar_motion_studio/about_stellar_motion_studio/index.md
-        - Home: stellarx/tutorials/stellar_motion_studio/home/index.md
-        - Tool: stellarx/tutorials/stellar_motion_studio/tool/index.md
-        - Pose: stellarx/tutorials/stellar_motion_studio/pose/index.md
-        - Motion: stellarx/tutorials/stellar_motion_studio/motion/index.md
-      - Simulation & Virtual Control:
-        - Virtual Control Overview: stellarx/tutorials/simulation/virtual_control_overview/index.md
-        - Isaac Sim:
-          - Introduction: stellarx/tutorials/simulation/introduction/index.md
-          - Extension Installation: stellarx/tutorials/simulation/extension_installation/index.md
-          - Robot Setup: stellarx/tutorials/simulation/robot_setup/index.md
-    - User Guide:
-      - Remote Control:
-        - Understanding Remote Control: stellarx/user_guide/remote_control/understanding_remote_control/index.md
-      - APIS: stellarx/user_guide/apis/index.md
-      - Stellar Designer:
-        - Setup:
-          - Robot Structure: stellarx/user_guide/stellar_designer/robot_structure/index.md
-          - Robot System Parameters: stellarx/user_guide/stellar_designer/robot_system_parameters/index.md
-          - Actuator Mapping: stellarx/user_guide/stellar_designer/actuator_mapping/index.md
+  - Get Started:
+    - Overview: index.md
+    - Sodero Ecosystem: get_started/sodero_ecosystem/index.md
+  - Hardware Setup:
+    - Stellar Series:
+      - Stellar X: hardware_setup/stellar_series/stellar_x/index.md
+  # - Software Module:
+  #   - Stellar Designer:
+  #     - Overview: software_module/stellar_designer/what_is_stellarx/index.md
+  #     - Robot Structure: software_module/stellar_designer/robot_structure/index.md
+  #     - Robot System Parameters: software_module/stellar_designer/robot_system_parameters/index.md
+  #     - Actuator Mapping: software_module/stellar_designer/actuator_mapping/index.md
+  #     - Virtual Verification: software_module/stellar_designer/virtual_verification/index.md
+  #   - Stellar Motion Studio:
+  #     - Overview: software_module/stellar_motion_studio/what_is_stellarx/index.md
+  - Tutorials:
+    - Stellar Designer:
+      - Introduction: tutorials/stellar_designer/introduction/index.md
+      - Create New Robot:
+        - Robot Structure: tutorials/stellar_designer/robot_structure/index.md
+        - Robot System Parameters: tutorials/stellar_designer/configure_system_parameters/index.md
+        - Actuator Mapping: tutorials/stellar_designer/map_actuators/index.md
+        - Virtual Verification: tutorials/stellar_designer/verify_configuration/index.md
+      - Start from Templates: tutorials/stellar_designer/start_from_templates/index.md
+    - Stellar Motion Studio:
+      - About Stellar Motion Studio: tutorials/stellar_motion_studio/about_stellar_motion_studio/index.md
+      - Home: tutorials/stellar_motion_studio/home/index.md
+      - Tool: tutorials/stellar_motion_studio/tool/index.md
+      - Pose: tutorials/stellar_motion_studio/pose/index.md
+      - Motion: tutorials/stellar_motion_studio/motion/index.md
+  - Virtual Simulation:
+    - Virtual Control Overview: virtual_simulation/virtual_control_overview/index.md
+    - NVIDIA Isaac Sim:
+      - Introduction: virtual_simulation/introduction/index.md
+      - Extension Installation: virtual_simulation/extension_installation/index.md
+      - Robot Setup: virtual_simulation/robot_setup/index.md
+  - Manual:
+    - Remote Control:
+      - Understanding Remote Control: manual/remote_control/understanding_remote_control/index.md
+    - Stellar Designer:
+      - Robot Structure: manual/stellar_designer/robot_structure/index.md
+      - Robot System Parameters: manual/stellar_designer/robot_system_parameters/index.md
+      - Actuator Mapping: manual/stellar_designer/actuator_mapping/index.md
+    - APIS: manual/apis/index.md
+  - ChangeLog: CHANGELOG.md
+
 markdown_extensions:
   - attr_list
   - md_in_html
+  - admonition
   - pymdownx.blocks.caption
   - pymdownx.arithmatex:
       generic: true
@@ -96,6 +112,7 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
 plugins:
   - glightbox
+  - search
   - llmstxt:
       full_output: llms-full.txt
       sections:

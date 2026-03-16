@@ -1,17 +1,244 @@
-@media (max-width: 76.24em) {
-  .md-content > nav, 
-  .md-content .md-breadcrumbs {
+/* @media (max-width: 76.24em) {
+
+  .md-nav--primary .md-nav__title {
     display: none !important;
   }
 
-  .md-sidebar--secondary .md-nav__title {
-      display: none !important;
+  .md-nav__item--back {
+    display: none !important;
   }
 
-  .md-footer-meta {
+  .md-nav__title[for^="__nav_"] {
+    display: none !important;
+  }
+
+  .md-nav--primary .md-nav {
+    position: static !important;
+    transform: none !important;
+  }
+
+  .md-nav__toggle:not(:checked) ~ .md-nav {
+    max-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .md-nav__toggle:checked ~ .md-nav {
+    max-height: 1000px !important;
+  }
+
+  .md-nav__item--nested > .md-nav{
+    display:none;
+  }
+
+  .md-nav__toggle:checked ~ .md-nav{
+    display:block;
+  }
+
+  .md-nav--primary,
+  .md-nav--primary .md-nav__link,
+  .md-nav--primary .md-nav__title,
+  .md-nav--primary .md-nav__item,
+  .md-nav--primary .md-nav__list {
+      font-size: 14px !important;
+      line-height: 1.65 !important;
+      color: #b4bac0 !important;
+  }
+
+  .md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav__link,
+  .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link {
+      font-weight: 600 !important;
+      color: #f0f1f2 !important;
+  }
+
+ .md-nav__link {
+    padding: 0.3rem 0.8rem !important;
+    min-height: auto !important;
+  }
+
+  .md-nav__link,
+  .md-nav__title {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .md-nav__item {
+    border: none !important;
+  }
+
+  .md-nav__list {
+    border: none !important;
+  }
+
+  .md-nav__link:hover {
+    background: transparent !important;
+  }
+
+  label[for="__toc"]{
+    display:none !important;
+  }
+
+  .md-sidebar--secondary{
+    display:none !important;
+  }
+
+  .md-nav__item--level-1 > .md-nav__list{
+    border-left:none !important;
+  }
+
+  .md-nav__item--level-2 > .md-nav__list,
+  .md-nav__item--level-3 > .md-nav__list{
+    border-left:1px solid #444 !important;
+  }
+
+  .md-nav__item--level-1{
+    margin:6px 0 !important;
+  }
+
+  .md-nav__item--level-2{
+    margin:2px 0 !important;
+  }
+
+  .md-nav--secondary{
+    display:none !important;
+  }
+
+  .md-nav__item--active .md-nav--secondary{
+    display:none !important;
+  }
+
+
+} */
+
+
+/* @media (max-width: 76.24em) {
+  .md-nav--primary .md-nav {
+    position: static !important;
+    transform: none !important;
+    background-color: transparent !important;
+    display: block !important; 
+    flex-direction: column !important;
+  }
+
+  .md-nav__item--back,
+  .md-nav__title,
+  .md-nav__title[for^="__nav_"] {
+    display: none !important;
+  }
+
+  .md-nav__toggle:not(:checked) ~ .md-nav {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .md-nav__toggle:checked ~ .md-nav {
+    display: block !important;
+    max-height: none !important;
+  }
+
+  .md-sidebar--secondary,
+  .md-nav--secondary,
+  label[for="__toc"] {
+      display: none !important;
+  }
+} */
+
+@media (max-width: 76.24em) {
+  /* 1. 드릴다운 및 모바일 전용 액티브 레이아웃 초기화 */
+  .md-nav--primary .md-nav,
+  .md-nav__item--active > .md-nav {
+    position: static !important;
+    transform: none !important;
+    background-color: transparent !important;
+    display: none; /* 기본 숨김, 아래 로직으로 필요한 것만 노출 */
+  }
+
+  /* 2. 선택된 항목의 세로 길어짐 및 제목 사라짐 방지 */
+  /* 모바일 테마가 현재 페이지를 강조하려고 적용하는 불필요한 레이아웃 초기화 */
+  .md-nav__item--active {
+    display: block !important; 
+  }
+
+  .md-nav__link--active {
+    display: flex !important; 
+    color: #f0f1f2 !important; 
+  }
+
+  /* 3. 1단계 대제목 아래 리스트(Level 2) 무조건 노출 */
+  .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav {
+    display: block !important;
+    max-height: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* 4. 1단계 제목 설정 (클릭 차단) */
+  .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link {
+    pointer-events: none !important; 
+    cursor: default !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: #f0f1f2 !important;
+    margin-bottom: 5px !important;
+    border: none !important;
+  }
+
+  .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link .md-nav__icon {
+    display: none !important;
+  }
+
+  /* 5. 3단계 아코디언 동작 복구 및 세로선 설정 */
+  /* Level 2 폴더 내부의 항목들 토글 */
+  .md-nav__item .md-nav__item .md-nav__toggle:checked ~ .md-nav {
+    display: block !important;
+  }
+
+  .md-nav__list .md-nav__list .md-nav__list {
+    margin-left: 0.8rem !important;
+    padding-left: 0.5rem !important;
+    border-left: 1px solid #444 !important;
+    transition: none !important; 
+  }
+
+  /* 6. 모든 테두리 및 구분선 완전 제거 */
+  .md-nav__item, 
+  .md-nav__link,
+  .md-nav__list,
+  .md-nav {
+    border-top: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
+
+  /* 7. 2단계/3단계 링크 복구 */
+  .md-nav__link {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    padding: 0.4rem 0.8rem !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .md-nav__link .md-nav__icon {
+    transition: transform 0.2s ease !important;
+  }
+
+  .md-nav__toggle:checked ~ .md-nav__link .md-nav__icon {
+    transform: rotate(90deg) !important;
+  }
+
+  /* 8. 기타 불필요 모바일 요소 숨김 */
+  .md-nav__item--back, 
+  .md-nav__title, 
+  .md-sidebar--secondary, 
+  .md-nav--secondary,
+  label[for="__toc"] {
     display: none !important;
   }
 }
+
 
 /* 2. 큰 화면 (PC 데스크탑) */
 @media (min-width: 76.25em) {
@@ -65,9 +292,9 @@
     display: none !important;
   }
 
-  .md-sidebar--secondary .md-nav__title {
+  /* .md-sidebar--secondary .md-nav__title {
       display: none !important;
-  }
+  } */
 
   .md-sidebar--primary {
     width: 280px;
@@ -84,15 +311,43 @@
     display: none !important;
   }
 
-  .md-nav__item[data-keep-open="true"] > .md-nav {
-    display: block !important;
-    visibility: visible !important;
-    height: auto !important;
-    opacity: 1 !important;
+
+  .version-dropdown {
+    margin-right: 14px;
   }
 
-  .md-nav__item[data-keep-open="true"] .md-nav__list {
-    transition: none !important;
+  .version-dropdown select {
+    background: #1a1a1a;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+
+  /* 버전 드롭다운 스타일 커스텀 */
+  .md-header__option {
+    margin-left: 20px; /* 검색창과의 간격 */
+    display: flex;
+    align-items: center;
+  }
+
+  .md-select__inner {
+    background: rgba(255, 255, 255, 0.1); /* 배경 살짝 밝게 */
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .md-select__inner option {
+    background: #1a1a1a; /* 옵션 목록 배경색 */
+    color: #fff;
   }
 
   .version-dropdown {

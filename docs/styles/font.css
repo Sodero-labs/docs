@@ -1,87 +1,104 @@
 
-/* 1. 사이드바 전체 (폰트 크기 + 기본 색상) */
 .md-nav--primary,
 .md-nav--primary .md-nav__link,
 .md-nav--primary .md-nav__title,
 .md-nav--primary .md-nav__item,
 .md-nav--primary .md-nav__list {
     font-size: 14px !important;
+    line-height: 1.65 !important;
+    color: #b4bac0 !important;
 }
 
+.md-nav__item--active > .md-nav__link {
+  color: #f0f1f2 !important;
+}
+
+.md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav__link,
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link {
+    font-weight: 600 !important;
+    color: #f0f1f2 !important;
+}
+
+.md-nav--primary > .md-nav__list > .md-nav__item {
+    margin-bottom: 30px; 
+}
+
+.md-nav__list .md-nav__item .md-nav__list .md-nav__item .md-nav__list {
+    border-left: 1px solid #444 !important;
+    transition: border-left-color 0.3s ease;
+}
+
+.md-nav__item--active > .md-nav__list {
+    border-left-color: #f2f0f0 !important; 
+}
+
+.md-nav__list .md-nav__list:hover {
+    border-left-color: #f0f1f2;
+}
+
+
 .md-nav--secondary {
-    font-size: 12px !important;
-    color: #9e9e9e !important;
+    font-size: 14px !important;
+    color: #b4bac0 !important;
 }
 
 .md-nav--secondary .md-nav__list .md-nav__link {
-    font-size: 12px !important;
+    font-size: 14px !important;
 }
 
-/* 2. 사이드바 링크 상세 (기본, 호버, 활성) */
 .md-nav__link {
     color: #9e9e9e !important;
     transition: color 0.2s ease;
 }
 
-/* 마우스 올렸을 때 */
 .md-nav__link:hover {
-    color: #e5e5e5 !important;
+    color: #f0f1f2 !important;
 }
 
-/* 현재 위치 (두껍게 + 흰색) */
 .md-nav__link--active {
-    color:#ffffff !important;
-    /* font-weight: 600 !important; */
+    color:#f0f1f2 !important;
 }
 
-/* 각 메뉴 항목의 세로 간격 및 기본 설정 */
-.md-sidebar--primary .md-nav__link {
-    line-height: 1.6 !important;    
+.md-nav__toggle {
+  cursor: pointer;
 }
 
-/* 하위 메뉴 상하 여백 조절 */
-.md-sidebar--primary .md-nav__list {
-    padding-top: 0.2rem !important;
-    padding-bottom: 0.4rem !important;
+.md-sidebar--primary {
+  contain: layout;
 }
 
+.md-sidebar--primary .md-nav {
+  transition: none !important;
+}
 
-/* -------------------------------------------------- */
-
-/* 본문 텍스트 전체 설정 */
 .md-typeset {
-    font-size: 14px !important;
-    line-height: 1.5 !important;
-    color: #e5e5e5; 
+    font-size: 16px !important;
+    letter-spacing: -0.05em !important;  
+    line-height: 1.65 !important;
+    color: #b4bac0; 
 }
 
-/* 문단(p) 사이의 여백 */
 .md-typeset p {
     margin-top: 1em !important;
     margin-bottom: 1em !important; 
     word-break: keep-all;          
 }
 
-/* 리스트(ul, ol) 여백 */
 .md-typeset ul, 
 .md-typeset ol {
-    margin-top: 0.8em !important;
-    margin-bottom: 0.8em !important;
+    margin-top: 0.4em !important;
+    margin-bottom: 0.4em !important;
 }
 
-/* 리스트 항목(li) 간의 미세 여백 */
 .md-typeset li {
     margin-bottom: 0.4em !important;
 }
 
-/* 리스트 내부의 첫 번째 문단 여백 제거 (중복 여백 방지) */
 .md-typeset li p {
     margin: 0.2em 0 !important;
 }
 
-/* -------------------------------------------------- */
 
-/* 공통 헤더 기본 설정 */
 .md-typeset h1,
 .md-typeset h2,
 .md-typeset h3,
@@ -89,39 +106,81 @@
 .md-typeset h5,
 .md-typeset h6 {
     font-weight: 600 !important;
-    letter-spacing: -0.01em;
-    margin-top: 1.4em !important;
-    margin-bottom: 0.6em !important;
+    color: #f0f1f2 !important;
 }
 
-/* 단계별 크기 (본문 14px 기준 비율 조정) */
-
 .md-typeset h1 {
-    font-size: 26px !important;
-    color: #ffffff !important;
+    font-size: 32px !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1.2 !important;         
 }
 
 .md-typeset h2 {
-    font-size: 22px !important;
-    color: #e6e6e6 !important;
+    font-size: 24px !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1.2 !important;          
 }
 
 .md-typeset h3 {
-    font-size: 18px !important;
-    color: #d0d0d0 !important;
+    font-size: 20px !important;
+    letter-spacing: -0.025em !important; 
+    line-height: 1.2 !important;    
 }
 
 .md-typeset h4 {
     font-size: 16px !important;
-    color: #b5b5b5 !important;
+    letter-spacing: -0.05em !important;  
+    line-height: 1.65 !important;
 }
 
-.md-typeset h5 {
-    font-size: 15px !important;
-    color: #9e9e9e !important;
+.md-typeset .changelog-container {
+    position: relative;
+    padding-left: 7rem; 
+    margin-left: 1rem;
 }
 
-.md-typeset h6 {
-    font-size: 14px !important;
-    color: #8a8a8a !important;
+.md-typeset .version-info {
+    position: sticky;
+    top: 3rem;
+    float: left;
+    margin-left: -6rem;
+    width: 5.5rem;
+    z-index: 0;
+}
+
+.display-version { color: #0070dd; font-size: 16px; font-weight: bold; }
+.display-date { color: #b4bac0; font-size: 13px; }
+
+.md-typeset .version-content h2 {
+    height: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    opacity: 0;
+    pointer-events: none;
+    
+    scroll-margin-top: 10rem; 
+}
+
+.md-sidebar--secondary .md-nav__link--active {
+    color: var(--md-typeset-a-color) !important;
+    font-weight: bold !important;
+}
+
+.md-sidebar--secondary .md-nav__item--level-2 .md-nav__list {
+    display: none !important;
+}
+
+.md-typeset .version-content h2 {
+    height: 0; margin: 0 !important; padding: 0 !important;
+    opacity: 0; pointer-events: none;
+    
+    scroll-margin-top: 6rem; 
+    scroll-margin-bottom: 50vh; 
+}
+
+.md-sidebar--secondary .md-nav__link[href*="new-nodes"], 
+.md-sidebar--secondary .md-nav__link[href*="release"], 
+.md-sidebar--secondary .md-nav__link[href*="bug-fixes"] {
+    display: none;
 }
