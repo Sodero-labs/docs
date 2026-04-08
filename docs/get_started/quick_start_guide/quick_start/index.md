@@ -8,17 +8,17 @@ Welcome to the StellarX family! We’re excited to have you on board. This guide
 Before we begin, please check that your package includes all the following components. If anything is missing, please contact our support team.
 
 <figure markdown="span">
-  ![Stellar X Main Unit](images/product_stellar_x.jpeg){ width="750" }
+  ![Stellar X Main Unit](images/product_stellar_x.svg){ width="750" }
   <figcaption>StellarX Main Unit</figcaption>
 </figure>
 
 <figure markdown="span">
-  ![24V Power Adapter](images/power_adapter.jpeg){ width="500" }
+  ![24V Power Adapter](images/power_adapter.svg){ width="500" }
   <figcaption>24V Power Adapter</figcaption>
 </figure>
 
 <figure markdown="span">
-  ![Power Cable](images/power_cable.jpeg){ width="500" }
+  ![Power Cable](images/power_cable.svg){ width="500" }
   <figcaption>Power Cable</figcaption>
 </figure>
 
@@ -28,12 +28,12 @@ Before we begin, please check that your package includes all the following compo
 Take a moment to familiarize yourself with the StellarX interface. Knowing the ports now will make the setup process much smoother.
 
 <figure markdown="span">
-  ![Hardware Interface](images/hardware_interface.png){ width="500" }
+  ![Hardware Interface](images/hardware_interface.svg){ width="500" }
   <figcaption>StellarX Interface1</figcaption>
 </figure>
 
 <figure markdown="span">
-  ![Hardware Interface](images/hardware_interface2.jpeg){ width="500" }
+  ![Hardware Interface](images/hardware_interface2.svg){ width="500" }
   <figcaption>StellarX Interface2</figcaption>
 </figure>
 
@@ -66,7 +66,7 @@ To ensure the longevity of your device and prevent electrical damage, please fol
 3. **Secure the Connection:** Once fully inserted, hand-tighten the metal nut on the connector to ensure it stays securely locked in place.
 
     <figure markdown="span">
-      ![Fasten Nut](images/fasten_nut_of_power_connector.jpeg){ width="500" }
+      ![Fasten Nut](images/fasten_nut_of_power_connector.svg){ width="500" }
       <figcaption>Securing the locking nut</figcaption>
     </figure>
 
@@ -80,7 +80,7 @@ To talk to StellarX, your PC needs to be on the same "wavelength" (network subne
 1. **Physical Connection:** Connect an Ethernet (LAN) cable to **Eth1 (Port 1)** on the StellarX unit and the other end to your PC’s LAN port.
 
     <figure markdown="span">
-      ![LAN Port Connection](images/lan_connection.jpeg){ width="500" }
+      ![LAN Port Connection](images/lan_connection.svg){ width="500" }
       <figcaption>Connecting to Eth1</figcaption>
     </figure>
 
@@ -110,7 +110,7 @@ To talk to StellarX, your PC needs to be on the same "wavelength" (network subne
    If the **Stellar Designer** welcome screen appears, you are officially ready to start your project!
 
     <figure markdown="span">
-      ![Welcome Screen](images/welcome_screen.png){ width="800" }
+      ![Welcome Screen](images/welcome_screen.svg){ width="800" }
       <figcaption>Stellar Designer Welcome Screen</figcaption>
     </figure>
 
@@ -120,7 +120,7 @@ To talk to StellarX, your PC needs to be on the same "wavelength" (network subne
 If you ever forget your IP settings or need a fresh start, you can perform a factory reset.
 
 <figure markdown="span">
-    ![Reset Button](images/reset_button.jpeg){ width="500" }
+    ![Reset Button](images/reset_button.svg){ width="500" }
     <figcaption>Reset Button Location</figcaption>
 </figure>
 
