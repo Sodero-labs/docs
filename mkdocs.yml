@@ -1,5 +1,7 @@
 site_name: Sodero Documents
 site_url: https://docs.sodero.io/
+exclude_docs: |
+  overrides/
 theme:
   name: material
   favicon: assets/tab_icon.svg
@@ -49,59 +51,70 @@ extra_javascript:
   - javascripts/select-all.js
   - javascripts/nav-state.js
   - javascripts/version.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 nav:
   - Get Started:
     - Overview: index.md
     - Sodero Ecosystem: get_started/sodero_ecosystem/index.md
+    - Key Concepts: get_started/key_concepts/index.md
+    - Quick Start: get_started/quick_start/index.md
   - Hardware Setup:
     - Stellar Series:
       - Stellar X: hardware_setup/stellar_series/stellar_x/index.md
-  # - Software Module:
-  #   - Stellar Designer:
-  #     - Overview: software_module/stellar_designer/what_is_stellarx/index.md
-  #     - Robot Structure: software_module/stellar_designer/robot_structure/index.md
-  #     - Robot System Parameters: software_module/stellar_designer/robot_system_parameters/index.md
-  #     - Actuator Mapping: software_module/stellar_designer/actuator_mapping/index.md
-  #     - Virtual Verification: software_module/stellar_designer/virtual_verification/index.md
-  #   - Stellar Motion Studio:
-  #     - Overview: software_module/stellar_motion_studio/what_is_stellarx/index.md
+      - Network Settings: hardware_setup/stellar_series/network_settings/index.md
+  - Stellar Station:
+    - Overview: station/overview/index.md
+    - Nodes and Connections: station/nodes_and_connections/index.md
+    - Design Documents: station/design_documents/index.md
+    - Running Nodes: station/running_nodes/index.md
+    - Modules: station/modules/index.md
+    - Backup and Restore: station/backup_restore/index.md
+  - Gateways:
+    - Overview: gateways/overview/index.md
+    - Gateway Designer: gateways/gateway_designer/index.md
+    - EtherCAT Gateway: gateways/ethercat/index.md
+    - Simulation Gateway: gateways/simulation/index.md
+    - Sensors and Cameras: gateways/sensors_and_cameras/index.md
+    - Device Bridge: gateways/device_bridge/index.md
+  - Controllers:
+    - Strider: controllers/strider/index.md
+    - Motion Studio: controllers/motion_studio/index.md
+    - Articulation: controllers/articulation/index.md
+  - Localization & Navigation:
+    - Overview: navigation/overview/index.md
+    - Map Bundle (.nav): navigation/map_bundle/index.md
+    - Navigate in Simulation: navigation/simulation_tutorial/index.md
   - Tutorials:
     - Stellar Designer:
       - Introduction: tutorials/stellar_designer/introduction/index.md
-      - Create New Robot:
-        - Robot Structure: tutorials/stellar_designer/robot_structure/index.md
-        - Robot System Parameters: tutorials/stellar_designer/configure_system_parameters/index.md
-        - Actuator Mapping: tutorials/stellar_designer/map_actuators/index.md
-        - Virtual Verification: tutorials/stellar_designer/verify_configuration/index.md
-      - Start from Templates: tutorials/stellar_designer/start_from_templates/index.md
-    - Stellar Motion Studio:
-      - About Stellar Motion Studio: tutorials/stellar_motion_studio/about_stellar_motion_studio/index.md
-      - Home: tutorials/stellar_motion_studio/home/index.md
-      - Tool: tutorials/stellar_motion_studio/tool/index.md
-      - Pose: tutorials/stellar_motion_studio/pose/index.md
-      - Motion: tutorials/stellar_motion_studio/motion/index.md
+      - Manipulator (.sdd): tutorials/stellar_designer/manipulator/index.md
+      - Mobile Robot (.sddm): tutorials/stellar_designer/mobile_robot/index.md
+      - 3D Model (.glb): tutorials/stellar_designer/3dmodel_creation/index.md
   - Virtual Simulation:
-    - Virtual Control Overview: virtual_simulation/virtual_control_overview/index.md
-    - NVIDIA Isaac Sim:
-      - Introduction: virtual_simulation/introduction/index.md
-      - Extension Installation: virtual_simulation/extension_installation/index.md
-      - Robot Setup: virtual_simulation/robot_setup/index.md
-  - Manual:
-    - Remote Control:
-      - Understanding Remote Control: manual/remote_control/understanding_remote_control/index.md
-    - Stellar Designer:
-      - Robot Structure: manual/stellar_designer/robot_structure/index.md
-      - Robot System Parameters: manual/stellar_designer/robot_system_parameters/index.md
-      - Actuator Mapping: manual/stellar_designer/actuator_mapping/index.md
-    - APIS: manual/apis/index.md
+    - Overview: virtual_simulation/introduction/index.md
+    - Isaac Bridge Installation: virtual_simulation/extension_installation/index.md
+    - Robot Setup: virtual_simulation/robot_setup/index.md
+    - Connect to Stellar Station: virtual_simulation/connect_station/index.md
+  - SSH Workspace:
+    - Overview: ssh_workspace/overview/index.md
+    - AI Coding Agents: ssh_workspace/ai_agents/index.md
+    - sodero CLI: ssh_workspace/sodero_cli/index.md
   - ChangeLog: CHANGELOG.md
 
 markdown_extensions:
   - attr_list
   - md_in_html
   - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.keys
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.blocks.caption
   - pymdownx.arithmatex:
       generic: true
@@ -116,11 +129,23 @@ plugins:
   - llmstxt:
       full_output: llms-full.txt
       sections:
+        Get Started:
+          - get_started/sodero_ecosystem/index.md
+          - get_started/key_concepts/index.md
+          - get_started/quick_start/index.md
+        Hardware Setup:
+          - hardware_setup/**/*.md
+        Stellar Station:
+          - station/**/*.md
+        Gateways:
+          - gateways/**/*.md
+        Controllers:
+          - controllers/**/*.md
+        Localization and Navigation:
+          - navigation/**/*.md
         Tutorials - Stellar Designer:
-          - stellarx/tutorials/stellar_designer/**/*.md
-        Tutorials - Stellar Motion Studio:
-          - stellarx/tutorials/stellar_motion_studio/**/*.md
-        Tutorials - Simulation & Virtual Control:
-          - stellarx/tutorials/simulation/**/*.md
-        User Guide:
-          - stellarx/user_guide/**/*.md
+          - tutorials/stellar_designer/**/*.md
+        Virtual Simulation:
+          - virtual_simulation/**/*.md
+        SSH Workspace:
+          - ssh_workspace/**/*.md

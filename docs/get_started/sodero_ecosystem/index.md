@@ -1,30 +1,60 @@
 # Sodero Ecosystem
 
 ## A Software-Defined Robotics Platform: Build Once. Move Everywhere.
-Sodero fundamentally resolves the biggest bottlenecks in traditional robot development: **Tight Hardware Coupling** and the **Sim-to-Real Gap**. By abstracting complex control environments into a standardized software layer, we provide an innovative, unified ecosystem. Developers can now design robots in a virtual environment and deploy them directly to the real world without changing a single line of code.
+Sodero fundamentally resolves the biggest bottlenecks in traditional robot development: **Tight Hardware Coupling** and the **Sim-to-Real Gap**. By abstracting complex control environments into a standardized software layer, we provide an innovative, unified ecosystem. Developers can design robots in a virtual environment and deploy them directly to the real world without changing a single line of code.
 
 ### Core Architecture
 
 **Causality-Aligned Simulation**
-  Going beyond simple 3D rendering, our Reverse Digital Twin technology ensures that the control logic in the virtual environment perfectly matches the physical outcomes in reality. Success in simulation guarantees success in the real world.
+  Going beyond simple 3D rendering, our Reverse Digital Twin technology ensures that the control logic in the virtual environment matches the physical outcomes in reality. The same controller drives a robot in NVIDIA Isaac Sim and on real motors; only its gateway changes.
+
 **Unified Execution Layer**
-  Even if the robot's form factor or hardware changes, there is no need to rewrite the glue code from scratch. All codes and motions written on the Sodero platform are executed with perfectly standardized semantics.
+  Even if the robot's form factor or hardware changes, there is no need to rewrite the glue code from scratch. Every node on Stellar Station, built-in or your own, runs on one real-time runtime with standardized interfaces, so code and motions written on the Sodero platform are executed with the same semantics everywhere.
 
-### The Build-Teach-Run Workflow
-The Sodero ecosystem connects the entire process—from robot design and validation to physical deployment—into a single, seamless pipeline.
+---
 
-**Build: Stellar Designer** A web-based control design tool that allows you to intuitively define your robot's kinematics, links, and joint parameters via a GUI, entirely hardware-free.
-**Create: Stellar Motion Studio** An intuitive motion generation interface where you can create precise trajectories and safely test poses without writing complex code.
-**Simulate: Virtual Controller & NVIDIA Isaac Sim** A free, Docker-based virtual controller that runs instantly without complex host OS configurations. Integrated with NVIDIA Isaac Sim, it enables perfect pre-validation even without physical hardware.
-**Run: Stellar Hardware Series** Starting with Stellar X, our industry-proven universal motion controller, Sodero will continuously expand its physical ecosystem with next-generation lineups (e.g., Stellar Y, Z) to support various form factors and specialized applications.
+### What's New in 2.0
 
-!!! idea "**Tip:** Stellar Designer and Motion Studio operate in a browser-native environment. Start designing your own robot immediately without installing heavy software on your PC."
+Version 2.0 turns Stellar X from a single-robot motion controller into a complete robot system on one controller:
 
+- **Stellar Station**: build the robot system as a graph of nodes (gateways, controllers, sensors, navigation and your own modules) and run it from the browser.
+- **One Stellar Designer** for every design document: manipulators (`.sdd`), mobile bases (`.sddm`), articulated robots (`.sdda`) and gateways (`.gw`).
+- **Mobile robots and navigation**: Strider drives wheeled bases; the Localizer and Navigator add map-based localization and autonomous navigation.
+- **Isaac Bridge**: connect robots in NVIDIA Isaac Sim to the Station over the network, with cameras and IMUs.
+- **SSH Workspace and AI agents**: develop on the controller over SSH and let AI coding agents operate the Station with the `sodero` CLI.
 
+---
 
-### Infinite Extensibility
-Beyond controlling a single robot, Sodero supports flexible integration with complex SI (System Integration) environments and upper-level host controllers.
+### From Design to the Real Robot
+The Sodero ecosystem connects the entire process, from robot design and validation to physical deployment, into a single pipeline.
 
-**Language-Agnostic SDK (stellarx_remote)** Built on an independent RPC (Remote Procedure Call) architecture, our SDK allows you to integrate upper-level controllers using your preferred programming language, such as C++, Python, or Rust.
-**Unified API Experience** The API used for internal simulation testing is structurally identical to the one used for external remote control. Apply the code you wrote in the virtual environment directly to your production deployment without any modifications.
- 
+```mermaid
+flowchart TB
+    D["Design<br>Stellar Designer"] --> S["Compose<br>Stellar Station"]
+    S --> V["Simulate<br>Isaac Sim + Isaac Bridge"]
+    V --> R["Run<br>Stellar X + real hardware"]
+    R -. "same controller,<br>new gateway" .- V
+```
+
+**Design: Stellar Designer** A web-based design tool that defines your robot's kinematics, links, joints, wheels and actuator mapping through a GUI, and the gateway that connects the actuators, entirely hardware-free.
+
+**Compose: Stellar Station** The control center on the controller. Add gateways and controllers as nodes, connect their ports, load their design documents and start them, all in the browser.
+
+**Simulate: NVIDIA Isaac Sim** The Isaac Bridge extension connects a robot in Isaac Sim to the Station. The simulated robot is driven by exactly the same controller and documents as the real one.
+
+**Run: Stellar Hardware Series** Starting with Stellar X, our industry-proven universal motion controller with an EtherCAT master, Sodero will continuously expand its physical ecosystem with next-generation lineups to support various form factors and specialized applications.
+
+In simulation and on the real robot alike, you operate the robot from the same built-in controller UIs: **Motion Studio** for manipulators, **Strider** for mobile bases and **Articulation** for articulated and legged robots.
+
+!!! idea "**Tip:** Every tool runs in the browser and is served by Stellar X itself. Connect a PC to the controller's network and open its address; there is nothing to install on your PC except Isaac Sim for simulation."
+
+---
+
+### Integration and Extensibility
+Beyond controlling a single robot, Sodero integrates with complex system integration (SI) environments and upper-level host controllers.
+
+**Modules** Package your own programs and install them on the Station. They run as nodes next to the built-in ones and use the same interfaces to command robots, read sensors and send navigation goals.
+
+**SSH Workspace and the `sodero` CLI** Every Station operation is available as a command that prints JSON, for scripts, CI pipelines and AI coding agents.
+
+Continue with [Key Concepts](../key_concepts/index.md), then try the [Quick Start](../quick_start/index.md).

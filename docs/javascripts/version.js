@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return res;
     })
     .then(res => {
-      if (!res.ok) throw new Error("versions.json 파일을 서버에서 찾을 수 없습니다.");
+      if (!res.ok) throw new Error("versions.json not found");
       return res.json();
     })
     .then(data => {
@@ -35,6 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     })
     .catch(err => {
-      console.error("버전 로드 에러:", err);
+      console.error("Version list could not be loaded:", err);
     });
 });

@@ -1,6 +1,6 @@
-# Getting Started with StellarX
+# Stellar X
 
-Welcome to the StellarX family! We’re excited to have you on board. This guide will walk you through everything you need to get up and running—from unboxing and hardware assembly to establishing your first network connection with your PC.
+Welcome to the Stellar X family! We’re excited to have you on board. This guide will walk you through everything you need to get up and running—from unboxing and hardware assembly to establishing your first network connection with your PC.
 
 ---
 
@@ -9,7 +9,7 @@ Before we begin, please check that your package includes all the following compo
 
 <figure markdown="span">
   ![Stellar X Main Unit](images/product_stellar_x.svg){ width="750" }
-  <figcaption>StellarX Main Unit</figcaption>
+  <figcaption>Stellar X Main Unit</figcaption>
 </figure>
 
 <figure markdown="span">
@@ -25,16 +25,16 @@ Before we begin, please check that your package includes all the following compo
 ---
 
 ## 2. Device Overview
-Take a moment to familiarize yourself with the StellarX interface. Knowing the ports now will make the setup process much smoother.
+Take a moment to familiarize yourself with the Stellar X interface. Knowing the ports now will make the setup process much smoother.
 
 <figure markdown="span">
   ![Hardware Interface](images/hardware_interface.svg){ width="500" }
-  <figcaption>StellarX Interface1</figcaption>
+  <figcaption>Rear panel: ① Eth1 ② Eth2 ③ EtherCAT Out ④ DC 24V In</figcaption>
 </figure>
 
 <figure markdown="span">
   ![Hardware Interface](images/hardware_interface2.svg){ width="500" }
-  <figcaption>StellarX Interface2</figcaption>
+  <figcaption>Bottom: ⑤ reset button</figcaption>
 </figure>
 
 | Port / Button | Description |
@@ -52,9 +52,9 @@ To ensure the longevity of your device and prevent electrical damage, please fol
 
 1. **Prepare the Adapter:** Connect the power cable to the 24V power adapter. **Stop! Do not plug it into the wall outlet just yet.**
 
-2. **Connect to StellarX:** Insert the adapter's output cable into the **DC 24V In** port on the unit.
+2. **Connect to Stellar X:** Insert the adapter's output cable into the **DC 24V In** port on the unit.
 
-    !!! error "To prevent **electrical arcing (sparks)** or connection issues, always connect the cable to the **StellarX unit first**, and *then* plug the power adapter into the wall."
+    !!! error "To prevent **electrical arcing (sparks)** or connection issues, always connect the cable to the **Stellar X unit first**, and *then* plug the power adapter into the wall."
 
     !!! info "The connector features a small guide notch inside. If it doesn't slide in easily, **gently rotate the cable** until the notch aligns with the port."
 
@@ -70,14 +70,14 @@ To ensure the longevity of your device and prevent electrical damage, please fol
       <figcaption>Securing the locking nut</figcaption>
     </figure>
 
-4. **Power Up:** Finally, plug the power cable into a standard wall outlet. Your StellarX will power on automatically.
+4. **Power Up:** Finally, plug the power cable into a standard wall outlet. Your Stellar X will power on automatically.
 
 ---
 
 ## 4. Network Configuration
-To talk to StellarX, your PC needs to be on the same "wavelength" (network subnet).
+Your PC must be on the same subnet as Stellar X.
 
-1. **Physical Connection:** Connect an Ethernet (LAN) cable to **Eth1 (Port 1)** on the StellarX unit and the other end to your PC’s LAN port.
+1. **Physical Connection:** Connect an Ethernet (LAN) cable to **Eth1 (Port 1)** on the Stellar X unit and the other end to your PC’s LAN port.
 
     <figure markdown="span">
       ![LAN Port Connection](images/lan_connection.svg){ width="500" }
@@ -85,7 +85,7 @@ To talk to StellarX, your PC needs to be on the same "wavelength" (network subne
     </figure>
 
 2. **Configure Your PC:**
-   Since StellarX's Eth1 is fixed at `10.0.0.1`, you must set your PC to a static IP in the same range (e.g., `10.0.0.2`).
+   Since Stellar X's Eth1 is fixed at `10.0.0.1`, you must set your PC to a static IP in the same range (e.g., `10.0.0.2`).
 
     !!! warning "Avoid using `10.0.0.1` for your PC, as this will cause an IP conflict."
 
@@ -107,12 +107,14 @@ To talk to StellarX, your PC needs to be on the same "wavelength" (network subne
    `http://10.0.0.1`
 
 4. **Success!**
-   If the **Stellar Designer** welcome screen appears, you are officially ready to start your project!
+   If **Stellar Station** appears, you are ready to start your project. Continue with the [Quick Start](../../../get_started/quick_start/index.md).
 
     <figure markdown="span">
-      ![Welcome Screen](images/welcome_screen.svg){ width="800" }
-      <figcaption>Stellar Designer Welcome Screen</figcaption>
+      ![Stellar Station](images/stellar_station.png){ width="800" }
+      <figcaption>Stellar Station</figcaption>
     </figure>
+
+    !!! info "To change the controller's address or to connect it to your office network, use the [Network Settings](../network_settings/index.md) page on port 3000."
 
 ---
 
@@ -121,20 +123,20 @@ If you ever forget your IP settings or need a fresh start, you can perform a fac
 
 <figure markdown="span">
     ![Reset Button](images/reset_button.svg){ width="500" }
-    <figcaption>Reset Button Location</figcaption>
+    <figcaption>The reset button ⑤ on the bottom of the unit</figcaption>
 </figure>
 
-### **The Procedure**
+### Procedure
 1. Locate the **Reset Button** on the bottom of the unit.
 2. Press and hold the button for **more than 3 seconds**.
 3. The system will automatically reboot.
 4. Once back up, **Eth1** will be restored to the default IP: `10.0.0.1`.
 
-### **Troubleshooting**
+### Troubleshooting
 
 If the reset doesn't seem to trigger, try these steps:
 
 1. **Power Cycle:** Unplug the power, wait 10 seconds, and plug it back in.
 2. **Wait & Retry:** Give the system about **1 minute** to fully initialize, then try holding the reset button for 3 seconds again.
 
-!!! error "A factory reset will **permanently erase all stored data**, including projects, scripts, and custom settings. Please use this feature with caution."
+!!! error "A factory reset will **permanently erase all stored data**, including the Station's nodes, documents and settings. Back up the Station first ([Backup and Restore](../../../station/backup_restore/index.md))."

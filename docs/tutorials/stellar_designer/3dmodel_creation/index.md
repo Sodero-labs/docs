@@ -1,82 +1,85 @@
 # 3D Model Creation
-In this chapter, we will assemble 3d model parts for visualization in Stellar X. In terms of applying to real workflow, we're going to assume that you finished your CAD design and have 3d model files for each links. If you are using manufactured robots, you should have your technical specification ready for DH-parameters, joint limits, physics property etc. This step is purely for visualization and optional, so you can skip it and have no problem moving forward. We'll be using 6-axis manipulator for this example. Please download 3d models from link below and unzip it.
 
-- **[download link](models/example_manipulator_parts.zip)**
+This tutorial assembles the 3D model of a robot arm for display in Stellar Designer, Motion Studio and the Station. The model is for visualization only: the kinematics come from the DH parameters of the `.sdd` document, not from the model. You can skip this step and add a model later.
+
+The example is a 6-axis manipulator. Download its parts and unzip them:
+
+- **[example_manipulator_parts.zip](models/example_manipulator_parts.zip)**
 
 <figure markdown="span">
-    ![PS_A_03_500](images/ps_a_03_500.png){ width="400" }
-    <figcaption>Rendered Image of Example Manipulator</figcaption>
+    ![Example manipulator](images/ps_a_03_500.png){ width="400" }
+    <figcaption>The example manipulator</figcaption>
 </figure>
 
-We'll be using blender for this step. Blender accepts most of major 3d model formats except some proprietary ones. You don't have to use blender, but the naming convention, model tree, output file format must be matched.
+For your own robot you need one 3D model file per link from your CAD design, and the DH parameters, joint limits and mass properties from its specification.
 
-- [**Blender Installation**](https://www.blender.org/download/)
+The steps use [Blender](https://www.blender.org/download/){:target="_blank"}, which reads most common 3D formats. Any other 3D tool works as long as it produces the same object names, hierarchy and file format.
 
 ---
 
-## 1. Blender Preferences
+## 1. Prepare the Scene in Blender
 
-### 1. Stage
-<figure markdown="span">
-    ![blender](images/blender_01.png){ width="1000" }
-</figure>
-- First, open blender and delete default `Camera`, `Cube` and `Light`.
-
-### 2. Naming Conventions
-
-**Base**
-
-| Classification | Name |
-|------|------|
-| Joint | J0 |
-| Link | link0 |
-
-**Joint**
-
-- `J1` ~ `Jn`
-
-**Link**
-
-- `link1` ~ `linkn`
-!!! info "`n` increases with the number of joints."
-
-### 3. Create Joints
-<figure markdown="span">
-    ![blender](images/blender_02.png)
-    ![blender](images/blender_03.png)
-</figure>
-- Click `Add` -> `Empty` -> `Plain Axes` to add axes. Add total of 7 axes and rename them to J0 ~ J7. These names act as joints in Designer and their name must be `J{number}`.
-
-### 4. Create links
-<figure markdown="span">
-    ![blender](images/blender_04.png)
-    ![blender](images/blender_05.png){ width="1000" }
-    ![blender](images/blender_06.png){ width="1000" }
-</figure>
-- Now, we are going to add 3d models. Click `File` -> `Import` -> `Wavefront`. Go to saved directory and import all 7 of them. Be aware of import settings. If imported successfully, it should look like bottom picture.
+### Clear the Scene
 
 <figure markdown="span">
-    ![blender](images/blender_07.png)
-    ![blender](images/blender_08.png){ width="1000" }
+    ![Blender](images/blender_01.png){ width="1000" }
 </figure>
-- Click `link0` -> `Rotation X` and enter `0`. The part should now stand up. Repeat this for all the other parts.
 
-### 5. Joint–Link Connection
-Each link model must be moved under its corresponding joint.
+Open Blender and delete the default `Camera`, `Cube` and `Light`.
+
+### Naming Conventions
+
+| Part | Name |
+| :--- | :--- |
+| Base joint | `J0` |
+| Base link | `link0` |
+| Joints | `J1` to `Jn` |
+| Links | `link1` to `linkn` |
+
+`n` is the number of joints, 6 in this example.
+
+### Create the Joints
 
 <figure markdown="span">
-    ![blender](images/blender_09.png)
-    ![blender](images/blender_10.png)
+    ![Blender](images/blender_02.png)
+    ![Blender](images/blender_03.png)
 </figure>
-- Select `link0` and shift-drag the link to the `J0` joint. `link0` should now lay under `J0`. Repeat it for all the other links.
+
+Click **Add › Empty › Plain Axes** to add an axis object. Add seven of them and rename them `J0` to `J6`. Stellar Designer finds the joints by these names, so each name must be `J` followed by its number.
+
+### Import the Links
+
+<figure markdown="span">
+    ![Blender](images/blender_04.png)
+    ![Blender](images/blender_05.png){ width="1000" }
+    ![Blender](images/blender_06.png){ width="1000" }
+</figure>
+
+Click **File › Import › Wavefront (.obj)**, open the folder of the unzipped parts and import all seven parts with the import settings shown above. The scene then looks like the last picture.
+
+<figure markdown="span">
+    ![Blender](images/blender_07.png)
+    ![Blender](images/blender_08.png){ width="1000" }
+</figure>
+
+Select `link0` and set **Rotation X** to `0`: the part stands upright. Repeat this for the other parts.
+
+### Attach Each Link to Its Joint
+
+<figure markdown="span">
+    ![Blender](images/blender_09.png)
+    ![Blender](images/blender_10.png)
+</figure>
+
+Select `link0` and Shift-drag it onto `J0`, so that `link0` sits under `J0`. Repeat this for the other links.
 
 ---
 
-## 2. Hierarchical Structure
-The robot must be configured in a serial manipulator configuration.
+## 2. Build the Hierarchy
 
-### 1. Basic Structure
-```
+The robot is a serial chain: each joint is a child of the previous joint, and each link is a child of its joint.
+
+```text
 World
 └── root
     └── links
@@ -97,121 +100,85 @@ World
 ```
 
 <figure markdown="span">
-    ![blender](images/blender_10_2.png)
+    ![Blender](images/blender_10_2.png)
 </figure>
 
-Select `J1` and shift-drag to `J0` joint. both `J1` and `link1` should now be under `J0`. Repeat same process for rest of the joints.
+Select `J1` and Shift-drag it onto `J0`: `J1` and `link1` are now under `J0`. Repeat this for the other joints.
 
-### 2. Structure Description
 | Item | Description |
-|------|------|
-| World | 3D Tool Basic Scene |
-| root | Robot Base Node |
-| links | Joint Group |
-| J0~Jn | Joint Nodes |
-| link0~linkn | Link Model |
+| :--- | :--- |
+| `World` | The scene of the 3D tool |
+| `root` | The robot's base node |
+| `links` | The group that holds the joints |
+| `J0` to `Jn` | Joint nodes |
+| `link0` to `linkn` | Link models |
 
-
-### 3. Precautions when Creating a Structure
-- All joints (`Jn`) must be set as children of the parent link.
-- Each link (`linkn`) must be set as a child of its corresponding joint (`Jn`).
-- If the hierarchy is incorrect, the robot structure will not function properly.
+!!! warning "Each joint `Jn` must be a child of the previous joint, and each link `linkn` a child of its joint `Jn`. With a different hierarchy the links do not move with their joints."
 
 ---
 
-## 3. Aligning DH Parameters with Model Structure
-The joint structure set in Blender must match the DH parameters in Stellar Designer.
+## 3. Match the DH Parameters
 
-### 1. DH Parameter
-DH parameters are defined by transforming each joint coordinate system in the following order:
+The joint frames in Blender must match the DH parameters of the robot in Stellar Designer.
 
-    Application order:
+### DH Convention
 
-    1. Z-axis rotation (θ)
-    2. Z-axis translation (d)
-    3. X-axis translation (a)
-    4. X-axis rotation (α)
+Stellar Designer applies the four DH parameters of a joint in this fixed order:
 
-    This order cannot be changed and is the default rule for coordinate system calculations.
+1. Rotation about Z by θ (theta)
+2. Translation along Z by d
+3. Translation along X by a
+4. Rotation about X by α (alpha)
 
-### 2. Matching modeling and DH parameters in Blender
-<figure markdown="span">
-    ![blender](images/blender_13.png){ width="1000" }
-</figure>
-- Shows the joint hierarchy in Blender.
-<figure markdown="span">
-    ![stellar](images/stellar_dh_j1.png){ width="400" }
-</figure>
-- Shows the DH parameter settings for J1 in Stellar Designer.
-
-This means that J1 is transformed in the following order:
-
-    1. No rotation about the Z-axis (θ = 0)
-    2. Translation of 205 mm along the Z-axis (d = 205)
-    3. No translation along the X-axis (a = 0)
-    4. No rotation about the X-axis (α = 0)
-
-    As a result, the coordinate frame of J2 is generated at a position
-    205 mm above J1 along the Z-axis.
-
-- Click `J2` -> `Location z` and enter `0.205`. 
-- `link2` and all the other links under `J2` should move upward. 
+### Place the Joints
 
 <figure markdown="span">
-    ![blender](images/blender_14.png){ width="1000" }
-    ![blender](images/blender_15.png){ width="1000" }
-    ![blender](images/blender_16.png){ width="1000" }
+    ![Blender](images/blender_13.png){ width="1000" }
+    <figcaption>The joint hierarchy in Blender</figcaption>
 </figure>
-- For `J3`, enter `0.27`, and for `J5`, enter `0.23`. Final result should look like bottom picture.
 
-When making your own robot, your parts may not align with the axes from DH-parameters. In that case, you have to adjust the position of the mesh itself from your CAD program. The base's position and joint positions when assembled should be { 0.0, 0.0, 0.0 } and 0, respectively.
+Joint J1 of the example has θ = 0, d = 205 mm, a = 0 and α = 0 in Stellar Designer, so the frame of J2 sits 205 mm above J1 along Z.
 
-## 4. Setting Coordinate Axes and Rotation Axes
-- Set the rotation axis of each joint (`Jn`) based on the DH parameters.
-- Use rotation based on the Local Axis.
-- Do not use rotation based on the World Axis.
+1. Select `J2` and set **Location Z** to `0.205`. `link2` and everything under `J2` moves up.
+2. Set **Location Z** of `J3` to `0.27` and of `J5` to `0.23`. The model then looks like the last picture below.
 
-<figure markdown>
-![stellar](images/stellar_designer_robot_structure.png)
-<figcaption>Robot Structure</figcaption>
+<figure markdown="span">
+    ![Blender](images/blender_14.png){ width="1000" }
+    ![Blender](images/blender_15.png){ width="1000" }
+    ![Blender](images/blender_16.png){ width="1000" }
 </figure>
-<figure markdown>
-![blender](images/stellar_designer_robot_structure_blender.png)
-<figcaption>Blender</figcaption>
-</figure>
+
+For your own robot, the parts may not line up with the joint axes of the DH parameters. In that case, move the mesh itself in your CAD program. In the assembled pose, the base is at (0, 0, 0) and every joint is at 0.
+
+### Joint Axes
+
+- Set the rotation axis of each joint `Jn` according to its DH parameters.
+- Rotate in the joint's local axes, not in the world axes.
 
 ---
 
-## 5.  Exporting Result
+## 4. Export the Model
 
-### 1. Export Menu
-File → Export → glTF 2.0 (.glb/.gltf)
+1. Choose **File › Export › glTF 2.0 (.glb/.gltf)**.
 
-<figure markdown="span">
-    ![blender](images/blender_17.png)
-</figure>
+    <figure markdown="span">
+        ![Blender](images/blender_17.png)
+    </figure>
 
+2. In the export window, set **Format** to **glTF Binary (.glb)** and, under **Transform**, clear **+Y Up**.
 
-### 2. Required Export Options
-Set the following in the Export window:
+    <figure markdown="span">
+        ![Blender](images/blender_18.png){ width="1000" }
+    </figure>
 
-#### Transform Settings
-+Y Up: Disabled
-!!! warning "This must be disabled to prevent coordinate transformation errors."
+!!! warning "Clear **+Y Up**. Otherwise Blender converts the model to a Y-up coordinate system, and it appears rotated in Stellar Designer."
 
-<figure markdown="span">
-    ![blender](images/blender_18.png){ width="1000" }
-</figure>
-
-And that should be it. For those who are having troubles, i'll leave download links for final assembly. 
-
-**[.blend download link](models/example_manipulator_assembly_vis.blend)**
-
-**[.glb download link](models/example_manipulator_assembly_vis.glb)**
+The finished files of this example: **[.blend](models/example_manipulator_assembly_vis.blend)** and **[.glb](models/example_manipulator_assembly_vis.glb)**.
 
 ---
 
-## 6. Notes
-- Only `.glb` files are used in the final system.
-- Blender is a production example tool and is not a required tool.
-- The same structure and naming conventions must be maintained when using other tools.
+## 5. Load the Model in Stellar Designer
+
+Open the robot's document in Stellar Designer, click **Display** in the 3D view and choose **Load.glb** ([Stellar Designer](../introduction/index.md#display-menu)). Switch **Representation** to **3D Model**: each link moves with its joint when you jog the joints in **Robot Structure**. Motion Studio and the Station then show the robot with this model.
+
+!!! info "Stellar Designer uses only the `.glb` file. Blender is one example of a tool; any other tool works with the same names, hierarchy and file format."

@@ -1,4 +1,6 @@
-mkdocs-material
-mkdocs-glightbox
-mkdocs-llmstxt
-mike
+mkdocs==1.6.1
+mkdocs-material==9.7.7
+mkdocs-glightbox==0.5.2
+mkdocs-llmstxt==0.5.1
+pymdown-extensions==12.3
+mike==2.2.0
