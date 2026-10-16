@@ -1,0 +1,3304 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.sodero.io/v2.0.0/gateways/device_bridge/">
+      
+      
+        <link rel="prev" href="../sensors_and_cameras/">
+      
+      
+        <link rel="next" href="../../controllers/strider/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/tab_icon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+  
+    <title>Device Bridge</title>
+  
+
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../styles/layout.css">
+    
+      <link rel="stylesheet" href="../../styles/color.css">
+    
+      <link rel="stylesheet" href="../../styles/font.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="white">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#device-bridge" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden="">
+        
+      </div>
+    
+    
+  <style>
+    .md-header {
+      height: 60px !important;
+      background: #111 !important;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #333;
+    }
+
+    /* --- [1] 모바일 화면 --- */
+    @media (max-width: 76.24em) {
+      .pc-only { display: none !important; }
+      .mobile-header-inner {
+        display: flex; align-items: center;
+        height: 100%; width: 100%; padding: 0 12px; gap: 10px;
+      }
+      .md-header__button.md-icon { color: #fff; cursor: pointer; display: flex; align-items: center; margin-left: -8px; }
+      .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
+    }
+
+    /* --- [2] PC 화면 --- */
+    @media (min-width: 76.25em) {
+      .mobile-only { display: none !important; }
+      .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
+
+      .custom-header-inner {
+        height: 100%; display: grid; grid-template-columns: 280px 1fr 600px;
+        align-items: center; width: 100%; box-sizing: border-box;
+      }
+
+      .header-left, .header-center, .header-right { height: 100%; display: flex; align-items: center; padding: 0 12px; }
+      .header-left { gap: 15px; border-right: 1px solid #333; }
+      .header-icon-link, .header-home-btn { display: flex; align-items: center; height: 100%; text-decoration: none; color: #fff; }
+      .site-title { font-size: 0.8rem; font-weight: 500; }
+      .header-breadcrumbs { font-size: 14px; color: #bdbdbd; display: flex; gap: 6px; }
+      .header-breadcrumbs a { color: #bdbdbd; text-decoration: none; }
+      .header-right { justify-content: flex-end; gap: 10px; }
+
+      .md-search { position: relative; transition: all 0.3s; }
+
+      .md-search:focus-within {
+        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0, 0, 0, 0.85); display: flex; flex-direction: column;
+        align-items: center; padding-top: 40px; z-index: 999;
+      }
+
+      .md-search__form {
+        position: relative; display: flex; align-items: center;
+        width: 280px; height: 36px;
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid #333; 
+        border-radius: 4px;
+        transition: all 0.3s;
+        overflow: visible; 
+      }
+
+      .md-search:focus-within .md-search__form {
+        width: 100%; max-width: 760px; height: 54px;
+        background-color: #1a1a1a; border: 1px solid #444;
+      }
+
+      .md-search__input {
+        width: 100%; height: 100%; background: transparent !important;
+        border: none !important; outline: none !important;
+        color: #fff; font-size: 0.75rem; 
+        padding: 0 40px !important; 
+      }
+
+      .md-search:focus-within .md-search__input { font-size: 1.1rem; padding: 0 60px !important; }
+
+      .md-search__icon {
+        position: absolute !important;
+        left: 8px !important;
+        top: 50% !important;
+        transform: translateY(-45%) !important;
+        color: #bdbdbd !important;
+        opacity: 1 !important; 
+        visibility: visible !important; 
+        cursor: pointer;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        z-index: 5; 
+      }
+
+      .md-search:focus-within .md-search__icon[data-md-component="search-reset"] {
+        opacity: 1 !important;
+        left: 15px !important;
+
+        pointer-events: auto;
+      }
+
+      .md-search__output { display: none; }
+      .md-search:focus-within .md-search__output {
+        display: block; position: static; width: 100%; max-width: 760px;
+        background: #1a1a1a; margin-top: 2px; border-radius: 0 0 8px 8px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      }
+
+      .md-search-result__list {
+        display: flex;
+        flex-direction: column; 
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .md-search-result__item {
+        border-bottom: 1px solid #333; 
+      }
+
+      .md-search-result__link {
+        padding: 10px 15px !important;
+        display: block !important;
+      }
+
+      .md-search-result__article h1,
+      .md-search-result__article h2,
+      .md-search-result__article h3 {
+        font-size: 20px !important; 
+        font-weight: 600 !important;
+        margin: 0 0 4px 0 !important;
+        color: #e0e0e0 !important;
+        line-height: 1.2 !important;
+      }
+
+      .md-search-result__teaser {
+        font-size: 14px !important;
+        color: #999 !important;
+        line-height: 1.4 !important;
+        max-height: 2.8em; 
+        overflow: hidden;
+      }
+
+      /* 매칭된 키워드 하이라이트 색상 */
+      .md-search-result mark {
+        background-color: #0070dd;
+        color: #f0f1f2;
+        text-decoration: underline;
+      }
+
+      .md-search__scrollwrap {
+        max-height: 60vh; 
+        scrollbar-width: thin;
+        scrollbar-color: #444 transparent;
+      }
+    }
+
+    .md-search-result__icon {
+      width: 1.2rem !important; 
+      height: 1.2rem !important;
+      margin-top: 0.1rem !important;
+    }
+
+    .md-search-result__icon svg {
+      width: 0.8rem !important;  
+      height: 0.8rem !important;
+      opacity: 0.6;       
+    }
+
+    .md-search-result__link {
+      display: flex !important;
+      align-items: flex-start !important; 
+      gap: 10px !important;    
+      padding: 10px 15px !important;
+    }
+
+    .md-search-result__article {
+      width: 760px;
+      margin-left: 0 !important;
+    }
+  </style>
+
+  <header class="md-header" data-md-component="header">
+    <div class="md-header__inner" style="width: 100%;">
+      
+      <div class="mobile-header-inner mobile-only">
+        <label class="md-header__button md-icon" for="__drawer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+        </label>
+        <a href="../.." class="header-home-btn">
+          <img src="../../assets/docs.svg" alt="Sodero Docs">
+        </a>
+      </div>
+
+      <div class="custom-header-inner pc-only">
+        <div class="header-left">
+          <a href="https://www.sodero.io" class="header-icon-link" title="Sodero Home" target="_blank" rel="noopener">
+            <img src="../../assets/main_icon.svg" alt="Sodero Docs">
+          </a>
+          <a href="../.." class="header-home-btn">
+            <img src="../../assets/docs.svg" alt="Sodero Docs">
+          </a>
+        </div>
+
+        <div class="header-center">
+          <nav class="header-breadcrumbs">
+            
+              
+                <a href="#">Gateways</a>
+                <span class="sep">/</span>
+              
+            
+            <span class="current">Device Bridge</span>
+          </nav>
+        </div>
+
+        <div class="header-right">
+          <div class="md-search" data-md-component="search">
+            <form class="md-search__form" name="search">
+              <label class="md-search__icon md-icon" for="__search">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M9.5 3a6.5 6.5 0 015.2 10.5l4.4 4.4-1.4 1.4-4.4-4.4A6.5 6.5 0 119.5 3m0 2a4.5 4.5 0 100 9 4.5 4.5 0 000-9z"></path>
+                </svg>
+              </label>
+
+              <input type="text" class="md-search__input" placeholder="Search" aria-label="Search" data-md-component="search-query" required="">
+
+              <button type="submit" class="md-search__icon md-icon" data-md-component="search-reset" aria-label="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M9.5 3a6.5 6.5 0 015.2 10.5l4.4 4.4-1.4 1.4-4.4-4.4A6.5 6.5 0 119.5 3m0 2a4.5 4.5 0 100 9 4.5 4.5 0 000-9z"></path>
+                </svg>
+              </button>
+            </form>
+            <div class="md-search__output">
+              <div class="md-search__scrollwrap" data-md-scrollfix="">
+                <div class="md-search-result" data-md-component="search-result">
+                  <div class="md-search-result__meta"></div>
+                  <ol class="md-search-result__list"></ol>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="version-dropdown">
+            <select class="version-select"></select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sodero Documents" class="md-nav__button md-logo" aria-label="Sodero Documents" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Sodero Documents
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1">
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Get Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../get_started/sodero_ecosystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sodero Ecosystem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../get_started/key_concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Key Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../get_started/quick_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardware Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1">
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stellar Series
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stellar Series
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware_setup/stellar_series/stellar_x/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stellar X
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware_setup/stellar_series/network_settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stellar Station
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stellar Station
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../station/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../station/nodes_and_connections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nodes and Connections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../station/design_documents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../station/running_nodes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../station/modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../station/backup_restore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup and Restore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gateways
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gateways
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gateway_designer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gateway Designer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ethercat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EtherCAT Gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulation Gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sensors_and_cameras/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sensors and Cameras
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Device Bridge
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Device Bridge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-official-and-what-is-yours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is Official and What Is Yours
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-install-and-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Install and Run
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Install and Run">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration File
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log-lines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log Lines
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-from-another-computer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check from Another Computer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#try-without-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Try Without Hardware
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-built-in-drivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Built-in Drivers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-connect-it-on-the-station-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Connect It on the Station Page
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Connect It on the Station Page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#camera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Camera
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#imu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IMU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wheels-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wheels (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#navigation-and-mounting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Navigation and Mounting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-write-your-own-driver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Write Your Own Driver
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Protocol
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Controllers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Controllers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../controllers/strider/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strider
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../controllers/motion_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Motion Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../controllers/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Localization &amp; Navigation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Localization &amp; Navigation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../navigation/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../navigation/map_bundle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Map Bundle (.nav)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../navigation/simulation_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigate in Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1">
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stellar Designer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stellar Designer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/manipulator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manipulator (.sdd)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/mobile_robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot (.sddm)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3D Model (.glb)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual Simulation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtual Simulation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual_simulation/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual_simulation/extension_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Isaac Bridge Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual_simulation/robot_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual_simulation/connect_station/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connect to Stellar Station
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH Workspace
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SSH Workspace
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ssh_workspace/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ssh_workspace/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Coding Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ssh_workspace/sodero_cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sodero CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChangeLog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-official-and-what-is-yours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is Official and What Is Yours
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-install-and-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Install and Run
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Install and Run">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration File
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log-lines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log Lines
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-from-another-computer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check from Another Computer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#try-without-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Try Without Hardware
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-built-in-drivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Built-in Drivers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-connect-it-on-the-station-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Connect It on the Station Page
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Connect It on the Station Page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#camera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Camera
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#imu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IMU
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wheels-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wheels (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#navigation-and-mounting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Navigation and Mounting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-write-your-own-driver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Write Your Own Driver
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Protocol
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  <div id="breadcrumb-source" hidden="">
+    
+      
+        <a href="#">Gateways</a>
+        <span class="sep">/</span>
+      
+    
+    <span class="current">Device Bridge</span>
+  </div>
+  
+                  
+
+
+
+<h1 id="device-bridge">Device Bridge<a class="headerlink" href="#device-bridge" title="Permanent link">¶</a></h1>
+<p>Stellar X connects to the rest of the robot through network ports only. Sensors that need USB, such as an Intel RealSense depth camera or a USB IMU, therefore go on a small computer next to them: a Raspberry Pi, another single-board computer or a PC. The <strong>device bridge</strong> runs on that computer. It reads the devices and serves their data to the controller over the LAN.</p>
+<p>The bridge speaks the same network protocol as the Isaac Sim bridge. The controller's official Camera gateway, IMU gateway, Visual odometry, Localizer and Navigator therefore work with real sensors exactly as they work with a simulated robot; only the address they connect to differs.</p>
+<p>Use the device bridge when:</p>
+<ul>
+<li>the robot carries a USB camera or IMU, which cannot plug into the controller;</li>
+<li>the motor board of a small robot sits on USB as well (for example the TurtleBot3 OpenCR board) and the controller should drive it.</li>
+</ul>
+<p>Drives on the controller's EtherCAT port do not need the bridge, and neither does a simulated robot.</p>
+<div class="admonition info">
+<p class="admonition-title">The device bridge is an open example program. Use its built-in drivers as they are, or add a driver for your own device. Nothing changes on the controller.</p>
+</div>
+<hr>
+<h2 id="1-architecture">1. Architecture<a class="headerlink" href="#1-architecture" title="Permanent link">¶</a></h2>
+<pre class="mermaid"><code>flowchart TB
+    subgraph SC ["Sensor computer"]
+        DB(["Device bridge"])
+        RS["RealSense&lt;br&gt;depth camera"] --&gt; DB
+        IU["USB IMU"] --&gt; DB
+        MB["Motor board&lt;br&gt;(optional)"] &lt;--&gt; DB
+    end
+    subgraph SX ["Stellar X · Stellar Station"]
+        CG["Camera gateway"]
+        IG["IMU gateway"]
+        AG["Actuator gateway&lt;br&gt;(optional)"]
+        VO["Visual odometry"]
+        LO["Localizer"]
+        NV["Navigator"]
+        ST["Strider"]
+    end
+    DB --&gt;|"53335 · RGB-D frames"| CG
+    DB --&gt;|"53334 · IMU samples"| IG
+    DB &lt;--&gt;|"53333 commands · 53334 joint states"| AG
+    CG --&gt; VO
+    IG --&gt; VO
+    CG --&gt; LO
+    VO --&gt;|odometry| LO
+    LO --&gt;|"localization · map"| NV
+    NV --&gt;|mobile_base| ST
+    AG &lt;--&gt;|servo_link| ST</code></pre>
+<p>The bridge <strong>listens</strong> on three ports and the controller's gateways <strong>connect</strong> to it, exactly as they connect to the simulator. Every message carries the bridge's <code>robot_name</code>, and each gateway takes the data published under the name it is configured with. Without the optional wheels, Strider drives the robot's own base through an EtherCAT Actuator gateway as usual.</p>
+<h3 id="what-is-official-and-what-is-yours">What Is Official and What Is Yours<a class="headerlink" href="#what-is-official-and-what-is-yours" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Part</th>
+<th style="text-align: left;">Runs on</th>
+<th style="text-align: left;">Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Device drivers (<code>device_bridge/devices/</code>)</td>
+<td style="text-align: left;">Sensor computer</td>
+<td style="text-align: left;"><strong>You.</strong> Use a built-in driver or add one per device.</td>
+</tr>
+<tr>
+<td style="text-align: left;">The rest of the bridge: protocol, streams, wheel watchdog</td>
+<td style="text-align: left;">Sensor computer</td>
+<td style="text-align: left;">Sodero. Use it as is.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Wire protocol (<code>docs/protocol.md</code>)</td>
+<td style="text-align: left;">Between the two</td>
+<td style="text-align: left;">Sodero. The Isaac Sim bridge speaks the same protocol.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Camera gateway, IMU gateway, Actuator gateway</td>
+<td style="text-align: left;">Stellar X</td>
+<td style="text-align: left;">Sodero official modules. You configure them.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Visual odometry, Localizer, Navigator, Strider</td>
+<td style="text-align: left;">Stellar X</td>
+<td style="text-align: left;">Sodero official modules. You configure them.</td>
+</tr>
+</tbody>
+</table>
+<p>Supporting a new camera or IMU means writing one small driver class on the sensor computer. Nothing on the controller is rebuilt or modified.</p>
+<hr>
+<h2 id="2-requirements">2. Requirements<a class="headerlink" href="#2-requirements" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Item</th>
+<th style="text-align: left;">Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Sensor computer</td>
+<td style="text-align: left;">A Raspberry Pi, another single-board computer or a PC next to the sensors, running 64-bit Linux with systemd (for example Debian 12, Raspberry Pi OS or Ubuntu). A RealSense camera needs a USB 3 port.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Python</td>
+<td style="text-align: left;">Python 3.8 or later. The installer creates its own environment; when the system Python cannot load the RealSense SDK (for example Debian 12 on 64-bit ARM), it installs a standalone Python 3.10 by itself.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Internet</td>
+<td style="text-align: left;">During installation only, to download the Python packages</td>
+</tr>
+<tr>
+<td style="text-align: left;">Network</td>
+<td style="text-align: left;">The sensor computer and Stellar X on the same LAN; a wired link is recommended</td>
+</tr>
+<tr>
+<td style="text-align: left;">Clocks</td>
+<td style="text-align: left;">Synchronized to within about 20 ms while frames carry their capture time (the default)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Firewall</td>
+<td style="text-align: left;">Inbound TCP ports 53333–53335 on the sensor computer open to the controller</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Bandwidth.</strong> RGB-D frames travel uncompressed: about 61 Mbit/s at 424 × 240 and 15 fps, about 185 Mbit/s at 640 × 480 and 15 fps, and about 370 Mbit/s at 640 × 480 and 30 fps. IMU samples and wheel messages add only a few Mbit/s. Use a wired link, ideally Gigabit Ethernet, for the higher settings.</p>
+<div class="admonition warning">
+<p class="admonition-title"><strong>Clock synchronization.</strong> With <code>send_capture_time: true</code> (the default), every frame carries its capture time. The controller accepts a frame only when that time is at most 20 ms ahead of its own clock and at most 2 s old, so run NTP (for example chrony) to keep both computers on the same time. If you cannot synchronize the clocks, set <code>send_capture_time: false</code>: the controller then uses each frame's arrival time, as with the simulator. This needs no clock agreement and costs the network delay in accuracy.</p>
+</div>
+<div class="admonition idea">
+<p class="admonition-title"><strong>Tip:</strong> On a sensor computer that runs ufw, open the ports for the controller with <code>sudo ufw allow from ROBOT_ADDRESS to any port 53333:53335 proto tcp</code>.</p>
+</div>
+<hr>
+<h2 id="3-install-and-run">3. Install and Run<a class="headerlink" href="#3-install-and-run" title="Permanent link">¶</a></h2>
+<ol>
+<li>
+<p><strong>Get the source</strong> on the sensor computer:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Sodero-labs/device_bridge.git
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>device_bridge
+</code></pre></div>
+<p>You can also copy the <code>device_bridge</code> folder to the sensor computer by other means, for example with <code>scp -r</code> from your PC.</p>
+</li>
+<li>
+<p><strong>Choose a configuration.</strong> Copy the example closest to your hardware, for example <code>cp config/turtlebot3_d435.yaml config/my_robot.yaml</code>, and edit it as described in <a href="#configuration-file">Configuration File</a>. <code>config/turtlebot3_d435.yaml</code> serves a RealSense D435 and the IMU of a TurtleBot3 OpenCR board, with the wheel stream prepared but commented out; <code>config/simulated.yaml</code> needs no hardware.</p>
+</li>
+<li>
+<p><strong>Install and start</strong> the service:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>deploy/install.sh<span class="w"> </span>config/my_robot.yaml
+</code></pre></div>
+<p>The installer copies the program and your configuration to <code>/opt/sodero-device-bridge</code> (as <code>config.yaml</code>), creates a Python environment there and installs the <code>sodero-device-bridge</code> service. The service starts now and at every boot, and restarts 3 seconds after an error. It runs as the user who called <code>sudo</code>, with access to serial ports, USB devices and cameras.</p>
+</li>
+<li>
+<p><strong>Follow the log</strong> with <code>journalctl -u sodero-device-bridge -f</code> and look for the lines in <a href="#log-lines">Log Lines</a>.</p>
+</li>
+<li><strong>Check the streams</strong> from another computer, as described in <a href="#check-from-another-computer">Check from Another Computer</a>.</li>
+</ol>
+<p>To change a setting later, edit <code>/opt/sodero-device-bridge/config.yaml</code> and run <code>sudo systemctl restart sodero-device-bridge</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Running <code>install.sh</code> again, for example after <code>git pull</code>, replaces <code>/opt/sodero-device-bridge/config.yaml</code> with the file you pass. Keep your configuration in your own file and pass it every time.</p>
+</div>
+<h3 id="configuration-file">Configuration File<a class="headerlink" href="#configuration-file" title="Permanent link">¶</a></h3>
+<p>The configuration names the robot, lists the devices on this computer and states which stream each device feeds. Every stream is optional; the bridge opens only the ports of the streams you configure.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">robot_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tb3</span><span class="w">              </span><span class="c1"># the controller finds this robot's data under this name</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">network</span><span class="p">:</span><span class="w">                     </span><span class="c1"># optional; these are the defaults</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">bind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0.0.0</span><span class="w">              </span><span class="c1"># every interface, or this computer's LAN address</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">command_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">53333</span><span class="w">        </span><span class="c1"># controller -&gt; bridge: wheel commands</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">state_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">53334</span><span class="w">          </span><span class="c1"># bridge -&gt; controller: IMU samples and wheel states</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">camera_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">53335</span><span class="w">         </span><span class="c1"># bridge -&gt; controller: RGB-D frames and intrinsics</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="nt">state_poll_hz</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span><span class="w">           </span><span class="c1"># optional; how often the IMU and wheel devices are read</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="nt">devices</span><span class="p">:</span><span class="w">                     </span><span class="c1"># the hardware, each under a name you choose</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span><span class="nt">d435</span><span class="p">:</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">realsense</span><span class="w">        </span><span class="c1"># a built-in driver</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="nt">serial</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">auto</span><span class="w">             </span><span class="c1"># every other key is an option of the driver</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="nt">width</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">424</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="nt">height</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">240</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="nt">fps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">  </span><span class="nt">opencr</span><span class="p">:</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">turtlebot3_opencr</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/turtlebot3_opencr</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">    </span><span class="nt">max_linear_speed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.15</span><span class="w">   </span><span class="c1"># m/s</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">    </span><span class="nt">max_angular_speed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span><span class="w">   </span><span class="c1"># rad/s</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="nt">streams</span><span class="p">:</span><span class="w">                     </span><span class="c1"># what the controller receives</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">  </span><span class="nt">camera</span><span class="p">:</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">    </span><span class="nt">device</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">d435</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">    </span><span class="nt">frame_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cam0_optical</span><span class="w">   </span><span class="c1"># the camera frame named in the map bundle</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">    </span><span class="nt">send_capture_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># needs synchronized clocks; false = arrival time</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">  </span><span class="nt">imu</span><span class="p">:</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">    </span><span class="nt">device</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">opencr</span><span class="w">           </span><span class="c1"># one device can feed several streams</span>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">  </span><span class="nt">wheels</span><span class="p">:</span><span class="w">                    </span><span class="c1"># only when the controller drives these wheels</span>
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="w">    </span><span class="nt">device</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">opencr</span>
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="w">    </span><span class="nt">command_timeout_s</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span><span class="w">   </span><span class="c1"># stop the wheels when commands pause this long</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Default</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>robot_name</code></td>
+<td style="text-align: left;">required</td>
+<td style="text-align: left;">Name under which the bridge publishes. The Station's gateways use the same name.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>network.bind</code></td>
+<td style="text-align: left;"><code>0.0.0.0</code></td>
+<td style="text-align: left;">Address the bridge listens on. Enter the sensor computer's LAN address to restrict it to one interface.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>network.camera_port</code></td>
+<td style="text-align: left;"><code>53335</code></td>
+<td style="text-align: left;">RGB-D frames. Must match the Camera gateway's <strong>Port</strong>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>network.state_port</code></td>
+<td style="text-align: left;"><code>53334</code></td>
+<td style="text-align: left;">IMU samples and wheel states. Keep the default: the IMU and Actuator gateways expect it.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>network.command_port</code></td>
+<td style="text-align: left;"><code>53333</code></td>
+<td style="text-align: left;">Wheel commands. Keep the default.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>state_poll_hz</code></td>
+<td style="text-align: left;"><code>200</code></td>
+<td style="text-align: left;">How often the IMU and wheel drivers are polled, per second</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>devices.&lt;name&gt;.driver</code></td>
+<td style="text-align: left;">required</td>
+<td style="text-align: left;">A <a href="#4-built-in-drivers">built-in driver</a> or your own class as <code>package.module:Class</code>. All other keys of the block are passed to the driver as options.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>streams.camera.device</code></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;">The device that provides the camera</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>streams.camera.frame_id</code></td>
+<td style="text-align: left;"><code>cam0_optical</code></td>
+<td style="text-align: left;">Optical frame name sent with each frame, 1 to 15 bytes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>streams.camera.send_capture_time</code></td>
+<td style="text-align: left;"><code>true</code></td>
+<td style="text-align: left;">Send each frame's capture time. <code>false</code>: the controller uses the arrival time.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>streams.imu.device</code></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;">The device that provides the IMU</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>streams.wheels.device</code></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;">The device that drives the wheels. Leave the stream out when the controller drives its own base.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>streams.wheels.command_timeout_s</code></td>
+<td style="text-align: left;"><code>0.5</code></td>
+<td style="text-align: left;">Stop the wheels when commands pause this long, in seconds</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Unknown keys are refused, so a typo stops the bridge with a clear message instead of being ignored. The configuration needs at least one device and one stream, and each stream must name a listed device that provides it.</p>
+</div>
+<div class="admonition idea">
+<p class="admonition-title"><strong>Tip:</strong> Choose a <code>robot_name</code> of lowercase letters, digits and underscores that starts with a letter, such as <code>tb3</code>. Every Station node accepts such a name, so the gateway nodes can carry the same name.</p>
+</div>
+<h3 id="log-lines">Log Lines<a class="headerlink" href="#log-lines" title="Permanent link">¶</a></h3>
+<p>After a start, the log shows these lines (time stamps left out):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>INFO device_bridge: device 'd435' (realsense) is open
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>INFO device_bridge: device 'opencr' (turtlebot3_opencr) is open
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>INFO device_bridge.bridge: camera 424x240 fx=303.22 fy=303.26 cx=216.20 cy=123.18 frame_id=cam0_optical (use these intrinsics in the controller's camera settings)
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>INFO device_bridge.bridge: serving robot 'tb3' on 0.0.0.0 (camera 53335, state 53334, command -)
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>INFO device_bridge: camera_pair 15.0/s, imu_state 50.0/s, sim_state 0.0/s, sim_command 0.0/s
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Line</th>
+<th style="text-align: left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>device '…' (…) is open</code></td>
+<td style="text-align: left;">The driver has connected to its hardware.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>camera 424x240 fx=… fy=… cx=… cy=…</code></td>
+<td style="text-align: left;">The camera's resolution and intrinsics. Enter them in the Camera gateway (see <a href="#camera">Camera</a>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>serving robot 'tb3' on … (camera 53335, state 53334, command -)</code></td>
+<td style="text-align: left;">The robot name and the ports served. <code>-</code> marks a stream that is not configured.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>camera_pair 15.0/s, imu_state 50.0/s, …</code></td>
+<td style="text-align: left;">Message rates, every 10 seconds. <code>sim_command</code> counts the commands received from the controller.</td>
+</tr>
+</tbody>
+</table>
+<p>If the configuration or a device fails, the log shows one <code>ERROR</code> line that names the problem, and the service tries again 3 seconds later.</p>
+<h3 id="check-from-another-computer">Check from Another Computer<a class="headerlink" href="#check-from-another-computer" title="Permanent link">¶</a></h3>
+<p><code>listen</code> receives the streams the way the controller does. Run it from a copy of the source on any computer of the same network, for example your PC:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">cd</span><span class="w"> </span>device_bridge
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>.<span class="w"> </span>.venv/bin/activate
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>pyzmq<span class="w"> </span>PyYAML
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>python<span class="w"> </span>-m<span class="w"> </span>device_bridge.listen<span class="w"> </span>SENSOR_COMPUTER_ADDRESS<span class="w"> </span>--robot<span class="w"> </span>tb3
+</code></pre></div>
+<p>It prints one line per message kind with its rate and latest values, for example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>camera_info     1.0/s  width=424 height=240 fx=303.217 fy=303.257 cx=216.198 cy=123.175
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>camera_pair    15.0/s  424x240, depth valid 91%, median 1480 mm, capture age 9 ms (meaningful with synchronized clocks)
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>imu_state      50.0/s  gyro [+0.002, -0.001, +0.000] rad/s, |accel| 9.80 m/s^2
+</code></pre></div>
+<p>To test the wheels, add <code>--wheels</code> with one speed per wheel in rad/s, for example <code>--wheels 1.0 1.0 --seconds 2</code>. <code>listen</code> drives them for <code>--seconds</code> and then releases them the way the controller does.</p>
+<div class="admonition warning">
+<p class="admonition-title"><code>--wheels</code> moves the robot. Lift the wheels off the ground or give the robot room, and stop the Station's Actuator gateway for this robot first.</p>
+</div>
+<h3 id="try-without-hardware">Try Without Hardware<a class="headerlink" href="#try-without-hardware" title="Permanent link">¶</a></h3>
+<p><code>config/simulated.yaml</code> serves a test-pattern camera, a slowly turning IMU and two ideal wheels under the robot name <code>tb3</code>. Use it to try the network, the Station's gateway settings and <code>listen</code> before the hardware is ready. Install it as a service, or run it in the foreground in the environment from the previous section:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>deploy/install.sh<span class="w"> </span>config/simulated.yaml<span class="w">     </span><span class="c1"># as a service</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>python<span class="w"> </span>-m<span class="w"> </span>device_bridge<span class="w"> </span>config/simulated.yaml<span class="w">    </span><span class="c1"># or in the foreground; stop with Ctrl+C</span>
+</code></pre></div>
+<hr>
+<h2 id="4-built-in-drivers">4. Built-in Drivers<a class="headerlink" href="#4-built-in-drivers" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Driver</th>
+<th style="text-align: left;">Provides</th>
+<th style="text-align: left;">Options (default)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>realsense</code></td>
+<td style="text-align: left;">Camera</td>
+<td style="text-align: left;"><code>serial</code> (<code>auto</code>), <code>width</code> (<code>424</code>), <code>height</code> (<code>240</code>), <code>fps</code> (<code>15</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>turtlebot3_opencr</code></td>
+<td style="text-align: left;">IMU and wheels (left, right)</td>
+<td style="text-align: left;"><code>port</code> (<code>/dev/turtlebot3_opencr</code>), <code>poll_hz</code> (<code>100</code>, 20 to 100), <code>max_linear_speed</code> (<code>0.15</code> m/s, at most 0.22), <code>max_angular_speed</code> (<code>1.0</code> rad/s, at most 2.84)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>simulated_camera</code></td>
+<td style="text-align: left;">Camera</td>
+<td style="text-align: left;"><code>width</code> (<code>424</code>), <code>height</code> (<code>240</code>), <code>fps</code> (<code>15</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>simulated_imu</code></td>
+<td style="text-align: left;">IMU</td>
+<td style="text-align: left;"><code>rate_hz</code> (<code>100</code>), <code>yaw_rate</code> (<code>0.1</code> rad/s)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>simulated_wheels</code></td>
+<td style="text-align: left;">Wheels</td>
+<td style="text-align: left;"><code>joints</code> (<code>2</code>), <code>rate_hz</code> (<code>100</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>package.module:Class</code></td>
+<td style="text-align: left;">What the class provides</td>
+<td style="text-align: left;">Your own driver (see <a href="#6-write-your-own-driver">Write Your Own Driver</a>)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong><code>realsense</code></strong> reads Intel RealSense D400 cameras through the RealSense SDK and is tested with the D435. Depth is aligned to the colour image, so both share the colour camera's intrinsics. With <code>serial: auto</code>, exactly one camera must be connected; with several cameras, enter the serial number.</li>
+<li><strong><code>turtlebot3_opencr</code></strong> drives the OpenCR board of a TurtleBot3 Burger running the ROBOTIS TurtleBot3 ROS 2 firmware. The board is both the wheel controller and the IMU, and its serial port can have only one owner, so one device feeds both the <code>imu</code> and the <code>wheels</code> stream. Wheel speeds are scaled down together to the configured limits, which keeps the path's curvature. If the bridge stops talking to the board, the firmware stops the wheels by itself within 0.5 s. Set <code>port</code> to the board's serial device (for example <code>/dev/ttyACM0</code>) when the default device name does not exist on your system.</li>
+<li><strong><code>simulated_camera</code></strong>, <strong><code>simulated_imu</code></strong> and <strong><code>simulated_wheels</code></strong> stand in for hardware: a moving colour pattern in front of a flat wall 2 m away, a level sensor turning slowly about its z axis, and joints that follow their velocity commands exactly.</li>
+</ul>
+<hr>
+<h2 id="5-connect-it-on-the-station-page">5. Connect It on the Station Page<a class="headerlink" href="#5-connect-it-on-the-station-page" title="Permanent link">¶</a></h2>
+<p>Start with the bridge running and <code>listen</code> showing its streams, then open the Station page (<code>http://ROBOT_ADDRESS</code>). The steps use the robot name <code>tb3</code>; use your bridge's <code>robot_name</code> instead.</p>
+<div class="admonition warning">
+<p class="admonition-title"><strong>Names must match.</strong> The Camera gateway's <strong>Camera name</strong>, the IMU gateway's <strong>Robot in World</strong> and the Actuator gateway's <strong>Robot name</strong> must all be exactly the bridge's <code>robot_name</code>. Each gateway takes only the data published under its name.</p>
+</div>
+<h3 id="camera">Camera<a class="headerlink" href="#camera" title="Permanent link">¶</a></h3>
+<ol>
+<li>Click <strong>Add node</strong>, choose <strong>Gateway</strong> → <strong>Camera gateway</strong> and name it after the robot, for example <code>tb3</code> (node <code>rc.camera_gateway.tb3</code>).</li>
+<li>In the <strong>CAMERA GATEWAY</strong> section of the inspector, enter:<ul>
+<li><strong>Camera name</strong>: the bridge's <code>robot_name</code> (<code>tb3</code>). The bridge publishes its camera under the robot name; it has no separate camera name.</li>
+<li><strong>Camera host</strong>: <code>SENSOR_COMPUTER_ADDRESS</code>.</li>
+<li><strong>Port</strong>: <code>53335</code>, or the bridge's <code>network.camera_port</code>.</li>
+</ul>
+</li>
+<li>
+<p>Enter the resolution and intrinsics from the bridge's <code>camera …</code> log line. A new Camera gateway computes its intrinsics from a field of view, as for a simulated camera, so its <strong>CAMERA SETTINGS</strong> show only <em>horizontal fov deg</em>. Load the calibrated values once with <strong>Upload yaml</strong> while the node is stopped:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">camera_gateway</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">camera</span><span class="p">:</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">isaac_zmq</span><span class="w">              </span><span class="c1"># the simulator's stream format, which the bridge speaks</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">frame_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cam0_optical</span><span class="w">       </span><span class="c1"># the bridge's streams.camera.frame_id</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nt">width</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">424</span><span class="w">                   </span><span class="c1"># resolution from the log line</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="nt">height</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">240</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="nt">fps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="nt">isaac</span><span class="p">:</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">      </span><span class="nt">robot_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tb3</span><span class="w">            </span><span class="c1"># Camera name: the bridge's robot_name</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SENSOR_COMPUTER_ADDRESS</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">53335</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span><span class="nt">intrinsics</span><span class="p">:</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">      </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">manual</span><span class="w">               </span><span class="c1"># use fx, fy, cx, cy instead of a field of view</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">      </span><span class="nt">fx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">303.22</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">      </span><span class="nt">fy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">303.26</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">      </span><span class="nt">cx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">216.20</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">      </span><span class="nt">cy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123.18</span>
+</code></pre></div>
+<p>After the upload, <strong>CAMERA SETTINGS</strong> shows these values and you can change them there later. Check that <strong>Camera name</strong>, <strong>Camera host</strong> and <strong>Port</strong> show your values.</p>
+</li>
+<li>
+<p>Click <strong>Start</strong>.</p>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Intrinsics belong to one resolution. After you change the bridge's <code>width</code>, <code>height</code> or camera, enter the new values from its log line.</p>
+</div>
+<div class="admonition idea">
+<p class="admonition-title"><strong>Tip:</strong> In the <a href="../../ssh_workspace/overview/">SSH workspace</a>, <code>sodero camera snapshot rc.camera_gateway.tb3 --output frame.png</code> saves a picture from the gateway.</p>
+</div>
+<h3 id="imu">IMU<a class="headerlink" href="#imu" title="Permanent link">¶</a></h3>
+<ol>
+<li>Click <strong>Add node</strong>, choose <strong>Gateway</strong> → <strong>IMU gateway</strong> and name it after the robot (<code>tb3</code>).</li>
+<li>In <strong>IMU SETTINGS</strong>, check that <strong>Robot in World</strong> is the bridge's <code>robot_name</code> (a new IMU gateway starts with its node name) and click <strong>Save settings</strong>.</li>
+<li>Start the gateway.</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">The IMU gateway has no address field: it connects to the Station's configured simulator/sensor address, which Sodero support sets for the unit. Ask Sodero support to set it to the sensor computer.</p>
+</div>
+<h3 id="wheels-optional">Wheels (Optional)<a class="headerlink" href="#wheels-optional" title="Permanent link">¶</a></h3>
+<p>Only when the bridge serves a <code>wheels</code> stream:</p>
+<ol>
+<li>Add an <strong>Actuator gateway</strong> and load a simulation <code>.gw</code> (<code>hardware.type: simulation</code>) whose joints are the bridge's wheels, in the same order (<code>turtlebot3_opencr</code>: left, then right).</li>
+<li>In its <strong>TARGET</strong> section, click <strong>Change</strong>, enter <strong>Robot name</strong> <code>tb3</code> and <strong>Sim host</strong> <code>SENSOR_COMPUTER_ADDRESS</code>, and click <strong>Done</strong>.</li>
+<li>Add <strong>Strider</strong> with your base's <code>.sddm</code> and connect its <code>servo_link</code> to the Actuator gateway's <code>servo_link</code>.</li>
+<li>Drive slowly at first, with the wheels off the ground.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">The bridge stops and releases the wheels when the controller switches its drive off and when commands pause for longer than <code>command_timeout_s</code>. Keep someone ready to stop the robot during the first runs.</p>
+</div>
+<h3 id="navigation-and-mounting">Navigation and Mounting<a class="headerlink" href="#navigation-and-mounting" title="Permanent link">¶</a></h3>
+<ol>
+<li>Add <strong>Visual odometry</strong>, <strong>Localizer</strong> and <strong>Navigator</strong> and connect them as for any robot: the Camera gateway's <code>camera</code> to Visual odometry and the Localizer, the IMU gateway's <code>imu</code> to Visual odometry, Visual odometry's (or Strider's) <code>odometry</code> to the Localizer, the Localizer's <code>localization</code> and <code>map</code> to the Navigator, and Strider's <code>mobile_base</code> to the Navigator.</li>
+<li>Upload your map bundle (<code>.nav</code>) to the Localizer and the Navigator. See <a href="../../navigation/overview/">Localization and Navigation</a>.</li>
+</ol>
+<p>The bridge sends camera and IMU data in the sensors' own frames. Where the sensors sit on the robot, their mounting extrinsics, belongs in the <a href="../../navigation/map_bundle/">map bundle</a>: measure the mounting and enter it there, and do not rotate data inside a driver. Keep the bridge's <code>frame_id</code>, the Camera gateway's <em>frame id</em> and the camera frame of the map bundle the same (default <code>cam0_optical</code>).</p>
+<hr>
+<h2 id="6-write-your-own-driver">6. Write Your Own Driver<a class="headerlink" href="#6-write-your-own-driver" title="Permanent link">¶</a></h2>
+<p>A driver is one Python class for one piece of hardware. It subclasses <code>Device</code> and each capability the hardware has: <code>Camera</code>, <code>Imu</code> or <code>Wheels</code>. One class may provide several, as the OpenCR driver provides both <code>Imu</code> and <code>Wheels</code>. The interfaces are documented in <code>device_bridge/devices/base.py</code>, and <code>device_bridge/devices/simulated.py</code> is the smallest complete example.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Class</th>
+<th style="text-align: left;">You implement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>Device</code></td>
+<td style="text-align: left;"><code>open()</code>: connect, or raise an exception with a clear message. <code>close()</code>: stop and release the hardware; safe to call twice. <code>self.options</code> holds the device's configuration block.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Camera</code></td>
+<td style="text-align: left;"><code>camera_info()</code> returns <code>CameraInfo(width, height, fx, fy, cx, cy)</code> of the aligned output; <code>read_frame(timeout_s)</code> returns <code>RgbdFrame(rgb, depth_mm, capture_unix_ns)</code> or <code>None</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Imu</code></td>
+<td style="text-align: left;"><code>read_imu()</code> returns <code>ImuSample(gyro, accel, orientation_xyzw, source_time_ns)</code>, or <code>None</code> when nothing is new</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Wheels</code></td>
+<td style="text-align: left;"><code>joint_count</code>; <code>read_joints()</code> returns <code>JointState(positions, velocities, efforts, source_time_ns)</code> or <code>None</code>; <code>set_velocities(rad_per_s)</code>; <code>stop()</code> sets zero speed and releases the motors</td>
+</tr>
+</tbody>
+</table>
+<p>A minimal IMU driver:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># device_bridge/devices/my_imu.py</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">device_bridge.devices.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Device</span><span class="p">,</span> <span class="n">Imu</span><span class="p">,</span> <span class="n">ImuSample</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">vendor_sdk</span>  <span class="c1"># placeholder: your IMU's SDK</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyImu</span><span class="p">(</span><span class="n">Device</span><span class="p">,</span> <span class="n">Imu</span><span class="p">):</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">vendor_sdk</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"port"</span><span class="p">,</span> <span class="s2">"/dev/ttyUSB0"</span><span class="p">))</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">last_ns</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"sensor"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="kc">None</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">read_imu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>        <span class="n">raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">latest</span><span class="p">()</span>               <span class="c1"># newest sample; never wait for one</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>        <span class="k">if</span> <span class="n">raw</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">raw</span><span class="o">.</span><span class="n">timestamp_ns</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_ns</span><span class="p">:</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>            <span class="k">return</span> <span class="kc">None</span>                          <span class="c1"># nothing new since the last call</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">last_ns</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">timestamp_ns</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>        <span class="k">return</span> <span class="n">ImuSample</span><span class="p">(</span><span class="n">gyro</span><span class="o">=</span><span class="n">raw</span><span class="o">.</span><span class="n">gyro_rad_s</span><span class="p">,</span>              <span class="c1"># rad/s, sensor axes</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>                         <span class="n">accel</span><span class="o">=</span><span class="n">raw</span><span class="o">.</span><span class="n">accel_m_s2</span><span class="p">,</span>             <span class="c1"># m/s², gravity included</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>                         <span class="n">orientation_xyzw</span><span class="o">=</span><span class="n">raw</span><span class="o">.</span><span class="n">quaternion_xyzw</span><span class="p">,</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>                         <span class="n">source_time_ns</span><span class="o">=</span><span class="n">raw</span><span class="o">.</span><span class="n">timestamp_ns</span><span class="p">)</span>  <span class="c1"># must increase</span>
+</code></pre></div>
+<p>Select it in the configuration as <code>driver: device_bridge.devices.my_imu:MyImu</code>, or register a short name in <code>DRIVERS</code> in <code>device_bridge/devices/__init__.py</code>. Keep your drivers in <code>device_bridge/devices/</code> so that <code>install.sh</code> copies them, and add your SDK's Python package to <code>requirements.txt</code>. <code>python -m unittest discover -s tests</code> checks the bridge end to end with the simulated devices.</p>
+<p>Rules every driver follows:</p>
+<ul>
+<li><strong>Units:</strong> radians, rad/s, m/s² with gravity included (+9.81 m/s² upward at rest), depth in millimetres as 16-bit integers (0 = no measurement), times in nanoseconds. Wheel positions are continuous and do not wrap at 2π.</li>
+<li><strong>Frames:</strong> IMU data in the sensor's own axes, with <code>orientation_xyzw</code> the sensor's attitude in the world. Camera images in the optical frame (x right, y down, z forward), depth aligned to the RGB image, both rectified without distortion. Do not rotate data into the robot's frame; the mounting belongs in the map bundle.</li>
+<li><strong>Time:</strong> <code>source_time_ns</code> must increase; a monotonic clock is fine. A camera's <code>capture_unix_ns</code> is the capture time on the wall clock.</li>
+<li><strong>Timing:</strong> <code>read_imu</code> and <code>read_joints</code> return at once; <code>read_frame</code> blocks for at most its timeout. Copy images out of buffers that the SDK reuses.</li>
+<li><strong>Safety:</strong> <code>stop()</code> must stop and release the motors. The bridge calls it when the controller switches its drive off and when commands pause for <code>command_timeout_s</code>.</li>
+</ul>
+<hr>
+<h2 id="7-protocol">7. Protocol<a class="headerlink" href="#7-protocol" title="Permanent link">¶</a></h2>
+<p>The device bridge and Isaac Bridge send the same messages over ZeroMQ on TCP. The bridge listens; the Station's gateways connect.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Port</th>
+<th style="text-align: left;">Direction</th>
+<th style="text-align: left;">Contents</th>
+<th style="text-align: left;">Station node</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">53335</td>
+<td style="text-align: left;">bridge → controller</td>
+<td style="text-align: left;">RGB-D frames (16-bit depth in millimetres and 8-bit RGB) and the camera intrinsics</td>
+<td style="text-align: left;">Camera gateway</td>
+</tr>
+<tr>
+<td style="text-align: center;">53334</td>
+<td style="text-align: left;">bridge → controller</td>
+<td style="text-align: left;">IMU samples and wheel states</td>
+<td style="text-align: left;">IMU gateway, Actuator gateway</td>
+</tr>
+<tr>
+<td style="text-align: center;">53333</td>
+<td style="text-align: left;">controller → bridge</td>
+<td style="text-align: left;">Wheel commands: velocity while the drive is on, limp when it is off</td>
+<td style="text-align: left;">Actuator gateway</td>
+</tr>
+</tbody>
+</table>
+<p>Every message carries the robot name, and each gateway takes only the messages of its own name. A slow link drops old frames instead of queuing them. The byte layouts are documented in <a href="https://github.com/Sodero-labs/device_bridge/blob/HEAD/docs/protocol.md" target="_blank"><code>docs/protocol.md</code></a> in the repository.</p>
+<hr>
+<h2 id="8-troubleshooting">8. Troubleshooting<a class="headerlink" href="#8-troubleshooting" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Symptom</th>
+<th style="text-align: left;">Cause</th>
+<th style="text-align: left;">Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">The service restarts every few seconds and the log shows one <code>ERROR</code> line</td>
+<td style="text-align: left;">A configuration or device problem named in that line, such as an unknown key, a stream without its device, <code>RealSense … is not connected</code> or <code>no reply from the board</code></td>
+<td style="text-align: left;">Fix the configuration or the connection, then restart the service</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>listen</code> prints <code>no messages from … for robot '…'</code></td>
+<td style="text-align: left;">The bridge is not running, <code>--robot</code> differs from <code>robot_name</code>, or a firewall blocks the ports</td>
+<td style="text-align: left;">Check <code>systemctl status sodero-device-bridge</code>, use the name from the <code>serving robot</code> line, open TCP 53333–53335</td>
+</tr>
+<tr>
+<td style="text-align: left;">Camera gateway: <code>Waiting for simulator at …:53335</code></td>
+<td style="text-align: left;">Wrong <strong>Camera host</strong> or <strong>Port</strong>, no camera stream, or a firewall</td>
+<td style="text-align: left;">Compare with the <code>serving robot</code> line and run <code>listen</code> from another computer</td>
+</tr>
+<tr>
+<td style="text-align: left;">Camera gateway: <code>… publishes frames of camera(s) 'tb3' but none of camera '…'</code></td>
+<td style="text-align: left;"><strong>Camera name</strong> differs from <code>robot_name</code></td>
+<td style="text-align: left;">Set <strong>Camera name</strong> to <code>robot_name</code>, then Stop and Start</td>
+</tr>
+<tr>
+<td style="text-align: left;">Camera gateway: <code>Frames … are stale or carry capture times that do not match this Station's clock (clock skew?)</code></td>
+<td style="text-align: left;">The clocks differ: frames look more than 20 ms in the future or more than 2 s old</td>
+<td style="text-align: left;">Synchronize the clocks with NTP, or set <code>send_capture_time: false</code> and restart the bridge</td>
+</tr>
+<tr>
+<td style="text-align: left;">Visual odometry drifts or the Localizer does not fit the map</td>
+<td style="text-align: left;">Field-of-view intrinsics instead of the calibrated ones, or values for another resolution</td>
+<td style="text-align: left;">Upload the intrinsics from the bridge's log line for the current resolution</td>
+</tr>
+<tr>
+<td style="text-align: left;">The IMU gateway does not start: <code>Start the project World to provide the simulation IMU endpoint.</code></td>
+<td style="text-align: left;">No simulator/sensor address is configured for the unit</td>
+<td style="text-align: left;">Ask Sodero support to set it to the sensor computer</td>
+</tr>
+<tr>
+<td style="text-align: left;">The IMU gateway runs, but no IMU data arrives</td>
+<td style="text-align: left;"><strong>Robot in World</strong> differs from <code>robot_name</code>, the bridge has no <code>imu</code> stream (<code>state -</code>), or the unit's address points to another computer</td>
+<td style="text-align: left;">Fix the name or the stream; check the address with Sodero support</td>
+</tr>
+<tr>
+<td style="text-align: left;">The wheels do not move</td>
+<td style="text-align: left;">No <code>wheels</code> stream (<code>command -</code>), a different <strong>Robot name</strong>, commands that are not velocity commands (<code>modes … are not velocity control</code>), or the OpenCR motor power is off (<code>wheel motors are not powered</code>)</td>
+<td style="text-align: left;">Add the stream, fix the name, drive Strider in <strong>Twist</strong> mode, switch on the motor power</td>
+</tr>
+<tr>
+<td style="text-align: left;">The wheels stop while driving; log: <code>no wheel command for 0.50 s: wheels stopped</code></td>
+<td style="text-align: left;">The safety watchdog: commands paused longer than <code>command_timeout_s</code></td>
+<td style="text-align: left;">Use a wired link; raise <code>command_timeout_s</code> only with care</td>
+</tr>
+<tr>
+<td style="text-align: left;">The <code>camera_pair</code> rate stays below <code>fps</code></td>
+<td style="text-align: left;">Not enough bandwidth (Wi-Fi), a USB 2 port or a busy sensor computer</td>
+<td style="text-align: left;">Use a wired link and a USB 3 port, or lower <code>width</code>, <code>height</code> or <code>fps</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Camera host</strong> cannot be edited</td>
+<td style="text-align: left;">The camera address is set for this unit</td>
+<td style="text-align: left;">Ask Sodero support to point it at the sensor computer</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+    <h2></h2>
+    <script src="https://giscus.app/client.js" data-repo="Sodero-labs/docs" data-repo-id="R_kgDOQiK7fQ" data-category="Q&amp;A" data-category-id="DIC_kwDOQiK7fc4C3JkV" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="dark" data-lang="en" crossorigin="anonymous" async="">
+    </script>
+
+    <script>
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+            var theme = palette.color.scheme === "slate" ? "dark" : "light"
+            var script = document.querySelector("script[src^='https://giscus.app/client.js']")
+            script.setAttribute("data-theme", theme)
+        }
+
+        var ref = document.querySelector("[data-md-component=config]")
+        var observer = new MutationObserver(function() {
+            var palette = __md_get("__palette")
+            var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+            var frame = document.querySelector(".giscus-frame")
+            if (frame) {
+                frame.contentWindow.postMessage(
+                    { giscus: { setConfig: { theme } } },
+                    "https://giscus.app"
+                )
+            }
+        })
+        observer.observe(ref, { attributes: true })
+    </script>         
+    <style>
+        .custom-btn-gray {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            font-size: 14px;
+            
+            color: #9e9e9e !important;
+            border: 1px solid #9e9e9e !important;
+            background-color: transparent !important;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        .custom-btn-gray:hover {
+            color: #ffffff !important;
+            border-color: #ffffff !important;
+        }
+
+        .custom-btn-gray .twemoji svg {
+            fill: currentColor;
+        }
+    </style>
+
+    <div style="margin-top: 2rem; display: flex; gap: 10px; flex-wrap: wrap;">
+        
+        <a href="https://github.com/Sodero-labs/docs/issues/new?title=[BUG] Device%20Bridge&amp;body=Path: https%3A//docs.sodero.io/v2.0.0/gateways/device_bridge/" class="custom-btn-gray" target="_blank" rel="noopener noreferrer">
+            <span class="twemoji">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
+            </span>
+            Raise Issues
+        </a>
+
+    </div>
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.path", "navigation.sections", "navigation.tracking", "navigation.instant", "navigation.instant.progress", "content.code.copy", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/select-all.js"></script>
+      
+        <script src="../../javascripts/nav-state.js"></script>
+      
+        <script src="../../javascripts/version.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

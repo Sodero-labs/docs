@@ -1,0 +1,63 @@
+# Sodero Documents
+
+## Get Started
+
+- [Sodero Ecosystem](https://docs.sodero.io/v2.0.0/get_started/sodero_ecosystem/index.md)
+- [Key Concepts](https://docs.sodero.io/v2.0.0/get_started/key_concepts/index.md)
+- [Quick Start](https://docs.sodero.io/v2.0.0/get_started/quick_start/index.md)
+
+## Hardware Setup
+
+- [Network Settings](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/network_settings/index.md)
+- [Stellar X](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/stellar_x/index.md)
+
+## Stellar Station
+
+- [Backup and Restore](https://docs.sodero.io/v2.0.0/station/backup_restore/index.md)
+- [Design Documents](https://docs.sodero.io/v2.0.0/station/design_documents/index.md)
+- [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md)
+- [Nodes and Connections](https://docs.sodero.io/v2.0.0/station/nodes_and_connections/index.md)
+- [Overview](https://docs.sodero.io/v2.0.0/station/overview/index.md)
+- [Running Nodes](https://docs.sodero.io/v2.0.0/station/running_nodes/index.md)
+
+## Gateways
+
+- [Device Bridge](https://docs.sodero.io/v2.0.0/gateways/device_bridge/index.md)
+- [EtherCAT Gateway](https://docs.sodero.io/v2.0.0/gateways/ethercat/index.md)
+- [Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md)
+- [Overview](https://docs.sodero.io/v2.0.0/gateways/overview/index.md)
+- [Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/index.md)
+- [Simulation Gateway](https://docs.sodero.io/v2.0.0/gateways/simulation/index.md)
+
+## Controllers
+
+- [Articulation](https://docs.sodero.io/v2.0.0/controllers/articulation/index.md)
+- [Motion Studio](https://docs.sodero.io/v2.0.0/controllers/motion_studio/index.md)
+- [Strider](https://docs.sodero.io/v2.0.0/controllers/strider/index.md)
+
+## Localization and Navigation
+
+- [Map Bundle (.nav)](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md)
+- [Overview](https://docs.sodero.io/v2.0.0/navigation/overview/index.md)
+- [Navigate in Simulation](https://docs.sodero.io/v2.0.0/navigation/simulation_tutorial/index.md)
+
+## Tutorials - Stellar Designer
+
+- [3D Model (.glb)](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/3dmodel_creation/index.md)
+- [Introduction](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/introduction/index.md)
+- [Manipulator (.sdd)](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/manipulator/index.md)
+- [Mobile Robot (.sddm)](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/mobile_robot/index.md)
+
+## Virtual Simulation
+
+- [Connect to Stellar Station](https://docs.sodero.io/v2.0.0/virtual_simulation/connect_station/index.md)
+- [Isaac Bridge Installation](https://docs.sodero.io/v2.0.0/virtual_simulation/extension_installation/index.md)
+- [Overview](https://docs.sodero.io/v2.0.0/virtual_simulation/introduction/index.md)
+- [Robot Setup](https://docs.sodero.io/v2.0.0/virtual_simulation/robot_setup/index.md)
+
+## SSH Workspace
+
+- [AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md)
+- [Overview](https://docs.sodero.io/v2.0.0/ssh_workspace/overview/index.md)
+- [sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)
+
