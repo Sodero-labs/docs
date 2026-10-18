@@ -2,7 +2,7 @@
 [data-md-color-scheme="slate"] {
   --md-default-bg-color: #0a0b0c;     
   --md-default-fg-color: #b4bac0;   
-  --md-accent-fg-color: #6fa6dd;        /* 강조색 (사이드바 하이라이트 등에 영향) */
+  --md-accent-fg-color: #6fa6dd;        /* accent color (sidebar highlight etc.) */
   --md-accent-fg-color--transparent: #0070dd; 
 }
 

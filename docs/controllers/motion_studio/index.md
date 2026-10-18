@@ -60,12 +60,12 @@ The Stellar mark at the top left opens the menu: **Back to Stellar Station**, **
 Click **Jog** in the header to open the jog panel.
 
 <figure markdown="span">
-  ![Jog panel](images/ms_jog_panel.png){ width="340" }
+  ![Jog panel](images/ms_jog_panel.png){ width="328" }
   <figcaption>The jog panel</figcaption>
 </figure>
 
 1. Switch **Servo On** ⑥.
-2. Choose the jog **Mode** ③:
+2. In **JOG OPTION** ②, choose the jog **Mode** ③:
     - **Joint**: move one joint at a time (J1…Jn).
     - **Base**: move the tool in the robot's base frame (X, Y, Z, RX, RY, RZ).
     - **Tool**: move the tool in its own frame.

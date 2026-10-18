@@ -1,6 +1,6 @@
 # Localization and Navigation
 
-Stellar Station includes a complete navigation stack for mobile robots: it knows where the robot is on a map (**localization**) and drives it to goals around obstacles (**navigation**). Both run on Stellar X as built-in nodes and drive the base through its Strider node.
+Stellar Station includes a complete navigation stack for mobile robots: it knows where the robot is on a map (**localization**) and drives it to goals around obstacles (**navigation**). Both run on Stellar X as built-in nodes and work with the base's Strider node: the localizer reads its odometry, and the navigator drives the base through it.
 
 ---
 
@@ -26,7 +26,7 @@ flowchart TB
 | **Visual odometry** (optional) | Estimates odometry from the camera, for robots without wheel odometry such as walking robots |
 | **Map bundle** (`.nav`) | One file with the map (point cloud and occupancy grid) and the localizer and navigator settings for one site ([Map Bundle](../map_bundle/index.md)) |
 
-The localizer works in the plane: it estimates x, y and heading on the map. There is one localizer and one navigator per Station, so one robot per Station navigates.
+By default the localizer works in the plane: it estimates x, y and heading on the map. There is one localizer and one navigator per Station, so one robot per Station navigates.
 
 ---
 

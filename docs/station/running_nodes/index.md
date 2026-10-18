@@ -30,12 +30,12 @@ The **Start all nodes** button starts every node that is down, in dependency ord
 </figure>
 
 - While a run is in progress, a banner shows the progress, and the menu offers **Cancel**. Nodes already started stay up when you cancel.
-- The run continues on the controller even if you close the browser. The page shows its progress again when you reopen it.
+- The run continues even if you close the browser. The page shows its progress again when you reopen it.
 - The result appears as a banner, for example *Runtime topology is up.*
 
 !!! warning "**Start all nodes** starts every node of the graph, including nodes that drive real hardware. When the graph contains hardware you do not want to run, start the nodes one by one."
 
-!!! info "After the controller restarts, the Station comes back with its saved graph, documents and settings, but **no node is started**. Start the nodes again when you need them."
+!!! info "After Stellar X restarts, the Station comes back with its saved graph, documents and settings, but **no node is started**. Start the nodes again when you need them."
 
 ---
 
@@ -55,17 +55,17 @@ The footer of each node card and the inspector header show the node's state.
 | **Paused** | Paused |
 | **Degraded** | Running with reduced performance |
 | **Disconnected** | Heartbeat lost |
-| **Fault** | Fault state; reset it to recover |
+| **Fault** | The node reported a fault. The inspector and the node log show the reason. |
 | **Error** / **Failed** | The node reported an error. The inspector shows the reason. |
 | **Stopped** | The process ended |
 
-The dot next to the state is green for Ready and Operating, yellow while waiting, red for errors and grey otherwise. Problems are also counted in the **N issues** chip of the toolbar.
+The dot next to the state is green for Ready, Running and Operating, yellow while waiting, red for errors and grey otherwise. Problems are also counted in the **N issues** chip of the toolbar.
 
 ---
 
 ## 4. Open the Controller UIs
 
-When a controller node runs, its **CONTROL** section unlocks:
+When a node runs, its tools unlock, in the inspector's **CONTROL** section or as a link on the node card:
 
 | Node | Button | Opens |
 | :--- | :--- | :--- |

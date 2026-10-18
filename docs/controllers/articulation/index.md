@@ -1,12 +1,12 @@
 # Articulation
 
-The **Articulation** controller drives an articulated robot joint by joint: legged robots, humanoids, grippers, pan-tilt heads, or any set of joints that receives joint targets. Unlike Motion Studio it uses no arm kinematics (no DH parameters, no Cartesian motions); it bounds and forwards joint targets from an upper controller such as **Legged locomotion**, and it lets you jog and calibrate the joints by hand.
+The **Articulation** controller drives an articulated robot joint by joint: legged robots, humanoids, grippers, pan-tilt heads, or any set of joints that receives joint targets. Unlike Motion Studio, it uses no arm kinematics (no DH parameters, no Cartesian motions). It bounds and forwards joint targets from an upper controller, such as the [**Legged locomotion**](../../station/nodes_and_connections/index.md#node-types-and-modules) node that runs a walking policy, and it lets you jog and calibrate the joints by hand.
 
 | Item | Value |
 | :--- | :--- |
 | Node | `rc.articulation_controller_manager.NAME` |
-| Document | `.sdda` ([Stellar Designer](../../tutorials/stellar_designer/introduction/index.md)) |
-| Joints | 1 to 24, driven by one actuator gateway |
+| Document | `.sdda` ([Stellar Designer](../../tutorials/stellar_designer/articulation/index.md)) |
+| Joints | 1 to 64, driven by one actuator gateway |
 | Units | rad, rad/s, N·m |
 
 ```mermaid
@@ -47,7 +47,7 @@ Start the gateway and the Articulation node, then click **Articulation** in the 
 | :--- | :--- |
 | Left rail | **Joints** (joint monitor), **Constraints** (configured limits), **Set origin** |
 | Top bar | **Servo on**, **Servo off**, **Stop**, **Clear stop**, the control mode, and the button that opens the **Joint control** panel |
-| Status strip | **Servo** On/Off, **Feedback** age in milliseconds, **Safety** (*Ready* or the reason of a stop) |
+| Status strip | **Servo** On/Off, **Feedback** age in milliseconds, **Safety** (*Ready* or the reason for a stop) |
 | **Controller** | The Articulation node this window controls |
 | **Joint monitor** | Per joint: position, velocity, effort and target |
 

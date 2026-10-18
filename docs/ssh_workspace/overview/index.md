@@ -1,15 +1,15 @@
 # SSH Workspace
 
-Stellar X includes a development workspace that you reach over SSH. It runs on the controller itself, next to Stellar Station but separated from real-time control, so building and testing code there does not disturb the robot's control loops.
+Stellar X includes a development workspace that you reach over SSH. It runs on the controller itself, next to Stellar Station but separated from real-time control. It still shares the controller's memory and storage, so avoid very large builds while the robot is moving.
 
 From the workspace you can:
 
 - inspect and change the Station with the `sodero` command-line tool: nodes, connections, design documents, settings, maps and packages;
-- read the status and logs of every node, and call robot tools such as Strider, Motion Studio and navigation;
+- read the status and logs of every node, as the Station page shows them, and call robot tools such as Strider, Motion Studio and navigation;
 - write and test your own programs and install them on the Station as modules;
 - let an AI coding agent do all of the above for you (see [AI Coding Agents](../ai_agents/index.md)).
 
-!!! info "The workspace performs the same operations as the Station page. A node added with `sodero topology add-node` is the same node you would add with **Add node**, and the result is identical whichever way you work."
+!!! info "The workspace performs the same operations as the Station page: a node added with `sodero topology add-node` is the same node you would add with **Add node**."
 
 ---
 
@@ -18,12 +18,12 @@ From the workspace you can:
 The workspace accepts SSH keys only; there is no password sign-in. Register the public key of every computer that should connect, on the robot's **Network Settings** page.
 
 1. Open `http://ROBOT_ADDRESS:3000` in a browser (for example `http://192.168.60.18:3000`).
-2. In **SSH ACCESS**, go to **ADD A PUBLIC KEY** and select your operating system (**Windows** or **macOS · Linux**).
-3. Click **Copy**, run the copied command in a terminal of your computer, and copy the line it prints. It starts with `ssh-ed25519`. The command creates a key first if your computer has none.
-4. Paste the line into the text box and click **Add key**. The key appears under **REGISTERED KEYS**.
+2. In **SSH ACCESS**, go to **ADD A PUBLIC KEY** and select your operating system ② (**Windows** or **macOS · Linux**).
+3. Click **Copy** ③, run the copied command in a terminal on your computer, and copy the line it prints. It starts with `ssh-ed25519`. The command creates a key first if your computer has none; on Windows, press Enter at the two passphrase prompts.
+4. Paste the line into the text box ④ and click **Add key** ⑤. The key appears under **REGISTERED KEYS**.
 
 <figure markdown="span">
-  ![SSH access card](images/ssh_access.png){ width="600" }
+  ![SSH access card](images/ssh_access.png){ width="560" }
   <figcaption>SSH ACCESS on the Network Settings page</figcaption>
 </figure>
 
@@ -35,7 +35,7 @@ To revoke a computer's access, click the trash icon next to its key. See [Networ
 
 ## 2. Connect
 
-The **SSH workspace** card shows the command with a **Copy** button:
+The **SSH workspace** card shows the command with a **Copy** button ①:
 
 ```sh
 ssh -p 2222 sodero@192.168.60.18
@@ -70,14 +70,13 @@ Stellar X has a single Station, with the ID `station`. Every command uses it by 
 | :--- | :--- |
 | `/workspace` | Your files. They stay on the robot across restarts and software updates. |
 | `/workspace/README.md` | The workspace guide: terms, a five-minute start and the guide map |
-| `/workspace/AGENTS.md`, `/workspace/CLAUDE.md` | Operating rules for AI coding agents ([AI Coding Agents](../ai_agents/index.md)) |
+| `/workspace/AGENTS.md` | Operating rules for AI coding agents ([AI Coding Agents](../ai_agents/index.md)) |
 | `/opt/sodero/docs/` | All workspace guides and examples, read-only. Also linked as `/workspace/docs`. |
 
 | Tool | Purpose |
 | :--- | :--- |
 | `sodero` | Station command-line tool ([sodero CLI](../sodero_cli/index.md)) |
 | `sodero-help` | Prints the guides: `sodero-help` lists them, `sodero-help navigation` opens one |
-| `sodero-model` | Builds robot models from URDF and CAD meshes |
 | Python 3.12 | With numpy, PyYAML, requests, aiohttp and onnxruntime |
 | `git`, `gcc`, `make`, `scp`, `sftp` | Standard development tools |
 
@@ -90,6 +89,9 @@ Stellar X has a single Station, with the ID `station`. Every command uses it by 
 Use `scp` or any SFTP client with the same address, user and port:
 
 ```sh
+# Once: create a folder for your work on the robot
+ssh -p 2222 sodero@192.168.60.18 mkdir -p /workspace/my-work
+
 # From your computer to the robot
 scp -P 2222 my_robot.gw sodero@192.168.60.18:/workspace/my-work/
 
@@ -116,7 +118,9 @@ The first connection copies the VS Code server (about 230 MB) and takes a minute
 - **Preview first.** A `sodero` command that changes something only previews until you add `--execute`. Read the preview, then repeat the command with `--execute`.
 - **The robot is real equipment.** A command with `--execute` can start nodes or move the robot. Run it only when the surroundings are clear and someone who can stop the robot is present.
 - **Stop a node before you change it.** The Station refuses changes to a running node. Stop it, apply the change, start it again.
-- **Official modules stay protected.** Their parameters and settings are open to you, but their sources, binaries, weights and internal logs are not part of the workspace.
+- **Official modules stay protected.** Their parameters, settings and node logs are open to you, but their sources, binaries, weights and internal logs are not part of the workspace.
+
+Where to go next:
 
 | Task | Where |
 | :--- | :--- |

@@ -15,18 +15,20 @@
 flowchart TB
     subgraph SX ["Stellar X · Stellar Station"]
         CTRL["Controllers<br>Motion Studio · Strider · Articulation"] --> AG["Simulation gateways<br>(actuator)"]
-        CG["Camera / IMU gateways"]
+        IG["IMU gateways"]
+        CG["Camera gateways"]
     end
     subgraph PC ["Isaac Sim computer"]
         IB["Isaac Bridge extension"] --- ST["Scene<br>robots · cameras"]
     end
     AG -- "joint commands · 53333" --> IB
-    IB -- "joint states, IMU · 53334" --> AG
+    IB -- "joint states · 53334" --> AG
+    IB -- "IMU · 53334" --> IG
     IB -- "RGB-D frames · 53335" --> CG
 ```
 
 - **Only the gateways change.** A simulation gateway replaces the fieldbus with the network connection to Isaac Sim. Controllers, documents, settings and applications stay the same as for the real robot.
-- **The simulated robot behaves like servo drives.** Each joint receives position, velocity or torque commands and reports its position, velocity and torque, like a drive with its motor and encoder.
+- **Simulated joints behave like servo drives.** Each joint receives position, velocity or torque commands and reports its position, velocity and torque, like a drive with its motor and encoder.
 - **Cameras and IMUs** of the scene are served to the Station's camera and IMU gateways, so localization, navigation and walking controllers run on simulated sensors.
 - **Several robots** can share one scene. Each robot has a unique name, and each gateway on the Station names the robot it drives.
 

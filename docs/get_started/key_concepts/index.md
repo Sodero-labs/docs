@@ -46,7 +46,7 @@ When you click **Add node** on the Station page, you choose one of four node typ
 | **Compound** | Combines several robot units into one system | Your own compound modules |
 | **Application** | Defines robot behaviors and task logic | Your own modules |
 
-Each node has an ID of the form `rc.<kind>.<name>`. You choose the name; the kind comes from the module:
+Most built-in nodes have an ID of the form `rc.<kind>.<name>`. You choose the name; the kind comes from the module:
 
 | Module | Node ID |
 | :--- | :--- |
@@ -96,16 +96,16 @@ A **gateway** is the only node that talks to actuators. Controllers never touch 
 
 | Hardware type of the `.gw` | Drives |
 | :--- | :--- |
-| **Isaac Sim** | A robot in **NVIDIA Isaac Sim** on a PC of the same network, through the Isaac Bridge extension |
+| **Isaac Sim** | A robot in **NVIDIA Isaac Sim** on a PC on the same network, through the Isaac Bridge extension |
 | **EtherCAT** | Real EtherCAT drives on the controller's EtherCAT port |
 
-!!! warning "**Names must match.** A simulation gateway finds its robot in Isaac Sim by name. The gateway's **robot name** must be exactly the name of the robot's articulation prim in the Isaac Sim scene (for example `/World/jackal` for the robot name `jackal`). With a different name, the gateway keeps waiting and the robot never moves. See [Simulation Gateway](../../gateways/simulation/index.md)."
+!!! warning "**Names must match.** A simulation gateway finds its robot in Isaac Sim by name. The gateway's **Robot name** must be exactly the name of the robot's articulation prim in the Isaac Sim scene (for example `/World/jackal` for the robot name `jackal`). With a different name, the gateway keeps waiting and the robot never moves. See [Simulation Gateway](../../gateways/simulation/index.md)."
 
 ---
 
 ## Design Documents
 
-Each built-in node is configured by a **design document**. You create documents with **Stellar Designer** and load them into nodes on the Station page.
+Actuator gateways and robot controllers are configured by a **design document**. You create documents with **Stellar Designer** (gateway documents with its **Gateway Designer**) and load them into nodes on the Station page.
 
 | File | Node | Contents |
 | :--- | :--- | :--- |
@@ -113,11 +113,10 @@ Each built-in node is configured by a **design document**. You create documents 
 | `.sdd` | Motion Studio | Manipulator: kinematics, dynamics, actuator mapping |
 | `.sddm` | Strider | Mobile base: drive type, wheels, limits, actuator mapping |
 | `.sdda` | Articulation | Articulated robot: joints and actuator mapping |
-| `.nav` | Localizer, Navigator | Map bundle: map, localization and navigation settings |
 
-Cameras, IMUs, visual odometry, the localizer and the navigator also have **settings** that you edit directly in the node's inspector on the Station page.
+Camera and IMU gateways, visual odometry, the localizer, the navigator and legged locomotion have no design document. They have **settings** that you edit in the node's inspector on the Station page ([Design Documents](../../station/design_documents/index.md#4-settings-of-sensor-and-navigation-nodes)). The localizer and the navigator also use a **map bundle** (`.nav`): one file with the map of the site and their settings ([Map Bundle](../../navigation/map_bundle/index.md)).
 
-Your own programs are installed as **modules** (packages) on the [Modules](../../station/modules/index.md) page and run as Application nodes.
+Your own programs are installed as **modules** (packages) on the [Modules](../../station/modules/index.md) page and run as nodes on the Station.
 
 ---
 
@@ -140,8 +139,9 @@ The recommended workflow follows the same order every time:
 | Port | A connection point of a node: REQUIRES (needs) or PROVIDES (offers) |
 | Gateway | A node that connects controllers to actuators or sensors, real or simulated |
 | Controller | A node that controls a robot unit: Motion Studio, Strider, Articulation, Legged locomotion |
-| Design document | The configuration file of a node: `.gw`, `.sdd`, `.sddm`, `.sdda` |
-| Module | Your own program, uploaded to the Station and run as a node |
+| Design document | The configuration file of an actuator gateway or a robot controller: `.gw`, `.sdd`, `.sddm`, `.sdda` |
+| Map bundle | A `.nav` file with the map of a site and the settings of the localizer and the navigator |
+| Module | A program that runs as a node: built in, or your own package installed on the Modules page |
 | SDR | A backup file of the whole Station: graph, documents and settings |
 | World | The simulated scene in Isaac Sim that the Station's simulation gateways connect to |
 | Isaac Bridge | The Isaac Sim extension that connects the World to the Station |

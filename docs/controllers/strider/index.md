@@ -8,7 +8,7 @@ Supported drive types (templates of the `.sddm` document): differential drive, s
 
 ## 1. Open Strider
 
-Start the Strider node and its gateway on the Station ([Running Nodes](../../station/running_nodes/index.md)). Then click **Strider** in the node's **CONTROL** section, or the **Strider** link on the node card. Strider opens in a new tab for that robot.
+On the Station, start the gateway first, then the Strider node ([Running Nodes](../../station/running_nodes/index.md)). Click **Strider** in the node's **CONTROL** section, or the **Strider** link on the node card. Strider opens in a new tab for that robot.
 
 <figure markdown="span">
   ![Strider node](images/strider_node.png){ width="340" }
@@ -26,7 +26,7 @@ The left rail has three pages: **Status**, **Drive** and **Navigation**. The top
 | Item | Description |
 | :--- | :--- |
 | Readiness pill | The current state in one line, for example *Manual Drive Ready* or *Servo Off*. Click it for the **CHECKS** list: Connection, Mobile base, Servo, Localization, Navigation. |
-| **System Log** | Events of this browser session, filtered by System, Drive, Navigation, Localization |
+| **System Log** | Events of this browser session, with filters for System, Drive, Navigation and Localization |
 | **Motion Alarm** | Active alarms and recent errors |
 | **Stop Motion** (Drive page) | Stops manual driving and cancels a running goal |
 | **E-STOP** | Emergency stop of the base. It latches until **Clear E-Stop**. |
@@ -52,6 +52,8 @@ The left rail has three pages: **Status**, **Drive** and **Navigation**. The top
 | **Operation Status** | System Ready, Moving / Motion Idle, Servo On / Off, Fault Clear / Emergency Stop / Fault / Watchdog Tripped |
 | **Base Status (Odometry)** | Mode and X, Y, Theta, VX, VY, WZ |
 | **Control Node Health** | Whether the base, the localizer and the navigator are reachable |
+| **Drive Unit Status** | The drive template (for example `skid_steer_4`) and, per wheel, the servo state, position, velocity and target velocity |
+| **Recent Events** | The six latest events; **View All** opens the **System Log** |
 
 !!! info "**Watchdog Tripped** while the base stands still in Twist mode is normal: it means that no velocity command is arriving, so the base holds zero speed."
 
@@ -151,7 +153,7 @@ If the localization status is not **Healthy**, tell the localizer where the robo
 
 ## 6. Control Strider from Programs
 
-Everything the UI does is available to programs:
+The main functions are also available to programs:
 
 - From the SSH workspace with `sodero tools call strider.set_mode`, `strider.servo_on`, `strider.set_twist`, `strider.stop` and `strider.get_state` ([sodero CLI](../../ssh_workspace/sodero_cli/index.md)).
 - From your own modules on the Station through the `mobile_base` interface ([Modules](../../station/modules/index.md)).

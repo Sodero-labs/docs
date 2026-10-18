@@ -5,19 +5,19 @@ Gateways and robot controllers are configured by **design documents**. You creat
 | File | Node | Edited with |
 | :--- | :--- | :--- |
 | `.gw` | Actuator gateway | Stellar Gateway Designer ([Gateway Designer](../../gateways/gateway_designer/index.md)) |
-| `.sdd` | Motion Studio | Stellar Designer, manipulator editor |
+| `.sdd` | Motion Studio | Stellar Designer, manipulator editor ([Manipulator](../../tutorials/stellar_designer/manipulator/index.md)) |
 | `.sddm` | Strider | Stellar Designer, mobile robot editor ([Mobile Robot](../../tutorials/stellar_designer/mobile_robot/index.md)) |
-| `.sdda` | Articulation | Stellar Designer, articulation editor |
+| `.sdda` | Articulation | Stellar Designer, articulation editor ([Articulated Robot](../../tutorials/stellar_designer/articulation/index.md)) |
 
 Cameras, IMUs, visual odometry, the localizer and the navigator have no design document. They have **settings** that you edit in the node's inspector (see [Settings of Sensor and Navigation Nodes](#4-settings-of-sensor-and-navigation-nodes)).
 
-!!! info "Every new gateway or controller node starts with an empty document of its type, so you can either import a finished file or build the document from scratch with **Edit Stellar Designer**."
+!!! info "Every new gateway or controller node starts with an empty document of its type, so you can either import a finished file or build the document from scratch with **Edit Stellar Designer** (**Edit Stellar Gateway Designer** for gateways)."
 
 ---
 
 ## 1. Import a Document
 
-1. Stop the node if it runs.
+1. Stop the node if it is running.
 2. Select the node. In the inspector's **DEFINITION** section, click the upload icon (**Import .gw**, **Import .sdd**, **Import .sddm** or **Import .sdda**).
 3. On **From your PC** ①, drop the file or click **Choose file**. The chosen file appears ②; click **Import** ③.
 
@@ -38,8 +38,8 @@ The **DEFINITION** section then shows the file name and *imported just now*.
 
 Click **Edit Stellar Designer** (controllers) or **Edit Stellar Gateway Designer** (gateways) in the **DEFINITION** section. Stellar Designer opens in a new browser tab with the node's document. The breadcrumb at the top shows the node and the file, for example `rc.mobile_controller_manager.jackal / jackal.sddm`.
 
-- Your edits are saved back to the node automatically.
 - **Stop the node before you edit its document.** While the node runs, the Station refuses to save.
+- Your edits are saved back to the node automatically. In an Articulation document, click **Save configuration**.
 - The arrow at the left of the breadcrumb returns to the Station.
 
 The editors are described in [Stellar Designer](../../tutorials/stellar_designer/introduction/index.md) and [Gateway Designer](../../gateways/gateway_designer/index.md).
@@ -51,7 +51,7 @@ The editors are described in [Stellar Designer](../../tutorials/stellar_designer
 A simulation gateway also needs to know **which robot** in Isaac Sim it drives and **where** Isaac Sim runs. Select the gateway and click **Change** in its **TARGET** section:
 
 <figure markdown="span">
-  ![Target](images/inspector_target_edit.png){ width="299" }
+  ![Target](images/inspector_target_edit.png){ width="331" }
   <figcaption>Robot name and simulator address of a simulation gateway</figcaption>
 </figure>
 
@@ -79,7 +79,7 @@ The same settings can be read and written from the SSH workspace with `sodero na
 
 ## 5. Rules for Documents
 
-- A Strider or Motion Studio document names the gateway it drives and the gateway's actuator indices (zero-based). Connect the node's `servo_link` to that same gateway.
-- A simulation gateway document has `hardware.type: simulation`. Its robot name and simulator address are set on the node (section 3).
-- The number of actuators must match: the controller document maps every actuator it uses to a joint or wheel, and the gateway must provide at least that many actuators.
+- A Motion Studio, Strider or Articulation document names the gateway it drives and the gateway's actuator indices (zero-based). Connect the node's `servo_link` to that same gateway.
+- A simulation gateway document has `hardware.type: simulation`. Its robot name and simulator address are set on the node ([section 3](#3-point-a-simulation-gateway-at-its-robot)).
+- The gateway must have enough actuators: the controller document maps every actuator it uses to a joint or wheel, and the gateway must provide at least that many.
 - Connect one robot controller to a gateway. To drive one manipulator through several gateways, use **+ Gateway link** on its Motion Studio node.

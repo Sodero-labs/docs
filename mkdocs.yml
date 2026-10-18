@@ -89,6 +89,7 @@ nav:
       - Introduction: tutorials/stellar_designer/introduction/index.md
       - Manipulator (.sdd): tutorials/stellar_designer/manipulator/index.md
       - Mobile Robot (.sddm): tutorials/stellar_designer/mobile_robot/index.md
+      - Articulated Robot (.sdda): tutorials/stellar_designer/articulation/index.md
       - 3D Model (.glb): tutorials/stellar_designer/3dmodel_creation/index.md
   - Virtual Simulation:
     - Overview: virtual_simulation/introduction/index.md

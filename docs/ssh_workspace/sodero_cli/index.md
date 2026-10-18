@@ -1,6 +1,6 @@
 # sodero CLI
 
-`sodero` is the command-line tool of the SSH workspace. It performs the operations of the Station page (adding nodes, connecting ports, loading settings and maps, starting nodes, calling robot tools) and prints every result as JSON, so both people and scripts or AI agents can use it.
+`sodero` is the command-line tool of the SSH workspace. It performs the operations of the Station page (adding nodes, connecting ports, loading settings and maps, starting nodes, calling robot tools) and prints every result as JSON, so people, scripts and AI agents can all use it.
 
 The CLI is its own best reference:
 
@@ -20,7 +20,7 @@ The CLI is its own best reference:
 - **Preview first.** A command that changes something only previews until you add `--execute`. Read the preview, then repeat the command with `--execute`.
 - **Versions.** Changes to the node graph take `--if-version N`, the `expected_version` from `sodero topology get`. Changes to settings and documents take `--if-sha256 SHA256` from the matching `get`. Each saved change returns the next value. If someone changed the Station page in the meantime, the change is refused with a conflict (exit code 6): read again and retry.
 - **One Station.** On a robot, the only item is the Station `station`. `--item` defaults to it and can be left out.
-- **Node IDs.** Nodes are named `rc.<kind>.<name>`, for example `rc.actuator_gateway.jackal`, `rc.mobile_controller_manager.jackal`, `rc.camera_gateway.cam0`. The localizer, navigator and visual odometry have fixed IDs: `rc.localizer`, `rc.navigator`, `rc.visual_odometry`.
+- **Node IDs.** Nodes are named `rc.<kind>.<name>`, where the kind comes from the module, not from the `--kind` option of `topology add-node`: `--kind camera --name cam0` creates `rc.camera_gateway.cam0`. Other examples: `rc.actuator_gateway.jackal`, `rc.mobile_controller_manager.jackal`. The localizer, navigator and visual odometry have fixed IDs: `rc.localizer`, `rc.navigator`, `rc.visual_odometry`.
 
 ### Exit Codes
 
@@ -56,7 +56,7 @@ The CLI is its own best reference:
 | `files` | `upload` | Stage a file on the robot for `documents.apply` (kept for at most 6 hours) |
 | `run`, `programs` | `run`; `programs list`, `programs logs` | Run a program in the workspace and keep its output |
 
-!!! info "Worlds, project items, the project Library and the official asset catalog belong to the Sodero cloud. On a robot these commands answer `NOT_AVAILABLE_ON_DEVICE`."
+!!! info "Worlds, project items, the project Library and the official asset catalog belong to Sodero Cloud. On a robot these commands answer `NOT_AVAILABLE_ON_DEVICE`."
 
 ---
 
@@ -80,11 +80,11 @@ sodero runtime node stop rc.mobile_controller_manager.jackal --execute
 
 `sodero runtime start --execute --wait` starts every saved node, like **Start all nodes** on the Station page.
 
-!!! warning "**Start all** includes nodes that drive real hardware. Start nodes one by one when the graph contains hardware you do not want to run."
+!!! warning "**Start all nodes** includes nodes that drive real hardware. Start nodes one by one when the graph contains hardware you do not want to run."
 
 ### Edit the Node Graph
 
-Every graph change needs the current version. Read it, preview, then execute:
+Stop the nodes you change first, as on the Station page; changes apply when they next start. Every graph change needs the current version. Read it, preview, then execute:
 
 ```sh
 sodero topology get                                       # note "expected_version", e.g. 12
@@ -94,7 +94,7 @@ sodero topology connect --source rc.localizer.camera \
     --target rc.camera_gateway.cam0.camera --if-version 13 --execute
 ```
 
-`sodero topology catalog` lists the node kinds (`gateway`, `strider`, `motion_studio`, `articulation`, `camera`, `imu`, `vo`, `localizer`, `navigator`, `legged_locomotion`, `legged_navigator`, `package`) with their ports. The Station must be stopped while you edit its graph, as on the Station page.
+`sodero topology catalog` lists the node kinds (`gateway`, `strider`, `motion_studio`, `articulation`, `camera`, `imu`, `vo`, `localizer`, `navigator`, `legged_locomotion`, `legged_navigator`, `package`) with their ports.
 
 ### Change Settings of Official Nodes
 
@@ -111,17 +111,21 @@ Stop the node first; the new settings apply when it starts again. These are the 
 ### Attach a Map
 
 ```sh
-sodero navigation get --node rc.localizer            # its sha256
-sodero maps upload /workspace/maps/warehouse.nav --node rc.localizer --if-sha256 SHA256 --execute
+sodero runtime node stop rc.navigator --execute          # stop the nodes that use the map
+sodero runtime node stop rc.localizer --execute
+sodero runtime node stop rc.visual_odometry --execute    # if the Station has one
+sodero navigation get --node rc.localizer                # note "sha256"
+sodero maps upload /workspace/maps/warehouse.nav --node rc.localizer --if-sha256 SHA256            # preview: checks the bundle
+sodero maps upload /workspace/maps/warehouse.nav --node rc.localizer --if-sha256 SHA256 --execute  # attach it
 ```
 
-The localizer and the navigator share one map bundle, so one upload serves both. Stop both nodes first. See [Localization and Navigation](../../navigation/overview/index.md).
+The localizer and the navigator share one map bundle, so one upload serves both. Start the nodes again afterwards. See [Map Bundle (.nav)](../../navigation/map_bundle/index.md) and [Localization and Navigation](../../navigation/overview/index.md).
 
 ### Modules (Your Own Programs)
 
 ```sh
 sodero packages upload /workspace/my-work/patrol.tar.gz --execute
-sodero topology add-node --kind package --package patrol --if-version N --execute
+sodero topology add-node --kind package --package customer.patrol --if-version N --execute   # name from package.yaml
 sodero apps start NODE --execute
 sodero apps logs NODE --lines 100
 ```

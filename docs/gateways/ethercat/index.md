@@ -30,7 +30,7 @@ flowchart LR
     D2 --> D3["Drive 3"]
 ```
 
-- Plug Stellar X's **EtherCAT** port into the **IN** port of the first drive. Connect each drive's **OUT** port to the next drive's **IN** port.
+- Plug Stellar X's **EtherCAT Out** port into the **IN** port of the first drive. Connect each drive's **OUT** port to the next drive's **IN** port.
 - **Do not use a network switch.** EtherCAT frames must pass through the drives in a line.
 - **The cable order is the actuator order.** The first drive on the cable is actuator 1 (index 0) of the gateway, the second is actuator 2 (index 1), and so on. To change the order, change the wiring.
 - Devices after the last controlled drive are allowed; the gateway ignores them.
@@ -58,12 +58,14 @@ flowchart LR
   <figcaption>Motor tab</figcaption>
 </figure>
 
+Click **Brand**, **Series** or **Model** ① to open **Motor Select**: search by model number, or pick **Brand** › **Series** › **Model**. The preview shows the catalog values, and **Accept** fills them in. For a motor that is not in the catalog, type the values.
+
 <figure markdown="span">
   ![Motor Select](images/gwd_motor_select.png){ width="760" }
   <figcaption>Motor Select catalog: search ①, or pick Brand ② › Series ③ › Model ④, then Accept ⑤</figcaption>
 </figure>
 
-Click **Brand**, **Series** or **Model** ① to open **Motor Select**: search by model number, or pick **Brand** › **Series** › **Model**. The preview shows the catalog values, and **Accept** fills them in. For a motor that is not in the catalog, type the values.
+The fields of the **Motor** tab:
 
 | Section | Field | Unit | Meaning |
 | :--- | :--- | :--- | :--- |
@@ -95,7 +97,8 @@ Click the gear icon in the actuator panel to open **Servo Driver Select**:
 
 | Section | Field | Meaning |
 | :--- | :--- | :--- |
-| **IDENTIFICATION** | **Idx**, **Alias** | Position of the drive on the cable (read-only) |
+| **IDENTIFICATION** | **Idx** | Position of the drive on the cable, from 0 (read-only) |
+| | **Alias** | An alias that identifies the device (read-only). The gateway addresses drives by their position on the cable, not by alias. |
 | | **Name** | A label for logs |
 | **SDOS** | **Index**, **Subindex**, **Value**, **Size** | Start-up parameters written to the drive before operation. Index, subindex and value are hexadecimal (`0x…`); size is in bytes. The entry named *Absolute Encoder Reset* is not written at start-up; Motion Studio's origin calibration uses it. |
 | **PDOS** | **Rx PDO** / **Tx PDO** index | The PDO mapping objects, typically `0x1600` and `0x1A00` |
@@ -167,7 +170,7 @@ The gateway explains every problem in **Gateway events**, followed by a hint. Th
 
 | Message | Cause and fix |
 | :--- | :--- |
-| *EtherCAT: no cable link on network port …* | No Ethernet link. Plug the cable into Stellar X's EtherCAT port and into the first drive's **IN** port, and power the drive. |
+| *EtherCAT: no cable link on network port …* | No Ethernet link. Plug the cable into Stellar X's **EtherCAT Out** port and into the first drive's **IN** port, and power the drive. |
 | *EtherCAT: no drive answered on network port …* | The cable goes to the wrong port of the drive (OUT instead of IN), to a switch, or the drive has no power. |
 | *EtherCAT: found M of the N drives this gateway controls.* | The chain ends after drive M. Check the cable from drive M's OUT port to the next drive's IN port, and that drive's power. |
 | *…configuration describes K drive(s), but the gateway controls N.* | The drive list in the document does not match the actuators. Fix it in the Gateway Designer. |

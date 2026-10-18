@@ -18,19 +18,21 @@ With Isaac Bridge installed and the robot prepared, point the Station's gateways
 
 ## 2. Set the Gateways on the Station
 
-Each line of the Isaac Bridge window corresponds to a field on a Station node:
+Set the Station nodes to match Isaac Sim:
 
-| Isaac Bridge window | Station node | Field |
+| Isaac Sim | Station node | Field |
 | :--- | :--- | :--- |
 | Robot `jackal` | Actuator gateway (simulation) | **TARGET › Robot name** `jackal` |
 | The Isaac Sim computer | Actuator gateway (simulation) | **TARGET › Sim host**: the computer's IP address |
 | Camera `cam0` | Camera gateway | **Camera name** `cam0`, **Camera host**: the computer's IP address, **Port** 53335 |
 | Robot `jackal` (with an IMU) | IMU gateway | **Robot in World** `jackal` |
 
+The IMU gateway has no host field: it connects to the simulator address configured for your controller, which Sodero support sets ([Sensors and Cameras](../../gateways/sensors_and_cameras/index.md#2-imu-gateway)).
+
 !!! warning "**The Robot name on the Station must be exactly the robot's prim name in Isaac Sim.** Names are case-sensitive. If they differ, the gateway keeps waiting and the robot never moves."
 
 <figure markdown="span">
-  ![Target](../../get_started/quick_start/images/target.png){ width="340" }
+  ![Target](../../get_started/quick_start/images/target.png){ width="331" }
   <figcaption>Robot name and Sim host of a simulation gateway</figcaption>
 </figure>
 
@@ -62,7 +64,7 @@ The gateways treat Isaac Sim like a power supply of real drives:
 | Editing the scene while it plays | Takes effect at the next **Play**, or click **Rescan** in the Isaac Bridge window |
 | Closing Isaac Sim | The gateways keep waiting and reconnect when the scene plays again |
 
-!!! info "After the simulation restarts, the robot is back at its starting pose, but the localizer may still hold its last pose. If Strider's Navigation page shows a wrong pose, set the initial pose again."
+!!! info "After the simulation restarts, the robot is back at its starting pose, but the Localizer may still hold its last pose. If Strider's Navigation page shows a wrong pose, set the initial pose again."
 
 ---
 
@@ -95,6 +97,6 @@ The simulation runs in real time while the computer keeps up with the render rat
 | The robot is listed but never **bound** | It is not a valid PhysX articulation, or its name is used twice ([Robot Setup](../robot_setup/index.md#9-check-the-robot)) |
 | Camera gateway: *publishes frames of camera(s) … but none of camera …* | The camera gateway's **Camera name** is not the camera's prim name |
 | Camera gateway: frames *stale* or with capture times that do not match | The clocks of the two computers differ. Synchronize them. |
-| The robot moves too fast or too slow | The computer cannot keep the render rate. Lower camera sizes or rates, or close viewports. |
+| The robot moves too fast or too slow | The computer cannot keep up with the render rate. Lower camera sizes or rates, or close viewports. |
 
 The Isaac Sim console shows the bridge's messages, prefixed with the robot or camera name.

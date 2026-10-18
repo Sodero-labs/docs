@@ -18,10 +18,10 @@ The Gateway Designer opens in a new tab with the node's document. Edits are save
 
 | Area | Contents |
 | :--- | :--- |
-| Breadcrumb | Where the document belongs: Station / node / file. The arrow returns to the Station. |
+| Breadcrumb | Where the document belongs: device / Station / node / file. The arrow returns to the Station. |
 | Steps | **01 Gateway setup** (actuators and their parameters) and **02 Verification** |
 | **Actuators (N)** | One card per actuator, in index order, with its brand, model and status (**Configured** / **Not configured**). **Add Actuator** adds one; **×** removes one. |
-| Actuator panel | The parameters of the selected actuator, in tabs: **Motor** and a tab for the hardware type (**EtherCAT**, **Isaac Sim** or **Damiao CAN**) |
+| Actuator panel | The parameters of the selected actuator, in tabs: **Motor** and a tab for the hardware type (**EtherCAT** or **Isaac Sim**) |
 | Units | `mm / g / deg` or `m / kg / radian` for display |
 
 ---
@@ -40,7 +40,9 @@ A new gateway node starts with an empty document. When you open it, the Gateway 
 | **Isaac Sim** ① | A robot in NVIDIA Isaac Sim ([Simulation Gateway](../simulation/index.md)) |
 | **EtherCAT** ② | CiA 402 servo drives on the EtherCAT port ([EtherCAT Gateway](../ethercat/index.md)) |
 
-**Damiao CAN** and **Simulation** are greyed out: they are not available here. Select the type and click **Next** ③, then **Create**. To change the type of an existing gateway later, use the same chooser; actuators keep their motor settings and receive the new type's hardware settings.
+Select the type and click **Next** ③, then **Create**.
+
+To change the type of an existing gateway, click the Stellar mark at the top left and choose **Definition** › **Replace definition**. Pick the new type and click **Next** › **Replace**. Existing actuators keep their motor settings and receive the new type's hardware settings; the previous type's hardware settings are removed. This cannot be undone.
 
 ---
 
@@ -48,7 +50,7 @@ A new gateway node starts with an empty document. When you open it, the Gateway 
 
 1. Click **Add Actuator** once per motor. Actuator 1 is index 0, actuator 2 is index 1, and so on.
 2. Select an actuator card. Fill in the **Motor** tab: pick the motor from the catalog (**Brand** › **Series** › **Model**) or enter its values.
-3. Fill in the tab of the hardware type: **EtherCAT** (identification, SDOs, PDOs), **Isaac Sim** (DOF offset) or **Damiao CAN** (model, gains, limits).
+3. Fill in the tab of the hardware type: **EtherCAT** (identification, SDOs, PDOs) or **Isaac Sim** (DOF offset).
 
 ### Motor Parameters
 
@@ -57,8 +59,8 @@ A new gateway node starts with an empty document. When you open it, the Gateway 
 | **Rated torque** | Nm | Continuous torque of the motor. For EtherCAT drives it is the reference for torque commands in per mille. |
 | **Max torque** | Nm | Peak torque of the motor. The gateway clamps torque commands to *Max torque × gear ratio* at the joint. |
 | **Max speed** | rpm | Maximum motor speed. The joint speed limit is *Max speed ÷ gear ratio*. |
-| **Resolution** | counts per revolution | Encoder resolution at the motor shaft, before the gear (EtherCAT). For example 2²³ = 8,388,608 for a 23-bit encoder. |
-| **Encoder offset** | counts | Zero offset of the absolute encoder. Normally set by origin calibration in Motion Studio, not by hand. |
+| **Resolution** | PPR | Encoder pulses per motor revolution, before the gear (EtherCAT). For example 2²³ = 8,388,608 for a 23-bit encoder. |
+| **Encoder offset** | pulses | Zero offset of the absolute encoder. Normally set by origin calibration in Motion Studio, not by hand. |
 | **Gear ratio** | ratio | Motor turns per joint turn. |
 
 For simulation gateways only **Max torque**, **Max speed** and **Gear ratio** apply.
@@ -67,7 +69,7 @@ For simulation gateways only **Max torque**, **Max speed** and **Gear ratio** ap
 
 ## 4. Verify and Export
 
-Open **02 Verification** and click **Verify**. The Gateway Designer checks the hardware type, that actuators are defined, the motor parameters and, for EtherCAT, the encoder resolution, and that the configuration files are valid.
+Open **02 Verification** and click **Verify**. The Gateway Designer checks the hardware type, the actuator list, the motor parameters (for EtherCAT also the encoder resolution) and the configuration files.
 
 <figure markdown="span">
   ![Verification](images/gwd_sim_verify.png){ width="1000" }
@@ -75,6 +77,8 @@ Open **02 Verification** and click **Verify**. The Gateway Designer checks the h
 </figure>
 
 Errors (for example a parameter that must be positive) must be fixed; warnings are advisory. Then start the gateway from the Station.
+
+When all checks pass, **Export .gw** downloads the document as a `.gw` file, which you can import into another gateway node (**Import .gw**).
 
 ---
 
@@ -90,11 +94,3 @@ For **Isaac Sim** gateways, the actuator panel has an **Isaac Sim** tab with one
 **DOF offset** is the first joint of the Isaac Sim articulation that this gateway drives. Leave it at 0 when one gateway drives the whole robot. Several gateways can share one simulated robot, for example an arm gateway with offset 0 for joints 1–6 and a gripper gateway with offset 6 for the joints after them.
 
 The robot name in the scene and the simulator address are set on the Station node, not in the document ([Simulation Gateway](../simulation/index.md)).
-
----
-
-## 6. CAN Gateways
-
-The **Damiao CAN** type drives Damiao motors in MIT mode over SocketCAN. Its tab selects the **Motor model** (which fills in the protocol's position, velocity and torque ranges), the **Gains** (position Kp and Kd, velocity Kd) and the **Limits**. The CAN ID of each motor is its actuator number.
-
-!!! info "In the Gateway Designer opened from a Stellar X node, new gateways can be created as **Isaac Sim** or **EtherCAT**. To use a CAN gateway, contact Sodero support."

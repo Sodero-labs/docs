@@ -4,7 +4,7 @@ This tutorial continues the [Quick Start](../../get_started/quick_start/index.md
 
 <figure markdown="span">
   ![Jackal navigating](images/jackal_navigating_isaac.png){ width="900" }
-  <figcaption>The Jackal driving to a goal in the warehouse, guided by the Station's navigation stack</figcaption>
+  <figcaption>The Jackal (center) driving to a goal in the warehouse, guided by the Station's navigation stack</figcaption>
 </figure>
 
 ---
@@ -21,7 +21,7 @@ This tutorial continues the [Quick Start](../../get_started/quick_start/index.md
 
 ## Step 1: Set the Camera Size and Rate
 
-The localizer in this tutorial uses the camera at 320 × 240 pixels and 5 frames per second. Isaac Bridge renders cameras at 640 × 480 and 15 frames per second unless told otherwise, so close Isaac Sim and start it again with this camera setting:
+The localizer in this tutorial uses the camera at 320 × 240 pixels and 5 frames per second. Isaac Bridge renders cameras at 640 × 480 and 15 frames per second unless told otherwise, so close Isaac Sim and start it again from its installation folder with this camera setting:
 
 === "Linux"
 
@@ -36,13 +36,13 @@ The localizer in this tutorial uses the camera at 320 × 240 pixels and 5 frames
     isaac-sim.bat
     ```
 
-Run the command in Isaac Sim's installation folder, then open `jackal_warehouse.usd` and press **Play**. The Isaac Bridge window lists `cam0  320x240 at 5 fps`.
+Then open `jackal_warehouse.usd` and press **Play**. The Isaac Bridge window lists `cam0  320x240 at 5 fps`.
 
 ---
 
 ## Step 2: Add the Camera Gateway
 
-1. **Add node** › **Gateway** › **Camera gateway**, name it `cam0`.
+1. **Add node** › **Gateway** › **Camera gateway**, name it `cam0`. The Station also adds its companion node `rc.camera_component.cam0` ([Sensors and Cameras](../../gateways/sensors_and_cameras/index.md#1-camera-gateway)).
 2. In its inspector, set **Camera name** `cam0` (the camera prim's name in the scene) and **Camera host** (the Isaac Sim computer). The port is `53335`.
 3. Under **CAMERA SETTINGS**, set **fps** `5`, **frame id** `cam0_optical`, intrinsics mode `fov` with a horizontal field of view of `90`, and click **Save settings**.
 4. Click **Start node**, then **Camera view** on its card to check the image.

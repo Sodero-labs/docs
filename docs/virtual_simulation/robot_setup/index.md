@@ -18,7 +18,7 @@ A robot prepared this way looks like this in the **Stage** panel:
 
 <figure markdown="span">
   ![Jackal in the Stage panel](images_v2/stage_jackal.png){ width="364" }
-  <figcaption>① the robot prim `jackal` with the Articulation Root ② its four drive joints in actuator order</figcaption>
+  <figcaption>① the robot prim jackal with the Articulation Root ② its four drive joints in actuator order</figcaption>
 </figure>
 
 ```text
@@ -39,9 +39,9 @@ A robot prepared this way looks like this in the **Stage** panel:
 
 - **Isaac Sim assets.** Isaac Sim ships many robots from well-known manufacturers. Find them in the **Isaac Sim Assets** browser (**Window › Browsers**).
 - **URDF.** Import a URDF with Isaac Sim's URDF importer (**File › Import**). See [Import URDF](https://docs.isaacsim.omniverse.nvidia.com/latest/importer_exporter/import_urdf.html){:target="_blank"} in the Isaac Sim documentation.
-- **A 3D model.** Rig the robot yourself: rigid bodies and colliders on the links, joints between them, and an articulation root. See [Rig a Simple Robot](https://docs.isaacsim.omniverse.nvidia.com/latest/robot_setup_tutorials/tutorial_gui_simple_robot.html){:target="_blank"} in the Isaac Sim documentation.
+- **A 3D model.** Rig the robot yourself: rigid bodies and colliders on the links, joints between them, and an articulation root. See [Articulate a Basic Robot](https://docs.isaacsim.omniverse.nvidia.com/latest/robot_setup_tutorials/tutorial_gui_simple_robot.html){:target="_blank"} in the Isaac Sim documentation.
 
-Then check the rules below and fix what differs.
+Then check the model against the rules above; the sections below show how to fix what differs.
 
 ---
 
@@ -95,7 +95,7 @@ Every **Camera** prim of the scene (except Isaac Sim's own viewport cameras) is 
 
 <figure markdown="span">
   ![Camera in the Stage panel](images_v2/stage_cam0.png){ width="364" }
-  <figcaption>The camera `cam0` under the Jackal's `base_link`</figcaption>
+  <figcaption>The camera cam0 under the Jackal's base_link</figcaption>
 </figure>
 
 1. Create a camera under the link it is mounted on (**Create › Camera**), for example `/World/jackal/links/base_link/cam0`, so it moves with the robot.

@@ -11,7 +11,9 @@ Open the page from any computer on the same network:
 http://ROBOT_ADDRESS:3000
 ```
 
-In this guide the controller's address is `192.168.60.18`, so the page is `http://192.168.60.18:3000`. The page needs no sign-in.
+In this guide the controller's address is `192.168.60.18`, so the page is `http://192.168.60.18:3000`. On a direct cable with factory settings, the page is `http://10.0.0.1:3000` ([Stellar X](../stellar_x/index.md#4-network-configuration)).
+
+The page needs no sign-in: anyone on the same network can change the address and register SSH keys. Connect Stellar X only to networks you trust.
 
 <figure markdown="span">
   ![Network Settings page](images/network_settings_page.png){ width="420" }
@@ -96,7 +98,7 @@ The **SSH ACCESS** card controls who can sign in to the controller's SSH workspa
         if (!(Test-Path $HOME\.ssh\id_ed25519.pub)) { mkdir $HOME\.ssh -Force | Out-Null; ssh-keygen -t ed25519 -f $HOME\.ssh\id_ed25519 }; Get-Content $HOME\.ssh\id_ed25519.pub | Set-Clipboard; Get-Content $HOME\.ssh\id_ed25519.pub
         ```
 
-        On Windows the command also copies the key to the clipboard.
+        On Windows the command also copies the key to the clipboard. When `ssh-keygen` asks for a passphrase, press Enter twice to create the key without one.
 
 2. Paste the printed line into the box ④ and click **Add key** ⑤.
 3. Click **Copy** next to the connection command ① and run it:

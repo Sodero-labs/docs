@@ -25,9 +25,9 @@ Step **01 Robot Structure** ① shows the **Joint Section**: the joints from the
 1. Click **Add joint** ⑥ to add a joint at the end of the chain. The trash icon removes a joint.
 2. Open a joint ② and choose its **Joint Type** ③: rotation or translation about the joint's X, Y or Z axis.
 3. Enter its **DH PARAMETERS** ④: **DH (Theta)**, **DH (D)**, **DH (A)** and **DH (Alpha)**. The 3D view updates as you type.
-4. Under **ADVANCED SETTINGS** ⑤:
+4. Under **ADVANCED SETTINGS**:
     - **Dynamics**: the mass, center of mass and inertia of the link that moves with this joint.
-    - **Constraints**: opens the joint's constraints in the right panel ⑧.
+    - **Constraints** ⑤: opens the joint's constraints in the right panel ⑧.
 5. Use **JOG** **+** / **−** to move the joint in the 3D view and check its direction. **Jog Reset** returns all joints to zero.
 
 **Joint constraints** ⑧:

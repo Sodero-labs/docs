@@ -6,8 +6,8 @@ This tutorial builds the document of a wheeled mobile base, using the Clearpath 
 
 ## Before You Start
 
-1. On the Station, add a **Controller › Strider** node, for example `jackal`.
-2. Select it and click **Edit Stellar Designer**.
+1. On the Station, add a **Controller › Strider** node, for example `jackal`, and an **Actuator gateway** for its wheel motors ([Nodes and Connections](../../../station/nodes_and_connections/index.md)).
+2. Select the Strider node and click **Edit Stellar Designer**.
 3. In **Create robot definition**, choose the template that matches your drive:
 
 | Template | Drive |
@@ -18,7 +18,6 @@ This tutorial builds the document of a wheeled mobile base, using the Clearpath 
 | Mecanum 4WD | Four mecanum wheels, omnidirectional |
 | Swerve 4WD | Four steered and driven wheels |
 | Ackermann | Car-like steering |
-| Tricycle 3WD | One steered and driven wheel, two passive wheels |
 
 The template sets the drive type, which decides how body velocities become wheel commands. Then change its dimensions to those of your robot.
 
@@ -74,7 +73,7 @@ Step **01 Chassis Structure** ① shows the body and the wheels of the base.
 | :--- | :--- | :--- |
 | **ROBOT** | Total mass, Max payload, Center of mass, Body inertia | Mass properties of the robot |
 | **ENVIRONMENT** | Gravity vector | Normally `(0, 0, -9.81) m/s²` |
-| **MOTION** | Max linear speed, Max angular speed, Max linear accel, Max angular accel | Limits of the body velocity. Strider and the navigator never exceed them. |
+| **MOTION** | Max linear speed, Max angular speed, Max linear accel, Max angular accel | Limits of the body velocity. Strider and the Navigator never exceed them. |
 
 ---
 
@@ -87,7 +86,7 @@ Step **01 Chassis Structure** ① shows the body and the wheels of the base.
 
 Connect each actuator of the gateway to the wheel it drives (or steers), as for a manipulator ([Manipulator › Actuator Mapping](../manipulator/index.md#step-3-actuator-mapping)). The order must match the gateway: in the Jackal's gateway, actuator 1 is the front-left wheel, 2 front-right, 3 rear-left, 4 rear-right.
 
-A mobile base uses the mapping only to know which actuator drives which wheel; leave the **INFLUENCE FACTOR** at `1`. The wheel kinematics already account for the left and right side. If a real wheel still turns the wrong way, invert the motor's direction in its drive, for example with the drive's polarity parameter as a start-up SDO in the [Gateway Designer](../../../gateways/ethercat/index.md#ethercat-tab).
+A mobile base uses the mapping only to know which actuator drives which wheel; leave the **INFLUENCE FACTOR** at `1`. The wheel kinematics already account for the left and right side. If a real wheel still turns the wrong way, invert the motor's direction in its drive, for example by writing the drive's polarity parameter as a start-up SDO ([EtherCAT Gateway](../../../gateways/ethercat/index.md#ethercat-tab)).
 
 ---
 

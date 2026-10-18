@@ -11,17 +11,17 @@ show_intro: true
 ### Getting Started
 <div class="box-container">
   <a href="get_started/quick_start" class="card-box">
-    <img src="https://unpkg.com/lucide-static@latest/icons/rocket.svg" class="external-icon" alt="Icon">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/rocket.svg" class="external-icon" alt="Icon">
     <h4>Quick Start</h4>
     <p>Build your first robot system on Stellar X and drive a simulated robot in about 15 minutes.</p>
   </a>
   <a href="get_started/sodero_ecosystem" class="card-box">
-    <img src="https://unpkg.com/lucide-static@latest/icons/chart-column.svg" class="external-icon" alt="Icon">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/chart-column.svg" class="external-icon" alt="Icon">
     <h4>Sodero Ecosystem</h4>
-    <p>How Stellar X, Stellar Station, the designers and the controllers work together, from design to the real robot.</p>
+    <p>How Stellar X, Stellar Station, Stellar Designer and the controllers work together, from design to the real robot.</p>
   </a>
   <a href="hardware_setup/stellar_series/stellar_x" class="card-box">
-    <img src="https://unpkg.com/lucide-static@latest/icons/cpu.svg" class="external-icon" alt="Icon">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/cpu.svg" class="external-icon" alt="Icon">
     <h4>Hardware Setup</h4>
     <p>Power, network connection and first start of the Stellar X controller.</p>
   </a>
@@ -30,17 +30,17 @@ show_intro: true
 ### Build and Operate
 <div class="box-container">
   <a href="station/overview" class="card-box">
-    <img src="https://unpkg.com/lucide-static@latest/icons/layout-dashboard.svg" class="external-icon" alt="Icon">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/layout-dashboard.svg" class="external-icon" alt="Icon">
     <h4>Stellar Station</h4>
     <p>Build the robot system as a graph of nodes, load design documents, run nodes and follow their logs.</p>
   </a>
   <a href="gateways/overview" class="card-box">
-    <img src="https://unpkg.com/lucide-static@latest/icons/cable.svg" class="external-icon" alt="Icon">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/cable.svg" class="external-icon" alt="Icon">
     <h4>Gateways</h4>
     <p>Connect EtherCAT drives, simulated robots, cameras and IMUs, and set their parameters.</p>
   </a>
   <a href="controllers/strider" class="card-box">
-    <img src="https://unpkg.com/lucide-static@latest/icons/gamepad-2.svg" class="external-icon" alt="Icon">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/gamepad-2.svg" class="external-icon" alt="Icon">
     <h4>Strider and Motion Studio</h4>
     <p>Jog mobile bases and manipulators, define tools and poses, and send navigation goals.</p>
   </a>
@@ -49,36 +49,36 @@ show_intro: true
 ### Design and Simulate
 <div class="box-container">
   <a href="tutorials/stellar_designer/introduction" class="card-box">
-    <img src="https://unpkg.com/lucide-static@latest/icons/boxes.svg" class="external-icon" alt="Icon">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/boxes.svg" class="external-icon" alt="Icon">
     <h4>Stellar Designer</h4>
     <p>Describe your robot: kinematics, limits, safety and actuator mapping for arms and mobile bases.</p>
   </a>
   <a href="navigation/overview" class="card-box">
-    <img src="https://unpkg.com/lucide-static@latest/icons/map.svg" class="external-icon" alt="Icon">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/map.svg" class="external-icon" alt="Icon">
     <h4>Localization and Navigation</h4>
     <p>Localize the robot on a map with its camera and drive it to goals around obstacles.</p>
   </a>
   <a href="virtual_simulation/introduction" class="card-box">
-    <img src="https://unpkg.com/lucide-static@latest/icons/square-mouse-pointer.svg" class="external-icon" alt="Icon">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/square-mouse-pointer.svg" class="external-icon" alt="Icon">
     <h4>NVIDIA Isaac Sim</h4>
-    <p>Drive robots in Isaac Sim with the same controllers and documents as the real robot.</p>
+    <p>Drive robots in Isaac Sim with the same controllers and controller documents as the real robot.</p>
   </a>
 </div>
 
 ### Develop and Extend
 <div class="box-container">
   <a href="ssh_workspace/overview" class="card-box">
-    <img src="https://unpkg.com/lucide-static@latest/icons/square-terminal.svg" class="external-icon" alt="Icon">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/square-terminal.svg" class="external-icon" alt="Icon">
     <h4>SSH Workspace</h4>
     <p>A Linux workspace on the controller with the sodero command-line tool.</p>
   </a>
   <a href="ssh_workspace/ai_agents" class="card-box">
-    <img src="https://unpkg.com/lucide-static@latest/icons/bot.svg" class="external-icon" alt="Icon">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/bot.svg" class="external-icon" alt="Icon">
     <h4>AI Coding Agents</h4>
     <p>Let an AI coding agent inspect, configure and operate the robot system for you.</p>
   </a>
   <a href="station/modules" class="card-box">
-    <img src="https://unpkg.com/lucide-static@latest/icons/puzzle.svg" class="external-icon" alt="Icon">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/puzzle.svg" class="external-icon" alt="Icon">
     <h4>Modules</h4>
     <p>Add your own applications and devices to the Station as nodes.</p>
   </a>
@@ -86,18 +86,18 @@ show_intro: true
 
 ### Support
 <div class="box-container">
-  <a href="https://www.sodero.io" class="card-box">
-    <img src="https://unpkg.com/lucide-static@latest/icons/headset.svg" class="external-icon" alt="Icon">
+  <a href="https://www.sodero.io/contact" class="card-box">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/headset.svg" class="external-icon" alt="Icon">
     <h4>Contact Support</h4>
     <p>Reach out directly to our robotics engineering team for technical assistance or product inquiries.</p>
   </a>
   <a href="CHANGELOG" class="card-box">
-    <img src="https://unpkg.com/lucide-static@latest/icons/clock.svg" class="external-icon" alt="Icon">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/clock.svg" class="external-icon" alt="Icon">
     <h4>ChangeLog</h4>
     <p>Release notes on new features, changes and fixes across the Sodero platform.</p>
   </a>
   <a href="https://github.com/Sodero-labs/docs/discussions" class="card-box">
-    <img src="https://unpkg.com/lucide-static@latest/icons/github.svg" class="external-icon" alt="Icon">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/github.svg" class="external-icon" alt="Icon">
     <h4>GitHub Discussions</h4>
     <p>Join the global Sodero community to ask questions, share technical insights, and discuss ideas.</p>
   </a>

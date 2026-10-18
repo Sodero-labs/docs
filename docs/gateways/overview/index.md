@@ -13,7 +13,7 @@ flowchart TB
     I -. "IMU" .-> IG
 ```
 
-Because only the gateway knows the hardware, **the same controller and documents drive a simulated robot and the real one**. Moving from Isaac Sim to real motors means replacing the gateway's document, nothing else.
+Because only the gateway knows the hardware, **the same controller, with the same document, drives a simulated robot and the real one**. Moving from Isaac Sim to real motors means replacing the gateway's document, nothing else.
 
 ---
 
@@ -23,9 +23,9 @@ Because only the gateway knows the hardware, **the same controller and documents
 | :--- | :--- | :--- | :--- |
 | Actuator gateway | `rc.actuator_gateway.NAME` | EtherCAT drives, or the joints of a robot in Isaac Sim | A `.gw` document ([Gateway Designer](../gateway_designer/index.md)) |
 | Camera gateway | `rc.camera_gateway.NAME` | An RGB-D camera: a camera in Isaac Sim, or a real camera through the [Device Bridge](../device_bridge/index.md) | Camera settings in the inspector ([Sensors and Cameras](../sensors_and_cameras/index.md)) |
-| IMU gateway | `rc.imu_gateway.NAME` | An IMU and foot contacts: in Isaac Sim, or through the Device Bridge | IMU settings in the inspector |
+| IMU gateway | `rc.imu_gateway.NAME` | An IMU (and foot contacts in Isaac Sim): in Isaac Sim, or through the Device Bridge | IMU settings in the inspector ([Sensors and Cameras](../sensors_and_cameras/index.md#2-imu-gateway)) |
 
-You can also write your own gateway as a module (**Gateway** › **Gateway subsystem** in **Add node**) for devices the built-in gateways do not cover. See [Modules](../../station/modules/index.md).
+For devices the built-in gateways do not cover, you can write your own gateway as a module with the role `gateway`. Once installed, it appears in **Add node** › **Gateway** with the **CUSTOM** badge. See [Modules](../../station/modules/index.md).
 
 ---
 
@@ -37,15 +37,16 @@ The `.gw` document chooses how the actuator gateway reaches its actuators:
 | :--- | :--- | :--- | :--- |
 | **EtherCAT** | `ethercat` | CiA 402 servo drives on the controller's EtherCAT port, synchronized by distributed clocks | [EtherCAT Gateway](../ethercat/index.md) |
 | **Isaac Sim** | `simulation` | The joints of a robot in NVIDIA Isaac Sim, through the Isaac Bridge extension | [Simulation Gateway](../simulation/index.md) |
-| **Damiao CAN** | `can` | MIT-mode CAN motors, on request | [Gateway Designer](../gateway_designer/index.md#6-can-gateways) |
 
 ---
 
 ## Actuators and Indices
 
-A gateway drives a list of **actuators**, numbered from zero in the order they are defined (`a1` is index 0, `a2` is index 1, …). For EtherCAT, the order of the actuators is the order of the drives on the cable.
+A gateway drives a list of **actuators**, numbered from zero in the order they are defined (actuator 1 is index 0, actuator 2 is index 1, …). For EtherCAT, the order of the actuators is the order of the drives on the cable.
 
 A controller's document refers to these indices to say which actuator drives which joint or wheel. For example, a Strider document for a 4-wheel base maps its wheels to the gateway's actuators `[0, 1, 2, 3]`.
+
+Motor units and joint units are defined in different documents:
 
 | Unit | Where it is defined |
 | :--- | :--- |

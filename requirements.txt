@@ -4,3 +4,5 @@ mkdocs-glightbox==0.5.2
 mkdocs-llmstxt==0.5.1
 pymdown-extensions==12.3
 mike==2.2.0
+markdown==3.11.1
+selectolax==1.0.0

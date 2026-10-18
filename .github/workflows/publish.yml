@@ -27,14 +27,14 @@ jobs:
 
       - name: Deploy with mike
         run: |
-          # 현재 푸시된 태그 이름을 버전명으로 사용 (예: v1.0)
+          # Use the pushed tag name as the version name (e.g. v2.0.0)
           TAG_NAME=${GITHUB_REF_NAME}
           
-          # gh-pages 동기화
+          # Sync the gh-pages branch
           git fetch origin gh-pages:gh-pages || true
           
-          # 태그 이름을 버전으로 배포하고 latest 별칭 부여
+          # Deploy the tag as a version and point the latest alias to it
           mike deploy --push --update-aliases $TAG_NAME latest
           
-          # 가장 최근 태그를 기본 페이지로 설정
+          # Make the latest version the default page
           mike set-default --push latest
