@@ -2303,8 +2303,8 @@
 <hr>
 <h2 id="1-how-it-works">1. How It Works<a class="headerlink" href="#1-how-it-works" title="Permanent link">¶</a></h2>
 <pre class="mermaid"><code>flowchart TB
-    CAM["Camera gateway&lt;br&gt;RGB-D"] -- camera --&gt; LOC["Localizer&lt;br&gt;rc.localizer"]
-    STR["Strider&lt;br&gt;rc.mobile_controller_manager.NAME"] -- odometry --&gt; LOC
+    CAM["Camera gateway&lt;br&gt;RGB-D"] -- camera --&gt; LOC["Localizer&lt;br&gt;sodero.localizer"]
+    STR["Strider&lt;br&gt;sodero.mlc.NAME"] -- odometry --&gt; LOC
     LOC -- "localization · map" --&gt; NAV["Navigator&lt;br&gt;rc.navigator"]
     NAV -- mobile_base --&gt; STR
     MAP[(".nav map bundle")] -.-&gt; LOC

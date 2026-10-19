@@ -2369,7 +2369,7 @@
 </table>
 <hr>
 <h2 id="1-camera-gateway">1. Camera Gateway<a class="headerlink" href="#1-camera-gateway" title="Permanent link">¶</a></h2>
-<p>Add the node with <strong>Add node</strong> › <strong>Gateway</strong> › <strong>Camera gateway</strong> and a name such as <code>cam0</code>. The node creates a companion node <code>rc.camera_component.NAME</code> automatically, which offers the camera to applications.</p>
+<p>Add the node with <strong>Add node</strong> › <strong>Gateway</strong> › <strong>Camera gateway</strong> and a name such as <code>cam0</code>. Nodes that use the camera connect to its <code>camera</code> port.</p>
 <figure>
   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/camera_inspector.png" data-desc-position="bottom"><img alt="Camera gateway inspector" src="images/camera_inspector.png" width="300"></a>
 <br>
@@ -2443,7 +2443,7 @@
 </figure>
 <hr>
 <h2 id="2-imu-gateway">2. IMU Gateway<a class="headerlink" href="#2-imu-gateway" title="Permanent link">¶</a></h2>
-<p>Add the node with <strong>Add node</strong> › <strong>Gateway</strong> › <strong>IMU gateway</strong>. It also creates a companion node <code>rc.imu_component.NAME</code>.</p>
+<p>Add the node with <strong>Add node</strong> › <strong>Gateway</strong> › <strong>IMU gateway</strong>. Nodes that use the IMU connect to its ports.</p>
 <table>
 <thead>
 <tr>
@@ -2491,7 +2491,7 @@
 </tr>
 <tr>
 <td style="text-align: left;">Camera log: <em>Frames … are stale or carry capture times that do not match this Station's clock</em></td>
-<td style="text-align: left;">The clocks of the two computers differ. Synchronize them (NTP), or stop sending capture times at the source (Device Bridge: <code>send_capture_time: false</code>) so that the Station uses arrival times.</td>
+<td style="text-align: left;">The clocks of the two computers differ. Synchronize them (NTP), or stop sending capture times at the source (Isaac Sim: start it with <code>RC_CAMERA_CAPTURE_TIME=0</code>; Device Bridge: <code>send_capture_time: false</code>) so that the Station uses arrival times.</td>
 </tr>
 <tr>
 <td style="text-align: left;">Camera view is black or frozen</td>

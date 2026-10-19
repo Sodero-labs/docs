@@ -20,7 +20,7 @@ ______________________________________________________________________
 - **Preview first.** A command that changes something only previews until you add `--execute`. Read the preview, then repeat the command with `--execute`.
 - **Versions.** Changes to the node graph take `--if-version N`, the `expected_version` from `sodero topology get`. Changes to settings and documents take `--if-sha256 SHA256` from the matching `get`. Each saved change returns the next value. If someone changed the Station page in the meantime, the change is refused with a conflict (exit code 6): read again and retry.
 - **One Station.** On a robot, the only item is the Station `station`. `--item` defaults to it and can be left out.
-- **Node IDs.** Nodes are named `rc.<kind>.<name>`, where the kind comes from the module, not from the `--kind` option of `topology add-node`: `--kind camera --name cam0` creates `rc.camera_gateway.cam0`. Other examples: `rc.actuator_gateway.jackal`, `rc.mobile_controller_manager.jackal`. The localizer, navigator and visual odometry have fixed IDs: `rc.localizer`, `rc.navigator`, `rc.visual_odometry`.
+- **Node IDs.** A node's ID comes from its module, not from the `--kind` option of `topology add-node`: `--kind camera --name cam0` creates `rc.camera_gateway.cam0`. Strider, Motion Studio and Articulation nodes are `sodero.mlc.<name>`, `sodero.mmc.<name>` and `sodero.amc.<name>` (for example `sodero.mlc.jackal`); gateways and the other modules are `rc.<kind>.<name>` (for example `rc.actuator_gateway.jackal`). The localizer, navigator and visual odometry have fixed IDs: `sodero.localizer`, `rc.navigator`, `sodero.visual_odometry`.
 
 ### Exit Codes
 
@@ -67,15 +67,15 @@ ______________________________________________________________________
 ```
 sodero runtime status                                    # every node: configured, running, its state
 sodero runtime logs rc.actuator_gateway.jackal --lines 100
-sodero tools call strider.get_state --input '{"target":"rc.mobile_controller_manager.jackal"}'
+sodero tools call strider.get_state --input '{"target":"sodero.mlc.jackal"}'
 ```
 
 ### Start and Stop Nodes
 
 ```
 sodero runtime node start rc.actuator_gateway.jackal --execute          # gateway first
-sodero runtime node start rc.mobile_controller_manager.jackal --execute # then its controller
-sodero runtime node stop rc.mobile_controller_manager.jackal --execute
+sodero runtime node start sodero.mlc.jackal --execute # then its controller
+sodero runtime node stop sodero.mlc.jackal --execute
 ```
 
 `sodero runtime start --execute --wait` starts every saved node, like **Start all nodes** on the Station page.
@@ -90,7 +90,7 @@ Stop the nodes you change first, as on the Station page; changes apply when they
 sodero topology get                                       # note "expected_version", e.g. 12
 sodero topology add-node --kind camera --name cam0 --if-version 12              # preview
 sodero topology add-node --kind camera --name cam0 --if-version 12 --execute    # returns version 13
-sodero topology connect --source rc.localizer.camera \
+sodero topology connect --source sodero.localizer.camera \
     --target rc.camera_gateway.cam0.camera --if-version 13 --execute
 ```
 
@@ -112,11 +112,11 @@ Stop the node first; the new settings apply when it starts again. These are the 
 
 ```
 sodero runtime node stop rc.navigator --execute          # stop the nodes that use the map
-sodero runtime node stop rc.localizer --execute
-sodero runtime node stop rc.visual_odometry --execute    # if the Station has one
-sodero navigation get --node rc.localizer                # note "sha256"
-sodero maps upload /workspace/maps/warehouse.nav --node rc.localizer --if-sha256 SHA256            # preview: checks the bundle
-sodero maps upload /workspace/maps/warehouse.nav --node rc.localizer --if-sha256 SHA256 --execute  # attach it
+sodero runtime node stop sodero.localizer --execute
+sodero runtime node stop sodero.visual_odometry --execute    # if the Station has one
+sodero navigation get --node sodero.localizer                # note "sha256"
+sodero maps upload /workspace/maps/warehouse.nav --node sodero.localizer --if-sha256 SHA256            # preview: checks the bundle
+sodero maps upload /workspace/maps/warehouse.nav --node sodero.localizer --if-sha256 SHA256 --execute  # attach it
 ```
 
 The localizer and the navigator share one map bundle, so one upload serves both. Start the nodes again afterwards. See [Map Bundle (.nav)](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md) and [Localization and Navigation](https://docs.sodero.io/v2.0.0/navigation/overview/index.md).
@@ -141,11 +141,11 @@ sodero tools call localization.set_initial_pose --input '{"x": -1.6, "y": 2.4, "
 sodero tools call localization.set_initial_pose --input '{"x": -1.6, "y": 2.4, "yaw": 0.0}' --execute
 ```
 
-A tool that changes something or moves the robot acts only with `--execute`. Strider and Motion Studio tools need the exact `target` (from `tools list`) when the Station has more than one robot of that kind, for example `{"mode": "TWIST", "target": "rc.mobile_controller_manager.jackal"}` for `strider.set_mode`.
+A tool that changes something or moves the robot acts only with `--execute`. Strider and Motion Studio tools need the exact `target` (from `tools list`) when the Station has more than one robot of that kind, for example `{"mode": "TWIST", "target": "sodero.mlc.jackal"}` for `strider.set_mode`.
 
 ### Readings and Pictures
 
 ```
-sodero watch --probe rc.mobile_controller_manager.jackal --hz 5 --seconds 5
+sodero watch --probe sodero.mlc.jackal --hz 5 --seconds 5
 sodero camera snapshot rc.camera_gateway.cam0 --output frame.png
 ```

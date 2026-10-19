@@ -11,7 +11,7 @@ In about 15 minutes you will build a small robot system on Stellar X and drive a
 flowchart TB
     B["Your browser<br>Stellar Station · Strider"]
     subgraph SX ["Stellar X"]
-        S["Strider<br>rc.mobile_controller_manager.jackal"] -- servo_link --> G["Actuator gateway<br>rc.actuator_gateway.jackal"]
+        S["Strider<br>sodero.mlc.jackal"] -- servo_link --> G["Actuator gateway<br>rc.actuator_gateway.jackal"]
     end
     I["Isaac Sim + Isaac Bridge<br>robot /World/jackal"]
     B --> S
@@ -62,7 +62,7 @@ ______________________________________________________________________
 ## Step 3: Add Strider and Connect It
 
 1. Click **Add node**, choose **Controller** ① › **Strider** ② and click **Next** ③. Name it `jackal` and click **Add node**.
-1. Select `rc.mobile_controller_manager.jackal` and click the upload icon in **DEFINITION** (**Import .sddm**). On **From your PC** ①, choose `jackal.sddm` ② and click **Import** ③.
+1. Select `sodero.mlc.jackal` and click the upload icon in **DEFINITION** (**Import .sddm**). On **From your PC** ①, choose `jackal.sddm` ② and click **Import** ③.
 1. Connect the two nodes: drag from the Strider's `servo_link` (left edge) to the gateway's `servo_link` (right edge), or click **Auto-connect** next to `servo_link` in the Strider's inspector.
 
 The gateway and Strider connected through servo_link

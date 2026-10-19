@@ -2423,15 +2423,15 @@
 </tr>
 <tr>
 <td style="text-align: left;">Motion Studio</td>
-<td style="text-align: left;"><code>rc.controller_manager.NAME</code></td>
+<td style="text-align: left;"><code>sodero.mmc.NAME</code></td>
 </tr>
 <tr>
 <td style="text-align: left;">Strider</td>
-<td style="text-align: left;"><code>rc.mobile_controller_manager.NAME</code></td>
+<td style="text-align: left;"><code>sodero.mlc.NAME</code></td>
 </tr>
 <tr>
 <td style="text-align: left;">Articulation</td>
-<td style="text-align: left;"><code>rc.articulation_controller_manager.NAME</code></td>
+<td style="text-align: left;"><code>sodero.amc.NAME</code></td>
 </tr>
 <tr>
 <td style="text-align: left;">Legged locomotion</td>
@@ -2439,7 +2439,7 @@
 </tr>
 <tr>
 <td style="text-align: left;">Visual odometry, Localizer, Navigator</td>
-<td style="text-align: left;"><code>rc.visual_odometry</code>, <code>rc.localizer</code>, <code>rc.navigator</code> (one of each per Station)</td>
+<td style="text-align: left;"><code>sodero.visual_odometry</code>, <code>sodero.localizer</code>, <code>rc.navigator</code> (one of each per Station)</td>
 </tr>
 </tbody>
 </table>
@@ -2452,7 +2452,7 @@
 </ul>
 <p>You connect a required port to a compatible provided port by dragging between them. The most important connection is the <strong>servo link</strong> between a controller and its gateway:</p>
 <pre class="mermaid"><code>flowchart TB
-    S["Strider&lt;br&gt;rc.mobile_controller_manager.jackal"] -- "servo_link" --&gt; G["Actuator gateway&lt;br&gt;rc.actuator_gateway.jackal"]
+    S["Strider&lt;br&gt;sodero.mlc.jackal"] -- "servo_link" --&gt; G["Actuator gateway&lt;br&gt;rc.actuator_gateway.jackal"]
     G -- "simulation" --&gt; I["Isaac Sim&lt;br&gt;robot 'jackal'"]
     G -. "or EtherCAT" .-&gt; M["Real motors"]</code></pre>
 <table>

@@ -2411,7 +2411,7 @@
 
 
 <h1 id="strider">Strider<a class="headerlink" href="#strider" title="Permanent link">¶</a></h1>
-<p><strong>Stellar Strider</strong> controls wheeled mobile bases. A Strider node (<code>rc.mobile_controller_manager.NAME</code>) turns body velocities into wheel commands for its gateway, integrates odometry, and enforces the speed and acceleration limits of its <code>.sddm</code> document. The Strider web UI lets you jog the base, watch its state and odometry, and send navigation goals.</p>
+<p><strong>Stellar Strider</strong> controls wheeled mobile bases. A Strider node (<code>sodero.mlc.NAME</code>) turns body velocities into wheel commands for its gateway, integrates odometry, and enforces the speed and acceleration limits of its <code>.sddm</code> document. The Strider web UI lets you jog the base, watch its state and odometry, and send navigation goals.</p>
 <p>Supported drive types (templates of the <code>.sddm</code> document): differential drive, skid steer 4WD, mecanum 4WD, swerve 4WD and Ackermann.</p>
 <hr>
 <h2 id="1-open-strider">1. Open Strider<a class="headerlink" href="#1-open-strider" title="Permanent link">¶</a></h2>
@@ -2694,8 +2694,8 @@
 <li>From the SSH workspace with <code>sodero tools call strider.set_mode</code>, <code>strider.servo_on</code>, <code>strider.set_twist</code>, <code>strider.stop</code> and <code>strider.get_state</code> (<a href="../../ssh_workspace/sodero_cli/">sodero CLI</a>).</li>
 <li>From your own modules on the Station through the <code>mobile_base</code> interface (<a href="../../station/modules/">Modules</a>).</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sodero<span class="w"> </span>tools<span class="w"> </span>call<span class="w"> </span>strider.get_state<span class="w"> </span>--input<span class="w"> </span><span class="s1">'{"target": "rc.mobile_controller_manager.jackal"}'</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sodero<span class="w"> </span>tools<span class="w"> </span>call<span class="w"> </span>strider.set_mode<span class="w"> </span>--input<span class="w"> </span><span class="s1">'{"mode": "TWIST", "target": "rc.mobile_controller_manager.jackal"}'</span><span class="w"> </span>--execute
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sodero<span class="w"> </span>tools<span class="w"> </span>call<span class="w"> </span>strider.get_state<span class="w"> </span>--input<span class="w"> </span><span class="s1">'{"target": "sodero.mlc.jackal"}'</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sodero<span class="w"> </span>tools<span class="w"> </span>call<span class="w"> </span>strider.set_mode<span class="w"> </span>--input<span class="w"> </span><span class="s1">'{"mode": "TWIST", "target": "sodero.mlc.jackal"}'</span><span class="w"> </span>--execute
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title"><code>strider.set_twist</code> is a single velocity sample that expires after a short time. A program that drives continuously must send samples several times per second, and must stop the robot with <code>strider.stop</code> when it ends.</p>

@@ -58,14 +58,16 @@ Motor Select catalog: search ①, or pick Brand ② › Series ③ › Model ④
 
 The fields of the **Motor** tab:
 
-| Section                 | Field              | Unit   | Meaning                                                                                                    |
-| ----------------------- | ------------------ | ------ | ---------------------------------------------------------------------------------------------------------- |
-| ② TORQUE                | **Rated torque**   | Nm     | Continuous motor torque. Torque commands are sent to the drive in per mille of this value.                 |
-|                         | **Max torque**     | Nm     | Peak motor torque. The gateway limits joint torque to *Max torque × Gear ratio*.                           |
-| ③ SPEED                 | **Max speed**      | rpm    | Maximum motor speed. The joint speed limit is *Max speed ÷ Gear ratio*.                                    |
-| ④ MOTOR CHARACTERISTICS | **Resolution**     | PPR    | Encoder pulses (counts) per motor revolution, **before** the gear, e.g. 1,048,576 (2²⁰) or 8,388,608 (2²³) |
-| ⑤ ENCODER CONFIGURATION | **Encoder offset** | pulses | Absolute encoder zero. Set by origin calibration in Motion Studio; leave 0 for a new robot.                |
-| ⑥ REDUCER               | **Gear ratio**     | –      | Motor turns per joint turn                                                                                 |
+| Section                 | Field              | Unit   | Meaning                                                                                                                                                                            |
+| ----------------------- | ------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ② TORQUE                | **Rated torque**   | Nm     | Continuous motor torque. Torque commands are sent to the drive in per mille of this value.                                                                                         |
+|                         | **Max torque**     | Nm     | Peak torque of the motor itself, at the motor shaft (the motor's datasheet value, not the torque after the reducer). The gateway limits joint torque to *Max torque × Gear ratio*. |
+| ③ SPEED                 | **Max speed**      | rpm    | Maximum speed of the motor itself, at the motor shaft (the motor's datasheet value, not the joint speed after the reducer). The joint speed limit is *Max speed ÷ Gear ratio*.     |
+| ④ MOTOR CHARACTERISTICS | **Resolution**     | PPR    | Encoder pulses (counts) per motor revolution, **before** the gear, e.g. 1,048,576 (2²⁰) or 8,388,608 (2²³)                                                                         |
+| ⑤ ENCODER CONFIGURATION | **Encoder offset** | pulses | Absolute encoder zero. Set by origin calibration in Motion Studio; leave 0 for a new robot.                                                                                        |
+| ⑥ REDUCER               | **Gear ratio**     | –      | Motor turns per joint turn                                                                                                                                                         |
+
+**Rated torque**, **Max torque** and **Max speed** are the motor's own values at the motor shaft, as in the motor's datasheet, whatever reducer follows it. Do not convert them to the joint side: the gateway applies the **Gear ratio** itself.
 
 If **Gear ratio** is exactly 1, the gateway reads the gear ratio configured in the drive itself (object 0x6091). Enter the real ratio when the drive does not hold it.
 

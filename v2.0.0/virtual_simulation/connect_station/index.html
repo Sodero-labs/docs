@@ -2432,7 +2432,7 @@
 <li>Use moderate camera sizes and frame rates; each camera is rendered in addition to the viewport.</li>
 <li>Close viewports and windows you do not need.</li>
 <li>Do not run other heavy GPU programs (such as training) on the same computer at the same time.</li>
-<li>Keep the clocks of both computers synchronized (NTP). The camera gateway accepts frames at most 20 ms ahead of and 2 s behind its own clock.</li>
+<li>Keep the clocks of both computers synchronized (NTP). The camera gateway accepts frames at most 20 ms ahead of and 2 s behind its own clock. If you cannot synchronize them, start Isaac Sim with <code>RC_CAMERA_CAPTURE_TIME=0</code>: the camera gateway then stamps each frame when it arrives.</li>
 </ul>
 <hr>
 <h2 id="7-troubleshooting">7. Troubleshooting<a class="headerlink" href="#7-troubleshooting" title="Permanent link">¶</a></h2>
@@ -2466,7 +2466,7 @@
 </tr>
 <tr>
 <td style="text-align: left;">Camera gateway: frames <em>stale</em> or with capture times that do not match</td>
-<td style="text-align: left;">The clocks of the two computers differ. Synchronize them.</td>
+<td style="text-align: left;">The clocks of the two computers differ. Synchronize them, or start Isaac Sim with <code>RC_CAMERA_CAPTURE_TIME=0</code> so that the camera gateway uses arrival times.</td>
 </tr>
 <tr>
 <td style="text-align: left;">The robot moves too fast or too slow</td>

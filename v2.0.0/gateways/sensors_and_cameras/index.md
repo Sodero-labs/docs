@@ -26,7 +26,7 @@ ______________________________________________________________________
 
 ## 1. Camera Gateway
 
-Add the node with **Add node** › **Gateway** › **Camera gateway** and a name such as `cam0`. The node creates a companion node `rc.camera_component.NAME` automatically, which offers the camera to applications.
+Add the node with **Add node** › **Gateway** › **Camera gateway** and a name such as `cam0`. Nodes that use the camera connect to its `camera` port.
 
 The camera gateway's inspector
 
@@ -64,7 +64,7 @@ ______________________________________________________________________
 
 ## 2. IMU Gateway
 
-Add the node with **Add node** › **Gateway** › **IMU gateway**. It also creates a companion node `rc.imu_component.NAME`.
+Add the node with **Add node** › **Gateway** › **IMU gateway**. Nodes that use the IMU connect to its ports.
 
 | Setting                    | Meaning                                                                                                 |
 | -------------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -86,9 +86,9 @@ ______________________________________________________________________
 
 ## 4. Troubleshooting
 
-| Symptom                                                                                        | Cause and fix                                                                                                                                                                                   |
-| ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camera log: *Waiting for simulator at …:53335 (World not running?)*                            | Isaac Sim is not playing, the camera host is wrong, or a firewall blocks port 53335                                                                                                             |
-| Camera log: *…publishes frames of camera(s) … but none of camera 'cam0'*                       | **Camera name** does not match a camera in the scene                                                                                                                                            |
-| Camera log: *Frames … are stale or carry capture times that do not match this Station's clock* | The clocks of the two computers differ. Synchronize them (NTP), or stop sending capture times at the source (Device Bridge: `send_capture_time: false`) so that the Station uses arrival times. |
-| Camera view is black or frozen                                                                 | The camera prim looks at nothing, or the scene is paused                                                                                                                                        |
+| Symptom                                                                                        | Cause and fix                                                                                                                                                                                                                                        |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camera log: *Waiting for simulator at …:53335 (World not running?)*                            | Isaac Sim is not playing, the camera host is wrong, or a firewall blocks port 53335                                                                                                                                                                  |
+| Camera log: *…publishes frames of camera(s) … but none of camera 'cam0'*                       | **Camera name** does not match a camera in the scene                                                                                                                                                                                                 |
+| Camera log: *Frames … are stale or carry capture times that do not match this Station's clock* | The clocks of the two computers differ. Synchronize them (NTP), or stop sending capture times at the source (Isaac Sim: start it with `RC_CAMERA_CAPTURE_TIME=0`; Device Bridge: `send_capture_time: false`) so that the Station uses arrival times. |
+| Camera view is black or frozen                                                                 | The camera prim looks at nothing, or the scene is paused                                                                                                                                                                                             |

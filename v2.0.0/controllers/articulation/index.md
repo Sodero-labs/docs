@@ -4,7 +4,7 @@ The **Articulation** controller drives an articulated robot joint by joint: legg
 
 | Item     | Value                                                                                                        |
 | -------- | ------------------------------------------------------------------------------------------------------------ |
-| Node     | `rc.articulation_controller_manager.NAME`                                                                    |
+| Node     | `sodero.amc.NAME`                                                                                            |
 | Document | `.sdda` ([Stellar Designer](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/articulation/index.md)) |
 | Joints   | 1 to 64, driven by one actuator gateway                                                                      |
 | Units    | rad, rad/s, N·m                                                                                              |

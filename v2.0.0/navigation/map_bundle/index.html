@@ -3398,15 +3398,15 @@
 </div>
 <h3 id="sodero-cli">sodero CLI<a class="headerlink" href="#sodero-cli" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sodero<span class="w"> </span>runtime<span class="w"> </span>node<span class="w"> </span>stop<span class="w"> </span>rc.navigator<span class="w"> </span>--execute
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sodero<span class="w"> </span>runtime<span class="w"> </span>node<span class="w"> </span>stop<span class="w"> </span>rc.localizer<span class="w"> </span>--execute
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>sodero<span class="w"> </span>navigation<span class="w"> </span>get<span class="w"> </span>--node<span class="w"> </span>rc.localizer<span class="w">                                     </span><span class="c1"># note "sha256"</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>sodero<span class="w"> </span>maps<span class="w"> </span>upload<span class="w"> </span>site.nav<span class="w"> </span>--node<span class="w"> </span>rc.localizer<span class="w"> </span>--if-sha256<span class="w"> </span>SHA256<span class="w">            </span><span class="c1"># preview: checks the bundle</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>sodero<span class="w"> </span>maps<span class="w"> </span>upload<span class="w"> </span>site.nav<span class="w"> </span>--node<span class="w"> </span>rc.localizer<span class="w"> </span>--if-sha256<span class="w"> </span>SHA256<span class="w"> </span>--execute<span class="w">  </span><span class="c1"># attach it</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>sodero<span class="w"> </span>runtime<span class="w"> </span>node<span class="w"> </span>start<span class="w"> </span>rc.localizer<span class="w"> </span>--execute
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sodero<span class="w"> </span>runtime<span class="w"> </span>node<span class="w"> </span>stop<span class="w"> </span>sodero.localizer<span class="w"> </span>--execute
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>sodero<span class="w"> </span>navigation<span class="w"> </span>get<span class="w"> </span>--node<span class="w"> </span>sodero.localizer<span class="w">                                     </span><span class="c1"># note "sha256"</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>sodero<span class="w"> </span>maps<span class="w"> </span>upload<span class="w"> </span>site.nav<span class="w"> </span>--node<span class="w"> </span>sodero.localizer<span class="w"> </span>--if-sha256<span class="w"> </span>SHA256<span class="w">            </span><span class="c1"># preview: checks the bundle</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>sodero<span class="w"> </span>maps<span class="w"> </span>upload<span class="w"> </span>site.nav<span class="w"> </span>--node<span class="w"> </span>sodero.localizer<span class="w"> </span>--if-sha256<span class="w"> </span>SHA256<span class="w"> </span>--execute<span class="w">  </span><span class="c1"># attach it</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>sodero<span class="w"> </span>runtime<span class="w"> </span>node<span class="w"> </span>start<span class="w"> </span>sodero.localizer<span class="w"> </span>--execute
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>sodero<span class="w"> </span>runtime<span class="w"> </span>node<span class="w"> </span>start<span class="w"> </span>rc.navigator<span class="w"> </span>--execute
 </code></pre></div>
 <ul>
-<li>With Visual odometry, also stop <code>rc.visual_odometry</code> before the upload, and start it again before the Localizer.</li>
+<li>With Visual odometry, also stop <code>sodero.visual_odometry</code> before the upload, and start it again before the Localizer.</li>
 <li>The file name must end in <code>.nav</code>, and the file may be at most 64 MiB.</li>
 <li>The preview reports the first problem it finds (see <a href="#validation-errors">Validation Errors</a>) and changes nothing.</li>
 <li><code>--node rc.navigator</code>, with the SHA-256 from <code>sodero navigation get --node rc.navigator</code>, attaches the same shared bundle. After each upload or settings change, read the SHA-256 again.</li>
@@ -3541,7 +3541,7 @@
 </tbody>
 </table>
 <div class="admonition info">
-<p class="admonition-title">Two problems appear only when the Localizer starts, in its log (<code>sodero runtime logs rc.localizer</code>): <code>camera_frame_id is required</code> when <code>extrinsics.yaml</code> has no <code>camera_frame_id</code>, and <code>no_extrinsics_edge</code> when no edge connects the camera node's <code>frame_id</code> to <code>base_link</code>.</p>
+<p class="admonition-title">Two problems appear only when the Localizer starts, in its log (<code>sodero runtime logs sodero.localizer</code>): <code>camera_frame_id is required</code> when <code>extrinsics.yaml</code> has no <code>camera_frame_id</code>, and <code>no_extrinsics_edge</code> when no edge connects the camera node's <code>frame_id</code> to <code>base_link</code>.</p>
 </div>
 <hr>
 <h2 id="checklist">Checklist<a class="headerlink" href="#checklist" title="Permanent link">¶</a></h2>

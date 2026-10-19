@@ -2355,7 +2355,7 @@
 
 
 <h1 id="motion-studio">Motion Studio<a class="headerlink" href="#motion-studio" title="Permanent link">¶</a></h1>
-<p><strong>Stellar Motion Studio</strong> is the controller UI for manipulators. A Motion Studio node (<code>rc.controller_manager.NAME</code>) runs the arm's real-time controller: kinematics, dynamics, trajectory generation and safety limits from the arm's <code>.sdd</code> document. The Motion Studio web UI lets you watch the arm in 3D, jog it, define tools and teach poses.</p>
+<p><strong>Stellar Motion Studio</strong> is the controller UI for manipulators. A Motion Studio node (<code>sodero.mmc.NAME</code>) runs the arm's real-time controller: kinematics, dynamics, trajectory generation and safety limits from the arm's <code>.sdd</code> document. The Motion Studio web UI lets you watch the arm in 3D, jog it, define tools and teach poses.</p>
 <hr>
 <h2 id="1-open-motion-studio">1. Open Motion Studio<a class="headerlink" href="#1-open-motion-studio" title="Permanent link">¶</a></h2>
 <ol>
@@ -2554,8 +2554,8 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sodero<span class="w"> </span>tools<span class="w"> </span>call<span class="w"> </span>motion.get_tcp_pose<span class="w"> </span>--input<span class="w"> </span><span class="s1">'{"target": "rc.controller_manager.arm"}'</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sodero<span class="w"> </span>tools<span class="w"> </span>call<span class="w"> </span>motion.move_j<span class="w"> </span>--input<span class="w"> </span><span class="s1">'{"target": "rc.controller_manager.arm",</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sodero<span class="w"> </span>tools<span class="w"> </span>call<span class="w"> </span>motion.get_tcp_pose<span class="w"> </span>--input<span class="w"> </span><span class="s1">'{"target": "sodero.mmc.arm"}'</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sodero<span class="w"> </span>tools<span class="w"> </span>call<span class="w"> </span>motion.move_j<span class="w"> </span>--input<span class="w"> </span><span class="s1">'{"target": "sodero.mmc.arm",</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="s1">  "waypoints": [{"q": {"values": [0, 0, 1.5708, 0, 1.5708, 0]}, "vel": 0.5, "acc": 1.0}]}'</span><span class="w"> </span>--execute
 </code></pre></div>
 <div class="admonition info">

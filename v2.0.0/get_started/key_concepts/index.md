@@ -48,16 +48,16 @@ When you click **Add node** on the Station page, you choose one of four node typ
 
 Most built-in nodes have an ID of the form `rc.<kind>.<name>`. You choose the name; the kind comes from the module:
 
-| Module                                | Node ID                                                                        |
-| ------------------------------------- | ------------------------------------------------------------------------------ |
-| Actuator gateway                      | `rc.actuator_gateway.NAME`                                                     |
-| Camera gateway                        | `rc.camera_gateway.NAME`                                                       |
-| IMU gateway                           | `rc.imu_gateway.NAME`                                                          |
-| Motion Studio                         | `rc.controller_manager.NAME`                                                   |
-| Strider                               | `rc.mobile_controller_manager.NAME`                                            |
-| Articulation                          | `rc.articulation_controller_manager.NAME`                                      |
-| Legged locomotion                     | `rc.legged_locomotion.NAME`                                                    |
-| Visual odometry, Localizer, Navigator | `rc.visual_odometry`, `rc.localizer`, `rc.navigator` (one of each per Station) |
+| Module                                | Node ID                                                                                |
+| ------------------------------------- | -------------------------------------------------------------------------------------- |
+| Actuator gateway                      | `rc.actuator_gateway.NAME`                                                             |
+| Camera gateway                        | `rc.camera_gateway.NAME`                                                               |
+| IMU gateway                           | `rc.imu_gateway.NAME`                                                                  |
+| Motion Studio                         | `sodero.mmc.NAME`                                                                      |
+| Strider                               | `sodero.mlc.NAME`                                                                      |
+| Articulation                          | `sodero.amc.NAME`                                                                      |
+| Legged locomotion                     | `rc.legged_locomotion.NAME`                                                            |
+| Visual odometry, Localizer, Navigator | `sodero.visual_odometry`, `sodero.localizer`, `rc.navigator` (one of each per Station) |
 
 ______________________________________________________________________
 
@@ -72,7 +72,7 @@ You connect a required port to a compatible provided port by dragging between th
 
 ```
 flowchart TB
-    S["Strider<br>rc.mobile_controller_manager.jackal"] -- "servo_link" --> G["Actuator gateway<br>rc.actuator_gateway.jackal"]
+    S["Strider<br>sodero.mlc.jackal"] -- "servo_link" --> G["Actuator gateway<br>rc.actuator_gateway.jackal"]
     G -- "simulation" --> I["Isaac Sim<br>robot 'jackal'"]
     G -. "or EtherCAT" .-> M["Real motors"]
 ```

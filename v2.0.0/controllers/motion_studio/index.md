@@ -1,6 +1,6 @@
 # Motion Studio
 
-**Stellar Motion Studio** is the controller UI for manipulators. A Motion Studio node (`rc.controller_manager.NAME`) runs the arm's real-time controller: kinematics, dynamics, trajectory generation and safety limits from the arm's `.sdd` document. The Motion Studio web UI lets you watch the arm in 3D, jog it, define tools and teach poses.
+**Stellar Motion Studio** is the controller UI for manipulators. A Motion Studio node (`sodero.mmc.NAME`) runs the arm's real-time controller: kinematics, dynamics, trajectory generation and safety limits from the arm's `.sdd` document. The Motion Studio web UI lets you watch the arm in 3D, jog it, define tools and teach poses.
 
 ______________________________________________________________________
 
@@ -113,8 +113,8 @@ Motion Studio is for setup and teaching. Programs run outside the UI and call th
 | A module on the Station | A module node connected to the Motion Studio node's `manipulator` port ([Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md))                                               |
 
 ```
-sodero tools call motion.get_tcp_pose --input '{"target": "rc.controller_manager.arm"}'
-sodero tools call motion.move_j --input '{"target": "rc.controller_manager.arm",
+sodero tools call motion.get_tcp_pose --input '{"target": "sodero.mmc.arm"}'
+sodero tools call motion.move_j --input '{"target": "sodero.mmc.arm",
   "waypoints": [{"q": {"values": [0, 0, 1.5708, 0, 1.5708, 0]}, "vel": 0.5, "acc": 1.0}]}' --execute
 ```
 

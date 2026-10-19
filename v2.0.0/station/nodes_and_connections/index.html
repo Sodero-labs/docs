@@ -2420,19 +2420,19 @@
 <tr>
 <td style="text-align: left;"><strong>Controller</strong></td>
 <td style="text-align: left;">Motion Studio</td>
-<td style="text-align: left;"><code>rc.controller_manager.NAME</code></td>
+<td style="text-align: left;"><code>sodero.mmc.NAME</code></td>
 <td style="text-align: left;">Manipulators</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Strider</td>
-<td style="text-align: left;"><code>rc.mobile_controller_manager.NAME</code></td>
+<td style="text-align: left;"><code>sodero.mlc.NAME</code></td>
 <td style="text-align: left;">Wheeled mobile bases</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Articulation</td>
-<td style="text-align: left;"><code>rc.articulation_controller_manager.NAME</code></td>
+<td style="text-align: left;"><code>sodero.amc.NAME</code></td>
 <td style="text-align: left;">Articulated robots with direct joint control</td>
 </tr>
 <tr>
@@ -2444,13 +2444,13 @@
 <tr>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Localizer</td>
-<td style="text-align: left;"><code>rc.localizer</code></td>
+<td style="text-align: left;"><code>sodero.localizer</code></td>
 <td style="text-align: left;">Map-based localization (one per Station)</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Visual odometry</td>
-<td style="text-align: left;"><code>rc.visual_odometry</code></td>
+<td style="text-align: left;"><code>sodero.visual_odometry</code></td>
 <td style="text-align: left;">Camera-based odometry (one per Station)</td>
 </tr>
 <tr>
@@ -2483,7 +2483,7 @@
 <p class="admonition-title"><strong>Name rules.</strong> Gateway names are converted to lowercase. Controller names (Motion Studio, Strider, Articulation, Legged locomotion) start with a lowercase letter and use lowercase letters, digits and <code>_</code>, at most 20 characters. The Localizer, Visual odometry and Navigator have fixed names.</p>
 </div>
 <div class="admonition idea">
-<p class="admonition-title"><strong>Tip:</strong> Give a robot's gateway and controller the same name, for example <code>rc.actuator_gateway.jackal</code> and <code>rc.mobile_controller_manager.jackal</code>. The graph stays easy to read, and <strong>Auto-connect</strong> finds the right partner.</p>
+<p class="admonition-title"><strong>Tip:</strong> Give a robot's gateway and controller the same name, for example <code>rc.actuator_gateway.jackal</code> and <code>sodero.mlc.jackal</code>. The graph stays easy to read, and <strong>Auto-connect</strong> finds the right partner.</p>
 </div>
 <hr>
 <h2 id="2-the-node-card">2. The Node Card<a class="headerlink" href="#2-the-node-card" title="Permanent link">¶</a></h2>

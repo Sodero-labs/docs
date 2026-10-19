@@ -1,6 +1,6 @@
 # Strider
 
-**Stellar Strider** controls wheeled mobile bases. A Strider node (`rc.mobile_controller_manager.NAME`) turns body velocities into wheel commands for its gateway, integrates odometry, and enforces the speed and acceleration limits of its `.sddm` document. The Strider web UI lets you jog the base, watch its state and odometry, and send navigation goals.
+**Stellar Strider** controls wheeled mobile bases. A Strider node (`sodero.mlc.NAME`) turns body velocities into wheel commands for its gateway, integrates odometry, and enforces the speed and acceleration limits of its `.sddm` document. The Strider web UI lets you jog the base, watch its state and odometry, and send navigation goals.
 
 Supported drive types (templates of the `.sddm` document): differential drive, skid steer 4WD, mecanum 4WD, swerve 4WD and Ackermann.
 
@@ -138,8 +138,8 @@ The main functions are also available to programs:
 - From your own modules on the Station through the `mobile_base` interface ([Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md)).
 
 ```
-sodero tools call strider.get_state --input '{"target": "rc.mobile_controller_manager.jackal"}'
-sodero tools call strider.set_mode --input '{"mode": "TWIST", "target": "rc.mobile_controller_manager.jackal"}' --execute
+sodero tools call strider.get_state --input '{"target": "sodero.mlc.jackal"}'
+sodero tools call strider.set_mode --input '{"mode": "TWIST", "target": "sodero.mlc.jackal"}' --execute
 ```
 
 `strider.set_twist` is a single velocity sample that expires after a short time. A program that drives continuously must send samples several times per second, and must stop the robot with `strider.stop` when it ends.

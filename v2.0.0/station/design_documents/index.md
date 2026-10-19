@@ -33,7 +33,7 @@ ______________________________________________________________________
 
 ## 2. Edit a Document in Stellar Designer
 
-Click **Edit Stellar Designer** (controllers) or **Edit Stellar Gateway Designer** (gateways) in the **DEFINITION** section. Stellar Designer opens in a new browser tab with the node's document. The breadcrumb at the top shows the node and the file, for example `rc.mobile_controller_manager.jackal / jackal.sddm`.
+Click **Edit Stellar Designer** (controllers) or **Edit Stellar Gateway Designer** (gateways) in the **DEFINITION** section. Stellar Designer opens in a new browser tab with the node's document. The breadcrumb at the top shows the node and the file, for example `sodero.mlc.jackal / jackal.sddm`.
 
 - **Stop the node before you edit its document.** While the node runs, the Station refuses to save.
 - Your edits are saved back to the node automatically. In an Articulation document, click **Save configuration**.

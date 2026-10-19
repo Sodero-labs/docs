@@ -2493,13 +2493,13 @@
 <td style="text-align: left;"></td>
 <td style="text-align: left;"><strong>Max torque</strong></td>
 <td style="text-align: left;">Nm</td>
-<td style="text-align: left;">Peak motor torque. The gateway limits joint torque to <em>Max torque × Gear ratio</em>.</td>
+<td style="text-align: left;">Peak torque of the motor itself, at the motor shaft (the motor's datasheet value, not the torque after the reducer). The gateway limits joint torque to <em>Max torque × Gear ratio</em>.</td>
 </tr>
 <tr>
 <td style="text-align: left;">③ SPEED</td>
 <td style="text-align: left;"><strong>Max speed</strong></td>
 <td style="text-align: left;">rpm</td>
-<td style="text-align: left;">Maximum motor speed. The joint speed limit is <em>Max speed ÷ Gear ratio</em>.</td>
+<td style="text-align: left;">Maximum speed of the motor itself, at the motor shaft (the motor's datasheet value, not the joint speed after the reducer). The joint speed limit is <em>Max speed ÷ Gear ratio</em>.</td>
 </tr>
 <tr>
 <td style="text-align: left;">④ MOTOR CHARACTERISTICS</td>
@@ -2521,6 +2521,9 @@
 </tr>
 </tbody>
 </table>
+<div class="admonition info">
+<p class="admonition-title"><strong>Rated torque</strong>, <strong>Max torque</strong> and <strong>Max speed</strong> are the motor's own values at the motor shaft, as in the motor's datasheet, whatever reducer follows it. Do not convert them to the joint side: the gateway applies the <strong>Gear ratio</strong> itself.</p>
+</div>
 <div class="admonition info">
 <p class="admonition-title">If <strong>Gear ratio</strong> is exactly 1, the gateway reads the gear ratio configured in the drive itself (object 0x6091). Enter the real ratio when the drive does not hold it.</p>
 </div>

@@ -114,16 +114,16 @@ When you click **Add node** on the Station page, you choose one of four node typ
 
 Most built-in nodes have an ID of the form `rc.<kind>.<name>`. You choose the name; the kind comes from the module:
 
-| Module                                | Node ID                                                                        |
-| ------------------------------------- | ------------------------------------------------------------------------------ |
-| Actuator gateway                      | `rc.actuator_gateway.NAME`                                                     |
-| Camera gateway                        | `rc.camera_gateway.NAME`                                                       |
-| IMU gateway                           | `rc.imu_gateway.NAME`                                                          |
-| Motion Studio                         | `rc.controller_manager.NAME`                                                   |
-| Strider                               | `rc.mobile_controller_manager.NAME`                                            |
-| Articulation                          | `rc.articulation_controller_manager.NAME`                                      |
-| Legged locomotion                     | `rc.legged_locomotion.NAME`                                                    |
-| Visual odometry, Localizer, Navigator | `rc.visual_odometry`, `rc.localizer`, `rc.navigator` (one of each per Station) |
+| Module                                | Node ID                                                                                |
+| ------------------------------------- | -------------------------------------------------------------------------------------- |
+| Actuator gateway                      | `rc.actuator_gateway.NAME`                                                             |
+| Camera gateway                        | `rc.camera_gateway.NAME`                                                               |
+| IMU gateway                           | `rc.imu_gateway.NAME`                                                                  |
+| Motion Studio                         | `sodero.mmc.NAME`                                                                      |
+| Strider                               | `sodero.mlc.NAME`                                                                      |
+| Articulation                          | `sodero.amc.NAME`                                                                      |
+| Legged locomotion                     | `rc.legged_locomotion.NAME`                                                            |
+| Visual odometry, Localizer, Navigator | `sodero.visual_odometry`, `sodero.localizer`, `rc.navigator` (one of each per Station) |
 
 ______________________________________________________________________
 
@@ -138,7 +138,7 @@ You connect a required port to a compatible provided port by dragging between th
 
 ```
 flowchart TB
-    S["Strider<br>rc.mobile_controller_manager.jackal"] -- "servo_link" --> G["Actuator gateway<br>rc.actuator_gateway.jackal"]
+    S["Strider<br>sodero.mlc.jackal"] -- "servo_link" --> G["Actuator gateway<br>rc.actuator_gateway.jackal"]
     G -- "simulation" --> I["Isaac Sim<br>robot 'jackal'"]
     G -. "or EtherCAT" .-> M["Real motors"]
 ```
@@ -225,7 +225,7 @@ In about 15 minutes you will build a small robot system on Stellar X and drive a
 flowchart TB
     B["Your browser<br>Stellar Station · Strider"]
     subgraph SX ["Stellar X"]
-        S["Strider<br>rc.mobile_controller_manager.jackal"] -- servo_link --> G["Actuator gateway<br>rc.actuator_gateway.jackal"]
+        S["Strider<br>sodero.mlc.jackal"] -- servo_link --> G["Actuator gateway<br>rc.actuator_gateway.jackal"]
     end
     I["Isaac Sim + Isaac Bridge<br>robot /World/jackal"]
     B --> S
@@ -276,7 +276,7 @@ ______________________________________________________________________
 ## Step 3: Add Strider and Connect It
 
 1. Click **Add node**, choose **Controller** ① › **Strider** ② and click **Next** ③. Name it `jackal` and click **Add node**.
-1. Select `rc.mobile_controller_manager.jackal` and click the upload icon in **DEFINITION** (**Import .sddm**). On **From your PC** ①, choose `jackal.sddm` ② and click **Import** ③.
+1. Select `sodero.mlc.jackal` and click the upload icon in **DEFINITION** (**Import .sddm**). On **From your PC** ①, choose `jackal.sddm` ② and click **Import** ③.
 1. Connect the two nodes: drag from the Strider's `servo_link` (left edge) to the gateway's `servo_link` (right edge), or click **Auto-connect** next to `servo_link` in the Strider's inspector.
 
 The gateway and Strider connected through servo_link
@@ -644,7 +644,7 @@ ______________________________________________________________________
 
 ## 2. Edit a Document in Stellar Designer
 
-Click **Edit Stellar Designer** (controllers) or **Edit Stellar Gateway Designer** (gateways) in the **DEFINITION** section. Stellar Designer opens in a new browser tab with the node's document. The breadcrumb at the top shows the node and the file, for example `rc.mobile_controller_manager.jackal / jackal.sddm`.
+Click **Edit Stellar Designer** (controllers) or **Edit Stellar Gateway Designer** (gateways) in the **DEFINITION** section. Stellar Designer opens in a new browser tab with the node's document. The breadcrumb at the top shows the node and the file, for example `sodero.mlc.jackal / jackal.sddm`.
 
 - **Stop the node before you edit its document.** While the node runs, the Station refuses to save.
 - Your edits are saved back to the node automatically. In an Articulation document, click **Save configuration**.
@@ -797,20 +797,20 @@ The new node appears on the canvas in the **Planned** state. It is saved with th
 
 ### Node Types and Modules
 
-| Type            | Module                   | Node ID                                   | Typical use                                                 |
-| --------------- | ------------------------ | ----------------------------------------- | ----------------------------------------------------------- |
-| **Gateway**     | Actuator gateway         | `rc.actuator_gateway.NAME`                | Motors and drives, real (EtherCAT) or simulated (Isaac Sim) |
-|                 | IMU gateway              | `rc.imu_gateway.NAME`                     | IMU and foot-contact data                                   |
-|                 | Camera gateway           | `rc.camera_gateway.NAME`                  | An RGB-D camera                                             |
-| **Controller**  | Motion Studio            | `rc.controller_manager.NAME`              | Manipulators                                                |
-|                 | Strider                  | `rc.mobile_controller_manager.NAME`       | Wheeled mobile bases                                        |
-|                 | Articulation             | `rc.articulation_controller_manager.NAME` | Articulated robots with direct joint control                |
-|                 | Legged locomotion        | `rc.legged_locomotion.NAME`               | Walking robots driven by a walking policy                   |
-|                 | Localizer                | `rc.localizer`                            | Map-based localization (one per Station)                    |
-|                 | Visual odometry          | `rc.visual_odometry`                      | Camera-based odometry (one per Station)                     |
-|                 | Navigator                | `rc.navigator`                            | Path planning and goal following (one per Station)          |
-| **Compound**    | Your compound modules    |                                           | Several robot units combined into one system                |
-| **Application** | Your application modules |                                           | Robot behaviors and task logic                              |
+| Type            | Module                   | Node ID                     | Typical use                                                 |
+| --------------- | ------------------------ | --------------------------- | ----------------------------------------------------------- |
+| **Gateway**     | Actuator gateway         | `rc.actuator_gateway.NAME`  | Motors and drives, real (EtherCAT) or simulated (Isaac Sim) |
+|                 | IMU gateway              | `rc.imu_gateway.NAME`       | IMU and foot-contact data                                   |
+|                 | Camera gateway           | `rc.camera_gateway.NAME`    | An RGB-D camera                                             |
+| **Controller**  | Motion Studio            | `sodero.mmc.NAME`           | Manipulators                                                |
+|                 | Strider                  | `sodero.mlc.NAME`           | Wheeled mobile bases                                        |
+|                 | Articulation             | `sodero.amc.NAME`           | Articulated robots with direct joint control                |
+|                 | Legged locomotion        | `rc.legged_locomotion.NAME` | Walking robots driven by a walking policy                   |
+|                 | Localizer                | `sodero.localizer`          | Map-based localization (one per Station)                    |
+|                 | Visual odometry          | `sodero.visual_odometry`    | Camera-based odometry (one per Station)                     |
+|                 | Navigator                | `rc.navigator`              | Path planning and goal following (one per Station)          |
+| **Compound**    | Your compound modules    |                             | Several robot units combined into one system                |
+| **Application** | Your application modules |                             | Robot behaviors and task logic                              |
 
 Modules marked **SODERO** are built in. Modules you installed on the [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md) page are marked **CUSTOM** and appear under the type they declare. Each type also lists a **… subsystem** entry (*Empty draft subsystem*): it adds an empty placeholder node with no program behind it, for sketching a system, and that node cannot be started.
 
@@ -818,7 +818,7 @@ Choosing a controller module: ① Controller ② Strider ③ Next (the list scro
 
 **Name rules.** Gateway names are converted to lowercase. Controller names (Motion Studio, Strider, Articulation, Legged locomotion) start with a lowercase letter and use lowercase letters, digits and `_`, at most 20 characters. The Localizer, Visual odometry and Navigator have fixed names.
 
-**Tip:** Give a robot's gateway and controller the same name, for example `rc.actuator_gateway.jackal` and `rc.mobile_controller_manager.jackal`. The graph stays easy to read, and **Auto-connect** finds the right partner.
+**Tip:** Give a robot's gateway and controller the same name, for example `rc.actuator_gateway.jackal` and `sodero.mlc.jackal`. The graph stays easy to read, and **Auto-connect** finds the right partner.
 
 ______________________________________________________________________
 
@@ -1572,14 +1572,16 @@ Motor Select catalog: search ①, or pick Brand ② › Series ③ › Model ④
 
 The fields of the **Motor** tab:
 
-| Section                 | Field              | Unit   | Meaning                                                                                                    |
-| ----------------------- | ------------------ | ------ | ---------------------------------------------------------------------------------------------------------- |
-| ② TORQUE                | **Rated torque**   | Nm     | Continuous motor torque. Torque commands are sent to the drive in per mille of this value.                 |
-|                         | **Max torque**     | Nm     | Peak motor torque. The gateway limits joint torque to *Max torque × Gear ratio*.                           |
-| ③ SPEED                 | **Max speed**      | rpm    | Maximum motor speed. The joint speed limit is *Max speed ÷ Gear ratio*.                                    |
-| ④ MOTOR CHARACTERISTICS | **Resolution**     | PPR    | Encoder pulses (counts) per motor revolution, **before** the gear, e.g. 1,048,576 (2²⁰) or 8,388,608 (2²³) |
-| ⑤ ENCODER CONFIGURATION | **Encoder offset** | pulses | Absolute encoder zero. Set by origin calibration in Motion Studio; leave 0 for a new robot.                |
-| ⑥ REDUCER               | **Gear ratio**     | –      | Motor turns per joint turn                                                                                 |
+| Section                 | Field              | Unit   | Meaning                                                                                                                                                                            |
+| ----------------------- | ------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ② TORQUE                | **Rated torque**   | Nm     | Continuous motor torque. Torque commands are sent to the drive in per mille of this value.                                                                                         |
+|                         | **Max torque**     | Nm     | Peak torque of the motor itself, at the motor shaft (the motor's datasheet value, not the torque after the reducer). The gateway limits joint torque to *Max torque × Gear ratio*. |
+| ③ SPEED                 | **Max speed**      | rpm    | Maximum speed of the motor itself, at the motor shaft (the motor's datasheet value, not the joint speed after the reducer). The joint speed limit is *Max speed ÷ Gear ratio*.     |
+| ④ MOTOR CHARACTERISTICS | **Resolution**     | PPR    | Encoder pulses (counts) per motor revolution, **before** the gear, e.g. 1,048,576 (2²⁰) or 8,388,608 (2²³)                                                                         |
+| ⑤ ENCODER CONFIGURATION | **Encoder offset** | pulses | Absolute encoder zero. Set by origin calibration in Motion Studio; leave 0 for a new robot.                                                                                        |
+| ⑥ REDUCER               | **Gear ratio**     | –      | Motor turns per joint turn                                                                                                                                                         |
+
+**Rated torque**, **Max torque** and **Max speed** are the motor's own values at the motor shaft, as in the motor's datasheet, whatever reducer follows it. Do not convert them to the joint side: the gateway applies the **Gear ratio** itself.
 
 If **Gear ratio** is exactly 1, the gateway reads the gear ratio configured in the drive itself (object 0x6091). Enter the real ratio when the drive does not hold it.
 
@@ -1859,7 +1861,7 @@ ______________________________________________________________________
 
 ## 1. Camera Gateway
 
-Add the node with **Add node** › **Gateway** › **Camera gateway** and a name such as `cam0`. The node creates a companion node `rc.camera_component.NAME` automatically, which offers the camera to applications.
+Add the node with **Add node** › **Gateway** › **Camera gateway** and a name such as `cam0`. Nodes that use the camera connect to its `camera` port.
 
 The camera gateway's inspector
 
@@ -1897,7 +1899,7 @@ ______________________________________________________________________
 
 ## 2. IMU Gateway
 
-Add the node with **Add node** › **Gateway** › **IMU gateway**. It also creates a companion node `rc.imu_component.NAME`.
+Add the node with **Add node** › **Gateway** › **IMU gateway**. Nodes that use the IMU connect to its ports.
 
 | Setting                    | Meaning                                                                                                 |
 | -------------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -1919,12 +1921,12 @@ ______________________________________________________________________
 
 ## 4. Troubleshooting
 
-| Symptom                                                                                        | Cause and fix                                                                                                                                                                                   |
-| ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camera log: *Waiting for simulator at …:53335 (World not running?)*                            | Isaac Sim is not playing, the camera host is wrong, or a firewall blocks port 53335                                                                                                             |
-| Camera log: *…publishes frames of camera(s) … but none of camera 'cam0'*                       | **Camera name** does not match a camera in the scene                                                                                                                                            |
-| Camera log: *Frames … are stale or carry capture times that do not match this Station's clock* | The clocks of the two computers differ. Synchronize them (NTP), or stop sending capture times at the source (Device Bridge: `send_capture_time: false`) so that the Station uses arrival times. |
-| Camera view is black or frozen                                                                 | The camera prim looks at nothing, or the scene is paused                                                                                                                                        |
+| Symptom                                                                                        | Cause and fix                                                                                                                                                                                                                                        |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camera log: *Waiting for simulator at …:53335 (World not running?)*                            | Isaac Sim is not playing, the camera host is wrong, or a firewall blocks port 53335                                                                                                                                                                  |
+| Camera log: *…publishes frames of camera(s) … but none of camera 'cam0'*                       | **Camera name** does not match a camera in the scene                                                                                                                                                                                                 |
+| Camera log: *Frames … are stale or carry capture times that do not match this Station's clock* | The clocks of the two computers differ. Synchronize them (NTP), or stop sending capture times at the source (Isaac Sim: start it with `RC_CAMERA_CAPTURE_TIME=0`; Device Bridge: `send_capture_time: false`) so that the Station uses arrival times. |
+| Camera view is black or frozen                                                                 | The camera prim looks at nothing, or the scene is paused                                                                                                                                                                                             |
 
 # Simulation Gateway
 
@@ -2024,7 +2026,7 @@ The **Articulation** controller drives an articulated robot joint by joint: legg
 
 | Item     | Value                                                                                                        |
 | -------- | ------------------------------------------------------------------------------------------------------------ |
-| Node     | `rc.articulation_controller_manager.NAME`                                                                    |
+| Node     | `sodero.amc.NAME`                                                                                            |
 | Document | `.sdda` ([Stellar Designer](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/articulation/index.md)) |
 | Joints   | 1 to 64, driven by one actuator gateway                                                                      |
 | Units    | rad, rad/s, N·m                                                                                              |
@@ -2119,7 +2121,7 @@ ______________________________________________________________________
 
 # Motion Studio
 
-**Stellar Motion Studio** is the controller UI for manipulators. A Motion Studio node (`rc.controller_manager.NAME`) runs the arm's real-time controller: kinematics, dynamics, trajectory generation and safety limits from the arm's `.sdd` document. The Motion Studio web UI lets you watch the arm in 3D, jog it, define tools and teach poses.
+**Stellar Motion Studio** is the controller UI for manipulators. A Motion Studio node (`sodero.mmc.NAME`) runs the arm's real-time controller: kinematics, dynamics, trajectory generation and safety limits from the arm's `.sdd` document. The Motion Studio web UI lets you watch the arm in 3D, jog it, define tools and teach poses.
 
 ______________________________________________________________________
 
@@ -2232,8 +2234,8 @@ Motion Studio is for setup and teaching. Programs run outside the UI and call th
 | A module on the Station | A module node connected to the Motion Studio node's `manipulator` port ([Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md))                                               |
 
 ```
-sodero tools call motion.get_tcp_pose --input '{"target": "rc.controller_manager.arm"}'
-sodero tools call motion.move_j --input '{"target": "rc.controller_manager.arm",
+sodero tools call motion.get_tcp_pose --input '{"target": "sodero.mmc.arm"}'
+sodero tools call motion.move_j --input '{"target": "sodero.mmc.arm",
   "waypoints": [{"q": {"values": [0, 0, 1.5708, 0, 1.5708, 0]}, "vel": 0.5, "acc": 1.0}]}' --execute
 ```
 
@@ -2241,7 +2243,7 @@ Tools use SI units: radians, meters and seconds. Check a tool's arguments with `
 
 # Strider
 
-**Stellar Strider** controls wheeled mobile bases. A Strider node (`rc.mobile_controller_manager.NAME`) turns body velocities into wheel commands for its gateway, integrates odometry, and enforces the speed and acceleration limits of its `.sddm` document. The Strider web UI lets you jog the base, watch its state and odometry, and send navigation goals.
+**Stellar Strider** controls wheeled mobile bases. A Strider node (`sodero.mlc.NAME`) turns body velocities into wheel commands for its gateway, integrates odometry, and enforces the speed and acceleration limits of its `.sddm` document. The Strider web UI lets you jog the base, watch its state and odometry, and send navigation goals.
 
 Supported drive types (templates of the `.sddm` document): differential drive, skid steer 4WD, mecanum 4WD, swerve 4WD and Ackermann.
 
@@ -2379,8 +2381,8 @@ The main functions are also available to programs:
 - From your own modules on the Station through the `mobile_base` interface ([Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md)).
 
 ```
-sodero tools call strider.get_state --input '{"target": "rc.mobile_controller_manager.jackal"}'
-sodero tools call strider.set_mode --input '{"mode": "TWIST", "target": "rc.mobile_controller_manager.jackal"}' --execute
+sodero tools call strider.get_state --input '{"target": "sodero.mlc.jackal"}'
+sodero tools call strider.set_mode --input '{"mode": "TWIST", "target": "sodero.mlc.jackal"}' --execute
 ```
 
 `strider.set_twist` is a single velocity sample that expires after a short time. A program that drives continuously must send samples several times per second, and must stop the robot with `strider.stop` when it ends.
@@ -2724,15 +2726,15 @@ Upload `site.nav.tgz` on the Station page and `site.nav` with the CLI; both are 
 
 ```
 sodero runtime node stop rc.navigator --execute
-sodero runtime node stop rc.localizer --execute
-sodero navigation get --node rc.localizer                                     # note "sha256"
-sodero maps upload site.nav --node rc.localizer --if-sha256 SHA256            # preview: checks the bundle
-sodero maps upload site.nav --node rc.localizer --if-sha256 SHA256 --execute  # attach it
-sodero runtime node start rc.localizer --execute
+sodero runtime node stop sodero.localizer --execute
+sodero navigation get --node sodero.localizer                                     # note "sha256"
+sodero maps upload site.nav --node sodero.localizer --if-sha256 SHA256            # preview: checks the bundle
+sodero maps upload site.nav --node sodero.localizer --if-sha256 SHA256 --execute  # attach it
+sodero runtime node start sodero.localizer --execute
 sodero runtime node start rc.navigator --execute
 ```
 
-- With Visual odometry, also stop `rc.visual_odometry` before the upload, and start it again before the Localizer.
+- With Visual odometry, also stop `sodero.visual_odometry` before the upload, and start it again before the Localizer.
 - The file name must end in `.nav`, and the file may be at most 64 MiB.
 - The preview reports the first problem it finds (see [Validation Errors](#validation-errors)) and changes nothing.
 - `--node rc.navigator`, with the SHA-256 from `sodero navigation get --node rc.navigator`, attaches the same shared bundle. After each upload or settings change, read the SHA-256 again.
@@ -2769,7 +2771,7 @@ ______________________________________________________________________
 | `… the file name must end with .tar.gz or .tgz or .tar or .zip`                                                                                                | A `.nav` file name on the Station page                                                                            | Rename the file to `site.nav.tgz`                                                                 |
 | `the localizer is running — stop it before replacing its bundle`                                                                                               | Upload on the Station page while the Localizer runs                                                               | Stop the Localizer                                                                                |
 
-Two problems appear only when the Localizer starts, in its log (`sodero runtime logs rc.localizer`): `camera_frame_id is required` when `extrinsics.yaml` has no `camera_frame_id`, and `no_extrinsics_edge` when no edge connects the camera node's `frame_id` to `base_link`.
+Two problems appear only when the Localizer starts, in its log (`sodero runtime logs sodero.localizer`): `camera_frame_id is required` when `extrinsics.yaml` has no `camera_frame_id`, and `no_extrinsics_edge` when no edge connects the camera node's `frame_id` to `base_link`.
 
 ______________________________________________________________________
 
@@ -2795,8 +2797,8 @@ ______________________________________________________________________
 
 ```
 flowchart TB
-    CAM["Camera gateway<br>RGB-D"] -- camera --> LOC["Localizer<br>rc.localizer"]
-    STR["Strider<br>rc.mobile_controller_manager.NAME"] -- odometry --> LOC
+    CAM["Camera gateway<br>RGB-D"] -- camera --> LOC["Localizer<br>sodero.localizer"]
+    STR["Strider<br>sodero.mlc.NAME"] -- odometry --> LOC
     LOC -- "localization · map" --> NAV["Navigator<br>rc.navigator"]
     NAV -- mobile_base --> STR
     MAP[(".nav map bundle")] -.-> LOC
@@ -2912,7 +2914,7 @@ ______________________________________________________________________
 
 | You need              | Details                                                                                                                                                                                                                                                                                                                        |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| The Quick Start setup | `rc.actuator_gateway.jackal` and `rc.mobile_controller_manager.jackal`, running, with the Jackal driving in Isaac Sim                                                                                                                                                                                                          |
+| The Quick Start setup | `rc.actuator_gateway.jackal` and `sodero.mlc.jackal`, running, with the Jackal driving in Isaac Sim                                                                                                                                                                                                                            |
 | The example scene     | `jackal_warehouse.usd` from the Quick Start ([jackal_warehouse.zip](https://docs.sodero.io/v2.0.0/get_started/quick_start/files/jackal_warehouse.zip)). The Jackal carries a depth camera `cam0` on its `base_link`, 0.22 m ahead of the base and 0.47 m above the floor, looking forward with a 90° horizontal field of view. |
 | The map bundle        | [warehouse.nav.tgz](https://docs.sodero.io/v2.0.0/navigation/simulation_tutorial/files/warehouse.nav.tgz): the map of the warehouse scene with the settings used in this tutorial                                                                                                                                              |
 
@@ -2933,14 +2935,30 @@ isaac-sim.bat
 
 Then open `jackal_warehouse.usd` and press **Play**. The Isaac Bridge window lists `cam0 320x240 at 5 fps`.
 
+Restarting Isaac Sim interrupts the Quick Start nodes: the gateway loses the simulator, and the Strider's watchdog stops the robot. Once the scene plays again, restart them from the toolbar: **Stop all nodes**, then **Start all nodes** ([Running Nodes](https://docs.sodero.io/v2.0.0/station/running_nodes/#2-start-all-nodes)). Both nodes show **Operating** again.
+
+**Synchronize the clocks of both computers.** Every camera frame carries its capture time on the Isaac Sim computer's clock, and the camera gateway accepts only frames captured at most 20 ms ahead of and 2 s behind Stellar X's clock. It drops the others: the **Camera view** in Step 2 stays empty, and the camera gateway's log shows *Frames … are stale or carry capture times that do not match this Station's clock (clock skew?)*. Two computers that each follow a time server on the internet are easily more than 20 ms apart.
+
+If you cannot synchronize the clocks, start Isaac Sim with `RC_CAMERA_CAPTURE_TIME=0` as well. The frames then carry no capture time, and the camera gateway stamps each frame when it arrives. An arrival time is later than the capture time by the rendering and network delay, so synchronized clocks remain the better choice for localization.
+
+```
+RC_CAMERA_CAPTURE_TIME=0 RC_ISAAC_CAMERA_DEVICES='[{"name": "cam0", "width": 320, "height": 240, "fps": 5}]' ./isaac-sim.sh
+```
+
+```
+set "RC_CAMERA_CAPTURE_TIME=0"
+set "RC_ISAAC_CAMERA_DEVICES=[{"name": "cam0", "width": 320, "height": 240, "fps": 5}]"
+isaac-sim.bat
+```
+
 ______________________________________________________________________
 
 ## Step 2: Add the Camera Gateway
 
-1. **Add node** › **Gateway** › **Camera gateway**, name it `cam0`. The Station also adds its companion node `rc.camera_component.cam0` ([Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/#1-camera-gateway)).
+1. **Add node** › **Gateway** › **Camera gateway**, name it `cam0` ([Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/#1-camera-gateway)).
 1. In its inspector, set **Camera name** `cam0` (the camera prim's name in the scene) and **Camera host** (the Isaac Sim computer). The port is `53335`.
 1. Under **CAMERA SETTINGS**, set **fps** `5`, **frame id** `cam0_optical`, intrinsics mode `fov` with a horizontal field of view of `90`, and click **Save settings**.
-1. Click **Start node**, then **Camera view** on its card to check the image.
+1. Click **Start node**, then **Camera view** on its card to check the image. If the image stays empty, see the clock note in [Step 1](#step-1-set-the-camera-size-and-rate).
 
 The Jackal's camera
 
@@ -2948,7 +2966,7 @@ ______________________________________________________________________
 
 ## Step 3: Add the Localizer and Load the Map
 
-1. **Add node** › **Controller** › **Localizer**. It is named `rc.localizer`.
+1. **Add node** › **Controller** › **Localizer**. It is named `sodero.localizer`.
 1. In its inspector, click **Upload .nav** and choose `warehouse.nav.tgz`. The inspector shows the map: `warehouse · 500×620 @ 0.05 m`, and the initial pose of the bundle.
 
 The localizer with its map and connections
@@ -2967,13 +2985,13 @@ ______________________________________________________________________
 
 Drag these five connections (from the required port on the left of a card to the provided port on the right of another):
 
-| From                            | To                                                    |
-| ------------------------------- | ----------------------------------------------------- |
-| `rc.localizer` › `camera`       | `rc.camera_gateway.cam0` › `camera`                   |
-| `rc.localizer` › `odometry`     | `rc.mobile_controller_manager.jackal` › `odometry`    |
-| `rc.navigator` › `localization` | `rc.localizer` › `localization`                       |
-| `rc.navigator` › `map`          | `rc.localizer` › `map`                                |
-| `rc.navigator` › `mobile_base`  | `rc.mobile_controller_manager.jackal` › `mobile_base` |
+| From                            | To                                  |
+| ------------------------------- | ----------------------------------- |
+| `sodero.localizer` › `camera`   | `rc.camera_gateway.cam0` › `camera` |
+| `sodero.localizer` › `odometry` | `sodero.mlc.jackal` › `odometry`    |
+| `rc.navigator` › `localization` | `sodero.localizer` › `localization` |
+| `rc.navigator` › `map`          | `sodero.localizer` › `map`          |
+| `rc.navigator` › `mobile_base`  | `sodero.mlc.jackal` › `mobile_base` |
 
 The complete navigation graph, all nodes operating
 
@@ -2986,7 +3004,7 @@ ______________________________________________________________________
 ## Step 6: Start and Localize
 
 1. In Isaac Sim, stop and play the scene so the Jackal is back at its starting pose.
-1. Start the nodes in order: `rc.localizer`, then `rc.navigator` (the gateway, the Strider and the camera already run).
+1. Start the nodes in order: `sodero.localizer`, then `rc.navigator` (the gateway, the Strider and the camera already run).
 1. In the gateway's log, after *Simulator connected again*, open Strider and switch **Twist** and **Servo On** again (a simulation restart turns the servo off).
 1. Open Strider's **Navigation** page (the **Strider** link on the Navigator's card). **Localization Status** shows **Healthy** once the camera view matches the map.
 
@@ -3161,7 +3179,7 @@ Stellar Designer uses only the `.glb` file.
 
 # Articulated Robot (.sdda)
 
-This tutorial builds the document of a robot whose joints are driven one by one, using a four-legged robot with twelve joints as the example. The document belongs to an Articulation node (`rc.articulation_controller_manager.NAME`). Unlike a manipulator or mobile base document, it describes no kinematics: only the joints, their limits and how the gateway's actuators drive them. How the controller uses the document is described in [Articulation](https://docs.sodero.io/v2.0.0/controllers/articulation/index.md).
+This tutorial builds the document of a robot whose joints are driven one by one, using a four-legged robot with twelve joints as the example. The document belongs to an Articulation node (`sodero.amc.NAME`). Unlike a manipulator or mobile base document, it describes no kinematics: only the joints, their limits and how the gateway's actuators drive them. How the controller uses the document is described in [Articulation](https://docs.sodero.io/v2.0.0/controllers/articulation/index.md).
 
 ______________________________________________________________________
 
@@ -3313,7 +3331,7 @@ Then start the node on the Station and try the robot, in simulation first.
 
 # Manipulator (.sdd)
 
-This tutorial walks through the four steps of a manipulator document, using a 6-axis arm. The document belongs to a Motion Studio node (`rc.controller_manager.NAME`), which drives the arm through an actuator gateway.
+This tutorial walks through the four steps of a manipulator document, using a 6-axis arm. The document belongs to a Motion Studio node (`sodero.mmc.NAME`), which drives the arm through an actuator gateway.
 
 ______________________________________________________________________
 
@@ -3414,7 +3432,7 @@ ______________________________________________________________________
 
 # Mobile Robot (.sddm)
 
-This tutorial builds the document of a wheeled mobile base, using the Clearpath Jackal (skid steer, four wheels) of the [Quick Start](https://docs.sodero.io/v2.0.0/get_started/quick_start/index.md). The document belongs to a Strider node (`rc.mobile_controller_manager.NAME`).
+This tutorial builds the document of a wheeled mobile base, using the Clearpath Jackal (skid steer, four wheels) of the [Quick Start](https://docs.sodero.io/v2.0.0/get_started/quick_start/index.md). The document belongs to a Strider node (`sodero.mlc.NAME`).
 
 ______________________________________________________________________
 
@@ -3587,7 +3605,7 @@ The simulation runs in real time while the computer keeps up with the render rat
 - Use moderate camera sizes and frame rates; each camera is rendered in addition to the viewport.
 - Close viewports and windows you do not need.
 - Do not run other heavy GPU programs (such as training) on the same computer at the same time.
-- Keep the clocks of both computers synchronized (NTP). The camera gateway accepts frames at most 20 ms ahead of and 2 s behind its own clock.
+- Keep the clocks of both computers synchronized (NTP). The camera gateway accepts frames at most 20 ms ahead of and 2 s behind its own clock. If you cannot synchronize them, start Isaac Sim with `RC_CAMERA_CAPTURE_TIME=0`: the camera gateway then stamps each frame when it arrives.
 
 ______________________________________________________________________
 
@@ -3600,7 +3618,7 @@ ______________________________________________________________________
 | Isaac Sim console: *'sim_command' for 'X', which is no robot or tracked object of this stage* | The gateway's **Robot name** `X` is not the prim name of a robot in the scene                                                                                                                                             |
 | The robot is listed but never **bound**                                                       | It is not a valid PhysX articulation, or its name is used twice ([Robot Setup](https://docs.sodero.io/v2.0.0/virtual_simulation/robot_setup/#9-check-the-robot))                                                          |
 | Camera gateway: *publishes frames of camera(s) … but none of camera …*                        | The camera gateway's **Camera name** is not the camera's prim name                                                                                                                                                        |
-| Camera gateway: frames *stale* or with capture times that do not match                        | The clocks of the two computers differ. Synchronize them.                                                                                                                                                                 |
+| Camera gateway: frames *stale* or with capture times that do not match                        | The clocks of the two computers differ. Synchronize them, or start Isaac Sim with `RC_CAMERA_CAPTURE_TIME=0` so that the camera gateway uses arrival times.                                                               |
 | The robot moves too fast or too slow                                                          | The computer cannot keep up with the render rate. Lower camera sizes or rates, or close viewports.                                                                                                                        |
 
 The Isaac Sim console shows the bridge's messages, prefixed with the robot or camera name.
@@ -4027,14 +4045,14 @@ ______________________________________________________________________
 
 ## Example Tasks
 
-| You ask                                                         | What the agent does                                                                                                                                                              |
-| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| *"Why did the Strider node fail?"*                              | `sodero runtime status` to find the failed node and its reason, then `sodero runtime logs NODE`                                                                                  |
-| *"Add a camera gateway cam0 and connect it to the localizer."*  | `sodero topology get`, then `sodero topology add-node` and `sodero topology connect`, each previewed first                                                                       |
-| *"Lower the navigator's maximum speed to 0.3 m/s."*             | `sodero navigation get --node rc.navigator`, edits the value, `sodero navigation apply` with the returned SHA-256                                                                |
-| *"Attach warehouse.nav to the localizer and the navigator."*    | `sodero navigation get --node rc.localizer` for its SHA-256, then `sodero maps upload warehouse.nav --node rc.localizer` with it, previewed first (one upload serves both nodes) |
-| *"Write a module that drives to these three points in a loop."* | Writes a package under `/workspace/my-work`, checks it, `sodero packages upload`, adds its node and starts it with `sodero apps start`                                           |
-| *"Drive the simulated robot forward 1 m."*                      | `sodero tools call strider.set_mode`, `strider.servo_on`, `strider.set_twist` and `strider.stop` on the **simulated** robot's target                                             |
+| You ask                                                         | What the agent does                                                                                                                                                                      |
+| --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *"Why did the Strider node fail?"*                              | `sodero runtime status` to find the failed node and its reason, then `sodero runtime logs NODE`                                                                                          |
+| *"Add a camera gateway cam0 and connect it to the localizer."*  | `sodero topology get`, then `sodero topology add-node` and `sodero topology connect`, each previewed first                                                                               |
+| *"Lower the navigator's maximum speed to 0.3 m/s."*             | `sodero navigation get --node rc.navigator`, edits the value, `sodero navigation apply` with the returned SHA-256                                                                        |
+| *"Attach warehouse.nav to the localizer and the navigator."*    | `sodero navigation get --node sodero.localizer` for its SHA-256, then `sodero maps upload warehouse.nav --node sodero.localizer` with it, previewed first (one upload serves both nodes) |
+| *"Write a module that drives to these three points in a loop."* | Writes a package under `/workspace/my-work`, checks it, `sodero packages upload`, adds its node and starts it with `sodero apps start`                                                   |
+| *"Drive the simulated robot forward 1 m."*                      | `sodero tools call strider.set_mode`, `strider.servo_on`, `strider.set_twist` and `strider.stop` on the **simulated** robot's target                                                     |
 
 ______________________________________________________________________
 
@@ -4203,7 +4221,7 @@ ______________________________________________________________________
 - **Preview first.** A command that changes something only previews until you add `--execute`. Read the preview, then repeat the command with `--execute`.
 - **Versions.** Changes to the node graph take `--if-version N`, the `expected_version` from `sodero topology get`. Changes to settings and documents take `--if-sha256 SHA256` from the matching `get`. Each saved change returns the next value. If someone changed the Station page in the meantime, the change is refused with a conflict (exit code 6): read again and retry.
 - **One Station.** On a robot, the only item is the Station `station`. `--item` defaults to it and can be left out.
-- **Node IDs.** Nodes are named `rc.<kind>.<name>`, where the kind comes from the module, not from the `--kind` option of `topology add-node`: `--kind camera --name cam0` creates `rc.camera_gateway.cam0`. Other examples: `rc.actuator_gateway.jackal`, `rc.mobile_controller_manager.jackal`. The localizer, navigator and visual odometry have fixed IDs: `rc.localizer`, `rc.navigator`, `rc.visual_odometry`.
+- **Node IDs.** A node's ID comes from its module, not from the `--kind` option of `topology add-node`: `--kind camera --name cam0` creates `rc.camera_gateway.cam0`. Strider, Motion Studio and Articulation nodes are `sodero.mlc.<name>`, `sodero.mmc.<name>` and `sodero.amc.<name>` (for example `sodero.mlc.jackal`); gateways and the other modules are `rc.<kind>.<name>` (for example `rc.actuator_gateway.jackal`). The localizer, navigator and visual odometry have fixed IDs: `sodero.localizer`, `rc.navigator`, `sodero.visual_odometry`.
 
 ### Exit Codes
 
@@ -4250,15 +4268,15 @@ ______________________________________________________________________
 ```
 sodero runtime status                                    # every node: configured, running, its state
 sodero runtime logs rc.actuator_gateway.jackal --lines 100
-sodero tools call strider.get_state --input '{"target":"rc.mobile_controller_manager.jackal"}'
+sodero tools call strider.get_state --input '{"target":"sodero.mlc.jackal"}'
 ```
 
 ### Start and Stop Nodes
 
 ```
 sodero runtime node start rc.actuator_gateway.jackal --execute          # gateway first
-sodero runtime node start rc.mobile_controller_manager.jackal --execute # then its controller
-sodero runtime node stop rc.mobile_controller_manager.jackal --execute
+sodero runtime node start sodero.mlc.jackal --execute # then its controller
+sodero runtime node stop sodero.mlc.jackal --execute
 ```
 
 `sodero runtime start --execute --wait` starts every saved node, like **Start all nodes** on the Station page.
@@ -4273,7 +4291,7 @@ Stop the nodes you change first, as on the Station page; changes apply when they
 sodero topology get                                       # note "expected_version", e.g. 12
 sodero topology add-node --kind camera --name cam0 --if-version 12              # preview
 sodero topology add-node --kind camera --name cam0 --if-version 12 --execute    # returns version 13
-sodero topology connect --source rc.localizer.camera \
+sodero topology connect --source sodero.localizer.camera \
     --target rc.camera_gateway.cam0.camera --if-version 13 --execute
 ```
 
@@ -4295,11 +4313,11 @@ Stop the node first; the new settings apply when it starts again. These are the 
 
 ```
 sodero runtime node stop rc.navigator --execute          # stop the nodes that use the map
-sodero runtime node stop rc.localizer --execute
-sodero runtime node stop rc.visual_odometry --execute    # if the Station has one
-sodero navigation get --node rc.localizer                # note "sha256"
-sodero maps upload /workspace/maps/warehouse.nav --node rc.localizer --if-sha256 SHA256            # preview: checks the bundle
-sodero maps upload /workspace/maps/warehouse.nav --node rc.localizer --if-sha256 SHA256 --execute  # attach it
+sodero runtime node stop sodero.localizer --execute
+sodero runtime node stop sodero.visual_odometry --execute    # if the Station has one
+sodero navigation get --node sodero.localizer                # note "sha256"
+sodero maps upload /workspace/maps/warehouse.nav --node sodero.localizer --if-sha256 SHA256            # preview: checks the bundle
+sodero maps upload /workspace/maps/warehouse.nav --node sodero.localizer --if-sha256 SHA256 --execute  # attach it
 ```
 
 The localizer and the navigator share one map bundle, so one upload serves both. Start the nodes again afterwards. See [Map Bundle (.nav)](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md) and [Localization and Navigation](https://docs.sodero.io/v2.0.0/navigation/overview/index.md).
@@ -4324,11 +4342,11 @@ sodero tools call localization.set_initial_pose --input '{"x": -1.6, "y": 2.4, "
 sodero tools call localization.set_initial_pose --input '{"x": -1.6, "y": 2.4, "yaw": 0.0}' --execute
 ```
 
-A tool that changes something or moves the robot acts only with `--execute`. Strider and Motion Studio tools need the exact `target` (from `tools list`) when the Station has more than one robot of that kind, for example `{"mode": "TWIST", "target": "rc.mobile_controller_manager.jackal"}` for `strider.set_mode`.
+A tool that changes something or moves the robot acts only with `--execute`. Strider and Motion Studio tools need the exact `target` (from `tools list`) when the Station has more than one robot of that kind, for example `{"mode": "TWIST", "target": "sodero.mlc.jackal"}` for `strider.set_mode`.
 
 ### Readings and Pictures
 
 ```
-sodero watch --probe rc.mobile_controller_manager.jackal --hz 5 --seconds 5
+sodero watch --probe sodero.mlc.jackal --hz 5 --seconds 5
 sodero camera snapshot rc.camera_gateway.cam0 --output frame.png
 ```

@@ -2405,7 +2405,7 @@
 <tbody>
 <tr>
 <td style="text-align: left;">The Quick Start setup</td>
-<td style="text-align: left;"><code>rc.actuator_gateway.jackal</code> and <code>rc.mobile_controller_manager.jackal</code>, running, with the Jackal driving in Isaac Sim</td>
+<td style="text-align: left;"><code>rc.actuator_gateway.jackal</code> and <code>sodero.mlc.jackal</code>, running, with the Jackal driving in Isaac Sim</td>
 </tr>
 <tr>
 <td style="text-align: left;">The example scene</td>
@@ -2434,13 +2434,32 @@
 </div>
 </div>
 <p>Then open <code>jackal_warehouse.usd</code> and press <strong>Play</strong>. The Isaac Bridge window lists <code>cam0  320x240 at 5 fps</code>.</p>
+<p>Restarting Isaac Sim interrupts the Quick Start nodes: the gateway loses the simulator, and the Strider's watchdog stops the robot. Once the scene plays again, restart them from the toolbar: <strong>Stop all nodes</strong>, then <strong>Start all nodes</strong> (<a href="../../station/running_nodes/#2-start-all-nodes">Running Nodes</a>). Both nodes show <strong>Operating</strong> again.</p>
+<div class="admonition warning">
+<p class="admonition-title"><strong>Synchronize the clocks of both computers.</strong> Every camera frame carries its capture time on the Isaac Sim computer's clock, and the camera gateway accepts only frames captured at most 20 ms ahead of and 2 s behind Stellar X's clock. It drops the others: the <strong>Camera view</strong> in Step 2 stays empty, and the camera gateway's log shows <em>Frames … are stale or carry capture times that do not match this Station's clock (clock skew?)</em>. Two computers that each follow a time server on the internet are easily more than 20 ms apart.</p>
+</div>
+<p>If you cannot synchronize the clocks, start Isaac Sim with <code>RC_CAMERA_CAPTURE_TIME=0</code> as well. The frames then carry no capture time, and the camera gateway stamps each frame when it arrives. An arrival time is later than the capture time by the rendering and network delay, so synchronized clocks remain the better choice for localization.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Linux</label><label for="__tabbed_2_2">Windows (Command Prompt)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">RC_CAMERA_CAPTURE_TIME</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">RC_ISAAC_CAMERA_DEVICES</span><span class="o">=</span><span class="s1">'[{"name": "cam0", "width": 320, "height": 240, "fps": 5}]'</span><span class="w"> </span>./isaac-sim.sh
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">set</span> <span class="s2">"RC_CAMERA_CAPTURE_TIME=0"</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">set</span> <span class="s2">"RC_ISAAC_CAMERA_DEVICES=[{"</span>name<span class="s2">": "</span>cam0<span class="s2">", "</span>width<span class="s2">": 320, "</span>height<span class="s2">": 240, "</span>fps<span class="s2">": 5}]"</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>isaac-sim.bat
+</code></pre></div>
+</div>
+</div>
+</div>
 <hr>
 <h2 id="step-2-add-the-camera-gateway">Step 2: Add the Camera Gateway<a class="headerlink" href="#step-2-add-the-camera-gateway" title="Permanent link">¶</a></h2>
 <ol>
-<li><strong>Add node</strong> › <strong>Gateway</strong> › <strong>Camera gateway</strong>, name it <code>cam0</code>. The Station also adds its companion node <code>rc.camera_component.cam0</code> (<a href="../../gateways/sensors_and_cameras/#1-camera-gateway">Sensors and Cameras</a>).</li>
+<li><strong>Add node</strong> › <strong>Gateway</strong> › <strong>Camera gateway</strong>, name it <code>cam0</code> (<a href="../../gateways/sensors_and_cameras/#1-camera-gateway">Sensors and Cameras</a>).</li>
 <li>In its inspector, set <strong>Camera name</strong> <code>cam0</code> (the camera prim's name in the scene) and <strong>Camera host</strong> (the Isaac Sim computer). The port is <code>53335</code>.</li>
 <li>Under <strong>CAMERA SETTINGS</strong>, set <strong>fps</strong> <code>5</code>, <strong>frame id</strong> <code>cam0_optical</code>, intrinsics mode <code>fov</code> with a horizontal field of view of <code>90</code>, and click <strong>Save settings</strong>.</li>
-<li>Click <strong>Start node</strong>, then <strong>Camera view</strong> on its card to check the image.</li>
+<li>Click <strong>Start node</strong>, then <strong>Camera view</strong> on its card to check the image. If the image stays empty, see the clock note in <a href="#step-1-set-the-camera-size-and-rate">Step 1</a>.</li>
 </ol>
 <figure>
   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../gateways/sensors_and_cameras/images/camera_view.png" data-desc-position="bottom"><img alt="Camera view" src="../../gateways/sensors_and_cameras/images/camera_view.png" width="800"></a>
@@ -2450,7 +2469,7 @@
 <hr>
 <h2 id="step-3-add-the-localizer-and-load-the-map">Step 3: Add the Localizer and Load the Map<a class="headerlink" href="#step-3-add-the-localizer-and-load-the-map" title="Permanent link">¶</a></h2>
 <ol>
-<li><strong>Add node</strong> › <strong>Controller</strong> › <strong>Localizer</strong>. It is named <code>rc.localizer</code>.</li>
+<li><strong>Add node</strong> › <strong>Controller</strong> › <strong>Localizer</strong>. It is named <code>sodero.localizer</code>.</li>
 <li>In its inspector, click <strong>Upload .nav</strong> and choose <code>warehouse.nav.tgz</code>. The inspector shows the map: <code>warehouse · 500×620 @ 0.05 m</code>, and the initial pose of the bundle.</li>
 </ol>
 <figure>
@@ -2478,24 +2497,24 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>rc.localizer</code> › <code>camera</code></td>
+<td style="text-align: left;"><code>sodero.localizer</code> › <code>camera</code></td>
 <td style="text-align: left;"><code>rc.camera_gateway.cam0</code> › <code>camera</code></td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>rc.localizer</code> › <code>odometry</code></td>
-<td style="text-align: left;"><code>rc.mobile_controller_manager.jackal</code> › <code>odometry</code></td>
+<td style="text-align: left;"><code>sodero.localizer</code> › <code>odometry</code></td>
+<td style="text-align: left;"><code>sodero.mlc.jackal</code> › <code>odometry</code></td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>rc.navigator</code> › <code>localization</code></td>
-<td style="text-align: left;"><code>rc.localizer</code> › <code>localization</code></td>
+<td style="text-align: left;"><code>sodero.localizer</code> › <code>localization</code></td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>rc.navigator</code> › <code>map</code></td>
-<td style="text-align: left;"><code>rc.localizer</code> › <code>map</code></td>
+<td style="text-align: left;"><code>sodero.localizer</code> › <code>map</code></td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>rc.navigator</code> › <code>mobile_base</code></td>
-<td style="text-align: left;"><code>rc.mobile_controller_manager.jackal</code> › <code>mobile_base</code></td>
+<td style="text-align: left;"><code>sodero.mlc.jackal</code> › <code>mobile_base</code></td>
 </tr>
 </tbody>
 </table>
@@ -2514,7 +2533,7 @@
 <h2 id="step-6-start-and-localize">Step 6: Start and Localize<a class="headerlink" href="#step-6-start-and-localize" title="Permanent link">¶</a></h2>
 <ol>
 <li>In Isaac Sim, stop and play the scene so the Jackal is back at its starting pose.</li>
-<li>Start the nodes in order: <code>rc.localizer</code>, then <code>rc.navigator</code> (the gateway, the Strider and the camera already run).</li>
+<li>Start the nodes in order: <code>sodero.localizer</code>, then <code>rc.navigator</code> (the gateway, the Strider and the camera already run).</li>
 <li>In the gateway's log, after <em>Simulator connected again</em>, open Strider and switch <strong>Twist</strong> and <strong>Servo On</strong> again (a simulation restart turns the servo off).</li>
 <li>Open Strider's <strong>Navigation</strong> page (the <strong>Strider</strong> link on the Navigator's card). <strong>Localization Status</strong> shows <strong>Healthy</strong> once the camera view matches the map.</li>
 </ol>
