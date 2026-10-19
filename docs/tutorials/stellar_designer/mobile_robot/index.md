@@ -1,6 +1,6 @@
 # Mobile Robot (.sddm)
 
-This tutorial builds the document of a wheeled mobile base, using the Clearpath Jackal (skid steer, four wheels) of the [Quick Start](../../../get_started/quick_start/index.md). The document belongs to a Strider node (`rc.mobile_controller_manager.NAME`).
+This tutorial builds the document of a wheeled mobile base, using the Clearpath Jackal (skid steer, four wheels) of the [Quick Start](../../../get_started/quick_start/index.md). The document belongs to a Strider node (`sodero.mlc.NAME`).
 
 ---
 

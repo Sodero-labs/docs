@@ -120,7 +120,7 @@ The agent runs commands such as `sodero topology get` and `sodero runtime status
 | *"Why did the Strider node fail?"* | `sodero runtime status` to find the failed node and its reason, then `sodero runtime logs NODE` |
 | *"Add a camera gateway cam0 and connect it to the localizer."* | `sodero topology get`, then `sodero topology add-node` and `sodero topology connect`, each previewed first |
 | *"Lower the navigator's maximum speed to 0.3 m/s."* | `sodero navigation get --node rc.navigator`, edits the value, `sodero navigation apply` with the returned SHA-256 |
-| *"Attach warehouse.nav to the localizer and the navigator."* | `sodero navigation get --node rc.localizer` for its SHA-256, then `sodero maps upload warehouse.nav --node rc.localizer` with it, previewed first (one upload serves both nodes) |
+| *"Attach warehouse.nav to the localizer and the navigator."* | `sodero navigation get --node sodero.localizer` for its SHA-256, then `sodero maps upload warehouse.nav --node sodero.localizer` with it, previewed first (one upload serves both nodes) |
 | *"Write a module that drives to these three points in a loop."* | Writes a package under `/workspace/my-work`, checks it, `sodero packages upload`, adds its node and starts it with `sodero apps start` |
 | *"Drive the simulated robot forward 1 m."* | `sodero tools call strider.set_mode`, `strider.servo_on`, `strider.set_twist` and `strider.stop` on the **simulated** robot's target |
 

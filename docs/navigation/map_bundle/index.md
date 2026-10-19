@@ -336,15 +336,15 @@ The Localizer and the Navigator share one bundle, so one upload serves both. See
 
 ```sh
 sodero runtime node stop rc.navigator --execute
-sodero runtime node stop rc.localizer --execute
-sodero navigation get --node rc.localizer                                     # note "sha256"
-sodero maps upload site.nav --node rc.localizer --if-sha256 SHA256            # preview: checks the bundle
-sodero maps upload site.nav --node rc.localizer --if-sha256 SHA256 --execute  # attach it
-sodero runtime node start rc.localizer --execute
+sodero runtime node stop sodero.localizer --execute
+sodero navigation get --node sodero.localizer                                     # note "sha256"
+sodero maps upload site.nav --node sodero.localizer --if-sha256 SHA256            # preview: checks the bundle
+sodero maps upload site.nav --node sodero.localizer --if-sha256 SHA256 --execute  # attach it
+sodero runtime node start sodero.localizer --execute
 sodero runtime node start rc.navigator --execute
 ```
 
-- With Visual odometry, also stop `rc.visual_odometry` before the upload, and start it again before the Localizer.
+- With Visual odometry, also stop `sodero.visual_odometry` before the upload, and start it again before the Localizer.
 - The file name must end in `.nav`, and the file may be at most 64 MiB.
 - The preview reports the first problem it finds (see [Validation Errors](#validation-errors)) and changes nothing.
 - `--node rc.navigator`, with the SHA-256 from `sodero navigation get --node rc.navigator`, attaches the same shared bundle. After each upload or settings change, read the SHA-256 again.
@@ -381,7 +381,7 @@ sodero runtime node start rc.navigator --execute
 | `… the file name must end with .tar.gz or .tgz or .tar or .zip` | A `.nav` file name on the Station page | Rename the file to `site.nav.tgz` |
 | `the localizer is running — stop it before replacing its bundle` | Upload on the Station page while the Localizer runs | Stop the Localizer |
 
-!!! info "Two problems appear only when the Localizer starts, in its log (`sodero runtime logs rc.localizer`): `camera_frame_id is required` when `extrinsics.yaml` has no `camera_frame_id`, and `no_extrinsics_edge` when no edge connects the camera node's `frame_id` to `base_link`."
+!!! info "Two problems appear only when the Localizer starts, in its log (`sodero runtime logs sodero.localizer`): `camera_frame_id is required` when `extrinsics.yaml` has no `camera_frame_id`, and `no_extrinsics_edge` when no edge connects the camera node's `frame_id` to `base_link`."
 
 ---
 

@@ -26,7 +26,7 @@ flowchart TB
 
 ## 1. Camera Gateway
 
-Add the node with **Add node** › **Gateway** › **Camera gateway** and a name such as `cam0`. Nodes that use the camera connect to its `camera` port. Depending on the Station version, a companion node `rc.camera_component.NAME` also appears next to it. The Station adds and removes it by itself; you do not add it.
+Add the node with **Add node** › **Gateway** › **Camera gateway** and a name such as `cam0`. Nodes that use the camera connect to its `camera` port.
 
 <figure markdown="span">
   ![Camera gateway inspector](images/camera_inspector.png){ width="300" }
@@ -70,7 +70,7 @@ While the camera gateway runs, click **Camera view** on its node card:
 
 ## 2. IMU Gateway
 
-Add the node with **Add node** › **Gateway** › **IMU gateway**. Depending on the Station version, a companion node `rc.imu_component.NAME` also appears; the Station manages it by itself.
+Add the node with **Add node** › **Gateway** › **IMU gateway**. Nodes that use the IMU connect to its ports.
 
 | Setting | Meaning |
 | :--- | :--- |

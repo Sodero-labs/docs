@@ -1,6 +1,6 @@
 # Articulated Robot (.sdda)
 
-This tutorial builds the document of a robot whose joints are driven one by one, using a four-legged robot with twelve joints as the example. The document belongs to an Articulation node (`rc.articulation_controller_manager.NAME`). Unlike a manipulator or mobile base document, it describes no kinematics: only the joints, their limits and how the gateway's actuators drive them. How the controller uses the document is described in [Articulation](../../../controllers/articulation/index.md).
+This tutorial builds the document of a robot whose joints are driven one by one, using a four-legged robot with twelve joints as the example. The document belongs to an Articulation node (`sodero.amc.NAME`). Unlike a manipulator or mobile base document, it describes no kinematics: only the joints, their limits and how the gateway's actuators drive them. How the controller uses the document is described in [Articulation](../../../controllers/articulation/index.md).
 
 ---
 

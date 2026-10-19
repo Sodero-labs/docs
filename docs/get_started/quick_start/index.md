@@ -11,7 +11,7 @@ In about 15 minutes you will build a small robot system on Stellar X and drive a
 flowchart TB
     B["Your browser<br>Stellar Station · Strider"]
     subgraph SX ["Stellar X"]
-        S["Strider<br>rc.mobile_controller_manager.jackal"] -- servo_link --> G["Actuator gateway<br>rc.actuator_gateway.jackal"]
+        S["Strider<br>sodero.mlc.jackal"] -- servo_link --> G["Actuator gateway<br>rc.actuator_gateway.jackal"]
     end
     I["Isaac Sim + Isaac Bridge<br>robot /World/jackal"]
     B --> S
@@ -79,7 +79,7 @@ flowchart TB
       ![Add Strider](images/add_strider.png){ width="620" }
     </figure>
 
-2. Select `rc.mobile_controller_manager.jackal` and click the upload icon in **DEFINITION** (**Import .sddm**). On **From your PC** ①, choose `jackal.sddm` ② and click **Import** ③.
+2. Select `sodero.mlc.jackal` and click the upload icon in **DEFINITION** (**Import .sddm**). On **From your PC** ①, choose `jackal.sddm` ② and click **Import** ③.
 
     <figure markdown="span">
       ![Import .sddm](images/import_sddm.png){ width="560" }

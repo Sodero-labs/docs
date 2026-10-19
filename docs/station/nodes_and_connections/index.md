@@ -30,12 +30,12 @@ The new node appears on the canvas in the **Planned** state. It is saved with th
 | **Gateway** | Actuator gateway | `rc.actuator_gateway.NAME` | Motors and drives, real (EtherCAT) or simulated (Isaac Sim) |
 | | IMU gateway | `rc.imu_gateway.NAME` | IMU and foot-contact data |
 | | Camera gateway | `rc.camera_gateway.NAME` | An RGB-D camera |
-| **Controller** | Motion Studio | `rc.controller_manager.NAME` | Manipulators |
-| | Strider | `rc.mobile_controller_manager.NAME` | Wheeled mobile bases |
-| | Articulation | `rc.articulation_controller_manager.NAME` | Articulated robots with direct joint control |
+| **Controller** | Motion Studio | `sodero.mmc.NAME` | Manipulators |
+| | Strider | `sodero.mlc.NAME` | Wheeled mobile bases |
+| | Articulation | `sodero.amc.NAME` | Articulated robots with direct joint control |
 | | Legged locomotion | `rc.legged_locomotion.NAME` | Walking robots driven by a walking policy |
-| | Localizer | `rc.localizer` | Map-based localization (one per Station) |
-| | Visual odometry | `rc.visual_odometry` | Camera-based odometry (one per Station) |
+| | Localizer | `sodero.localizer` | Map-based localization (one per Station) |
+| | Visual odometry | `sodero.visual_odometry` | Camera-based odometry (one per Station) |
 | | Navigator | `rc.navigator` | Path planning and goal following (one per Station) |
 | **Compound** | Your compound modules | | Several robot units combined into one system |
 | **Application** | Your application modules | | Robot behaviors and task logic |
@@ -49,7 +49,7 @@ Modules marked **SODERO** are built in. Modules you installed on the [Modules](.
 
 !!! info "**Name rules.** Gateway names are converted to lowercase. Controller names (Motion Studio, Strider, Articulation, Legged locomotion) start with a lowercase letter and use lowercase letters, digits and `_`, at most 20 characters. The Localizer, Visual odometry and Navigator have fixed names."
 
-!!! idea "**Tip:** Give a robot's gateway and controller the same name, for example `rc.actuator_gateway.jackal` and `rc.mobile_controller_manager.jackal`. The graph stays easy to read, and **Auto-connect** finds the right partner."
+!!! idea "**Tip:** Give a robot's gateway and controller the same name, for example `rc.actuator_gateway.jackal` and `sodero.mlc.jackal`. The graph stays easy to read, and **Auto-connect** finds the right partner."
 
 ---
 
