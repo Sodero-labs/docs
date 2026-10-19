@@ -38,14 +38,32 @@ The localizer in this tutorial uses the camera at 320 × 240 pixels and 5 frames
 
 Then open `jackal_warehouse.usd` and press **Play**. The Isaac Bridge window lists `cam0  320x240 at 5 fps`.
 
+!!! warning "**Synchronize the clocks of both computers.** Every camera frame carries its capture time on the Isaac Sim computer's clock, and the camera gateway accepts only frames captured at most 20 ms ahead of and 2 s behind Stellar X's clock. It drops the others: the **Camera view** in Step 2 stays empty, and the camera gateway's log shows *Frames … are stale or carry capture times that do not match this Station's clock (clock skew?)*. Two computers that each follow a time server on the internet are easily more than 20 ms apart."
+
+If you cannot synchronize the clocks, start Isaac Sim with `RC_CAMERA_CAPTURE_TIME=0` as well. The frames then carry no capture time, and the camera gateway stamps each frame when it arrives. An arrival time is later than the capture time by the rendering and network delay, so synchronized clocks remain the better choice for localization.
+
+=== "Linux"
+
+    ```sh
+    RC_CAMERA_CAPTURE_TIME=0 RC_ISAAC_CAMERA_DEVICES='[{"name": "cam0", "width": 320, "height": 240, "fps": 5}]' ./isaac-sim.sh
+    ```
+
+=== "Windows (Command Prompt)"
+
+    ```bat
+    set "RC_CAMERA_CAPTURE_TIME=0"
+    set "RC_ISAAC_CAMERA_DEVICES=[{"name": "cam0", "width": 320, "height": 240, "fps": 5}]"
+    isaac-sim.bat
+    ```
+
 ---
 
 ## Step 2: Add the Camera Gateway
 
-1. **Add node** › **Gateway** › **Camera gateway**, name it `cam0`. The Station also adds its companion node `rc.camera_component.cam0` ([Sensors and Cameras](../../gateways/sensors_and_cameras/index.md#1-camera-gateway)).
+1. **Add node** › **Gateway** › **Camera gateway**, name it `cam0` ([Sensors and Cameras](../../gateways/sensors_and_cameras/index.md#1-camera-gateway)). Depending on the Station version, a companion node `rc.camera_component.cam0` also appears next to it. The Station adds and removes it by itself; you do not add it.
 2. In its inspector, set **Camera name** `cam0` (the camera prim's name in the scene) and **Camera host** (the Isaac Sim computer). The port is `53335`.
 3. Under **CAMERA SETTINGS**, set **fps** `5`, **frame id** `cam0_optical`, intrinsics mode `fov` with a horizontal field of view of `90`, and click **Save settings**.
-4. Click **Start node**, then **Camera view** on its card to check the image.
+4. Click **Start node**, then **Camera view** on its card to check the image. If the image stays empty, see the clock note in [Step 1](#step-1-set-the-camera-size-and-rate).
 
 <figure markdown="span">
   ![Camera view](../../gateways/sensors_and_cameras/images/camera_view.png){ width="800" }

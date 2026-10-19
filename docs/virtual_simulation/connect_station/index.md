@@ -83,7 +83,7 @@ The simulation runs in real time while the computer keeps up with the render rat
 - Use moderate camera sizes and frame rates; each camera is rendered in addition to the viewport.
 - Close viewports and windows you do not need.
 - Do not run other heavy GPU programs (such as training) on the same computer at the same time.
-- Keep the clocks of both computers synchronized (NTP). The camera gateway accepts frames at most 20 ms ahead of and 2 s behind its own clock.
+- Keep the clocks of both computers synchronized (NTP). The camera gateway accepts frames at most 20 ms ahead of and 2 s behind its own clock. If you cannot synchronize them, start Isaac Sim with `RC_CAMERA_CAPTURE_TIME=0`: the camera gateway then stamps each frame when it arrives.
 
 ---
 
@@ -96,7 +96,7 @@ The simulation runs in real time while the computer keeps up with the render rat
 | Isaac Sim console: *'sim_command' for 'X', which is no robot or tracked object of this stage* | The gateway's **Robot name** `X` is not the prim name of a robot in the scene |
 | The robot is listed but never **bound** | It is not a valid PhysX articulation, or its name is used twice ([Robot Setup](../robot_setup/index.md#9-check-the-robot)) |
 | Camera gateway: *publishes frames of camera(s) … but none of camera …* | The camera gateway's **Camera name** is not the camera's prim name |
-| Camera gateway: frames *stale* or with capture times that do not match | The clocks of the two computers differ. Synchronize them. |
+| Camera gateway: frames *stale* or with capture times that do not match | The clocks of the two computers differ. Synchronize them, or start Isaac Sim with `RC_CAMERA_CAPTURE_TIME=0` so that the camera gateway uses arrival times. |
 | The robot moves too fast or too slow | The computer cannot keep up with the render rate. Lower camera sizes or rates, or close viewports. |
 
 The Isaac Sim console shows the bridge's messages, prefixed with the robot or camera name.
