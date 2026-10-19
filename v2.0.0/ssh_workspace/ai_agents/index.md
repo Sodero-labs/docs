@@ -1,6 +1,6 @@
 # Working with AI Coding Agents
 
-The SSH workspace is built to be used by people and by AI coding agents alike. Every `sodero` command prints JSON, every change is previewed before it is applied, and the workspace ships its own operating rules for agents. With an agent such as **Claude Code** or **OpenAI Codex**, you describe a task in plain language and the agent runs the commands, reads the results and reports back:
+The SSH workspace is built for people and AI coding agents alike. Every `sodero` command prints JSON, every change is previewed before it is applied, and the workspace ships its own operating rules for agents. With an agent such as **Claude Code** or **OpenAI Codex**, you describe a task in plain language and the agent runs the commands, reads the results and reports back:
 
 - *"Which nodes are running, and why did the Strider node stop?"*
 - *"Add a camera gateway named cam0 and connect it to the localizer."*
@@ -44,7 +44,7 @@ ______________________________________________________________________
    ssh stellar-x sodero project status
    ```
 
-   It prints one line of JSON that describes the robot's Station.
+   The first time, SSH asks you to confirm the robot's host key: answer `yes`. After that the command must run without any prompt. It prints one line of JSON that describes the robot's Station.
 
 **Tip (macOS · Linux):** Reuse one SSH connection
 
@@ -75,7 +75,8 @@ Before you change anything, read the robot's own rules and follow them:
 - Commands that change something only preview until `--execute` is added.
   Show me the preview and wait for my OK before you add `--execute`.
 - Never move the real robot unless I ask for that motion.
-- Keep source files on the robot under /workspace/my-work.
+- Keep source files on the robot under /workspace/my-work
+  (create it with `mkdir -p /workspace/my-work` if it does not exist).
 ```
 
 The robot's own rules (`/workspace/AGENTS.md`) tell the agent how to read results and exit codes, how to wait for long operations without polling loops, which nodes drive real hardware on this robot, and what it must never do. They are maintained with the robot's software, so you do not need to copy them.
@@ -110,14 +111,14 @@ ______________________________________________________________________
 
 ## Example Tasks
 
-| You ask                                                         | What the agent does                                                                                                                          |
-| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| *"Why did the Strider node fail?"*                              | `sodero runtime status` to find the failed node and its reason, then `sodero runtime logs NODE`                                              |
-| *"Add a camera gateway cam0 and connect it to the localizer."*  | `sodero topology get`, then `sodero topology add-node` and `sodero topology connect`, each previewed first                                   |
-| *"Lower the navigator's maximum speed to 0.3 m/s."*             | `sodero navigation get --node rc.navigator`, edits the value, `sodero navigation apply` with the returned SHA-256                            |
-| *"Attach warehouse.nav to the localizer and the navigator."*    | `sodero navigation get` for each node's SHA-256, then `sodero maps upload warehouse.nav --node rc.localizer` and the same for `rc.navigator` |
-| *"Write a module that drives to these three points in a loop."* | Writes a package under `/workspace/my-work`, checks it, `sodero packages upload`, adds its node and starts it with `sodero apps start`       |
-| *"Drive the simulated robot forward 1 m."*                      | `sodero tools call strider.set_mode`, `strider.servo_on`, `strider.set_twist` and `strider.stop` on the **simulated** robot's target         |
+| You ask                                                         | What the agent does                                                                                                                                                              |
+| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *"Why did the Strider node fail?"*                              | `sodero runtime status` to find the failed node and its reason, then `sodero runtime logs NODE`                                                                                  |
+| *"Add a camera gateway cam0 and connect it to the localizer."*  | `sodero topology get`, then `sodero topology add-node` and `sodero topology connect`, each previewed first                                                                       |
+| *"Lower the navigator's maximum speed to 0.3 m/s."*             | `sodero navigation get --node rc.navigator`, edits the value, `sodero navigation apply` with the returned SHA-256                                                                |
+| *"Attach warehouse.nav to the localizer and the navigator."*    | `sodero navigation get --node rc.localizer` for its SHA-256, then `sodero maps upload warehouse.nav --node rc.localizer` with it, previewed first (one upload serves both nodes) |
+| *"Write a module that drives to these three points in a loop."* | Writes a package under `/workspace/my-work`, checks it, `sodero packages upload`, adds its node and starts it with `sodero apps start`                                           |
+| *"Drive the simulated robot forward 1 m."*                      | `sodero tools call strider.set_mode`, `strider.servo_on`, `strider.set_twist` and `strider.stop` on the **simulated** robot's target                                             |
 
 ______________________________________________________________________
 
@@ -125,8 +126,8 @@ ______________________________________________________________________
 
 - **Review previews.** Ask the agent to show the preview of every change. Nothing changes until a command runs with `--execute`.
 - **Set approval rules in your agent.** Most agents can require your approval before they run a command. A practical setup: allow read-only commands (`status`, `get`, `list`, `logs`) freely, and ask for approval for anything with `--execute`, `tools call` or `apps call`.
-- **Real hardware moves.** A robot tool called with `--execute` can move real equipment. Keep the area clear and keep the emergency stop within reach. The robot's rules forbid the agent to move a robot unless you asked for that motion.
-- **Protected assets.** Official modules expose their parameters and settings, but not their sources, binaries, weights or internal logs. Your own files, documents, packages and their logs are fully available to the agent.
+- **Real hardware moves.** A robot tool called with `--execute` can move real equipment. Keep the area clear and keep the emergency stop within reach. The robot's rules forbid the agent to move the robot unless you ask for that motion.
+- **Protected assets.** Official modules expose their parameters, settings and node logs, but not their sources, binaries, weights or internal logs. Your own files, documents, packages and their logs are fully available to the agent.
 
 ______________________________________________________________________
 

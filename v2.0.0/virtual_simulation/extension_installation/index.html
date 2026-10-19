@@ -113,7 +113,7 @@
       border-bottom: 1px solid #333;
     }
 
-    /* --- [1] 모바일 화면 --- */
+    /* --- [1] Mobile --- */
     @media (max-width: 76.24em) {
       .pc-only { display: none !important; }
       .mobile-header-inner {
@@ -124,7 +124,7 @@
       .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
     }
 
-    /* --- [2] PC 화면 --- */
+    /* --- [2] Desktop --- */
     @media (min-width: 76.25em) {
       .mobile-only { display: none !important; }
       .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
@@ -239,7 +239,7 @@
         overflow: hidden;
       }
 
-      /* 매칭된 키워드 하이라이트 색상 */
+      /* Highlight color of matched keywords */
       .md-search-result mark {
         background-color: #0070dd;
         color: #f0f1f2;
@@ -1653,6 +1653,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulated Robot (.sdda)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
         
   
@@ -2255,7 +2283,7 @@
 <p>Isaac Bridge is open source. Download it from GitHub:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Sodero-labs/isaac_bridge.git
 </code></pre></div>
-<p>Or download the ZIP file of the latest release from the repository page and extract it. Either way you get a folder <code>isaac_bridge</code>. Remember the folder that <strong>contains</strong> it, for example <code>~/isaac_extensions</code> when the extension is in <code>~/isaac_extensions/isaac_bridge</code>.</p>
+<p>Or download the ZIP file of the latest release from the repository page, extract it, and rename the extracted folder to <code>isaac_bridge</code> (GitHub adds the version to its name). Either way you get a folder <code>isaac_bridge</code>. Remember the folder that <strong>contains</strong> it, for example <code>~/isaac_extensions</code> when the extension is in <code>~/isaac_extensions/isaac_bridge</code>.</p>
 <hr>
 <h2 id="2-add-the-extension-to-isaac-sim">2. Add the Extension to Isaac Sim<a class="headerlink" href="#2-add-the-extension-to-isaac-sim" title="Permanent link">¶</a></h2>
 <ol>
@@ -2271,21 +2299,27 @@
 <br>
 <figcaption>① search ② enable ③ autoload</figcaption>
 </figure>
-<p>When the extension starts the first time, Isaac Sim installs the Python package <code>pyzmq</code> from the internet. On a computer without internet access, install it into Isaac Sim's Python yourself, from Isaac Sim's installation folder:</p>
+<p>When the extension starts the first time, Isaac Sim installs the Python package <code>pyzmq</code> from the internet. For a computer without internet access, download the package on a computer that has internet access and the same operating system and Isaac Sim version, copy the <code>wheels</code> folder to the Isaac Sim computer, and install it from there. Run the commands in Isaac Sim's installation folder:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Linux</label><label for="__tabbed_1_2">Windows</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>./python.sh<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pyzmq
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># On the computer with internet access</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>./python.sh<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>download<span class="w"> </span>pyzmq<span class="w"> </span>-d<span class="w"> </span>wheels
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># On the Isaac Sim computer, with the copied wheels folder</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>./python.sh<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-index<span class="w"> </span>--find-links<span class="w"> </span>wheels<span class="w"> </span>pyzmq
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python.bat -m pip install pyzmq
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">REM On the computer with internet access</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>python.bat -m pip download pyzmq -d wheels
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1">REM On the Isaac Sim computer, with the copied wheels folder</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>python.bat -m pip install --no-index --find-links wheels pyzmq
 </code></pre></div>
 </div>
 </div>
 </div>
 <div class="admonition info">
-<p class="admonition-title">You can also start Isaac Sim with the extension from a command line: <code>isaac-sim.sh --ext-folder ~/isaac_extensions --enable isaac_bridge</code>.</p>
+<p class="admonition-title">You can also start Isaac Sim with the extension from a command line: <code>isaac-sim.sh --ext-folder ~/isaac_extensions --enable isaac_bridge</code> (<code>isaac-sim.bat</code> on Windows).</p>
 </div>
 <hr>
 <h2 id="3-open-the-status-window">3. Open the Status Window<a class="headerlink" href="#3-open-the-status-window" title="Permanent link">¶</a></h2>
@@ -2423,7 +2457,7 @@
             <span class="twemoji">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
             </span>
-            Raise Issues
+            Report an Issue
         </a>
 
     </div>

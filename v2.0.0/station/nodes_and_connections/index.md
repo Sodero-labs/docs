@@ -35,11 +35,11 @@ The new node appears on the canvas in the **Planned** state. It is saved with th
 | **Compound**    | Your compound modules    |                                           | Several robot units combined into one system                |
 | **Application** | Your application modules |                                           | Robot behaviors and task logic                              |
 
-Modules marked **SODERO** are built in. Modules you installed on the [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md) page are marked **CUSTOM** and appear under their own type.
+Modules marked **SODERO** are built in. Modules you installed on the [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md) page are marked **CUSTOM** and appear under the type they declare. Each type also lists a **… subsystem** entry (*Empty draft subsystem*): it adds an empty placeholder node with no program behind it, for sketching a system, and that node cannot be started.
 
-Choosing a controller module (the list scrolls)
+Choosing a controller module: ① Controller ② Strider ③ Next (the list scrolls)
 
-**Name rules.** Gateway names are converted to lowercase. Controller names (Motion Studio, Strider, Articulation, Legged locomotion) start with a lowercase letter and use lowercase letters, digits and `_`, at most 24 characters. The Localizer, Visual odometry and Navigator have fixed names.
+**Name rules.** Gateway names are converted to lowercase. Controller names (Motion Studio, Strider, Articulation, Legged locomotion) start with a lowercase letter and use lowercase letters, digits and `_`, at most 20 characters. The Localizer, Visual odometry and Navigator have fixed names.
 
 **Tip:** Give a robot's gateway and controller the same name, for example `rc.actuator_gateway.jackal` and `rc.mobile_controller_manager.jackal`. The graph stays easy to read, and **Auto-connect** finds the right partner.
 
@@ -68,11 +68,11 @@ Connect a required port to a provided port of another node. There are three ways
 - **Click** one port, then the other.
 - In the inspector of the node that requires the port, click **Auto-connect** next to the port. The Station picks the matching provider.
 
-The Station accepts a connection only when the two ports are on different nodes, point in opposite directions and use the same contract. It also enforces the system structure:
+The Station accepts a connection only when the two ports are on different nodes, one requires and the other provides, and both use the same contract (the interface type shown under the port name in the inspector, for example `api.actuator.servo.v1`). It also enforces the system structure:
 
 - Only a **controller** may use a gateway.
 - An **application** uses controllers or compounds, never gateways directly.
-- A gateway serves one robot controller.
+- An actuator gateway serves one robot controller (Motion Studio, Strider or Articulation) at a time.
 
 ### Common Connections
 
@@ -104,7 +104,7 @@ A Strider node: ① Start node ② its controller UI ③ its document ④ Stella
 | **CONTROL**    | Buttons that open the node's tool: **Stellar Motion Studio**, **Strider**, **Articulation** for controllers; **Test Stellar Gateway** for gateways. They unlock once the node runs.                                                                       |
 | **DEFINITION** | The node's design document: file name and when it was imported, **Edit Stellar Designer** / **Edit Stellar Gateway Designer**, and the upload icon to import a file ([Design Documents](https://docs.sodero.io/v2.0.0/station/design_documents/index.md)) |
 | **TARGET**     | Simulation gateways only: the robot name in Isaac Sim and the simulator address ([Simulation Gateway](https://docs.sodero.io/v2.0.0/gateways/simulation/index.md))                                                                                        |
-| Settings       | Camera, IMU, visual odometry, localizer, navigator and legged nodes: their settings form                                                                                                                                                                  |
+| Settings       | Camera, IMU, visual odometry, localizer, navigator and legged locomotion nodes: their settings form                                                                                                                                                       |
 | **CONNECTION** | Requires and Provides ports with their contracts, **Auto-connect** and **Disconnect**                                                                                                                                                                     |
 | **LOGS**       | Output and events of the node ([Running Nodes](https://docs.sodero.io/v2.0.0/station/running_nodes/#5-logs))                                                                                                                                              |
 
@@ -112,8 +112,8 @@ ______________________________________________________________________
 
 ## 5. Rename and Delete
 
-- **Rename:** click the pencil icon next to the node name in the inspector. Stop the node first.
-- **Delete:** right-click the node and choose **Delete node**. The node and its connections are removed from the graph. Stop the node first.
+- **Rename:** stop the node, then click the pencil icon next to the node name in the inspector.
+- **Delete:** stop the node, then right-click it and choose **Delete node**. The node and its connections are removed from the graph.
 
 Right-click menu of a node
 

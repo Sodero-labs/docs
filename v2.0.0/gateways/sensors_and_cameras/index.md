@@ -32,23 +32,25 @@ The camera gateway's inspector
 
 ### Connection
 
-| Field           | Value                                                                                                                                                                       |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Camera name** | The name of the camera: in Isaac Sim, the camera prim's name (for example `cam0` for `/World/jackal/links/base_link/cam0`); with the Device Bridge, the bridge's robot name |
-| **Camera host** | The address of the Isaac Sim computer or the sensor computer                                                                                                                |
-| **Port**        | `53335`                                                                                                                                                                     |
+In the **CAMERA GATEWAY** section of the inspector:
+
+| Field           | Value                                                                                                                                                                                                                                                                    |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Camera name** | The name of the camera: in Isaac Sim, the camera prim's name (for example `cam0` for `/World/jackal/links/base_link/cam0`); with the Device Bridge, the bridge's robot name                                                                                              |
+| **Camera host** | The address of the Isaac Sim computer or the sensor computer. The field is greyed out when a camera address is configured for the unit; the gateway then uses that address at every start, even if an uploaded YAML names another. To change it, contact Sodero support. |
+| **Port**        | `53335`                                                                                                                                                                                                                                                                  |
 
 ### Camera Settings
 
 Stop the node, change the values and click **Save settings**.
 
-| Setting               | Meaning                                                                                                                                |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **fps**               | Expected frame rate (the source decides the actual rate)                                                                               |
-| **frame id**          | Name of the camera's optical frame, at most 15 characters, for example `cam0_optical`. The map bundle's extrinsics refer to this name. |
-| **width**, **height** | Image size; 0 takes it from the frames                                                                                                 |
-| Intrinsics            | `fov` mode with the horizontal field of view in degrees, or `manual` mode with fx, fy, cx, cy in pixels                                |
-| Simulation camera     | Connection timeouts                                                                                                                    |
+| Setting               | Meaning                                                                                                                                                                                                                                                                                          |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **fps**               | Expected frame rate (the source decides the actual rate)                                                                                                                                                                                                                                         |
+| **frame id**          | Name of the camera's optical frame, at most 15 characters, for example `cam0_optical`. The map bundle's extrinsics refer to this name.                                                                                                                                                           |
+| **width**, **height** | Image size; 0 takes it from the frames                                                                                                                                                                                                                                                           |
+| Intrinsics            | `fov` mode with the horizontal field of view in degrees, or `manual` mode with fx, fy, cx, cy in pixels. A new camera gateway offers only the field of view; load `manual` values with **Upload yaml** ([Device Bridge › Camera](https://docs.sodero.io/v2.0.0/gateways/device_bridge/#camera)). |
+| Simulation camera     | Connection timeouts                                                                                                                                                                                                                                                                              |
 
 Isaac Sim renders cameras with square pixels and the principal point at the image center, so `fov` mode with the camera's horizontal field of view is exact. Isaac Bridge prints each camera's field of view in the Isaac Sim console when the scene plays.
 
@@ -72,21 +74,21 @@ Add the node with **Add node** › **Gateway** › **IMU gateway**. It also crea
 
 The IMU gateway connects to the controller's configured simulator or sensor address. To set or change that address for your controller, contact Sodero support.
 
-In Isaac Sim, a robot publishes IMU data when its robot prim names the link that carries the IMU ([Robot Setup](https://docs.sodero.io/v2.0.0/virtual_simulation/robot_setup/index.md)).
+In Isaac Sim, a robot publishes IMU data when its robot prim names the link that carries the IMU in `rc:imuLink` ([Robot Setup](https://docs.sodero.io/v2.0.0/virtual_simulation/robot_setup/#7-imu)).
 
 ______________________________________________________________________
 
 ## 3. Mounting: Where the Sensor Sits
 
-Sensor data is in the sensor's own frame. Where the camera is mounted on the robot (its position and orientation relative to the robot's `base_link`) is part of the map bundle's extrinsics, used by the localizer ([Map Bundle](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md)). Measure the mounting on the robot; do not rotate the data in the source.
+Sensor data is in the sensor's own frame. Where the camera is mounted on the robot (its position and orientation relative to the robot's `base_link`) is part of the map bundle's extrinsics, used by the Localizer ([Map Bundle](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md)). Measure the mounting on the robot; do not rotate the data in the source.
 
 ______________________________________________________________________
 
 ## 4. Troubleshooting
 
-| Symptom                                                                                        | Cause and fix                                                                                        |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Camera log: *Waiting for simulator at …:53335 (World not running?)*                            | Isaac Sim is not playing, the camera host is wrong, or a firewall blocks port 53335                  |
-| Camera log: *…publishes frames of camera(s) … but none of camera 'cam0'*                       | **Camera name** does not match a camera in the scene                                                 |
-| Camera log: *Frames … are stale or carry capture times that do not match this Station's clock* | The clocks of the two computers differ. Synchronize them (NTP) or let the source send arrival times. |
-| Camera view is black or frozen                                                                 | The camera prim looks at nothing, or the scene is paused                                             |
+| Symptom                                                                                        | Cause and fix                                                                                                                                                                                   |
+| ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camera log: *Waiting for simulator at …:53335 (World not running?)*                            | Isaac Sim is not playing, the camera host is wrong, or a firewall blocks port 53335                                                                                                             |
+| Camera log: *…publishes frames of camera(s) … but none of camera 'cam0'*                       | **Camera name** does not match a camera in the scene                                                                                                                                            |
+| Camera log: *Frames … are stale or carry capture times that do not match this Station's clock* | The clocks of the two computers differ. Synchronize them (NTP), or stop sending capture times at the source (Device Bridge: `send_capture_time: false`) so that the Station uses arrival times. |
+| Camera view is black or frozen                                                                 | The camera prim looks at nothing, or the scene is paused                                                                                                                                        |

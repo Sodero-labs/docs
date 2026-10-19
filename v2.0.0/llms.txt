@@ -44,6 +44,7 @@
 ## Tutorials - Stellar Designer
 
 - [3D Model (.glb)](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/3dmodel_creation/index.md)
+- [Articulated Robot (.sdda)](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/articulation/index.md)
 - [Introduction](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/introduction/index.md)
 - [Manipulator (.sdd)](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/manipulator/index.md)
 - [Mobile Robot (.sddm)](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/mobile_robot/index.md)

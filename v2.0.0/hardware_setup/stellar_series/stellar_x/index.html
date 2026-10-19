@@ -113,7 +113,7 @@
       border-bottom: 1px solid #333;
     }
 
-    /* --- [1] 모바일 화면 --- */
+    /* --- [1] Mobile --- */
     @media (max-width: 76.24em) {
       .pc-only { display: none !important; }
       .mobile-header-inner {
@@ -124,7 +124,7 @@
       .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
     }
 
-    /* --- [2] PC 화면 --- */
+    /* --- [2] Desktop --- */
     @media (min-width: 76.25em) {
       .mobile-only { display: none !important; }
       .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
@@ -239,7 +239,7 @@
         overflow: hidden;
       }
 
-      /* 매칭된 키워드 하이라이트 색상 */
+      /* Highlight color of matched keywords */
       .md-search-result mark {
         background-color: #0070dd;
         color: #f0f1f2;
@@ -1792,6 +1792,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../tutorials/stellar_designer/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulated Robot (.sdda)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
         
   
@@ -2368,10 +2396,10 @@
 
 
 <h1 id="stellar-x">Stellar X<a class="headerlink" href="#stellar-x" title="Permanent link">¶</a></h1>
-<p>Welcome to the Stellar X family! We’re excited to have you on board. This guide will walk you through everything you need to get up and running—from unboxing and hardware assembly to establishing your first network connection with your PC.</p>
+<p>This guide takes you from unboxing and hardware assembly to the first network connection between Stellar X and your PC.</p>
 <hr>
 <h2 id="1-whats-in-the-box">1. What's in the Box<a class="headerlink" href="#1-whats-in-the-box" title="Permanent link">¶</a></h2>
-<p>Before we begin, please check that your package includes all the following components. If anything is missing, please contact our support team.</p>
+<p>Check that your package includes the following components. If anything is missing, contact <a href="https://www.sodero.io/contact">our support team</a>.</p>
 <figure>
   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/product_stellar_x.svg" data-desc-position="bottom"><img alt="Stellar X Main Unit" src="images/product_stellar_x.svg" width="750"></a>
 <br>
@@ -2389,14 +2417,14 @@
 </figure>
 <hr>
 <h2 id="2-device-overview">2. Device Overview<a class="headerlink" href="#2-device-overview" title="Permanent link">¶</a></h2>
-<p>Take a moment to familiarize yourself with the Stellar X interface. Knowing the ports now will make the setup process much smoother.</p>
+<p>The network and power ports are on the rear panel; the reset button is on the bottom.</p>
 <figure>
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/hardware_interface.svg" data-desc-position="bottom"><img alt="Hardware Interface" src="images/hardware_interface.svg" width="500"></a>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/hardware_interface.svg" data-desc-position="bottom"><img alt="Rear panel" src="images/hardware_interface.svg" width="500"></a>
 <br>
-<figcaption>Rear panel: ① Eth1 ② Eth2 ③ EtherCAT Out ④ DC 24V In</figcaption>
+<figcaption>Rear panel: ① Eth1 ② Eth2 ③ EtherCAT Out ④ 24V DC In</figcaption>
 </figure>
 <figure>
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/hardware_interface2.svg" data-desc-position="bottom"><img alt="Hardware Interface" src="images/hardware_interface2.svg" width="500"></a>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/hardware_interface2.svg" data-desc-position="bottom"><img alt="Bottom panel" src="images/hardware_interface2.svg" width="500"></a>
 <br>
 <figcaption>Bottom: ⑤ reset button</figcaption>
 </figure>
@@ -2421,7 +2449,7 @@
 <td style="text-align: left;">EtherCAT Master output. Connect this to the <strong>IN</strong> port of your first EtherCAT slave device.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>4. DC 24V In</strong></td>
+<td style="text-align: left;"><strong>4. 24V DC In</strong></td>
 <td style="text-align: left;">Power input port.</td>
 </tr>
 <tr>
@@ -2432,18 +2460,18 @@
 </table>
 <hr>
 <h2 id="3-hardware-setup-power-on">3. Hardware Setup &amp; Power On<a class="headerlink" href="#3-hardware-setup-power-on" title="Permanent link">¶</a></h2>
-<p>To ensure the longevity of your device and prevent electrical damage, please follow these steps in order.</p>
+<p>Follow these steps in order to prevent electrical damage.</p>
 <ol>
 <li>
-<p><strong>Prepare the Adapter:</strong> Connect the power cable to the 24V power adapter. <strong>Stop! Do not plug it into the wall outlet just yet.</strong></p>
+<p><strong>Prepare the Adapter:</strong> Connect the power cable to the 24V power adapter. <strong>Do not plug it into the wall outlet yet.</strong></p>
 </li>
 <li>
-<p><strong>Connect to Stellar X:</strong> Insert the adapter's output cable into the <strong>DC 24V In</strong> port on the unit.</p>
+<p><strong>Connect to Stellar X:</strong> Insert the adapter's output cable into the <strong>24V DC In</strong> port on the unit.</p>
 <div class="admonition error">
 <p class="admonition-title">To prevent <strong>electrical arcing (sparks)</strong> or connection issues, always connect the cable to the <strong>Stellar X unit first</strong>, and <em>then</em> plug the power adapter into the wall.</p>
 </div>
 <div class="admonition info">
-<p class="admonition-title">The connector features a small guide notch inside. If it doesn't slide in easily, <strong>gently rotate the cable</strong> until the notch aligns with the port.</p>
+<p class="admonition-title">The connector has a small guide notch inside. If it doesn't slide in easily, <strong>gently rotate the cable</strong> until the notch aligns with the port.</p>
 </div>
 <p></p><figure markdown="span">
   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/power_port_direction.jpeg" data-desc-position="bottom"><img alt="Connector Alignment" src="images/power_port_direction.jpeg" width="500"></a>
@@ -2451,14 +2479,14 @@
 </figure><p></p>
 </li>
 <li>
-<p><strong>Secure the Connection:</strong> Once fully inserted, hand-tighten the metal nut on the connector to ensure it stays securely locked in place.</p>
+<p><strong>Secure the Connection:</strong> Once the connector is fully inserted, hand-tighten its metal nut so that it stays locked in place.</p>
 <p></p><figure markdown="span">
   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/fasten_nut_of_power_connector.svg" data-desc-position="bottom"><img alt="Fasten Nut" src="images/fasten_nut_of_power_connector.svg" width="500"></a>
   <figcaption>Securing the locking nut</figcaption>
 </figure><p></p>
 </li>
 <li>
-<p><strong>Power Up:</strong> Finally, plug the power cable into a standard wall outlet. Your Stellar X will power on automatically.</p>
+<p><strong>Power Up:</strong> Plug the power cable into a wall outlet. Stellar X powers on automatically and takes about 1 minute to start up.</p>
 </li>
 </ol>
 <hr>
@@ -2466,7 +2494,7 @@
 <p>Your PC must be on the same subnet as Stellar X.</p>
 <ol>
 <li>
-<p><strong>Physical Connection:</strong> Connect an Ethernet (LAN) cable to <strong>Eth1 (Port 1)</strong> on the Stellar X unit and the other end to your PC’s LAN port.</p>
+<p><strong>Physical Connection:</strong> Connect an Ethernet (LAN) cable to <strong>Eth1 (Port 1)</strong> on the Stellar X unit and the other end to your PC's LAN port.</p>
 <p></p><figure markdown="span">
   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/lan_connection.svg" data-desc-position="bottom"><img alt="LAN Port Connection" src="images/lan_connection.svg" width="500"></a>
   <figcaption>Connecting to Eth1</figcaption>
@@ -2474,7 +2502,7 @@
 </li>
 <li>
 <p><strong>Configure Your PC:</strong>
-   Since Stellar X's Eth1 is fixed at <code>10.0.0.1</code>, you must set your PC to a static IP in the same range (e.g., <code>10.0.0.2</code>).</p>
+   Since Stellar X's Eth1 is fixed at <code>10.0.0.1</code>, you must set your PC to a static IP in the same subnet (e.g., <code>10.0.0.2</code>).</p>
 <div class="admonition warning">
 <p class="admonition-title">Avoid using <code>10.0.0.1</code> for your PC, as this will cause an IP conflict.</p>
 </div>
@@ -2486,6 +2514,7 @@
 <li>Click the <strong>gear icon</strong> next to your wired connection.</li>
 <li>Select the <strong>IPv4</strong> tab and choose <strong>Manual</strong>.</li>
 <li>Set Address: <code>10.0.0.2</code> / Netmask: <code>255.255.255.0</code>.</li>
+<li>Click <strong>Apply</strong>.</li>
 </ol>
 </li>
 <li>
@@ -2493,9 +2522,12 @@
 <ol>
 <li>Go to <strong>Settings &gt; Network &amp; Internet &gt; Ethernet</strong>.</li>
 <li>Find <strong>IP assignment</strong> and click <strong>Edit</strong>.</li>
-<li>Select <strong>Manual</strong>, toggle <strong>IPv4 On</strong>, and enter:</li>
+<li>Select <strong>Manual</strong>, toggle <strong>IPv4 On</strong>, and enter:<ul>
 <li>IP address: <code>10.0.0.2</code></li>
 <li>Subnet mask: <code>255.255.255.0</code></li>
+</ul>
+</li>
+<li>Click <strong>Save</strong>.</li>
 </ol>
 </li>
 </ul>
@@ -2510,7 +2542,7 @@
    If <strong>Stellar Station</strong> appears, you are ready to start your project. Continue with the <a href="../../../get_started/quick_start/">Quick Start</a>.</p>
 <p></p><figure markdown="span">
   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/stellar_station.png" data-desc-position="bottom"><img alt="Stellar Station" src="images/stellar_station.png" width="800"></a>
-  <figcaption>Stellar Station</figcaption>
+  <figcaption>Stellar Station with an example robot system</figcaption>
 </figure><p></p>
 <div class="admonition info">
 <p class="admonition-title">To change the controller's address or to connect it to your office network, use the <a href="../network_settings/">Network Settings</a> page on port 3000.</p>
@@ -2520,6 +2552,9 @@
 <hr>
 <h2 id="5-hardware-factory-reset">5. Hardware Factory Reset<a class="headerlink" href="#5-hardware-factory-reset" title="Permanent link">¶</a></h2>
 <p>If you ever forget your IP settings or need a fresh start, you can perform a factory reset.</p>
+<div class="admonition error">
+<p class="admonition-title">A factory reset will <strong>permanently erase all stored data</strong>, including the Station's nodes, documents and settings. Back up the Station first (<a href="../../../station/backup_restore/">Backup and Restore</a>).</p>
+</div>
 <figure>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/reset_button.svg" data-desc-position="bottom"><img alt="Reset Button" src="images/reset_button.svg" width="500"></a>
     <figcaption>The reset button ⑤ on the bottom of the unit</figcaption>
@@ -2535,11 +2570,8 @@
 <p>If the reset doesn't seem to trigger, try these steps:</p>
 <ol>
 <li><strong>Power Cycle:</strong> Unplug the power, wait 10 seconds, and plug it back in.</li>
-<li><strong>Wait &amp; Retry:</strong> Give the system about <strong>1 minute</strong> to fully initialize, then try holding the reset button for 3 seconds again.</li>
+<li><strong>Wait &amp; Retry:</strong> Give the system about <strong>1 minute</strong> to fully initialize, then try holding the reset button for more than 3 seconds again.</li>
 </ol>
-<div class="admonition error">
-<p class="admonition-title">A factory reset will <strong>permanently erase all stored data</strong>, including the Station's nodes, documents and settings. Back up the Station first (<a href="../../../station/backup_restore/">Backup and Restore</a>).</p>
-</div>
 
 
 
@@ -2611,7 +2643,7 @@
             <span class="twemoji">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
             </span>
-            Raise Issues
+            Report an Issue
         </a>
 
     </div>

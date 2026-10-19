@@ -113,7 +113,7 @@
       border-bottom: 1px solid #333;
     }
 
-    /* --- [1] 모바일 화면 --- */
+    /* --- [1] Mobile --- */
     @media (max-width: 76.24em) {
       .pc-only { display: none !important; }
       .mobile-header-inner {
@@ -124,7 +124,7 @@
       .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
     }
 
-    /* --- [2] PC 화면 --- */
+    /* --- [2] Desktop --- */
     @media (min-width: 76.25em) {
       .mobile-only { display: none !important; }
       .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
@@ -239,7 +239,7 @@
         overflow: hidden;
       }
 
-      /* 매칭된 키워드 하이라이트 색상 */
+      /* Highlight color of matched keywords */
       .md-search-result mark {
         background-color: #0070dd;
         color: #f0f1f2;
@@ -1653,6 +1653,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulated Robot (.sdda)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
         
   
@@ -2271,28 +2299,28 @@
 
 
 <h1 id="ssh-workspace">SSH Workspace<a class="headerlink" href="#ssh-workspace" title="Permanent link">¶</a></h1>
-<p>Stellar X includes a development workspace that you reach over SSH. It runs on the controller itself, next to Stellar Station but separated from real-time control, so building and testing code there does not disturb the robot's control loops.</p>
+<p>Stellar X includes a development workspace that you reach over SSH. It runs on the controller itself, next to Stellar Station but separated from real-time control. It still shares the controller's memory and storage, so avoid very large builds while the robot is moving.</p>
 <p>From the workspace you can:</p>
 <ul>
 <li>inspect and change the Station with the <code>sodero</code> command-line tool: nodes, connections, design documents, settings, maps and packages;</li>
-<li>read the status and logs of every node, and call robot tools such as Strider, Motion Studio and navigation;</li>
+<li>read the status and logs of every node, as the Station page shows them, and call robot tools such as Strider, Motion Studio and navigation;</li>
 <li>write and test your own programs and install them on the Station as modules;</li>
 <li>let an AI coding agent do all of the above for you (see <a href="../ai_agents/">AI Coding Agents</a>).</li>
 </ul>
 <div class="admonition info">
-<p class="admonition-title">The workspace performs the same operations as the Station page. A node added with <code>sodero topology add-node</code> is the same node you would add with <strong>Add node</strong>, and the result is identical whichever way you work.</p>
+<p class="admonition-title">The workspace performs the same operations as the Station page: a node added with <code>sodero topology add-node</code> is the same node you would add with <strong>Add node</strong>.</p>
 </div>
 <hr>
 <h2 id="1-register-your-ssh-key">1. Register Your SSH Key<a class="headerlink" href="#1-register-your-ssh-key" title="Permanent link">¶</a></h2>
 <p>The workspace accepts SSH keys only; there is no password sign-in. Register the public key of every computer that should connect, on the robot's <strong>Network Settings</strong> page.</p>
 <ol>
 <li>Open <code>http://ROBOT_ADDRESS:3000</code> in a browser (for example <code>http://192.168.60.18:3000</code>).</li>
-<li>In <strong>SSH ACCESS</strong>, go to <strong>ADD A PUBLIC KEY</strong> and select your operating system (<strong>Windows</strong> or <strong>macOS · Linux</strong>).</li>
-<li>Click <strong>Copy</strong>, run the copied command in a terminal of your computer, and copy the line it prints. It starts with <code>ssh-ed25519</code>. The command creates a key first if your computer has none.</li>
-<li>Paste the line into the text box and click <strong>Add key</strong>. The key appears under <strong>REGISTERED KEYS</strong>.</li>
+<li>In <strong>SSH ACCESS</strong>, go to <strong>ADD A PUBLIC KEY</strong> and select your operating system ② (<strong>Windows</strong> or <strong>macOS · Linux</strong>).</li>
+<li>Click <strong>Copy</strong> ③, run the copied command in a terminal on your computer, and copy the line it prints. It starts with <code>ssh-ed25519</code>. The command creates a key first if your computer has none; on Windows, press Enter at the two passphrase prompts.</li>
+<li>Paste the line into the text box ④ and click <strong>Add key</strong> ⑤. The key appears under <strong>REGISTERED KEYS</strong>.</li>
 </ol>
 <figure>
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ssh_access.png" data-desc-position="bottom"><img alt="SSH access card" src="images/ssh_access.png" width="600"></a>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ssh_access.png" data-desc-position="bottom"><img alt="SSH access card" src="images/ssh_access.png" width="560"></a>
 <br>
 <figcaption>SSH ACCESS on the Network Settings page</figcaption>
 </figure>
@@ -2302,7 +2330,7 @@
 </div>
 <hr>
 <h2 id="2-connect">2. Connect<a class="headerlink" href="#2-connect" title="Permanent link">¶</a></h2>
-<p>The <strong>SSH workspace</strong> card shows the command with a <strong>Copy</strong> button:</p>
+<p>The <strong>SSH workspace</strong> card shows the command with a <strong>Copy</strong> button ①:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ssh<span class="w"> </span>-p<span class="w"> </span><span class="m">2222</span><span class="w"> </span>sodero@192.168.60.18
 </code></pre></div>
 <p>Replace the address with your robot's address. The user name is always <code>sodero</code> and the port is always <code>2222</code>.</p>
@@ -2339,7 +2367,7 @@
 <td style="text-align: left;">The workspace guide: terms, a five-minute start and the guide map</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>/workspace/AGENTS.md</code>, <code>/workspace/CLAUDE.md</code></td>
+<td style="text-align: left;"><code>/workspace/AGENTS.md</code></td>
 <td style="text-align: left;">Operating rules for AI coding agents (<a href="../ai_agents/">AI Coding Agents</a>)</td>
 </tr>
 <tr>
@@ -2365,10 +2393,6 @@
 <td style="text-align: left;">Prints the guides: <code>sodero-help</code> lists them, <code>sodero-help navigation</code> opens one</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>sodero-model</code></td>
-<td style="text-align: left;">Builds robot models from URDF and CAD meshes</td>
-</tr>
-<tr>
 <td style="text-align: left;">Python 3.12</td>
 <td style="text-align: left;">With numpy, PyYAML, requests, aiohttp and onnxruntime</td>
 </tr>
@@ -2384,11 +2408,14 @@
 <hr>
 <h2 id="4-copy-files">4. Copy Files<a class="headerlink" href="#4-copy-files" title="Permanent link">¶</a></h2>
 <p>Use <code>scp</code> or any SFTP client with the same address, user and port:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># From your computer to the robot</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>scp<span class="w"> </span>-P<span class="w"> </span><span class="m">2222</span><span class="w"> </span>my_robot.gw<span class="w"> </span>sodero@192.168.60.18:/workspace/my-work/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Once: create a folder for your work on the robot</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>ssh<span class="w"> </span>-p<span class="w"> </span><span class="m">2222</span><span class="w"> </span>sodero@192.168.60.18<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/workspace/my-work
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># From the robot to your computer</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>scp<span class="w"> </span>-P<span class="w"> </span><span class="m">2222</span><span class="w"> </span>sodero@192.168.60.18:/workspace/my-work/result.json<span class="w"> </span>.
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># From your computer to the robot</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>scp<span class="w"> </span>-P<span class="w"> </span><span class="m">2222</span><span class="w"> </span>my_robot.gw<span class="w"> </span>sodero@192.168.60.18:/workspace/my-work/
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># From the robot to your computer</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>scp<span class="w"> </span>-P<span class="w"> </span><span class="m">2222</span><span class="w"> </span>sodero@192.168.60.18:/workspace/my-work/result.json<span class="w"> </span>.
 </code></pre></div>
 <hr>
 <h2 id="5-use-vs-code">5. Use VS Code<a class="headerlink" href="#5-use-vs-code" title="Permanent link">¶</a></h2>
@@ -2405,8 +2432,9 @@
 <li><strong>Preview first.</strong> A <code>sodero</code> command that changes something only previews until you add <code>--execute</code>. Read the preview, then repeat the command with <code>--execute</code>.</li>
 <li><strong>The robot is real equipment.</strong> A command with <code>--execute</code> can start nodes or move the robot. Run it only when the surroundings are clear and someone who can stop the robot is present.</li>
 <li><strong>Stop a node before you change it.</strong> The Station refuses changes to a running node. Stop it, apply the change, start it again.</li>
-<li><strong>Official modules stay protected.</strong> Their parameters and settings are open to you, but their sources, binaries, weights and internal logs are not part of the workspace.</li>
+<li><strong>Official modules stay protected.</strong> Their parameters, settings and node logs are open to you, but their sources, binaries, weights and internal logs are not part of the workspace.</li>
 </ul>
+<p>Where to go next:</p>
 <table>
 <thead>
 <tr>
@@ -2504,7 +2532,7 @@
             <span class="twemoji">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
             </span>
-            Raise Issues
+            Report an Issue
         </a>
 
     </div>

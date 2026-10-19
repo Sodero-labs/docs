@@ -113,7 +113,7 @@
       border-bottom: 1px solid #333;
     }
 
-    /* --- [1] 모바일 화면 --- */
+    /* --- [1] Mobile --- */
     @media (max-width: 76.24em) {
       .pc-only { display: none !important; }
       .mobile-header-inner {
@@ -124,7 +124,7 @@
       .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
     }
 
-    /* --- [2] PC 화면 --- */
+    /* --- [2] Desktop --- */
     @media (min-width: 76.25em) {
       .mobile-only { display: none !important; }
       .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
@@ -239,7 +239,7 @@
         overflow: hidden;
       }
 
-      /* 매칭된 키워드 하이라이트 색상 */
+      /* Highlight color of matched keywords */
       .md-search-result mark {
         background-color: #0070dd;
         color: #f0f1f2;
@@ -1768,6 +1768,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulated Robot (.sdda)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
         
   
@@ -2297,14 +2325,14 @@
 </figure>
 <ul>
 <li>While a run is in progress, a banner shows the progress, and the menu offers <strong>Cancel</strong>. Nodes already started stay up when you cancel.</li>
-<li>The run continues on the controller even if you close the browser. The page shows its progress again when you reopen it.</li>
+<li>The run continues even if you close the browser. The page shows its progress again when you reopen it.</li>
 <li>The result appears as a banner, for example <em>Runtime topology is up.</em></li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title"><strong>Start all nodes</strong> starts every node of the graph, including nodes that drive real hardware. When the graph contains hardware you do not want to run, start the nodes one by one.</p>
 </div>
 <div class="admonition info">
-<p class="admonition-title">After the controller restarts, the Station comes back with its saved graph, documents and settings, but <strong>no node is started</strong>. Start the nodes again when you need them.</p>
+<p class="admonition-title">After Stellar X restarts, the Station comes back with its saved graph, documents and settings, but <strong>no node is started</strong>. Start the nodes again when you need them.</p>
 </div>
 <hr>
 <h2 id="3-node-states">3. Node States<a class="headerlink" href="#3-node-states" title="Permanent link">¶</a></h2>
@@ -2359,7 +2387,7 @@
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Fault</strong></td>
-<td style="text-align: left;">Fault state; reset it to recover</td>
+<td style="text-align: left;">The node reported a fault. The inspector and the node log show the reason.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Error</strong> / <strong>Failed</strong></td>
@@ -2371,10 +2399,10 @@
 </tr>
 </tbody>
 </table>
-<p>The dot next to the state is green for Ready and Operating, yellow while waiting, red for errors and grey otherwise. Problems are also counted in the <strong>N issues</strong> chip of the toolbar.</p>
+<p>The dot next to the state is green for Ready, Running and Operating, yellow while waiting, red for errors and grey otherwise. Problems are also counted in the <strong>N issues</strong> chip of the toolbar.</p>
 <hr>
 <h2 id="4-open-the-controller-uis">4. Open the Controller UIs<a class="headerlink" href="#4-open-the-controller-uis" title="Permanent link">¶</a></h2>
-<p>When a controller node runs, its <strong>CONTROL</strong> section unlocks:</p>
+<p>When a node runs, its tools unlock, in the inspector's <strong>CONTROL</strong> section or as a link on the node card:</p>
 <table>
 <thead>
 <tr>
@@ -2563,7 +2591,7 @@
             <span class="twemoji">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
             </span>
-            Raise Issues
+            Report an Issue
         </a>
 
     </div>

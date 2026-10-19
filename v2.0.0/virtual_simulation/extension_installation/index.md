@@ -12,7 +12,7 @@ Isaac Bridge is open source. Download it from GitHub:
 git clone https://github.com/Sodero-labs/isaac_bridge.git
 ```
 
-Or download the ZIP file of the latest release from the repository page and extract it. Either way you get a folder `isaac_bridge`. Remember the folder that **contains** it, for example `~/isaac_extensions` when the extension is in `~/isaac_extensions/isaac_bridge`.
+Or download the ZIP file of the latest release from the repository page, extract it, and rename the extracted folder to `isaac_bridge` (GitHub adds the version to its name). Either way you get a folder `isaac_bridge`. Remember the folder that **contains** it, for example `~/isaac_extensions` when the extension is in `~/isaac_extensions/isaac_bridge`.
 
 ______________________________________________________________________
 
@@ -27,17 +27,23 @@ ______________________________________________________________________
 
 ① search ② enable ③ autoload
 
-When the extension starts the first time, Isaac Sim installs the Python package `pyzmq` from the internet. On a computer without internet access, install it into Isaac Sim's Python yourself, from Isaac Sim's installation folder:
+When the extension starts the first time, Isaac Sim installs the Python package `pyzmq` from the internet. For a computer without internet access, download the package on a computer that has internet access and the same operating system and Isaac Sim version, copy the `wheels` folder to the Isaac Sim computer, and install it from there. Run the commands in Isaac Sim's installation folder:
 
 ```
-./python.sh -m pip install pyzmq
+# On the computer with internet access
+./python.sh -m pip download pyzmq -d wheels
+# On the Isaac Sim computer, with the copied wheels folder
+./python.sh -m pip install --no-index --find-links wheels pyzmq
 ```
 
 ```
-python.bat -m pip install pyzmq
+REM On the computer with internet access
+python.bat -m pip download pyzmq -d wheels
+REM On the Isaac Sim computer, with the copied wheels folder
+python.bat -m pip install --no-index --find-links wheels pyzmq
 ```
 
-You can also start Isaac Sim with the extension from a command line: `isaac-sim.sh --ext-folder ~/isaac_extensions --enable isaac_bridge`.
+You can also start Isaac Sim with the extension from a command line: `isaac-sim.sh --ext-folder ~/isaac_extensions --enable isaac_bridge` (`isaac-sim.bat` on Windows).
 
 ______________________________________________________________________
 

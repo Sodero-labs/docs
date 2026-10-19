@@ -8,7 +8,7 @@ The example is a 6-axis manipulator. Download its parts and unzip them:
 
 The example manipulator
 
-For your own robot you need one 3D model file per link from your CAD design, and the DH parameters, joint limits and mass properties from its specification.
+For your own robot you need one 3D model file per link, exported from your CAD design, and the robot's DH parameters.
 
 The steps use [Blender](https://www.blender.org/download/), which reads most common 3D formats. Any other 3D tool works as long as it produces the same object names, hierarchy and file format.
 
@@ -53,33 +53,29 @@ The robot is a serial chain: each joint is a child of the previous joint, and ea
 
 ```
 World
-└── root
-    └── links
-        └── J0
-            ├── link0
-            └── J1
-                ├── link1
-                └── J2
-                    ├── link2
-                    └── J3
-                        ├── link3
-                        └── J4
-                            ├── link4
-                            └── J5
-                                ├── link5
-                                └── J6
-                                    └── link6
+└── J0
+    ├── link0
+    └── J1
+        ├── link1
+        └── J2
+            ├── link2
+            └── J3
+                ├── link3
+                └── J4
+                    ├── link4
+                    └── J5
+                        ├── link5
+                        └── J6
+                            └── link6
 ```
 
 Select `J1` and Shift-drag it onto `J0`: `J1` and `link1` are now under `J0`. Repeat this for the other joints.
 
-| Item               | Description                     |
-| ------------------ | ------------------------------- |
-| `World`            | The scene of the 3D tool        |
-| `root`             | The robot's base node           |
-| `links`            | The group that holds the joints |
-| `J0` to `Jn`       | Joint nodes                     |
-| `link0` to `linkn` | Link models                     |
+| Item               | Description              |
+| ------------------ | ------------------------ |
+| `World`            | The scene of the 3D tool |
+| `J0` to `Jn`       | Joint nodes              |
+| `link0` to `linkn` | Link models              |
 
 Each joint `Jn` must be a child of the previous joint, and each link `linkn` a child of its joint `Jn`. With a different hierarchy the links do not move with their joints.
 
@@ -100,7 +96,7 @@ Stellar Designer applies the four DH parameters of a joint in this fixed order:
 
 ### Place the Joints
 
-The joint hierarchy in Blender
+J2 placed 0.205 m above J1
 
 Joint J1 of the example has θ = 0, d = 205 mm, a = 0 and α = 0 in Stellar Designer, so the frame of J2 sits 205 mm above J1 along Z.
 
@@ -131,4 +127,4 @@ ______________________________________________________________________
 
 Open the robot's document in Stellar Designer, click **Display** in the 3D view and choose **Load.glb** ([Stellar Designer](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/introduction/#display-menu)). Switch **Representation** to **3D Model**: each link moves with its joint when you jog the joints in **Robot Structure**. Motion Studio and the Station then show the robot with this model.
 
-Stellar Designer uses only the `.glb` file. Blender is one example of a tool; any other tool works with the same names, hierarchy and file format.
+Stellar Designer uses only the `.glb` file.

@@ -2,7 +2,7 @@
 
 This tutorial continues the [Quick Start](https://docs.sodero.io/v2.0.0/get_started/quick_start/index.md). You add a camera, the Localizer and the Navigator to the simulated Jackal, load the map of its warehouse, let the robot find itself on the map, and send it to a goal.
 
-The Jackal driving to a goal in the warehouse, guided by the Station's navigation stack
+The Jackal (center) driving to a goal in the warehouse, guided by the Station's navigation stack
 
 ______________________________________________________________________
 
@@ -18,7 +18,7 @@ ______________________________________________________________________
 
 ## Step 1: Set the Camera Size and Rate
 
-The localizer in this tutorial uses the camera at 320 × 240 pixels and 5 frames per second. Isaac Bridge renders cameras at 640 × 480 and 15 frames per second unless told otherwise, so close Isaac Sim and start it again with this camera setting:
+The localizer in this tutorial uses the camera at 320 × 240 pixels and 5 frames per second. Isaac Bridge renders cameras at 640 × 480 and 15 frames per second unless told otherwise, so close Isaac Sim and start it again from its installation folder with this camera setting:
 
 ```
 RC_ISAAC_CAMERA_DEVICES='[{"name": "cam0", "width": 320, "height": 240, "fps": 5}]' ./isaac-sim.sh
@@ -29,13 +29,13 @@ set "RC_ISAAC_CAMERA_DEVICES=[{"name": "cam0", "width": 320, "height": 240, "fps
 isaac-sim.bat
 ```
 
-Run the command in Isaac Sim's installation folder, then open `jackal_warehouse.usd` and press **Play**. The Isaac Bridge window lists `cam0 320x240 at 5 fps`.
+Then open `jackal_warehouse.usd` and press **Play**. The Isaac Bridge window lists `cam0 320x240 at 5 fps`.
 
 ______________________________________________________________________
 
 ## Step 2: Add the Camera Gateway
 
-1. **Add node** › **Gateway** › **Camera gateway**, name it `cam0`.
+1. **Add node** › **Gateway** › **Camera gateway**, name it `cam0`. The Station also adds its companion node `rc.camera_component.cam0` ([Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/#1-camera-gateway)).
 1. In its inspector, set **Camera name** `cam0` (the camera prim's name in the scene) and **Camera host** (the Isaac Sim computer). The port is `53335`.
 1. Under **CAMERA SETTINGS**, set **fps** `5`, **frame id** `cam0_optical`, intrinsics mode `fov` with a horizontal field of view of `90`, and click **Save settings**.
 1. Click **Start node**, then **Camera view** on its card to check the image.

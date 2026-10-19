@@ -113,7 +113,7 @@
       border-bottom: 1px solid #333;
     }
 
-    /* --- [1] 모바일 화면 --- */
+    /* --- [1] Mobile --- */
     @media (max-width: 76.24em) {
       .pc-only { display: none !important; }
       .mobile-header-inner {
@@ -124,7 +124,7 @@
       .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
     }
 
-    /* --- [2] PC 화면 --- */
+    /* --- [2] Desktop --- */
     @media (min-width: 76.25em) {
       .mobile-only { display: none !important; }
       .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
@@ -239,7 +239,7 @@
         overflow: hidden;
       }
 
-      /* 매칭된 키워드 하이라이트 색상 */
+      /* Highlight color of matched keywords */
       .md-search-result mark {
         background-color: #0070dd;
         color: #f0f1f2;
@@ -1776,6 +1776,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../tutorials/stellar_designer/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulated Robot (.sdda)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
         
   
@@ -2344,7 +2372,8 @@
 <p>Open the page from any computer on the same network:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>http://ROBOT_ADDRESS:3000
 </code></pre></div>
-<p>In this guide the controller's address is <code>192.168.60.18</code>, so the page is <code>http://192.168.60.18:3000</code>. The page needs no sign-in.</p>
+<p>In this guide the controller's address is <code>192.168.60.18</code>, so the page is <code>http://192.168.60.18:3000</code>. On a direct cable with factory settings, the page is <code>http://10.0.0.1:3000</code> (<a href="../stellar_x/#4-network-configuration">Stellar X</a>).</p>
+<p>The page needs no sign-in: anyone on the same network can change the address and register SSH keys. Connect Stellar X only to networks you trust.</p>
 <figure>
   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/network_settings_page.png" data-desc-position="bottom"><img alt="Network Settings page" src="images/network_settings_page.png" width="420"></a>
 <br>
@@ -2473,7 +2502,7 @@
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">if</span> <span class="p">(!(</span><span class="nb">Test-Path</span> <span class="nv">$HOME</span><span class="p">\.</span><span class="n">ssh</span><span class="p">\</span><span class="n">id_ed25519</span><span class="p">.</span><span class="n">pub</span><span class="p">))</span> <span class="p">{</span> <span class="n">mkdir</span> <span class="nv">$HOME</span><span class="p">\.</span><span class="n">ssh</span> <span class="n">-Force</span> <span class="p">|</span> <span class="nb">Out-Null</span><span class="p">;</span> <span class="n">ssh-keygen</span> <span class="n">-t</span> <span class="n">ed25519</span> <span class="o">-f</span> <span class="nv">$HOME</span><span class="p">\.</span><span class="n">ssh</span><span class="p">\</span><span class="n">id_ed25519</span> <span class="p">};</span> <span class="nb">Get-Content</span> <span class="nv">$HOME</span><span class="p">\.</span><span class="n">ssh</span><span class="p">\</span><span class="n">id_ed25519</span><span class="p">.</span><span class="n">pub</span> <span class="p">|</span> <span class="nb">Set-Clipboard</span><span class="p">;</span> <span class="nb">Get-Content</span> <span class="nv">$HOME</span><span class="p">\.</span><span class="n">ssh</span><span class="p">\</span><span class="n">id_ed25519</span><span class="p">.</span><span class="n">pub</span>
 </code></pre></div>
-<p>On Windows the command also copies the key to the clipboard.</p>
+<p>On Windows the command also copies the key to the clipboard. When <code>ssh-keygen</code> asks for a passphrase, press Enter twice to create the key without one.</p>
 </div>
 </div>
 </div>
@@ -2566,7 +2595,7 @@
             <span class="twemoji">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
             </span>
-            Raise Issues
+            Report an Issue
         </a>
 
     </div>

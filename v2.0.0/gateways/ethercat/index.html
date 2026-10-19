@@ -113,7 +113,7 @@
       border-bottom: 1px solid #333;
     }
 
-    /* --- [1] 모바일 화면 --- */
+    /* --- [1] Mobile --- */
     @media (max-width: 76.24em) {
       .pc-only { display: none !important; }
       .mobile-header-inner {
@@ -124,7 +124,7 @@
       .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
     }
 
-    /* --- [2] PC 화면 --- */
+    /* --- [2] Desktop --- */
     @media (min-width: 76.25em) {
       .mobile-only { display: none !important; }
       .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
@@ -239,7 +239,7 @@
         overflow: hidden;
       }
 
-      /* 매칭된 키워드 하이라이트 색상 */
+      /* Highlight color of matched keywords */
       .md-search-result mark {
         background-color: #0070dd;
         color: #f0f1f2;
@@ -1818,6 +1818,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulated Robot (.sdda)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
         
   
@@ -2412,7 +2440,7 @@
     D1 --&gt; D2["Drive 2"]
     D2 --&gt; D3["Drive 3"]</code></pre>
 <ul>
-<li>Plug Stellar X's <strong>EtherCAT</strong> port into the <strong>IN</strong> port of the first drive. Connect each drive's <strong>OUT</strong> port to the next drive's <strong>IN</strong> port.</li>
+<li>Plug Stellar X's <strong>EtherCAT Out</strong> port into the <strong>IN</strong> port of the first drive. Connect each drive's <strong>OUT</strong> port to the next drive's <strong>IN</strong> port.</li>
 <li><strong>Do not use a network switch.</strong> EtherCAT frames must pass through the drives in a line.</li>
 <li><strong>The cable order is the actuator order.</strong> The first drive on the cable is actuator 1 (index 0) of the gateway, the second is actuator 2 (index 1), and so on. To change the order, change the wiring.</li>
 <li>Devices after the last controlled drive are allowed; the gateway ignores them.</li>
@@ -2438,12 +2466,13 @@
 <br>
 <figcaption>Motor tab</figcaption>
 </figure>
+<p>Click <strong>Brand</strong>, <strong>Series</strong> or <strong>Model</strong> ① to open <strong>Motor Select</strong>: search by model number, or pick <strong>Brand</strong> › <strong>Series</strong> › <strong>Model</strong>. The preview shows the catalog values, and <strong>Accept</strong> fills them in. For a motor that is not in the catalog, type the values.</p>
 <figure>
   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/gwd_motor_select.png" data-desc-position="bottom"><img alt="Motor Select" src="images/gwd_motor_select.png" width="760"></a>
 <br>
 <figcaption>Motor Select catalog: search ①, or pick Brand ② › Series ③ › Model ④, then Accept ⑤</figcaption>
 </figure>
-<p>Click <strong>Brand</strong>, <strong>Series</strong> or <strong>Model</strong> ① to open <strong>Motor Select</strong>: search by model number, or pick <strong>Brand</strong> › <strong>Series</strong> › <strong>Model</strong>. The preview shows the catalog values, and <strong>Accept</strong> fills them in. For a motor that is not in the catalog, type the values.</p>
+<p>The fields of the <strong>Motor</strong> tab:</p>
 <table>
 <thead>
 <tr>
@@ -2522,8 +2551,13 @@
 <tbody>
 <tr>
 <td style="text-align: left;"><strong>IDENTIFICATION</strong></td>
-<td style="text-align: left;"><strong>Idx</strong>, <strong>Alias</strong></td>
-<td style="text-align: left;">Position of the drive on the cable (read-only)</td>
+<td style="text-align: left;"><strong>Idx</strong></td>
+<td style="text-align: left;">Position of the drive on the cable, from 0 (read-only)</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Alias</strong></td>
+<td style="text-align: left;">An alias that identifies the device (read-only). The gateway addresses drives by their position on the cable, not by alias.</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
@@ -2683,7 +2717,7 @@
 <tbody>
 <tr>
 <td style="text-align: left;"><em>EtherCAT: no cable link on network port …</em></td>
-<td style="text-align: left;">No Ethernet link. Plug the cable into Stellar X's EtherCAT port and into the first drive's <strong>IN</strong> port, and power the drive.</td>
+<td style="text-align: left;">No Ethernet link. Plug the cable into Stellar X's <strong>EtherCAT Out</strong> port and into the first drive's <strong>IN</strong> port, and power the drive.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><em>EtherCAT: no drive answered on network port …</em></td>
@@ -2801,7 +2835,7 @@
             <span class="twemoji">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
             </span>
-            Raise Issues
+            Report an Issue
         </a>
 
     </div>

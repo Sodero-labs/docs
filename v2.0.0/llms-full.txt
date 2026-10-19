@@ -6,25 +6,13 @@
 
 ## A Software-Defined Robotics Platform: Build Once. Move Everywhere.
 
-Sodero fundamentally resolves the biggest bottlenecks in traditional robot development: **Tight Hardware Coupling** and the **Sim-to-Real Gap**. By abstracting complex control environments into a standardized software layer, we provide an innovative, unified ecosystem. Developers can design robots in a virtual environment and deploy them directly to the real world without changing a single line of code.
+Sodero resolves the biggest bottlenecks in traditional robot development: **tight hardware coupling** and the **sim-to-real gap**. It abstracts complex control environments into a standardized software layer, so developers can design robots in a virtual environment and deploy them directly to the real world without changing a single line of code.
 
 ### Core Architecture
 
-**Causality-Aligned Simulation** Going beyond simple 3D rendering, our Reverse Digital Twin technology ensures that the control logic in the virtual environment matches the physical outcomes in reality. The same controller drives a robot in NVIDIA Isaac Sim and on real motors; only its gateway changes.
+**Causality-Aligned Simulation.** Going beyond simple 3D rendering, our Reverse Digital Twin technology ensures that the control logic in the virtual environment matches the physical outcomes in reality. The same controller drives a robot in NVIDIA Isaac Sim and on real motors; only its gateway changes.
 
-**Unified Execution Layer** Even if the robot's form factor or hardware changes, there is no need to rewrite the glue code from scratch. Every node on Stellar Station, built-in or your own, runs on one real-time runtime with standardized interfaces, so code and motions written on the Sodero platform are executed with the same semantics everywhere.
-
-______________________________________________________________________
-
-### What's New in 2.0
-
-Version 2.0 turns Stellar X from a single-robot motion controller into a complete robot system on one controller:
-
-- **Stellar Station**: build the robot system as a graph of nodes (gateways, controllers, sensors, navigation and your own modules) and run it from the browser.
-- **One Stellar Designer** for every design document: manipulators (`.sdd`), mobile bases (`.sddm`), articulated robots (`.sdda`) and gateways (`.gw`).
-- **Mobile robots and navigation**: Strider drives wheeled bases; the Localizer and Navigator add map-based localization and autonomous navigation.
-- **Isaac Bridge**: connect robots in NVIDIA Isaac Sim to the Station over the network, with cameras and IMUs.
-- **SSH Workspace and AI agents**: develop on the controller over SSH and let AI coding agents operate the Station with the `sodero` CLI.
+**Unified Execution Layer.** Even if the robot's form factor or hardware changes, there is no need to rewrite glue code from scratch. Every node on Stellar Station, built-in or your own, runs on one real-time runtime with standardized interfaces, so code and motions written on the Sodero platform are executed with the same semantics everywhere.
 
 ______________________________________________________________________
 
@@ -40,27 +28,39 @@ flowchart TB
     R -. "same controller,<br>new gateway" .- V
 ```
 
-**Design: Stellar Designer** A web-based design tool that defines your robot's kinematics, links, joints, wheels and actuator mapping through a GUI, and the gateway that connects the actuators, entirely hardware-free.
+**Design: Stellar Designer.** A web-based tool for defining your robot's kinematics, links, joints, wheels and actuator mapping, and the gateway that connects its actuators, without any hardware.
 
-**Compose: Stellar Station** The control center on the controller. Add gateways and controllers as nodes, connect their ports, load their design documents and start them, all in the browser.
+**Compose: Stellar Station.** The control center on the controller. Add gateways and controllers as nodes, connect their ports, load their design documents and start them, all in the browser.
 
-**Simulate: NVIDIA Isaac Sim** The Isaac Bridge extension connects a robot in Isaac Sim to the Station. The simulated robot is driven by exactly the same controller and documents as the real one.
+**Simulate: NVIDIA Isaac Sim.** The Isaac Bridge extension connects a robot in Isaac Sim to the Station. The simulated robot is driven by exactly the same controller and controller document as the real one; only the gateway document differs.
 
-**Run: Stellar Hardware Series** Starting with Stellar X, our industry-proven universal motion controller with an EtherCAT master, Sodero will continuously expand its physical ecosystem with next-generation lineups to support various form factors and specialized applications.
+**Run: Stellar Hardware Series.** The series starts with Stellar X, our industry-proven universal motion controller with an EtherCAT master, and will expand to support more form factors and specialized applications.
 
 In simulation and on the real robot alike, you operate the robot from the same built-in controller UIs: **Motion Studio** for manipulators, **Strider** for mobile bases and **Articulation** for articulated and legged robots.
 
-**Tip:** Every tool runs in the browser and is served by Stellar X itself. Connect a PC to the controller's network and open its address; there is nothing to install on your PC except Isaac Sim for simulation.
+**Tip:** Every tool runs in the browser and is served by Stellar X itself. Connect a PC to the controller's network and open its address; there is nothing to install on your PC except Isaac Sim and the Isaac Bridge extension for simulation.
 
 ______________________________________________________________________
 
 ### Integration and Extensibility
 
-Beyond controlling a single robot, Sodero integrates with complex system integration (SI) environments and upper-level host controllers.
+Beyond controlling a single robot, Sodero fits into complex system integration (SI) environments.
 
-**Modules** Package your own programs and install them on the Station. They run as nodes next to the built-in ones and use the same interfaces to command robots, read sensors and send navigation goals.
+**Modules.** Package your own programs and install them on the Station. They run as nodes next to the built-in ones and use the same interfaces to command robots, read sensors and send navigation goals.
 
-**SSH Workspace and the `sodero` CLI** Every Station operation is available as a command that prints JSON, for scripts, CI pipelines and AI coding agents.
+**SSH Workspace and the `sodero` CLI.** Every Station operation is available as a command that prints JSON, for scripts, CI pipelines and AI coding agents.
+
+______________________________________________________________________
+
+### What's New in 2.0
+
+Version 2.0 turns Stellar X from a single-robot motion controller into a complete robot system on one controller:
+
+- **Stellar Station**: build the robot system as a graph of nodes (gateways, controllers, sensors, navigation and your own modules) and run it from the browser.
+- **One Stellar Designer** for every design document: manipulators (`.sdd`), mobile bases (`.sddm`), articulated robots (`.sdda`) and gateways (`.gw`).
+- **Mobile robots and navigation**: Strider drives wheeled bases; the Localizer and Navigator add map-based localization and autonomous navigation.
+- **Isaac Bridge**: connect robots in NVIDIA Isaac Sim to the Station over the network, with cameras and IMUs.
+- **SSH Workspace and AI agents**: develop on the controller over SSH and let AI coding agents operate the Station with the `sodero` CLI.
 
 Continue with [Key Concepts](https://docs.sodero.io/v2.0.0/get_started/key_concepts/index.md), then try the [Quick Start](https://docs.sodero.io/v2.0.0/get_started/quick_start/index.md).
 
@@ -112,7 +112,7 @@ When you click **Add node** on the Station page, you choose one of four node typ
 | **Compound**    | Combines several robot units into one system  | Your own compound modules                                                                      |
 | **Application** | Defines robot behaviors and task logic        | Your own modules                                                                               |
 
-Each node has an ID of the form `rc.<kind>.<name>`. You choose the name; the kind comes from the module:
+Most built-in nodes have an ID of the form `rc.<kind>.<name>`. You choose the name; the kind comes from the module:
 
 | Module                                | Node ID                                                                        |
 | ------------------------------------- | ------------------------------------------------------------------------------ |
@@ -162,28 +162,27 @@ A **gateway** is the only node that talks to actuators. Controllers never touch 
 
 | Hardware type of the `.gw` | Drives                                                                                          |
 | -------------------------- | ----------------------------------------------------------------------------------------------- |
-| **Isaac Sim**              | A robot in **NVIDIA Isaac Sim** on a PC of the same network, through the Isaac Bridge extension |
+| **Isaac Sim**              | A robot in **NVIDIA Isaac Sim** on a PC on the same network, through the Isaac Bridge extension |
 | **EtherCAT**               | Real EtherCAT drives on the controller's EtherCAT port                                          |
 
-**Names must match.** A simulation gateway finds its robot in Isaac Sim by name. The gateway's **robot name** must be exactly the name of the robot's articulation prim in the Isaac Sim scene (for example `/World/jackal` for the robot name `jackal`). With a different name, the gateway keeps waiting and the robot never moves. See [Simulation Gateway](https://docs.sodero.io/v2.0.0/gateways/simulation/index.md).
+**Names must match.** A simulation gateway finds its robot in Isaac Sim by name. The gateway's **Robot name** must be exactly the name of the robot's articulation prim in the Isaac Sim scene (for example `/World/jackal` for the robot name `jackal`). With a different name, the gateway keeps waiting and the robot never moves. See [Simulation Gateway](https://docs.sodero.io/v2.0.0/gateways/simulation/index.md).
 
 ______________________________________________________________________
 
 ## Design Documents
 
-Each built-in node is configured by a **design document**. You create documents with **Stellar Designer** and load them into nodes on the Station page.
+Actuator gateways and robot controllers are configured by a **design document**. You create documents with **Stellar Designer** (gateway documents with its **Gateway Designer**) and load them into nodes on the Station page.
 
-| File    | Node                 | Contents                                                  |
-| ------- | -------------------- | --------------------------------------------------------- |
-| `.gw`   | Actuator gateway     | Hardware type, actuators, EtherCAT or simulation settings |
-| `.sdd`  | Motion Studio        | Manipulator: kinematics, dynamics, actuator mapping       |
-| `.sddm` | Strider              | Mobile base: drive type, wheels, limits, actuator mapping |
-| `.sdda` | Articulation         | Articulated robot: joints and actuator mapping            |
-| `.nav`  | Localizer, Navigator | Map bundle: map, localization and navigation settings     |
+| File    | Node             | Contents                                                  |
+| ------- | ---------------- | --------------------------------------------------------- |
+| `.gw`   | Actuator gateway | Hardware type, actuators, EtherCAT or simulation settings |
+| `.sdd`  | Motion Studio    | Manipulator: kinematics, dynamics, actuator mapping       |
+| `.sddm` | Strider          | Mobile base: drive type, wheels, limits, actuator mapping |
+| `.sdda` | Articulation     | Articulated robot: joints and actuator mapping            |
 
-Cameras, IMUs, visual odometry, the localizer and the navigator also have **settings** that you edit directly in the node's inspector on the Station page.
+Camera and IMU gateways, visual odometry, the localizer, the navigator and legged locomotion have no design document. They have **settings** that you edit in the node's inspector on the Station page ([Design Documents](https://docs.sodero.io/v2.0.0/station/design_documents/#4-settings-of-sensor-and-navigation-nodes)). The localizer and the navigator also use a **map bundle** (`.nav`): one file with the map of the site and their settings ([Map Bundle](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md)).
 
-Your own programs are installed as **modules** (packages) on the [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md) page and run as Application nodes.
+Your own programs are installed as **modules** (packages) on the [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md) page and run as nodes on the Station.
 
 ______________________________________________________________________
 
@@ -199,18 +198,19 @@ ______________________________________________________________________
 
 ## Glossary
 
-| Term            | Meaning                                                                                    |
-| --------------- | ------------------------------------------------------------------------------------------ |
-| Station         | The robot system on one controller, shown as a node graph on the Station page              |
-| Node            | One program in the Station, such as a gateway, a controller, a sensor or your module       |
-| Port            | A connection point of a node: REQUIRES (needs) or PROVIDES (offers)                        |
-| Gateway         | A node that connects controllers to actuators or sensors, real or simulated                |
-| Controller      | A node that controls a robot unit: Motion Studio, Strider, Articulation, Legged locomotion |
-| Design document | The configuration file of a node: `.gw`, `.sdd`, `.sddm`, `.sdda`                          |
-| Module          | Your own program, uploaded to the Station and run as a node                                |
-| SDR             | A backup file of the whole Station: graph, documents and settings                          |
-| World           | The simulated scene in Isaac Sim that the Station's simulation gateways connect to         |
-| Isaac Bridge    | The Isaac Sim extension that connects the World to the Station                             |
+| Term            | Meaning                                                                                              |
+| --------------- | ---------------------------------------------------------------------------------------------------- |
+| Station         | The robot system on one controller, shown as a node graph on the Station page                        |
+| Node            | One program in the Station, such as a gateway, a controller, a sensor or your module                 |
+| Port            | A connection point of a node: REQUIRES (needs) or PROVIDES (offers)                                  |
+| Gateway         | A node that connects controllers to actuators or sensors, real or simulated                          |
+| Controller      | A node that controls a robot unit: Motion Studio, Strider, Articulation, Legged locomotion           |
+| Design document | The configuration file of an actuator gateway or a robot controller: `.gw`, `.sdd`, `.sddm`, `.sdda` |
+| Map bundle      | A `.nav` file with the map of a site and the settings of the localizer and the navigator             |
+| Module          | A program that runs as a node: built in, or your own package installed on the Modules page           |
+| SDR             | A backup file of the whole Station: graph, documents and settings                                    |
+| World           | The simulated scene in Isaac Sim that the Station's simulation gateways connect to                   |
+| Isaac Bridge    | The Isaac Sim extension that connects the World to the Station                                       |
 
 # Quick Start
 
@@ -252,7 +252,7 @@ ______________________________________________________________________
 
    Gateway › Actuator gateway
 
-1. Name it `jackal` and click **Add node**.
+1. Name it `jackal` ① and click **Add node** ②.
 
 ______________________________________________________________________
 
@@ -260,9 +260,9 @@ ______________________________________________________________________
 
 1. Select the new node `rc.actuator_gateway.jackal`. In its inspector, click the upload icon in **DEFINITION** (**Import .gw**).
 
-1. Choose `jackal.gw` and click **Import**.
+1. On **From your PC** ①, choose `jackal.gw` ② and click **Import** ③.
 
-1. In **TARGET**, click **Change** and check the two values:
+1. In **TARGET**, click **Change** and set the two values:
 
    - **Robot name**: `jackal`. It must equal the robot's prim name in Isaac Sim (`/World/jackal`).
    - **Sim host**: the IP address of your Isaac Sim PC.
@@ -275,8 +275,8 @@ ______________________________________________________________________
 
 ## Step 3: Add Strider and Connect It
 
-1. Click **Add node**, choose **Controller** › **Strider**, click **Next**, name it `jackal` and click **Add node**.
-1. Select `rc.mobile_controller_manager.jackal`, click the upload icon in **DEFINITION** (**Import .sddm**), choose `jackal.sddm` and click **Import**.
+1. Click **Add node**, choose **Controller** ① › **Strider** ② and click **Next** ③. Name it `jackal` and click **Add node**.
+1. Select `rc.mobile_controller_manager.jackal` and click the upload icon in **DEFINITION** (**Import .sddm**). On **From your PC** ①, choose `jackal.sddm` ② and click **Import** ③.
 1. Connect the two nodes: drag from the Strider's `servo_link` (left edge) to the gateway's `servo_link` (right edge), or click **Auto-connect** next to `servo_link` in the Strider's inspector.
 
 The gateway and Strider connected through servo_link
@@ -291,7 +291,7 @@ ______________________________________________________________________
 
 Isaac Bridge status: ① ports serving ② robots bound ③ cameras ④ Rescan
 
-Isaac Sim's computer must accept TCP connections on ports 53333–53335 from Stellar X. Allow them in its firewall.
+The Isaac Sim PC must accept TCP connections from Stellar X on ports 53333–53335. Allow them in its firewall ([Isaac Bridge Installation](https://docs.sodero.io/v2.0.0/virtual_simulation/extension_installation/#4-allow-the-ports-in-the-firewall)).
 
 **Tip:** To use your own robot instead, prepare its scene as described in [Robot Setup](https://docs.sodero.io/v2.0.0/virtual_simulation/robot_setup/index.md): its articulation prim name is its robot name, and its joints, in order, are the gateway's actuators.
 
@@ -322,9 +322,9 @@ ______________________________________________________________________
 
 Strider's Drive page: ① Twist ② Servo On ③ Live switch for the keyboard ④ speed limits ⑤ drive pad ⑥⑦ stop and emergency stop ⑧ readiness
 
-The simulated Jackal after a short drive and turn
-
 **Tip:** Switch on **Live** ③ in **Manual Drive** to drive with the keyboard: **W**/**S** forward and back, **A**/**D** turn, **Space** stops.
+
+The simulated Jackal after a short drive and turn
 
 When you are done, switch the servo off and click **Idle** under **Drive Mode**.
 
@@ -354,7 +354,9 @@ Open the page from any computer on the same network:
 http://ROBOT_ADDRESS:3000
 ```
 
-In this guide the controller's address is `192.168.60.18`, so the page is `http://192.168.60.18:3000`. The page needs no sign-in.
+In this guide the controller's address is `192.168.60.18`, so the page is `http://192.168.60.18:3000`. On a direct cable with factory settings, the page is `http://10.0.0.1:3000` ([Stellar X](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/stellar_x/#4-network-configuration)).
+
+The page needs no sign-in: anyone on the same network can change the address and register SSH keys. Connect Stellar X only to networks you trust.
 
 The Network Settings page
 
@@ -423,7 +425,7 @@ SSH workspace status, registered keys and key registration
    if (!(Test-Path $HOME\.ssh\id_ed25519.pub)) { mkdir $HOME\.ssh -Force | Out-Null; ssh-keygen -t ed25519 -f $HOME\.ssh\id_ed25519 }; Get-Content $HOME\.ssh\id_ed25519.pub | Set-Clipboard; Get-Content $HOME\.ssh\id_ed25519.pub
    ```
 
-   On Windows the command also copies the key to the clipboard.
+   On Windows the command also copies the key to the clipboard. When `ssh-keygen` asks for a passphrase, press Enter twice to create the key without one.
 
 1. Paste the printed line into the box ④ and click **Add key** ⑤.
 
@@ -443,13 +445,13 @@ Continue with [SSH Workspace](https://docs.sodero.io/v2.0.0/ssh_workspace/overvi
 
 # Stellar X
 
-Welcome to the Stellar X family! We’re excited to have you on board. This guide will walk you through everything you need to get up and running—from unboxing and hardware assembly to establishing your first network connection with your PC.
+This guide takes you from unboxing and hardware assembly to the first network connection between Stellar X and your PC.
 
 ______________________________________________________________________
 
 ## 1. What's in the Box
 
-Before we begin, please check that your package includes all the following components. If anything is missing, please contact our support team.
+Check that your package includes the following components. If anything is missing, contact [our support team](https://www.sodero.io/contact).
 
 Stellar X Main Unit
 
@@ -461,9 +463,9 @@ ______________________________________________________________________
 
 ## 2. Device Overview
 
-Take a moment to familiarize yourself with the Stellar X interface. Knowing the ports now will make the setup process much smoother.
+The network and power ports are on the rear panel; the reset button is on the bottom.
 
-Rear panel: ① Eth1 ② Eth2 ③ EtherCAT Out ④ DC 24V In
+Rear panel: ① Eth1 ② Eth2 ③ EtherCAT Out ④ 24V DC In
 
 Bottom: ⑤ reset button
 
@@ -472,30 +474,30 @@ Bottom: ⑤ reset button
 | **1. Eth1 (Static IP)** | Pre-configured with a **Static IP** for direct connection. • IP: `10.0.0.1` • Subnet Mask: `255.255.255.0` |
 | **2. Eth2 (DHCP)**      | Configured for **DHCP**. Connect this to a router or switch to receive an IP address automatically.        |
 | **3. EtherCAT Out**     | EtherCAT Master output. Connect this to the **IN** port of your first EtherCAT slave device.               |
-| **4. DC 24V In**        | Power input port.                                                                                          |
+| **4. 24V DC In**        | Power input port.                                                                                          |
 | **5. Reset Button**     | Used to restore the device to factory settings.                                                            |
 
 ______________________________________________________________________
 
 ## 3. Hardware Setup & Power On
 
-To ensure the longevity of your device and prevent electrical damage, please follow these steps in order.
+Follow these steps in order to prevent electrical damage.
 
-1. **Prepare the Adapter:** Connect the power cable to the 24V power adapter. **Stop! Do not plug it into the wall outlet just yet.**
+1. **Prepare the Adapter:** Connect the power cable to the 24V power adapter. **Do not plug it into the wall outlet yet.**
 
-1. **Connect to Stellar X:** Insert the adapter's output cable into the **DC 24V In** port on the unit.
+1. **Connect to Stellar X:** Insert the adapter's output cable into the **24V DC In** port on the unit.
 
    To prevent **electrical arcing (sparks)** or connection issues, always connect the cable to the **Stellar X unit first**, and *then* plug the power adapter into the wall.
 
-   The connector features a small guide notch inside. If it doesn't slide in easily, **gently rotate the cable** until the notch aligns with the port.
+   The connector has a small guide notch inside. If it doesn't slide in easily, **gently rotate the cable** until the notch aligns with the port.
 
    Aligning the connector notch
 
-1. **Secure the Connection:** Once fully inserted, hand-tighten the metal nut on the connector to ensure it stays securely locked in place.
+1. **Secure the Connection:** Once the connector is fully inserted, hand-tighten its metal nut so that it stays locked in place.
 
    Securing the locking nut
 
-1. **Power Up:** Finally, plug the power cable into a standard wall outlet. Your Stellar X will power on automatically.
+1. **Power Up:** Plug the power cable into a wall outlet. Stellar X powers on automatically and takes about 1 minute to start up.
 
 ______________________________________________________________________
 
@@ -503,11 +505,11 @@ ______________________________________________________________________
 
 Your PC must be on the same subnet as Stellar X.
 
-1. **Physical Connection:** Connect an Ethernet (LAN) cable to **Eth1 (Port 1)** on the Stellar X unit and the other end to your PC’s LAN port.
+1. **Physical Connection:** Connect an Ethernet (LAN) cable to **Eth1 (Port 1)** on the Stellar X unit and the other end to your PC's LAN port.
 
    Connecting to Eth1
 
-1. **Configure Your PC:** Since Stellar X's Eth1 is fixed at `10.0.0.1`, you must set your PC to a static IP in the same range (e.g., `10.0.0.2`).
+1. **Configure Your PC:** Since Stellar X's Eth1 is fixed at `10.0.0.1`, you must set your PC to a static IP in the same subnet (e.g., `10.0.0.2`).
 
    Avoid using `10.0.0.1` for your PC, as this will cause an IP conflict.
 
@@ -517,20 +519,22 @@ Your PC must be on the same subnet as Stellar X.
      1. Click the **gear icon** next to your wired connection.
      1. Select the **IPv4** tab and choose **Manual**.
      1. Set Address: `10.0.0.2` / Netmask: `255.255.255.0`.
+     1. Click **Apply**.
 
    - **For Windows Users:**
 
      1. Go to **Settings > Network & Internet > Ethernet**.
      1. Find **IP assignment** and click **Edit**.
      1. Select **Manual**, toggle **IPv4 On**, and enter:
-     1. IP address: `10.0.0.2`
-     1. Subnet mask: `255.255.255.0`
+        - IP address: `10.0.0.2`
+        - Subnet mask: `255.255.255.0`
+     1. Click **Save**.
 
 1. **Verify the Connection:** Open your preferred web browser (Chrome, Edge, etc.) and type the following into the address bar: `http://10.0.0.1`
 
 1. **Success!** If **Stellar Station** appears, you are ready to start your project. Continue with the [Quick Start](https://docs.sodero.io/v2.0.0/get_started/quick_start/index.md).
 
-   Stellar Station
+   Stellar Station with an example robot system
 
    To change the controller's address or to connect it to your office network, use the [Network Settings](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/network_settings/index.md) page on port 3000.
 
@@ -539,6 +543,8 @@ ______________________________________________________________________
 ## 5. Hardware Factory Reset
 
 If you ever forget your IP settings or need a fresh start, you can perform a factory reset.
+
+A factory reset will **permanently erase all stored data**, including the Station's nodes, documents and settings. Back up the Station first ([Backup and Restore](https://docs.sodero.io/v2.0.0/station/backup_restore/index.md)).
 
 The reset button ⑤ on the bottom of the unit
 
@@ -554,9 +560,7 @@ The reset button ⑤ on the bottom of the unit
 If the reset doesn't seem to trigger, try these steps:
 
 1. **Power Cycle:** Unplug the power, wait 10 seconds, and plug it back in.
-1. **Wait & Retry:** Give the system about **1 minute** to fully initialize, then try holding the reset button for 3 seconds again.
-
-A factory reset will **permanently erase all stored data**, including the Station's nodes, documents and settings. Back up the Station first ([Backup and Restore](https://docs.sodero.io/v2.0.0/station/backup_restore/index.md)).
+1. **Wait & Retry:** Give the system about **1 minute** to fully initialize, then try holding the reset button for more than 3 seconds again.
 # Stellar Station
 
 # Backup and Restore
@@ -571,11 +575,11 @@ Click **Export SDR** in the Runtime toolbar. Pending edits are saved first, then
 
 The file contains:
 
-| Part            | Contents                                                                                |
-| --------------- | --------------------------------------------------------------------------------------- |
-| Runtime graph   | All nodes and their connections                                                         |
-| Robot documents | The `.sdd`, `.sddm` and `.sdda` documents of the controllers                            |
-| Station data    | Gateway projects, settings of sensor and navigation nodes, maps and other Station state |
+| Part            | Contents                                                                                         |
+| --------------- | ------------------------------------------------------------------------------------------------ |
+| Runtime graph   | All nodes and their connections                                                                  |
+| Robot documents | The `.sdd`, `.sddm` and `.sdda` documents of the controllers                                     |
+| Station data    | Gateway documents (`.gw`), settings of sensor and navigation nodes, maps and other Station state |
 
 Installed module packages are not part of the file; they stay on the controller.
 
@@ -593,38 +597,38 @@ Loading an .sdr file
 
 The Station replaces its graph, robot documents and Station data with the file's content and restarts. The page shows *Restarting the Station with …* and reloads when the Station is back, usually within a minute. The nodes are not started; start them when you need them.
 
-- The controller keeps a backup of its previous Station (the three most recent ones) and keeps its installed modules.
+- Before loading, the controller backs up its current Station. Installed modules stay installed.
 - If the file cannot be loaded, the Station keeps its data and the dialog says why.
 
 Loading is refused while any node runs: *Stop all nodes before loading a .sdr.*
 
 ### Files That Cannot Be Loaded
 
-| Message                                        | Cause                                                             |
-| ---------------------------------------------- | ----------------------------------------------------------------- |
-| *This .sdr holds a simulation, not a Station.* | The file is a World (simulation) export. Open it in Sodero Cloud. |
-| Not enough free space                          | The unpacked file is too large for the controller's storage.      |
+| Message                                                              | Cause                                                             |
+| -------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| *This .sdr holds a simulation, not a Station.*                       | The file is a World (simulation) export. Open it in Sodero Cloud. |
+| *This robot does not have enough free disk space to load this .sdr.* | The unpacked file is too large for the controller's storage.      |
 
 # Design Documents
 
 Gateways and robot controllers are configured by **design documents**. You create them in Stellar Designer, load them into nodes on the Station, and edit them later directly from the node.
 
-| File    | Node             | Edited with                                                                                                                            |
-| ------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `.gw`   | Actuator gateway | Stellar Gateway Designer ([Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md))                        |
-| `.sdd`  | Motion Studio    | Stellar Designer, manipulator editor                                                                                                   |
-| `.sddm` | Strider          | Stellar Designer, mobile robot editor ([Mobile Robot](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/mobile_robot/index.md)) |
-| `.sdda` | Articulation     | Stellar Designer, articulation editor                                                                                                  |
+| File    | Node             | Edited with                                                                                                                                 |
+| ------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.gw`   | Actuator gateway | Stellar Gateway Designer ([Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md))                             |
+| `.sdd`  | Motion Studio    | Stellar Designer, manipulator editor ([Manipulator](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/manipulator/index.md))         |
+| `.sddm` | Strider          | Stellar Designer, mobile robot editor ([Mobile Robot](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/mobile_robot/index.md))      |
+| `.sdda` | Articulation     | Stellar Designer, articulation editor ([Articulated Robot](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/articulation/index.md)) |
 
 Cameras, IMUs, visual odometry, the localizer and the navigator have no design document. They have **settings** that you edit in the node's inspector (see [Settings of Sensor and Navigation Nodes](#4-settings-of-sensor-and-navigation-nodes)).
 
-Every new gateway or controller node starts with an empty document of its type, so you can either import a finished file or build the document from scratch with **Edit Stellar Designer**.
+Every new gateway or controller node starts with an empty document of its type, so you can either import a finished file or build the document from scratch with **Edit Stellar Designer** (**Edit Stellar Gateway Designer** for gateways).
 
 ______________________________________________________________________
 
 ## 1. Import a Document
 
-1. Stop the node if it runs.
+1. Stop the node if it is running.
 1. Select the node. In the inspector's **DEFINITION** section, click the upload icon (**Import .gw**, **Import .sdd**, **Import .sddm** or **Import .sdda**).
 1. On **From your PC** ①, drop the file or click **Choose file**. The chosen file appears ②; click **Import** ③.
 
@@ -642,8 +646,8 @@ ______________________________________________________________________
 
 Click **Edit Stellar Designer** (controllers) or **Edit Stellar Gateway Designer** (gateways) in the **DEFINITION** section. Stellar Designer opens in a new browser tab with the node's document. The breadcrumb at the top shows the node and the file, for example `rc.mobile_controller_manager.jackal / jackal.sddm`.
 
-- Your edits are saved back to the node automatically.
 - **Stop the node before you edit its document.** While the node runs, the Station refuses to save.
+- Your edits are saved back to the node automatically. In an Articulation document, click **Save configuration**.
 - The arrow at the left of the breadcrumb returns to the Station.
 
 The editors are described in [Stellar Designer](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/introduction/index.md) and [Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md).
@@ -680,9 +684,9 @@ ______________________________________________________________________
 
 ## 5. Rules for Documents
 
-- A Strider or Motion Studio document names the gateway it drives and the gateway's actuator indices (zero-based). Connect the node's `servo_link` to that same gateway.
-- A simulation gateway document has `hardware.type: simulation`. Its robot name and simulator address are set on the node (section 3).
-- The number of actuators must match: the controller document maps every actuator it uses to a joint or wheel, and the gateway must provide at least that many actuators.
+- A Motion Studio, Strider or Articulation document names the gateway it drives and the gateway's actuator indices (zero-based). Connect the node's `servo_link` to that same gateway.
+- A simulation gateway document has `hardware.type: simulation`. Its robot name and simulator address are set on the node ([section 3](#3-point-a-simulation-gateway-at-its-robot)).
+- The gateway must have enough actuators: the controller document maps every actuator it uses to a joint or wheel, and the gateway must provide at least that many.
 - Connect one robot controller to a gateway. To drive one manipulator through several gateways, use **+ Gateway link** on its Motion Studio node.
 
 # Modules
@@ -719,7 +723,7 @@ Installing a module package
 
 ### Add and Start the Module's Node
 
-1. Click **Add node** and choose the type your module declares (for example **Application**). Your module appears in the list with the **CUSTOM** badge.
+1. Click **Add node** and choose the type that matches the `role` in your module's `subsystem.yaml`: **Gateway** for `gateway`, **Controller** for `component`, **Compound** for `compound`, **Application** for `app`. Your module appears in the list with the **CUSTOM** badge. The status module built below, for example, is a `component` and appears under **Controller**.
 1. Connect its required ports, for example to a Strider's `mobile_base` or a Motion Studio's `manipulator`.
 1. Right-click the node and choose **Start node**, or use **Start all nodes**.
 
@@ -746,8 +750,8 @@ my-module-1.0.0.tar.gz
 | File             | Purpose                                                                                                                                         |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | `package.yaml`   | The module's name (for example `customer.patrol`), version, the command that starts it and its parameters                                       |
-| `subsystem.yaml` | The node the module creates: its role (`component`, `compound` or `application`) and its ports with their contracts                             |
-| `run.py`         | Your program. It implements the node's lifecycle (initialize, start, stop) with the Stellar SDK and serves or calls the interfaces of its ports |
+| `subsystem.yaml` | The node the module creates: its role (`gateway`, `component`, `compound` or `app`) and its ports with their contracts                          |
+| `run.py`         | Your program. It implements the node's lifecycle (initialize, start, stop) with the Station SDK and serves or calls the interfaces of its ports |
 
 Limits: 64 MiB per package (128 MiB unpacked).
 
@@ -755,7 +759,10 @@ Limits: 64 MiB per package (128 MiB unpacked).
 
 ### Build and Install from the SSH Workspace
 
+The Station SDK is not installed in the SSH workspace. Import it only in the code that runs on the Station, and give your program an offline `--self-test` to check it in the workspace, as the example does.
+
 ```
+mkdir -p /workspace/my-work
 cp -R /opt/sodero/docs/examples/native-status /workspace/my-work/
 cd /workspace/my-work/native-status
 python3 run.py --self-test                     # offline check
@@ -764,7 +771,7 @@ tar -czf ../status-module.tar.gz package.yaml subsystem.yaml run.py README.md
 sodero packages upload ../status-module.tar.gz --execute
 ```
 
-Then add its node on the Station page, or with `sodero topology add-node --kind package --package NAME --if-version N --execute`, and start it.
+Then add its node on the Station page, or with `sodero topology add-node --kind package --package NAME --if-version N --execute`, and start it. `NAME` is the `name` in `package.yaml`; `N` is the graph version that `sodero topology get` returns ([sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)).
 
 **Tip:** An AI coding agent can write, check, package and install a module for you through the SSH workspace. See [AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md).
 
@@ -805,11 +812,11 @@ The new node appears on the canvas in the **Planned** state. It is saved with th
 | **Compound**    | Your compound modules    |                                           | Several robot units combined into one system                |
 | **Application** | Your application modules |                                           | Robot behaviors and task logic                              |
 
-Modules marked **SODERO** are built in. Modules you installed on the [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md) page are marked **CUSTOM** and appear under their own type.
+Modules marked **SODERO** are built in. Modules you installed on the [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md) page are marked **CUSTOM** and appear under the type they declare. Each type also lists a **… subsystem** entry (*Empty draft subsystem*): it adds an empty placeholder node with no program behind it, for sketching a system, and that node cannot be started.
 
-Choosing a controller module (the list scrolls)
+Choosing a controller module: ① Controller ② Strider ③ Next (the list scrolls)
 
-**Name rules.** Gateway names are converted to lowercase. Controller names (Motion Studio, Strider, Articulation, Legged locomotion) start with a lowercase letter and use lowercase letters, digits and `_`, at most 24 characters. The Localizer, Visual odometry and Navigator have fixed names.
+**Name rules.** Gateway names are converted to lowercase. Controller names (Motion Studio, Strider, Articulation, Legged locomotion) start with a lowercase letter and use lowercase letters, digits and `_`, at most 20 characters. The Localizer, Visual odometry and Navigator have fixed names.
 
 **Tip:** Give a robot's gateway and controller the same name, for example `rc.actuator_gateway.jackal` and `rc.mobile_controller_manager.jackal`. The graph stays easy to read, and **Auto-connect** finds the right partner.
 
@@ -838,11 +845,11 @@ Connect a required port to a provided port of another node. There are three ways
 - **Click** one port, then the other.
 - In the inspector of the node that requires the port, click **Auto-connect** next to the port. The Station picks the matching provider.
 
-The Station accepts a connection only when the two ports are on different nodes, point in opposite directions and use the same contract. It also enforces the system structure:
+The Station accepts a connection only when the two ports are on different nodes, one requires and the other provides, and both use the same contract (the interface type shown under the port name in the inspector, for example `api.actuator.servo.v1`). It also enforces the system structure:
 
 - Only a **controller** may use a gateway.
 - An **application** uses controllers or compounds, never gateways directly.
-- A gateway serves one robot controller.
+- An actuator gateway serves one robot controller (Motion Studio, Strider or Articulation) at a time.
 
 ### Common Connections
 
@@ -874,7 +881,7 @@ A Strider node: ① Start node ② its controller UI ③ its document ④ Stella
 | **CONTROL**    | Buttons that open the node's tool: **Stellar Motion Studio**, **Strider**, **Articulation** for controllers; **Test Stellar Gateway** for gateways. They unlock once the node runs.                                                                       |
 | **DEFINITION** | The node's design document: file name and when it was imported, **Edit Stellar Designer** / **Edit Stellar Gateway Designer**, and the upload icon to import a file ([Design Documents](https://docs.sodero.io/v2.0.0/station/design_documents/index.md)) |
 | **TARGET**     | Simulation gateways only: the robot name in Isaac Sim and the simulator address ([Simulation Gateway](https://docs.sodero.io/v2.0.0/gateways/simulation/index.md))                                                                                        |
-| Settings       | Camera, IMU, visual odometry, localizer, navigator and legged nodes: their settings form                                                                                                                                                                  |
+| Settings       | Camera, IMU, visual odometry, localizer, navigator and legged locomotion nodes: their settings form                                                                                                                                                       |
 | **CONNECTION** | Requires and Provides ports with their contracts, **Auto-connect** and **Disconnect**                                                                                                                                                                     |
 | **LOGS**       | Output and events of the node ([Running Nodes](https://docs.sodero.io/v2.0.0/station/running_nodes/#5-logs))                                                                                                                                              |
 
@@ -882,8 +889,8 @@ ______________________________________________________________________
 
 ## 5. Rename and Delete
 
-- **Rename:** click the pencil icon next to the node name in the inspector. Stop the node first.
-- **Delete:** right-click the node and choose **Delete node**. The node and its connections are removed from the graph. Stop the node first.
+- **Rename:** stop the node, then click the pencil icon next to the node name in the inspector.
+- **Delete:** stop the node, then right-click it and choose **Delete node**. The node and its connections are removed from the graph.
 
 Right-click menu of a node
 
@@ -1022,12 +1029,12 @@ The **Start all nodes** button starts every node that is down, in dependency ord
 The run menu
 
 - While a run is in progress, a banner shows the progress, and the menu offers **Cancel**. Nodes already started stay up when you cancel.
-- The run continues on the controller even if you close the browser. The page shows its progress again when you reopen it.
+- The run continues even if you close the browser. The page shows its progress again when you reopen it.
 - The result appears as a banner, for example *Runtime topology is up.*
 
 **Start all nodes** starts every node of the graph, including nodes that drive real hardware. When the graph contains hardware you do not want to run, start the nodes one by one.
 
-After the controller restarts, the Station comes back with its saved graph, documents and settings, but **no node is started**. Start the nodes again when you need them.
+After Stellar X restarts, the Station comes back with its saved graph, documents and settings, but **no node is started**. Start the nodes again when you need them.
 
 ______________________________________________________________________
 
@@ -1035,29 +1042,29 @@ ______________________________________________________________________
 
 The footer of each node card and the inspector header show the node's state.
 
-| State                      | Meaning                                                     |
-| -------------------------- | ----------------------------------------------------------- |
-| **Planned**                | Saved in the graph, not started yet                         |
-| **Booting** / **Starting** | Starting up                                                 |
-| **Waiting binding**        | A required port has no connection yet                       |
-| **Waiting target**         | A connected node is not ready yet                           |
-| **Ready**                  | Started and waiting to operate                              |
-| **Operating**              | Running normally                                            |
-| **Running**                | The process is up                                           |
-| **Paused**                 | Paused                                                      |
-| **Degraded**               | Running with reduced performance                            |
-| **Disconnected**           | Heartbeat lost                                              |
-| **Fault**                  | Fault state; reset it to recover                            |
-| **Error** / **Failed**     | The node reported an error. The inspector shows the reason. |
-| **Stopped**                | The process ended                                           |
+| State                      | Meaning                                                                    |
+| -------------------------- | -------------------------------------------------------------------------- |
+| **Planned**                | Saved in the graph, not started yet                                        |
+| **Booting** / **Starting** | Starting up                                                                |
+| **Waiting binding**        | A required port has no connection yet                                      |
+| **Waiting target**         | A connected node is not ready yet                                          |
+| **Ready**                  | Started and waiting to operate                                             |
+| **Operating**              | Running normally                                                           |
+| **Running**                | The process is up                                                          |
+| **Paused**                 | Paused                                                                     |
+| **Degraded**               | Running with reduced performance                                           |
+| **Disconnected**           | Heartbeat lost                                                             |
+| **Fault**                  | The node reported a fault. The inspector and the node log show the reason. |
+| **Error** / **Failed**     | The node reported an error. The inspector shows the reason.                |
+| **Stopped**                | The process ended                                                          |
 
-The dot next to the state is green for Ready and Operating, yellow while waiting, red for errors and grey otherwise. Problems are also counted in the **N issues** chip of the toolbar.
+The dot next to the state is green for Ready, Running and Operating, yellow while waiting, red for errors and grey otherwise. Problems are also counted in the **N issues** chip of the toolbar.
 
 ______________________________________________________________________
 
 ## 4. Open the Controller UIs
 
-When a controller node runs, its **CONTROL** section unlocks:
+When a node runs, its tools unlock, in the inspector's **CONTROL** section or as a link on the node card:
 
 | Node             | Button                           | Opens                                                                                                 |
 | ---------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------- |
@@ -1106,18 +1113,18 @@ ______________________________________________________________________
 
 # Device Bridge
 
-Stellar X connects to the rest of the robot through network ports only. Sensors that need USB, such as an Intel RealSense depth camera or a USB IMU, therefore go on a small computer next to them: a Raspberry Pi, another single-board computer or a PC. The **device bridge** runs on that computer. It reads the devices and serves their data to the controller over the LAN.
+Stellar X connects to the rest of the robot through network ports only. Sensors that need USB, such as an Intel RealSense depth camera or a USB IMU, therefore go on a small computer next to them: a Raspberry Pi, another single-board computer or a PC. The **Device Bridge** runs on that computer. It reads the devices and serves their data to the controller over the LAN.
 
-The bridge speaks the same network protocol as the Isaac Sim bridge. The controller's official Camera gateway, IMU gateway, Visual odometry, Localizer and Navigator therefore work with real sensors exactly as they work with a simulated robot; only the address they connect to differs.
+The bridge speaks the same network protocol as Isaac Bridge. The controller's official Camera gateway, IMU gateway, Visual odometry, Localizer and Navigator therefore work with real sensors exactly as they work with a simulated robot; only the address they connect to differs.
 
-Use the device bridge when:
+Use the Device Bridge when:
 
 - the robot carries a USB camera or IMU, which cannot plug into the controller;
 - the motor board of a small robot sits on USB as well (for example the TurtleBot3 OpenCR board) and the controller should drive it.
 
 Drives on the controller's EtherCAT port do not need the bridge, and neither does a simulated robot.
 
-The device bridge is an open example program. Use its built-in drivers as they are, or add a driver for your own device. Nothing changes on the controller.
+The Device Bridge is an open example program. Use its built-in drivers as they are, or add a driver for your own device. Nothing changes on the controller.
 
 ______________________________________________________________________
 
@@ -1126,7 +1133,7 @@ ______________________________________________________________________
 ```
 flowchart TB
     subgraph SC ["Sensor computer"]
-        DB(["Device bridge"])
+        DB(["Device Bridge"])
         RS["RealSense<br>depth camera"] --> DB
         IU["USB IMU"] --> DB
         MB["Motor board<br>(optional)"] <--> DB
@@ -1152,17 +1159,17 @@ flowchart TB
     AG <-->|servo_link| ST
 ```
 
-The bridge **listens** on three ports and the controller's gateways **connect** to it, exactly as they connect to the simulator. Every message carries the bridge's `robot_name`, and each gateway takes the data published under the name it is configured with. Without the optional wheels, Strider drives the robot's own base through an EtherCAT Actuator gateway as usual.
+The bridge **listens** on three ports and the controller's gateways **connect** to it, exactly as they connect to the simulator. Every message carries the bridge's `robot_name`, and each gateway takes the data published under the name it is configured with. Without the optional wheel stream, Strider drives the robot's own base through an EtherCAT Actuator gateway as usual.
 
 ### What Is Official and What Is Yours
 
-| Part                                                      | Runs on         | Owner                                                  |
-| --------------------------------------------------------- | --------------- | ------------------------------------------------------ |
-| Device drivers (`device_bridge/devices/`)                 | Sensor computer | **You.** Use a built-in driver or add one per device.  |
-| The rest of the bridge: protocol, streams, wheel watchdog | Sensor computer | Sodero. Use it as is.                                  |
-| Wire protocol (`docs/protocol.md`)                        | Between the two | Sodero. The Isaac Sim bridge speaks the same protocol. |
-| Camera gateway, IMU gateway, Actuator gateway             | Stellar X       | Sodero official modules. You configure them.           |
-| Visual odometry, Localizer, Navigator, Strider            | Stellar X       | Sodero official modules. You configure them.           |
+| Part                                                      | Runs on         | Owner                                                 |
+| --------------------------------------------------------- | --------------- | ----------------------------------------------------- |
+| Device drivers (`device_bridge/devices/`)                 | Sensor computer | **You.** Use a built-in driver or add one per device. |
+| The rest of the bridge: protocol, streams, wheel watchdog | Sensor computer | Sodero. Use it as is.                                 |
+| Wire protocol (`docs/protocol.md`)                        | Between the two | Sodero. Isaac Bridge speaks the same protocol.        |
+| Camera gateway, IMU gateway, Actuator gateway             | Stellar X       | Sodero official modules. You configure them.          |
+| Visual odometry, Localizer, Navigator, Strider            | Stellar X       | Sodero official modules. You configure them.          |
 
 Supporting a new camera or IMU means writing one small driver class on the sensor computer. Nothing on the controller is rebuilt or modified.
 
@@ -1278,7 +1285,7 @@ Unknown keys are refused, so a typo stops the bridge with a clear message instea
 
 ### Log Lines
 
-After a start, the log shows these lines (time stamps left out):
+After a start with `config/turtlebot3_d435.yaml` (camera and IMU, no wheel stream), the log shows these lines (time stamps left out):
 
 ```
 INFO device_bridge: device 'd435' (realsense) is open
@@ -1299,7 +1306,7 @@ If the configuration or a device fails, the log shows one `ERROR` line that name
 
 ### Check from Another Computer
 
-`listen` receives the streams the way the controller does. Run it from a copy of the source on any computer of the same network, for example your PC:
+`listen` receives the streams the way the controller does. Run it from a copy of the source on any computer on the same network, for example your PC:
 
 ```
 cd device_bridge
@@ -1342,9 +1349,9 @@ ______________________________________________________________________
 | `simulated_wheels`     | Wheels                       | `joints` (`2`), `rate_hz` (`100`)                                                                                                                               |
 | `package.module:Class` | What the class provides      | Your own driver (see [Write Your Own Driver](#6-write-your-own-driver))                                                                                         |
 
-- **`realsense`** reads Intel RealSense D400 cameras through the RealSense SDK and is tested with the D435. Depth is aligned to the colour image, so both share the colour camera's intrinsics. With `serial: auto`, exactly one camera must be connected; with several cameras, enter the serial number.
+- **`realsense`** reads Intel RealSense D400 cameras through the RealSense SDK and is tested with the D435. Depth is aligned to the color image, so both share the color camera's intrinsics. With `serial: auto`, exactly one camera must be connected; with several cameras, enter the serial number.
 - **`turtlebot3_opencr`** drives the OpenCR board of a TurtleBot3 Burger running the ROBOTIS TurtleBot3 ROS 2 firmware. The board is both the wheel controller and the IMU, and its serial port can have only one owner, so one device feeds both the `imu` and the `wheels` stream. Wheel speeds are scaled down together to the configured limits, which keeps the path's curvature. If the bridge stops talking to the board, the firmware stops the wheels by itself within 0.5 s. Set `port` to the board's serial device (for example `/dev/ttyACM0`) when the default device name does not exist on your system.
-- **`simulated_camera`**, **`simulated_imu`** and **`simulated_wheels`** stand in for hardware: a moving colour pattern in front of a flat wall 2 m away, a level sensor turning slowly about its z axis, and joints that follow their velocity commands exactly.
+- **`simulated_camera`**, **`simulated_imu`** and **`simulated_wheels`** stand in for hardware: a moving color pattern in front of a flat wall 2 m away, a level sensor turning slowly about its z axis, and joints that follow their velocity commands exactly.
 
 ______________________________________________________________________
 
@@ -1356,7 +1363,7 @@ Start with the bridge running and `listen` showing its streams, then open the St
 
 ### Camera
 
-1. Click **Add node**, choose **Gateway** → **Camera gateway** and name it after the robot, for example `tb3` (node `rc.camera_gateway.tb3`).
+1. Click **Add node**, choose **Gateway** › **Camera gateway** and name it after the robot, for example `tb3` (node `rc.camera_gateway.tb3`).
 
 1. In the **CAMERA GATEWAY** section of the inspector, enter:
 
@@ -1364,7 +1371,7 @@ Start with the bridge running and `listen` showing its streams, then open the St
    - **Camera host**: `SENSOR_COMPUTER_ADDRESS`.
    - **Port**: `53335`, or the bridge's `network.camera_port`.
 
-1. Enter the resolution and intrinsics from the bridge's `camera …` log line. A new Camera gateway computes its intrinsics from a field of view, as for a simulated camera, so its **CAMERA SETTINGS** show only *horizontal fov deg*. Load the calibrated values once with **Upload yaml** while the node is stopped:
+1. Enter the resolution and intrinsics from the bridge's `camera …` log line. A new Camera gateway computes its intrinsics from a field of view, as for a simulated camera, so for intrinsics its **CAMERA SETTINGS** show *horizontal fov deg* but not fx, fy, cx and cy. Load the calibrated values once with **Upload yaml** while the node is stopped:
 
    ```
    camera_gateway:
@@ -1396,7 +1403,7 @@ Intrinsics belong to one resolution. After you change the bridge's `width`, `hei
 
 ### IMU
 
-1. Click **Add node**, choose **Gateway** → **IMU gateway** and name it after the robot (`tb3`).
+1. Click **Add node**, choose **Gateway** › **IMU gateway** and name it after the robot (`tb3`).
 1. In **IMU SETTINGS**, check that **Robot in World** is the bridge's `robot_name` (a new IMU gateway starts with its node name) and click **Save settings**.
 1. Start the gateway.
 
@@ -1466,7 +1473,7 @@ Select it in the configuration as `driver: device_bridge.devices.my_imu:MyImu`, 
 
 Rules every driver follows:
 
-- **Units:** radians, rad/s, m/s² with gravity included (+9.81 m/s² upward at rest), depth in millimetres as 16-bit integers (0 = no measurement), times in nanoseconds. Wheel positions are continuous and do not wrap at 2π.
+- **Units:** radians, rad/s, m/s² with gravity included (+9.81 m/s² upward at rest), depth in millimeters as 16-bit integers (0 = no measurement), times in nanoseconds. Wheel positions are continuous and do not wrap at 2π.
 - **Frames:** IMU data in the sensor's own axes, with `orientation_xyzw` the sensor's attitude in the world. Camera images in the optical frame (x right, y down, z forward), depth aligned to the RGB image, both rectified without distortion. Do not rotate data into the robot's frame; the mounting belongs in the map bundle.
 - **Time:** `source_time_ns` must increase; a monotonic clock is fine. A camera's `capture_unix_ns` is the capture time on the wall clock.
 - **Timing:** `read_imu` and `read_joints` return at once; `read_frame` blocks for at most its timeout. Copy images out of buffers that the SDK reuses.
@@ -1476,11 +1483,11 @@ ______________________________________________________________________
 
 ## 7. Protocol
 
-The device bridge and Isaac Bridge send the same messages over ZeroMQ on TCP. The bridge listens; the Station's gateways connect.
+The Device Bridge and Isaac Bridge send the same messages over ZeroMQ on TCP. The bridge listens; the Station's gateways connect.
 
 | Port  | Direction           | Contents                                                                           | Station node                  |
 | ----- | ------------------- | ---------------------------------------------------------------------------------- | ----------------------------- |
-| 53335 | bridge → controller | RGB-D frames (16-bit depth in millimetres and 8-bit RGB) and the camera intrinsics | Camera gateway                |
+| 53335 | bridge → controller | RGB-D frames (16-bit depth in millimeters and 8-bit RGB) and the camera intrinsics | Camera gateway                |
 | 53334 | bridge → controller | IMU samples and wheel states                                                       | IMU gateway, Actuator gateway |
 | 53333 | controller → bridge | Wheel commands: velocity while the drive is on, limp when it is off                | Actuator gateway              |
 
@@ -1537,7 +1544,7 @@ flowchart LR
     D2 --> D3["Drive 3"]
 ```
 
-- Plug Stellar X's **EtherCAT** port into the **IN** port of the first drive. Connect each drive's **OUT** port to the next drive's **IN** port.
+- Plug Stellar X's **EtherCAT Out** port into the **IN** port of the first drive. Connect each drive's **OUT** port to the next drive's **IN** port.
 - **Do not use a network switch.** EtherCAT frames must pass through the drives in a line.
 - **The cable order is the actuator order.** The first drive on the cable is actuator 1 (index 0) of the gateway, the second is actuator 2 (index 1), and so on. To change the order, change the wiring.
 - Devices after the last controlled drive are allowed; the gateway ignores them.
@@ -1559,9 +1566,11 @@ An EtherCAT gateway with two actuators; the EtherCAT tab of actuator 1
 
 Motor tab
 
+Click **Brand**, **Series** or **Model** ① to open **Motor Select**: search by model number, or pick **Brand** › **Series** › **Model**. The preview shows the catalog values, and **Accept** fills them in. For a motor that is not in the catalog, type the values.
+
 Motor Select catalog: search ①, or pick Brand ② › Series ③ › Model ④, then Accept ⑤
 
-Click **Brand**, **Series** or **Model** ① to open **Motor Select**: search by model number, or pick **Brand** › **Series** › **Model**. The preview shows the catalog values, and **Accept** fills them in. For a motor that is not in the catalog, type the values.
+The fields of the **Motor** tab:
 
 | Section                 | Field              | Unit   | Meaning                                                                                                    |
 | ----------------------- | ------------------ | ------ | ---------------------------------------------------------------------------------------------------------- |
@@ -1587,7 +1596,8 @@ IDENTIFICATION ①, SDOS ②, PDOS ③
 
 | Section            | Field                                        | Meaning                                                                                                                                                                                                                                          |
 | ------------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **IDENTIFICATION** | **Idx**, **Alias**                           | Position of the drive on the cable (read-only)                                                                                                                                                                                                   |
+| **IDENTIFICATION** | **Idx**                                      | Position of the drive on the cable, from 0 (read-only)                                                                                                                                                                                           |
+|                    | **Alias**                                    | An alias that identifies the device (read-only). The gateway addresses drives by their position on the cable, not by alias.                                                                                                                      |
 |                    | **Name**                                     | A label for logs                                                                                                                                                                                                                                 |
 | **SDOS**           | **Index**, **Subindex**, **Value**, **Size** | Start-up parameters written to the drive before operation. Index, subindex and value are hexadecimal (`0x…`); size is in bytes. The entry named *Absolute Encoder Reset* is not written at start-up; Motion Studio's origin calibration uses it. |
 | **PDOS**           | **Rx PDO** / **Tx PDO** index                | The PDO mapping objects, typically `0x1600` and `0x1A00`                                                                                                                                                                                         |
@@ -1658,7 +1668,7 @@ The gateway explains every problem in **Gateway events**, followed by a hint. Th
 
 | Message                                                                         | Cause and fix                                                                                                                                                                                                |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| *EtherCAT: no cable link on network port …*                                     | No Ethernet link. Plug the cable into Stellar X's EtherCAT port and into the first drive's **IN** port, and power the drive.                                                                                 |
+| *EtherCAT: no cable link on network port …*                                     | No Ethernet link. Plug the cable into Stellar X's **EtherCAT Out** port and into the first drive's **IN** port, and power the drive.                                                                         |
 | *EtherCAT: no drive answered on network port …*                                 | The cable goes to the wrong port of the drive (OUT instead of IN), to a switch, or the drive has no power.                                                                                                   |
 | *EtherCAT: found M of the N drives this gateway controls.*                      | The chain ends after drive M. Check the cable from drive M's OUT port to the next drive's IN port, and that drive's power.                                                                                   |
 | *…configuration describes K drive(s), but the gateway controls N.*              | The drive list in the document does not match the actuators. Fix it in the Gateway Designer.                                                                                                                 |
@@ -1689,10 +1699,10 @@ A simulation gateway with four actuators
 
 | Area              | Contents                                                                                                                                                     |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Breadcrumb        | Where the document belongs: Station / node / file. The arrow returns to the Station.                                                                         |
+| Breadcrumb        | Where the document belongs: device / Station / node / file. The arrow returns to the Station.                                                                |
 | Steps             | **01 Gateway setup** (actuators and their parameters) and **02 Verification**                                                                                |
 | **Actuators (N)** | One card per actuator, in index order, with its brand, model and status (**Configured** / **Not configured**). **Add Actuator** adds one; **×** removes one. |
-| Actuator panel    | The parameters of the selected actuator, in tabs: **Motor** and a tab for the hardware type (**EtherCAT**, **Isaac Sim** or **Damiao CAN**)                  |
+| Actuator panel    | The parameters of the selected actuator, in tabs: **Motor** and a tab for the hardware type (**EtherCAT** or **Isaac Sim**)                                  |
 | Units             | `mm / g / deg` or `m / kg / radian` for display                                                                                                              |
 
 ______________________________________________________________________
@@ -1708,7 +1718,9 @@ Create gateway definition
 | **Isaac Sim** ① | A robot in NVIDIA Isaac Sim ([Simulation Gateway](https://docs.sodero.io/v2.0.0/gateways/simulation/index.md))           |
 | **EtherCAT** ②  | CiA 402 servo drives on the EtherCAT port ([EtherCAT Gateway](https://docs.sodero.io/v2.0.0/gateways/ethercat/index.md)) |
 
-**Damiao CAN** and **Simulation** are greyed out: they are not available here. Select the type and click **Next** ③, then **Create**. To change the type of an existing gateway later, use the same chooser; actuators keep their motor settings and receive the new type's hardware settings.
+Select the type and click **Next** ③, then **Create**.
+
+To change the type of an existing gateway, click the Stellar mark at the top left and choose **Definition** › **Replace definition**. Pick the new type and click **Next** › **Replace**. Existing actuators keep their motor settings and receive the new type's hardware settings; the previous type's hardware settings are removed. This cannot be undone.
 
 ______________________________________________________________________
 
@@ -1716,18 +1728,18 @@ ______________________________________________________________________
 
 1. Click **Add Actuator** once per motor. Actuator 1 is index 0, actuator 2 is index 1, and so on.
 1. Select an actuator card. Fill in the **Motor** tab: pick the motor from the catalog (**Brand** › **Series** › **Model**) or enter its values.
-1. Fill in the tab of the hardware type: **EtherCAT** (identification, SDOs, PDOs), **Isaac Sim** (DOF offset) or **Damiao CAN** (model, gains, limits).
+1. Fill in the tab of the hardware type: **EtherCAT** (identification, SDOs, PDOs) or **Isaac Sim** (DOF offset).
 
 ### Motor Parameters
 
-| Field              | Unit                  | Meaning                                                                                                              |
-| ------------------ | --------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| **Rated torque**   | Nm                    | Continuous torque of the motor. For EtherCAT drives it is the reference for torque commands in per mille.            |
-| **Max torque**     | Nm                    | Peak torque of the motor. The gateway clamps torque commands to *Max torque × gear ratio* at the joint.              |
-| **Max speed**      | rpm                   | Maximum motor speed. The joint speed limit is *Max speed ÷ gear ratio*.                                              |
-| **Resolution**     | counts per revolution | Encoder resolution at the motor shaft, before the gear (EtherCAT). For example 2²³ = 8,388,608 for a 23-bit encoder. |
-| **Encoder offset** | counts                | Zero offset of the absolute encoder. Normally set by origin calibration in Motion Studio, not by hand.               |
-| **Gear ratio**     | ratio                 | Motor turns per joint turn.                                                                                          |
+| Field              | Unit   | Meaning                                                                                                            |
+| ------------------ | ------ | ------------------------------------------------------------------------------------------------------------------ |
+| **Rated torque**   | Nm     | Continuous torque of the motor. For EtherCAT drives it is the reference for torque commands in per mille.          |
+| **Max torque**     | Nm     | Peak torque of the motor. The gateway clamps torque commands to *Max torque × gear ratio* at the joint.            |
+| **Max speed**      | rpm    | Maximum motor speed. The joint speed limit is *Max speed ÷ gear ratio*.                                            |
+| **Resolution**     | PPR    | Encoder pulses per motor revolution, before the gear (EtherCAT). For example 2²³ = 8,388,608 for a 23-bit encoder. |
+| **Encoder offset** | pulses | Zero offset of the absolute encoder. Normally set by origin calibration in Motion Studio, not by hand.             |
+| **Gear ratio**     | ratio  | Motor turns per joint turn.                                                                                        |
 
 For simulation gateways only **Max torque**, **Max speed** and **Gear ratio** apply.
 
@@ -1735,11 +1747,13 @@ ______________________________________________________________________
 
 ## 4. Verify and Export
 
-Open **02 Verification** and click **Verify**. The Gateway Designer checks the hardware type, that actuators are defined, the motor parameters and, for EtherCAT, the encoder resolution, and that the configuration files are valid.
+Open **02 Verification** and click **Verify**. The Gateway Designer checks the hardware type, the actuator list, the motor parameters (for EtherCAT also the encoder resolution) and the configuration files.
 
 All checks passed
 
 Errors (for example a parameter that must be positive) must be fixed; warnings are advisory. Then start the gateway from the Station.
+
+When all checks pass, **Export .gw** downloads the document as a `.gw` file, which you can import into another gateway node (**Import .gw**).
 
 ______________________________________________________________________
 
@@ -1752,14 +1766,6 @@ The Isaac Sim tab of an actuator
 **DOF offset** is the first joint of the Isaac Sim articulation that this gateway drives. Leave it at 0 when one gateway drives the whole robot. Several gateways can share one simulated robot, for example an arm gateway with offset 0 for joints 1–6 and a gripper gateway with offset 6 for the joints after them.
 
 The robot name in the scene and the simulator address are set on the Station node, not in the document ([Simulation Gateway](https://docs.sodero.io/v2.0.0/gateways/simulation/index.md)).
-
-______________________________________________________________________
-
-## 6. CAN Gateways
-
-The **Damiao CAN** type drives Damiao motors in MIT mode over SocketCAN. Its tab selects the **Motor model** (which fills in the protocol's position, velocity and torque ranges), the **Gains** (position Kp and Kd, velocity Kd) and the **Limits**. The CAN ID of each motor is its actuator number.
-
-In the Gateway Designer opened from a Stellar X node, new gateways can be created as **Isaac Sim** or **EtherCAT**. To use a CAN gateway, contact Sodero support.
 
 # Gateways Overview
 
@@ -1776,19 +1782,19 @@ flowchart TB
     I -. "IMU" .-> IG
 ```
 
-Because only the gateway knows the hardware, **the same controller and documents drive a simulated robot and the real one**. Moving from Isaac Sim to real motors means replacing the gateway's document, nothing else.
+Because only the gateway knows the hardware, **the same controller, with the same document, drives a simulated robot and the real one**. Moving from Isaac Sim to real motors means replacing the gateway's document, nothing else.
 
 ______________________________________________________________________
 
 ## Built-in Gateways
 
-| Module           | Node ID                    | Connects                                                                                                                                            | Configured with                                                                                                               |
-| ---------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Actuator gateway | `rc.actuator_gateway.NAME` | EtherCAT drives, or the joints of a robot in Isaac Sim                                                                                              | A `.gw` document ([Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md))                       |
-| Camera gateway   | `rc.camera_gateway.NAME`   | An RGB-D camera: a camera in Isaac Sim, or a real camera through the [Device Bridge](https://docs.sodero.io/v2.0.0/gateways/device_bridge/index.md) | Camera settings in the inspector ([Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/index.md)) |
-| IMU gateway      | `rc.imu_gateway.NAME`      | An IMU and foot contacts: in Isaac Sim, or through the Device Bridge                                                                                | IMU settings in the inspector                                                                                                 |
+| Module           | Node ID                    | Connects                                                                                                                                            | Configured with                                                                                                                  |
+| ---------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Actuator gateway | `rc.actuator_gateway.NAME` | EtherCAT drives, or the joints of a robot in Isaac Sim                                                                                              | A `.gw` document ([Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md))                          |
+| Camera gateway   | `rc.camera_gateway.NAME`   | An RGB-D camera: a camera in Isaac Sim, or a real camera through the [Device Bridge](https://docs.sodero.io/v2.0.0/gateways/device_bridge/index.md) | Camera settings in the inspector ([Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/index.md))    |
+| IMU gateway      | `rc.imu_gateway.NAME`      | An IMU (and foot contacts in Isaac Sim): in Isaac Sim, or through the Device Bridge                                                                 | IMU settings in the inspector ([Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/#2-imu-gateway)) |
 
-You can also write your own gateway as a module (**Gateway** › **Gateway subsystem** in **Add node**) for devices the built-in gateways do not cover. See [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md).
+For devices the built-in gateways do not cover, you can write your own gateway as a module with the role `gateway`. Once installed, it appears in **Add node** › **Gateway** with the **CUSTOM** badge. See [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md).
 
 ______________________________________________________________________
 
@@ -1796,19 +1802,20 @@ ______________________________________________________________________
 
 The `.gw` document chooses how the actuator gateway reaches its actuators:
 
-| Type           | `hardware.type` | Use                                                                                        | Page                                                                                        |
-| -------------- | --------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| **EtherCAT**   | `ethercat`      | CiA 402 servo drives on the controller's EtherCAT port, synchronized by distributed clocks | [EtherCAT Gateway](https://docs.sodero.io/v2.0.0/gateways/ethercat/index.md)                |
-| **Isaac Sim**  | `simulation`    | The joints of a robot in NVIDIA Isaac Sim, through the Isaac Bridge extension              | [Simulation Gateway](https://docs.sodero.io/v2.0.0/gateways/simulation/index.md)            |
-| **Damiao CAN** | `can`           | MIT-mode CAN motors, on request                                                            | [Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/#6-can-gateways) |
+| Type          | `hardware.type` | Use                                                                                        | Page                                                                             |
+| ------------- | --------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| **EtherCAT**  | `ethercat`      | CiA 402 servo drives on the controller's EtherCAT port, synchronized by distributed clocks | [EtherCAT Gateway](https://docs.sodero.io/v2.0.0/gateways/ethercat/index.md)     |
+| **Isaac Sim** | `simulation`    | The joints of a robot in NVIDIA Isaac Sim, through the Isaac Bridge extension              | [Simulation Gateway](https://docs.sodero.io/v2.0.0/gateways/simulation/index.md) |
 
 ______________________________________________________________________
 
 ## Actuators and Indices
 
-A gateway drives a list of **actuators**, numbered from zero in the order they are defined (`a1` is index 0, `a2` is index 1, …). For EtherCAT, the order of the actuators is the order of the drives on the cable.
+A gateway drives a list of **actuators**, numbered from zero in the order they are defined (actuator 1 is index 0, actuator 2 is index 1, …). For EtherCAT, the order of the actuators is the order of the drives on the cable.
 
 A controller's document refers to these indices to say which actuator drives which joint or wheel. For example, a Strider document for a 4-wheel base maps its wheels to the gateway's actuators `[0, 1, 2, 3]`.
+
+Motor units and joint units are defined in different documents:
 
 | Unit                            | Where it is defined                                                                           |
 | ------------------------------- | --------------------------------------------------------------------------------------------- |
@@ -1858,23 +1865,25 @@ The camera gateway's inspector
 
 ### Connection
 
-| Field           | Value                                                                                                                                                                       |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Camera name** | The name of the camera: in Isaac Sim, the camera prim's name (for example `cam0` for `/World/jackal/links/base_link/cam0`); with the Device Bridge, the bridge's robot name |
-| **Camera host** | The address of the Isaac Sim computer or the sensor computer                                                                                                                |
-| **Port**        | `53335`                                                                                                                                                                     |
+In the **CAMERA GATEWAY** section of the inspector:
+
+| Field           | Value                                                                                                                                                                                                                                                                    |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Camera name** | The name of the camera: in Isaac Sim, the camera prim's name (for example `cam0` for `/World/jackal/links/base_link/cam0`); with the Device Bridge, the bridge's robot name                                                                                              |
+| **Camera host** | The address of the Isaac Sim computer or the sensor computer. The field is greyed out when a camera address is configured for the unit; the gateway then uses that address at every start, even if an uploaded YAML names another. To change it, contact Sodero support. |
+| **Port**        | `53335`                                                                                                                                                                                                                                                                  |
 
 ### Camera Settings
 
 Stop the node, change the values and click **Save settings**.
 
-| Setting               | Meaning                                                                                                                                |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **fps**               | Expected frame rate (the source decides the actual rate)                                                                               |
-| **frame id**          | Name of the camera's optical frame, at most 15 characters, for example `cam0_optical`. The map bundle's extrinsics refer to this name. |
-| **width**, **height** | Image size; 0 takes it from the frames                                                                                                 |
-| Intrinsics            | `fov` mode with the horizontal field of view in degrees, or `manual` mode with fx, fy, cx, cy in pixels                                |
-| Simulation camera     | Connection timeouts                                                                                                                    |
+| Setting               | Meaning                                                                                                                                                                                                                                                                                          |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **fps**               | Expected frame rate (the source decides the actual rate)                                                                                                                                                                                                                                         |
+| **frame id**          | Name of the camera's optical frame, at most 15 characters, for example `cam0_optical`. The map bundle's extrinsics refer to this name.                                                                                                                                                           |
+| **width**, **height** | Image size; 0 takes it from the frames                                                                                                                                                                                                                                                           |
+| Intrinsics            | `fov` mode with the horizontal field of view in degrees, or `manual` mode with fx, fy, cx, cy in pixels. A new camera gateway offers only the field of view; load `manual` values with **Upload yaml** ([Device Bridge › Camera](https://docs.sodero.io/v2.0.0/gateways/device_bridge/#camera)). |
+| Simulation camera     | Connection timeouts                                                                                                                                                                                                                                                                              |
 
 Isaac Sim renders cameras with square pixels and the principal point at the image center, so `fov` mode with the camera's horizontal field of view is exact. Isaac Bridge prints each camera's field of view in the Isaac Sim console when the scene plays.
 
@@ -1898,24 +1907,24 @@ Add the node with **Add node** › **Gateway** › **IMU gateway**. It also crea
 
 The IMU gateway connects to the controller's configured simulator or sensor address. To set or change that address for your controller, contact Sodero support.
 
-In Isaac Sim, a robot publishes IMU data when its robot prim names the link that carries the IMU ([Robot Setup](https://docs.sodero.io/v2.0.0/virtual_simulation/robot_setup/index.md)).
+In Isaac Sim, a robot publishes IMU data when its robot prim names the link that carries the IMU in `rc:imuLink` ([Robot Setup](https://docs.sodero.io/v2.0.0/virtual_simulation/robot_setup/#7-imu)).
 
 ______________________________________________________________________
 
 ## 3. Mounting: Where the Sensor Sits
 
-Sensor data is in the sensor's own frame. Where the camera is mounted on the robot (its position and orientation relative to the robot's `base_link`) is part of the map bundle's extrinsics, used by the localizer ([Map Bundle](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md)). Measure the mounting on the robot; do not rotate the data in the source.
+Sensor data is in the sensor's own frame. Where the camera is mounted on the robot (its position and orientation relative to the robot's `base_link`) is part of the map bundle's extrinsics, used by the Localizer ([Map Bundle](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md)). Measure the mounting on the robot; do not rotate the data in the source.
 
 ______________________________________________________________________
 
 ## 4. Troubleshooting
 
-| Symptom                                                                                        | Cause and fix                                                                                        |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Camera log: *Waiting for simulator at …:53335 (World not running?)*                            | Isaac Sim is not playing, the camera host is wrong, or a firewall blocks port 53335                  |
-| Camera log: *…publishes frames of camera(s) … but none of camera 'cam0'*                       | **Camera name** does not match a camera in the scene                                                 |
-| Camera log: *Frames … are stale or carry capture times that do not match this Station's clock* | The clocks of the two computers differ. Synchronize them (NTP) or let the source send arrival times. |
-| Camera view is black or frozen                                                                 | The camera prim looks at nothing, or the scene is paused                                             |
+| Symptom                                                                                        | Cause and fix                                                                                                                                                                                   |
+| ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camera log: *Waiting for simulator at …:53335 (World not running?)*                            | Isaac Sim is not playing, the camera host is wrong, or a firewall blocks port 53335                                                                                                             |
+| Camera log: *…publishes frames of camera(s) … but none of camera 'cam0'*                       | **Camera name** does not match a camera in the scene                                                                                                                                            |
+| Camera log: *Frames … are stale or carry capture times that do not match this Station's clock* | The clocks of the two computers differ. Synchronize them (NTP), or stop sending capture times at the source (Device Bridge: `send_capture_time: false`) so that the Station uses arrival times. |
+| Camera view is black or frozen                                                                 | The camera prim looks at nothing, or the scene is paused                                                                                                                                        |
 
 # Simulation Gateway
 
@@ -1999,24 +2008,25 @@ ______________________________________________________________________
 
 ## 5. Troubleshooting
 
-| Symptom                                                | Cause and fix                                                                                                                                          |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| The log stays at *waiting for it to start*             | Isaac Sim is not playing; **Sim host** is not the Isaac Sim computer; its firewall blocks TCP 53333–53334; **Robot name** does not match the prim name |
-| The Isaac Bridge window shows the robot as *not bound* | The prim has no articulation root, or two prims share the name ([Robot Setup](https://docs.sodero.io/v2.0.0/virtual_simulation/robot_setup/index.md))  |
-| Servo on is accepted but the robot does not move       | Strider: the drive mode is not **Twist**. Motion Studio: the joint count of the scene differs from the gateway's actuators.                            |
-| A wheel or joint turns the wrong way                   | The joint order or axis in the scene differs from the document. Fix the scene or the document; do not invert signs elsewhere.                          |
-| Motion is too slow or odometry drifts                  | The simulation runs slower than real time. Lower the scene's physics and render rates, close other GPU programs.                                       |
+| Symptom                                                | Cause and fix                                                                                                                                                                                                                                                                                                                    |
+| ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The log stays at *waiting for it to start*             | Isaac Sim is not playing; **Sim host** is not the Isaac Sim computer; its firewall blocks TCP 53333–53334; **Robot name** does not match the prim name                                                                                                                                                                           |
+| The Isaac Bridge window does not list the robot        | The prim has no articulation root ([Robot Setup](https://docs.sodero.io/v2.0.0/virtual_simulation/robot_setup/index.md))                                                                                                                                                                                                         |
+| The Isaac Bridge window shows the robot as *not bound* | The robot is not a valid PhysX articulation (check the Isaac Sim console), or two prims share the name ([Robot Setup](https://docs.sodero.io/v2.0.0/virtual_simulation/robot_setup/index.md))                                                                                                                                    |
+| Servo on is accepted but the robot does not move       | Strider: the drive mode is not **Twist**. Motion Studio: the joint count of the scene differs from the gateway's actuators.                                                                                                                                                                                                      |
+| A wheel or joint turns the wrong way                   | The joint order or axis in the scene differs from the document. Fix the scene or the document; do not invert signs elsewhere.                                                                                                                                                                                                    |
+| Motion looks slow, or localization lags                | The simulation runs slower than real time: controllers follow simulation time, but camera-based localization runs on wall-clock time. Lower the scene's physics and render rates, close other GPU programs ([Real-Time Performance](https://docs.sodero.io/v2.0.0/virtual_simulation/connect_station/#6-real-time-performance)). |
 # Controllers
 
 # Articulation
 
-The **Articulation** controller drives an articulated robot joint by joint: legged robots, humanoids, grippers, pan-tilt heads, or any set of joints that receives joint targets. Unlike Motion Studio it uses no arm kinematics (no DH parameters, no Cartesian motions); it bounds and forwards joint targets from an upper controller such as **Legged locomotion**, and it lets you jog and calibrate the joints by hand.
+The **Articulation** controller drives an articulated robot joint by joint: legged robots, humanoids, grippers, pan-tilt heads, or any set of joints that receives joint targets. Unlike Motion Studio, it uses no arm kinematics (no DH parameters, no Cartesian motions). It bounds and forwards joint targets from an upper controller, such as the [**Legged locomotion**](https://docs.sodero.io/v2.0.0/station/nodes_and_connections/#node-types-and-modules) node that runs a walking policy, and it lets you jog and calibrate the joints by hand.
 
 | Item     | Value                                                                                                        |
 | -------- | ------------------------------------------------------------------------------------------------------------ |
 | Node     | `rc.articulation_controller_manager.NAME`                                                                    |
-| Document | `.sdda` ([Stellar Designer](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/introduction/index.md)) |
-| Joints   | 1 to 24, driven by one actuator gateway                                                                      |
+| Document | `.sdda` ([Stellar Designer](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/articulation/index.md)) |
+| Joints   | 1 to 64, driven by one actuator gateway                                                                      |
 | Units    | rad, rad/s, N·m                                                                                              |
 
 ```
@@ -2057,7 +2067,7 @@ Start the gateway and the Articulation node, then click **Articulation** in the 
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | Left rail         | **Joints** (joint monitor), **Constraints** (configured limits), **Set origin**                                                |
 | Top bar           | **Servo on**, **Servo off**, **Stop**, **Clear stop**, the control mode, and the button that opens the **Joint control** panel |
-| Status strip      | **Servo** On/Off, **Feedback** age in milliseconds, **Safety** (*Ready* or the reason of a stop)                               |
+| Status strip      | **Servo** On/Off, **Feedback** age in milliseconds, **Safety** (*Ready* or the reason for a stop)                              |
 | **Controller**    | The Articulation node this window controls                                                                                     |
 | **Joint monitor** | Per joint: position, velocity, effort and target                                                                               |
 
@@ -2162,7 +2172,7 @@ Click **Jog** in the header to open the jog panel.
 The jog panel
 
 1. Switch **Servo On** ⑥.
-1. Choose the jog **Mode** ③:
+1. In **JOG OPTION** ②, choose the jog **Mode** ③:
    - **Joint**: move one joint at a time (J1…Jn).
    - **Base**: move the tool in the robot's base frame (X, Y, Z, RX, RY, RZ).
    - **Tool**: move the tool in its own frame.
@@ -2239,7 +2249,7 @@ ______________________________________________________________________
 
 ## 1. Open Strider
 
-Start the Strider node and its gateway on the Station ([Running Nodes](https://docs.sodero.io/v2.0.0/station/running_nodes/index.md)). Then click **Strider** in the node's **CONTROL** section, or the **Strider** link on the node card. Strider opens in a new tab for that robot.
+On the Station, start the gateway first, then the Strider node ([Running Nodes](https://docs.sodero.io/v2.0.0/station/running_nodes/index.md)). Click **Strider** in the node's **CONTROL** section, or the **Strider** link on the node card. Strider opens in a new tab for that robot.
 
 A running Strider node
 
@@ -2254,7 +2264,7 @@ The left rail has three pages: **Status**, **Drive** and **Navigation**. The top
 | Item                         | Description                                                                                                                                                                 |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Readiness pill               | The current state in one line, for example *Manual Drive Ready* or *Servo Off*. Click it for the **CHECKS** list: Connection, Mobile base, Servo, Localization, Navigation. |
-| **System Log**               | Events of this browser session, filtered by System, Drive, Navigation, Localization                                                                                         |
+| **System Log**               | Events of this browser session, with filters for System, Drive, Navigation and Localization                                                                                 |
 | **Motion Alarm**             | Active alarms and recent errors                                                                                                                                             |
 | **Stop Motion** (Drive page) | Stops manual driving and cancels a running goal                                                                                                                             |
 | **E-STOP**                   | Emergency stop of the base. It latches until **Clear E-Stop**.                                                                                                              |
@@ -2274,6 +2284,8 @@ The Status page
 | **Operation Status**           | System Ready, Moving / Motion Idle, Servo On / Off, Fault Clear / Emergency Stop / Fault / Watchdog Tripped                    |
 | **Base Status (Odometry)**     | Mode and X, Y, Theta, VX, VY, WZ                                                                                               |
 | **Control Node Health**        | Whether the base, the localizer and the navigator are reachable                                                                |
+| **Drive Unit Status**          | The drive template (for example `skid_steer_4`) and, per wheel, the servo state, position, velocity and target velocity        |
+| **Recent Events**              | The six latest events; **View All** opens the **System Log**                                                                   |
 
 **Watchdog Tripped** while the base stands still in Twist mode is normal: it means that no velocity command is arriving, so the base holds zero speed.
 
@@ -2361,7 +2373,7 @@ ______________________________________________________________________
 
 ## 6. Control Strider from Programs
 
-Everything the UI does is available to programs:
+The main functions are also available to programs:
 
 - From the SSH workspace with `sodero tools call strider.set_mode`, `strider.servo_on`, `strider.set_twist`, `strider.stop` and `strider.get_state` ([sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)).
 - From your own modules on the Station through the `mobile_base` interface ([Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md)).
@@ -2378,7 +2390,7 @@ sodero tools call strider.set_mode --input '{"mode": "TWIST", "target": "rc.mobi
 
 A map bundle is one file that carries the map of one site together with the settings to localize and navigate in it. You attach it to the **Localizer**; the **Navigator** runs on the same bundle, and **Visual odometry** uses its camera calibration.
 
-Stellar does not build maps on the robot; there is no SLAM. The map comes from a 3D model of the site, such as the USD world of your NVIDIA Isaac Sim scene, or from a 3D scan of the real site. This page specifies the format completely, so that you can build bundles for your own sites.
+Stellar Station does not build maps on the robot; there is no SLAM. The map comes from a 3D model of the site, such as the USD world of your NVIDIA Isaac Sim scene, or from a 3D scan of the real site. This page specifies the format completely, so that you can build bundles for your own sites.
 
 The Localizer matches the camera's depth images against the 3D point cloud of the bundle to find the robot on the map. The Navigator plans paths on the 2D occupancy grid. Both describe the same site in the same coordinates.
 
@@ -2433,7 +2445,7 @@ flowchart TB
 
 The Localizer is planar by default (`icp.planar: true`): it estimates x, y and yaw of `base_link` and holds its height, roll and pitch at zero. `base_link` therefore lies on the floor, and the camera height in `extrinsics.yaml` is its height **above the floor**.
 
-Measure the camera's x and y from the base origin that your odometry tracks, but its z from the floor, even when your robot model places `base_link` higher, for example at the wheel axles. A height taken from a raised base puts every camera point too low by that offset: the fit error exceeds `icp.max_rmse` and the Localizer stays `initializing`.
+Measure the camera's x and y from the base origin that your odometry tracks, but its z from the floor, even when your robot model places `base_link` higher, for example at the wheel axles. A height taken from a raised base puts every camera point too low by that offset: the fit error exceeds `icp.max_rmse` and the localization status stays **Initializing** (`initializing`).
 
 ______________________________________________________________________
 
@@ -2504,7 +2516,7 @@ free_thresh: 0.196
 
 | Key               | Type         | Unit | Meaning                                                                                                                                | Example                     |
 | ----------------- | ------------ | ---- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| `camera_frame_id` | text         | —    | The camera's optical frame: the `frame_id` in the camera node's **Camera settings**, at most 15 characters. Required by the Localizer. | `cam0_optical`              |
+| `camera_frame_id` | text         | —    | The camera's optical frame: the `frame_id` in the camera node's **CAMERA SETTINGS**, at most 15 characters. Required by the Localizer. | `cam0_optical`              |
 | `edges`           | list         | —    | 1 to 32 fixed transforms; a frame is the `child` of one edge at most                                                                   |                             |
 | `parent`, `child` | text         | —    | Frame names                                                                                                                            | `base_link`, `cam0_optical` |
 | `xyz`             | [x, y, z]    | m    | Position of the child in the parent frame                                                                                              | `[0.22, 0.0, 0.468]`        |
@@ -2538,11 +2550,11 @@ y: 2.3881
 yaw: 0.0
 ```
 
-The Localizer starts from this pose when it has no confirmed pose on this map. Once it has localized, it restarts from its last confirmed pose on the same `map_id`. A pose set in **Initial pose** mode on the map page, or with the `localization.set_initial_pose` tool, replaces both. Give a changed map a new `map_id` so that an old pose is not reused.
+The Localizer starts from this pose when it has no confirmed pose on this map. Once it has localized, it restarts from its last confirmed pose on the same `map_id`. A pose set with **Set Initial Pose** on Strider's Navigation page, or with the `localization.set_initial_pose` tool, replaces both. Give a changed map a new `map_id` so that an old pose is not reused.
 
 ### localizer.yaml
 
-Only `map.file` is required; a key you leave out keeps its default. The warehouse values:
+Only `map.file` is required; a key you leave out keeps its default. An excerpt of the warehouse file:
 
 ```
 map:
@@ -2573,10 +2585,10 @@ publish:
 | `icp.deg_ratio`, `icp.deg_min_info`, `icp.deg_threshold`                                                                                                                                             | `0.05`, `5.0`, `0`                                                     | Handling of directions the view cannot observe, such as along a corridor                                                                                                                                              |
 | `icp.max_solve_points`, `robust_delta`, `relative_fitness`, `relative_rmse`, `min_structural_fitness`, `rmse_growth_factor`, `sigma_depth`, `cov_inflation`, `recovery_radius_m`, `recovery_yaw_rad` | `0`, `0`, `1.0e-6`, `1.0e-6`, `0`, `1.05`, `0.01`, `4.0`, `0.4`, `0.5` | Advanced tuning; keep the defaults                                                                                                                                                                                    |
 | `sensor.depth_min`, `sensor.depth_max`                                                                                                                                                               | `0.2` m, `6.0` m                                                       | Depth range of the camera points used                                                                                                                                                                                 |
-| `status.accept_streak`, `status.init_min_fitness`                                                                                                                                                    | `3`, `0.7`                                                             | Accepted fits in a row, each with at least this fitness, needed to become `localized`                                                                                                                                 |
-| `status.degrade_after_s`, `lost_after_s`, `degrade_fitness`                                                                                                                                          | `2.0` s, `10.0` s, `0.5`                                               | Time without an accepted fit before `degraded` and `lost`; fitness below which the state degrades                                                                                                                     |
+| `status.accept_streak`, `status.init_min_fitness`                                                                                                                                                    | `3`, `0.7`                                                             | Accepted fits in a row, each with at least this fitness, needed to become **Healthy** (`localized`)                                                                                                                   |
+| `status.degrade_after_s`, `lost_after_s`, `degrade_fitness`                                                                                                                                          | `2.0` s, `10.0` s, `0.5`                                               | Time without an accepted fit before **Degraded** (`degraded`) and **Lost** (`lost`); fitness below which the state degrades                                                                                           |
 | `status.clock_skew_ms`, `status.odometry_stale_s`                                                                                                                                                    | `200` ms, `3.0` s                                                      | Largest camera-to-odometry lag; odometry silence before the input reconnects                                                                                                                                          |
-| `recovery.auto_reseed`, `lost_wait_s`, `attempts`, `attempt_timeout_s`, `spacing_s`, `radius_step_m`, `max_radius_m`, `yaw_jitter_rad`                                                               | `true`, `3.0` s, `5`, `5.0` s, `1.0` s, `0.3` m, `1.0` m, `0.17` rad   | After `lost`, retry automatically around the last confirmed pose: schedule and search area                                                                                                                            |
+| `recovery.auto_reseed`, `lost_wait_s`, `attempts`, `attempt_timeout_s`, `spacing_s`, `radius_step_m`, `max_radius_m`, `yaw_jitter_rad`                                                               | `true`, `3.0` s, `5`, `5.0` s, `1.0` s, `0.3` m, `1.0` m, `0.17` rad   | After **Lost**, retry automatically around the last confirmed pose: schedule and search area                                                                                                                          |
 | `publish.pose_hz`, `status_hz`, `obstacles_hz`                                                                                                                                                       | `20`, `1`, `10` Hz                                                     | Output rates                                                                                                                                                                                                          |
 | `publish.obstacles.z_min`, `z_max`, `ground_relative`                                                                                                                                                | `0.10` m, `0.30` m, `false`                                            | Height band above the floor whose camera points mark live obstacles for the Navigator; `true` measures from the floor seen in each image                                                                              |
 | `publish.obstacles.size_cells`, `resolution`, `decay_s`                                                                                                                                              | `48`, `0.05` m, `2.0` s                                                | Live obstacle grid around the robot (at most 48 × 48 cells) and how long a mark lasts                                                                                                                                 |
@@ -2610,6 +2622,8 @@ navigator: {drive: diff}
 - **Numbers** are 0 to 1,000,000, except the entries of `min_velocity` and `max_decel`, which may be negative. Velocity lists have three entries: `[x m/s, y m/s, yaw rad/s]`.
 - **Robot size** is a circle, `robot_radius`; a polygon `footprint` is refused.
 
+The **Template** column lists the values of the reference navigator configuration, which defines the accepted keys. They are a starting point for your own values, not the built-in values used for a key you leave out.
+
 | Key                                                                                                     | Template                                                                    | Meaning                                                                                                   |
 | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | `local_costmap.robot_radius`, `global_costmap.robot_radius`                                             | `0.42` m                                                                    | Radius around `base_link` that covers the robot; required, the same value in both                         |
@@ -2637,7 +2651,7 @@ ______________________________________________________________________
 
 After the upload, the settings in `localizer.yaml`, `navigator.yaml`, `extrinsics.yaml` and `initial_pose.yaml` can be changed without a new bundle:
 
-- **Station page:** select the Localizer or the Navigator node. The inspector's **Navigation settings** section groups the keys your files contain as Localizer, Navigator, Camera calibration and Initial pose.
+- **Station page:** select the Localizer or the Navigator node. The inspector's **NAVIGATION SETTINGS** section groups the keys your files contain as Localizer, Navigator, Camera calibration and Initial pose.
 - **CLI:** `sodero navigation get --node rc.navigator`, edit the returned `config`, then `sodero navigation apply` with its SHA-256 (see [sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)).
 
 Stop the Localizer, the Navigator and Visual odometry before you save; the new values apply when the nodes start again. The map files, `meta.yaml` and `map.file` change only with a new bundle.
@@ -2701,20 +2715,24 @@ The Localizer and the Navigator share one bundle, so one upload serves both. See
 
 1. Stop the Localizer and the nodes that use its bundle (Navigator, Visual odometry).
 1. Select the Localizer node. In the inspector's **LOCALIZER** section, click **Upload .nav** and choose `site.nav.tgz`.
-1. The section shows the file name, and **Navigation settings** lists the settings of the bundle.
+1. The section shows the file name, and **NAVIGATION SETTINGS** lists the settings of the bundle.
 1. Start the Localizer and the Navigator again.
 
-The Station page accepts file names ending in `.tgz`, `.tar.gz`, `.tar` or `.zip`, the CLI only names ending in `.nav`. Both take the same gzip tar archive: name it `site.nav.tgz` for the page and `site.nav` for the CLI. The page checks the archive's layout; the CLI preview checks every rule on this page, so preview a new bundle with the CLI before you upload it on the page.
+Upload `site.nav.tgz` on the Station page and `site.nav` with the CLI; both are the same gzip-compressed tar. The page checks the archive's layout; the CLI preview checks every rule on this page, so preview a new bundle with the CLI before you upload it on the page.
 
 ### sodero CLI
 
 ```
+sodero runtime node stop rc.navigator --execute
 sodero runtime node stop rc.localizer --execute
 sodero navigation get --node rc.localizer                                     # note "sha256"
 sodero maps upload site.nav --node rc.localizer --if-sha256 SHA256            # preview: checks the bundle
 sodero maps upload site.nav --node rc.localizer --if-sha256 SHA256 --execute  # attach it
+sodero runtime node start rc.localizer --execute
+sodero runtime node start rc.navigator --execute
 ```
 
+- With Visual odometry, also stop `rc.visual_odometry` before the upload, and start it again before the Localizer.
 - The file name must end in `.nav`, and the file may be at most 64 MiB.
 - The preview reports the first problem it finds (see [Validation Errors](#validation-errors)) and changes nothing.
 - `--node rc.navigator`, with the SHA-256 from `sodero navigation get --node rc.navigator`, attaches the same shared bundle. After each upload or settings change, read the SHA-256 again.
@@ -2740,7 +2758,7 @@ ______________________________________________________________________
 | `PLY requires a bounded LF header.`, `PLY point data length is inconsistent.`                                                                                  | CRLF line endings, or point data that does not match the header                                                   | Export again with LF line endings                                                                 |
 | `Use plain YAML data types.`, `Each YAML document must be a mapping.`, `Invalid YAML document.`                                                                | An unquoted date or time (for example in `created`), an empty file or a syntax error                              | Quote dates and times; fix the file                                                               |
 | `KEY: number outside supported bounds.`                                                                                                                        | A value out of range, or a number read as text, such as `1e-6`                                                    | Use the ranges on this page; write `1.0e-6`                                                       |
-| `KEY: unknown or missing fields.`                                                                                                                              | A misspelt or unsupported key, such as `rpy` in an edge or `footprint` in a costmap                               | Use only the keys on this page                                                                    |
+| `KEY: unknown or missing fields.`                                                                                                                              | A misspelled or unsupported key, such as `rpy` in an edge or `footprint` in a costmap                             | Use only the keys on this page                                                                    |
 | `KEY: unsupported value.`                                                                                                                                      | A fixed text value changed, `negate` other than 0 or 1, or an unknown `drive`                                     | Restore the value                                                                                 |
 | `KEY: invalid text.`, `KEY: invalid list length.`                                                                                                              | A name with unsupported characters or not starting with a letter; a list with the wrong number of entries         | Use letters, digits, `_`, `.` and `-`; 3 entries for `xyz`, `origin` and velocities, 4 for `quat` |
 | `Calibration edges require unique children and unit quaternions.`, `Calibration frames must not contain a cycle.`                                              | A frame is the child of two edges, a parent equals its child, `quat` is not unit length, or the edges form a loop | One edge per child, chained from `base_link`; normalize `quat`                                    |
@@ -2765,11 +2783,11 @@ ______________________________________________________________________
 - `initial_pose.yaml` gives the pose of `base_link`, with yaw in radians.
 - `navigator.yaml` is complete, with your robot's `robot_radius` and speed limits.
 - The archive is a gzip tar with one top folder, at most 64 MiB, and the CLI preview reports no problem.
-- In simulation, the Localizer reaches `localized` and the robot reaches a nearby goal before you drive the real robot.
+- In simulation, the localization status reaches **Healthy** and the robot reaches a nearby goal before you drive the real robot.
 
 # Localization and Navigation
 
-Stellar Station includes a complete navigation stack for mobile robots: it knows where the robot is on a map (**localization**) and drives it to goals around obstacles (**navigation**). Both run on Stellar X as built-in nodes and drive the base through its Strider node.
+Stellar Station includes a complete navigation stack for mobile robots: it knows where the robot is on a map (**localization**) and drives it to goals around obstacles (**navigation**). Both run on Stellar X as built-in nodes and work with the base's Strider node: the localizer reads its odometry, and the navigator drives the base through it.
 
 ______________________________________________________________________
 
@@ -2795,7 +2813,7 @@ flowchart TB
 | **Visual odometry** (optional) | Estimates odometry from the camera, for robots without wheel odometry such as walking robots                                                                                              |
 | **Map bundle** (`.nav`)        | One file with the map (point cloud and occupancy grid) and the localizer and navigator settings for one site ([Map Bundle](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md)) |
 
-The localizer works in the plane: it estimates x, y and heading on the map. There is one localizer and one navigator per Station, so one robot per Station navigates.
+By default the localizer works in the plane: it estimates x, y and heading on the map. There is one localizer and one navigator per Station, so one robot per Station navigates.
 
 ______________________________________________________________________
 
@@ -2886,7 +2904,7 @@ A goal is a pose in the `map` frame. A patrol is a sequence of goals sent one af
 
 This tutorial continues the [Quick Start](https://docs.sodero.io/v2.0.0/get_started/quick_start/index.md). You add a camera, the Localizer and the Navigator to the simulated Jackal, load the map of its warehouse, let the robot find itself on the map, and send it to a goal.
 
-The Jackal driving to a goal in the warehouse, guided by the Station's navigation stack
+The Jackal (center) driving to a goal in the warehouse, guided by the Station's navigation stack
 
 ______________________________________________________________________
 
@@ -2902,7 +2920,7 @@ ______________________________________________________________________
 
 ## Step 1: Set the Camera Size and Rate
 
-The localizer in this tutorial uses the camera at 320 × 240 pixels and 5 frames per second. Isaac Bridge renders cameras at 640 × 480 and 15 frames per second unless told otherwise, so close Isaac Sim and start it again with this camera setting:
+The localizer in this tutorial uses the camera at 320 × 240 pixels and 5 frames per second. Isaac Bridge renders cameras at 640 × 480 and 15 frames per second unless told otherwise, so close Isaac Sim and start it again from its installation folder with this camera setting:
 
 ```
 RC_ISAAC_CAMERA_DEVICES='[{"name": "cam0", "width": 320, "height": 240, "fps": 5}]' ./isaac-sim.sh
@@ -2913,13 +2931,13 @@ set "RC_ISAAC_CAMERA_DEVICES=[{"name": "cam0", "width": 320, "height": 240, "fps
 isaac-sim.bat
 ```
 
-Run the command in Isaac Sim's installation folder, then open `jackal_warehouse.usd` and press **Play**. The Isaac Bridge window lists `cam0 320x240 at 5 fps`.
+Then open `jackal_warehouse.usd` and press **Play**. The Isaac Bridge window lists `cam0 320x240 at 5 fps`.
 
 ______________________________________________________________________
 
 ## Step 2: Add the Camera Gateway
 
-1. **Add node** › **Gateway** › **Camera gateway**, name it `cam0`.
+1. **Add node** › **Gateway** › **Camera gateway**, name it `cam0`. The Station also adds its companion node `rc.camera_component.cam0` ([Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/#1-camera-gateway)).
 1. In its inspector, set **Camera name** `cam0` (the camera prim's name in the scene) and **Camera host** (the Isaac Sim computer). The port is `53335`.
 1. Under **CAMERA SETTINGS**, set **fps** `5`, **frame id** `cam0_optical`, intrinsics mode `fov` with a horizontal field of view of `90`, and click **Save settings**.
 1. Click **Start node**, then **Camera view** on its card to check the image.
@@ -3020,7 +3038,7 @@ The example is a 6-axis manipulator. Download its parts and unzip them:
 
 The example manipulator
 
-For your own robot you need one 3D model file per link from your CAD design, and the DH parameters, joint limits and mass properties from its specification.
+For your own robot you need one 3D model file per link, exported from your CAD design, and the robot's DH parameters.
 
 The steps use [Blender](https://www.blender.org/download/), which reads most common 3D formats. Any other 3D tool works as long as it produces the same object names, hierarchy and file format.
 
@@ -3065,33 +3083,29 @@ The robot is a serial chain: each joint is a child of the previous joint, and ea
 
 ```
 World
-└── root
-    └── links
-        └── J0
-            ├── link0
-            └── J1
-                ├── link1
-                └── J2
-                    ├── link2
-                    └── J3
-                        ├── link3
-                        └── J4
-                            ├── link4
-                            └── J5
-                                ├── link5
-                                └── J6
-                                    └── link6
+└── J0
+    ├── link0
+    └── J1
+        ├── link1
+        └── J2
+            ├── link2
+            └── J3
+                ├── link3
+                └── J4
+                    ├── link4
+                    └── J5
+                        ├── link5
+                        └── J6
+                            └── link6
 ```
 
 Select `J1` and Shift-drag it onto `J0`: `J1` and `link1` are now under `J0`. Repeat this for the other joints.
 
-| Item               | Description                     |
-| ------------------ | ------------------------------- |
-| `World`            | The scene of the 3D tool        |
-| `root`             | The robot's base node           |
-| `links`            | The group that holds the joints |
-| `J0` to `Jn`       | Joint nodes                     |
-| `link0` to `linkn` | Link models                     |
+| Item               | Description              |
+| ------------------ | ------------------------ |
+| `World`            | The scene of the 3D tool |
+| `J0` to `Jn`       | Joint nodes              |
+| `link0` to `linkn` | Link models              |
 
 Each joint `Jn` must be a child of the previous joint, and each link `linkn` a child of its joint `Jn`. With a different hierarchy the links do not move with their joints.
 
@@ -3112,7 +3126,7 @@ Stellar Designer applies the four DH parameters of a joint in this fixed order:
 
 ### Place the Joints
 
-The joint hierarchy in Blender
+J2 placed 0.205 m above J1
 
 Joint J1 of the example has θ = 0, d = 205 mm, a = 0 and α = 0 in Stellar Designer, so the frame of J2 sits 205 mm above J1 along Z.
 
@@ -3143,17 +3157,105 @@ ______________________________________________________________________
 
 Open the robot's document in Stellar Designer, click **Display** in the 3D view and choose **Load.glb** ([Stellar Designer](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/introduction/#display-menu)). Switch **Representation** to **3D Model**: each link moves with its joint when you jog the joints in **Robot Structure**. Motion Studio and the Station then show the robot with this model.
 
-Stellar Designer uses only the `.glb` file. Blender is one example of a tool; any other tool works with the same names, hierarchy and file format.
+Stellar Designer uses only the `.glb` file.
+
+# Articulated Robot (.sdda)
+
+This tutorial builds the document of a robot whose joints are driven one by one, using a four-legged robot with twelve joints as the example. The document belongs to an Articulation node (`rc.articulation_controller_manager.NAME`). Unlike a manipulator or mobile base document, it describes no kinematics: only the joints, their limits and how the gateway's actuators drive them. How the controller uses the document is described in [Articulation](https://docs.sodero.io/v2.0.0/controllers/articulation/index.md).
+
+______________________________________________________________________
+
+## Before You Start
+
+1. On the Station, add a **Controller › Articulation** node, for example `quadruped`, and an **Actuator gateway** for its motors ([Nodes and Connections](https://docs.sodero.io/v2.0.0/station/nodes_and_connections/index.md)).
+1. Connect the Articulation node's `servo_link` to the gateway.
+1. Select the Articulation node and click **Edit Stellar Designer**.
+
+A new Articulation node starts with one joint, `joint_1`. There are no templates; you add the joints of your robot one by one.
+
+______________________________________________________________________
+
+## Step 1: Joint Configuration
+
+Joint configuration of a four-legged robot with twelve joints
+
+Step **01 Joint configuration** ① shows the controller settings on the left and the joints on the right.
+
+**Controller**:
+
+| Field                    | Meaning                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Controller subsystem** | The ID of the node. The Station fills it in.                                                                                                                                                                                                                                                                                                        |
+| **Actuator gateway**     | The gateway connected to the node's `servo_link`. The Station fills it in.                                                                                                                                                                                                                                                                          |
+| **Drive mode** ②         | **Position targets**: the controller bounds the joint targets, and the drive (or the simulated joint) follows them with its own position control. Set a matching effort limit in the drive or the simulator. **Bounded PD torque**: the controller computes a torque from each joint's **Kp** and **Kd** and clamps it to the joint's torque limit. |
+
+**Joints**: **Add joint** ③ adds a joint at the end of the list, up to 64 joints. Open a joint ④ to edit it:
+
+| Field                  | Meaning                                                              |
+| ---------------------- | -------------------------------------------------------------------- |
+| **Name**               | A unique name of letters, digits and underscores                     |
+| **Min**, **Max** (rad) | Range of motion. Targets outside it are refused.                     |
+| **Speed** (rad/s)      | Velocity limit, also the reference for the jog speed in Articulation |
+| **Torque** (N·m)       | Torque limit                                                         |
+| **Offset** (rad)       | Joint position at actuator position zero                             |
+| **Kp**, **Kd**         | Stiffness and damping, shown in **Bounded PD torque** mode           |
+
+**Move up** moves a joint one place up and **Remove** deletes it.
+
+Each leg of the example robot (`fl`, `fr`, `rl`, `rr`) has a hip, a thigh and a calf joint, named for example `fl_hip`. The list runs leg by leg: `fl_hip`, `fl_thigh`, `fl_calf`, then the joints of `fr`, `rl` and `rr`. The example uses these values; enter those of your own robot:
+
+|                   | Hip  | Thigh | Calf |
+| ----------------- | ---- | ----- | ---- |
+| **Min** (rad)     | −0.8 | −1.0  | −2.7 |
+| **Max** (rad)     | 0.8  | 3.0   | −0.9 |
+| **Speed** (rad/s) | 20   | 20    | 20   |
+| **Torque** (N·m)  | 25   | 25    | 35   |
+
+**Joint order matters.** Commands and feedback follow the order of the list. A program that sends joint targets must use the same order: Legged locomotion, for example, compares the joint names and their order with its walking policy and does not start if they differ (*The controller joint order does not match the policy manifest.*).
+
+**Save configuration** ⑤ saves the document to the node; the button shows **Saved** when there is nothing left to save. Stellar Designer also saves when you return to the Station.
+
+______________________________________________________________________
+
+## Step 2: Actuator Mapping
+
+Twelve actuators, each driving one joint
+
+The canvas ① shows the gateway's actuators (top) and the joints (bottom); the right panel ② lists the **INFLUENCE FACTOR** of each connection. Every joint you add starts connected to the actuator with the same number, with factor `1`.
+
+Change the mapping as for a manipulator ([Manipulator › Actuator Mapping](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/manipulator/#step-3-actuator-mapping)): drag from an actuator's connector to a joint's connector, set the influence factor, and use a negative factor to reverse a direction. Several connections describe coupled joints. The mapping uses as many actuators as there are joints, and it must be invertible: every set of joint targets must correspond to exactly one set of actuator commands.
+
+Actuator *n* here is actuator *n* of the gateway. The gateway must provide at least as many actuators as the document has joints.
+
+______________________________________________________________________
+
+## Save a Copy
+
+To save the document to your computer, click the Stellar mark at the top left and choose **Definition › Download .sdda**. You can import the file into another Articulation node with **Import .sdda** ([Design Documents](https://docs.sodero.io/v2.0.0/station/design_documents/index.md)).
+
+______________________________________________________________________
+
+## Try the Robot
+
+**Real hardware moves.** Support a legged robot so that its feet are off the ground, keep the area clear and keep the emergency stop within reach.
+
+Start the gateway, then the Articulation node, and click **Articulation** in the node's **CONTROL** section ([Articulation](https://docs.sodero.io/v2.0.0/controllers/articulation/index.md)). Switch the servo on and jog each joint at a low speed. Check that:
+
+- each joint moves in the expected direction,
+- each joint stops at its limits,
+- the joint monitor shows the expected angles in a known pose. Correct a joint's zero with **Offset**, or with **Set origin** in Articulation.
+
+Then start the program that sends joint targets, such as Legged locomotion.
 
 # Stellar Designer
 
 **Stellar Designer** creates and edits the design documents of controllers: the robot's structure, its limits and safety settings, and how the gateway's actuators drive its joints or wheels. Each controller node on the Station holds one document:
 
-| Document | Robot                                                              | Controller    | Tutorial                                                                                       |
-| -------- | ------------------------------------------------------------------ | ------------- | ---------------------------------------------------------------------------------------------- |
-| `.sdd`   | Manipulator (serial arm)                                           | Motion Studio | [Manipulator](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/manipulator/index.md)   |
-| `.sddm`  | Wheeled mobile base                                                | Strider       | [Mobile Robot](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/mobile_robot/index.md) |
-| `.sdda`  | Articulated robot driven joint by joint (legged robots, humanoids) | Articulation  | [Articulation](https://docs.sodero.io/v2.0.0/controllers/articulation/index.md)                |
+| Document | Robot                                                              | Controller    | Tutorial                                                                                            |
+| -------- | ------------------------------------------------------------------ | ------------- | --------------------------------------------------------------------------------------------------- |
+| `.sdd`   | Manipulator (serial arm)                                           | Motion Studio | [Manipulator](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/manipulator/index.md)        |
+| `.sddm`  | Wheeled mobile base                                                | Strider       | [Mobile Robot](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/mobile_robot/index.md)      |
+| `.sdda`  | Articulated robot driven joint by joint (legged robots, humanoids) | Articulation  | [Articulated Robot](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/articulation/index.md) |
 
 Gateway documents (`.gw`) are made in the [Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md).
 
@@ -3164,14 +3266,14 @@ ______________________________________________________________________
 1. On the Station, select a controller node (Motion Studio, Strider or Articulation).
 1. Click **Edit Stellar Designer** in the node's **DEFINITION** section.
 
-Stellar Designer opens in a new tab with the node's document. Changes are saved back to the node automatically. **Stop the node before you edit its document**; the new document takes effect the next time the node starts.
+Stellar Designer opens in a new tab with the node's document. Changes are saved back to the node automatically; in an Articulation document, click **Save configuration**. **Stop the node before you edit its document**; the new document takes effect the next time the node starts.
 
-If the node has no document yet, Stellar Designer opens **Create robot definition**: choose a template of the robot type, or **Blank robot** for a manipulator, and click **Create**.
+If a Motion Studio or Strider node has no document yet, Stellar Designer opens **Create robot definition**: choose a template of the robot type, or **Blank robot** for a manipulator, and click **Create**. An Articulation node starts with a document of one joint.
 
-| Robot type  | Templates                                                                                                     |
-| ----------- | ------------------------------------------------------------------------------------------------------------- |
-| Manipulator | 2-axis two-bar arm, 4-axis SCARA, 4-axis cylindrical SCARA, 7-axis humanoid arm, Blank robot                  |
-| Mobile      | Differential drive 2WD, MiR250 differential, Skid steer 4WD, Mecanum 4WD, Swerve 4WD, Ackermann, Tricycle 3WD |
+| Robot type  | Templates                                                                                       |
+| ----------- | ----------------------------------------------------------------------------------------------- |
+| Manipulator | 2-axis two-bar arm, 4-axis SCARA, 4-axis cylindrical SCARA, 7-axis humanoid arm, Blank robot    |
+| Mobile      | Differential drive 2WD, MiR250 differential, Skid steer 4WD, Mecanum 4WD, Swerve 4WD, Ackermann |
 
 You can also import a document you already have with **Import** in the node's **DEFINITION** section ([Design Documents](https://docs.sodero.io/v2.0.0/station/design_documents/index.md)).
 
@@ -3181,20 +3283,20 @@ ______________________________________________________________________
 
 Stellar Designer with a 6-axis arm
 
-| Area        | Description                                                                                                                                                                                            |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Breadcrumb  | Where the document belongs: device / Station / node / file. The arrow returns to the Station.                                                                                                          |
-| Steps       | **01 Robot Structure** (or **Chassis Structure** for mobile robots), **02 Robot System Parameters**, **03 Actuator Mapping**, **04 Verification**. Click a step to open it; you can go back and forth. |
-| Left panel  | The joints (or wheels) of the robot, with their parameters                                                                                                                                             |
-| 3D view     | The robot as you define it. Drag to rotate, right-drag to pan, scroll to zoom. **Fit view** frames the robot; **Focus selection** frames the selected part.                                            |
-| Right panel | Details of the selection, such as constraints, or the parameters of the current step                                                                                                                   |
-| Units       | `mm / g / deg` or `m / kg / radian`. Display only; documents store SI units.                                                                                                                           |
+| Area        | Description                                                                                                                                                                                                                                                                                            |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Breadcrumb  | Where the document belongs: device / Station / node / file. The arrow returns to the Station.                                                                                                                                                                                                          |
+| Steps       | **01 Robot Structure** (or **Chassis Structure** for mobile robots), **02 Robot System Parameters**, **03 Actuator Mapping**, **04 Verification**. An Articulation document has two steps: **01 Joint configuration** and **02 Actuator Mapping**. Click a step to open it; you can go back and forth. |
+| Left panel  | The joints (or wheels) of the robot, with their parameters                                                                                                                                                                                                                                             |
+| 3D view     | The robot as you define it. Drag to rotate, right-drag to pan, scroll to zoom. **Fit view** frames the robot; **Focus selection** frames the selected part.                                                                                                                                            |
+| Right panel | Details of the selection, such as constraints, or the parameters of the current step                                                                                                                                                                                                                   |
+| Units       | `mm / g / deg` or `m / kg / radian`. Display only; documents store SI units.                                                                                                                                                                                                                           |
 
 ### Display Menu
 
 The Display menu
 
-**Display** in the 3D view switches between **Skeleton** (joint frames and links as lines) and **3D Model**, shows or hides **Joint frames**, **Grid** and **Axis gizmo**, and loads the robot's 3D model: **Load.glb** attaches a GLB file to the document, which Motion Studio and the Station show as the robot.
+**Display** in the 3D view switches between **Skeleton** (joint frames and links as lines) and **3D Model**, and shows or hides **Joint frames**, **Grid** and **Axis gizmo**. **Load.glb** attaches the robot's 3D model, a GLB file, to the document; Motion Studio and the Station then show the robot with it ([3D Model Creation](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/3dmodel_creation/index.md)).
 
 ______________________________________________________________________
 
@@ -3204,6 +3306,8 @@ ______________________________________________________________________
 1. **System parameters.** Enter the robot-wide values: payload, gravity, speed limits, goal tolerances, safety margins.
 1. **Actuator mapping.** Connect the gateway's actuators to the joints or wheels, with their transmission factors.
 1. **Verification.** Click **Verify**. When all checks pass, the document is ready; **Export** saves a copy to your computer.
+
+An Articulation document has only the joints with their limits and the actuator mapping ([Articulated Robot](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/articulation/index.md)).
 
 Then start the node on the Station and try the robot, in simulation first.
 
@@ -3231,9 +3335,9 @@ Step **01 Robot Structure** ① shows the **Joint Section**: the joints from the
 1. Click **Add joint** ⑥ to add a joint at the end of the chain. The trash icon removes a joint.
 1. Open a joint ② and choose its **Joint Type** ③: rotation or translation about the joint's X, Y or Z axis.
 1. Enter its **DH PARAMETERS** ④: **DH (Theta)**, **DH (D)**, **DH (A)** and **DH (Alpha)**. The 3D view updates as you type.
-1. Under **ADVANCED SETTINGS** ⑤:
+1. Under **ADVANCED SETTINGS**:
    - **Dynamics**: the mass, center of mass and inertia of the link that moves with this joint.
-   - **Constraints**: opens the joint's constraints in the right panel ⑧.
+   - **Constraints** ⑤: opens the joint's constraints in the right panel ⑧.
 1. Use **JOG** **+** / **−** to move the joint in the 3D view and check its direction. **Jog Reset** returns all joints to zero.
 
 **Joint constraints** ⑧:
@@ -3316,8 +3420,8 @@ ______________________________________________________________________
 
 ## Before You Start
 
-1. On the Station, add a **Controller › Strider** node, for example `jackal`.
-1. Select it and click **Edit Stellar Designer**.
+1. On the Station, add a **Controller › Strider** node, for example `jackal`, and an **Actuator gateway** for its wheel motors ([Nodes and Connections](https://docs.sodero.io/v2.0.0/station/nodes_and_connections/index.md)).
+1. Select the Strider node and click **Edit Stellar Designer**.
 1. In **Create robot definition**, choose the template that matches your drive:
 
 | Template               | Drive                                            |
@@ -3328,7 +3432,6 @@ ______________________________________________________________________
 | Mecanum 4WD            | Four mecanum wheels, omnidirectional             |
 | Swerve 4WD             | Four steered and driven wheels                   |
 | Ackermann              | Car-like steering                                |
-| Tricycle 3WD           | One steered and driven wheel, two passive wheels |
 
 The template sets the drive type, which decides how body velocities become wheel commands. Then change its dimensions to those of your robot.
 
@@ -3375,7 +3478,7 @@ Robot System Parameters of the Jackal
 | --------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
 | **ROBOT**       | Total mass, Max payload, Center of mass, Body inertia                    | Mass properties of the robot                                              |
 | **ENVIRONMENT** | Gravity vector                                                           | Normally `(0, 0, -9.81) m/s²`                                             |
-| **MOTION**      | Max linear speed, Max angular speed, Max linear accel, Max angular accel | Limits of the body velocity. Strider and the navigator never exceed them. |
+| **MOTION**      | Max linear speed, Max angular speed, Max linear accel, Max angular accel | Limits of the body velocity. Strider and the Navigator never exceed them. |
 
 ______________________________________________________________________
 
@@ -3385,7 +3488,7 @@ Four actuators driving the four wheels
 
 Connect each actuator of the gateway to the wheel it drives (or steers), as for a manipulator ([Manipulator › Actuator Mapping](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/manipulator/#step-3-actuator-mapping)). The order must match the gateway: in the Jackal's gateway, actuator 1 is the front-left wheel, 2 front-right, 3 rear-left, 4 rear-right.
 
-A mobile base uses the mapping only to know which actuator drives which wheel; leave the **INFLUENCE FACTOR** at `1`. The wheel kinematics already account for the left and right side. If a real wheel still turns the wrong way, invert the motor's direction in its drive, for example with the drive's polarity parameter as a start-up SDO in the [Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/ethercat/#ethercat-tab).
+A mobile base uses the mapping only to know which actuator drives which wheel; leave the **INFLUENCE FACTOR** at `1`. The wheel kinematics already account for the left and right side. If a real wheel still turns the wrong way, invert the motor's direction in its drive, for example by writing the drive's polarity parameter as a start-up SDO ([EtherCAT Gateway](https://docs.sodero.io/v2.0.0/gateways/ethercat/#ethercat-tab)).
 
 ______________________________________________________________________
 
@@ -3425,14 +3528,16 @@ ______________________________________________________________________
 
 ## 2. Set the Gateways on the Station
 
-Each line of the Isaac Bridge window corresponds to a field on a Station node:
+Set the Station nodes to match Isaac Sim:
 
-| Isaac Bridge window          | Station node                  | Field                                                                              |
+| Isaac Sim                    | Station node                  | Field                                                                              |
 | ---------------------------- | ----------------------------- | ---------------------------------------------------------------------------------- |
 | Robot `jackal`               | Actuator gateway (simulation) | **TARGET › Robot name** `jackal`                                                   |
 | The Isaac Sim computer       | Actuator gateway (simulation) | **TARGET › Sim host**: the computer's IP address                                   |
 | Camera `cam0`                | Camera gateway                | **Camera name** `cam0`, **Camera host**: the computer's IP address, **Port** 53335 |
 | Robot `jackal` (with an IMU) | IMU gateway                   | **Robot in World** `jackal`                                                        |
+
+The IMU gateway has no host field: it connects to the simulator address configured for your controller, which Sodero support sets ([Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/#2-imu-gateway)).
 
 **The Robot name on the Station must be exactly the robot's prim name in Isaac Sim.** Names are case-sensitive. If they differ, the gateway keeps waiting and the robot never moves.
 
@@ -3463,7 +3568,7 @@ The gateways treat Isaac Sim like a power supply of real drives:
 | Editing the scene while it plays | Takes effect at the next **Play**, or click **Rescan** in the Isaac Bridge window                                                  |
 | Closing Isaac Sim                | The gateways keep waiting and reconnect when the scene plays again                                                                 |
 
-After the simulation restarts, the robot is back at its starting pose, but the localizer may still hold its last pose. If Strider's Navigation page shows a wrong pose, set the initial pose again.
+After the simulation restarts, the robot is back at its starting pose, but the Localizer may still hold its last pose. If Strider's Navigation page shows a wrong pose, set the initial pose again.
 
 ______________________________________________________________________
 
@@ -3496,7 +3601,7 @@ ______________________________________________________________________
 | The robot is listed but never **bound**                                                       | It is not a valid PhysX articulation, or its name is used twice ([Robot Setup](https://docs.sodero.io/v2.0.0/virtual_simulation/robot_setup/#9-check-the-robot))                                                          |
 | Camera gateway: *publishes frames of camera(s) … but none of camera …*                        | The camera gateway's **Camera name** is not the camera's prim name                                                                                                                                                        |
 | Camera gateway: frames *stale* or with capture times that do not match                        | The clocks of the two computers differ. Synchronize them.                                                                                                                                                                 |
-| The robot moves too fast or too slow                                                          | The computer cannot keep the render rate. Lower camera sizes or rates, or close viewports.                                                                                                                                |
+| The robot moves too fast or too slow                                                          | The computer cannot keep up with the render rate. Lower camera sizes or rates, or close viewports.                                                                                                                        |
 
 The Isaac Sim console shows the bridge's messages, prefixed with the robot or camera name.
 
@@ -3514,7 +3619,7 @@ Isaac Bridge is open source. Download it from GitHub:
 git clone https://github.com/Sodero-labs/isaac_bridge.git
 ```
 
-Or download the ZIP file of the latest release from the repository page and extract it. Either way you get a folder `isaac_bridge`. Remember the folder that **contains** it, for example `~/isaac_extensions` when the extension is in `~/isaac_extensions/isaac_bridge`.
+Or download the ZIP file of the latest release from the repository page, extract it, and rename the extracted folder to `isaac_bridge` (GitHub adds the version to its name). Either way you get a folder `isaac_bridge`. Remember the folder that **contains** it, for example `~/isaac_extensions` when the extension is in `~/isaac_extensions/isaac_bridge`.
 
 ______________________________________________________________________
 
@@ -3529,17 +3634,23 @@ ______________________________________________________________________
 
 ① search ② enable ③ autoload
 
-When the extension starts the first time, Isaac Sim installs the Python package `pyzmq` from the internet. On a computer without internet access, install it into Isaac Sim's Python yourself, from Isaac Sim's installation folder:
+When the extension starts the first time, Isaac Sim installs the Python package `pyzmq` from the internet. For a computer without internet access, download the package on a computer that has internet access and the same operating system and Isaac Sim version, copy the `wheels` folder to the Isaac Sim computer, and install it from there. Run the commands in Isaac Sim's installation folder:
 
 ```
-./python.sh -m pip install pyzmq
+# On the computer with internet access
+./python.sh -m pip download pyzmq -d wheels
+# On the Isaac Sim computer, with the copied wheels folder
+./python.sh -m pip install --no-index --find-links wheels pyzmq
 ```
 
 ```
-python.bat -m pip install pyzmq
+REM On the computer with internet access
+python.bat -m pip download pyzmq -d wheels
+REM On the Isaac Sim computer, with the copied wheels folder
+python.bat -m pip install --no-index --find-links wheels pyzmq
 ```
 
-You can also start Isaac Sim with the extension from a command line: `isaac-sim.sh --ext-folder ~/isaac_extensions --enable isaac_bridge`.
+You can also start Isaac Sim with the extension from a command line: `isaac-sim.sh --ext-folder ~/isaac_extensions --enable isaac_bridge` (`isaac-sim.bat` on Windows).
 
 ______________________________________________________________________
 
@@ -3597,18 +3708,20 @@ ______________________________________________________________________
 flowchart TB
     subgraph SX ["Stellar X · Stellar Station"]
         CTRL["Controllers<br>Motion Studio · Strider · Articulation"] --> AG["Simulation gateways<br>(actuator)"]
-        CG["Camera / IMU gateways"]
+        IG["IMU gateways"]
+        CG["Camera gateways"]
     end
     subgraph PC ["Isaac Sim computer"]
         IB["Isaac Bridge extension"] --- ST["Scene<br>robots · cameras"]
     end
     AG -- "joint commands · 53333" --> IB
-    IB -- "joint states, IMU · 53334" --> AG
+    IB -- "joint states · 53334" --> AG
+    IB -- "IMU · 53334" --> IG
     IB -- "RGB-D frames · 53335" --> CG
 ```
 
 - **Only the gateways change.** A simulation gateway replaces the fieldbus with the network connection to Isaac Sim. Controllers, documents, settings and applications stay the same as for the real robot.
-- **The simulated robot behaves like servo drives.** Each joint receives position, velocity or torque commands and reports its position, velocity and torque, like a drive with its motor and encoder.
+- **Simulated joints behave like servo drives.** Each joint receives position, velocity or torque commands and reports its position, velocity and torque, like a drive with its motor and encoder.
 - **Cameras and IMUs** of the scene are served to the Station's camera and IMU gateways, so localization, navigation and walking controllers run on simulated sensors.
 - **Several robots** can share one scene. Each robot has a unique name, and each gateway on the Station names the robot it drives.
 
@@ -3659,7 +3772,7 @@ ______________________________________________________________________
 
 A robot prepared this way looks like this in the **Stage** panel:
 
-① the robot prim `jackal` with the Articulation Root ② its four drive joints in actuator order
+① the robot prim jackal with the Articulation Root ② its four drive joints in actuator order
 
 ```
 /World/jackal              ← Articulation Root; prim name = robot name
@@ -3679,9 +3792,9 @@ ______________________________________________________________________
 
 - **Isaac Sim assets.** Isaac Sim ships many robots from well-known manufacturers. Find them in the **Isaac Sim Assets** browser (**Window › Browsers**).
 - **URDF.** Import a URDF with Isaac Sim's URDF importer (**File › Import**). See [Import URDF](https://docs.isaacsim.omniverse.nvidia.com/latest/importer_exporter/import_urdf.html) in the Isaac Sim documentation.
-- **A 3D model.** Rig the robot yourself: rigid bodies and colliders on the links, joints between them, and an articulation root. See [Rig a Simple Robot](https://docs.isaacsim.omniverse.nvidia.com/latest/robot_setup_tutorials/tutorial_gui_simple_robot.html) in the Isaac Sim documentation.
+- **A 3D model.** Rig the robot yourself: rigid bodies and colliders on the links, joints between them, and an articulation root. See [Articulate a Basic Robot](https://docs.isaacsim.omniverse.nvidia.com/latest/robot_setup_tutorials/tutorial_gui_simple_robot.html) in the Isaac Sim documentation.
 
-Then check the rules below and fix what differs.
+Then check the model against the rules above; the sections below show how to fix what differs.
 
 ______________________________________________________________________
 
@@ -3733,7 +3846,7 @@ ______________________________________________________________________
 
 Every **Camera** prim of the scene (except Isaac Sim's own viewport cameras) is served under its prim name, with color and depth images (640 × 480 at 15 frames per second by default). Cameras render only while the scene plays.
 
-The camera `cam0` under the Jackal's `base_link`
+The camera cam0 under the Jackal's base_link
 
 1. Create a camera under the link it is mounted on (**Create › Camera**), for example `/World/jackal/links/base_link/cam0`, so it moves with the robot.
 1. Place and point it as on the real robot.
@@ -3803,7 +3916,7 @@ Next: [Connect to Stellar Station](https://docs.sodero.io/v2.0.0/virtual_simulat
 
 # Working with AI Coding Agents
 
-The SSH workspace is built to be used by people and by AI coding agents alike. Every `sodero` command prints JSON, every change is previewed before it is applied, and the workspace ships its own operating rules for agents. With an agent such as **Claude Code** or **OpenAI Codex**, you describe a task in plain language and the agent runs the commands, reads the results and reports back:
+The SSH workspace is built for people and AI coding agents alike. Every `sodero` command prints JSON, every change is previewed before it is applied, and the workspace ships its own operating rules for agents. With an agent such as **Claude Code** or **OpenAI Codex**, you describe a task in plain language and the agent runs the commands, reads the results and reports back:
 
 - *"Which nodes are running, and why did the Strider node stop?"*
 - *"Add a camera gateway named cam0 and connect it to the localizer."*
@@ -3847,7 +3960,7 @@ ______________________________________________________________________
    ssh stellar-x sodero project status
    ```
 
-   It prints one line of JSON that describes the robot's Station.
+   The first time, SSH asks you to confirm the robot's host key: answer `yes`. After that the command must run without any prompt. It prints one line of JSON that describes the robot's Station.
 
 **Tip (macOS · Linux):** Reuse one SSH connection
 
@@ -3878,7 +3991,8 @@ Before you change anything, read the robot's own rules and follow them:
 - Commands that change something only preview until `--execute` is added.
   Show me the preview and wait for my OK before you add `--execute`.
 - Never move the real robot unless I ask for that motion.
-- Keep source files on the robot under /workspace/my-work.
+- Keep source files on the robot under /workspace/my-work
+  (create it with `mkdir -p /workspace/my-work` if it does not exist).
 ```
 
 The robot's own rules (`/workspace/AGENTS.md`) tell the agent how to read results and exit codes, how to wait for long operations without polling loops, which nodes drive real hardware on this robot, and what it must never do. They are maintained with the robot's software, so you do not need to copy them.
@@ -3913,14 +4027,14 @@ ______________________________________________________________________
 
 ## Example Tasks
 
-| You ask                                                         | What the agent does                                                                                                                          |
-| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| *"Why did the Strider node fail?"*                              | `sodero runtime status` to find the failed node and its reason, then `sodero runtime logs NODE`                                              |
-| *"Add a camera gateway cam0 and connect it to the localizer."*  | `sodero topology get`, then `sodero topology add-node` and `sodero topology connect`, each previewed first                                   |
-| *"Lower the navigator's maximum speed to 0.3 m/s."*             | `sodero navigation get --node rc.navigator`, edits the value, `sodero navigation apply` with the returned SHA-256                            |
-| *"Attach warehouse.nav to the localizer and the navigator."*    | `sodero navigation get` for each node's SHA-256, then `sodero maps upload warehouse.nav --node rc.localizer` and the same for `rc.navigator` |
-| *"Write a module that drives to these three points in a loop."* | Writes a package under `/workspace/my-work`, checks it, `sodero packages upload`, adds its node and starts it with `sodero apps start`       |
-| *"Drive the simulated robot forward 1 m."*                      | `sodero tools call strider.set_mode`, `strider.servo_on`, `strider.set_twist` and `strider.stop` on the **simulated** robot's target         |
+| You ask                                                         | What the agent does                                                                                                                                                              |
+| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *"Why did the Strider node fail?"*                              | `sodero runtime status` to find the failed node and its reason, then `sodero runtime logs NODE`                                                                                  |
+| *"Add a camera gateway cam0 and connect it to the localizer."*  | `sodero topology get`, then `sodero topology add-node` and `sodero topology connect`, each previewed first                                                                       |
+| *"Lower the navigator's maximum speed to 0.3 m/s."*             | `sodero navigation get --node rc.navigator`, edits the value, `sodero navigation apply` with the returned SHA-256                                                                |
+| *"Attach warehouse.nav to the localizer and the navigator."*    | `sodero navigation get --node rc.localizer` for its SHA-256, then `sodero maps upload warehouse.nav --node rc.localizer` with it, previewed first (one upload serves both nodes) |
+| *"Write a module that drives to these three points in a loop."* | Writes a package under `/workspace/my-work`, checks it, `sodero packages upload`, adds its node and starts it with `sodero apps start`                                           |
+| *"Drive the simulated robot forward 1 m."*                      | `sodero tools call strider.set_mode`, `strider.servo_on`, `strider.set_twist` and `strider.stop` on the **simulated** robot's target                                             |
 
 ______________________________________________________________________
 
@@ -3928,8 +4042,8 @@ ______________________________________________________________________
 
 - **Review previews.** Ask the agent to show the preview of every change. Nothing changes until a command runs with `--execute`.
 - **Set approval rules in your agent.** Most agents can require your approval before they run a command. A practical setup: allow read-only commands (`status`, `get`, `list`, `logs`) freely, and ask for approval for anything with `--execute`, `tools call` or `apps call`.
-- **Real hardware moves.** A robot tool called with `--execute` can move real equipment. Keep the area clear and keep the emergency stop within reach. The robot's rules forbid the agent to move a robot unless you asked for that motion.
-- **Protected assets.** Official modules expose their parameters and settings, but not their sources, binaries, weights or internal logs. Your own files, documents, packages and their logs are fully available to the agent.
+- **Real hardware moves.** A robot tool called with `--execute` can move real equipment. Keep the area clear and keep the emergency stop within reach. The robot's rules forbid the agent to move the robot unless you ask for that motion.
+- **Protected assets.** Official modules expose their parameters, settings and node logs, but not their sources, binaries, weights or internal logs. Your own files, documents, packages and their logs are fully available to the agent.
 
 ______________________________________________________________________
 
@@ -3940,16 +4054,16 @@ ______________________________________________________________________
 
 # SSH Workspace
 
-Stellar X includes a development workspace that you reach over SSH. It runs on the controller itself, next to Stellar Station but separated from real-time control, so building and testing code there does not disturb the robot's control loops.
+Stellar X includes a development workspace that you reach over SSH. It runs on the controller itself, next to Stellar Station but separated from real-time control. It still shares the controller's memory and storage, so avoid very large builds while the robot is moving.
 
 From the workspace you can:
 
 - inspect and change the Station with the `sodero` command-line tool: nodes, connections, design documents, settings, maps and packages;
-- read the status and logs of every node, and call robot tools such as Strider, Motion Studio and navigation;
+- read the status and logs of every node, as the Station page shows them, and call robot tools such as Strider, Motion Studio and navigation;
 - write and test your own programs and install them on the Station as modules;
 - let an AI coding agent do all of the above for you (see [AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md)).
 
-The workspace performs the same operations as the Station page. A node added with `sodero topology add-node` is the same node you would add with **Add node**, and the result is identical whichever way you work.
+The workspace performs the same operations as the Station page: a node added with `sodero topology add-node` is the same node you would add with **Add node**.
 
 ______________________________________________________________________
 
@@ -3958,9 +4072,9 @@ ______________________________________________________________________
 The workspace accepts SSH keys only; there is no password sign-in. Register the public key of every computer that should connect, on the robot's **Network Settings** page.
 
 1. Open `http://ROBOT_ADDRESS:3000` in a browser (for example `http://192.168.60.18:3000`).
-1. In **SSH ACCESS**, go to **ADD A PUBLIC KEY** and select your operating system (**Windows** or **macOS · Linux**).
-1. Click **Copy**, run the copied command in a terminal of your computer, and copy the line it prints. It starts with `ssh-ed25519`. The command creates a key first if your computer has none.
-1. Paste the line into the text box and click **Add key**. The key appears under **REGISTERED KEYS**.
+1. In **SSH ACCESS**, go to **ADD A PUBLIC KEY** and select your operating system ② (**Windows** or **macOS · Linux**).
+1. Click **Copy** ③, run the copied command in a terminal on your computer, and copy the line it prints. It starts with `ssh-ed25519`. The command creates a key first if your computer has none; on Windows, press Enter at the two passphrase prompts.
+1. Paste the line into the text box ④ and click **Add key** ⑤. The key appears under **REGISTERED KEYS**.
 
 SSH ACCESS on the Network Settings page
 
@@ -3972,7 +4086,7 @@ ______________________________________________________________________
 
 ## 2. Connect
 
-The **SSH workspace** card shows the command with a **Copy** button:
+The **SSH workspace** card shows the command with a **Copy** button ①:
 
 ```
 ssh -p 2222 sodero@192.168.60.18
@@ -4004,18 +4118,17 @@ ______________________________________________________________________
 
 ## 3. What Is in the Workspace
 
-| Path                                           | Contents                                                                                                                  |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `/workspace`                                   | Your files. They stay on the robot across restarts and software updates.                                                  |
-| `/workspace/README.md`                         | The workspace guide: terms, a five-minute start and the guide map                                                         |
-| `/workspace/AGENTS.md`, `/workspace/CLAUDE.md` | Operating rules for AI coding agents ([AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md)) |
-| `/opt/sodero/docs/`                            | All workspace guides and examples, read-only. Also linked as `/workspace/docs`.                                           |
+| Path                   | Contents                                                                                                                  |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `/workspace`           | Your files. They stay on the robot across restarts and software updates.                                                  |
+| `/workspace/README.md` | The workspace guide: terms, a five-minute start and the guide map                                                         |
+| `/workspace/AGENTS.md` | Operating rules for AI coding agents ([AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md)) |
+| `/opt/sodero/docs/`    | All workspace guides and examples, read-only. Also linked as `/workspace/docs`.                                           |
 
 | Tool                                | Purpose                                                                                                   |
 | ----------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | `sodero`                            | Station command-line tool ([sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)) |
 | `sodero-help`                       | Prints the guides: `sodero-help` lists them, `sodero-help navigation` opens one                           |
-| `sodero-model`                      | Builds robot models from URDF and CAD meshes                                                              |
 | Python 3.12                         | With numpy, PyYAML, requests, aiohttp and onnxruntime                                                     |
 | `git`, `gcc`, `make`, `scp`, `sftp` | Standard development tools                                                                                |
 
@@ -4028,6 +4141,9 @@ ______________________________________________________________________
 Use `scp` or any SFTP client with the same address, user and port:
 
 ```
+# Once: create a folder for your work on the robot
+ssh -p 2222 sodero@192.168.60.18 mkdir -p /workspace/my-work
+
 # From your computer to the robot
 scp -P 2222 my_robot.gw sodero@192.168.60.18:/workspace/my-work/
 
@@ -4054,7 +4170,9 @@ ______________________________________________________________________
 - **Preview first.** A `sodero` command that changes something only previews until you add `--execute`. Read the preview, then repeat the command with `--execute`.
 - **The robot is real equipment.** A command with `--execute` can start nodes or move the robot. Run it only when the surroundings are clear and someone who can stop the robot is present.
 - **Stop a node before you change it.** The Station refuses changes to a running node. Stop it, apply the change, start it again.
-- **Official modules stay protected.** Their parameters and settings are open to you, but their sources, binaries, weights and internal logs are not part of the workspace.
+- **Official modules stay protected.** Their parameters, settings and node logs are open to you, but their sources, binaries, weights and internal logs are not part of the workspace.
+
+Where to go next:
 
 | Task                                                           | Where                                                                                             |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -4065,7 +4183,7 @@ ______________________________________________________________________
 
 # sodero CLI
 
-`sodero` is the command-line tool of the SSH workspace. It performs the operations of the Station page (adding nodes, connecting ports, loading settings and maps, starting nodes, calling robot tools) and prints every result as JSON, so both people and scripts or AI agents can use it.
+`sodero` is the command-line tool of the SSH workspace. It performs the operations of the Station page (adding nodes, connecting ports, loading settings and maps, starting nodes, calling robot tools) and prints every result as JSON, so people, scripts and AI agents can all use it.
 
 The CLI is its own best reference:
 
@@ -4085,7 +4203,7 @@ ______________________________________________________________________
 - **Preview first.** A command that changes something only previews until you add `--execute`. Read the preview, then repeat the command with `--execute`.
 - **Versions.** Changes to the node graph take `--if-version N`, the `expected_version` from `sodero topology get`. Changes to settings and documents take `--if-sha256 SHA256` from the matching `get`. Each saved change returns the next value. If someone changed the Station page in the meantime, the change is refused with a conflict (exit code 6): read again and retry.
 - **One Station.** On a robot, the only item is the Station `station`. `--item` defaults to it and can be left out.
-- **Node IDs.** Nodes are named `rc.<kind>.<name>`, for example `rc.actuator_gateway.jackal`, `rc.mobile_controller_manager.jackal`, `rc.camera_gateway.cam0`. The localizer, navigator and visual odometry have fixed IDs: `rc.localizer`, `rc.navigator`, `rc.visual_odometry`.
+- **Node IDs.** Nodes are named `rc.<kind>.<name>`, where the kind comes from the module, not from the `--kind` option of `topology add-node`: `--kind camera --name cam0` creates `rc.camera_gateway.cam0`. Other examples: `rc.actuator_gateway.jackal`, `rc.mobile_controller_manager.jackal`. The localizer, navigator and visual odometry have fixed IDs: `rc.localizer`, `rc.navigator`, `rc.visual_odometry`.
 
 ### Exit Codes
 
@@ -4121,7 +4239,7 @@ ______________________________________________________________________
 | `files`                  | `upload`                                                                       | Stage a file on the robot for `documents.apply` (kept for at most 6 hours) |
 | `run`, `programs`        | `run`; `programs list`, `programs logs`                                        | Run a program in the workspace and keep its output                         |
 
-Worlds, project items, the project Library and the official asset catalog belong to the Sodero cloud. On a robot these commands answer `NOT_AVAILABLE_ON_DEVICE`.
+Worlds, project items, the project Library and the official asset catalog belong to Sodero Cloud. On a robot these commands answer `NOT_AVAILABLE_ON_DEVICE`.
 
 ______________________________________________________________________
 
@@ -4145,11 +4263,11 @@ sodero runtime node stop rc.mobile_controller_manager.jackal --execute
 
 `sodero runtime start --execute --wait` starts every saved node, like **Start all nodes** on the Station page.
 
-**Start all** includes nodes that drive real hardware. Start nodes one by one when the graph contains hardware you do not want to run.
+**Start all nodes** includes nodes that drive real hardware. Start nodes one by one when the graph contains hardware you do not want to run.
 
 ### Edit the Node Graph
 
-Every graph change needs the current version. Read it, preview, then execute:
+Stop the nodes you change first, as on the Station page; changes apply when they next start. Every graph change needs the current version. Read it, preview, then execute:
 
 ```
 sodero topology get                                       # note "expected_version", e.g. 12
@@ -4159,7 +4277,7 @@ sodero topology connect --source rc.localizer.camera \
     --target rc.camera_gateway.cam0.camera --if-version 13 --execute
 ```
 
-`sodero topology catalog` lists the node kinds (`gateway`, `strider`, `motion_studio`, `articulation`, `camera`, `imu`, `vo`, `localizer`, `navigator`, `legged_locomotion`, `legged_navigator`, `package`) with their ports. The Station must be stopped while you edit its graph, as on the Station page.
+`sodero topology catalog` lists the node kinds (`gateway`, `strider`, `motion_studio`, `articulation`, `camera`, `imu`, `vo`, `localizer`, `navigator`, `legged_locomotion`, `legged_navigator`, `package`) with their ports.
 
 ### Change Settings of Official Nodes
 
@@ -4176,17 +4294,21 @@ Stop the node first; the new settings apply when it starts again. These are the 
 ### Attach a Map
 
 ```
-sodero navigation get --node rc.localizer            # its sha256
-sodero maps upload /workspace/maps/warehouse.nav --node rc.localizer --if-sha256 SHA256 --execute
+sodero runtime node stop rc.navigator --execute          # stop the nodes that use the map
+sodero runtime node stop rc.localizer --execute
+sodero runtime node stop rc.visual_odometry --execute    # if the Station has one
+sodero navigation get --node rc.localizer                # note "sha256"
+sodero maps upload /workspace/maps/warehouse.nav --node rc.localizer --if-sha256 SHA256            # preview: checks the bundle
+sodero maps upload /workspace/maps/warehouse.nav --node rc.localizer --if-sha256 SHA256 --execute  # attach it
 ```
 
-The localizer and the navigator share one map bundle, so one upload serves both. Stop both nodes first. See [Localization and Navigation](https://docs.sodero.io/v2.0.0/navigation/overview/index.md).
+The localizer and the navigator share one map bundle, so one upload serves both. Start the nodes again afterwards. See [Map Bundle (.nav)](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md) and [Localization and Navigation](https://docs.sodero.io/v2.0.0/navigation/overview/index.md).
 
 ### Modules (Your Own Programs)
 
 ```
 sodero packages upload /workspace/my-work/patrol.tar.gz --execute
-sodero topology add-node --kind package --package patrol --if-version N --execute
+sodero topology add-node --kind package --package customer.patrol --if-version N --execute   # name from package.yaml
 sodero apps start NODE --execute
 sodero apps logs NODE --lines 100
 ```

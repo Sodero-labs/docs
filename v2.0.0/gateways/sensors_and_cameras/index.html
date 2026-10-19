@@ -113,7 +113,7 @@
       border-bottom: 1px solid #333;
     }
 
-    /* --- [1] 모바일 화면 --- */
+    /* --- [1] Mobile --- */
     @media (max-width: 76.24em) {
       .pc-only { display: none !important; }
       .mobile-header-inner {
@@ -124,7 +124,7 @@
       .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
     }
 
-    /* --- [2] PC 화면 --- */
+    /* --- [2] Desktop --- */
     @media (min-width: 76.25em) {
       .mobile-only { display: none !important; }
       .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
@@ -239,7 +239,7 @@
         overflow: hidden;
       }
 
-      /* 매칭된 키워드 하이라이트 색상 */
+      /* Highlight color of matched keywords */
       .md-search-result mark {
         background-color: #0070dd;
         color: #f0f1f2;
@@ -1785,6 +1785,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulated Robot (.sdda)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
         
   
@@ -2348,6 +2376,7 @@
 <figcaption>The camera gateway's inspector</figcaption>
 </figure>
 <h3 id="connection">Connection<a class="headerlink" href="#connection" title="Permanent link">¶</a></h3>
+<p>In the <strong>CAMERA GATEWAY</strong> section of the inspector:</p>
 <table>
 <thead>
 <tr>
@@ -2362,7 +2391,7 @@
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Camera host</strong></td>
-<td style="text-align: left;">The address of the Isaac Sim computer or the sensor computer</td>
+<td style="text-align: left;">The address of the Isaac Sim computer or the sensor computer. The field is greyed out when a camera address is configured for the unit; the gateway then uses that address at every start, even if an uploaded YAML names another. To change it, contact Sodero support.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Port</strong></td>
@@ -2394,7 +2423,7 @@
 </tr>
 <tr>
 <td style="text-align: left;">Intrinsics</td>
-<td style="text-align: left;"><code>fov</code> mode with the horizontal field of view in degrees, or <code>manual</code> mode with fx, fy, cx, cy in pixels</td>
+<td style="text-align: left;"><code>fov</code> mode with the horizontal field of view in degrees, or <code>manual</code> mode with fx, fy, cx, cy in pixels. A new camera gateway offers only the field of view; load <code>manual</code> values with <strong>Upload yaml</strong> (<a href="../device_bridge/#camera">Device Bridge › Camera</a>).</td>
 </tr>
 <tr>
 <td style="text-align: left;">Simulation camera</td>
@@ -2438,10 +2467,10 @@
 </tbody>
 </table>
 <p>The IMU gateway connects to the controller's configured simulator or sensor address. To set or change that address for your controller, contact Sodero support.</p>
-<p>In Isaac Sim, a robot publishes IMU data when its robot prim names the link that carries the IMU (<a href="../../virtual_simulation/robot_setup/">Robot Setup</a>).</p>
+<p>In Isaac Sim, a robot publishes IMU data when its robot prim names the link that carries the IMU in <code>rc:imuLink</code> (<a href="../../virtual_simulation/robot_setup/#7-imu">Robot Setup</a>).</p>
 <hr>
 <h2 id="3-mounting-where-the-sensor-sits">3. Mounting: Where the Sensor Sits<a class="headerlink" href="#3-mounting-where-the-sensor-sits" title="Permanent link">¶</a></h2>
-<p>Sensor data is in the sensor's own frame. Where the camera is mounted on the robot (its position and orientation relative to the robot's <code>base_link</code>) is part of the map bundle's extrinsics, used by the localizer (<a href="../../navigation/map_bundle/">Map Bundle</a>). Measure the mounting on the robot; do not rotate the data in the source.</p>
+<p>Sensor data is in the sensor's own frame. Where the camera is mounted on the robot (its position and orientation relative to the robot's <code>base_link</code>) is part of the map bundle's extrinsics, used by the Localizer (<a href="../../navigation/map_bundle/">Map Bundle</a>). Measure the mounting on the robot; do not rotate the data in the source.</p>
 <hr>
 <h2 id="4-troubleshooting">4. Troubleshooting<a class="headerlink" href="#4-troubleshooting" title="Permanent link">¶</a></h2>
 <table>
@@ -2462,7 +2491,7 @@
 </tr>
 <tr>
 <td style="text-align: left;">Camera log: <em>Frames … are stale or carry capture times that do not match this Station's clock</em></td>
-<td style="text-align: left;">The clocks of the two computers differ. Synchronize them (NTP) or let the source send arrival times.</td>
+<td style="text-align: left;">The clocks of the two computers differ. Synchronize them (NTP), or stop sending capture times at the source (Device Bridge: <code>send_capture_time: false</code>) so that the Station uses arrival times.</td>
 </tr>
 <tr>
 <td style="text-align: left;">Camera view is black or frozen</td>
@@ -2541,7 +2570,7 @@
             <span class="twemoji">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
             </span>
-            Raise Issues
+            Report an Issue
         </a>
 
     </div>

@@ -10,11 +10,11 @@ Click **Export SDR** in the Runtime toolbar. Pending edits are saved first, then
 
 The file contains:
 
-| Part            | Contents                                                                                |
-| --------------- | --------------------------------------------------------------------------------------- |
-| Runtime graph   | All nodes and their connections                                                         |
-| Robot documents | The `.sdd`, `.sddm` and `.sdda` documents of the controllers                            |
-| Station data    | Gateway projects, settings of sensor and navigation nodes, maps and other Station state |
+| Part            | Contents                                                                                         |
+| --------------- | ------------------------------------------------------------------------------------------------ |
+| Runtime graph   | All nodes and their connections                                                                  |
+| Robot documents | The `.sdd`, `.sddm` and `.sdda` documents of the controllers                                     |
+| Station data    | Gateway documents (`.gw`), settings of sensor and navigation nodes, maps and other Station state |
 
 Installed module packages are not part of the file; they stay on the controller.
 
@@ -32,14 +32,14 @@ Loading an .sdr file
 
 The Station replaces its graph, robot documents and Station data with the file's content and restarts. The page shows *Restarting the Station with …* and reloads when the Station is back, usually within a minute. The nodes are not started; start them when you need them.
 
-- The controller keeps a backup of its previous Station (the three most recent ones) and keeps its installed modules.
+- Before loading, the controller backs up its current Station. Installed modules stay installed.
 - If the file cannot be loaded, the Station keeps its data and the dialog says why.
 
 Loading is refused while any node runs: *Stop all nodes before loading a .sdr.*
 
 ### Files That Cannot Be Loaded
 
-| Message                                        | Cause                                                             |
-| ---------------------------------------------- | ----------------------------------------------------------------- |
-| *This .sdr holds a simulation, not a Station.* | The file is a World (simulation) export. Open it in Sodero Cloud. |
-| Not enough free space                          | The unpacked file is too large for the controller's storage.      |
+| Message                                                              | Cause                                                             |
+| -------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| *This .sdr holds a simulation, not a Station.*                       | The file is a World (simulation) export. Open it in Sodero Cloud. |
+| *This robot does not have enough free disk space to load this .sdr.* | The unpacked file is too large for the controller's storage.      |

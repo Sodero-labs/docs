@@ -113,7 +113,7 @@
       border-bottom: 1px solid #333;
     }
 
-    /* --- [1] 모바일 화면 --- */
+    /* --- [1] Mobile --- */
     @media (max-width: 76.24em) {
       .pc-only { display: none !important; }
       .mobile-header-inner {
@@ -124,7 +124,7 @@
       .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
     }
 
-    /* --- [2] PC 화면 --- */
+    /* --- [2] Desktop --- */
     @media (min-width: 76.25em) {
       .mobile-only { display: none !important; }
       .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
@@ -239,7 +239,7 @@
         overflow: hidden;
       }
 
-      /* 매칭된 키워드 하이라이트 색상 */
+      /* Highlight color of matched keywords */
       .md-search-result mark {
         background-color: #0070dd;
         color: #f0f1f2;
@@ -1907,6 +1907,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulated Robot (.sdda)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
         
   
@@ -2549,22 +2577,22 @@
 
 
 <h1 id="device-bridge">Device Bridge<a class="headerlink" href="#device-bridge" title="Permanent link">¶</a></h1>
-<p>Stellar X connects to the rest of the robot through network ports only. Sensors that need USB, such as an Intel RealSense depth camera or a USB IMU, therefore go on a small computer next to them: a Raspberry Pi, another single-board computer or a PC. The <strong>device bridge</strong> runs on that computer. It reads the devices and serves their data to the controller over the LAN.</p>
-<p>The bridge speaks the same network protocol as the Isaac Sim bridge. The controller's official Camera gateway, IMU gateway, Visual odometry, Localizer and Navigator therefore work with real sensors exactly as they work with a simulated robot; only the address they connect to differs.</p>
-<p>Use the device bridge when:</p>
+<p>Stellar X connects to the rest of the robot through network ports only. Sensors that need USB, such as an Intel RealSense depth camera or a USB IMU, therefore go on a small computer next to them: a Raspberry Pi, another single-board computer or a PC. The <strong>Device Bridge</strong> runs on that computer. It reads the devices and serves their data to the controller over the LAN.</p>
+<p>The bridge speaks the same network protocol as Isaac Bridge. The controller's official Camera gateway, IMU gateway, Visual odometry, Localizer and Navigator therefore work with real sensors exactly as they work with a simulated robot; only the address they connect to differs.</p>
+<p>Use the Device Bridge when:</p>
 <ul>
 <li>the robot carries a USB camera or IMU, which cannot plug into the controller;</li>
 <li>the motor board of a small robot sits on USB as well (for example the TurtleBot3 OpenCR board) and the controller should drive it.</li>
 </ul>
 <p>Drives on the controller's EtherCAT port do not need the bridge, and neither does a simulated robot.</p>
 <div class="admonition info">
-<p class="admonition-title">The device bridge is an open example program. Use its built-in drivers as they are, or add a driver for your own device. Nothing changes on the controller.</p>
+<p class="admonition-title">The Device Bridge is an open example program. Use its built-in drivers as they are, or add a driver for your own device. Nothing changes on the controller.</p>
 </div>
 <hr>
 <h2 id="1-architecture">1. Architecture<a class="headerlink" href="#1-architecture" title="Permanent link">¶</a></h2>
 <pre class="mermaid"><code>flowchart TB
     subgraph SC ["Sensor computer"]
-        DB(["Device bridge"])
+        DB(["Device Bridge"])
         RS["RealSense&lt;br&gt;depth camera"] --&gt; DB
         IU["USB IMU"] --&gt; DB
         MB["Motor board&lt;br&gt;(optional)"] &lt;--&gt; DB
@@ -2588,7 +2616,7 @@
     LO --&gt;|"localization · map"| NV
     NV --&gt;|mobile_base| ST
     AG &lt;--&gt;|servo_link| ST</code></pre>
-<p>The bridge <strong>listens</strong> on three ports and the controller's gateways <strong>connect</strong> to it, exactly as they connect to the simulator. Every message carries the bridge's <code>robot_name</code>, and each gateway takes the data published under the name it is configured with. Without the optional wheels, Strider drives the robot's own base through an EtherCAT Actuator gateway as usual.</p>
+<p>The bridge <strong>listens</strong> on three ports and the controller's gateways <strong>connect</strong> to it, exactly as they connect to the simulator. Every message carries the bridge's <code>robot_name</code>, and each gateway takes the data published under the name it is configured with. Without the optional wheel stream, Strider drives the robot's own base through an EtherCAT Actuator gateway as usual.</p>
 <h3 id="what-is-official-and-what-is-yours">What Is Official and What Is Yours<a class="headerlink" href="#what-is-official-and-what-is-yours" title="Permanent link">¶</a></h3>
 <table>
 <thead>
@@ -2612,7 +2640,7 @@
 <tr>
 <td style="text-align: left;">Wire protocol (<code>docs/protocol.md</code>)</td>
 <td style="text-align: left;">Between the two</td>
-<td style="text-align: left;">Sodero. The Isaac Sim bridge speaks the same protocol.</td>
+<td style="text-align: left;">Sodero. Isaac Bridge speaks the same protocol.</td>
 </tr>
 <tr>
 <td style="text-align: left;">Camera gateway, IMU gateway, Actuator gateway</td>
@@ -2817,7 +2845,7 @@
 <p class="admonition-title"><strong>Tip:</strong> Choose a <code>robot_name</code> of lowercase letters, digits and underscores that starts with a letter, such as <code>tb3</code>. Every Station node accepts such a name, so the gateway nodes can carry the same name.</p>
 </div>
 <h3 id="log-lines">Log Lines<a class="headerlink" href="#log-lines" title="Permanent link">¶</a></h3>
-<p>After a start, the log shows these lines (time stamps left out):</p>
+<p>After a start with <code>config/turtlebot3_d435.yaml</code> (camera and IMU, no wheel stream), the log shows these lines (time stamps left out):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>INFO device_bridge: device 'd435' (realsense) is open
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>INFO device_bridge: device 'opencr' (turtlebot3_opencr) is open
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>INFO device_bridge.bridge: camera 424x240 fx=303.22 fy=303.26 cx=216.20 cy=123.18 frame_id=cam0_optical (use these intrinsics in the controller's camera settings)
@@ -2852,7 +2880,7 @@
 </table>
 <p>If the configuration or a device fails, the log shows one <code>ERROR</code> line that names the problem, and the service tries again 3 seconds later.</p>
 <h3 id="check-from-another-computer">Check from Another Computer<a class="headerlink" href="#check-from-another-computer" title="Permanent link">¶</a></h3>
-<p><code>listen</code> receives the streams the way the controller does. Run it from a copy of the source on any computer of the same network, for example your PC:</p>
+<p><code>listen</code> receives the streams the way the controller does. Run it from a copy of the source on any computer on the same network, for example your PC:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">cd</span><span class="w"> </span>device_bridge
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>.<span class="w"> </span>.venv/bin/activate
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>pyzmq<span class="w"> </span>PyYAML
@@ -2916,9 +2944,9 @@
 </tbody>
 </table>
 <ul>
-<li><strong><code>realsense</code></strong> reads Intel RealSense D400 cameras through the RealSense SDK and is tested with the D435. Depth is aligned to the colour image, so both share the colour camera's intrinsics. With <code>serial: auto</code>, exactly one camera must be connected; with several cameras, enter the serial number.</li>
+<li><strong><code>realsense</code></strong> reads Intel RealSense D400 cameras through the RealSense SDK and is tested with the D435. Depth is aligned to the color image, so both share the color camera's intrinsics. With <code>serial: auto</code>, exactly one camera must be connected; with several cameras, enter the serial number.</li>
 <li><strong><code>turtlebot3_opencr</code></strong> drives the OpenCR board of a TurtleBot3 Burger running the ROBOTIS TurtleBot3 ROS 2 firmware. The board is both the wheel controller and the IMU, and its serial port can have only one owner, so one device feeds both the <code>imu</code> and the <code>wheels</code> stream. Wheel speeds are scaled down together to the configured limits, which keeps the path's curvature. If the bridge stops talking to the board, the firmware stops the wheels by itself within 0.5 s. Set <code>port</code> to the board's serial device (for example <code>/dev/ttyACM0</code>) when the default device name does not exist on your system.</li>
-<li><strong><code>simulated_camera</code></strong>, <strong><code>simulated_imu</code></strong> and <strong><code>simulated_wheels</code></strong> stand in for hardware: a moving colour pattern in front of a flat wall 2 m away, a level sensor turning slowly about its z axis, and joints that follow their velocity commands exactly.</li>
+<li><strong><code>simulated_camera</code></strong>, <strong><code>simulated_imu</code></strong> and <strong><code>simulated_wheels</code></strong> stand in for hardware: a moving color pattern in front of a flat wall 2 m away, a level sensor turning slowly about its z axis, and joints that follow their velocity commands exactly.</li>
 </ul>
 <hr>
 <h2 id="5-connect-it-on-the-station-page">5. Connect It on the Station Page<a class="headerlink" href="#5-connect-it-on-the-station-page" title="Permanent link">¶</a></h2>
@@ -2928,7 +2956,7 @@
 </div>
 <h3 id="camera">Camera<a class="headerlink" href="#camera" title="Permanent link">¶</a></h3>
 <ol>
-<li>Click <strong>Add node</strong>, choose <strong>Gateway</strong> → <strong>Camera gateway</strong> and name it after the robot, for example <code>tb3</code> (node <code>rc.camera_gateway.tb3</code>).</li>
+<li>Click <strong>Add node</strong>, choose <strong>Gateway</strong> › <strong>Camera gateway</strong> and name it after the robot, for example <code>tb3</code> (node <code>rc.camera_gateway.tb3</code>).</li>
 <li>In the <strong>CAMERA GATEWAY</strong> section of the inspector, enter:<ul>
 <li><strong>Camera name</strong>: the bridge's <code>robot_name</code> (<code>tb3</code>). The bridge publishes its camera under the robot name; it has no separate camera name.</li>
 <li><strong>Camera host</strong>: <code>SENSOR_COMPUTER_ADDRESS</code>.</li>
@@ -2936,7 +2964,7 @@
 </ul>
 </li>
 <li>
-<p>Enter the resolution and intrinsics from the bridge's <code>camera …</code> log line. A new Camera gateway computes its intrinsics from a field of view, as for a simulated camera, so its <strong>CAMERA SETTINGS</strong> show only <em>horizontal fov deg</em>. Load the calibrated values once with <strong>Upload yaml</strong> while the node is stopped:</p>
+<p>Enter the resolution and intrinsics from the bridge's <code>camera …</code> log line. A new Camera gateway computes its intrinsics from a field of view, as for a simulated camera, so for intrinsics its <strong>CAMERA SETTINGS</strong> show <em>horizontal fov deg</em> but not fx, fy, cx and cy. Load the calibrated values once with <strong>Upload yaml</strong> while the node is stopped:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">camera_gateway</span><span class="p">:</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">camera</span><span class="p">:</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">isaac_zmq</span><span class="w">              </span><span class="c1"># the simulator's stream format, which the bridge speaks</span>
@@ -2969,7 +2997,7 @@
 </div>
 <h3 id="imu">IMU<a class="headerlink" href="#imu" title="Permanent link">¶</a></h3>
 <ol>
-<li>Click <strong>Add node</strong>, choose <strong>Gateway</strong> → <strong>IMU gateway</strong> and name it after the robot (<code>tb3</code>).</li>
+<li>Click <strong>Add node</strong>, choose <strong>Gateway</strong> › <strong>IMU gateway</strong> and name it after the robot (<code>tb3</code>).</li>
 <li>In <strong>IMU SETTINGS</strong>, check that <strong>Robot in World</strong> is the bridge's <code>robot_name</code> (a new IMU gateway starts with its node name) and click <strong>Save settings</strong>.</li>
 <li>Start the gateway.</li>
 </ol>
@@ -3051,7 +3079,7 @@
 <p>Select it in the configuration as <code>driver: device_bridge.devices.my_imu:MyImu</code>, or register a short name in <code>DRIVERS</code> in <code>device_bridge/devices/__init__.py</code>. Keep your drivers in <code>device_bridge/devices/</code> so that <code>install.sh</code> copies them, and add your SDK's Python package to <code>requirements.txt</code>. <code>python -m unittest discover -s tests</code> checks the bridge end to end with the simulated devices.</p>
 <p>Rules every driver follows:</p>
 <ul>
-<li><strong>Units:</strong> radians, rad/s, m/s² with gravity included (+9.81 m/s² upward at rest), depth in millimetres as 16-bit integers (0 = no measurement), times in nanoseconds. Wheel positions are continuous and do not wrap at 2π.</li>
+<li><strong>Units:</strong> radians, rad/s, m/s² with gravity included (+9.81 m/s² upward at rest), depth in millimeters as 16-bit integers (0 = no measurement), times in nanoseconds. Wheel positions are continuous and do not wrap at 2π.</li>
 <li><strong>Frames:</strong> IMU data in the sensor's own axes, with <code>orientation_xyzw</code> the sensor's attitude in the world. Camera images in the optical frame (x right, y down, z forward), depth aligned to the RGB image, both rectified without distortion. Do not rotate data into the robot's frame; the mounting belongs in the map bundle.</li>
 <li><strong>Time:</strong> <code>source_time_ns</code> must increase; a monotonic clock is fine. A camera's <code>capture_unix_ns</code> is the capture time on the wall clock.</li>
 <li><strong>Timing:</strong> <code>read_imu</code> and <code>read_joints</code> return at once; <code>read_frame</code> blocks for at most its timeout. Copy images out of buffers that the SDK reuses.</li>
@@ -3059,7 +3087,7 @@
 </ul>
 <hr>
 <h2 id="7-protocol">7. Protocol<a class="headerlink" href="#7-protocol" title="Permanent link">¶</a></h2>
-<p>The device bridge and Isaac Bridge send the same messages over ZeroMQ on TCP. The bridge listens; the Station's gateways connect.</p>
+<p>The Device Bridge and Isaac Bridge send the same messages over ZeroMQ on TCP. The bridge listens; the Station's gateways connect.</p>
 <table>
 <thead>
 <tr>
@@ -3073,7 +3101,7 @@
 <tr>
 <td style="text-align: center;">53335</td>
 <td style="text-align: left;">bridge → controller</td>
-<td style="text-align: left;">RGB-D frames (16-bit depth in millimetres and 8-bit RGB) and the camera intrinsics</td>
+<td style="text-align: left;">RGB-D frames (16-bit depth in millimeters and 8-bit RGB) and the camera intrinsics</td>
 <td style="text-align: left;">Camera gateway</td>
 </tr>
 <tr>
@@ -3235,7 +3263,7 @@
             <span class="twemoji">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
             </span>
-            Raise Issues
+            Report an Issue
         </a>
 
     </div>

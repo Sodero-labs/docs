@@ -113,7 +113,7 @@
       border-bottom: 1px solid #333;
     }
 
-    /* --- [1] 모바일 화면 --- */
+    /* --- [1] Mobile --- */
     @media (max-width: 76.24em) {
       .pc-only { display: none !important; }
       .mobile-header-inner {
@@ -124,7 +124,7 @@
       .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
     }
 
-    /* --- [2] PC 화면 --- */
+    /* --- [2] Desktop --- */
     @media (min-width: 76.25em) {
       .mobile-only { display: none !important; }
       .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
@@ -239,7 +239,7 @@
         overflow: hidden;
       }
 
-      /* 매칭된 키워드 하이라이트 색상 */
+      /* Highlight color of matched keywords */
       .md-search-result mark {
         background-color: #0070dd;
         color: #f0f1f2;
@@ -1653,6 +1653,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulated Robot (.sdda)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
         
   
@@ -2307,11 +2335,11 @@
 </figure>
 <hr>
 <h2 id="2-set-the-gateways-on-the-station">2. Set the Gateways on the Station<a class="headerlink" href="#2-set-the-gateways-on-the-station" title="Permanent link">¶</a></h2>
-<p>Each line of the Isaac Bridge window corresponds to a field on a Station node:</p>
+<p>Set the Station nodes to match Isaac Sim:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Isaac Bridge window</th>
+<th style="text-align: left;">Isaac Sim</th>
 <th style="text-align: left;">Station node</th>
 <th style="text-align: left;">Field</th>
 </tr>
@@ -2339,11 +2367,12 @@
 </tr>
 </tbody>
 </table>
+<p>The IMU gateway has no host field: it connects to the simulator address configured for your controller, which Sodero support sets (<a href="../../gateways/sensors_and_cameras/#2-imu-gateway">Sensors and Cameras</a>).</p>
 <div class="admonition warning">
 <p class="admonition-title"><strong>The Robot name on the Station must be exactly the robot's prim name in Isaac Sim.</strong> Names are case-sensitive. If they differ, the gateway keeps waiting and the robot never moves.</p>
 </div>
 <figure>
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../get_started/quick_start/images/target.png" data-desc-position="bottom"><img alt="Target" src="../../get_started/quick_start/images/target.png" width="340"></a>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../get_started/quick_start/images/target.png" data-desc-position="bottom"><img alt="Target" src="../../get_started/quick_start/images/target.png" width="331"></a>
 <br>
 <figcaption>Robot name and Sim host of a simulation gateway</figcaption>
 </figure>
@@ -2390,7 +2419,7 @@
 </tbody>
 </table>
 <div class="admonition info">
-<p class="admonition-title">After the simulation restarts, the robot is back at its starting pose, but the localizer may still hold its last pose. If Strider's Navigation page shows a wrong pose, set the initial pose again.</p>
+<p class="admonition-title">After the simulation restarts, the robot is back at its starting pose, but the Localizer may still hold its last pose. If Strider's Navigation page shows a wrong pose, set the initial pose again.</p>
 </div>
 <hr>
 <h2 id="5-several-robots">5. Several Robots<a class="headerlink" href="#5-several-robots" title="Permanent link">¶</a></h2>
@@ -2441,7 +2470,7 @@
 </tr>
 <tr>
 <td style="text-align: left;">The robot moves too fast or too slow</td>
-<td style="text-align: left;">The computer cannot keep the render rate. Lower camera sizes or rates, or close viewports.</td>
+<td style="text-align: left;">The computer cannot keep up with the render rate. Lower camera sizes or rates, or close viewports.</td>
 </tr>
 </tbody>
 </table>
@@ -2517,7 +2546,7 @@
             <span class="twemoji">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
             </span>
-            Raise Issues
+            Report an Issue
         </a>
 
     </div>

@@ -113,7 +113,7 @@
       border-bottom: 1px solid #333;
     }
 
-    /* --- [1] 모바일 화면 --- */
+    /* --- [1] Mobile --- */
     @media (max-width: 76.24em) {
       .pc-only { display: none !important; }
       .mobile-header-inner {
@@ -124,7 +124,7 @@
       .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
     }
 
-    /* --- [2] PC 화면 --- */
+    /* --- [2] Desktop --- */
     @media (min-width: 76.25em) {
       .mobile-only { display: none !important; }
       .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
@@ -239,7 +239,7 @@
         overflow: hidden;
       }
 
-      /* 매칭된 키워드 하이라이트 색상 */
+      /* Highlight color of matched keywords */
       .md-search-result mark {
         background-color: #0070dd;
         color: #f0f1f2;
@@ -1757,6 +1757,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulated Robot (.sdda)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
         
   
@@ -2267,7 +2295,7 @@
 <tr>
 <td style="text-align: left;"><code>.sdd</code></td>
 <td style="text-align: left;">Motion Studio</td>
-<td style="text-align: left;">Stellar Designer, manipulator editor</td>
+<td style="text-align: left;">Stellar Designer, manipulator editor (<a href="../../tutorials/stellar_designer/manipulator/">Manipulator</a>)</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>.sddm</code></td>
@@ -2277,18 +2305,18 @@
 <tr>
 <td style="text-align: left;"><code>.sdda</code></td>
 <td style="text-align: left;">Articulation</td>
-<td style="text-align: left;">Stellar Designer, articulation editor</td>
+<td style="text-align: left;">Stellar Designer, articulation editor (<a href="../../tutorials/stellar_designer/articulation/">Articulated Robot</a>)</td>
 </tr>
 </tbody>
 </table>
 <p>Cameras, IMUs, visual odometry, the localizer and the navigator have no design document. They have <strong>settings</strong> that you edit in the node's inspector (see <a href="#4-settings-of-sensor-and-navigation-nodes">Settings of Sensor and Navigation Nodes</a>).</p>
 <div class="admonition info">
-<p class="admonition-title">Every new gateway or controller node starts with an empty document of its type, so you can either import a finished file or build the document from scratch with <strong>Edit Stellar Designer</strong>.</p>
+<p class="admonition-title">Every new gateway or controller node starts with an empty document of its type, so you can either import a finished file or build the document from scratch with <strong>Edit Stellar Designer</strong> (<strong>Edit Stellar Gateway Designer</strong> for gateways).</p>
 </div>
 <hr>
 <h2 id="1-import-a-document">1. Import a Document<a class="headerlink" href="#1-import-a-document" title="Permanent link">¶</a></h2>
 <ol>
-<li>Stop the node if it runs.</li>
+<li>Stop the node if it is running.</li>
 <li>Select the node. In the inspector's <strong>DEFINITION</strong> section, click the upload icon (<strong>Import .gw</strong>, <strong>Import .sdd</strong>, <strong>Import .sddm</strong> or <strong>Import .sdda</strong>).</li>
 <li>On <strong>From your PC</strong> ①, drop the file or click <strong>Choose file</strong>. The chosen file appears ②; click <strong>Import</strong> ③.</li>
 </ol>
@@ -2308,8 +2336,8 @@
 <h2 id="2-edit-a-document-in-stellar-designer">2. Edit a Document in Stellar Designer<a class="headerlink" href="#2-edit-a-document-in-stellar-designer" title="Permanent link">¶</a></h2>
 <p>Click <strong>Edit Stellar Designer</strong> (controllers) or <strong>Edit Stellar Gateway Designer</strong> (gateways) in the <strong>DEFINITION</strong> section. Stellar Designer opens in a new browser tab with the node's document. The breadcrumb at the top shows the node and the file, for example <code>rc.mobile_controller_manager.jackal / jackal.sddm</code>.</p>
 <ul>
-<li>Your edits are saved back to the node automatically.</li>
 <li><strong>Stop the node before you edit its document.</strong> While the node runs, the Station refuses to save.</li>
+<li>Your edits are saved back to the node automatically. In an Articulation document, click <strong>Save configuration</strong>.</li>
 <li>The arrow at the left of the breadcrumb returns to the Station.</li>
 </ul>
 <p>The editors are described in <a href="../../tutorials/stellar_designer/introduction/">Stellar Designer</a> and <a href="../../gateways/gateway_designer/">Gateway Designer</a>.</p>
@@ -2317,7 +2345,7 @@
 <h2 id="3-point-a-simulation-gateway-at-its-robot">3. Point a Simulation Gateway at Its Robot<a class="headerlink" href="#3-point-a-simulation-gateway-at-its-robot" title="Permanent link">¶</a></h2>
 <p>A simulation gateway also needs to know <strong>which robot</strong> in Isaac Sim it drives and <strong>where</strong> Isaac Sim runs. Select the gateway and click <strong>Change</strong> in its <strong>TARGET</strong> section:</p>
 <figure>
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/inspector_target_edit.png" data-desc-position="bottom"><img alt="Target" src="images/inspector_target_edit.png" width="299"></a>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/inspector_target_edit.png" data-desc-position="bottom"><img alt="Target" src="images/inspector_target_edit.png" width="331"></a>
 <br>
 <figcaption>Robot name and simulator address of a simulation gateway</figcaption>
 </figure>
@@ -2362,9 +2390,9 @@
 <hr>
 <h2 id="5-rules-for-documents">5. Rules for Documents<a class="headerlink" href="#5-rules-for-documents" title="Permanent link">¶</a></h2>
 <ul>
-<li>A Strider or Motion Studio document names the gateway it drives and the gateway's actuator indices (zero-based). Connect the node's <code>servo_link</code> to that same gateway.</li>
-<li>A simulation gateway document has <code>hardware.type: simulation</code>. Its robot name and simulator address are set on the node (section 3).</li>
-<li>The number of actuators must match: the controller document maps every actuator it uses to a joint or wheel, and the gateway must provide at least that many actuators.</li>
+<li>A Motion Studio, Strider or Articulation document names the gateway it drives and the gateway's actuator indices (zero-based). Connect the node's <code>servo_link</code> to that same gateway.</li>
+<li>A simulation gateway document has <code>hardware.type: simulation</code>. Its robot name and simulator address are set on the node (<a href="#3-point-a-simulation-gateway-at-its-robot">section 3</a>).</li>
+<li>The gateway must have enough actuators: the controller document maps every actuator it uses to a joint or wheel, and the gateway must provide at least that many.</li>
 <li>Connect one robot controller to a gateway. To drive one manipulator through several gateways, use <strong>+ Gateway link</strong> on its Motion Studio node.</li>
 </ul>
 
@@ -2438,7 +2466,7 @@
             <span class="twemoji">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
             </span>
-            Raise Issues
+            Report an Issue
         </a>
 
     </div>

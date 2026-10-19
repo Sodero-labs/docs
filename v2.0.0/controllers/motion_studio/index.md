@@ -53,7 +53,7 @@ Click **Jog** in the header to open the jog panel.
 The jog panel
 
 1. Switch **Servo On** ⑥.
-1. Choose the jog **Mode** ③:
+1. In **JOG OPTION** ②, choose the jog **Mode** ③:
    - **Joint**: move one joint at a time (J1…Jn).
    - **Base**: move the tool in the robot's base frame (X, Y, Z, RX, RY, RZ).
    - **Tool**: move the tool in its own frame.

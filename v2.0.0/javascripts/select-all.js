@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const inlineCodes = document.querySelectorAll('.md-typeset code:not(pre code)');
     
     inlineCodes.forEach(el => {
-        el.style.cursor = "pointer"; // 마우스 커서를 포인터로
+        el.style.cursor = "pointer"; // show a pointer cursor
         el.addEventListener('click', function() {
             const range = document.createRange();
             range.selectNodeContents(this);

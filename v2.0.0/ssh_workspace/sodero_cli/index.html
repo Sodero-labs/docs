@@ -113,7 +113,7 @@
       border-bottom: 1px solid #333;
     }
 
-    /* --- [1] 모바일 화면 --- */
+    /* --- [1] Mobile --- */
     @media (max-width: 76.24em) {
       .pc-only { display: none !important; }
       .mobile-header-inner {
@@ -124,7 +124,7 @@
       .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
     }
 
-    /* --- [2] PC 화면 --- */
+    /* --- [2] Desktop --- */
     @media (min-width: 76.25em) {
       .mobile-only { display: none !important; }
       .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
@@ -239,7 +239,7 @@
         overflow: hidden;
       }
 
-      /* 매칭된 키워드 하이라이트 색상 */
+      /* Highlight color of matched keywords */
       .md-search-result mark {
         background-color: #0070dd;
         color: #f0f1f2;
@@ -1653,6 +1653,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulated Robot (.sdda)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
         
   
@@ -2427,7 +2455,7 @@
 
 
 <h1 id="sodero-cli">sodero CLI<a class="headerlink" href="#sodero-cli" title="Permanent link">¶</a></h1>
-<p><code>sodero</code> is the command-line tool of the SSH workspace. It performs the operations of the Station page (adding nodes, connecting ports, loading settings and maps, starting nodes, calling robot tools) and prints every result as JSON, so both people and scripts or AI agents can use it.</p>
+<p><code>sodero</code> is the command-line tool of the SSH workspace. It performs the operations of the Station page (adding nodes, connecting ports, loading settings and maps, starting nodes, calling robot tools) and prints every result as JSON, so people, scripts and AI agents can all use it.</p>
 <p>The CLI is its own best reference:</p>
 <table>
 <thead>
@@ -2466,7 +2494,7 @@
 <li><strong>Preview first.</strong> A command that changes something only previews until you add <code>--execute</code>. Read the preview, then repeat the command with <code>--execute</code>.</li>
 <li><strong>Versions.</strong> Changes to the node graph take <code>--if-version N</code>, the <code>expected_version</code> from <code>sodero topology get</code>. Changes to settings and documents take <code>--if-sha256 SHA256</code> from the matching <code>get</code>. Each saved change returns the next value. If someone changed the Station page in the meantime, the change is refused with a conflict (exit code 6): read again and retry.</li>
 <li><strong>One Station.</strong> On a robot, the only item is the Station <code>station</code>. <code>--item</code> defaults to it and can be left out.</li>
-<li><strong>Node IDs.</strong> Nodes are named <code>rc.&lt;kind&gt;.&lt;name&gt;</code>, for example <code>rc.actuator_gateway.jackal</code>, <code>rc.mobile_controller_manager.jackal</code>, <code>rc.camera_gateway.cam0</code>. The localizer, navigator and visual odometry have fixed IDs: <code>rc.localizer</code>, <code>rc.navigator</code>, <code>rc.visual_odometry</code>.</li>
+<li><strong>Node IDs.</strong> Nodes are named <code>rc.&lt;kind&gt;.&lt;name&gt;</code>, where the kind comes from the module, not from the <code>--kind</code> option of <code>topology add-node</code>: <code>--kind camera --name cam0</code> creates <code>rc.camera_gateway.cam0</code>. Other examples: <code>rc.actuator_gateway.jackal</code>, <code>rc.mobile_controller_manager.jackal</code>. The localizer, navigator and visual odometry have fixed IDs: <code>rc.localizer</code>, <code>rc.navigator</code>, <code>rc.visual_odometry</code>.</li>
 </ul>
 <h3 id="exit-codes">Exit Codes<a class="headerlink" href="#exit-codes" title="Permanent link">¶</a></h3>
 <table>
@@ -2604,7 +2632,7 @@
 </tbody>
 </table>
 <div class="admonition info">
-<p class="admonition-title">Worlds, project items, the project Library and the official asset catalog belong to the Sodero cloud. On a robot these commands answer <code>NOT_AVAILABLE_ON_DEVICE</code>.</p>
+<p class="admonition-title">Worlds, project items, the project Library and the official asset catalog belong to Sodero Cloud. On a robot these commands answer <code>NOT_AVAILABLE_ON_DEVICE</code>.</p>
 </div>
 <hr>
 <h2 id="recipes">Recipes<a class="headerlink" href="#recipes" title="Permanent link">¶</a></h2>
@@ -2620,17 +2648,17 @@
 </code></pre></div>
 <p><code>sodero runtime start --execute --wait</code> starts every saved node, like <strong>Start all nodes</strong> on the Station page.</p>
 <div class="admonition warning">
-<p class="admonition-title"><strong>Start all</strong> includes nodes that drive real hardware. Start nodes one by one when the graph contains hardware you do not want to run.</p>
+<p class="admonition-title"><strong>Start all nodes</strong> includes nodes that drive real hardware. Start nodes one by one when the graph contains hardware you do not want to run.</p>
 </div>
 <h3 id="edit-the-node-graph">Edit the Node Graph<a class="headerlink" href="#edit-the-node-graph" title="Permanent link">¶</a></h3>
-<p>Every graph change needs the current version. Read it, preview, then execute:</p>
+<p>Stop the nodes you change first, as on the Station page; changes apply when they next start. Every graph change needs the current version. Read it, preview, then execute:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sodero<span class="w"> </span>topology<span class="w"> </span>get<span class="w">                                       </span><span class="c1"># note "expected_version", e.g. 12</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sodero<span class="w"> </span>topology<span class="w"> </span>add-node<span class="w"> </span>--kind<span class="w"> </span>camera<span class="w"> </span>--name<span class="w"> </span>cam0<span class="w"> </span>--if-version<span class="w"> </span><span class="m">12</span><span class="w">              </span><span class="c1"># preview</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>sodero<span class="w"> </span>topology<span class="w"> </span>add-node<span class="w"> </span>--kind<span class="w"> </span>camera<span class="w"> </span>--name<span class="w"> </span>cam0<span class="w"> </span>--if-version<span class="w"> </span><span class="m">12</span><span class="w"> </span>--execute<span class="w">    </span><span class="c1"># returns version 13</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>sodero<span class="w"> </span>topology<span class="w"> </span>connect<span class="w"> </span>--source<span class="w"> </span>rc.localizer.camera<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span>--target<span class="w"> </span>rc.camera_gateway.cam0.camera<span class="w"> </span>--if-version<span class="w"> </span><span class="m">13</span><span class="w"> </span>--execute
 </code></pre></div>
-<p><code>sodero topology catalog</code> lists the node kinds (<code>gateway</code>, <code>strider</code>, <code>motion_studio</code>, <code>articulation</code>, <code>camera</code>, <code>imu</code>, <code>vo</code>, <code>localizer</code>, <code>navigator</code>, <code>legged_locomotion</code>, <code>legged_navigator</code>, <code>package</code>) with their ports. The Station must be stopped while you edit its graph, as on the Station page.</p>
+<p><code>sodero topology catalog</code> lists the node kinds (<code>gateway</code>, <code>strider</code>, <code>motion_studio</code>, <code>articulation</code>, <code>camera</code>, <code>imu</code>, <code>vo</code>, <code>localizer</code>, <code>navigator</code>, <code>legged_locomotion</code>, <code>legged_navigator</code>, <code>package</code>) with their ports.</p>
 <h3 id="change-settings-of-official-nodes">Change Settings of Official Nodes<a class="headerlink" href="#change-settings-of-official-nodes" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sodero<span class="w"> </span>navigation<span class="w"> </span>list
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sodero<span class="w"> </span>navigation<span class="w"> </span>get<span class="w"> </span>--node<span class="w"> </span>rc.navigator<span class="w"> </span>&gt;<span class="w"> </span>navigator.json<span class="w">   </span><span class="c1"># the editable config and its sha256</span>
@@ -2640,13 +2668,17 @@
 </code></pre></div>
 <p>Stop the node first; the new settings apply when it starts again. These are the same settings the Station page shows in the node's inspector.</p>
 <h3 id="attach-a-map">Attach a Map<a class="headerlink" href="#attach-a-map" title="Permanent link">¶</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sodero<span class="w"> </span>navigation<span class="w"> </span>get<span class="w"> </span>--node<span class="w"> </span>rc.localizer<span class="w">            </span><span class="c1"># its sha256</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sodero<span class="w"> </span>maps<span class="w"> </span>upload<span class="w"> </span>/workspace/maps/warehouse.nav<span class="w"> </span>--node<span class="w"> </span>rc.localizer<span class="w"> </span>--if-sha256<span class="w"> </span>SHA256<span class="w"> </span>--execute
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sodero<span class="w"> </span>runtime<span class="w"> </span>node<span class="w"> </span>stop<span class="w"> </span>rc.navigator<span class="w"> </span>--execute<span class="w">          </span><span class="c1"># stop the nodes that use the map</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sodero<span class="w"> </span>runtime<span class="w"> </span>node<span class="w"> </span>stop<span class="w"> </span>rc.localizer<span class="w"> </span>--execute
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sodero<span class="w"> </span>runtime<span class="w"> </span>node<span class="w"> </span>stop<span class="w"> </span>rc.visual_odometry<span class="w"> </span>--execute<span class="w">    </span><span class="c1"># if the Station has one</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>sodero<span class="w"> </span>navigation<span class="w"> </span>get<span class="w"> </span>--node<span class="w"> </span>rc.localizer<span class="w">                </span><span class="c1"># note "sha256"</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>sodero<span class="w"> </span>maps<span class="w"> </span>upload<span class="w"> </span>/workspace/maps/warehouse.nav<span class="w"> </span>--node<span class="w"> </span>rc.localizer<span class="w"> </span>--if-sha256<span class="w"> </span>SHA256<span class="w">            </span><span class="c1"># preview: checks the bundle</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>sodero<span class="w"> </span>maps<span class="w"> </span>upload<span class="w"> </span>/workspace/maps/warehouse.nav<span class="w"> </span>--node<span class="w"> </span>rc.localizer<span class="w"> </span>--if-sha256<span class="w"> </span>SHA256<span class="w"> </span>--execute<span class="w">  </span><span class="c1"># attach it</span>
 </code></pre></div>
-<p>The localizer and the navigator share one map bundle, so one upload serves both. Stop both nodes first. See <a href="../../navigation/overview/">Localization and Navigation</a>.</p>
+<p>The localizer and the navigator share one map bundle, so one upload serves both. Start the nodes again afterwards. See <a href="../../navigation/map_bundle/">Map Bundle (.nav)</a> and <a href="../../navigation/overview/">Localization and Navigation</a>.</p>
 <h3 id="modules-your-own-programs">Modules (Your Own Programs)<a class="headerlink" href="#modules-your-own-programs" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sodero<span class="w"> </span>packages<span class="w"> </span>upload<span class="w"> </span>/workspace/my-work/patrol.tar.gz<span class="w"> </span>--execute
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sodero<span class="w"> </span>topology<span class="w"> </span>add-node<span class="w"> </span>--kind<span class="w"> </span>package<span class="w"> </span>--package<span class="w"> </span>patrol<span class="w"> </span>--if-version<span class="w"> </span>N<span class="w"> </span>--execute
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sodero<span class="w"> </span>topology<span class="w"> </span>add-node<span class="w"> </span>--kind<span class="w"> </span>package<span class="w"> </span>--package<span class="w"> </span>customer.patrol<span class="w"> </span>--if-version<span class="w"> </span>N<span class="w"> </span>--execute<span class="w">   </span><span class="c1"># name from package.yaml</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>sodero<span class="w"> </span>apps<span class="w"> </span>start<span class="w"> </span>NODE<span class="w"> </span>--execute
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>sodero<span class="w"> </span>apps<span class="w"> </span>logs<span class="w"> </span>NODE<span class="w"> </span>--lines<span class="w"> </span><span class="m">100</span>
 </code></pre></div>
@@ -2733,7 +2765,7 @@
             <span class="twemoji">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
             </span>
-            Raise Issues
+            Report an Issue
         </a>
 
     </div>

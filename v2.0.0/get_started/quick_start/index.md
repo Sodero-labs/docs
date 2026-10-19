@@ -38,7 +38,7 @@ ______________________________________________________________________
 
    Gateway › Actuator gateway
 
-1. Name it `jackal` and click **Add node**.
+1. Name it `jackal` ① and click **Add node** ②.
 
 ______________________________________________________________________
 
@@ -46,9 +46,9 @@ ______________________________________________________________________
 
 1. Select the new node `rc.actuator_gateway.jackal`. In its inspector, click the upload icon in **DEFINITION** (**Import .gw**).
 
-1. Choose `jackal.gw` and click **Import**.
+1. On **From your PC** ①, choose `jackal.gw` ② and click **Import** ③.
 
-1. In **TARGET**, click **Change** and check the two values:
+1. In **TARGET**, click **Change** and set the two values:
 
    - **Robot name**: `jackal`. It must equal the robot's prim name in Isaac Sim (`/World/jackal`).
    - **Sim host**: the IP address of your Isaac Sim PC.
@@ -61,8 +61,8 @@ ______________________________________________________________________
 
 ## Step 3: Add Strider and Connect It
 
-1. Click **Add node**, choose **Controller** › **Strider**, click **Next**, name it `jackal` and click **Add node**.
-1. Select `rc.mobile_controller_manager.jackal`, click the upload icon in **DEFINITION** (**Import .sddm**), choose `jackal.sddm` and click **Import**.
+1. Click **Add node**, choose **Controller** ① › **Strider** ② and click **Next** ③. Name it `jackal` and click **Add node**.
+1. Select `rc.mobile_controller_manager.jackal` and click the upload icon in **DEFINITION** (**Import .sddm**). On **From your PC** ①, choose `jackal.sddm` ② and click **Import** ③.
 1. Connect the two nodes: drag from the Strider's `servo_link` (left edge) to the gateway's `servo_link` (right edge), or click **Auto-connect** next to `servo_link` in the Strider's inspector.
 
 The gateway and Strider connected through servo_link
@@ -77,7 +77,7 @@ ______________________________________________________________________
 
 Isaac Bridge status: ① ports serving ② robots bound ③ cameras ④ Rescan
 
-Isaac Sim's computer must accept TCP connections on ports 53333–53335 from Stellar X. Allow them in its firewall.
+The Isaac Sim PC must accept TCP connections from Stellar X on ports 53333–53335. Allow them in its firewall ([Isaac Bridge Installation](https://docs.sodero.io/v2.0.0/virtual_simulation/extension_installation/#4-allow-the-ports-in-the-firewall)).
 
 **Tip:** To use your own robot instead, prepare its scene as described in [Robot Setup](https://docs.sodero.io/v2.0.0/virtual_simulation/robot_setup/index.md): its articulation prim name is its robot name, and its joints, in order, are the gateway's actuators.
 
@@ -108,9 +108,9 @@ ______________________________________________________________________
 
 Strider's Drive page: ① Twist ② Servo On ③ Live switch for the keyboard ④ speed limits ⑤ drive pad ⑥⑦ stop and emergency stop ⑧ readiness
 
-The simulated Jackal after a short drive and turn
-
 **Tip:** Switch on **Live** ③ in **Manual Drive** to drive with the keyboard: **W**/**S** forward and back, **A**/**D** turn, **Space** stops.
+
+The simulated Jackal after a short drive and turn
 
 When you are done, switch the servo off and click **Idle** under **Drive Mode**.
 

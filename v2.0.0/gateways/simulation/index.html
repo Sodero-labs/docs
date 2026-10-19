@@ -113,7 +113,7 @@
       border-bottom: 1px solid #333;
     }
 
-    /* --- [1] 모바일 화면 --- */
+    /* --- [1] Mobile --- */
     @media (max-width: 76.24em) {
       .pc-only { display: none !important; }
       .mobile-header-inner {
@@ -124,7 +124,7 @@
       .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
     }
 
-    /* --- [2] PC 화면 --- */
+    /* --- [2] Desktop --- */
     @media (min-width: 76.25em) {
       .mobile-only { display: none !important; }
       .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
@@ -239,7 +239,7 @@
         overflow: hidden;
       }
 
-      /* 매칭된 키워드 하이라이트 색상 */
+      /* Highlight color of matched keywords */
       .md-search-result mark {
         background-color: #0070dd;
         color: #f0f1f2;
@@ -1757,6 +1757,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulated Robot (.sdda)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
         
   
@@ -2303,7 +2331,7 @@
 </li>
 </ol>
 <figure>
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../station/design_documents/images/inspector_target_edit.png" data-desc-position="bottom"><img alt="Target" src="../../station/design_documents/images/inspector_target_edit.png" width="340"></a>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../station/design_documents/images/inspector_target_edit.png" data-desc-position="bottom"><img alt="Target" src="../../station/design_documents/images/inspector_target_edit.png" width="331"></a>
 <br>
 <figcaption>Robot name and Sim host</figcaption>
 </figure>
@@ -2364,8 +2392,12 @@
 <td style="text-align: left;">Isaac Sim is not playing; <strong>Sim host</strong> is not the Isaac Sim computer; its firewall blocks TCP 53333–53334; <strong>Robot name</strong> does not match the prim name</td>
 </tr>
 <tr>
+<td style="text-align: left;">The Isaac Bridge window does not list the robot</td>
+<td style="text-align: left;">The prim has no articulation root (<a href="../../virtual_simulation/robot_setup/">Robot Setup</a>)</td>
+</tr>
+<tr>
 <td style="text-align: left;">The Isaac Bridge window shows the robot as <em>not bound</em></td>
-<td style="text-align: left;">The prim has no articulation root, or two prims share the name (<a href="../../virtual_simulation/robot_setup/">Robot Setup</a>)</td>
+<td style="text-align: left;">The robot is not a valid PhysX articulation (check the Isaac Sim console), or two prims share the name (<a href="../../virtual_simulation/robot_setup/">Robot Setup</a>)</td>
 </tr>
 <tr>
 <td style="text-align: left;">Servo on is accepted but the robot does not move</td>
@@ -2376,8 +2408,8 @@
 <td style="text-align: left;">The joint order or axis in the scene differs from the document. Fix the scene or the document; do not invert signs elsewhere.</td>
 </tr>
 <tr>
-<td style="text-align: left;">Motion is too slow or odometry drifts</td>
-<td style="text-align: left;">The simulation runs slower than real time. Lower the scene's physics and render rates, close other GPU programs.</td>
+<td style="text-align: left;">Motion looks slow, or localization lags</td>
+<td style="text-align: left;">The simulation runs slower than real time: controllers follow simulation time, but camera-based localization runs on wall-clock time. Lower the scene's physics and render rates, close other GPU programs (<a href="../../virtual_simulation/connect_station/#6-real-time-performance">Real-Time Performance</a>).</td>
 </tr>
 </tbody>
 </table>
@@ -2452,7 +2484,7 @@
             <span class="twemoji">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
             </span>
-            Raise Issues
+            Report an Issue
         </a>
 
     </div>

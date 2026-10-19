@@ -32,7 +32,7 @@ Installing a module package
 
 ### Add and Start the Module's Node
 
-1. Click **Add node** and choose the type your module declares (for example **Application**). Your module appears in the list with the **CUSTOM** badge.
+1. Click **Add node** and choose the type that matches the `role` in your module's `subsystem.yaml`: **Gateway** for `gateway`, **Controller** for `component`, **Compound** for `compound`, **Application** for `app`. Your module appears in the list with the **CUSTOM** badge. The status module built below, for example, is a `component` and appears under **Controller**.
 1. Connect its required ports, for example to a Strider's `mobile_base` or a Motion Studio's `manipulator`.
 1. Right-click the node and choose **Start node**, or use **Start all nodes**.
 
@@ -59,8 +59,8 @@ my-module-1.0.0.tar.gz
 | File             | Purpose                                                                                                                                         |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | `package.yaml`   | The module's name (for example `customer.patrol`), version, the command that starts it and its parameters                                       |
-| `subsystem.yaml` | The node the module creates: its role (`component`, `compound` or `application`) and its ports with their contracts                             |
-| `run.py`         | Your program. It implements the node's lifecycle (initialize, start, stop) with the Stellar SDK and serves or calls the interfaces of its ports |
+| `subsystem.yaml` | The node the module creates: its role (`gateway`, `component`, `compound` or `app`) and its ports with their contracts                          |
+| `run.py`         | Your program. It implements the node's lifecycle (initialize, start, stop) with the Station SDK and serves or calls the interfaces of its ports |
 
 Limits: 64 MiB per package (128 MiB unpacked).
 
@@ -68,7 +68,10 @@ Limits: 64 MiB per package (128 MiB unpacked).
 
 ### Build and Install from the SSH Workspace
 
+The Station SDK is not installed in the SSH workspace. Import it only in the code that runs on the Station, and give your program an offline `--self-test` to check it in the workspace, as the example does.
+
 ```
+mkdir -p /workspace/my-work
 cp -R /opt/sodero/docs/examples/native-status /workspace/my-work/
 cd /workspace/my-work/native-status
 python3 run.py --self-test                     # offline check
@@ -77,6 +80,6 @@ tar -czf ../status-module.tar.gz package.yaml subsystem.yaml run.py README.md
 sodero packages upload ../status-module.tar.gz --execute
 ```
 
-Then add its node on the Station page, or with `sodero topology add-node --kind package --package NAME --if-version N --execute`, and start it.
+Then add its node on the Station page, or with `sodero topology add-node --kind package --package NAME --if-version N --execute`, and start it. `NAME` is the `name` in `package.yaml`; `N` is the graph version that `sodero topology get` returns ([sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)).
 
 **Tip:** An AI coding agent can write, check, package and install a module for you through the SSH workspace. See [AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md).

@@ -13,19 +13,19 @@ flowchart TB
     I -. "IMU" .-> IG
 ```
 
-Because only the gateway knows the hardware, **the same controller and documents drive a simulated robot and the real one**. Moving from Isaac Sim to real motors means replacing the gateway's document, nothing else.
+Because only the gateway knows the hardware, **the same controller, with the same document, drives a simulated robot and the real one**. Moving from Isaac Sim to real motors means replacing the gateway's document, nothing else.
 
 ______________________________________________________________________
 
 ## Built-in Gateways
 
-| Module           | Node ID                    | Connects                                                                                                                                            | Configured with                                                                                                               |
-| ---------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Actuator gateway | `rc.actuator_gateway.NAME` | EtherCAT drives, or the joints of a robot in Isaac Sim                                                                                              | A `.gw` document ([Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md))                       |
-| Camera gateway   | `rc.camera_gateway.NAME`   | An RGB-D camera: a camera in Isaac Sim, or a real camera through the [Device Bridge](https://docs.sodero.io/v2.0.0/gateways/device_bridge/index.md) | Camera settings in the inspector ([Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/index.md)) |
-| IMU gateway      | `rc.imu_gateway.NAME`      | An IMU and foot contacts: in Isaac Sim, or through the Device Bridge                                                                                | IMU settings in the inspector                                                                                                 |
+| Module           | Node ID                    | Connects                                                                                                                                            | Configured with                                                                                                                  |
+| ---------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Actuator gateway | `rc.actuator_gateway.NAME` | EtherCAT drives, or the joints of a robot in Isaac Sim                                                                                              | A `.gw` document ([Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md))                          |
+| Camera gateway   | `rc.camera_gateway.NAME`   | An RGB-D camera: a camera in Isaac Sim, or a real camera through the [Device Bridge](https://docs.sodero.io/v2.0.0/gateways/device_bridge/index.md) | Camera settings in the inspector ([Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/index.md))    |
+| IMU gateway      | `rc.imu_gateway.NAME`      | An IMU (and foot contacts in Isaac Sim): in Isaac Sim, or through the Device Bridge                                                                 | IMU settings in the inspector ([Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/#2-imu-gateway)) |
 
-You can also write your own gateway as a module (**Gateway** › **Gateway subsystem** in **Add node**) for devices the built-in gateways do not cover. See [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md).
+For devices the built-in gateways do not cover, you can write your own gateway as a module with the role `gateway`. Once installed, it appears in **Add node** › **Gateway** with the **CUSTOM** badge. See [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md).
 
 ______________________________________________________________________
 
@@ -33,19 +33,20 @@ ______________________________________________________________________
 
 The `.gw` document chooses how the actuator gateway reaches its actuators:
 
-| Type           | `hardware.type` | Use                                                                                        | Page                                                                                        |
-| -------------- | --------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| **EtherCAT**   | `ethercat`      | CiA 402 servo drives on the controller's EtherCAT port, synchronized by distributed clocks | [EtherCAT Gateway](https://docs.sodero.io/v2.0.0/gateways/ethercat/index.md)                |
-| **Isaac Sim**  | `simulation`    | The joints of a robot in NVIDIA Isaac Sim, through the Isaac Bridge extension              | [Simulation Gateway](https://docs.sodero.io/v2.0.0/gateways/simulation/index.md)            |
-| **Damiao CAN** | `can`           | MIT-mode CAN motors, on request                                                            | [Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/#6-can-gateways) |
+| Type          | `hardware.type` | Use                                                                                        | Page                                                                             |
+| ------------- | --------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| **EtherCAT**  | `ethercat`      | CiA 402 servo drives on the controller's EtherCAT port, synchronized by distributed clocks | [EtherCAT Gateway](https://docs.sodero.io/v2.0.0/gateways/ethercat/index.md)     |
+| **Isaac Sim** | `simulation`    | The joints of a robot in NVIDIA Isaac Sim, through the Isaac Bridge extension              | [Simulation Gateway](https://docs.sodero.io/v2.0.0/gateways/simulation/index.md) |
 
 ______________________________________________________________________
 
 ## Actuators and Indices
 
-A gateway drives a list of **actuators**, numbered from zero in the order they are defined (`a1` is index 0, `a2` is index 1, …). For EtherCAT, the order of the actuators is the order of the drives on the cable.
+A gateway drives a list of **actuators**, numbered from zero in the order they are defined (actuator 1 is index 0, actuator 2 is index 1, …). For EtherCAT, the order of the actuators is the order of the drives on the cable.
 
 A controller's document refers to these indices to say which actuator drives which joint or wheel. For example, a Strider document for a 4-wheel base maps its wheels to the gateway's actuators `[0, 1, 2, 3]`.
+
+Motor units and joint units are defined in different documents:
 
 | Unit                            | Where it is defined                                                                           |
 | ------------------------------- | --------------------------------------------------------------------------------------------- |

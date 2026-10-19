@@ -113,7 +113,7 @@
       border-bottom: 1px solid #333;
     }
 
-    /* --- [1] 모바일 화면 --- */
+    /* --- [1] Mobile --- */
     @media (max-width: 76.24em) {
       .pc-only { display: none !important; }
       .mobile-header-inner {
@@ -124,7 +124,7 @@
       .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
     }
 
-    /* --- [2] PC 화면 --- */
+    /* --- [2] Desktop --- */
     @media (min-width: 76.25em) {
       .mobile-only { display: none !important; }
       .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
@@ -239,7 +239,7 @@
         overflow: hidden;
       }
 
-      /* 매칭된 키워드 하이라이트 색상 */
+      /* Highlight color of matched keywords */
       .md-search-result mark {
         background-color: #0070dd;
         color: #f0f1f2;
@@ -1973,6 +1973,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulated Robot (.sdda)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
         
   
@@ -2682,7 +2710,7 @@
 
 <h1 id="map-bundle-nav">Map Bundle (.nav)<a class="headerlink" href="#map-bundle-nav" title="Permanent link">¶</a></h1>
 <p>A map bundle is one file that carries the map of one site together with the settings to localize and navigate in it. You attach it to the <strong>Localizer</strong>; the <strong>Navigator</strong> runs on the same bundle, and <strong>Visual odometry</strong> uses its camera calibration.</p>
-<p>Stellar does not build maps on the robot; there is no SLAM. The map comes from a 3D model of the site, such as the USD world of your NVIDIA Isaac Sim scene, or from a 3D scan of the real site. This page specifies the format completely, so that you can build bundles for your own sites.</p>
+<p>Stellar Station does not build maps on the robot; there is no SLAM. The map comes from a 3D model of the site, such as the USD world of your NVIDIA Isaac Sim scene, or from a 3D scan of the real site. This page specifies the format completely, so that you can build bundles for your own sites.</p>
 <div class="admonition info">
 <p class="admonition-title">The Localizer matches the camera's depth images against the 3D point cloud of the bundle to find the robot on the map. The Navigator plans paths on the 2D occupancy grid. Both describe the same site in the same coordinates.</p>
 </div>
@@ -2770,7 +2798,7 @@
     B -- "extrinsics.yaml&lt;br&gt;(fixed)" --&gt; C["cam0_optical&lt;br&gt;(x right, y down, z forward)"]</code></pre>
 <p>The Localizer is planar by default (<code>icp.planar: true</code>): it estimates x, y and yaw of <code>base_link</code> and holds its height, roll and pitch at zero. <code>base_link</code> therefore lies on the floor, and the camera height in <code>extrinsics.yaml</code> is its height <strong>above the floor</strong>.</p>
 <div class="admonition warning">
-<p class="admonition-title">Measure the camera's x and y from the base origin that your odometry tracks, but its z from the floor, even when your robot model places <code>base_link</code> higher, for example at the wheel axles. A height taken from a raised base puts every camera point too low by that offset: the fit error exceeds <code>icp.max_rmse</code> and the Localizer stays <code>initializing</code>.</p>
+<p class="admonition-title">Measure the camera's x and y from the base origin that your odometry tracks, but its z from the floor, even when your robot model places <code>base_link</code> higher, for example at the wheel axles. A height taken from a raised base puts every camera point too low by that offset: the fit error exceeds <code>icp.max_rmse</code> and the localization status stays <strong>Initializing</strong> (<code>initializing</code>).</p>
 </div>
 <hr>
 <h2 id="files">Files<a class="headerlink" href="#files" title="Permanent link">¶</a></h2>
@@ -2955,7 +2983,7 @@
 <td style="text-align: left;"><code>camera_frame_id</code></td>
 <td style="text-align: left;">text</td>
 <td style="text-align: left;">—</td>
-<td style="text-align: left;">The camera's optical frame: the <code>frame_id</code> in the camera node's <strong>Camera settings</strong>, at most 15 characters. Required by the Localizer.</td>
+<td style="text-align: left;">The camera's optical frame: the <code>frame_id</code> in the camera node's <strong>CAMERA SETTINGS</strong>, at most 15 characters. Required by the Localizer.</td>
 <td style="text-align: left;"><code>cam0_optical</code></td>
 </tr>
 <tr>
@@ -3048,9 +3076,9 @@
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.3881</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nt">yaw</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 </code></pre></div>
-<p>The Localizer starts from this pose when it has no confirmed pose on this map. Once it has localized, it restarts from its last confirmed pose on the same <code>map_id</code>. A pose set in <strong>Initial pose</strong> mode on the map page, or with the <code>localization.set_initial_pose</code> tool, replaces both. Give a changed map a new <code>map_id</code> so that an old pose is not reused.</p>
+<p>The Localizer starts from this pose when it has no confirmed pose on this map. Once it has localized, it restarts from its last confirmed pose on the same <code>map_id</code>. A pose set with <strong>Set Initial Pose</strong> on Strider's Navigation page, or with the <code>localization.set_initial_pose</code> tool, replaces both. Give a changed map a new <code>map_id</code> so that an old pose is not reused.</p>
 <h3 id="localizeryaml">localizer.yaml<a class="headerlink" href="#localizeryaml" title="Permanent link">¶</a></h3>
-<p>Only <code>map.file</code> is required; a key you leave out keeps its default. The warehouse values:</p>
+<p>Only <code>map.file</code> is required; a key you leave out keeps its default. An excerpt of the warehouse file:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">map</span><span class="p">:</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">map/warehouse.ply</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">voxel_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
@@ -3136,12 +3164,12 @@
 <tr>
 <td style="text-align: left;"><code>status.accept_streak</code>, <code>status.init_min_fitness</code></td>
 <td style="text-align: left;"><code>3</code>, <code>0.7</code></td>
-<td style="text-align: left;">Accepted fits in a row, each with at least this fitness, needed to become <code>localized</code></td>
+<td style="text-align: left;">Accepted fits in a row, each with at least this fitness, needed to become <strong>Healthy</strong> (<code>localized</code>)</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>status.degrade_after_s</code>, <code>lost_after_s</code>, <code>degrade_fitness</code></td>
 <td style="text-align: left;"><code>2.0</code> s, <code>10.0</code> s, <code>0.5</code></td>
-<td style="text-align: left;">Time without an accepted fit before <code>degraded</code> and <code>lost</code>; fitness below which the state degrades</td>
+<td style="text-align: left;">Time without an accepted fit before <strong>Degraded</strong> (<code>degraded</code>) and <strong>Lost</strong> (<code>lost</code>); fitness below which the state degrades</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>status.clock_skew_ms</code>, <code>status.odometry_stale_s</code></td>
@@ -3151,7 +3179,7 @@
 <tr>
 <td style="text-align: left;"><code>recovery.auto_reseed</code>, <code>lost_wait_s</code>, <code>attempts</code>, <code>attempt_timeout_s</code>, <code>spacing_s</code>, <code>radius_step_m</code>, <code>max_radius_m</code>, <code>yaw_jitter_rad</code></td>
 <td style="text-align: left;"><code>true</code>, <code>3.0</code> s, <code>5</code>, <code>5.0</code> s, <code>1.0</code> s, <code>0.3</code> m, <code>1.0</code> m, <code>0.17</code> rad</td>
-<td style="text-align: left;">After <code>lost</code>, retry automatically around the last confirmed pose: schedule and search area</td>
+<td style="text-align: left;">After <strong>Lost</strong>, retry automatically around the last confirmed pose: schedule and search area</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>publish.pose_hz</code>, <code>status_hz</code>, <code>obstacles_hz</code></td>
@@ -3204,6 +3232,7 @@
 <li><strong>Numbers</strong> are 0 to 1,000,000, except the entries of <code>min_velocity</code> and <code>max_decel</code>, which may be negative. Velocity lists have three entries: <code>[x m/s, y m/s, yaw rad/s]</code>.</li>
 <li><strong>Robot size</strong> is a circle, <code>robot_radius</code>; a polygon <code>footprint</code> is refused.</li>
 </ul>
+<p>The <strong>Template</strong> column lists the values of the reference navigator configuration, which defines the accepted keys. They are a starting point for your own values, not the built-in values used for a key you leave out.</p>
 <table>
 <thead>
 <tr>
@@ -3309,7 +3338,7 @@
 <h2 id="change-settings-later">Change Settings Later<a class="headerlink" href="#change-settings-later" title="Permanent link">¶</a></h2>
 <p>After the upload, the settings in <code>localizer.yaml</code>, <code>navigator.yaml</code>, <code>extrinsics.yaml</code> and <code>initial_pose.yaml</code> can be changed without a new bundle:</p>
 <ul>
-<li><strong>Station page:</strong> select the Localizer or the Navigator node. The inspector's <strong>Navigation settings</strong> section groups the keys your files contain as Localizer, Navigator, Camera calibration and Initial pose.</li>
+<li><strong>Station page:</strong> select the Localizer or the Navigator node. The inspector's <strong>NAVIGATION SETTINGS</strong> section groups the keys your files contain as Localizer, Navigator, Camera calibration and Initial pose.</li>
 <li><strong>CLI:</strong> <code>sodero navigation get --node rc.navigator</code>, edit the returned <code>config</code>, then <code>sodero navigation apply</code> with its SHA-256 (see <a href="../../ssh_workspace/sodero_cli/">sodero CLI</a>).</li>
 </ul>
 <p>Stop the Localizer, the Navigator and Visual odometry before you save; the new values apply when the nodes start again. The map files, <code>meta.yaml</code> and <code>map.file</code> change only with a new bundle.</p>
@@ -3361,19 +3390,23 @@
 <ol>
 <li>Stop the Localizer and the nodes that use its bundle (Navigator, Visual odometry).</li>
 <li>Select the Localizer node. In the inspector's <strong>LOCALIZER</strong> section, click <strong>Upload .nav</strong> and choose <code>site.nav.tgz</code>.</li>
-<li>The section shows the file name, and <strong>Navigation settings</strong> lists the settings of the bundle.</li>
+<li>The section shows the file name, and <strong>NAVIGATION SETTINGS</strong> lists the settings of the bundle.</li>
 <li>Start the Localizer and the Navigator again.</li>
 </ol>
 <div class="admonition info">
-<p class="admonition-title">The Station page accepts file names ending in <code>.tgz</code>, <code>.tar.gz</code>, <code>.tar</code> or <code>.zip</code>, the CLI only names ending in <code>.nav</code>. Both take the same gzip tar archive: name it <code>site.nav.tgz</code> for the page and <code>site.nav</code> for the CLI. The page checks the archive's layout; the CLI preview checks every rule on this page, so preview a new bundle with the CLI before you upload it on the page.</p>
+<p class="admonition-title">Upload <code>site.nav.tgz</code> on the Station page and <code>site.nav</code> with the CLI; both are the same gzip-compressed tar. The page checks the archive's layout; the CLI preview checks every rule on this page, so preview a new bundle with the CLI before you upload it on the page.</p>
 </div>
 <h3 id="sodero-cli">sodero CLI<a class="headerlink" href="#sodero-cli" title="Permanent link">¶</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sodero<span class="w"> </span>runtime<span class="w"> </span>node<span class="w"> </span>stop<span class="w"> </span>rc.localizer<span class="w"> </span>--execute
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sodero<span class="w"> </span>navigation<span class="w"> </span>get<span class="w"> </span>--node<span class="w"> </span>rc.localizer<span class="w">                                     </span><span class="c1"># note "sha256"</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>sodero<span class="w"> </span>maps<span class="w"> </span>upload<span class="w"> </span>site.nav<span class="w"> </span>--node<span class="w"> </span>rc.localizer<span class="w"> </span>--if-sha256<span class="w"> </span>SHA256<span class="w">            </span><span class="c1"># preview: checks the bundle</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>sodero<span class="w"> </span>maps<span class="w"> </span>upload<span class="w"> </span>site.nav<span class="w"> </span>--node<span class="w"> </span>rc.localizer<span class="w"> </span>--if-sha256<span class="w"> </span>SHA256<span class="w"> </span>--execute<span class="w">  </span><span class="c1"># attach it</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sodero<span class="w"> </span>runtime<span class="w"> </span>node<span class="w"> </span>stop<span class="w"> </span>rc.navigator<span class="w"> </span>--execute
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sodero<span class="w"> </span>runtime<span class="w"> </span>node<span class="w"> </span>stop<span class="w"> </span>rc.localizer<span class="w"> </span>--execute
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>sodero<span class="w"> </span>navigation<span class="w"> </span>get<span class="w"> </span>--node<span class="w"> </span>rc.localizer<span class="w">                                     </span><span class="c1"># note "sha256"</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>sodero<span class="w"> </span>maps<span class="w"> </span>upload<span class="w"> </span>site.nav<span class="w"> </span>--node<span class="w"> </span>rc.localizer<span class="w"> </span>--if-sha256<span class="w"> </span>SHA256<span class="w">            </span><span class="c1"># preview: checks the bundle</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>sodero<span class="w"> </span>maps<span class="w"> </span>upload<span class="w"> </span>site.nav<span class="w"> </span>--node<span class="w"> </span>rc.localizer<span class="w"> </span>--if-sha256<span class="w"> </span>SHA256<span class="w"> </span>--execute<span class="w">  </span><span class="c1"># attach it</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>sodero<span class="w"> </span>runtime<span class="w"> </span>node<span class="w"> </span>start<span class="w"> </span>rc.localizer<span class="w"> </span>--execute
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>sodero<span class="w"> </span>runtime<span class="w"> </span>node<span class="w"> </span>start<span class="w"> </span>rc.navigator<span class="w"> </span>--execute
 </code></pre></div>
 <ul>
+<li>With Visual odometry, also stop <code>rc.visual_odometry</code> before the upload, and start it again before the Localizer.</li>
 <li>The file name must end in <code>.nav</code>, and the file may be at most 64 MiB.</li>
 <li>The preview reports the first problem it finds (see <a href="#validation-errors">Validation Errors</a>) and changes nothing.</li>
 <li><code>--node rc.navigator</code>, with the SHA-256 from <code>sodero navigation get --node rc.navigator</code>, attaches the same shared bundle. After each upload or settings change, read the SHA-256 again.</li>
@@ -3457,7 +3490,7 @@
 </tr>
 <tr>
 <td style="text-align: left;"><code>KEY: unknown or missing fields.</code></td>
-<td style="text-align: left;">A misspelt or unsupported key, such as <code>rpy</code> in an edge or <code>footprint</code> in a costmap</td>
+<td style="text-align: left;">A misspelled or unsupported key, such as <code>rpy</code> in an edge or <code>footprint</code> in a costmap</td>
 <td style="text-align: left;">Use only the keys on this page</td>
 </tr>
 <tr>
@@ -3521,7 +3554,7 @@
 <li><code>initial_pose.yaml</code> gives the pose of <code>base_link</code>, with yaw in radians.</li>
 <li><code>navigator.yaml</code> is complete, with your robot's <code>robot_radius</code> and speed limits.</li>
 <li>The archive is a gzip tar with one top folder, at most 64 MiB, and the CLI preview reports no problem.</li>
-<li>In simulation, the Localizer reaches <code>localized</code> and the robot reaches a nearby goal before you drive the real robot.</li>
+<li>In simulation, the localization status reaches <strong>Healthy</strong> and the robot reaches a nearby goal before you drive the real robot.</li>
 </ul>
 
 
@@ -3594,7 +3627,7 @@
             <span class="twemoji">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
             </span>
-            Raise Issues
+            Report an Issue
         </a>
 
     </div>

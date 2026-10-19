@@ -2,7 +2,7 @@
 
 A map bundle is one file that carries the map of one site together with the settings to localize and navigate in it. You attach it to the **Localizer**; the **Navigator** runs on the same bundle, and **Visual odometry** uses its camera calibration.
 
-Stellar does not build maps on the robot; there is no SLAM. The map comes from a 3D model of the site, such as the USD world of your NVIDIA Isaac Sim scene, or from a 3D scan of the real site. This page specifies the format completely, so that you can build bundles for your own sites.
+Stellar Station does not build maps on the robot; there is no SLAM. The map comes from a 3D model of the site, such as the USD world of your NVIDIA Isaac Sim scene, or from a 3D scan of the real site. This page specifies the format completely, so that you can build bundles for your own sites.
 
 The Localizer matches the camera's depth images against the 3D point cloud of the bundle to find the robot on the map. The Navigator plans paths on the 2D occupancy grid. Both describe the same site in the same coordinates.
 
@@ -57,7 +57,7 @@ flowchart TB
 
 The Localizer is planar by default (`icp.planar: true`): it estimates x, y and yaw of `base_link` and holds its height, roll and pitch at zero. `base_link` therefore lies on the floor, and the camera height in `extrinsics.yaml` is its height **above the floor**.
 
-Measure the camera's x and y from the base origin that your odometry tracks, but its z from the floor, even when your robot model places `base_link` higher, for example at the wheel axles. A height taken from a raised base puts every camera point too low by that offset: the fit error exceeds `icp.max_rmse` and the Localizer stays `initializing`.
+Measure the camera's x and y from the base origin that your odometry tracks, but its z from the floor, even when your robot model places `base_link` higher, for example at the wheel axles. A height taken from a raised base puts every camera point too low by that offset: the fit error exceeds `icp.max_rmse` and the localization status stays **Initializing** (`initializing`).
 
 ______________________________________________________________________
 
@@ -128,7 +128,7 @@ free_thresh: 0.196
 
 | Key               | Type         | Unit | Meaning                                                                                                                                | Example                     |
 | ----------------- | ------------ | ---- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| `camera_frame_id` | text         | —    | The camera's optical frame: the `frame_id` in the camera node's **Camera settings**, at most 15 characters. Required by the Localizer. | `cam0_optical`              |
+| `camera_frame_id` | text         | —    | The camera's optical frame: the `frame_id` in the camera node's **CAMERA SETTINGS**, at most 15 characters. Required by the Localizer. | `cam0_optical`              |
 | `edges`           | list         | —    | 1 to 32 fixed transforms; a frame is the `child` of one edge at most                                                                   |                             |
 | `parent`, `child` | text         | —    | Frame names                                                                                                                            | `base_link`, `cam0_optical` |
 | `xyz`             | [x, y, z]    | m    | Position of the child in the parent frame                                                                                              | `[0.22, 0.0, 0.468]`        |
@@ -162,11 +162,11 @@ y: 2.3881
 yaw: 0.0
 ```
 
-The Localizer starts from this pose when it has no confirmed pose on this map. Once it has localized, it restarts from its last confirmed pose on the same `map_id`. A pose set in **Initial pose** mode on the map page, or with the `localization.set_initial_pose` tool, replaces both. Give a changed map a new `map_id` so that an old pose is not reused.
+The Localizer starts from this pose when it has no confirmed pose on this map. Once it has localized, it restarts from its last confirmed pose on the same `map_id`. A pose set with **Set Initial Pose** on Strider's Navigation page, or with the `localization.set_initial_pose` tool, replaces both. Give a changed map a new `map_id` so that an old pose is not reused.
 
 ### localizer.yaml
 
-Only `map.file` is required; a key you leave out keeps its default. The warehouse values:
+Only `map.file` is required; a key you leave out keeps its default. An excerpt of the warehouse file:
 
 ```
 map:
@@ -197,10 +197,10 @@ publish:
 | `icp.deg_ratio`, `icp.deg_min_info`, `icp.deg_threshold`                                                                                                                                             | `0.05`, `5.0`, `0`                                                     | Handling of directions the view cannot observe, such as along a corridor                                                                                                                                              |
 | `icp.max_solve_points`, `robust_delta`, `relative_fitness`, `relative_rmse`, `min_structural_fitness`, `rmse_growth_factor`, `sigma_depth`, `cov_inflation`, `recovery_radius_m`, `recovery_yaw_rad` | `0`, `0`, `1.0e-6`, `1.0e-6`, `0`, `1.05`, `0.01`, `4.0`, `0.4`, `0.5` | Advanced tuning; keep the defaults                                                                                                                                                                                    |
 | `sensor.depth_min`, `sensor.depth_max`                                                                                                                                                               | `0.2` m, `6.0` m                                                       | Depth range of the camera points used                                                                                                                                                                                 |
-| `status.accept_streak`, `status.init_min_fitness`                                                                                                                                                    | `3`, `0.7`                                                             | Accepted fits in a row, each with at least this fitness, needed to become `localized`                                                                                                                                 |
-| `status.degrade_after_s`, `lost_after_s`, `degrade_fitness`                                                                                                                                          | `2.0` s, `10.0` s, `0.5`                                               | Time without an accepted fit before `degraded` and `lost`; fitness below which the state degrades                                                                                                                     |
+| `status.accept_streak`, `status.init_min_fitness`                                                                                                                                                    | `3`, `0.7`                                                             | Accepted fits in a row, each with at least this fitness, needed to become **Healthy** (`localized`)                                                                                                                   |
+| `status.degrade_after_s`, `lost_after_s`, `degrade_fitness`                                                                                                                                          | `2.0` s, `10.0` s, `0.5`                                               | Time without an accepted fit before **Degraded** (`degraded`) and **Lost** (`lost`); fitness below which the state degrades                                                                                           |
 | `status.clock_skew_ms`, `status.odometry_stale_s`                                                                                                                                                    | `200` ms, `3.0` s                                                      | Largest camera-to-odometry lag; odometry silence before the input reconnects                                                                                                                                          |
-| `recovery.auto_reseed`, `lost_wait_s`, `attempts`, `attempt_timeout_s`, `spacing_s`, `radius_step_m`, `max_radius_m`, `yaw_jitter_rad`                                                               | `true`, `3.0` s, `5`, `5.0` s, `1.0` s, `0.3` m, `1.0` m, `0.17` rad   | After `lost`, retry automatically around the last confirmed pose: schedule and search area                                                                                                                            |
+| `recovery.auto_reseed`, `lost_wait_s`, `attempts`, `attempt_timeout_s`, `spacing_s`, `radius_step_m`, `max_radius_m`, `yaw_jitter_rad`                                                               | `true`, `3.0` s, `5`, `5.0` s, `1.0` s, `0.3` m, `1.0` m, `0.17` rad   | After **Lost**, retry automatically around the last confirmed pose: schedule and search area                                                                                                                          |
 | `publish.pose_hz`, `status_hz`, `obstacles_hz`                                                                                                                                                       | `20`, `1`, `10` Hz                                                     | Output rates                                                                                                                                                                                                          |
 | `publish.obstacles.z_min`, `z_max`, `ground_relative`                                                                                                                                                | `0.10` m, `0.30` m, `false`                                            | Height band above the floor whose camera points mark live obstacles for the Navigator; `true` measures from the floor seen in each image                                                                              |
 | `publish.obstacles.size_cells`, `resolution`, `decay_s`                                                                                                                                              | `48`, `0.05` m, `2.0` s                                                | Live obstacle grid around the robot (at most 48 × 48 cells) and how long a mark lasts                                                                                                                                 |
@@ -234,6 +234,8 @@ navigator: {drive: diff}
 - **Numbers** are 0 to 1,000,000, except the entries of `min_velocity` and `max_decel`, which may be negative. Velocity lists have three entries: `[x m/s, y m/s, yaw rad/s]`.
 - **Robot size** is a circle, `robot_radius`; a polygon `footprint` is refused.
 
+The **Template** column lists the values of the reference navigator configuration, which defines the accepted keys. They are a starting point for your own values, not the built-in values used for a key you leave out.
+
 | Key                                                                                                     | Template                                                                    | Meaning                                                                                                   |
 | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | `local_costmap.robot_radius`, `global_costmap.robot_radius`                                             | `0.42` m                                                                    | Radius around `base_link` that covers the robot; required, the same value in both                         |
@@ -261,7 +263,7 @@ ______________________________________________________________________
 
 After the upload, the settings in `localizer.yaml`, `navigator.yaml`, `extrinsics.yaml` and `initial_pose.yaml` can be changed without a new bundle:
 
-- **Station page:** select the Localizer or the Navigator node. The inspector's **Navigation settings** section groups the keys your files contain as Localizer, Navigator, Camera calibration and Initial pose.
+- **Station page:** select the Localizer or the Navigator node. The inspector's **NAVIGATION SETTINGS** section groups the keys your files contain as Localizer, Navigator, Camera calibration and Initial pose.
 - **CLI:** `sodero navigation get --node rc.navigator`, edit the returned `config`, then `sodero navigation apply` with its SHA-256 (see [sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)).
 
 Stop the Localizer, the Navigator and Visual odometry before you save; the new values apply when the nodes start again. The map files, `meta.yaml` and `map.file` change only with a new bundle.
@@ -325,20 +327,24 @@ The Localizer and the Navigator share one bundle, so one upload serves both. See
 
 1. Stop the Localizer and the nodes that use its bundle (Navigator, Visual odometry).
 1. Select the Localizer node. In the inspector's **LOCALIZER** section, click **Upload .nav** and choose `site.nav.tgz`.
-1. The section shows the file name, and **Navigation settings** lists the settings of the bundle.
+1. The section shows the file name, and **NAVIGATION SETTINGS** lists the settings of the bundle.
 1. Start the Localizer and the Navigator again.
 
-The Station page accepts file names ending in `.tgz`, `.tar.gz`, `.tar` or `.zip`, the CLI only names ending in `.nav`. Both take the same gzip tar archive: name it `site.nav.tgz` for the page and `site.nav` for the CLI. The page checks the archive's layout; the CLI preview checks every rule on this page, so preview a new bundle with the CLI before you upload it on the page.
+Upload `site.nav.tgz` on the Station page and `site.nav` with the CLI; both are the same gzip-compressed tar. The page checks the archive's layout; the CLI preview checks every rule on this page, so preview a new bundle with the CLI before you upload it on the page.
 
 ### sodero CLI
 
 ```
+sodero runtime node stop rc.navigator --execute
 sodero runtime node stop rc.localizer --execute
 sodero navigation get --node rc.localizer                                     # note "sha256"
 sodero maps upload site.nav --node rc.localizer --if-sha256 SHA256            # preview: checks the bundle
 sodero maps upload site.nav --node rc.localizer --if-sha256 SHA256 --execute  # attach it
+sodero runtime node start rc.localizer --execute
+sodero runtime node start rc.navigator --execute
 ```
 
+- With Visual odometry, also stop `rc.visual_odometry` before the upload, and start it again before the Localizer.
 - The file name must end in `.nav`, and the file may be at most 64 MiB.
 - The preview reports the first problem it finds (see [Validation Errors](#validation-errors)) and changes nothing.
 - `--node rc.navigator`, with the SHA-256 from `sodero navigation get --node rc.navigator`, attaches the same shared bundle. After each upload or settings change, read the SHA-256 again.
@@ -364,7 +370,7 @@ ______________________________________________________________________
 | `PLY requires a bounded LF header.`, `PLY point data length is inconsistent.`                                                                                  | CRLF line endings, or point data that does not match the header                                                   | Export again with LF line endings                                                                 |
 | `Use plain YAML data types.`, `Each YAML document must be a mapping.`, `Invalid YAML document.`                                                                | An unquoted date or time (for example in `created`), an empty file or a syntax error                              | Quote dates and times; fix the file                                                               |
 | `KEY: number outside supported bounds.`                                                                                                                        | A value out of range, or a number read as text, such as `1e-6`                                                    | Use the ranges on this page; write `1.0e-6`                                                       |
-| `KEY: unknown or missing fields.`                                                                                                                              | A misspelt or unsupported key, such as `rpy` in an edge or `footprint` in a costmap                               | Use only the keys on this page                                                                    |
+| `KEY: unknown or missing fields.`                                                                                                                              | A misspelled or unsupported key, such as `rpy` in an edge or `footprint` in a costmap                             | Use only the keys on this page                                                                    |
 | `KEY: unsupported value.`                                                                                                                                      | A fixed text value changed, `negate` other than 0 or 1, or an unknown `drive`                                     | Restore the value                                                                                 |
 | `KEY: invalid text.`, `KEY: invalid list length.`                                                                                                              | A name with unsupported characters or not starting with a letter; a list with the wrong number of entries         | Use letters, digits, `_`, `.` and `-`; 3 entries for `xyz`, `origin` and velocities, 4 for `quat` |
 | `Calibration edges require unique children and unit quaternions.`, `Calibration frames must not contain a cycle.`                                              | A frame is the child of two edges, a parent equals its child, `quat` is not unit length, or the edges form a loop | One edge per child, chained from `base_link`; normalize `quat`                                    |
@@ -389,4 +395,4 @@ ______________________________________________________________________
 - `initial_pose.yaml` gives the pose of `base_link`, with yaw in radians.
 - `navigator.yaml` is complete, with your robot's `robot_radius` and speed limits.
 - The archive is a gzip tar with one top folder, at most 64 MiB, and the CLI preview reports no problem.
-- In simulation, the Localizer reaches `localized` and the robot reaches a nearby goal before you drive the real robot.
+- In simulation, the localization status reaches **Healthy** and the robot reaches a nearby goal before you drive the real robot.
