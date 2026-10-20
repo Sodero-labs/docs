@@ -116,7 +116,6 @@ ______________________________________________________________________
 - **Preview first.** A `sodero` command that changes something only previews until you add `--execute`. Read the preview, then repeat the command with `--execute`.
 - **The robot is real equipment.** A command with `--execute` can start nodes or move the robot. Run it only when the surroundings are clear and someone who can stop the robot is present.
 - **Stop a node before you change it.** The Station refuses changes to a running node. Stop it, apply the change, start it again.
-- **Official modules stay protected.** Their parameters, settings and node logs are open to you, but their sources, binaries, weights and internal logs are not part of the workspace.
 
 Where to go next:
 

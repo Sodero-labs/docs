@@ -36,7 +36,7 @@ Installing a module package
 1. Connect its required ports, for example to a Strider's `mobile_base` or a Motion Studio's `manipulator`.
 1. Right-click the node and choose **Start node**, or use **Start all nodes**.
 
-If the module has its own web UI, a link with the module's name appears on its node card while it runs. Its logs are available in full in the inspector.
+If the module has its own web UI, a link with the module's name appears on its node card while it runs. Its logs appear in the inspector's **LOGS** section.
 
 ### Remove a Module
 

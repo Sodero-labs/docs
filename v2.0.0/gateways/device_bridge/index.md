@@ -2,7 +2,7 @@
 
 Stellar X connects to the rest of the robot through network ports only. Sensors that need USB, such as an Intel RealSense depth camera or a USB IMU, therefore go on a small computer next to them: a Raspberry Pi, another single-board computer or a PC. The **Device Bridge** runs on that computer. It reads the devices and serves their data to the controller over the LAN.
 
-The bridge speaks the same network protocol as Isaac Bridge. The controller's official Camera gateway, IMU gateway, Visual odometry, Localizer and Navigator therefore work with real sensors exactly as they work with a simulated robot; only the address they connect to differs.
+The bridge speaks the same network protocol as Isaac Bridge. The controller's built-in Camera gateway, IMU gateway, Visual odometry, Localizer and Navigator therefore work with real sensors exactly as they work with a simulated robot; only the address they connect to differs.
 
 Use the Device Bridge when:
 
@@ -47,16 +47,6 @@ flowchart TB
 ```
 
 The bridge **listens** on three ports and the controller's gateways **connect** to it, exactly as they connect to the simulator. Every message carries the bridge's `robot_name`, and each gateway takes the data published under the name it is configured with. Without the optional wheel stream, Strider drives the robot's own base through an EtherCAT Actuator gateway as usual.
-
-### What Is Official and What Is Yours
-
-| Part                                                      | Runs on         | Owner                                                 |
-| --------------------------------------------------------- | --------------- | ----------------------------------------------------- |
-| Device drivers (`device_bridge/devices/`)                 | Sensor computer | **You.** Use a built-in driver or add one per device. |
-| The rest of the bridge: protocol, streams, wheel watchdog | Sensor computer | Sodero. Use it as is.                                 |
-| Wire protocol (`docs/protocol.md`)                        | Between the two | Sodero. Isaac Bridge speaks the same protocol.        |
-| Camera gateway, IMU gateway, Actuator gateway             | Stellar X       | Sodero official modules. You configure them.          |
-| Visual odometry, Localizer, Navigator, Strider            | Stellar X       | Sodero official modules. You configure them.          |
 
 Supporting a new camera or IMU means writing one small driver class on the sensor computer. Nothing on the controller is rebuilt or modified.
 

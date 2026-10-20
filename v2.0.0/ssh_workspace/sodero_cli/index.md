@@ -96,7 +96,7 @@ sodero topology connect --source sodero.localizer.camera \
 
 `sodero topology catalog` lists the node kinds (`gateway`, `strider`, `motion_studio`, `articulation`, `camera`, `imu`, `vo`, `localizer`, `navigator`, `legged_locomotion`, `legged_navigator`, `package`) with their ports.
 
-### Change Settings of Official Nodes
+### Change Settings of Built-in Nodes
 
 ```
 sodero navigation list

@@ -337,7 +337,7 @@ ______________________________________________________________________
 | Let the Jackal localize itself on a map and drive to goals | [Navigate in Simulation](https://docs.sodero.io/v2.0.0/navigation/simulation_tutorial/index.md)                                                                                          |
 | Learn every part of the Station page                       | [Stellar Station](https://docs.sodero.io/v2.0.0/station/overview/index.md)                                                                                                               |
 | Build your own robot documents                             | [Stellar Designer](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/introduction/index.md), [Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md) |
-| Move from simulation to real motors                        | [EtherCAT Gateway](https://docs.sodero.io/v2.0.0/gateways/ethercat/index.md)                                                                                                             |
+| Move from simulation to real motors                        | [EtherCAT Mobile Base](https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/index.md), [EtherCAT Gateway](https://docs.sodero.io/v2.0.0/gateways/ethercat/index.md)              |
 | Let an AI coding agent do it for you                       | [AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md)                                                                                                       |
 # Hardware Setup
 
@@ -572,7 +572,7 @@ Loading an .sdr file
 
 The Station replaces its graph, robot documents and Station data with the file's content and restarts. The page shows *Restarting the Station with …* and reloads when the Station is back, usually within a minute. The nodes are not started; start them when you need them.
 
-- Before loading, the controller backs up its current Station. Installed modules stay installed.
+- Installed modules stay installed.
 - If the file cannot be loaded, the Station keeps its data and the dialog says why.
 
 Loading is refused while any node runs: *Stop all nodes before loading a .sdr.*
@@ -702,7 +702,7 @@ Installing a module package
 1. Connect its required ports, for example to a Strider's `mobile_base` or a Motion Studio's `manipulator`.
 1. Right-click the node and choose **Start node**, or use **Start all nodes**.
 
-If the module has its own web UI, a link with the module's name appears on its node card while it runs. Its logs are available in full in the inspector.
+If the module has its own web UI, a link with the module's name appears on its node card while it runs. Its logs appear in the inspector's **LOGS** section.
 
 ### Remove a Module
 
@@ -1069,8 +1069,6 @@ The **LOGS** section of the inspector shows the node's recent output. Choose the
 
 Gateway events of a simulation gateway
 
-Logs of your own modules are complete. Logs of built-in modules are summarized for operators.
-
 **Tip:** When a node fails, read **Gateway events** of its gateway first. Most start-up problems (no simulator, wrong robot name, no EtherCAT link, drive faults) are reported there with a hint.
 
 ______________________________________________________________________
@@ -1090,7 +1088,7 @@ ______________________________________________________________________
 
 Stellar X connects to the rest of the robot through network ports only. Sensors that need USB, such as an Intel RealSense depth camera or a USB IMU, therefore go on a small computer next to them: a Raspberry Pi, another single-board computer or a PC. The **Device Bridge** runs on that computer. It reads the devices and serves their data to the controller over the LAN.
 
-The bridge speaks the same network protocol as Isaac Bridge. The controller's official Camera gateway, IMU gateway, Visual odometry, Localizer and Navigator therefore work with real sensors exactly as they work with a simulated robot; only the address they connect to differs.
+The bridge speaks the same network protocol as Isaac Bridge. The controller's built-in Camera gateway, IMU gateway, Visual odometry, Localizer and Navigator therefore work with real sensors exactly as they work with a simulated robot; only the address they connect to differs.
 
 Use the Device Bridge when:
 
@@ -1135,16 +1133,6 @@ flowchart TB
 ```
 
 The bridge **listens** on three ports and the controller's gateways **connect** to it, exactly as they connect to the simulator. Every message carries the bridge's `robot_name`, and each gateway takes the data published under the name it is configured with. Without the optional wheel stream, Strider drives the robot's own base through an EtherCAT Actuator gateway as usual.
-
-### What Is Official and What Is Yours
-
-| Part                                                      | Runs on         | Owner                                                 |
-| --------------------------------------------------------- | --------------- | ----------------------------------------------------- |
-| Device drivers (`device_bridge/devices/`)                 | Sensor computer | **You.** Use a built-in driver or add one per device. |
-| The rest of the bridge: protocol, streams, wheel watchdog | Sensor computer | Sodero. Use it as is.                                 |
-| Wire protocol (`docs/protocol.md`)                        | Between the two | Sodero. Isaac Bridge speaks the same protocol.        |
-| Camera gateway, IMU gateway, Actuator gateway             | Stellar X       | Sodero official modules. You configure them.          |
-| Visual odometry, Localizer, Navigator, Strider            | Stellar X       | Sodero official modules. You configure them.          |
 
 Supporting a new camera or IMU means writing one small driver class on the sensor computer. Nothing on the controller is rebuilt or modified.
 
@@ -1490,6 +1478,8 @@ ______________________________________________________________________
 # EtherCAT Gateway
 
 Stellar X is an EtherCAT master. An actuator gateway of type **EtherCAT** drives CiA 402 servo drives on the controller's EtherCAT port with distributed-clock synchronization at the gateway's control period (1 ms by default). This page covers wiring, the gateway document, parameters, bring-up and troubleshooting.
+
+For a complete example from wiring to driving, see [EtherCAT Mobile Base](https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/index.md): four drives on a skid-steer base, with example files.
 
 **Real motors move.** Bring up a new EtherCAT system with the robot clear of people and obstacles, the drives' safe torque off (STO) and emergency stop wired, and someone at the emergency stop.
 
@@ -3502,6 +3492,165 @@ Start the gateway and the Strider node, open Strider, choose **Twist**, switch t
 - **Forward** drives forward and every wheel turns the right way,
 - **Turn Left** turns counterclockwise (seen from above),
 - the odometry on the **Status** page matches the distance and angle actually driven.
+# Tutorials - EtherCAT Mobile Base
+
+# EtherCAT Mobile Base
+
+This tutorial drives a four-wheel skid-steer base with four EtherCAT servo drives from Stellar X. It is the [Quick Start](https://docs.sodero.io/v2.0.0/get_started/quick_start/index.md) system on real motors: Strider still drives the base, and an EtherCAT gateway takes the place of the simulation gateway. You will:
+
+1. wire the four drives to Stellar X,
+1. add the gateway and Strider on Stellar Station and load their example documents,
+1. bring up the EtherCAT network, and
+1. jog each wheel with Strider.
+
+```
+flowchart TB
+    B["Your browser<br>Stellar Station · Strider"]
+    subgraph SX ["Stellar X"]
+        S["Strider<br>sodero.mlc.base"] -- servo_link --> G["EtherCAT gateway<br>rc.actuator_gateway.wheels"]
+    end
+    subgraph EC ["EtherCAT line"]
+        direction LR
+        D1["Drive 1<br>front left"] --> D2["Drive 2<br>front right"] --> D3["Drive 3<br>rear left"] --> D4["Drive 4<br>rear right"]
+    end
+    B --> S
+    G -- "EtherCAT Out" --> EC
+```
+
+**Real motors move.** Lift the base so that its wheels are off the ground until every wheel turns the right way. Wire the drives' safe torque off (STO) and an emergency stop, and keep the emergency stop within reach.
+
+______________________________________________________________________
+
+## Before You Start
+
+| You need          | Details                                                                                                                                                                                                                                       |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Stellar X         | Powered on and reachable from your PC ([Network Settings](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/network_settings/index.md)). In this guide its address is `192.168.60.18`.                                              |
+| Four servo drives | EtherCAT drives with the CiA 402 profile and cyclic synchronous velocity (CSV). Their RxPDO must include **Target velocity (0x60FF)** ([EtherCAT Gateway › What You Need](https://docs.sodero.io/v2.0.0/gateways/ethercat/#1-what-you-need)). |
+| Motors            | One motor per wheel. The example uses motors with a rated torque of 2.2222 Nm, a peak torque of 6.6667 Nm, a maximum speed of 1,890 rpm and an encoder with 524,288 counts per turn, each behind a 7.75 : 1 gear.                             |
+| A four-wheel base | The example base has wheels of 0.098 m radius at ±0.131 m front and back and ±0.188 m left and right of the base center.                                                                                                                      |
+| Example files     | [wheels.gw](https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/files/wheels.gw) (EtherCAT gateway with four drives) and [base.sddm](https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/files/base.sddm) (Strider).        |
+
+Your drives, motors and base are probably not the example's. Load the example files anyway and change the values in the Gateway Designer and Stellar Designer, as the steps below describe.
+
+______________________________________________________________________
+
+## Step 1: Wire the Drives
+
+1. Plug Stellar X's **EtherCAT Out** port into the **IN** port of the front-left drive.
+1. Connect its **OUT** port to the **IN** port of the front-right drive, then on to the rear-left and the rear-right drive.
+1. Power the drives and release their STO and the emergency stop.
+
+The cable order is the actuator order of the gateway, and the Strider document assigns the actuators to the wheels:
+
+| Drive on the cable | Gateway actuator | Wheel             |
+| ------------------ | ---------------- | ----------------- |
+| 1st                | 1 (index 0)      | `fl`, front left  |
+| 2nd                | 2 (index 1)      | `fr`, front right |
+| 3rd                | 3 (index 2)      | `rl`, rear left   |
+| 4th                | 4 (index 3)      | `rr`, rear right  |
+
+Do not use a network switch. EtherCAT frames must pass through the drives in a line ([EtherCAT Gateway › Wire the Drives](https://docs.sodero.io/v2.0.0/gateways/ethercat/#2-wire-the-drives)).
+
+______________________________________________________________________
+
+## Step 2: Add the Gateway and Load `wheels.gw`
+
+1. Open `http://192.168.60.18` in your browser.
+
+1. Click **Add node**, choose **Gateway** › **Actuator gateway** and click **Next**. Name it `wheels` and click **Add node** ([Quick Start › Step 1](https://docs.sodero.io/v2.0.0/get_started/quick_start/#step-1-add-the-gateway)).
+
+1. Select `rc.actuator_gateway.wheels`. In its inspector, click the upload icon in **DEFINITION** (**Import .gw**), choose `wheels.gw` on **From your PC** and click **Import**.
+
+1. Click **Edit Stellar Gateway Designer** to check the document.
+
+   ① four actuators, one per drive in cable order ② the Motor tab of actuator 1
+
+   The gateway has four actuators ①, one per drive. Every actuator has the same **Motor** tab ②:
+
+   | Field              | Example value |
+   | ------------------ | ------------- |
+   | **Rated torque**   | 2.2222 Nm     |
+   | **Max torque**     | 6.6667 Nm     |
+   | **Max speed**      | 1,890 rpm     |
+   | **Resolution**     | 524,288 PPR   |
+   | **Encoder offset** | 0 pulse       |
+   | **Gear ratio**     | 7.75          |
+
+   The **EtherCAT** tab of each actuator holds the drive's position on the cable (**Idx** 0 to 3), its label (`drive_fl` to `drive_rr`) and the PDO mapping: the six RxPDO and the six TxPDO objects listed in [Process Data](https://docs.sodero.io/v2.0.0/gateways/ethercat/#process-data), including **Target velocity (0x60FF)**.
+
+1. If your hardware differs, change it here: select your drive in the **EtherCAT** tab and enter your motor in the **Motor** tab of each actuator ([EtherCAT Gateway › Create the Gateway Document](https://docs.sodero.io/v2.0.0/gateways/ethercat/#3-create-the-gateway-document)).
+
+1. Open **02 Verification**, click **Verify** and fix any errors. Then click the back arrow to return to the Station.
+
+______________________________________________________________________
+
+## Step 3: Add Strider and Connect It
+
+1. Click **Add node**, choose **Controller** › **Strider** and click **Next**. Name it `base` and click **Add node**.
+1. Select `sodero.mlc.base`, click the upload icon in **DEFINITION** (**Import .sddm**), choose `base.sddm` and click **Import**.
+1. Connect the two nodes: drag from the Strider's `servo_link` to the gateway's `servo_link`, or click **Auto-connect** next to `servo_link` in the Strider's inspector.
+
+① the gateway and Strider connected through servo_link ② the gateway's document ③ the gateway's log after a start
+
+`base.sddm` describes the example base: a skid-steer chassis with four drive wheels, 0.098 m wheel radius and 17 kg. For your own base, select `sodero.mlc.base`, click **Edit Stellar Designer** and enter its dimensions and limits ([Mobile Robot (.sddm)](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/mobile_robot/index.md)).
+
+______________________________________________________________________
+
+## Step 4: Start the Gateway
+
+1. Select the gateway and click **Start node**. Wait until its state is **Operating**.
+
+1. In its **LOGS** (stream **Gateway events**) ③, check that all four drives answered and reached operation:
+
+   ```
+   Gateway rc.actuator_gateway.wheels starting: EtherCAT, 4 actuator(s), 1.0 ms cycle.
+   EtherCAT: starting on network port 'eth0' (4 drive(s) expected).
+   EtherCAT: found drive 1 (…).
+   EtherCAT: found drive 2 (…).
+   EtherCAT: found drive 3 (…).
+   EtherCAT: found drive 4 (…).
+   EtherCAT ready: 4 drive(s) operational, 1.0 ms cycle.
+   ```
+
+   Each *found drive* line names the drive as the drive reports itself.
+
+If the gateway stops before *EtherCAT ready*, its log says why: no cable link, a drive missing from the chain, a PDO mapping that does not match the drive, or a drive that refuses the configuration. See [EtherCAT Gateway › Troubleshooting](https://docs.sodero.io/v2.0.0/gateways/ethercat/#6-troubleshooting).
+
+**Tip:** Before you start Strider, click **Test Stellar Gateway** in the gateway's **CONTROL** section to turn single wheels from the test console ([EtherCAT Gateway › Bring Up the System](https://docs.sodero.io/v2.0.0/gateways/ethercat/#5-bring-up-the-system)).
+
+______________________________________________________________________
+
+## Step 5: Jog the Wheels with Strider
+
+1. Select the Strider and click **Start node**. The gateway's log shows *Robot controller connected.*
+1. In the Strider's inspector, click **Strider** in **CONTROL** and open the **Drive** page ([Strider › Jog the Base](https://docs.sodero.io/v2.0.0/controllers/strider/#4-jog-the-base-drive-page)).
+1. Under **Drive Mode**, click **Twist**. Under **Servo / Safety**, switch **Servo On**. The gateway's log shows *Servo ON: all 4 drive(s) enabled.*
+1. Set **Linear Velocity Limit** to a low value, such as 0.1 m/s.
+1. Press and hold **Forward (W)** for a moment. All four wheels turn forward.
+1. Press and hold **Turn Left (A)**. The left wheels turn backward and the right wheels forward.
+
+Check every wheel:
+
+| What you see                           | Cause and fix                                                                                                                                                                                                                                                                                                                                                          |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A different wheel turns than expected  | The cable order does not match the wheel order. Rewire the drives in the order of [Step 1](#step-1-wire-the-drives).                                                                                                                                                                                                                                                   |
+| A wheel turns backward                 | The motor is mounted the other way round. Invert its direction in the drive, for example with the drive's polarity parameter as a start-up SDO in the **EtherCAT** tab. Leave the influence factor in the Strider document at `1` ([Mobile Robot › Actuator Mapping](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/mobile_robot/#step-3-actuator-mapping)). |
+| A wheel turns too fast or too slow     | **Gear ratio** or **Resolution** in the gateway, or the wheel radius in the Strider document, is wrong.                                                                                                                                                                                                                                                                |
+| *Servo ON failed* in the gateway's log | A drive does not enable: check its STO and enable inputs, the emergency stop and its main power.                                                                                                                                                                                                                                                                       |
+
+When every wheel turns the right way, switch the servo off and click **Idle**. Put the base on the ground and drive it slowly, with the limits still low.
+
+______________________________________________________________________
+
+## What's Next
+
+| Next step                                                  | Page                                                                                                   |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Every Strider control, odometry calibration and programs   | [Strider](https://docs.sodero.io/v2.0.0/controllers/strider/index.md)                                  |
+| Localize the base on a map and drive it to goals           | [Localization and Navigation](https://docs.sodero.io/v2.0.0/navigation/overview/index.md)              |
+| EtherCAT parameters, process data and all gateway messages | [EtherCAT Gateway](https://docs.sodero.io/v2.0.0/gateways/ethercat/index.md)                           |
+| Your own base's dimensions, wheels and limits              | [Mobile Robot (.sddm)](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/mobile_robot/index.md) |
 # Virtual Simulation
 
 # Connect to Stellar Station
@@ -4036,7 +4185,6 @@ ______________________________________________________________________
 - **Review previews.** Ask the agent to show the preview of every change. Nothing changes until a command runs with `--execute`.
 - **Set approval rules in your agent.** Most agents can require your approval before they run a command. A practical setup: allow read-only commands (`status`, `get`, `list`, `logs`) freely, and ask for approval for anything with `--execute`, `tools call` or `apps call`.
 - **Real hardware moves.** A robot tool called with `--execute` can move real equipment. Keep the area clear and keep the emergency stop within reach. The robot's rules forbid the agent to move the robot unless you ask for that motion.
-- **Protected assets.** Official modules expose their parameters, settings and node logs, but not their sources, binaries, weights or internal logs. Your own files, documents, packages and their logs are fully available to the agent.
 
 ______________________________________________________________________
 
@@ -4163,7 +4311,6 @@ ______________________________________________________________________
 - **Preview first.** A `sodero` command that changes something only previews until you add `--execute`. Read the preview, then repeat the command with `--execute`.
 - **The robot is real equipment.** A command with `--execute` can start nodes or move the robot. Run it only when the surroundings are clear and someone who can stop the robot is present.
 - **Stop a node before you change it.** The Station refuses changes to a running node. Stop it, apply the change, start it again.
-- **Official modules stay protected.** Their parameters, settings and node logs are open to you, but their sources, binaries, weights and internal logs are not part of the workspace.
 
 Where to go next:
 
@@ -4272,7 +4419,7 @@ sodero topology connect --source sodero.localizer.camera \
 
 `sodero topology catalog` lists the node kinds (`gateway`, `strider`, `motion_studio`, `articulation`, `camera`, `imu`, `vo`, `localizer`, `navigator`, `legged_locomotion`, `legged_navigator`, `package`) with their ports.
 
-### Change Settings of Official Nodes
+### Change Settings of Built-in Nodes
 
 ```
 sodero navigation list

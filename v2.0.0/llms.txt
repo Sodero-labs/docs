@@ -49,6 +49,10 @@
 - [Manipulator (.sdd)](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/manipulator/index.md)
 - [Mobile Robot (.sddm)](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/mobile_robot/index.md)
 
+## Tutorials - EtherCAT Mobile Base
+
+- [EtherCAT Mobile Base](https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/index.md)
+
 ## Virtual Simulation
 
 - [Connect to Stellar Station](https://docs.sodero.io/v2.0.0/virtual_simulation/connect_station/index.md)

@@ -92,8 +92,6 @@ The **LOGS** section of the inspector shows the node's recent output. Choose the
 
 Gateway events of a simulation gateway
 
-Logs of your own modules are complete. Logs of built-in modules are summarized for operators.
-
 **Tip:** When a node fails, read **Gateway events** of its gateway first. Most start-up problems (no simulator, wrong robot name, no EtherCAT link, drive faults) are reported there with a hint.
 
 ______________________________________________________________________

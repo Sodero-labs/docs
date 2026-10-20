@@ -2,6 +2,8 @@
 
 Stellar X is an EtherCAT master. An actuator gateway of type **EtherCAT** drives CiA 402 servo drives on the controller's EtherCAT port with distributed-clock synchronization at the gateway's control period (1 ms by default). This page covers wiring, the gateway document, parameters, bring-up and troubleshooting.
 
+For a complete example from wiring to driving, see [EtherCAT Mobile Base](https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/index.md): four drives on a skid-steer base, with example files.
+
 **Real motors move.** Bring up a new EtherCAT system with the robot clear of people and obstacles, the drives' safe torque off (STO) and emergency stop wired, and someone at the emergency stop.
 
 ______________________________________________________________________

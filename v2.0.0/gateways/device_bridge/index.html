@@ -1217,23 +1217,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Architecture">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-is-official-and-what-is-yours" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What Is Official and What Is Yours
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1964,6 +1947,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/ethercat_mobile_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EtherCAT Mobile Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2347,23 +2358,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Architecture">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-is-official-and-what-is-yours" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What Is Official and What Is Yours
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2578,7 +2572,7 @@
 
 <h1 id="device-bridge">Device Bridge<a class="headerlink" href="#device-bridge" title="Permanent link">¶</a></h1>
 <p>Stellar X connects to the rest of the robot through network ports only. Sensors that need USB, such as an Intel RealSense depth camera or a USB IMU, therefore go on a small computer next to them: a Raspberry Pi, another single-board computer or a PC. The <strong>Device Bridge</strong> runs on that computer. It reads the devices and serves their data to the controller over the LAN.</p>
-<p>The bridge speaks the same network protocol as Isaac Bridge. The controller's official Camera gateway, IMU gateway, Visual odometry, Localizer and Navigator therefore work with real sensors exactly as they work with a simulated robot; only the address they connect to differs.</p>
+<p>The bridge speaks the same network protocol as Isaac Bridge. The controller's built-in Camera gateway, IMU gateway, Visual odometry, Localizer and Navigator therefore work with real sensors exactly as they work with a simulated robot; only the address they connect to differs.</p>
 <p>Use the Device Bridge when:</p>
 <ul>
 <li>the robot carries a USB camera or IMU, which cannot plug into the controller;</li>
@@ -2617,43 +2611,6 @@
     NV --&gt;|mobile_base| ST
     AG &lt;--&gt;|servo_link| ST</code></pre>
 <p>The bridge <strong>listens</strong> on three ports and the controller's gateways <strong>connect</strong> to it, exactly as they connect to the simulator. Every message carries the bridge's <code>robot_name</code>, and each gateway takes the data published under the name it is configured with. Without the optional wheel stream, Strider drives the robot's own base through an EtherCAT Actuator gateway as usual.</p>
-<h3 id="what-is-official-and-what-is-yours">What Is Official and What Is Yours<a class="headerlink" href="#what-is-official-and-what-is-yours" title="Permanent link">¶</a></h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Part</th>
-<th style="text-align: left;">Runs on</th>
-<th style="text-align: left;">Owner</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Device drivers (<code>device_bridge/devices/</code>)</td>
-<td style="text-align: left;">Sensor computer</td>
-<td style="text-align: left;"><strong>You.</strong> Use a built-in driver or add one per device.</td>
-</tr>
-<tr>
-<td style="text-align: left;">The rest of the bridge: protocol, streams, wheel watchdog</td>
-<td style="text-align: left;">Sensor computer</td>
-<td style="text-align: left;">Sodero. Use it as is.</td>
-</tr>
-<tr>
-<td style="text-align: left;">Wire protocol (<code>docs/protocol.md</code>)</td>
-<td style="text-align: left;">Between the two</td>
-<td style="text-align: left;">Sodero. Isaac Bridge speaks the same protocol.</td>
-</tr>
-<tr>
-<td style="text-align: left;">Camera gateway, IMU gateway, Actuator gateway</td>
-<td style="text-align: left;">Stellar X</td>
-<td style="text-align: left;">Sodero official modules. You configure them.</td>
-</tr>
-<tr>
-<td style="text-align: left;">Visual odometry, Localizer, Navigator, Strider</td>
-<td style="text-align: left;">Stellar X</td>
-<td style="text-align: left;">Sodero official modules. You configure them.</td>
-</tr>
-</tbody>
-</table>
 <p>Supporting a new camera or IMU means writing one small driver class on the sensor computer. Nothing on the controller is rebuilt or modified.</p>
 <hr>
 <h2 id="2-requirements">2. Requirements<a class="headerlink" href="#2-requirements" title="Permanent link">¶</a></h2>
