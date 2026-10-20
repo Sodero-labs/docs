@@ -769,45 +769,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#5-hardware-factory-reset" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Hardware Factory Reset
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Hardware Factory Reset">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#procedure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Procedure
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2267,45 +2228,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#5-hardware-factory-reset" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Hardware Factory Reset
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Hardware Factory Reset">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#procedure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Procedure
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2417,21 +2339,16 @@
 </figure>
 <hr>
 <h2 id="2-device-overview">2. Device Overview<a class="headerlink" href="#2-device-overview" title="Permanent link">¶</a></h2>
-<p>The network and power ports are on the rear panel; the reset button is on the bottom.</p>
+<p>The network and power ports are on the rear panel.</p>
 <figure>
   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/hardware_interface.svg" data-desc-position="bottom"><img alt="Rear panel" src="images/hardware_interface.svg" width="500"></a>
 <br>
 <figcaption>Rear panel: ① Eth1 ② Eth2 ③ EtherCAT Out ④ 24V DC In</figcaption>
 </figure>
-<figure>
-  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/hardware_interface2.svg" data-desc-position="bottom"><img alt="Bottom panel" src="images/hardware_interface2.svg" width="500"></a>
-<br>
-<figcaption>Bottom: ⑤ reset button</figcaption>
-</figure>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Port / Button</th>
+<th style="text-align: left;">Port</th>
 <th style="text-align: left;">Description</th>
 </tr>
 </thead>
@@ -2451,10 +2368,6 @@
 <tr>
 <td style="text-align: left;"><strong>4. 24V DC In</strong></td>
 <td style="text-align: left;">Power input port.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>5. Reset Button</strong></td>
-<td style="text-align: left;">Used to restore the device to factory settings.</td>
 </tr>
 </tbody>
 </table>
@@ -2548,29 +2461,6 @@
 <p class="admonition-title">To change the controller's address or to connect it to your office network, use the <a href="../network_settings/">Network Settings</a> page on port 3000.</p>
 </div>
 </li>
-</ol>
-<hr>
-<h2 id="5-hardware-factory-reset">5. Hardware Factory Reset<a class="headerlink" href="#5-hardware-factory-reset" title="Permanent link">¶</a></h2>
-<p>If you ever forget your IP settings or need a fresh start, you can perform a factory reset.</p>
-<div class="admonition error">
-<p class="admonition-title">A factory reset will <strong>permanently erase all stored data</strong>, including the Station's nodes, documents and settings. Back up the Station first (<a href="../../../station/backup_restore/">Backup and Restore</a>).</p>
-</div>
-<figure>
-    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/reset_button.svg" data-desc-position="bottom"><img alt="Reset Button" src="images/reset_button.svg" width="500"></a>
-    <figcaption>The reset button ⑤ on the bottom of the unit</figcaption>
-</figure>
-<h3 id="procedure">Procedure<a class="headerlink" href="#procedure" title="Permanent link">¶</a></h3>
-<ol>
-<li>Locate the <strong>Reset Button</strong> on the bottom of the unit.</li>
-<li>Press and hold the button for <strong>more than 3 seconds</strong>.</li>
-<li>The system will automatically reboot.</li>
-<li>Once back up, <strong>Eth1</strong> will be restored to the default IP: <code>10.0.0.1</code>.</li>
-</ol>
-<h3 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">¶</a></h3>
-<p>If the reset doesn't seem to trigger, try these steps:</p>
-<ol>
-<li><strong>Power Cycle:</strong> Unplug the power, wait 10 seconds, and plug it back in.</li>
-<li><strong>Wait &amp; Retry:</strong> Give the system about <strong>1 minute</strong> to fully initialize, then try holding the reset button for more than 3 seconds again.</li>
 </ol>
 
 
