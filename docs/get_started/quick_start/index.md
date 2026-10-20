@@ -157,5 +157,5 @@ When you are done, switch the servo off and click **Idle** under **Drive Mode**.
 | Let the Jackal localize itself on a map and drive to goals | [Navigate in Simulation](../../navigation/simulation_tutorial/index.md) |
 | Learn every part of the Station page | [Stellar Station](../../station/overview/index.md) |
 | Build your own robot documents | [Stellar Designer](../../tutorials/stellar_designer/introduction/index.md), [Gateway Designer](../../gateways/gateway_designer/index.md) |
-| Move from simulation to real motors | [EtherCAT Gateway](../../gateways/ethercat/index.md) |
+| Move from simulation to real motors | [EtherCAT Mobile Base](../../tutorials/ethercat_mobile_base/index.md), [EtherCAT Gateway](../../gateways/ethercat/index.md) |
 | Let an AI coding agent do it for you | [AI Coding Agents](../../ssh_workspace/ai_agents/index.md) |

@@ -131,7 +131,6 @@ The agent runs commands such as `sodero topology get` and `sodero runtime status
 - **Review previews.** Ask the agent to show the preview of every change. Nothing changes until a command runs with `--execute`.
 - **Set approval rules in your agent.** Most agents can require your approval before they run a command. A practical setup: allow read-only commands (`status`, `get`, `list`, `logs`) freely, and ask for approval for anything with `--execute`, `tools call` or `apps call`.
 - **Real hardware moves.** A robot tool called with `--execute` can move real equipment. Keep the area clear and keep the emergency stop within reach. The robot's rules forbid the agent to move the robot unless you ask for that motion.
-- **Protected assets.** Official modules expose their parameters, settings and node logs, but not their sources, binaries, weights or internal logs. Your own files, documents, packages and their logs are fully available to the agent.
 
 ---
 

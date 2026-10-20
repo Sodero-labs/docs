@@ -91,6 +91,7 @@ nav:
       - Mobile Robot (.sddm): tutorials/stellar_designer/mobile_robot/index.md
       - Articulated Robot (.sdda): tutorials/stellar_designer/articulation/index.md
       - 3D Model (.glb): tutorials/stellar_designer/3dmodel_creation/index.md
+    - EtherCAT Mobile Base: tutorials/ethercat_mobile_base/index.md
   - Virtual Simulation:
     - Overview: virtual_simulation/introduction/index.md
     - Isaac Bridge Installation: virtual_simulation/extension_installation/index.md
@@ -146,6 +147,8 @@ plugins:
           - navigation/**/*.md
         Tutorials - Stellar Designer:
           - tutorials/stellar_designer/**/*.md
+        Tutorials - EtherCAT Mobile Base:
+          - tutorials/ethercat_mobile_base/index.md
         Virtual Simulation:
           - virtual_simulation/**/*.md
         SSH Workspace:

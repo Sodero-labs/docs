@@ -35,7 +35,7 @@ Installed module packages are not part of the file; they stay on the controller.
 
 The Station replaces its graph, robot documents and Station data with the file's content and restarts. The page shows *Restarting the Station with …* and reloads when the Station is back, usually within a minute. The nodes are not started; start them when you need them.
 
-- Before loading, the controller backs up its current Station. Installed modules stay installed.
+- Installed modules stay installed.
 - If the file cannot be loaded, the Station keeps its data and the dialog says why.
 
 !!! warning "Loading is refused while any node runs: *Stop all nodes before loading a .sdr.*"
