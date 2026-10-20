@@ -25,25 +25,19 @@ Check that your package includes the following components. If anything is missin
 ---
 
 ## 2. Device Overview
-The network and power ports are on the rear panel; the reset button is on the bottom.
+The network and power ports are on the rear panel.
 
 <figure markdown="span">
   ![Rear panel](images/hardware_interface.svg){ width="500" }
   <figcaption>Rear panel: ① Eth1 ② Eth2 ③ EtherCAT Out ④ 24V DC In</figcaption>
 </figure>
 
-<figure markdown="span">
-  ![Bottom panel](images/hardware_interface2.svg){ width="500" }
-  <figcaption>Bottom: ⑤ reset button</figcaption>
-</figure>
-
-| Port / Button | Description |
+| Port | Description |
 | :--- | :--- |
 | **1. Eth1 (Static IP)** | Pre-configured with a **Static IP** for direct connection.<br>• IP: `10.0.0.1`<br>• Subnet Mask: `255.255.255.0` |
 | **2. Eth2 (DHCP)** | Configured for **DHCP**. Connect this to a router or switch to receive an IP address automatically. |
 | **3. EtherCAT Out** | EtherCAT Master output. Connect this to the **IN** port of your first EtherCAT slave device. |
 | **4. 24V DC In** | Power input port. |
-| **5. Reset Button** | Used to restore the device to factory settings. |
 
 ---
 
@@ -117,28 +111,3 @@ Your PC must be on the same subnet as Stellar X.
     </figure>
 
     !!! info "To change the controller's address or to connect it to your office network, use the [Network Settings](../network_settings/index.md) page on port 3000."
-
----
-
-## 5. Hardware Factory Reset
-If you ever forget your IP settings or need a fresh start, you can perform a factory reset.
-
-!!! error "A factory reset will **permanently erase all stored data**, including the Station's nodes, documents and settings. Back up the Station first ([Backup and Restore](../../../station/backup_restore/index.md))."
-
-<figure markdown="span">
-    ![Reset Button](images/reset_button.svg){ width="500" }
-    <figcaption>The reset button ⑤ on the bottom of the unit</figcaption>
-</figure>
-
-### Procedure
-1. Locate the **Reset Button** on the bottom of the unit.
-2. Press and hold the button for **more than 3 seconds**.
-3. The system will automatically reboot.
-4. Once back up, **Eth1** will be restored to the default IP: `10.0.0.1`.
-
-### Troubleshooting
-
-If the reset doesn't seem to trigger, try these steps:
-
-1. **Power Cycle:** Unplug the power, wait 10 seconds, and plug it back in.
-2. **Wait & Retry:** Give the system about **1 minute** to fully initialize, then try holding the reset button for more than 3 seconds again.

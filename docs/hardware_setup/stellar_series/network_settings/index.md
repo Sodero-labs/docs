@@ -13,7 +13,7 @@ http://ROBOT_ADDRESS:3000
 
 In this guide the controller's address is `192.168.60.18`, so the page is `http://192.168.60.18:3000`.
 
-!!! info "**Initial address: static `10.0.0.1`.** The LAN port starts with the static address `10.0.0.1` (subnet mask `255.255.255.0`), and a [factory reset](../stellar_x/index.md#5-hardware-factory-reset) brings it back. To reach it the first time, connect your PC with a cable and give the PC a static address in the same subnet, such as `10.0.0.2` ([Stellar X](../stellar_x/index.md#4-network-configuration)). Then open `http://10.0.0.1:3000` and change the address under [IP Configuration](#1-ip-configuration)."
+!!! info "**Initial address: static `10.0.0.1`.** The LAN port starts with the static address `10.0.0.1` (subnet mask `255.255.255.0`). To reach it the first time, connect your PC with a cable and give the PC a static address in the same subnet, such as `10.0.0.2` ([Stellar X](../stellar_x/index.md#4-network-configuration)). Then open `http://10.0.0.1:3000` and change the address under [IP Configuration](#1-ip-configuration)."
 
 The page needs no sign-in: anyone on the same network can change the address and register SSH keys. Connect Stellar X only to networks you trust.
 
