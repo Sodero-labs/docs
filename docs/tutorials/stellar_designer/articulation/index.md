@@ -90,4 +90,4 @@ Start the gateway, then the Articulation node, and click **Articulation** in the
 - each joint stops at its limits,
 - the joint monitor shows the expected angles in a known pose. Correct a joint's zero with **Offset**, or with **Set origin** in Articulation.
 
-Then start the program that sends joint targets, such as Legged locomotion.
+This guide ends with this manual joint test. A program that sends joint targets, such as Legged locomotion with a walking policy, needs its own preparation, which this documentation does not cover: its joint names and order must match the document ([Step 1](#step-1-joint-configuration)), and it must be tested with the robot supported off the ground.

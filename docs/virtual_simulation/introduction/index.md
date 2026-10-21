@@ -5,7 +5,7 @@
   <figcaption>The example scene of the Quick Start: a Clearpath Jackal and a Clearpath Dingo in a warehouse</figcaption>
 </figure>
 
-[NVIDIA Isaac Sim](https://developer.nvidia.com/isaac/sim){:target="_blank"} is a robotics simulator with physically based rendering and GPU physics. With the **Isaac Bridge** extension, Isaac Sim becomes the simulator of Stellar X: the controllers on the Station drive robots in Isaac Sim exactly as they drive real motors.
+[NVIDIA Isaac Sim](https://developer.nvidia.com/isaac/sim){:target="_blank"} is a robotics simulator with physically based rendering and GPU physics. With the **Isaac Bridge** extension, Isaac Sim becomes the simulator of Stellar X: the controllers on the Station drive robots in Isaac Sim through simulation gateways, with the same commands they send to real motors.
 
 ---
 
@@ -27,7 +27,7 @@ flowchart TB
     IB -- "RGB-D frames · 53335" --> CG
 ```
 
-- **Only the gateways change.** A simulation gateway replaces the fieldbus with the network connection to Isaac Sim. Controllers, documents, settings and applications stay the same as for the real robot.
+- **Gateways connect the simulator.** A simulation gateway replaces the fieldbus with the network connection to Isaac Sim. The controllers, their documents and your applications are the same as for the real robot. On the real robot you also verify the actuator mapping, calibration, limits and sensor settings.
 - **Simulated joints behave like servo drives.** Each joint receives position, velocity or torque commands and reports its position, velocity and torque, like a drive with its motor and encoder.
 - **Cameras and IMUs** of the scene are served to the Station's camera and IMU gateways, so localization, navigation and walking controllers run on simulated sensors.
 - **Several robots** can share one scene. Each robot has a unique name, and each gateway on the Station names the robot it drives.
@@ -44,7 +44,7 @@ What you can do in simulation:
 
 | Item | Requirement |
 | :--- | :--- |
-| Isaac Sim | 6.0 or later, on Linux or Windows ([Isaac Sim requirements and installation](https://docs.isaacsim.omniverse.nvidia.com/latest/installation/index.html){:target="_blank"}) |
+| Isaac Sim | 6.0, on Linux or Windows ([Isaac Sim requirements and installation](https://docs.isaacsim.omniverse.nvidia.com/latest/installation/index.html){:target="_blank"}). Isaac Bridge 1.0.0 is verified with Isaac Sim 6.0 ([Compatibility](../../reference/compatibility/index.md)). |
 | Isaac Bridge | The Sodero extension for Isaac Sim ([Isaac Bridge Installation](../extension_installation/index.md)) |
 | Network | Stellar X and the Isaac Sim computer on the same network; Stellar X must reach the Isaac Sim computer on TCP ports 53333–53335 |
 | Clock | Both computers synchronized with a time server (NTP), when you use cameras |
@@ -59,4 +59,4 @@ What you can do in simulation:
 | 2. Prepare the robot in the scene: articulation, name, joint order, cameras | [Robot Setup](../robot_setup/index.md) |
 | 3. Point the Station's gateways at Isaac Sim and run | [Connect to Stellar Station](../connect_station/index.md) |
 
-!!! idea "**Tip:** The [Quick Start](../../get_started/quick_start/index.md) walks through all three steps with a Jackal mobile robot."
+!!! idea "**Tip:** The [Quick Start](../../get_started/quick_start/index.md) uses a prepared Jackal scene and its example files. Do step 1 first; the Quick Start then covers steps 2 and 3 for the Jackal."

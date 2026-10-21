@@ -35,7 +35,7 @@ An `.sdda` document lists the joints and how the gateway's actuators drive them.
 
 **Actuator mapping.** As for manipulators, influence factors connect actuators to joints; one actuator can move several joints and several actuators can move one joint, as long as the mapping is invertible.
 
-**Watchdogs.** The controller stops its output when the gateway's feedback is older than 100 ms or when no new target arrives for 200 ms. Reconnecting never switches the servo on by itself.
+**Watchdogs.** The controller switches the servo off and latches a stop when the gateway's feedback is older than 100 ms or when no new target arrives for 200 ms (the defaults). Click **Clear stop**, then **Servo on**. Reconnecting never switches the servo on by itself.
 
 ---
 
@@ -46,7 +46,7 @@ Start the gateway and the Articulation node, then click **Articulation** in the 
 | Area | Contents |
 | :--- | :--- |
 | Left rail | **Joints** (joint monitor), **Constraints** (configured limits), **Set origin** |
-| Top bar | **Servo on**, **Servo off**, **Stop**, **Clear stop**, the control mode, and the button that opens the **Joint control** panel |
+| Top bar | **Servo on**, **Servo off**, **Stop** (switches the servo off and latches a stop), **Clear stop** (releases it while the servo is off), the control mode, and the button that opens the **Joint control** panel |
 | Status strip | **Servo** On/Off, **Feedback** age in milliseconds, **Safety** (*Ready* or the reason for a stop) |
 | **Controller** | The Articulation node this window controls |
 | **Joint monitor** | Per joint: position, velocity, effort and target |
@@ -60,7 +60,7 @@ Start the gateway and the Articulation node, then click **Articulation** in the 
 1. Open the **Joint control** panel (button at the right of the top bar).
 2. Click **Servo on**.
 3. Under **Joint jog**, set the **Speed** (1–100 % of each joint's velocity limit; 10 % by default).
-4. Hold **−** or **+** next to a joint. The joint moves while you hold the button and holds its position when you release it.
+4. Hold **−** or **+** next to a joint. The joint moves while you hold the button and holds its position when you release it. A jog button also switches the servo on if it is off.
 
 Leaving the window, switching to another tab or losing the connection switches the servo off.
 
@@ -95,4 +95,4 @@ The servo switches off first; the joint does not move. Afterwards the servo stay
 | :--- | :--- |
 | A walking robot | The **Legged locomotion** node runs a walking policy and sends joint targets to this node |
 | The SSH workspace | `sodero tools call articulation.get_status`, `articulation.get_joint_state`, `articulation.servo_on`, `articulation.uc_pos`, `articulation.stop` ([sodero CLI](../../ssh_workspace/sodero_cli/index.md)); `sodero articulations get` shows the joints and actuators |
-| A module on the Station | A module node connected to the Articulation node ([Modules](../../station/modules/index.md)) |
+| A module on the Station | A module node connected to the Articulation node ([Create Custom Modules](../../extend/custom_modules/index.md)) |

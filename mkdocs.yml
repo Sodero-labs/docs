@@ -58,10 +58,10 @@ nav:
     - Sodero Ecosystem: get_started/sodero_ecosystem/index.md
     - Key Concepts: get_started/key_concepts/index.md
     - Quick Start: get_started/quick_start/index.md
-  - Hardware Setup:
-    - Stellar Series:
-      - Stellar X: hardware_setup/stellar_series/stellar_x/index.md
-      - Network Settings: hardware_setup/stellar_series/network_settings/index.md
+  - Hardware & Network:
+    - Stellar X: hardware_setup/stellar_series/stellar_x/index.md
+    - Network Settings: hardware_setup/stellar_series/network_settings/index.md
+    - Stop Controls: hardware_setup/stop_controls/index.md
   - Stellar Station:
     - Overview: station/overview/index.md
     - Nodes and Connections: station/nodes_and_connections/index.md
@@ -69,39 +69,47 @@ nav:
     - Running Nodes: station/running_nodes/index.md
     - Modules: station/modules/index.md
     - Backup and Restore: station/backup_restore/index.md
-  - Gateways:
+  - Stellar Designer:
+    - Overview: tutorials/stellar_designer/introduction/index.md
+    - Gateway Designer (.gw): gateways/gateway_designer/index.md
+    - Manipulator (.sdd): tutorials/stellar_designer/manipulator/index.md
+    - Mobile Robot (.sddm): tutorials/stellar_designer/mobile_robot/index.md
+    - Articulated Robot (.sdda): tutorials/stellar_designer/articulation/index.md
+    - 3D Model (.glb, Optional): tutorials/stellar_designer/3dmodel_creation/index.md
+  - Gateways & Sensors:
     - Overview: gateways/overview/index.md
-    - Gateway Designer: gateways/gateway_designer/index.md
     - EtherCAT Gateway: gateways/ethercat/index.md
     - Simulation Gateway: gateways/simulation/index.md
+    - Test Console: gateways/test_console/index.md
     - Sensors and Cameras: gateways/sensors_and_cameras/index.md
     - Device Bridge: gateways/device_bridge/index.md
-  - Controllers:
+  - Operate Robots:
     - Strider: controllers/strider/index.md
     - Motion Studio: controllers/motion_studio/index.md
     - Articulation: controllers/articulation/index.md
-  - Localization & Navigation:
-    - Overview: navigation/overview/index.md
-    - Map Bundle (.nav): navigation/map_bundle/index.md
-    - Navigate in Simulation: navigation/simulation_tutorial/index.md
-  - Tutorials:
-    - Stellar Designer:
-      - Introduction: tutorials/stellar_designer/introduction/index.md
-      - Manipulator (.sdd): tutorials/stellar_designer/manipulator/index.md
-      - Mobile Robot (.sddm): tutorials/stellar_designer/mobile_robot/index.md
-      - Articulated Robot (.sdda): tutorials/stellar_designer/articulation/index.md
-      - 3D Model (.glb): tutorials/stellar_designer/3dmodel_creation/index.md
-    - EtherCAT Mobile Base: tutorials/ethercat_mobile_base/index.md
-  - Virtual Simulation:
+  - Simulation:
     - Overview: virtual_simulation/introduction/index.md
     - Isaac Bridge Installation: virtual_simulation/extension_installation/index.md
     - Robot Setup: virtual_simulation/robot_setup/index.md
     - Connect to Stellar Station: virtual_simulation/connect_station/index.md
-  - SSH Workspace:
-    - Overview: ssh_workspace/overview/index.md
-    - AI Coding Agents: ssh_workspace/ai_agents/index.md
+  - Localization & Navigation:
+    - Overview: navigation/overview/index.md
+    - Load and Configure a Map: navigation/map_bundle/index.md
+    - Create a Map from Your Site: navigation/create_map/index.md
+  - Tutorials:
+    - Learning Path: tutorials/learning_path/index.md
+    - Navigate in Simulation: navigation/simulation_tutorial/index.md
+    - EtherCAT Mobile Base: tutorials/ethercat_mobile_base/index.md
+  - Extend & Automate:
+    - SSH Workspace: ssh_workspace/overview/index.md
     - sodero CLI: ssh_workspace/sodero_cli/index.md
-  - ChangeLog: CHANGELOG.md
+    - AI Coding Agents: ssh_workspace/ai_agents/index.md
+    - Create Custom Modules: extend/custom_modules/index.md
+    - Write Device Bridge Drivers: extend/device_bridge_drivers/index.md
+  - Reference:
+    - Map Bundle Format: navigation/map_bundle_format/index.md
+    - Compatibility and Downloads: reference/compatibility/index.md
+    - ChangeLog: CHANGELOG.md
 
 markdown_extensions:
   - attr_list
@@ -135,21 +143,41 @@ plugins:
           - get_started/sodero_ecosystem/index.md
           - get_started/key_concepts/index.md
           - get_started/quick_start/index.md
-        Hardware Setup:
+        Hardware and Network:
           - hardware_setup/**/*.md
         Stellar Station:
           - station/**/*.md
-        Gateways:
-          - gateways/**/*.md
-        Controllers:
+        Stellar Designer:
+          - tutorials/stellar_designer/introduction/index.md
+          - gateways/gateway_designer/index.md
+          - tutorials/stellar_designer/manipulator/index.md
+          - tutorials/stellar_designer/mobile_robot/index.md
+          - tutorials/stellar_designer/articulation/index.md
+          - tutorials/stellar_designer/3dmodel_creation/index.md
+        Gateways and Sensors:
+          - gateways/overview/index.md
+          - gateways/ethercat/index.md
+          - gateways/simulation/index.md
+          - gateways/test_console/index.md
+          - gateways/sensors_and_cameras/index.md
+          - gateways/device_bridge/index.md
+        Operate Robots:
           - controllers/**/*.md
-        Localization and Navigation:
-          - navigation/**/*.md
-        Tutorials - Stellar Designer:
-          - tutorials/stellar_designer/**/*.md
-        Tutorials - EtherCAT Mobile Base:
-          - tutorials/ethercat_mobile_base/index.md
-        Virtual Simulation:
+        Simulation:
           - virtual_simulation/**/*.md
-        SSH Workspace:
-          - ssh_workspace/**/*.md
+        Localization and Navigation:
+          - navigation/overview/index.md
+          - navigation/map_bundle/index.md
+          - navigation/create_map/index.md
+        Tutorials:
+          - tutorials/learning_path/index.md
+          - navigation/simulation_tutorial/index.md
+          - tutorials/ethercat_mobile_base/index.md
+        Extend and Automate:
+          - ssh_workspace/overview/index.md
+          - ssh_workspace/sodero_cli/index.md
+          - ssh_workspace/ai_agents/index.md
+          - extend/**/*.md
+        Reference:
+          - navigation/map_bundle_format/index.md
+          - reference/**/*.md

@@ -24,7 +24,7 @@ flowchart TB
 | **Localizer** | Matches the camera's 3D view against the map's point cloud and corrects the odometry, so the robot knows its pose on the map |
 | **Navigator** | Plans a path on the map's occupancy grid and drives the base along it, avoiding obstacles, until the goal is reached |
 | **Visual odometry** (optional) | Estimates odometry from the camera, for robots without wheel odometry such as walking robots |
-| **Map bundle** (`.nav`) | One file with the map (point cloud and occupancy grid) and the localizer and navigator settings for one site ([Map Bundle](../map_bundle/index.md)) |
+| **Map bundle** (`.nav`) | One file with the map (point cloud and occupancy grid) and the localizer and navigator settings for one site ([Load and Configure a Map](../map_bundle/index.md)) |
 
 By default the localizer works in the plane: it estimates x, y and heading on the map. There is one localizer and one navigator per Station, so one robot per Station navigates.
 
@@ -51,8 +51,8 @@ The localizer publishes the correction `map → odom`; Strider publishes `odom �
 | :--- | :--- |
 | 1. Drive the base with Strider | [Quick Start](../../get_started/quick_start/index.md) |
 | 2. Add a camera gateway and check its image | [Sensors and Cameras](../../gateways/sensors_and_cameras/index.md) |
-| 3. Prepare the map bundle of the site | [Map Bundle](../map_bundle/index.md) |
-| 4. Add the Localizer and the Navigator, upload the map, connect the ports | [Navigate in Simulation](../simulation_tutorial/index.md) |
+| 3. Prepare the map bundle of the site | [Create a Map from Your Site](../create_map/index.md), or use a finished bundle |
+| 4. Add the Localizer and the Navigator, upload the map once to the Localizer, connect the ports | [Load and Configure a Map](../map_bundle/index.md), [Navigate in Simulation](../simulation_tutorial/index.md) |
 | 5. Set the initial pose and send goals | [Strider › Navigation Page](../../controllers/strider/index.md#5-navigation-page) |
 
 The connections:
@@ -99,7 +99,7 @@ The localizer and the navigator share their settings with the map bundle. Edit t
 | | `sensor.depth_min`, `sensor.depth_max` | Depth range of the camera used for matching (m) |
 | Initial pose | `x`, `y`, `yaw` | The pose used when no other pose is known |
 
-Uploading a map bundle again replaces these settings with the bundle's. The full list is in [Map Bundle](../map_bundle/index.md); from the SSH workspace use `sodero navigation get` and `sodero navigation apply` ([sodero CLI](../../ssh_workspace/sodero_cli/index.md)).
+Uploading a map bundle again replaces these settings with the bundle's. The full list is in [Map Bundle Format](../map_bundle_format/index.md#files); from the SSH workspace use `sodero navigation get` and `sodero navigation apply` ([sodero CLI](../../ssh_workspace/sodero_cli/index.md)).
 
 ---
 
@@ -109,6 +109,6 @@ Uploading a map bundle again replaces these settings with the bundle's. The full
 | :--- | :--- |
 | Strider | **Set Goal**, **Start Navigation** ([Strider](../../controllers/strider/index.md#5-navigation-page)) |
 | SSH workspace | `sodero tools call navigation.navigate_to_pose`, `navigation.get_status`, `navigation.cancel_navigation`, `localization.set_initial_pose` |
-| Your module | A module connected to the Navigator's `navigation` port; it can send goals and follow their progress ([Modules](../../station/modules/index.md)) |
+| Your module | A module connected to the Navigator's `navigation` port; it can send goals and follow their progress ([Create Custom Modules](../../extend/custom_modules/index.md)) |
 
 A goal is a pose in the `map` frame. A patrol is a sequence of goals sent one after another by your program.

@@ -79,6 +79,8 @@ Before you change anything, read the robot's own rules and follow them:
 
 The robot's own rules (`/workspace/AGENTS.md`) tell the agent how to read results and exit codes, how to wait for long operations without polling loops, which nodes drive real hardware on this robot, and what it must never do. They are maintained with the robot's software, so you do not need to copy them.
 
+!!! warning "These rules are instructions to the agent, not a safety function. An agent can misread them or make mistakes, and the `sodero` commands it runs have the same effect as your own clicks on the Station page. Approve every command that changes the robot yourself, and keep the robot's stop controls and the hardware emergency stop ready ([Stop Controls](../../hardware_setup/stop_controls/index.md))."
+
 ---
 
 ## 3. Start the Agent
@@ -130,7 +132,7 @@ The agent runs commands such as `sodero topology get` and `sodero runtime status
 
 - **Review previews.** Ask the agent to show the preview of every change. Nothing changes until a command runs with `--execute`.
 - **Set approval rules in your agent.** Most agents can require your approval before they run a command. A practical setup: allow read-only commands (`status`, `get`, `list`, `logs`) freely, and ask for approval for anything with `--execute`, `tools call` or `apps call`.
-- **Real hardware moves.** A robot tool called with `--execute` can move real equipment. Keep the area clear and keep the emergency stop within reach. The robot's rules forbid the agent to move the robot unless you ask for that motion.
+- **Real hardware moves.** A robot tool called with `--execute` can move real equipment. Keep the area clear and keep the emergency stop within reach. The robot's rules tell the agent not to move the robot unless you ask for that motion, but only your approval of each command and the robot's own stop controls keep it from moving.
 
 ---
 

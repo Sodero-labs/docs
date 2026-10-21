@@ -13,7 +13,7 @@ flowchart TB
     I -. "IMU" .-> IG
 ```
 
-Because only the gateway knows the hardware, **the same controller, with the same document, drives a simulated robot and the real one**. Moving from Isaac Sim to real motors means replacing the gateway's document, nothing else.
+Because only the gateway knows the hardware, the same controller and controller document can drive a simulated robot and the real one. To move from Isaac Sim to real motors, you give the robot an EtherCAT gateway document. Before you operate the real robot, verify its actuator mapping, calibration, limits and sensor settings: motor directions, gear ratios, encoder resolution and sensor mounting are properties of the hardware.
 
 ---
 
@@ -25,7 +25,7 @@ Because only the gateway knows the hardware, **the same controller, with the sam
 | Camera gateway | `rc.camera_gateway.NAME` | An RGB-D camera: a camera in Isaac Sim, or a real camera through the [Device Bridge](../device_bridge/index.md) | Camera settings in the inspector ([Sensors and Cameras](../sensors_and_cameras/index.md)) |
 | IMU gateway | `rc.imu_gateway.NAME` | An IMU (and foot contacts in Isaac Sim): in Isaac Sim, or through the Device Bridge | IMU settings in the inspector ([Sensors and Cameras](../sensors_and_cameras/index.md#2-imu-gateway)) |
 
-For devices the built-in gateways do not cover, you can write your own gateway as a module with the role `gateway`. Once installed, it appears in **Add node** › **Gateway** with the **CUSTOM** badge. See [Modules](../../station/modules/index.md).
+For devices the built-in gateways do not cover, you can write your own gateway as a module with the role `gateway` ([Create Custom Modules](../../extend/custom_modules/index.md)). Once installed, it appears in **Add node** › **Gateway** with the **CUSTOM** badge.
 
 ---
 
@@ -57,7 +57,8 @@ Motor units and joint units are defined in different documents:
 
 ## Safety Behavior
 
-- **Watchdog.** If a controller stops sending commands while the servo is on, the gateway switches the servo off after 3 s.
-- **Limits.** The gateway clamps velocity and torque commands to the actuator limits of its document.
+- **Watchdog.** If a controller stops sending commands while the servo is on, the gateway keeps the last command for 3 s, then switches the servo off.
+- **Limits.** The gateway clamps velocity and torque commands to the actuator limits of its document. Position limits come from the controller's document.
+- **Emergency stop.** When a controller or the [test console](../test_console/index.md) requests an emergency stop, the gateway sends a quick stop to the EtherCAT drives and switches the servo off. How the drives slow down depends on their quick stop settings. These software stops do not replace the hardware emergency stop ([Stop Controls](../../hardware_setup/stop_controls/index.md)).
 - **Fault reporting.** Drive faults, lost communication and missing devices are reported in the gateway's **Gateway events** log with a hint about what to check ([Running Nodes](../../station/running_nodes/index.md#5-logs)).
 - **One hardware type per gateway.** A gateway drives either real drives on one bus or one simulated robot. Use separate gateways for separate buses.

@@ -23,7 +23,7 @@
 * **Strider.** Controller and web UI for wheeled mobile bases: differential, skid steer, mecanum, swerve and Ackermann drives (`.sddm`). See [Strider](controllers/strider/index.md).
 * **Articulation.** Joint-level controller for legged robots, humanoids and other articulated robots (`.sdda`). See [Articulation](controllers/articulation/index.md).
 * **Localization and navigation.** Camera-based localization on a map and autonomous navigation to goals, configured by one map bundle (`.nav`). See [Localization and Navigation](navigation/overview/index.md).
-* **Isaac Bridge.** Extension for Isaac Sim 6.0 or later that connects Isaac Sim to the Station's gateways: several robots per scene, cameras and IMUs. See [Virtual Simulation](virtual_simulation/introduction/index.md).
+* **Isaac Bridge.** Extension for Isaac Sim 6.0 that connects Isaac Sim to the Station's gateways: several robots per scene, cameras and IMUs. See [Simulation](virtual_simulation/introduction/index.md).
 * **SSH Workspace.** A Linux workspace on the controller with the `sodero` command-line tool and support for AI coding agents. See [SSH Workspace](ssh_workspace/overview/index.md).
 * **Network Settings.** A settings page on port 3000 for the LAN address and SSH access. See [Network Settings](hardware_setup/stellar_series/network_settings/index.md).
 
@@ -31,6 +31,15 @@
 
 * **Stellar Designer** opens from a controller node on the Station and edits that node's document: manipulators (`.sdd`), mobile robots (`.sddm`) and articulated robots (`.sdda`). Motor and EtherCAT settings moved to the Gateway Designer.
 * **Stellar Motion Studio** has a new interface with the Home, Tool and Pose pages. Programs run from the SSH Workspace or as modules on the Station.
+
+#### Documentation Revisions
+
+The software version stays 2.0.0; these are revisions of this documentation and its example files ([Compatibility and Downloads](reference/compatibility/index.md)).
+
+* **2026.10.21.** New pages: [Learning Path](tutorials/learning_path/index.md), [Test Console](gateways/test_console/index.md), [Stop Controls](hardware_setup/stop_controls/index.md) and [Compatibility and Downloads](reference/compatibility/index.md). The map bundle page is split into [Load and Configure a Map](navigation/map_bundle/index.md), [Create a Map from Your Site](navigation/create_map/index.md) and [Map Bundle Format](navigation/map_bundle_format/index.md); writing Device Bridge drivers and building modules moved to **Extend & Automate**. The LAN ports and the test console conditions are described the same way on every page. Example files: `jackal.sddm` and `base.sddm` no longer carry run-time settings that the controller does not use. Copies downloaded before this date keep working.
+* **2026.10.21.** [EtherCAT Mobile Base](tutorials/ethercat_mobile_base/index.md): a step that tests each wheel with the test console before Strider drives them.
+* **2026.10.20.** New tutorial [EtherCAT Mobile Base](tutorials/ethercat_mobile_base/index.md) with the example files `wheels.gw` and `base.sddm`.
+* **2026.10.19.** The Quick Start files `jackal.gw` and `jackal.sddm` use the current document format. If the Station refuses a copy you downloaded before this date, download the files again.
 
 </div>
 

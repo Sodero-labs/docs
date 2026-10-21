@@ -32,12 +32,12 @@ The network and power ports are on the rear panel.
   <figcaption>Rear panel: ① Eth1 ② Eth2 ③ EtherCAT Out ④ 24V DC In</figcaption>
 </figure>
 
-| Port | Description |
-| :--- | :--- |
-| **1. Eth1 (Static IP)** | Pre-configured with a **Static IP** for direct connection.<br>• IP: `10.0.0.1`<br>• Subnet Mask: `255.255.255.0` |
-| **2. Eth2 (DHCP)** | Configured for **DHCP**. Connect this to a router or switch to receive an IP address automatically. |
-| **3. EtherCAT Out** | EtherCAT Master output. Connect this to the **IN** port of your first EtherCAT slave device. |
-| **4. 24V DC In** | Power input port. |
+| Port | Initial setting | How to change it | Use |
+| :--- | :--- | :--- | :--- |
+| **1. Eth1** | Static address `10.0.0.1`, subnet mask `255.255.255.0` | On the [Network Settings](../network_settings/index.md) page: DHCP or another static address | First connection with a cable from your PC; afterwards your office or lab network |
+| **2. Eth2** | DHCP | Not changed by the Network Settings page | A router or switch that assigns addresses by DHCP |
+| **3. EtherCAT Out** | No IP address | — | EtherCAT master output. Connect it to the **IN** port of the first EtherCAT drive. |
+| **4. 24V DC In** | — | — | Power input |
 
 ---
 
@@ -79,7 +79,7 @@ Your PC must be on the same subnet as Stellar X.
     </figure>
 
 2. **Configure Your PC:**
-   Since Stellar X's Eth1 is fixed at `10.0.0.1`, you must set your PC to a static IP in the same subnet (e.g., `10.0.0.2`).
+   Eth1 starts with the static address `10.0.0.1`, so set your PC to a static IP in the same subnet (e.g., `10.0.0.2`).
 
     !!! warning "Avoid using `10.0.0.1` for your PC, as this will cause an IP conflict."
 
@@ -110,4 +110,4 @@ Your PC must be on the same subnet as Stellar X.
       <figcaption>Stellar Station with an example robot system</figcaption>
     </figure>
 
-    !!! info "To change the controller's address or to connect it to your office network, use the [Network Settings](../network_settings/index.md) page on port 3000."
+    !!! info "To change Eth1's address or to connect it to your office network, use the [Network Settings](../network_settings/index.md) page on port 3000. The rest of this documentation uses the example address `192.168.60.18` for Stellar X; replace it with your controller's address, for example `10.0.0.1` while you use the direct cable."

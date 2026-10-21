@@ -4,7 +4,7 @@ Stellar X is an EtherCAT master. An actuator gateway of type **EtherCAT** drives
 
 !!! info "For a complete example from wiring to driving, see [EtherCAT Mobile Base](../../tutorials/ethercat_mobile_base/index.md): four drives on a skid-steer base, with example files."
 
-!!! error "**Real motors move.** Bring up a new EtherCAT system with the robot clear of people and obstacles, the drives' safe torque off (STO) and emergency stop wired, and someone at the emergency stop."
+!!! error "**Real motors move.** Bring up a new EtherCAT system with the robot clear of people and obstacles, the drives' safe torque off (STO) and emergency stop wired, and someone at the emergency stop ([Stop Controls](../../hardware_setup/stop_controls/index.md))."
 
 ---
 
@@ -72,8 +72,8 @@ The fields of the **Motor** tab:
 | Section | Field | Unit | Meaning |
 | :--- | :--- | :--- | :--- |
 | ② TORQUE | **Rated torque** | Nm | Continuous motor torque. Torque commands are sent to the drive in per mille of this value. |
-| | **Max torque** | Nm | Peak torque of the motor itself, at the motor shaft (the motor's datasheet value, not the torque after the reducer). The gateway limits joint torque to *Max torque × Gear ratio*. |
-| ③ SPEED | **Max speed** | rpm | Maximum speed of the motor itself, at the motor shaft (the motor's datasheet value, not the joint speed after the reducer). The joint speed limit is *Max speed ÷ Gear ratio*. |
+| | **Max torque** | Nm | Peak torque of the motor itself, at the motor shaft (the motor's datasheet value, not the torque after the reducer). The gateway limits torque commands to *Max torque × Gear ratio* at the joint. |
+| ③ SPEED | **Max speed** | rpm | Maximum speed of the motor itself, at the motor shaft (the motor's datasheet value, not the joint speed after the reducer). The gateway limits velocity commands to *Max speed ÷ Gear ratio* at the joint. |
 | ④ MOTOR CHARACTERISTICS | **Resolution** | PPR | Encoder pulses (counts) per motor revolution, **before** the gear, e.g. 1,048,576 (2²⁰) or 8,388,608 (2²³) |
 | ⑤ ENCODER CONFIGURATION | **Encoder offset** | pulses | Absolute encoder zero. Set by origin calibration in Motion Studio; leave 0 for a new robot. |
 | ⑥ REDUCER | **Gear ratio** | – | Motor turns per joint turn |
@@ -127,7 +127,7 @@ The gateway uses these CiA 402 objects:
 | | 0x6061 | Modes of operation display | Recommended |
 | | 0x603F | Error code | Recommended (fault messages) |
 
-You do not choose the mode of operation. The controller selects it per command: position commands use CSP (8), velocity commands CSV (9), torque and impedance commands CST (10).
+When a controller drives the gateway, you do not choose the mode of operation: the controller selects it per command. Position commands use CSP (8), velocity commands CSV (9), torque and impedance commands CST (10). In the [test console](../test_console/index.md) you choose the drive mode yourself.
 
 ### Verify
 
@@ -161,7 +161,7 @@ Open **02 Verification** and click **Verify**. Open a check marked **Error** to 
     EtherCAT ready: 2 drive(s) operational, 1.0 ms cycle.
     ```
 
-3. Optional: before you start a controller, click **Test Stellar Gateway** in the gateway's **CONTROL** section to open the test console and move single actuators ([EtherCAT Mobile Base › Step 5](../../tutorials/ethercat_mobile_base/index.md#step-5-test-the-wheels-with-the-test-console)).
+3. Optional: before you start a controller, click **Test Stellar Gateway** in the gateway's **CONTROL** section to open the [test console](../test_console/index.md) and move single actuators. When the test is done, click **Servo OFF** in the console and **Stop test** in the gateway's **CONTROL** section. [EtherCAT Mobile Base › Step 5](../../tutorials/ethercat_mobile_base/index.md#step-5-test-the-wheels-with-the-test-console) shows a complete test of four wheels.
 4. Start the controller node, open its UI and switch **Servo On**. Jog slowly first and check each joint's direction.
 
 !!! idea "**Tip:** Bring up one drive first. When it reaches *EtherCAT ready* and moves correctly, add the next drive to the cable and to the document."
@@ -182,8 +182,8 @@ The gateway explains every problem in **Gateway events**, followed by a hint. Th
 | *Drive … did not reach SAFE-OP / OP …* | The drive refused the configuration or the synchronization. The AL status in the message names the reason (sync, watchdog, PDO or cycle time). |
 | *Drive … gets velocity commands, but Target Velocity (0x60FF) is not in its …* | Add 0x60FF to the RxPDO (see [Process Data](#process-data)). |
 | *Servo ON failed: drive … did not enable (it stays in 'switch on disabled').* | The drive refuses to switch on: check its STO and enable inputs, the emergency stop and its main power. |
-| *Drive … fault: … (error code 0x….)* | A drive alarm, such as overcurrent, voltage, temperature, encoder or following error. Read the alarm on the drive and look it up in its manual, then **Error Reset** / **Fault Reset** in the controller UI. |
+| *Drive … fault: … (error code 0x….)* | A drive alarm, such as overcurrent, voltage, temperature, encoder or following error. Read the alarm on the drive and look it up in its manual, then **Error Reset** / **Fault Reset** in the controller UI and switch the servo on again. |
 | *EtherCAT communication lost: the drives stopped answering.* | A cable was unplugged or a drive lost power. The message names the segment; fix it and restart the gateway. |
-| *No commands from the robot controller for 3.0 s: servo turned OFF for safety.* | The controller stopped or lost its connection. Start the controller and switch the servo on again. |
+| *No commands from the robot controller for 3.0 s: servo turned OFF for safety.* | The controller stopped or lost its connection. Until the 3 s pass, the gateway keeps the last command. Start the controller and switch the servo on again. |
 
 !!! info "Problems that are not in the gateway's log (such as a joint moving in the wrong direction or the wrong distance) come from the documents: check the actuator order (cable order), **Gear ratio**, **Resolution**, and the joint mapping in the controller's document."

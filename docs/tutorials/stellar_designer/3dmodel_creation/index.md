@@ -1,6 +1,6 @@
 # 3D Model Creation
 
-This tutorial assembles the 3D model of a robot arm for display in Stellar Designer, Motion Studio and the Station. The model is for visualization only: the kinematics come from the DH parameters of the `.sdd` document, not from the model. You can skip this step and add a model later.
+This tutorial assembles the 3D model of a robot arm for display in Stellar Designer, Motion Studio and the Station. **It is optional.** The model is for visualization only: the kinematics come from the DH parameters of the `.sdd` document, not from the model, and every robot runs without one. You can skip this page and add a model later.
 
 The example is a 6-axis manipulator. Download its parts and unzip them:
 

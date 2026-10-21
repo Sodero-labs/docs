@@ -2,7 +2,7 @@
 
 Stellar X connects to the rest of the robot through network ports only. Sensors that need USB, such as an Intel RealSense depth camera or a USB IMU, therefore go on a small computer next to them: a Raspberry Pi, another single-board computer or a PC. The **Device Bridge** runs on that computer. It reads the devices and serves their data to the controller over the LAN.
 
-The bridge speaks the same network protocol as Isaac Bridge. The controller's built-in Camera gateway, IMU gateway, Visual odometry, Localizer and Navigator therefore work with real sensors exactly as they work with a simulated robot; only the address they connect to differs.
+The bridge speaks the same network protocol as Isaac Bridge, so the controller's built-in Camera gateway, IMU gateway, Visual odometry, Localizer and Navigator connect to real sensors the same way as to a simulated robot: they connect to the sensor computer instead of the Isaac Sim computer. Real sensors still need their own values: camera intrinsics, mounting and synchronized clocks.
 
 Use the Device Bridge when:
 
@@ -11,7 +11,12 @@ Use the Device Bridge when:
 
 Drives on the controller's EtherCAT port do not need the bridge, and neither does a simulated robot.
 
-!!! info "The Device Bridge is an open example program. Use its built-in drivers as they are, or add a driver for your own device. Nothing changes on the controller."
+| You want to | Page |
+| :--- | :--- |
+| Connect a RealSense D400 camera, a TurtleBot3 OpenCR board, or try the bridge without hardware | This page: install the bridge and use its built-in drivers |
+| Connect another camera, IMU or wheel board | [Write Device Bridge Drivers](../../extend/device_bridge_drivers/index.md), then this page |
+
+The Device Bridge is an open-source program. Nothing changes on the controller when you install it or add a driver.
 
 ---
 
@@ -48,8 +53,6 @@ flowchart TB
 
 The bridge **listens** on three ports and the controller's gateways **connect** to it, exactly as they connect to the simulator. Every message carries the bridge's `robot_name`, and each gateway takes the data published under the name it is configured with. Without the optional wheel stream, Strider drives the robot's own base through an EtherCAT Actuator gateway as usual.
 
-Supporting a new camera or IMU means writing one small driver class on the sensor computer. Nothing on the controller is rebuilt or modified.
-
 ---
 
 ## 2. Requirements
@@ -62,6 +65,7 @@ Supporting a new camera or IMU means writing one small driver class on the senso
 | Network | The sensor computer and Stellar X on the same LAN; a wired link is recommended |
 | Clocks | Synchronized to within about 20 ms while frames carry their capture time (the default) |
 | Firewall | Inbound TCP ports 53333–53335 on the sensor computer open to the controller |
+| IMU address | Only for an IMU stream: the controller's IMU gateway connects to a sensor address that Sodero support sets for the unit. Ask Sodero support to set it to the sensor computer before you connect the IMU ([IMU](#imu)). |
 
 **Bandwidth.** RGB-D frames travel uncompressed: about 61 Mbit/s at 424 × 240 and 15 fps, about 185 Mbit/s at 640 × 480 and 15 fps, and about 370 Mbit/s at 640 × 480 and 30 fps. IMU samples and wheel messages add only a few Mbit/s. Use a wired link, ideally Gigabit Ethernet, for the higher settings.
 
@@ -222,7 +226,7 @@ python -m device_bridge config/simulated.yaml    # or in the foreground; stop wi
 | `simulated_camera` | Camera | `width` (`424`), `height` (`240`), `fps` (`15`) |
 | `simulated_imu` | IMU | `rate_hz` (`100`), `yaw_rate` (`0.1` rad/s) |
 | `simulated_wheels` | Wheels | `joints` (`2`), `rate_hz` (`100`) |
-| `package.module:Class` | What the class provides | Your own driver (see [Write Your Own Driver](#6-write-your-own-driver)) |
+| `package.module:Class` | What the class provides | Your own driver ([Write Device Bridge Drivers](../../extend/device_bridge_drivers/index.md)) |
 
 - **`realsense`** reads Intel RealSense D400 cameras through the RealSense SDK and is tested with the D435. Depth is aligned to the color image, so both share the color camera's intrinsics. With `serial: auto`, exactly one camera must be connected; with several cameras, enter the serial number.
 - **`turtlebot3_opencr`** drives the OpenCR board of a TurtleBot3 Burger running the ROBOTIS TurtleBot3 ROS 2 firmware. The board is both the wheel controller and the IMU, and its serial port can have only one owner, so one device feeds both the `imu` and the `wheels` stream. Wheel speeds are scaled down together to the configured limits, which keeps the path's curvature. If the bridge stops talking to the board, the firmware stops the wheels by itself within 0.5 s. Set `port` to the board's serial device (for example `/dev/ttyACM0`) when the default device name does not exist on your system.
@@ -279,7 +283,7 @@ Start with the bridge running and `listen` showing its streams, then open the St
 2. In **IMU SETTINGS**, check that **Robot in World** is the bridge's `robot_name` (a new IMU gateway starts with its node name) and click **Save settings**.
 3. Start the gateway.
 
-!!! info "The IMU gateway has no address field: it connects to the Station's configured simulator/sensor address, which Sodero support sets for the unit. Ask Sodero support to set it to the sensor computer."
+!!! info "The IMU gateway has no address field: it connects to the sensor address that Sodero support sets for the unit ([Requirements](#2-requirements))."
 
 ### Wheels (Optional)
 
@@ -295,79 +299,13 @@ Only when the bridge serves a `wheels` stream:
 ### Navigation and Mounting
 
 1. Add **Visual odometry**, **Localizer** and **Navigator** and connect them as for any robot: the Camera gateway's `camera` to Visual odometry and the Localizer, the IMU gateway's `imu` to Visual odometry, Visual odometry's (or Strider's) `odometry` to the Localizer, the Localizer's `localization` and `map` to the Navigator, and Strider's `mobile_base` to the Navigator.
-2. Upload your map bundle (`.nav`) to the Localizer and the Navigator. See [Localization and Navigation](../../navigation/overview/index.md).
+2. Upload the map bundle (`.nav`) once to the Localizer. The Navigator uses the same shared bundle ([Load and Configure a Map](../../navigation/map_bundle/index.md)).
 
-The bridge sends camera and IMU data in the sensors' own frames. Where the sensors sit on the robot, their mounting extrinsics, belongs in the [map bundle](../../navigation/map_bundle/index.md): measure the mounting and enter it there, and do not rotate data inside a driver. Keep the bridge's `frame_id`, the Camera gateway's *frame id* and the camera frame of the map bundle the same (default `cam0_optical`).
-
----
-
-## 6. Write Your Own Driver
-
-A driver is one Python class for one piece of hardware. It subclasses `Device` and each capability the hardware has: `Camera`, `Imu` or `Wheels`. One class may provide several, as the OpenCR driver provides both `Imu` and `Wheels`. The interfaces are documented in `device_bridge/devices/base.py`, and `device_bridge/devices/simulated.py` is the smallest complete example.
-
-| Class | You implement |
-| :--- | :--- |
-| `Device` | `open()`: connect, or raise an exception with a clear message. `close()`: stop and release the hardware; safe to call twice. `self.options` holds the device's configuration block. |
-| `Camera` | `camera_info()` returns `CameraInfo(width, height, fx, fy, cx, cy)` of the aligned output; `read_frame(timeout_s)` returns `RgbdFrame(rgb, depth_mm, capture_unix_ns)` or `None` |
-| `Imu` | `read_imu()` returns `ImuSample(gyro, accel, orientation_xyzw, source_time_ns)`, or `None` when nothing is new |
-| `Wheels` | `joint_count`; `read_joints()` returns `JointState(positions, velocities, efforts, source_time_ns)` or `None`; `set_velocities(rad_per_s)`; `stop()` sets zero speed and releases the motors |
-
-A minimal IMU driver:
-
-```python
-# device_bridge/devices/my_imu.py
-from device_bridge.devices.base import Device, Imu, ImuSample
-import vendor_sdk  # placeholder: your IMU's SDK
-
-
-class MyImu(Device, Imu):
-    def open(self):
-        self.sensor = vendor_sdk.open(self.options.get("port", "/dev/ttyUSB0"))
-        self.last_ns = 0
-
-    def close(self):
-        if getattr(self, "sensor", None) is not None:
-            self.sensor.close()
-            self.sensor = None
-
-    def read_imu(self):
-        raw = self.sensor.latest()               # newest sample; never wait for one
-        if raw is None or raw.timestamp_ns <= self.last_ns:
-            return None                          # nothing new since the last call
-        self.last_ns = raw.timestamp_ns
-        return ImuSample(gyro=raw.gyro_rad_s,              # rad/s, sensor axes
-                         accel=raw.accel_m_s2,             # m/s², gravity included
-                         orientation_xyzw=raw.quaternion_xyzw,
-                         source_time_ns=raw.timestamp_ns)  # must increase
-```
-
-Select it in the configuration as `driver: device_bridge.devices.my_imu:MyImu`, or register a short name in `DRIVERS` in `device_bridge/devices/__init__.py`. Keep your drivers in `device_bridge/devices/` so that `install.sh` copies them, and add your SDK's Python package to `requirements.txt`. `python -m unittest discover -s tests` checks the bridge end to end with the simulated devices.
-
-Rules every driver follows:
-
-- **Units:** radians, rad/s, m/s² with gravity included (+9.81 m/s² upward at rest), depth in millimeters as 16-bit integers (0 = no measurement), times in nanoseconds. Wheel positions are continuous and do not wrap at 2π.
-- **Frames:** IMU data in the sensor's own axes, with `orientation_xyzw` the sensor's attitude in the world. Camera images in the optical frame (x right, y down, z forward), depth aligned to the RGB image, both rectified without distortion. Do not rotate data into the robot's frame; the mounting belongs in the map bundle.
-- **Time:** `source_time_ns` must increase; a monotonic clock is fine. A camera's `capture_unix_ns` is the capture time on the wall clock.
-- **Timing:** `read_imu` and `read_joints` return at once; `read_frame` blocks for at most its timeout. Copy images out of buffers that the SDK reuses.
-- **Safety:** `stop()` must stop and release the motors. The bridge calls it when the controller switches its drive off and when commands pause for `command_timeout_s`.
+The bridge sends camera and IMU data in the sensors' own frames. Where the sensors sit on the robot, their mounting extrinsics, belongs in the map bundle ([Load and Configure a Map](../../navigation/map_bundle/index.md#3-check-the-values-for-the-first-run)): measure the mounting and enter it there, and do not rotate data inside a driver. Keep the bridge's `frame_id`, the Camera gateway's *frame id* and the camera frame of the map bundle the same (default `cam0_optical`).
 
 ---
 
-## 7. Protocol
-
-The Device Bridge and Isaac Bridge send the same messages over ZeroMQ on TCP. The bridge listens; the Station's gateways connect.
-
-| Port | Direction | Contents | Station node |
-| :---: | :--- | :--- | :--- |
-| 53335 | bridge → controller | RGB-D frames (16-bit depth in millimeters and 8-bit RGB) and the camera intrinsics | Camera gateway |
-| 53334 | bridge → controller | IMU samples and wheel states | IMU gateway, Actuator gateway |
-| 53333 | controller → bridge | Wheel commands: velocity while the drive is on, limp when it is off | Actuator gateway |
-
-Every message carries the robot name, and each gateway takes only the messages of its own name. A slow link drops old frames instead of queuing them. The byte layouts are documented in [`docs/protocol.md`](https://github.com/Sodero-labs/device_bridge/blob/HEAD/docs/protocol.md){:target="_blank"} in the repository.
-
----
-
-## 8. Troubleshooting
+## 6. Troubleshooting
 
 | Symptom | Cause | Fix |
 | :--- | :--- | :--- |

@@ -38,9 +38,9 @@
 | No. | Item | Description |
 | :---: | :--- | :--- |
 | 1 | Robot and role | The controller node and whether this window has control (*Pilot - Control Active*) |
-| 2 | **Manual** / **Auto** | Manual limits the tool speed for safe teaching; Auto runs at full programmed speed |
+| 2 | **Manual** / **Auto** | **Manual** limits the linear speed of the tool center point in the controller's own motions and jogs, 0.25 m/s by default. It is a software limit for teaching, not a safety-rated reduced speed, and it does not limit rotations or **Hand** mode. **Auto** runs at the programmed speed. |
 | 3 | Feed rate | Speed override in percent (10–150 %), applied to motion in progress |
-| 4 | **Error Reset** | Clears a protective stop or a drive fault |
+| 4 | **Error Reset** | Clears a protective stop (a joint at its limit, a speed or torque limit, a detected collision) and resets drive faults. Switch the servo on again afterwards. If the arm stays stopped, stop and start the Motion Studio node. |
 | 5 | Units | `mm / g / deg` or `m / kg / radian` |
 | 6 | **Jog** | Opens the jog panel |
 | 7 | **Command log** | Commands sent from this window |
@@ -69,13 +69,13 @@ Click **Jog** in the header to open the jog panel.
     - **Joint**: move one joint at a time (J1…Jn).
     - **Base**: move the tool in the robot's base frame (X, Y, Z, RX, RY, RZ).
     - **Tool**: move the tool in its own frame.
-    - **Hand**: hand guiding. The arm compensates gravity so you can move it by hand; the jog buttons are disabled.
-3. Choose **Continuous** (moves while you hold a button) or **Step** (5° or 10 mm per click) ④, and the **Speed** ⑤ (50 %, 100 % or 150 %).
+    - **Hand**: hand guiding. The arm compensates gravity so you can move it by hand; the jog buttons are disabled. There is no damping and no speed limit, and collision detection stays active, so a firm push can cause a protective stop.
+3. Choose **Continuous** (moves while you hold a button) or **Step** (5° or 10 mm per click) ④, and the **Speed** ⑤ (50 %, 100 % or 150 %, about 0.04, 0.1 and 0.2 m/s at the tool).
 4. Hold **−** or **+** next to a joint or axis in **JOG CONTROL** ⑦. Motion stops when you release the button.
 
 The **POSE** section ① shows the current TCP pose and joint positions.
 
-!!! error "**Keep the emergency stop within reach.** A continuous jog moves until you release the button. Do not leave the window while jogging, and make sure the payload is set correctly before you use **Hand** mode."
+!!! error "**Keep the hardware emergency stop within reach.** Motion Studio has no on-screen emergency stop ([Stop Controls](../../hardware_setup/stop_controls/index.md)). A continuous jog moves until the page receives the release of the button: if the browser or the connection fails while you hold it, the motion continues. Do not leave the window while jogging, and make sure the payload is set correctly before you use **Hand** mode."
 
 ---
 
@@ -128,7 +128,7 @@ Motion Studio is for setup and teaching. Programs run outside the UI and call th
 | From | How |
 | :--- | :--- |
 | The SSH workspace | `sodero tools call motion.move_j`, `motion.move_l`, `motion.get_tcp_pose` and the other `motion.*` tools ([sodero CLI](../../ssh_workspace/sodero_cli/index.md)) |
-| A module on the Station | A module node connected to the Motion Studio node's `manipulator` port ([Modules](../../station/modules/index.md)) |
+| A module on the Station | A module node connected to the Motion Studio node's `manipulator` port ([Create Custom Modules](../../extend/custom_modules/index.md)) |
 
 ```sh
 sodero tools call motion.get_tcp_pose --input '{"target": "sodero.mmc.arm"}'

@@ -9,7 +9,7 @@
 1. Select an actuator gateway node on the Station.
 2. Click **Edit Stellar Gateway Designer** in the **DEFINITION** section.
 
-The Gateway Designer opens in a new tab with the node's document. Edits are saved back to the node automatically. **Stop the gateway before you edit**; the Station refuses saves while it runs.
+The Gateway Designer opens in a new tab with the node's document. Edits are saved back to the node automatically. **Stop the gateway before you edit**; the Station refuses saves while it runs (*Gateway '…' is running — stop it in the Station, then save again.*) and while its [test console](../test_console/index.md) is open (*Gateway '…' has a test console open — stop the test in the Station, then save again.*).
 
 <figure markdown="span">
   ![Gateway Designer](images/gwd_open.png){ width="1000" }
@@ -58,7 +58,7 @@ To change the type of an existing gateway, click the Stellar mark at the top lef
 | :--- | :--- | :--- |
 | **Rated torque** | Nm | Continuous torque of the motor. For EtherCAT drives it is the reference for torque commands in per mille. |
 | **Max torque** | Nm | Peak torque of the motor. The gateway clamps torque commands to *Max torque × gear ratio* at the joint. |
-| **Max speed** | rpm | Maximum motor speed. The joint speed limit is *Max speed ÷ gear ratio*. |
+| **Max speed** | rpm | Maximum motor speed. The gateway limits velocity commands to *Max speed ÷ gear ratio* at the joint. |
 | **Resolution** | PPR | Encoder pulses per motor revolution, before the gear (EtherCAT). For example 2²³ = 8,388,608 for a 23-bit encoder. |
 | **Encoder offset** | pulses | Zero offset of the absolute encoder. Normally set by origin calibration in Motion Studio, not by hand. |
 | **Gear ratio** | ratio | Motor turns per joint turn. |
