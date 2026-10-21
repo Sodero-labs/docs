@@ -1,8 +1,8 @@
 # Write Device Bridge Drivers
 
-The [Device Bridge](../../gateways/device_bridge/index.md) runs on a small computer next to the sensors and serves their data to Stellar X. Its built-in drivers cover Intel RealSense D400 cameras and the TurtleBot3 OpenCR board. For another camera, IMU or wheel board, you write a driver: one Python class on the sensor computer. Nothing on the controller is rebuilt or modified.
+The [Device Bridge](../../gateways/device_bridge/index.md) runs on a small computer next to the sensors and serves their data to Stellar X. It connects any RGB-D camera, IMU or wheel board for which it has a driver: one Python class on the sensor computer. The drivers that come with the bridge, for Intel RealSense D400 cameras, the TurtleBot3 OpenCR board and simulated devices, are examples; write a driver of the same kind for your own device. Nothing on the controller is rebuilt or modified.
 
-This page is for developers. To install and connect the bridge with its built-in drivers, see [Device Bridge](../../gateways/device_bridge/index.md).
+This page is for developers. To install the bridge and connect it to the Station, see [Device Bridge](../../gateways/device_bridge/index.md).
 
 ---
 

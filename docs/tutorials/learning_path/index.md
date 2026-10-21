@@ -70,5 +70,5 @@ flowchart TB
 | :--- | :--- |
 | Work on the controller over SSH | [SSH Workspace](../../ssh_workspace/overview/index.md), [sodero CLI](../../ssh_workspace/sodero_cli/index.md) |
 | Run your own programs as nodes | [Create Custom Modules](../../extend/custom_modules/index.md) |
-| Connect a sensor the Device Bridge does not support yet | [Write Device Bridge Drivers](../../extend/device_bridge_drivers/index.md) |
+| Connect your own camera, IMU or wheel board through the Device Bridge | [Write Device Bridge Drivers](../../extend/device_bridge_drivers/index.md) |
 | Let an AI coding agent do routine work | [AI Coding Agents](../../ssh_workspace/ai_agents/index.md) |
