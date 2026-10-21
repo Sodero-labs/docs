@@ -144,7 +144,7 @@ ______________________________________________________________________
    EtherCAT ready: 2 drive(s) operational, 1.0 ms cycle.
    ```
 
-1. Optional: before you start a controller, click **Test Stellar Gateway** in the gateway's **CONTROL** section to open the test console and move single actuators.
+1. Optional: before you start a controller, click **Test Stellar Gateway** in the gateway's **CONTROL** section to open the test console and move single actuators ([EtherCAT Mobile Base › Step 5](https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/#step-5-test-the-wheels-with-the-test-console)).
 
 1. Start the controller node, open its UI and switch **Servo On**. Jog slowly first and check each joint's direction.
 

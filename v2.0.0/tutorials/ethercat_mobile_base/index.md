@@ -4,8 +4,9 @@ This tutorial drives a four-wheel skid-steer base with four EtherCAT servo drive
 
 1. wire the four drives to Stellar X,
 1. add the gateway and Strider on Stellar Station and load their example documents,
-1. bring up the EtherCAT network, and
-1. jog each wheel with Strider.
+1. bring up the EtherCAT network,
+1. turn each wheel on its own from the gateway's test console, and
+1. jog the wheels with Strider.
 
 ```
 flowchart TB
@@ -121,11 +122,48 @@ ______________________________________________________________________
 
 If the gateway stops before *EtherCAT ready*, its log says why: no cable link, a drive missing from the chain, a PDO mapping that does not match the drive, or a drive that refuses the configuration. See [EtherCAT Gateway › Troubleshooting](https://docs.sodero.io/v2.0.0/gateways/ethercat/#6-troubleshooting).
 
-**Tip:** Before you start Strider, click **Test Stellar Gateway** in the gateway's **CONTROL** section to turn single wheels from the test console ([EtherCAT Gateway › Bring Up the System](https://docs.sodero.io/v2.0.0/gateways/ethercat/#5-bring-up-the-system)).
+______________________________________________________________________
+
+## Step 5: Test the Wheels with the Test Console
+
+The gateway's test console turns single actuators without a controller. Check every wheel with it before Strider drives them.
+
+1. Select the gateway and click **Test Stellar Gateway** in its **CONTROL** section. The test console opens in a new browser tab.
+
+   ① the test console, connected to the gateway's servo_link ② the gateway's test console buttons
+
+   While the test runs, the console is a node of the graph, `sodero.actuator_test.wheels` ①, and the gateway's **CONTROL** section shows **Open test console** and **Stop test** ②. The node has a red dashed outline because it is not part of your saved graph. It goes away when the test ends; do not add it to the graph with **Adopt running**.
+
+1. In the console, check that the top bar shows **Gateway Connected** and that there is one card per actuator, **A1** to **A4**. Card **A1** is actuator 1, the first drive on the cable.
+
+   ① EMERGENCY STOP ② Servo ON and Servo OFF ③ the drive mode of all actuators ④ the target velocity of actuator 1
+
+1. Under **DRIVE MODE — APPLY TO ALL AXES** ③, choose **VELOCITY** and click **Apply**.
+
+1. Click **Servo ON** ②. The indicator on every card changes from **Disable** to **Enable**, and the gateway's log shows *Servo ON: all 4 drive(s) enabled.*
+
+1. On card **A1**, press and hold the **dqa_d · Target Velocity** slider ④ and drag it to the right, to about 60 deg/s. The wheel turns while you hold the mouse button and stops when you release it.
+
+1. Do the same on cards **A2**, **A3** and **A4**.
+
+Each card must turn its own wheel ([Step 1](#step-1-wire-the-drives)) forward, the way the base drives forward. At 60 deg/s a wheel needs 6 s for one turn.
+
+| What you see                                                                 | Cause and fix                                                                                                                                                                                                                                                                                                                                                          |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A different wheel turns                                                      | The cable order does not match the wheel order. Rewire the drives in the order of [Step 1](#step-1-wire-the-drives).                                                                                                                                                                                                                                                   |
+| The wheel turns backward                                                     | The motor is mounted the other way round. Invert its direction in the drive, for example with the drive's polarity parameter as a start-up SDO in the **EtherCAT** tab. Leave the influence factor in the Strider document at `1` ([Mobile Robot › Actuator Mapping](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/mobile_robot/#step-3-actuator-mapping)). |
+| One turn takes clearly more or less than 6 s                                 | **Gear ratio** or **Resolution** in the gateway is wrong.                                                                                                                                                                                                                                                                                                              |
+| The cards stay at **Disable**, and the gateway's log shows *Servo ON failed* | A drive does not enable: check its STO and enable inputs, the emergency stop and its main power.                                                                                                                                                                                                                                                                       |
+
+After a change to the gateway document, stop the test, restart the gateway and test again.
+
+When every wheel passes, click **Servo OFF**. Then click **Stop test** in the gateway's **CONTROL** section. Closing the console's tab does not end the test.
+
+**Test Stellar Gateway** works only while no robot controller runs on Stellar X, and starting a controller ends the test. **EMERGENCY STOP** ① quick-stops all drives and switches their servo off; click it again to release it.
 
 ______________________________________________________________________
 
-## Step 5: Jog the Wheels with Strider
+## Step 6: Jog the Wheels with Strider
 
 1. Select the Strider and click **Start node**. The gateway's log shows *Robot controller connected.*
 1. In the Strider's inspector, click **Strider** in **CONTROL** and open the **Drive** page ([Strider › Jog the Base](https://docs.sodero.io/v2.0.0/controllers/strider/#4-jog-the-base-drive-page)).
@@ -134,14 +172,7 @@ ______________________________________________________________________
 1. Press and hold **Forward (W)** for a moment. All four wheels turn forward.
 1. Press and hold **Turn Left (A)**. The left wheels turn backward and the right wheels forward.
 
-Check every wheel:
-
-| What you see                           | Cause and fix                                                                                                                                                                                                                                                                                                                                                          |
-| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A different wheel turns than expected  | The cable order does not match the wheel order. Rewire the drives in the order of [Step 1](#step-1-wire-the-drives).                                                                                                                                                                                                                                                   |
-| A wheel turns backward                 | The motor is mounted the other way round. Invert its direction in the drive, for example with the drive's polarity parameter as a start-up SDO in the **EtherCAT** tab. Leave the influence factor in the Strider document at `1` ([Mobile Robot › Actuator Mapping](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/mobile_robot/#step-3-actuator-mapping)). |
-| A wheel turns too fast or too slow     | **Gear ratio** or **Resolution** in the gateway, or the wheel radius in the Strider document, is wrong.                                                                                                                                                                                                                                                                |
-| *Servo ON failed* in the gateway's log | A drive does not enable: check its STO and enable inputs, the emergency stop and its main power.                                                                                                                                                                                                                                                                       |
+The wheels passed the test console, so a wrong wheel or direction here comes from the Strider document: its actuator mapping must assign actuators 1 to 4 to `fl`, `fr`, `rl` and `rr`, each with the influence factor `1` ([Mobile Robot › Actuator Mapping](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/mobile_robot/#step-3-actuator-mapping)). If the wheels turn too fast or too slow, check the wheel radius in the Strider document.
 
 When every wheel turns the right way, switch the servo off and click **Idle**. Put the base on the ground and drive it slowly, with the limits still low.
 
