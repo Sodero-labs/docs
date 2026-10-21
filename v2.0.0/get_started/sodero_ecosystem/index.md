@@ -1,14 +1,16 @@
 # Sodero Ecosystem
 
-## A Software-Defined Robotics Platform: Build Once. Move Everywhere.
+## One Platform from Design to the Real Robot
 
-Sodero resolves the biggest bottlenecks in traditional robot development: **tight hardware coupling** and the **sim-to-real gap**. It abstracts complex control environments into a standardized software layer, so developers can design robots in a virtual environment and deploy them directly to the real world without changing a single line of code.
+Sodero connects robot design, simulation and operation on one controller. You describe the robot in Stellar Designer, run it on Stellar X with the built-in controllers, and drive it in NVIDIA Isaac Sim or on real motors through a gateway.
+
+The same controller and application structure can be reused in simulation and on supported hardware. Before operating the physical robot, configure its gateway and verify actuator mapping, calibration, limits and sensor settings.
 
 ### Core Architecture
 
-**Causality-Aligned Simulation.** Going beyond simple 3D rendering, our Reverse Digital Twin technology ensures that the control logic in the virtual environment matches the physical outcomes in reality. The same controller drives a robot in NVIDIA Isaac Sim and on real motors; only its gateway changes.
+**Gateways separate controllers from hardware.** Controllers never talk to hardware directly. A gateway connects them to EtherCAT drives, to a robot in NVIDIA Isaac Sim, or to sensors, so the same controller and controller document can drive a simulated robot and a real one.
 
-**Unified Execution Layer.** Even if the robot's form factor or hardware changes, there is no need to rewrite glue code from scratch. Every node on Stellar Station, built-in or your own, runs on one real-time runtime with standardized interfaces, so code and motions written on the Sodero platform are executed with the same semantics everywhere.
+**One Station for every node.** Gateways, controllers, navigation and your own modules run as nodes of one Station on Stellar X. They are connected through ports with defined interfaces, so built-in nodes and your own work together in the same way on every robot.
 
 ______________________________________________________________________
 
@@ -21,16 +23,16 @@ flowchart TB
     D["Design<br>Stellar Designer"] --> S["Compose<br>Stellar Station"]
     S --> V["Simulate<br>Isaac Sim + Isaac Bridge"]
     V --> R["Run<br>Stellar X + real hardware"]
-    R -. "same controller,<br>new gateway" .- V
+    R -. "same controller,<br>EtherCAT gateway" .- V
 ```
 
 **Design: Stellar Designer.** A web-based tool for defining your robot's kinematics, links, joints, wheels and actuator mapping, and the gateway that connects its actuators, without any hardware.
 
 **Compose: Stellar Station.** The control center on the controller. Add gateways and controllers as nodes, connect their ports, load their design documents and start them, all in the browser.
 
-**Simulate: NVIDIA Isaac Sim.** The Isaac Bridge extension connects a robot in Isaac Sim to the Station. The simulated robot is driven by exactly the same controller and controller document as the real one; only the gateway document differs.
+**Simulate: NVIDIA Isaac Sim.** The Isaac Bridge extension connects a robot in Isaac Sim to the Station. The simulated robot is driven by the same controller and controller document as the real one, through a simulation gateway instead of an EtherCAT gateway.
 
-**Run: Stellar Hardware Series.** The series starts with Stellar X, our industry-proven universal motion controller with an EtherCAT master, and will expand to support more form factors and specialized applications.
+**Run: Stellar X.** The motion controller with an EtherCAT master that runs the Station and its nodes. On the real robot, its EtherCAT gateway drives the servo drives, after you have checked the actuator mapping, calibration and limits on the hardware.
 
 In simulation and on the real robot alike, you operate the robot from the same built-in controller UIs: **Motion Studio** for manipulators, **Strider** for mobile bases and **Articulation** for articulated and legged robots.
 

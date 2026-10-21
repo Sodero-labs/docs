@@ -1,14 +1,15 @@
 # Stellar Designer
 
-**Stellar Designer** creates and edits the design documents of controllers: the robot's structure, its limits and safety settings, and how the gateway's actuators drive its joints or wheels. Each controller node on the Station holds one document:
+**Stellar Designer** creates and edits the design documents of gateways and controllers: the robot's structure, its limits and safety settings, and how the gateway's actuators drive its joints or wheels. Each actuator gateway and controller node on the Station holds one document:
 
-| Document | Robot                                                              | Controller    | Tutorial                                                                                            |
-| -------- | ------------------------------------------------------------------ | ------------- | --------------------------------------------------------------------------------------------------- |
-| `.sdd`   | Manipulator (serial arm)                                           | Motion Studio | [Manipulator](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/manipulator/index.md)        |
-| `.sddm`  | Wheeled mobile base                                                | Strider       | [Mobile Robot](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/mobile_robot/index.md)      |
-| `.sdda`  | Articulated robot driven joint by joint (legged robots, humanoids) | Articulation  | [Articulated Robot](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/articulation/index.md) |
+| Document | Describes                                                                      | Node             | Page                                                                                                        |
+| -------- | ------------------------------------------------------------------------------ | ---------------- | ----------------------------------------------------------------------------------------------------------- |
+| `.gw`    | The actuators and the hardware that drives them (EtherCAT drives or Isaac Sim) | Actuator gateway | [Gateway Designer (.gw)](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md)                  |
+| `.sdd`   | Manipulator (serial arm)                                                       | Motion Studio    | [Manipulator (.sdd)](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/manipulator/index.md)         |
+| `.sddm`  | Wheeled mobile base                                                            | Strider          | [Mobile Robot (.sddm)](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/mobile_robot/index.md)      |
+| `.sdda`  | Articulated robot driven joint by joint (legged robots, humanoids)             | Articulation     | [Articulated Robot (.sdda)](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/articulation/index.md) |
 
-Gateway documents (`.gw`) are made in the [Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md).
+A 3D model (`.glb`) for display is optional ([3D Model Creation](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/3dmodel_creation/index.md)). This page covers the controller documents; gateway documents are edited in the Gateway Designer, the part of Stellar Designer for `.gw` files.
 
 ______________________________________________________________________
 

@@ -16,9 +16,9 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
-## Step 1: Set the Camera Size and Rate
+## Step 1: Prepare Isaac Sim
 
-The localizer in this tutorial uses the camera at 320 × 240 pixels and 5 frames per second. Isaac Bridge renders cameras at 640 × 480 and 15 frames per second unless told otherwise, so close Isaac Sim and start it again from its installation folder with this camera setting:
+The localizer in this tutorial uses the camera at 320 × 240 pixels and 5 frames per second. Isaac Bridge renders cameras at 640 × 480 and 15 frames per second unless told otherwise, so start Isaac Sim from its installation folder with this camera setting (close it first if it runs):
 
 ```
 RC_ISAAC_CAMERA_DEVICES='[{"name": "cam0", "width": 320, "height": 240, "fps": 5}]' ./isaac-sim.sh
@@ -31,21 +31,10 @@ isaac-sim.bat
 
 Then open `jackal_warehouse.usd` and press **Play**. The Isaac Bridge window lists `cam0 320x240 at 5 fps`.
 
-Restarting Isaac Sim interrupts the Quick Start nodes: the gateway loses the simulator, and the Strider's watchdog stops the robot. Once the scene plays again, restart them from the toolbar: **Stop all nodes**, then **Start all nodes** ([Running Nodes](https://docs.sodero.io/v2.0.0/station/running_nodes/#2-start-all-nodes)). Both nodes show **Operating** again.
+Check two more things before you go on:
 
-**Synchronize the clocks of both computers.** Every camera frame carries its capture time on the Isaac Sim computer's clock, and the camera gateway accepts only frames captured at most 20 ms ahead of and 2 s behind Stellar X's clock. It drops the others: the **Camera view** in Step 2 stays empty, and the camera gateway's log shows *Frames … are stale or carry capture times that do not match this Station's clock (clock skew?)*. Two computers that each follow a time server on the internet are easily more than 20 ms apart.
-
-If you cannot synchronize the clocks, start Isaac Sim with `RC_CAMERA_CAPTURE_TIME=0` as well. The frames then carry no capture time, and the camera gateway stamps each frame when it arrives. An arrival time is later than the capture time by the rendering and network delay, so synchronized clocks remain the better choice for localization.
-
-```
-RC_CAMERA_CAPTURE_TIME=0 RC_ISAAC_CAMERA_DEVICES='[{"name": "cam0", "width": 320, "height": 240, "fps": 5}]' ./isaac-sim.sh
-```
-
-```
-set "RC_CAMERA_CAPTURE_TIME=0"
-set "RC_ISAAC_CAMERA_DEVICES=[{"name": "cam0", "width": 320, "height": 240, "fps": 5}]"
-isaac-sim.bat
-```
+- **Clocks.** The clocks of Stellar X and the Isaac Sim computer must agree within 20 ms. Synchronize both with a time server (NTP). If you cannot, see [Camera Timing](#camera-timing).
+- **Quick Start nodes.** If you restarted Isaac Sim for this step, restart the Quick Start nodes once the scene plays: **Stop all nodes**, then **Start all nodes** ([Connect to Stellar Station › Stop, Pause and Play](https://docs.sodero.io/v2.0.0/virtual_simulation/connect_station/#4-stop-pause-and-play)). Both nodes show **Operating** again.
 
 ______________________________________________________________________
 
@@ -54,7 +43,7 @@ ______________________________________________________________________
 1. **Add node** › **Gateway** › **Camera gateway**, name it `cam0` ([Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/#1-camera-gateway)).
 1. In its inspector, set **Camera name** `cam0` (the camera prim's name in the scene) and **Camera host** (the Isaac Sim computer). The port is `53335`.
 1. Under **CAMERA SETTINGS**, set **fps** `5`, **frame id** `cam0_optical`, intrinsics mode `fov` with a horizontal field of view of `90`, and click **Save settings**.
-1. Click **Start node**, then **Camera view** on its card to check the image. If the image stays empty, see the clock note in [Step 1](#step-1-set-the-camera-size-and-rate).
+1. Click **Start node**, then **Camera view** on its card to check the image. If the image stays empty, see [Camera Timing](#camera-timing).
 
 The Jackal's camera
 
@@ -91,7 +80,7 @@ Drag these five connections (from the required port on the left of a card to the
 
 The complete navigation graph, all nodes operating
 
-Ports with a red dashed outline are additional interfaces that a running node reports. They are not part of the saved graph and need no connection.
+While nodes run, the graph can show additional ports with a red dashed outline. Running nodes report them; they are not part of your saved graph and need no connection.
 
 When the Station has several Strider nodes, make sure the localizer's `odometry` and the navigator's `mobile_base` connect to the **same** robot.
 
@@ -131,6 +120,30 @@ ______________________________________________________________________
 ## Step 8: Finish
 
 Click **Cancel** if a goal is still running, switch the servo off and choose **Idle** in Strider, then stop the nodes (navigator, localizer, camera, Strider, gateway) and the Isaac Sim scene.
+
+______________________________________________________________________
+
+## Troubleshooting
+
+### Camera Timing
+
+Every camera frame carries its capture time on the Isaac Sim computer's clock, and the camera gateway accepts only frames captured at most 20 ms ahead of and 2 s behind Stellar X's clock. It drops the others: the **Camera view** in Step 2 stays empty, and the camera gateway's log shows *Frames … are stale or carry capture times that do not match this Station's clock (clock skew?)*. Two computers that each follow a time server on the internet are easily more than 20 ms apart.
+
+If you cannot synchronize the clocks, start Isaac Sim with `RC_CAMERA_CAPTURE_TIME=0` as well. The frames then carry no capture time, and the camera gateway stamps each frame when it arrives. An arrival time is later than the capture time by the rendering and network delay, so synchronized clocks remain the better choice for localization.
+
+```
+RC_CAMERA_CAPTURE_TIME=0 RC_ISAAC_CAMERA_DEVICES='[{"name": "cam0", "width": 320, "height": 240, "fps": 5}]' ./isaac-sim.sh
+```
+
+```
+set "RC_CAMERA_CAPTURE_TIME=0"
+set "RC_ISAAC_CAMERA_DEVICES=[{"name": "cam0", "width": 320, "height": 240, "fps": 5}]"
+isaac-sim.bat
+```
+
+### Nodes After an Isaac Sim Restart
+
+Restarting Isaac Sim interrupts the nodes: the gateway loses the simulator, and the Strider's watchdog stops the robot. Once the scene plays again, restart them from the toolbar: **Stop all nodes**, then **Start all nodes** ([Connect to Stellar Station › Stop, Pause and Play](https://docs.sodero.io/v2.0.0/virtual_simulation/connect_station/#4-stop-pause-and-play)). The Localizer may still hold its last pose; set the initial pose again if the robot appears at the wrong place.
 
 ______________________________________________________________________
 

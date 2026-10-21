@@ -6,13 +6,15 @@ ______________________________________________________________________
 
 ## 1. Download the Extension
 
-Isaac Bridge is open source. Download it from GitHub:
+Isaac Bridge is open source. Download release **v1.0.0**, the version this documentation is verified with ([Compatibility](https://docs.sodero.io/v2.0.0/reference/compatibility/index.md)), from GitHub:
 
 ```
-git clone https://github.com/Sodero-labs/isaac_bridge.git
+git clone --branch v1.0.0 https://github.com/Sodero-labs/isaac_bridge.git
 ```
 
-Or download the ZIP file of the latest release from the repository page, extract it, and rename the extracted folder to `isaac_bridge` (GitHub adds the version to its name). Either way you get a folder `isaac_bridge`. Remember the folder that **contains** it, for example `~/isaac_extensions` when the extension is in `~/isaac_extensions/isaac_bridge`.
+Or download the source ZIP file of release v1.0.0 from the repository's **Releases** page, extract it, and rename the extracted folder `isaac_bridge-1.0.0` to `isaac_bridge`. Either way you get a folder `isaac_bridge`. Remember the folder that **contains** it, for example `~/isaac_extensions` when the extension is in `~/isaac_extensions/isaac_bridge`.
+
+**Updating.** When you install another release, replace the folder, restart Isaac Sim and check the connection again: the [status window](#3-open-the-status-window) shows the ports **serving** and your robots **bound**, and each simulation gateway logs *Simulator connected.*
 
 ______________________________________________________________________
 

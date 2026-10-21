@@ -4,7 +4,7 @@ Stellar X is an EtherCAT master. An actuator gateway of type **EtherCAT** drives
 
 For a complete example from wiring to driving, see [EtherCAT Mobile Base](https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/index.md): four drives on a skid-steer base, with example files.
 
-**Real motors move.** Bring up a new EtherCAT system with the robot clear of people and obstacles, the drives' safe torque off (STO) and emergency stop wired, and someone at the emergency stop.
+**Real motors move.** Bring up a new EtherCAT system with the robot clear of people and obstacles, the drives' safe torque off (STO) and emergency stop wired, and someone at the emergency stop ([Stop Controls](https://docs.sodero.io/v2.0.0/hardware_setup/stop_controls/index.md)).
 
 ______________________________________________________________________
 
@@ -60,14 +60,14 @@ Motor Select catalog: search ①, or pick Brand ② › Series ③ › Model ④
 
 The fields of the **Motor** tab:
 
-| Section                 | Field              | Unit   | Meaning                                                                                                                                                                            |
-| ----------------------- | ------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ② TORQUE                | **Rated torque**   | Nm     | Continuous motor torque. Torque commands are sent to the drive in per mille of this value.                                                                                         |
-|                         | **Max torque**     | Nm     | Peak torque of the motor itself, at the motor shaft (the motor's datasheet value, not the torque after the reducer). The gateway limits joint torque to *Max torque × Gear ratio*. |
-| ③ SPEED                 | **Max speed**      | rpm    | Maximum speed of the motor itself, at the motor shaft (the motor's datasheet value, not the joint speed after the reducer). The joint speed limit is *Max speed ÷ Gear ratio*.     |
-| ④ MOTOR CHARACTERISTICS | **Resolution**     | PPR    | Encoder pulses (counts) per motor revolution, **before** the gear, e.g. 1,048,576 (2²⁰) or 8,388,608 (2²³)                                                                         |
-| ⑤ ENCODER CONFIGURATION | **Encoder offset** | pulses | Absolute encoder zero. Set by origin calibration in Motion Studio; leave 0 for a new robot.                                                                                        |
-| ⑥ REDUCER               | **Gear ratio**     | –      | Motor turns per joint turn                                                                                                                                                         |
+| Section                 | Field              | Unit   | Meaning                                                                                                                                                                                                    |
+| ----------------------- | ------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ② TORQUE                | **Rated torque**   | Nm     | Continuous motor torque. Torque commands are sent to the drive in per mille of this value.                                                                                                                 |
+|                         | **Max torque**     | Nm     | Peak torque of the motor itself, at the motor shaft (the motor's datasheet value, not the torque after the reducer). The gateway limits torque commands to *Max torque × Gear ratio* at the joint.         |
+| ③ SPEED                 | **Max speed**      | rpm    | Maximum speed of the motor itself, at the motor shaft (the motor's datasheet value, not the joint speed after the reducer). The gateway limits velocity commands to *Max speed ÷ Gear ratio* at the joint. |
+| ④ MOTOR CHARACTERISTICS | **Resolution**     | PPR    | Encoder pulses (counts) per motor revolution, **before** the gear, e.g. 1,048,576 (2²⁰) or 8,388,608 (2²³)                                                                                                 |
+| ⑤ ENCODER CONFIGURATION | **Encoder offset** | pulses | Absolute encoder zero. Set by origin calibration in Motion Studio; leave 0 for a new robot.                                                                                                                |
+| ⑥ REDUCER               | **Gear ratio**     | –      | Motor turns per joint turn                                                                                                                                                                                 |
 
 **Rated torque**, **Max torque** and **Max speed** are the motor's own values at the motor shaft, as in the motor's datasheet, whatever reducer follows it. Do not convert them to the joint side: the gateway applies the **Gear ratio** itself.
 
@@ -112,7 +112,7 @@ The gateway uses these CiA 402 objects:
 |                    | 0x6061 | Modes of operation display | Recommended                             |
 |                    | 0x603F | Error code                 | Recommended (fault messages)            |
 
-You do not choose the mode of operation. The controller selects it per command: position commands use CSP (8), velocity commands CSV (9), torque and impedance commands CST (10).
+When a controller drives the gateway, you do not choose the mode of operation: the controller selects it per command. Position commands use CSP (8), velocity commands CSV (9), torque and impedance commands CST (10). In the [test console](https://docs.sodero.io/v2.0.0/gateways/test_console/index.md) you choose the drive mode yourself.
 
 ### Verify
 
@@ -144,7 +144,7 @@ ______________________________________________________________________
    EtherCAT ready: 2 drive(s) operational, 1.0 ms cycle.
    ```
 
-1. Optional: before you start a controller, click **Test Stellar Gateway** in the gateway's **CONTROL** section to open the test console and move single actuators ([EtherCAT Mobile Base › Step 5](https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/#step-5-test-the-wheels-with-the-test-console)).
+1. Optional: before you start a controller, click **Test Stellar Gateway** in the gateway's **CONTROL** section to open the [test console](https://docs.sodero.io/v2.0.0/gateways/test_console/index.md) and move single actuators. When the test is done, click **Servo OFF** in the console and **Stop test** in the gateway's **CONTROL** section. [EtherCAT Mobile Base › Step 5](https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/#step-5-test-the-wheels-with-the-test-console) shows a complete test of four wheels.
 
 1. Start the controller node, open its UI and switch **Servo On**. Jog slowly first and check each joint's direction.
 
@@ -156,18 +156,18 @@ ______________________________________________________________________
 
 The gateway explains every problem in **Gateway events**, followed by a hint. The most common messages:
 
-| Message                                                                         | Cause and fix                                                                                                                                                                                                |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| *EtherCAT: no cable link on network port …*                                     | No Ethernet link. Plug the cable into Stellar X's **EtherCAT Out** port and into the first drive's **IN** port, and power the drive.                                                                         |
-| *EtherCAT: no drive answered on network port …*                                 | The cable goes to the wrong port of the drive (OUT instead of IN), to a switch, or the drive has no power.                                                                                                   |
-| *EtherCAT: found M of the N drives this gateway controls.*                      | The chain ends after drive M. Check the cable from drive M's OUT port to the next drive's IN port, and that drive's power.                                                                                   |
-| *…configuration describes K drive(s), but the gateway controls N.*              | The drive list in the document does not match the actuators. Fix it in the Gateway Designer.                                                                                                                 |
-| *Drive … exchanges x/y bits of process data …, the project describes …*         | The PDO mapping in the document does not match the drive. Re-select the drive or re-import its ESI file.                                                                                                     |
-| *Drive … did not reach SAFE-OP / OP …*                                          | The drive refused the configuration or the synchronization. The AL status in the message names the reason (sync, watchdog, PDO or cycle time).                                                               |
-| *Drive … gets velocity commands, but Target Velocity (0x60FF) is not in its …*  | Add 0x60FF to the RxPDO (see [Process Data](#process-data)).                                                                                                                                                 |
-| *Servo ON failed: drive … did not enable (it stays in 'switch on disabled').*   | The drive refuses to switch on: check its STO and enable inputs, the emergency stop and its main power.                                                                                                      |
-| *Drive … fault: … (error code 0x….)*                                            | A drive alarm, such as overcurrent, voltage, temperature, encoder or following error. Read the alarm on the drive and look it up in its manual, then **Error Reset** / **Fault Reset** in the controller UI. |
-| *EtherCAT communication lost: the drives stopped answering.*                    | A cable was unplugged or a drive lost power. The message names the segment; fix it and restart the gateway.                                                                                                  |
-| *No commands from the robot controller for 3.0 s: servo turned OFF for safety.* | The controller stopped or lost its connection. Start the controller and switch the servo on again.                                                                                                           |
+| Message                                                                         | Cause and fix                                                                                                                                                                                                                              |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| *EtherCAT: no cable link on network port …*                                     | No Ethernet link. Plug the cable into Stellar X's **EtherCAT Out** port and into the first drive's **IN** port, and power the drive.                                                                                                       |
+| *EtherCAT: no drive answered on network port …*                                 | The cable goes to the wrong port of the drive (OUT instead of IN), to a switch, or the drive has no power.                                                                                                                                 |
+| *EtherCAT: found M of the N drives this gateway controls.*                      | The chain ends after drive M. Check the cable from drive M's OUT port to the next drive's IN port, and that drive's power.                                                                                                                 |
+| *…configuration describes K drive(s), but the gateway controls N.*              | The drive list in the document does not match the actuators. Fix it in the Gateway Designer.                                                                                                                                               |
+| *Drive … exchanges x/y bits of process data …, the project describes …*         | The PDO mapping in the document does not match the drive. Re-select the drive or re-import its ESI file.                                                                                                                                   |
+| *Drive … did not reach SAFE-OP / OP …*                                          | The drive refused the configuration or the synchronization. The AL status in the message names the reason (sync, watchdog, PDO or cycle time).                                                                                             |
+| *Drive … gets velocity commands, but Target Velocity (0x60FF) is not in its …*  | Add 0x60FF to the RxPDO (see [Process Data](#process-data)).                                                                                                                                                                               |
+| *Servo ON failed: drive … did not enable (it stays in 'switch on disabled').*   | The drive refuses to switch on: check its STO and enable inputs, the emergency stop and its main power.                                                                                                                                    |
+| *Drive … fault: … (error code 0x….)*                                            | A drive alarm, such as overcurrent, voltage, temperature, encoder or following error. Read the alarm on the drive and look it up in its manual, then **Error Reset** / **Fault Reset** in the controller UI and switch the servo on again. |
+| *EtherCAT communication lost: the drives stopped answering.*                    | A cable was unplugged or a drive lost power. The message names the segment; fix it and restart the gateway.                                                                                                                                |
+| *No commands from the robot controller for 3.0 s: servo turned OFF for safety.* | The controller stopped or lost its connection. Until the 3 s pass, the gateway keeps the last command. Start the controller and switch the servo on again.                                                                                 |
 
 Problems that are not in the gateway's log (such as a joint moving in the wrong direction or the wrong distance) come from the documents: check the actuator order (cable order), **Gear ratio**, **Resolution**, and the joint mapping in the controller's document.

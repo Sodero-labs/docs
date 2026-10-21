@@ -1,6 +1,6 @@
 # Simulation Gateway
 
-A **simulation gateway** is an actuator gateway of type **Isaac Sim**. Instead of a fieldbus it drives the joints of a robot in NVIDIA Isaac Sim, through the [Isaac Bridge](https://docs.sodero.io/v2.0.0/virtual_simulation/extension_installation/index.md) extension on the Isaac Sim computer. The controller connected to it (Motion Studio, Strider, Articulation) behaves exactly as with real motors, so everything you build and test in simulation carries over to the real robot.
+A **simulation gateway** is an actuator gateway of type **Isaac Sim**. Instead of a fieldbus it drives the joints of a robot in NVIDIA Isaac Sim, through the [Isaac Bridge](https://docs.sodero.io/v2.0.0/virtual_simulation/extension_installation/index.md) extension on the Isaac Sim computer. The controller connected to it (Motion Studio, Strider, Articulation) uses the same interface as with real motors, so its document and your applications carry over to the real robot. The real robot still needs its own checks: motor directions, gear ratios, encoders, limits and sensors.
 
 ```
 flowchart TB

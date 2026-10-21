@@ -1,6 +1,6 @@
 # Manipulator (.sdd)
 
-This tutorial walks through the four steps of a manipulator document, using a 6-axis arm. The document belongs to a Motion Studio node (`sodero.mmc.NAME`), which drives the arm through an actuator gateway.
+This guide walks through the four steps of a manipulator document. The document belongs to a Motion Studio node (`sodero.mmc.NAME`), which drives the arm through an actuator gateway. The pictures show a 6-axis arm; there is no downloadable example arm, so you enter the data of your own arm.
 
 ______________________________________________________________________
 

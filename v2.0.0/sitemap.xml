@@ -21,6 +21,14 @@
          <lastmod>2026-10-21</lastmod>
     </url>
     <url>
+         <loc>https://docs.sodero.io/v2.0.0/extend/custom_modules/</loc>
+         <lastmod>2026-10-21</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.sodero.io/v2.0.0/extend/device_bridge_drivers/</loc>
+         <lastmod>2026-10-21</lastmod>
+    </url>
+    <url>
          <loc>https://docs.sodero.io/v2.0.0/gateways/device_bridge/</loc>
          <lastmod>2026-10-21</lastmod>
     </url>
@@ -45,6 +53,10 @@
          <lastmod>2026-10-21</lastmod>
     </url>
     <url>
+         <loc>https://docs.sodero.io/v2.0.0/gateways/test_console/</loc>
+         <lastmod>2026-10-21</lastmod>
+    </url>
+    <url>
          <loc>https://docs.sodero.io/v2.0.0/get_started/key_concepts/</loc>
          <lastmod>2026-10-21</lastmod>
     </url>
@@ -65,7 +77,19 @@
          <lastmod>2026-10-21</lastmod>
     </url>
     <url>
+         <loc>https://docs.sodero.io/v2.0.0/hardware_setup/stop_controls/</loc>
+         <lastmod>2026-10-21</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.sodero.io/v2.0.0/navigation/create_map/</loc>
+         <lastmod>2026-10-21</lastmod>
+    </url>
+    <url>
          <loc>https://docs.sodero.io/v2.0.0/navigation/map_bundle/</loc>
+         <lastmod>2026-10-21</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.sodero.io/v2.0.0/navigation/map_bundle_format/</loc>
          <lastmod>2026-10-21</lastmod>
     </url>
     <url>
@@ -74,6 +98,10 @@
     </url>
     <url>
          <loc>https://docs.sodero.io/v2.0.0/navigation/simulation_tutorial/</loc>
+         <lastmod>2026-10-21</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.sodero.io/v2.0.0/reference/compatibility/</loc>
          <lastmod>2026-10-21</lastmod>
     </url>
     <url>
@@ -114,6 +142,10 @@
     </url>
     <url>
          <loc>https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/</loc>
+         <lastmod>2026-10-21</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.sodero.io/v2.0.0/tutorials/learning_path/</loc>
          <lastmod>2026-10-21</lastmod>
     </url>
     <url>

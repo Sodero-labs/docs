@@ -92,7 +92,7 @@ ______________________________________________________________________
 
 ## Gateways: Simulation or Real Hardware
 
-A **gateway** is the only node that talks to actuators. Controllers never touch hardware directly; they send commands through their gateway. That is why the same controller runs a simulated robot and a real robot without any change: only the gateway's document differs.
+A **gateway** is the only node that talks to actuators. Controllers never touch hardware directly; they send commands through their gateway. That is why the same controller and controller document can drive a simulated robot and a real one: the gateway's document decides which. The real robot still needs its own checks of actuator mapping, calibration, limits and sensors.
 
 | Hardware type of the `.gw` | Drives                                                                                          |
 | -------------------------- | ----------------------------------------------------------------------------------------------- |
@@ -114,7 +114,7 @@ Actuator gateways and robot controllers are configured by a **design document**.
 | `.sddm` | Strider          | Mobile base: drive type, wheels, limits, actuator mapping |
 | `.sdda` | Articulation     | Articulated robot: joints and actuator mapping            |
 
-Camera and IMU gateways, visual odometry, the localizer, the navigator and legged locomotion have no design document. They have **settings** that you edit in the node's inspector on the Station page ([Design Documents](https://docs.sodero.io/v2.0.0/station/design_documents/#4-settings-of-sensor-and-navigation-nodes)). The localizer and the navigator also use a **map bundle** (`.nav`): one file with the map of the site and their settings ([Map Bundle](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md)).
+Camera and IMU gateways, visual odometry, the localizer, the navigator and legged locomotion have no design document. They have **settings** that you edit in the node's inspector on the Station page ([Design Documents](https://docs.sodero.io/v2.0.0/station/design_documents/#4-settings-of-sensor-and-navigation-nodes)). The localizer and the navigator also use a **map bundle** (`.nav`): one file with the map of the site and their settings ([Load and Configure a Map](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md)).
 
 Your own programs are installed as **modules** (packages) on the [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md) page and run as nodes on the Station.
 
@@ -126,7 +126,7 @@ The recommended workflow follows the same order every time:
 
 1. **Design** the robot in Stellar Designer (`.sdd`, `.sddm` or `.sdda`).
 1. **Simulate**: add a simulation gateway and the controller on the Station, connect them, and drive the robot in Isaac Sim.
-1. **Go real**: replace the simulation gateway's document with an EtherCAT gateway document. The controller, its document and your applications stay the same.
+1. **Go real**: give the robot an EtherCAT gateway document for its drives. The controller, its document and your applications are reused. Before you operate the robot, verify the actuator mapping, calibration, limits and sensor settings on the hardware, as in [EtherCAT Mobile Base](https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/index.md).
 
 ______________________________________________________________________
 

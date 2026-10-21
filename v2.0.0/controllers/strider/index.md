@@ -20,14 +20,14 @@ ______________________________________________________________________
 
 The left rail has three pages: **Status**, **Drive** and **Navigation**. The top bar shows the readiness pill, **System Log**, **Motion Alarm**, **E-STOP** and the units on every page, plus the actions of the current page: **Jog** on Status, **Stop Motion** on Drive, **Set Goal** and **Start Navigation** on Navigation.
 
-| Item                         | Description                                                                                                                                                                 |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Readiness pill               | The current state in one line, for example *Manual Drive Ready* or *Servo Off*. Click it for the **CHECKS** list: Connection, Mobile base, Servo, Localization, Navigation. |
-| **System Log**               | Events of this browser session, with filters for System, Drive, Navigation and Localization                                                                                 |
-| **Motion Alarm**             | Active alarms and recent errors                                                                                                                                             |
-| **Stop Motion** (Drive page) | Stops manual driving and cancels a running goal                                                                                                                             |
-| **E-STOP**                   | Emergency stop of the base. It latches until **Clear E-Stop**.                                                                                                              |
-| Units                        | `m / m/s / deg` or `m / m/s / rad`. Display only; commands are always SI.                                                                                                   |
+| Item                         | Description                                                                                                                                                                                                                                                                                                                                            |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Readiness pill               | The current state in one line, for example *Manual Drive Ready* or *Servo Off*. Click it for the **CHECKS** list: Connection, Mobile base, Servo, Localization, Navigation.                                                                                                                                                                            |
+| **System Log**               | Events of this browser session, with filters for System, Drive, Navigation and Localization                                                                                                                                                                                                                                                            |
+| **Motion Alarm**             | Active alarms and recent errors                                                                                                                                                                                                                                                                                                                        |
+| **Stop Motion** (Drive page) | Stops manual driving and cancels a running goal                                                                                                                                                                                                                                                                                                        |
+| **E-STOP**                   | Software stop of the base: cancels driving and the navigation goal and sets the wheel speeds to zero at once, with the servo still on. It latches until **Clear E-Stop**, which switches the base to **Idle**. It does not replace the hardware emergency stop ([Stop Controls](https://docs.sodero.io/v2.0.0/hardware_setup/stop_controls/index.md)). |
+| Units                        | `m / m/s / deg` or `m / m/s / rad`. Display only; commands are always SI.                                                                                                                                                                                                                                                                              |
 
 The readiness checks
 
@@ -60,22 +60,22 @@ The Drive page
 1. Under **Drive Mode**, click **Twist** ①.
 1. Under **Servo / Safety**, switch **Servo On** ②. The readiness pill shows *Manual Drive Ready*.
 1. Set the speed limits ④: **Linear Velocity Limit** (default 0.2 m/s, at most 0.8 m/s) and **Angular Velocity Limit**.
-1. Press and hold a pad button ⑤: **Forward (W)**, **Backward (S)**, **Turn Left (A)**, **Turn Right (D)**. The base moves only while you hold the button and stops when you release it; **Stop (Space)** stops at once.
+1. Press and hold a pad button ⑤: **Forward (W)**, **Backward (S)**, **Turn Left (A)**, **Turn Right (D)**. The base moves only while you hold the button and stops when you release it; **Stop (Space)** stops it too. The base slows down at the acceleration limits of its document.
 1. To drive with the keyboard, switch on **Live** ③ in **Manual Drive**, then use **W**, **S**, **A**, **D** and **Space**.
 1. When you are done, switch the servo off and click **Idle**.
 
-| No. | Control            | Meaning                                                                                                                                              |
-| --- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | **Drive Mode**     | **Idle**: no motion. **Twist**: body velocity commands (jogging and navigation). **Wheel**: direct wheel speeds (advanced). **EMG**: emergency mode. |
-| 2   | **Servo On / Off** | Enables or disables the drives. **Fault Reset** clears drive faults; **Clear E-Stop** releases a latched emergency stop.                             |
-| 3   | **Live**           | Sends commands at 20 Hz from the keyboard. Commands stop when the window loses focus.                                                                |
-| 4   | Velocity limits    | Upper limits for manual driving                                                                                                                      |
-| 5   | Drive pad          | Hold-to-drive buttons                                                                                                                                |
-| 6   | **Stop Motion**    | Stops manual driving and any navigation goal                                                                                                         |
-| 7   | **E-STOP**         | Emergency stop                                                                                                                                       |
-| 8   | Readiness pill     | Why driving is or is not possible right now                                                                                                          |
+| No. | Control            | Meaning                                                                                                                                                                                                           |
+| --- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | **Drive Mode**     | **Idle**: no motion; the wheels stop at once. **Twist**: body velocity commands (jogging and navigation). **Wheel**: direct wheel speeds (advanced). **EMG**: stops the base like **E-STOP**, but does not latch. |
+| 2   | **Servo On / Off** | Enables or disables the drives. **Fault Reset** clears drive faults; afterwards switch the servo off and on again. **Clear E-Stop** releases a latched **E-STOP**.                                                |
+| 3   | **Live**           | Sends commands at 20 Hz from the keyboard. Commands stop when the window loses focus.                                                                                                                             |
+| 4   | Velocity limits    | Upper limits for manual driving                                                                                                                                                                                   |
+| 5   | Drive pad          | Hold-to-drive buttons                                                                                                                                                                                             |
+| 6   | **Stop Motion**    | Stops manual driving and any navigation goal                                                                                                                                                                      |
+| 7   | **E-STOP**         | Software stop that latches ([Stop Controls](https://docs.sodero.io/v2.0.0/hardware_setup/stop_controls/index.md))                                                                                                 |
+| 8   | Readiness pill     | Why driving is or is not possible right now                                                                                                                                                                       |
 
-Manual commands take priority over navigation: jogging during a navigation goal overrides the navigator and can end the goal. Every manual command expires after a short time, so the base stops by itself if the connection drops.
+Manual commands take priority over navigation: jogging during a navigation goal overrides the navigator and can end the goal. Every manual command expires after about a second, so manual driving stops by itself if the connection drops. A navigation goal does not: cancel it with **Stop Motion**, **Cancel** or **E-STOP**.
 
 ### Advanced Controls
 
@@ -135,7 +135,7 @@ ______________________________________________________________________
 The main functions are also available to programs:
 
 - From the SSH workspace with `sodero tools call strider.set_mode`, `strider.servo_on`, `strider.set_twist`, `strider.stop` and `strider.get_state` ([sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)).
-- From your own modules on the Station through the `mobile_base` interface ([Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md)).
+- From your own modules on the Station through the `mobile_base` interface ([Create Custom Modules](https://docs.sodero.io/v2.0.0/extend/custom_modules/index.md)).
 
 ```
 sodero tools call strider.get_state --input '{"target": "sodero.mlc.jackal"}'

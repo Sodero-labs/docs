@@ -20,7 +20,7 @@ flowchart TB
 | -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | A camera or IMU in Isaac Sim                                   | Camera gateway / IMU gateway, connected to Isaac Sim (this page)                                                                               |
 | A real RGB-D camera (e.g. Intel RealSense) or USB IMU          | The [Device Bridge](https://docs.sodero.io/v2.0.0/gateways/device_bridge/index.md) on a sensor computer, plus the Camera gateway / IMU gateway |
-| Any other device (digital I/O, force sensors, custom hardware) | Your own gateway module ([Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md))                                                    |
+| Any other device (digital I/O, force sensors, custom hardware) | Your own gateway module ([Create Custom Modules](https://docs.sodero.io/v2.0.0/extend/custom_modules/index.md))                                |
 
 ______________________________________________________________________
 
@@ -80,7 +80,7 @@ ______________________________________________________________________
 
 ## 3. Mounting: Where the Sensor Sits
 
-Sensor data is in the sensor's own frame. Where the camera is mounted on the robot (its position and orientation relative to the robot's `base_link`) is part of the map bundle's extrinsics, used by the Localizer ([Map Bundle](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md)). Measure the mounting on the robot; do not rotate the data in the source.
+Sensor data is in the sensor's own frame. Where the camera is mounted on the robot (its position and orientation relative to the robot's `base_link`) is part of the map bundle's extrinsics, used by the Localizer ([Load and Configure a Map](https://docs.sodero.io/v2.0.0/navigation/map_bundle/#3-check-the-values-for-the-first-run)). Measure the mounting on the robot; do not rotate the data in the source.
 
 ______________________________________________________________________
 

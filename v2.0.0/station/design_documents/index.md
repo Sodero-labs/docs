@@ -65,7 +65,7 @@ Camera gateways, IMU gateways, visual odometry, the localizer, the navigator and
 
 - Stop the node, change the values, then click **Save settings**. **Reload** discards unsaved changes.
 - The localizer and the navigator share their settings with the map bundle. They can be saved only while the localizer, the navigator and visual odometry are stopped.
-- The localizer's map is loaded with **Upload .nav** ([Map Bundle](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md)).
+- The localizer's map is loaded with **Upload .nav** ([Load and Configure a Map](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md)). The navigator uses the same bundle.
 
 The same settings can be read and written from the SSH workspace with `sodero navigation get` and `sodero navigation apply` ([sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)).
 

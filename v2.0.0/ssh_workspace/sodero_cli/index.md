@@ -119,7 +119,7 @@ sodero maps upload /workspace/maps/warehouse.nav --node sodero.localizer --if-sh
 sodero maps upload /workspace/maps/warehouse.nav --node sodero.localizer --if-sha256 SHA256 --execute  # attach it
 ```
 
-The localizer and the navigator share one map bundle, so one upload serves both. Start the nodes again afterwards. See [Map Bundle (.nav)](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md) and [Localization and Navigation](https://docs.sodero.io/v2.0.0/navigation/overview/index.md).
+The localizer and the navigator share one map bundle, so one upload serves both. Start the nodes again afterwards. See [Load and Configure a Map](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md) and [Localization and Navigation](https://docs.sodero.io/v2.0.0/navigation/overview/index.md).
 
 ### Modules (Your Own Programs)
 

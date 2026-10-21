@@ -17,14 +17,14 @@ flowchart TB
     STR -- servo_link --> GW["Actuator gateway"]
 ```
 
-| Node                           | Role                                                                                                                                                                                      |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Camera gateway**             | Delivers depth and color images from the robot's RGB-D camera                                                                                                                             |
-| **Strider**                    | Drives the base and reports **odometry**: how far the wheels have moved the robot                                                                                                         |
-| **Localizer**                  | Matches the camera's 3D view against the map's point cloud and corrects the odometry, so the robot knows its pose on the map                                                              |
-| **Navigator**                  | Plans a path on the map's occupancy grid and drives the base along it, avoiding obstacles, until the goal is reached                                                                      |
-| **Visual odometry** (optional) | Estimates odometry from the camera, for robots without wheel odometry such as walking robots                                                                                              |
-| **Map bundle** (`.nav`)        | One file with the map (point cloud and occupancy grid) and the localizer and navigator settings for one site ([Map Bundle](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md)) |
+| Node                           | Role                                                                                                                                                                                                    |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Camera gateway**             | Delivers depth and color images from the robot's RGB-D camera                                                                                                                                           |
+| **Strider**                    | Drives the base and reports **odometry**: how far the wheels have moved the robot                                                                                                                       |
+| **Localizer**                  | Matches the camera's 3D view against the map's point cloud and corrects the odometry, so the robot knows its pose on the map                                                                            |
+| **Navigator**                  | Plans a path on the map's occupancy grid and drives the base along it, avoiding obstacles, until the goal is reached                                                                                    |
+| **Visual odometry** (optional) | Estimates odometry from the camera, for robots without wheel odometry such as walking robots                                                                                                            |
+| **Map bundle** (`.nav`)        | One file with the map (point cloud and occupancy grid) and the localizer and navigator settings for one site ([Load and Configure a Map](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md)) |
 
 By default the localizer works in the plane: it estimates x, y and heading on the map. There is one localizer and one navigator per Station, so one robot per Station navigates.
 
@@ -47,13 +47,13 @@ ______________________________________________________________________
 
 ## 3. Set Up Navigation
 
-| Step                                                                      | Where                                                                                             |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| 1. Drive the base with Strider                                            | [Quick Start](https://docs.sodero.io/v2.0.0/get_started/quick_start/index.md)                     |
-| 2. Add a camera gateway and check its image                               | [Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/index.md)        |
-| 3. Prepare the map bundle of the site                                     | [Map Bundle](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md)                        |
-| 4. Add the Localizer and the Navigator, upload the map, connect the ports | [Navigate in Simulation](https://docs.sodero.io/v2.0.0/navigation/simulation_tutorial/index.md)   |
-| 5. Set the initial pose and send goals                                    | [Strider › Navigation Page](https://docs.sodero.io/v2.0.0/controllers/strider/#5-navigation-page) |
+| Step                                                                                            | Where                                                                                                                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1. Drive the base with Strider                                                                  | [Quick Start](https://docs.sodero.io/v2.0.0/get_started/quick_start/index.md)                                                                                                             |
+| 2. Add a camera gateway and check its image                                                     | [Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/index.md)                                                                                                |
+| 3. Prepare the map bundle of the site                                                           | [Create a Map from Your Site](https://docs.sodero.io/v2.0.0/navigation/create_map/index.md), or use a finished bundle                                                                     |
+| 4. Add the Localizer and the Navigator, upload the map once to the Localizer, connect the ports | [Load and Configure a Map](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md), [Navigate in Simulation](https://docs.sodero.io/v2.0.0/navigation/simulation_tutorial/index.md) |
+| 5. Set the initial pose and send goals                                                          | [Strider › Navigation Page](https://docs.sodero.io/v2.0.0/controllers/strider/#5-navigation-page)                                                                                         |
 
 The connections:
 
@@ -99,16 +99,16 @@ The localizer and the navigator share their settings with the map bundle. Edit t
 |              | `sensor.depth_min`, `sensor.depth_max`             | Depth range of the camera used for matching (m)                                                                    |
 | Initial pose | `x`, `y`, `yaw`                                    | The pose used when no other pose is known                                                                          |
 
-Uploading a map bundle again replaces these settings with the bundle's. The full list is in [Map Bundle](https://docs.sodero.io/v2.0.0/navigation/map_bundle/index.md); from the SSH workspace use `sodero navigation get` and `sodero navigation apply` ([sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)).
+Uploading a map bundle again replaces these settings with the bundle's. The full list is in [Map Bundle Format](https://docs.sodero.io/v2.0.0/navigation/map_bundle_format/#files); from the SSH workspace use `sodero navigation get` and `sodero navigation apply` ([sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)).
 
 ______________________________________________________________________
 
 ## 6. Send Goals from Programs
 
-| From          | How                                                                                                                                                                      |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Strider       | **Set Goal**, **Start Navigation** ([Strider](https://docs.sodero.io/v2.0.0/controllers/strider/#5-navigation-page))                                                     |
-| SSH workspace | `sodero tools call navigation.navigate_to_pose`, `navigation.get_status`, `navigation.cancel_navigation`, `localization.set_initial_pose`                                |
-| Your module   | A module connected to the Navigator's `navigation` port; it can send goals and follow their progress ([Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md)) |
+| From          | How                                                                                                                                                                                          |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Strider       | **Set Goal**, **Start Navigation** ([Strider](https://docs.sodero.io/v2.0.0/controllers/strider/#5-navigation-page))                                                                         |
+| SSH workspace | `sodero tools call navigation.navigate_to_pose`, `navigation.get_status`, `navigation.cancel_navigation`, `localization.set_initial_pose`                                                    |
+| Your module   | A module connected to the Navigator's `navigation` port; it can send goals and follow their progress ([Create Custom Modules](https://docs.sodero.io/v2.0.0/extend/custom_modules/index.md)) |
 
 A goal is a pose in the `map` frame. A patrol is a sequence of goals sent one after another by your program.

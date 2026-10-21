@@ -2,7 +2,7 @@
 
 Nodes run only when you start them. This page covers starting and stopping nodes, reading their state and logs, and opening the controller UIs.
 
-**Real hardware moves.** Starting a gateway or controller that drives real motors can energize them. Before you start such nodes, make sure the robot's surroundings are clear and someone can reach the emergency stop.
+**Real hardware moves.** Starting a gateway or controller that drives real motors can energize them. Before you start such nodes, make sure the robot's surroundings are clear and someone can reach the emergency stop ([Stop Controls](https://docs.sodero.io/v2.0.0/hardware_setup/stop_controls/index.md)).
 
 ______________________________________________________________________
 
@@ -64,18 +64,20 @@ ______________________________________________________________________
 
 When a node runs, its tools unlock, in the inspector's **CONTROL** section or as a link on the node card:
 
-| Node             | Button                           | Opens                                                                                                 |
-| ---------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Motion Studio    | **Stellar Motion Studio**        | [Motion Studio](https://docs.sodero.io/v2.0.0/controllers/motion_studio/index.md) for the manipulator |
-| Strider          | **Strider**                      | [Strider](https://docs.sodero.io/v2.0.0/controllers/strider/index.md) for the mobile base             |
-| Articulation     | **Articulation**                 | [Articulation](https://docs.sodero.io/v2.0.0/controllers/articulation/index.md) for joint control     |
-| Navigator        | **Strider** link on the card     | Strider's Navigation page                                                                             |
-| Camera gateway   | **Camera view** link on the card | The camera image                                                                                      |
-| Actuator gateway | **Test Stellar Gateway**         | A test console for the gateway's actuators (only while no controller uses the gateway)                |
+| Node             | Button                           | Opens                                                                                                                               |
+| ---------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Motion Studio    | **Stellar Motion Studio**        | [Motion Studio](https://docs.sodero.io/v2.0.0/controllers/motion_studio/index.md) for the manipulator                               |
+| Strider          | **Strider**                      | [Strider](https://docs.sodero.io/v2.0.0/controllers/strider/index.md) for the mobile base                                           |
+| Articulation     | **Articulation**                 | [Articulation](https://docs.sodero.io/v2.0.0/controllers/articulation/index.md) for joint control                                   |
+| Navigator        | **Strider** link on the card     | Strider's Navigation page                                                                                                           |
+| Camera gateway   | **Camera view** link on the card | The camera image                                                                                                                    |
+| Actuator gateway | **Test Stellar Gateway**         | The [Test Console](https://docs.sodero.io/v2.0.0/gateways/test_console/index.md), which moves single actuators without a controller |
 
 A running Motion Studio node: the CONTROL button is unlocked
 
 Each UI opens in a new browser tab. You can keep several open, one per robot.
+
+**Test Stellar Gateway** is for a gateway that no robot controller uses. Stop the robot controllers first: the Station does not open a test while a Motion Studio node runs, and starting a robot controller (Motion Studio, Strider or Articulation) ends every running test.
 
 ______________________________________________________________________
 
@@ -104,4 +106,4 @@ ______________________________________________________________________
 | A simulation gateway runs but the robot does not move | The gateway's **Robot name** must equal the articulation prim name in Isaac Sim; Isaac Sim must be playing; the **Sim host** must be the Isaac Sim computer ([Simulation Gateway](https://docs.sodero.io/v2.0.0/gateways/simulation/index.md)) |
 | An EtherCAT gateway fails to start                    | Cable to the first drive's IN port, drive power, number of drives ([EtherCAT Gateway](https://docs.sodero.io/v2.0.0/gateways/ethercat/#6-troubleshooting))                                                                                     |
 | *Process stopped during topology startup*             | A node stopped right after **Start all nodes**. Read its logs, fix the cause, then start again                                                                                                                                                 |
-| Changes to a document are refused                     | Stop the node first                                                                                                                                                                                                                            |
+| Changes to a document are refused                     | Stop the node first. A gateway document is also refused while the gateway's test is open: click **Stop test** before you stop the gateway ([Test Console](https://docs.sodero.io/v2.0.0/gateways/test_console/#change-the-gateway-document)).  |

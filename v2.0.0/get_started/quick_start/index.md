@@ -1,6 +1,6 @@
 # Quick Start
 
-In about 15 minutes you will build a small robot system on Stellar X and drive a simulated **Clearpath Jackal** in NVIDIA Isaac Sim with Strider. You will:
+You will build a small robot system on Stellar X and drive a simulated **Clearpath Jackal** in NVIDIA Isaac Sim with Strider. It takes about 15 minutes once Stellar X is on your network and Isaac Sim with the Isaac Bridge extension is installed (see **Before You Start**). You will:
 
 1. add an actuator gateway and a Strider controller on Stellar Station,
 1. load their design documents,
@@ -22,11 +22,11 @@ ______________________________________________________________________
 
 ## Before You Start
 
-| You need                   | Details                                                                                                                                                                                                                                                                                                                                                                        |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Stellar X                  | Powered on and reachable from your PC ([Network Settings](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/network_settings/index.md)). In this guide its address is `192.168.60.18`.                                                                                                                                                                               |
-| A PC with NVIDIA Isaac Sim | Isaac Sim 6.0 or later with the Isaac Bridge extension enabled ([Isaac Bridge Installation](https://docs.sodero.io/v2.0.0/virtual_simulation/extension_installation/index.md)), on the same network as Stellar X. In this guide its address is `192.168.60.20`.                                                                                                                |
-| Example files              | [jackal.gw](https://docs.sodero.io/v2.0.0/get_started/quick_start/files/jackal.gw) (gateway), [jackal.sddm](https://docs.sodero.io/v2.0.0/get_started/quick_start/files/jackal.sddm) (Strider) and [jackal_warehouse.zip](https://docs.sodero.io/v2.0.0/get_started/quick_start/files/jackal_warehouse.zip) (Isaac Sim scene, 6 MB). Download all three and extract the scene. |
+| You need                   | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Stellar X                  | Powered on and reachable from your PC ([Stellar X › Network Configuration](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/stellar_x/#4-network-configuration), [Network Settings](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/network_settings/index.md)). In this guide its address is `192.168.60.18`, an example address on a lab network; use your controller's address instead, for example `10.0.0.1` on a direct cable. |
+| A PC with NVIDIA Isaac Sim | Isaac Sim 6.0 with the Isaac Bridge 1.0.0 extension installed and enabled ([Isaac Bridge Installation](https://docs.sodero.io/v2.0.0/virtual_simulation/extension_installation/index.md)), on the same network as Stellar X. In this guide its address is `192.168.60.20`.                                                                                                                                                                                  |
+| Example files              | [jackal.gw](https://docs.sodero.io/v2.0.0/get_started/quick_start/files/jackal.gw) (gateway), [jackal.sddm](https://docs.sodero.io/v2.0.0/get_started/quick_start/files/jackal.sddm) (Strider) and [jackal_warehouse.zip](https://docs.sodero.io/v2.0.0/get_started/quick_start/files/jackal_warehouse.zip) (Isaac Sim scene, 6 MB). Download all three and extract the scene.                                                                              |
 
 ______________________________________________________________________
 
@@ -80,6 +80,8 @@ Isaac Bridge status: ① ports serving ② robots bound ③ cameras ④ Rescan
 The Isaac Sim PC must accept TCP connections from Stellar X on ports 53333–53335. Allow them in its firewall ([Isaac Bridge Installation](https://docs.sodero.io/v2.0.0/virtual_simulation/extension_installation/#4-allow-the-ports-in-the-firewall)).
 
 **Tip:** To use your own robot instead, prepare its scene as described in [Robot Setup](https://docs.sodero.io/v2.0.0/virtual_simulation/robot_setup/index.md): its articulation prim name is its robot name, and its joints, in order, are the gateway's actuators.
+
+**Tip:** If you will continue with [Navigate in Simulation](https://docs.sodero.io/v2.0.0/navigation/simulation_tutorial/index.md), start Isaac Sim with the camera setting of its [Step 1](https://docs.sodero.io/v2.0.0/navigation/simulation_tutorial/#step-1-prepare-isaac-sim) now. Then you do not need to restart Isaac Sim later.
 
 ______________________________________________________________________
 

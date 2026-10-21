@@ -35,6 +35,8 @@ The new node appears on the canvas in the **Planned** state. It is saved with th
 | **Compound**    | Your compound modules    |                             | Several robot units combined into one system                |
 | **Application** | Your application modules |                             | Robot behaviors and task logic                              |
 
+**Legged locomotion** and **Visual odometry** need preparation that this documentation does not cover step by step. Legged locomotion runs a walking policy made for your robot, whose joint names and order must match the robot's Articulation document. Visual odometry needs a calibrated camera, and an IMU for walking robots. This documentation describes their connections and settings; ask Sodero support before you use them on your robot.
+
 Modules marked **SODERO** are built in. Modules you installed on the [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md) page are marked **CUSTOM** and appear under the type they declare. Each type also lists a **… subsystem** entry (*Empty draft subsystem*): it adds an empty placeholder node with no program behind it, for sketching a system, and that node cannot be started.
 
 Choosing a controller module: ① Controller ② Strider ③ Next (the list scrolls)

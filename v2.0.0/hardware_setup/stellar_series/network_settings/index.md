@@ -2,7 +2,7 @@
 
 Stellar X serves a small settings page on **port 3000**. Use it for the two things you need before anything else:
 
-- the IP address of the controller's LAN port, and
+- the IP address of the controller's LAN port **Eth1**, and
 - SSH access to the controller's [SSH workspace](https://docs.sodero.io/v2.0.0/ssh_workspace/overview/index.md).
 
 Open the page from any computer on the same network:
@@ -11,9 +11,9 @@ Open the page from any computer on the same network:
 http://ROBOT_ADDRESS:3000
 ```
 
-In this guide the controller's address is `192.168.60.18`, so the page is `http://192.168.60.18:3000`.
+In this guide the controller's address is `192.168.60.18`, an example address on a lab network, so the page is `http://192.168.60.18:3000`. Replace it with your controller's address.
 
-**Initial address: static `10.0.0.1`.** The LAN port starts with the static address `10.0.0.1` (subnet mask `255.255.255.0`). To reach it the first time, connect your PC with a cable and give the PC a static address in the same subnet, such as `10.0.0.2` ([Stellar X](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/stellar_x/#4-network-configuration)). Then open `http://10.0.0.1:3000` and change the address under [IP Configuration](#1-ip-configuration).
+**Initial address: static `10.0.0.1`.** Eth1 starts with the static address `10.0.0.1` (subnet mask `255.255.255.0`). To reach it the first time, connect your PC with a cable and give the PC a static address in the same subnet, such as `10.0.0.2` ([Stellar X](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/stellar_x/#4-network-configuration)). Then open `http://10.0.0.1:3000` and change the address under [IP Configuration](#1-ip-configuration).
 
 The page needs no sign-in: anyone on the same network can change the address and register SSH keys. Connect Stellar X only to networks you trust.
 
@@ -25,16 +25,16 @@ ______________________________________________________________________
 
 ## 1. IP Configuration
 
-The **IP CONFIGURATION** card shows and changes the address of the LAN port.
+The **IP CONFIGURATION** card shows and changes the address of Eth1. The page shows no port name; every value on the card belongs to Eth1.
 
 Current address and IP assignment
 
-| No. | Item            | Description                                                                                                                                                                         |
-| --- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | Current address | The address the LAN port has now, how it got it (**DHCP** or **Static**), the subnet mask and the port's MAC address. **Connected** means a cable is plugged in and the link is up. |
-| 2   | **DHCP**        | The router assigns the address. This is the simplest setup on an office or lab network.                                                                                             |
-| 3   | **Static**      | You enter the address yourself. Use it for a direct cable between your PC and the controller, or on a network without a DHCP server.                                                |
-| 4   | **Apply**       | Applies the selection. Nothing changes until you click it.                                                                                                                          |
+| No. | Item            | Description                                                                                                                                                                 |
+| --- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Current address | The address Eth1 has now, how it got it (**DHCP** or **Static**), the subnet mask and the port's MAC address. **Connected** means a cable is plugged in and the link is up. |
+| 2   | **DHCP**        | The router assigns the address. This is the simplest setup on an office or lab network.                                                                                     |
+| 3   | **Static**      | You enter the address yourself. Use it for a direct cable between your PC and the controller, or on a network without a DHCP server.                                        |
+| 4   | **Apply**       | Applies the selection. Nothing changes until you click it.                                                                                                                  |
 
 ### Set a Static Address
 
@@ -52,7 +52,7 @@ Your PC must be on the same subnet to reach the new address. For example, after 
 
 ### Notes
 
-- The page changes the **LAN port only**. The EtherCAT port is reserved for EtherCAT devices; it never gets an IP address and is not shown here.
+- The page changes **Eth1 only**. Eth2 keeps using DHCP. The EtherCAT port is reserved for EtherCAT devices; it never gets an IP address and is not shown here ([Stellar X › Device Overview](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/stellar_x/#2-device-overview)).
 - No default gateway is configured. Stellar X works on the local network and does not need Internet access.
 - With **DHCP**, find the controller's address in your router's client list; its host name is `stellar-x`.
 

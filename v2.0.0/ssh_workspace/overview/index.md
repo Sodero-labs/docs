@@ -15,24 +15,15 @@ ______________________________________________________________________
 
 ## 1. Register Your SSH Key
 
-The workspace accepts SSH keys only; there is no password sign-in. Register the public key of every computer that should connect, on the robot's **Network Settings** page.
+The workspace accepts SSH keys only; there is no password sign-in. Register the public key of every computer that should connect, in the **SSH ACCESS** card of the robot's Network Settings page (`http://ROBOT_ADDRESS:3000`): copy the key command for your operating system, run it on your computer, paste the line it prints and click **Add key**. The steps and the commands are in [Network Settings › SSH Access](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/network_settings/#2-ssh-access).
 
-1. Open `http://ROBOT_ADDRESS:3000` in a browser (for example `http://192.168.60.18:3000`).
-1. In **SSH ACCESS**, go to **ADD A PUBLIC KEY** and select your operating system ② (**Windows** or **macOS · Linux**).
-1. Click **Copy** ③, run the copied command in a terminal on your computer, and copy the line it prints. It starts with `ssh-ed25519`. The command creates a key first if your computer has none; on Windows, press Enter at the two passphrase prompts.
-1. Paste the line into the text box ④ and click **Add key** ⑤. The key appears under **REGISTERED KEYS**.
-
-SSH ACCESS on the Network Settings page
-
-To revoke a computer's access, click the trash icon next to its key. See [Network Settings](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/network_settings/index.md) for the rest of the page.
-
-Paste the **public** key (`.pub`). The page refuses private keys.
+To revoke a computer's access, click the trash icon next to its key on the same page.
 
 ______________________________________________________________________
 
 ## 2. Connect
 
-The **SSH workspace** card shows the command with a **Copy** button ①:
+The **SSH workspace** card on the Network Settings page shows the command with a **Copy** button:
 
 ```
 ssh -p 2222 sodero@192.168.60.18

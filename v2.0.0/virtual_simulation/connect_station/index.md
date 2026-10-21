@@ -48,12 +48,12 @@ ______________________________________________________________________
 
 The gateways treat Isaac Sim like a power supply of real drives:
 
-| In Isaac Sim                     | Result                                                                                                                             |
-| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| **Pause**                        | The robots stay where they are. The gateways see the simulator stop and switch the servo off; switch it on again after you resume. |
-| **Stop**, then **Play**          | A new session: the robots start again at their authored pose, as after a power cycle. Switch the servo on again.                   |
-| Editing the scene while it plays | Takes effect at the next **Play**, or click **Rescan** in the Isaac Bridge window                                                  |
-| Closing Isaac Sim                | The gateways keep waiting and reconnect when the scene plays again                                                                 |
+| In Isaac Sim                            | Result                                                                                                                                                                                                                                                                                                           |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Pause**                               | The robots stay where they are. The gateways see the simulator stop and switch the servo off; switch it on again after you resume.                                                                                                                                                                               |
+| **Stop**, then **Play**                 | A new session: the robots start again at their authored pose, as after a power cycle. Switch the servo on again.                                                                                                                                                                                                 |
+| Editing the scene while it plays        | Takes effect at the next **Play**, or click **Rescan** in the Isaac Bridge window                                                                                                                                                                                                                                |
+| Closing Isaac Sim and starting it again | The gateways lose the simulator, and the controllers stop the robots. When the scene plays again, restart the robot's nodes from the toolbar: **Stop all nodes**, then **Start all nodes** ([Running Nodes](https://docs.sodero.io/v2.0.0/station/running_nodes/#2-start-all-nodes)). Switch the servo on again. |
 
 After the simulation restarts, the robot is back at its starting pose, but the Localizer may still hold its last pose. If Strider's Navigation page shows a wrong pose, set the initial pose again.
 
