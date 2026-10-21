@@ -66,9 +66,9 @@ ______________________________________________________________________
 
 ## 6. Extend and Automate
 
-| What you do                                             | Page                                                                                                                                                          |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Work on the controller over SSH                         | [SSH Workspace](https://docs.sodero.io/v2.0.0/ssh_workspace/overview/index.md), [sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md) |
-| Run your own programs as nodes                          | [Create Custom Modules](https://docs.sodero.io/v2.0.0/extend/custom_modules/index.md)                                                                         |
-| Connect a sensor the Device Bridge does not support yet | [Write Device Bridge Drivers](https://docs.sodero.io/v2.0.0/extend/device_bridge_drivers/index.md)                                                            |
-| Let an AI coding agent do routine work                  | [AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md)                                                                            |
+| What you do                                                           | Page                                                                                                                                                          |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Work on the controller over SSH                                       | [SSH Workspace](https://docs.sodero.io/v2.0.0/ssh_workspace/overview/index.md), [sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md) |
+| Run your own programs as nodes                                        | [Create Custom Modules](https://docs.sodero.io/v2.0.0/extend/custom_modules/index.md)                                                                         |
+| Connect your own camera, IMU or wheel board through the Device Bridge | [Write Device Bridge Drivers](https://docs.sodero.io/v2.0.0/extend/device_bridge_drivers/index.md)                                                            |
+| Let an AI coding agent do routine work                                | [AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md)                                                                            |

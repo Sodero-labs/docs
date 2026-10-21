@@ -2773,16 +2773,16 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">Connect a RealSense D400 camera, a TurtleBot3 OpenCR board, or try the bridge without hardware</td>
-<td style="text-align: left;">This page: install the bridge and use its built-in drivers</td>
+<td style="text-align: left;">Install the bridge, configure its devices and connect it to the Station</td>
+<td style="text-align: left;">This page</td>
 </tr>
 <tr>
-<td style="text-align: left;">Connect another camera, IMU or wheel board</td>
-<td style="text-align: left;"><a href="../../extend/device_bridge_drivers/">Write Device Bridge Drivers</a>, then this page</td>
+<td style="text-align: left;">Add a driver for your own camera, IMU or wheel board</td>
+<td style="text-align: left;"><a href="../../extend/device_bridge_drivers/">Write Device Bridge Drivers</a></td>
 </tr>
 </tbody>
 </table>
-<p>The Device Bridge is an open-source program. Nothing changes on the controller when you install it or add a driver.</p>
+<p>The Device Bridge is an open-source program that works with any RGB-D camera, IMU or wheel board through drivers. It comes with example drivers for Intel RealSense D400 cameras, the TurtleBot3 OpenCR board and simulated devices (<a href="#4-built-in-drivers">Built-in Drivers</a>); other devices connect through a driver that you add. Nothing changes on the controller when you install the bridge or add a driver.</p>
 <hr>
 <h2 id="1-architecture">1. Architecture<a class="headerlink" href="#1-architecture" title="Permanent link">¶</a></h2>
 <pre class="mermaid"><code>flowchart TB
@@ -3063,6 +3063,7 @@
 </code></pre></div>
 <hr>
 <h2 id="4-built-in-drivers">4. Built-in Drivers<a class="headerlink" href="#4-built-in-drivers" title="Permanent link">¶</a></h2>
+<p>The bridge comes with these drivers. They are ready to use and serve as examples: other cameras, IMUs and wheel boards connect through a driver that you add (<a href="../../extend/device_bridge_drivers/">Write Device Bridge Drivers</a>).</p>
 <table>
 <thead>
 <tr>

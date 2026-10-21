@@ -2226,12 +2226,12 @@ Use the Device Bridge when:
 
 Drives on the controller's EtherCAT port do not need the bridge, and neither does a simulated robot.
 
-| You want to                                                                                    | Page                                                                                                               |
-| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Connect a RealSense D400 camera, a TurtleBot3 OpenCR board, or try the bridge without hardware | This page: install the bridge and use its built-in drivers                                                         |
-| Connect another camera, IMU or wheel board                                                     | [Write Device Bridge Drivers](https://docs.sodero.io/v2.0.0/extend/device_bridge_drivers/index.md), then this page |
+| You want to                                                             | Page                                                                                               |
+| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Install the bridge, configure its devices and connect it to the Station | This page                                                                                          |
+| Add a driver for your own camera, IMU or wheel board                    | [Write Device Bridge Drivers](https://docs.sodero.io/v2.0.0/extend/device_bridge_drivers/index.md) |
 
-The Device Bridge is an open-source program. Nothing changes on the controller when you install it or add a driver.
+The Device Bridge is an open-source program that works with any RGB-D camera, IMU or wheel board through drivers. It comes with example drivers for Intel RealSense D400 cameras, the TurtleBot3 OpenCR board and simulated devices ([Built-in Drivers](#4-built-in-drivers)); other devices connect through a driver that you add. Nothing changes on the controller when you install the bridge or add a driver.
 
 ______________________________________________________________________
 
@@ -2435,6 +2435,8 @@ python -m device_bridge config/simulated.yaml    # or in the foreground; stop wi
 ______________________________________________________________________
 
 ## 4. Built-in Drivers
+
+The bridge comes with these drivers. They are ready to use and serve as examples: other cameras, IMUs and wheel boards connect through a driver that you add ([Write Device Bridge Drivers](https://docs.sodero.io/v2.0.0/extend/device_bridge_drivers/index.md)).
 
 | Driver                 | Provides                     | Options (default)                                                                                                                                               |
 | ---------------------- | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3723,12 +3725,12 @@ ______________________________________________________________________
 
 ## 6. Extend and Automate
 
-| What you do                                             | Page                                                                                                                                                          |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Work on the controller over SSH                         | [SSH Workspace](https://docs.sodero.io/v2.0.0/ssh_workspace/overview/index.md), [sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md) |
-| Run your own programs as nodes                          | [Create Custom Modules](https://docs.sodero.io/v2.0.0/extend/custom_modules/index.md)                                                                         |
-| Connect a sensor the Device Bridge does not support yet | [Write Device Bridge Drivers](https://docs.sodero.io/v2.0.0/extend/device_bridge_drivers/index.md)                                                            |
-| Let an AI coding agent do routine work                  | [AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md)                                                                            |
+| What you do                                                           | Page                                                                                                                                                          |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Work on the controller over SSH                                       | [SSH Workspace](https://docs.sodero.io/v2.0.0/ssh_workspace/overview/index.md), [sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md) |
+| Run your own programs as nodes                                        | [Create Custom Modules](https://docs.sodero.io/v2.0.0/extend/custom_modules/index.md)                                                                         |
+| Connect your own camera, IMU or wheel board through the Device Bridge | [Write Device Bridge Drivers](https://docs.sodero.io/v2.0.0/extend/device_bridge_drivers/index.md)                                                            |
+| Let an AI coding agent do routine work                                | [AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md)                                                                            |
 
 # Navigate in Simulation
 
@@ -4536,9 +4538,9 @@ Then add its node on the Station page ([Modules › Add and Start the Module's N
 
 # Write Device Bridge Drivers
 
-The [Device Bridge](https://docs.sodero.io/v2.0.0/gateways/device_bridge/index.md) runs on a small computer next to the sensors and serves their data to Stellar X. Its built-in drivers cover Intel RealSense D400 cameras and the TurtleBot3 OpenCR board. For another camera, IMU or wheel board, you write a driver: one Python class on the sensor computer. Nothing on the controller is rebuilt or modified.
+The [Device Bridge](https://docs.sodero.io/v2.0.0/gateways/device_bridge/index.md) runs on a small computer next to the sensors and serves their data to Stellar X. It connects any RGB-D camera, IMU or wheel board for which it has a driver: one Python class on the sensor computer. The drivers that come with the bridge, for Intel RealSense D400 cameras, the TurtleBot3 OpenCR board and simulated devices, are examples; write a driver of the same kind for your own device. Nothing on the controller is rebuilt or modified.
 
-This page is for developers. To install and connect the bridge with its built-in drivers, see [Device Bridge](https://docs.sodero.io/v2.0.0/gateways/device_bridge/index.md).
+This page is for developers. To install the bridge and connect it to the Station, see [Device Bridge](https://docs.sodero.io/v2.0.0/gateways/device_bridge/index.md).
 
 ______________________________________________________________________
 

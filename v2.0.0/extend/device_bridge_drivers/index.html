@@ -2468,8 +2468,8 @@
 
 
 <h1 id="write-device-bridge-drivers">Write Device Bridge Drivers<a class="headerlink" href="#write-device-bridge-drivers" title="Permanent link">¶</a></h1>
-<p>The <a href="../../gateways/device_bridge/">Device Bridge</a> runs on a small computer next to the sensors and serves their data to Stellar X. Its built-in drivers cover Intel RealSense D400 cameras and the TurtleBot3 OpenCR board. For another camera, IMU or wheel board, you write a driver: one Python class on the sensor computer. Nothing on the controller is rebuilt or modified.</p>
-<p>This page is for developers. To install and connect the bridge with its built-in drivers, see <a href="../../gateways/device_bridge/">Device Bridge</a>.</p>
+<p>The <a href="../../gateways/device_bridge/">Device Bridge</a> runs on a small computer next to the sensors and serves their data to Stellar X. It connects any RGB-D camera, IMU or wheel board for which it has a driver: one Python class on the sensor computer. The drivers that come with the bridge, for Intel RealSense D400 cameras, the TurtleBot3 OpenCR board and simulated devices, are examples; write a driver of the same kind for your own device. Nothing on the controller is rebuilt or modified.</p>
+<p>This page is for developers. To install the bridge and connect it to the Station, see <a href="../../gateways/device_bridge/">Device Bridge</a>.</p>
 <hr>
 <h2 id="1-driver-classes">1. Driver Classes<a class="headerlink" href="#1-driver-classes" title="Permanent link">¶</a></h2>
 <p>A driver is one Python class for one piece of hardware. It subclasses <code>Device</code> and each capability the hardware has: <code>Camera</code>, <code>Imu</code> or <code>Wheels</code>. One class may provide several, as the OpenCR driver provides both <code>Imu</code> and <code>Wheels</code>. The interfaces are documented in <code>device_bridge/devices/base.py</code>, and <code>device_bridge/devices/simulated.py</code> is the smallest complete example.</p>
