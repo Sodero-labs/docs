@@ -20,7 +20,7 @@ The CLI is its own best reference:
 - **Preview first.** A command that changes something only previews until you add `--execute`. Read the preview, then repeat the command with `--execute`.
 - **Versions.** Changes to the node graph take `--if-version N`, the `expected_version` from `sodero topology get`. Changes to settings and documents take `--if-sha256 SHA256` from the matching `get`. Each saved change returns the next value. If someone changed the Station page in the meantime, the change is refused with a conflict (exit code 6): read again and retry.
 - **One Station.** On a robot, the only item is the Station `station`. `--item` defaults to it and can be left out.
-- **Node IDs.** A node's ID comes from its module, not from the `--kind` option of `topology add-node`: `--kind camera --name cam0` creates `rc.camera_gateway.cam0`. Strider, Motion Studio and Articulation nodes are `sodero.mlc.<name>`, `sodero.mmc.<name>` and `sodero.amc.<name>` (for example `sodero.mlc.jackal`); gateways and the other modules are `rc.<kind>.<name>` (for example `rc.actuator_gateway.jackal`). The localizer, navigator and visual odometry have fixed IDs: `sodero.localizer`, `rc.navigator`, `sodero.visual_odometry`.
+- **Node IDs.** A node's ID comes from its module, not from the `--kind` option of `topology add-node`: `--kind camera --name cam0` creates `sodero.camera_gateway.cam0`. Strider, Motion Studio and Articulation nodes are `sodero.mlc.<name>`, `sodero.mmc.<name>` and `sodero.amc.<name>` (for example `sodero.mlc.jackal`); gateways and the other modules are `sodero.<kind>.<name>` (for example `sodero.actuator_gateway.jackal`). The localizer, navigator and visual odometry have fixed IDs: `sodero.localizer`, `sodero.navigator`, `sodero.visual_odometry`.
 
 ### Exit Codes
 
@@ -66,14 +66,14 @@ The CLI is its own best reference:
 
 ```sh
 sodero runtime status                                    # every node: configured, running, its state
-sodero runtime logs rc.actuator_gateway.jackal --lines 100
+sodero runtime logs sodero.actuator_gateway.jackal --lines 100
 sodero tools call strider.get_state --input '{"target":"sodero.mlc.jackal"}'
 ```
 
 ### Start and Stop Nodes
 
 ```sh
-sodero runtime node start rc.actuator_gateway.jackal --execute          # gateway first
+sodero runtime node start sodero.actuator_gateway.jackal --execute          # gateway first
 sodero runtime node start sodero.mlc.jackal --execute # then its controller
 sodero runtime node stop sodero.mlc.jackal --execute
 ```
@@ -91,7 +91,7 @@ sodero topology get                                       # note "expected_versi
 sodero topology add-node --kind camera --name cam0 --if-version 12              # preview
 sodero topology add-node --kind camera --name cam0 --if-version 12 --execute    # returns version 13
 sodero topology connect --source sodero.localizer.camera \
-    --target rc.camera_gateway.cam0.camera --if-version 13 --execute
+    --target sodero.camera_gateway.cam0.camera --if-version 13 --execute
 ```
 
 `sodero topology catalog` lists the node kinds (`gateway`, `strider`, `motion_studio`, `articulation`, `camera`, `imu`, `vo`, `localizer`, `navigator`, `legged_locomotion`, `legged_navigator`, `package`) with their ports.
@@ -100,10 +100,10 @@ sodero topology connect --source sodero.localizer.camera \
 
 ```sh
 sodero navigation list
-sodero navigation get --node rc.navigator > navigator.json   # the editable config and its sha256
+sodero navigation get --node sodero.navigator > navigator.json   # the editable config and its sha256
 # save the "config" part to config.json and change the values you need, then:
-sodero navigation apply --node rc.navigator --config @config.json --if-sha256 SHA256            # preview
-sodero navigation apply --node rc.navigator --config @config.json --if-sha256 SHA256 --execute
+sodero navigation apply --node sodero.navigator --config @config.json --if-sha256 SHA256            # preview
+sodero navigation apply --node sodero.navigator --config @config.json --if-sha256 SHA256 --execute
 ```
 
 Stop the node first; the new settings apply when it starts again. These are the same settings the Station page shows in the node's inspector.
@@ -111,7 +111,7 @@ Stop the node first; the new settings apply when it starts again. These are the 
 ### Attach a Map
 
 ```sh
-sodero runtime node stop rc.navigator --execute          # stop the nodes that use the map
+sodero runtime node stop sodero.navigator --execute          # stop the nodes that use the map
 sodero runtime node stop sodero.localizer --execute
 sodero runtime node stop sodero.visual_odometry --execute    # if the Station has one
 sodero navigation get --node sodero.localizer                # note "sha256"
@@ -147,5 +147,5 @@ A tool that changes something or moves the robot acts only with `--execute`. Str
 
 ```sh
 sodero watch --probe sodero.mlc.jackal --hz 5 --seconds 5
-sodero camera snapshot rc.camera_gateway.cam0 --output frame.png
+sodero camera snapshot sodero.camera_gateway.cam0 --output frame.png
 ```

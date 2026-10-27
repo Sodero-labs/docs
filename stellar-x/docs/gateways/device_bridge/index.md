@@ -244,7 +244,7 @@ Start with the bridge running and `listen` showing its streams, then open the St
 
 ### Camera
 
-1. Click **Add node**, choose **Gateway** › **Camera gateway** and name it after the robot, for example `tb3` (node `rc.camera_gateway.tb3`).
+1. Click **Add node**, choose **Gateway** › **Camera gateway** and name it after the robot, for example `tb3` (node `sodero.camera_gateway.tb3`).
 2. In the **CAMERA GATEWAY** section of the inspector, enter:
     - **Camera name**: the bridge's `robot_name` (`tb3`). The bridge publishes its camera under the robot name; it has no separate camera name.
     - **Camera host**: `SENSOR_COMPUTER_ADDRESS`.
@@ -277,7 +277,7 @@ Start with the bridge running and `listen` showing its streams, then open the St
 
 !!! warning "Intrinsics belong to one resolution. After you change the bridge's `width`, `height` or camera, enter the new values from its log line."
 
-!!! idea "**Tip:** In the [SSH workspace](../../ssh_workspace/overview/index.md), `sodero camera snapshot rc.camera_gateway.tb3 --output frame.png` saves a picture from the gateway."
+!!! idea "**Tip:** In the [SSH workspace](../../ssh_workspace/overview/index.md), `sodero camera snapshot sodero.camera_gateway.tb3 --output frame.png` saves a picture from the gateway."
 
 ### IMU
 

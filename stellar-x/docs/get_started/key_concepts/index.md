@@ -46,18 +46,18 @@ When you click **Add node** on the Station page, you choose one of four node typ
 | **Compound** | Combines several robot units into one system | Your own compound modules |
 | **Application** | Defines robot behaviors and task logic | Your own modules |
 
-Most built-in nodes have an ID of the form `rc.<kind>.<name>`. You choose the name; the kind comes from the module:
+Most built-in nodes have an ID of the form `sodero.<kind>.<name>`. You choose the name; the kind comes from the module:
 
 | Module | Node ID |
 | :--- | :--- |
-| Actuator gateway | `rc.actuator_gateway.NAME` |
-| Camera gateway | `rc.camera_gateway.NAME` |
-| IMU gateway | `rc.imu_gateway.NAME` |
+| Actuator gateway | `sodero.actuator_gateway.NAME` |
+| Camera gateway | `sodero.camera_gateway.NAME` |
+| IMU gateway | `sodero.imu_gateway.NAME` |
 | Motion Studio | `sodero.mmc.NAME` |
 | Strider | `sodero.mlc.NAME` |
 | Articulation | `sodero.amc.NAME` |
 | Legged locomotion | `rc.legged_locomotion.NAME` |
-| Visual odometry, Localizer, Navigator | `sodero.visual_odometry`, `sodero.localizer`, `rc.navigator` (one of each per Station) |
+| Visual odometry, Localizer, Navigator | `sodero.visual_odometry`, `sodero.localizer`, `sodero.navigator` (one of each per Station) |
 
 ---
 
@@ -72,7 +72,7 @@ You connect a required port to a compatible provided port by dragging between th
 
 ```mermaid
 flowchart TB
-    S["Strider<br>sodero.mlc.jackal"] -- "servo_link" --> G["Actuator gateway<br>rc.actuator_gateway.jackal"]
+    S["Strider<br>sodero.mlc.jackal"] -- "servo_link" --> G["Actuator gateway<br>sodero.actuator_gateway.jackal"]
     G -- "simulation" --> I["Isaac Sim<br>robot 'jackal'"]
     G -. "or EtherCAT" .-> M["Real motors"]
 ```

@@ -7,6 +7,31 @@
 
 <div class="version-info" markdown="1">
 
+<div class="display-version">v2.0.1</div>
+<div class="display-date">2026.10.27</div>
+
+</div>
+
+<div class="version-content" markdown="1">
+
+## v2.0.1 { #v2-0-1 }
+
+#### Documentation and Example Files
+
+This is a Stellar X documentation release, not a change to the software installed on your controller.
+
+* Updated `jackal.gw`, `jackal.sddm`, `wheels.gw` and `base.sddm` to use current `sodero.actuator_gateway.*` IDs. Download both files of each pair again; older copies can be rejected or fail to connect on current Station builds.
+* Aligned gateway, camera, IMU and Navigator node IDs in the tutorials, connection diagrams and CLI examples. Older screenshots may still display `rc.*` IDs.
+* Checked gateway imports, robot document loading and the unchanged warehouse map bundle against the document loaders used by the 2026-10-26 Station build. Robot geometry, actuator order, EtherCAT settings and safety limits are unchanged. Hardware motion and simulation runs were not part of this compatibility check. See [Compatibility and Downloads](reference/compatibility/index.md).
+
+</div>
+
+</div>
+
+<div class="version-block" markdown="1">
+
+<div class="version-info" markdown="1">
+
 <div class="display-version">v2.0.0</div>
 <div class="display-date">2026.10.16</div>
 

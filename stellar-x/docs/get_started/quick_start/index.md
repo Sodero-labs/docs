@@ -1,5 +1,9 @@
 # Quick Start
 
+!!! info "Updated example pair (2026-10-27)"
+
+    Download both the `.gw` and `.sddm` files from this page again if you have older copies. They use the current `sodero.*` node IDs; older screenshots may still show `rc.*`. See [Compatibility and Downloads](../../reference/compatibility/index.md#example-files).
+
 You will build a small robot system on Stellar X and drive a simulated **Clearpath Jackal** in NVIDIA Isaac Sim with Strider. It takes about 15 minutes once Stellar X is on your network and Isaac Sim with the Isaac Bridge extension is installed (see **Before You Start**). You will:
 
 1. add an actuator gateway and a Strider controller on Stellar Station,
@@ -11,7 +15,7 @@ You will build a small robot system on Stellar X and drive a simulated **Clearpa
 flowchart TB
     B["Your browser<br>Stellar Station · Strider"]
     subgraph SX ["Stellar X"]
-        S["Strider<br>sodero.mlc.jackal"] -- servo_link --> G["Actuator gateway<br>rc.actuator_gateway.jackal"]
+        S["Strider<br>sodero.mlc.jackal"] -- servo_link --> G["Actuator gateway<br>sodero.actuator_gateway.jackal"]
     end
     I["Isaac Sim + Isaac Bridge<br>robot /World/jackal"]
     B --> S
@@ -50,7 +54,7 @@ flowchart TB
 
 ## Step 2: Load the Gateway Document
 
-1. Select the new node `rc.actuator_gateway.jackal`. In its inspector, click the upload icon in **DEFINITION** (**Import .gw**).
+1. Select the new node `sodero.actuator_gateway.jackal`. In its inspector, click the upload icon in **DEFINITION** (**Import .gw**).
 2. On **From your PC** ①, choose `jackal.gw` ② and click **Import** ③.
 
     <figure markdown="span">
@@ -121,7 +125,7 @@ flowchart TB
 In the gateway's **LOGS** (stream **Gateway events**) you see the connection to Isaac Sim:
 
 ```text
-Gateway rc.actuator_gateway.jackal starting: simulation, 4 actuator(s), 1.0 ms cycle.
+Gateway sodero.actuator_gateway.jackal starting: simulation, 4 actuator(s), 1.0 ms cycle.
 Simulation: robot 'jackal', simulator at 192.168.60.20; waiting for it to start.
 Simulator connected.
 ```

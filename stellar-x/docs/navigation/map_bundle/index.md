@@ -15,7 +15,7 @@ Stellar Station does not build maps on the robot; there is no SLAM. A bundle is 
 ## 1. What You Need
 
 - **The bundle file**, for example [warehouse.nav.tgz](../simulation_tutorial/files/warehouse.nav.tgz) of [Navigate in Simulation](../simulation_tutorial/index.md). The Station page accepts names ending in `.tgz`; the CLI needs a name ending in `.nav`. Both are the same gzip-compressed tar, so you can copy `site.nav.tgz` to `site.nav`.
-- **A Localizer node** (`sodero.localizer`) and, to drive to goals, a **Navigator node** (`rc.navigator`), connected as in [Localization and Navigation › Set Up Navigation](../overview/index.md#3-set-up-navigation).
+- **A Localizer node** (`sodero.localizer`) and, to drive to goals, a **Navigator node** (`sodero.navigator`), connected as in [Localization and Navigation › Set Up Navigation](../overview/index.md#3-set-up-navigation).
 
 The bundle contains five settings files and three map files:
 
@@ -45,13 +45,13 @@ The page checks the archive's layout. The CLI preview below checks every rule of
 ### sodero CLI
 
 ```sh
-sodero runtime node stop rc.navigator --execute
+sodero runtime node stop sodero.navigator --execute
 sodero runtime node stop sodero.localizer --execute
 sodero navigation get --node sodero.localizer                                     # note "sha256"
 sodero maps upload site.nav --node sodero.localizer --if-sha256 SHA256            # preview: checks the bundle
 sodero maps upload site.nav --node sodero.localizer --if-sha256 SHA256 --execute  # attach it
 sodero runtime node start sodero.localizer --execute
-sodero runtime node start rc.navigator --execute
+sodero runtime node start sodero.navigator --execute
 ```
 
 - With Visual odometry, also stop `sodero.visual_odometry` before the upload, and start it again before the Localizer.
@@ -80,7 +80,7 @@ A bundle made for another robot needs your robot's values. Check these before th
 After the upload, the settings in `localizer.yaml`, `navigator.yaml`, `extrinsics.yaml` and `initial_pose.yaml` can be changed without a new bundle:
 
 - **Station page:** select the Localizer or the Navigator node. The inspector's **NAVIGATION SETTINGS** section groups the keys your files contain as Localizer, Navigator, Camera calibration and Initial pose.
-- **CLI:** `sodero navigation get --node rc.navigator`, edit the returned `config`, then `sodero navigation apply` with its SHA-256 (see [sodero CLI](../../ssh_workspace/sodero_cli/index.md)).
+- **CLI:** `sodero navigation get --node sodero.navigator`, edit the returned `config`, then `sodero navigation apply` with its SHA-256 (see [sodero CLI](../../ssh_workspace/sodero_cli/index.md)).
 
 Stop the Localizer, the Navigator and Visual odometry before you save; the new values apply when the nodes start again. The map files, `meta.yaml` and `map.file` change only with a new bundle. Every key is described in [Map Bundle Format](../map_bundle_format/index.md#files).
 

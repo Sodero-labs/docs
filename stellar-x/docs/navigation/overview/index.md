@@ -10,7 +10,7 @@ Stellar Station includes a complete navigation stack for mobile robots: it knows
 flowchart TB
     CAM["Camera gateway<br>RGB-D"] -- camera --> LOC["Localizer<br>sodero.localizer"]
     STR["Strider<br>sodero.mlc.NAME"] -- odometry --> LOC
-    LOC -- "localization · map" --> NAV["Navigator<br>rc.navigator"]
+    LOC -- "localization · map" --> NAV["Navigator<br>sodero.navigator"]
     NAV -- mobile_base --> STR
     MAP[(".nav map bundle")] -.-> LOC
     MAP -.-> NAV

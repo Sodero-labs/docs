@@ -21,9 +21,9 @@ Because only the gateway knows the hardware, the same controller and controller 
 
 | Module | Node ID | Connects | Configured with |
 | :--- | :--- | :--- | :--- |
-| Actuator gateway | `rc.actuator_gateway.NAME` | EtherCAT drives, or the joints of a robot in Isaac Sim | A `.gw` document ([Gateway Designer](../gateway_designer/index.md)) |
-| Camera gateway | `rc.camera_gateway.NAME` | An RGB-D camera: a camera in Isaac Sim, or a real camera through the [Device Bridge](../device_bridge/index.md) | Camera settings in the inspector ([Sensors and Cameras](../sensors_and_cameras/index.md)) |
-| IMU gateway | `rc.imu_gateway.NAME` | An IMU (and foot contacts in Isaac Sim): in Isaac Sim, or through the Device Bridge | IMU settings in the inspector ([Sensors and Cameras](../sensors_and_cameras/index.md#2-imu-gateway)) |
+| Actuator gateway | `sodero.actuator_gateway.NAME` | EtherCAT drives, or the joints of a robot in Isaac Sim | A `.gw` document ([Gateway Designer](../gateway_designer/index.md)) |
+| Camera gateway | `sodero.camera_gateway.NAME` | An RGB-D camera: a camera in Isaac Sim, or a real camera through the [Device Bridge](../device_bridge/index.md) | Camera settings in the inspector ([Sensors and Cameras](../sensors_and_cameras/index.md)) |
+| IMU gateway | `sodero.imu_gateway.NAME` | An IMU (and foot contacts in Isaac Sim): in Isaac Sim, or through the Device Bridge | IMU settings in the inspector ([Sensors and Cameras](../sensors_and_cameras/index.md#2-imu-gateway)) |
 
 For devices the built-in gateways do not cover, you can write your own gateway as a module with the role `gateway` ([Create Custom Modules](../../extend/custom_modules/index.md)). Once installed, it appears in **Add node** › **Gateway** with the **CUSTOM** badge.
 

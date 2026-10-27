@@ -13,7 +13,7 @@ This tutorial continues the [Quick Start](../../get_started/quick_start/index.md
 
 | You need | Details |
 | :--- | :--- |
-| The Quick Start setup | `rc.actuator_gateway.jackal` and `sodero.mlc.jackal`, running, with the Jackal driving in Isaac Sim |
+| The Quick Start setup | `sodero.actuator_gateway.jackal` and `sodero.mlc.jackal`, running, with the Jackal driving in Isaac Sim |
 | The example scene | `jackal_warehouse.usd` from the Quick Start ([jackal_warehouse.zip](../../get_started/quick_start/files/jackal_warehouse.zip)). The Jackal carries a depth camera `cam0` on its `base_link`, 0.22 m ahead of the base and 0.47 m above the floor, looking forward with a 90° horizontal field of view. |
 | The map bundle | [warehouse.nav.tgz](files/warehouse.nav.tgz): the map of the warehouse scene with the settings used in this tutorial |
 
@@ -73,7 +73,7 @@ Check two more things before you go on:
 
 ## Step 4: Add the Navigator
 
-**Add node** › **Controller** › **Navigator**. It is named `rc.navigator` and uses the navigator settings of the same map bundle.
+**Add node** › **Controller** › **Navigator**. It is named `sodero.navigator` and uses the navigator settings of the same map bundle.
 
 <figure markdown="span">
   ![Navigator inspector](images/navigator_inspector.png){ width="300" }
@@ -88,11 +88,11 @@ Drag these five connections (from the required port on the left of a card to the
 
 | From | To |
 | :--- | :--- |
-| `sodero.localizer` › `camera` | `rc.camera_gateway.cam0` › `camera` |
+| `sodero.localizer` › `camera` | `sodero.camera_gateway.cam0` › `camera` |
 | `sodero.localizer` › `odometry` | `sodero.mlc.jackal` › `odometry` |
-| `rc.navigator` › `localization` | `sodero.localizer` › `localization` |
-| `rc.navigator` › `map` | `sodero.localizer` › `map` |
-| `rc.navigator` › `mobile_base` | `sodero.mlc.jackal` › `mobile_base` |
+| `sodero.navigator` › `localization` | `sodero.localizer` › `localization` |
+| `sodero.navigator` › `map` | `sodero.localizer` › `map` |
+| `sodero.navigator` › `mobile_base` | `sodero.mlc.jackal` › `mobile_base` |
 
 <figure markdown="span">
   ![Navigation graph](images/nav_graph.png){ width="1000" }
@@ -108,7 +108,7 @@ Drag these five connections (from the required port on the left of a card to the
 ## Step 6: Start and Localize
 
 1. In Isaac Sim, stop and play the scene so the Jackal is back at its starting pose.
-2. Start the nodes in order: `sodero.localizer`, then `rc.navigator` (the gateway, the Strider and the camera already run).
+2. Start the nodes in order: `sodero.localizer`, then `sodero.navigator` (the gateway, the Strider and the camera already run).
 3. In the gateway's log, after *Simulator connected again*, open Strider and switch **Twist** and **Servo On** again (a simulation restart turns the servo off).
 4. Open Strider's **Navigation** page (the **Strider** link on the Navigator's card). **Localization Status** shows **Healthy** once the camera view matches the map.
 

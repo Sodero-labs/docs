@@ -22,13 +22,17 @@ This documentation describes the versions below. With other versions, menus, mes
 
 | File | Used in | Contents | Last changed |
 | :--- | :--- | :--- | :--- |
-| [jackal.gw](../../get_started/quick_start/files/jackal.gw) | [Quick Start](../../get_started/quick_start/index.md) | Simulation gateway for the Jackal | 2026-10-19 |
-| [jackal.sddm](../../get_started/quick_start/files/jackal.sddm) | [Quick Start](../../get_started/quick_start/index.md) | Strider document of the Jackal | 2026-10-21 |
+| [jackal.gw](../../get_started/quick_start/files/jackal.gw) | [Quick Start](../../get_started/quick_start/index.md) | Simulation gateway for the Jackal | 2026-10-27 |
+| [jackal.sddm](../../get_started/quick_start/files/jackal.sddm) | [Quick Start](../../get_started/quick_start/index.md) | Strider document of the Jackal | 2026-10-27 |
 | [jackal_warehouse.zip](../../get_started/quick_start/files/jackal_warehouse.zip) | [Quick Start](../../get_started/quick_start/index.md) | Isaac Sim scene with a Clearpath Jackal and Dingo, with their license | 2026-10-18 |
 | [warehouse.nav.tgz](../../navigation/simulation_tutorial/files/warehouse.nav.tgz) | [Navigate in Simulation](../../navigation/simulation_tutorial/index.md) | Map bundle of the warehouse scene | 2026-10-16 |
-| [wheels.gw](../../tutorials/ethercat_mobile_base/files/wheels.gw) | [EtherCAT Mobile Base](../../tutorials/ethercat_mobile_base/index.md) | EtherCAT gateway with four drives | 2026-10-20 |
-| [base.sddm](../../tutorials/ethercat_mobile_base/files/base.sddm) | [EtherCAT Mobile Base](../../tutorials/ethercat_mobile_base/index.md) | Strider document of the four-wheel base | 2026-10-21 |
+| [wheels.gw](../../tutorials/ethercat_mobile_base/files/wheels.gw) | [EtherCAT Mobile Base](../../tutorials/ethercat_mobile_base/index.md) | EtherCAT gateway with four drives | 2026-10-27 |
+| [base.sddm](../../tutorials/ethercat_mobile_base/files/base.sddm) | [EtherCAT Mobile Base](../../tutorials/ethercat_mobile_base/index.md) | Strider document of the four-wheel base | 2026-10-27 |
 | [example_manipulator_parts.zip](../../tutorials/stellar_designer/3dmodel_creation/models/example_manipulator_parts.zip) | [3D Model Creation](../../tutorials/stellar_designer/3dmodel_creation/index.md) | 3D parts of the example arm | 2026-03-16 |
 | [.blend](../../tutorials/stellar_designer/3dmodel_creation/models/example_manipulator_assembly_vis.blend), [.glb](../../tutorials/stellar_designer/3dmodel_creation/models/example_manipulator_assembly_vis.glb) | [3D Model Creation](../../tutorials/stellar_designer/3dmodel_creation/index.md) | The assembled example arm | 2026-10-18 (`.blend`), 2026-03-16 (`.glb`) |
 
-What changed in the files is listed in the [ChangeLog](../../CHANGELOG.md). A file you downloaded earlier keeps working unless the ChangeLog says otherwise.
+The four `.gw` and `.sddm` examples above were updated on 2026-10-27 for Station builds that use `sodero.*` node IDs. Their imports were checked offline with the document loaders from the Station build dated 2026-10-26. The warehouse map bundle passed the same build's navigation validation and import checks without changes. These are file compatibility checks; they do not certify a physical robot or a simulation run.
+
+Download both files of a pair again: `jackal.gw` with `jackal.sddm`, or `wheels.gw` with `base.sddm`. Copies downloaded before 2026-10-27 contain the old gateway IDs and can be rejected or fail to connect on current Station builds. Keep the matching project names (`jackal`, or gateway `wheels` and controller `base`); after importing, check the `servo_link` connection before starting the nodes. For your own edited documents, use your software release's migration procedure instead of replacing them with these examples. See the [ChangeLog](../../CHANGELOG.md).
+
+Screenshots captured with an older build may show `rc.*` node IDs. Use the `sodero.*` IDs in the instructions and current Station.

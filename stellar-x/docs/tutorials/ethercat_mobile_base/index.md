@@ -1,5 +1,9 @@
 # EtherCAT Mobile Base
 
+!!! info "Updated example pair (2026-10-27)"
+
+    Download both the `.gw` and `.sddm` files from this page again if you have older copies. They use the current `sodero.*` node IDs; older screenshots may still show `rc.*`. See [Compatibility and Downloads](../../reference/compatibility/index.md#example-files).
+
 This tutorial drives a four-wheel skid-steer base with four EtherCAT servo drives from Stellar X. It is the [Quick Start](../../get_started/quick_start/index.md) system on real motors: Strider still drives the base, and an EtherCAT gateway takes the place of the simulation gateway. You will:
 
 1. wire the four drives to Stellar X,
@@ -12,7 +16,7 @@ This tutorial drives a four-wheel skid-steer base with four EtherCAT servo drive
 flowchart TB
     B["Your browser<br>Stellar Station · Strider"]
     subgraph SX ["Stellar X"]
-        S["Strider<br>sodero.mlc.base"] -- servo_link --> G["EtherCAT gateway<br>rc.actuator_gateway.wheels"]
+        S["Strider<br>sodero.mlc.base"] -- servo_link --> G["EtherCAT gateway<br>sodero.actuator_gateway.wheels"]
     end
     subgraph EC ["EtherCAT line"]
         direction LR
@@ -63,7 +67,7 @@ The cable order is the actuator order of the gateway, and the Strider document a
 
 1. Open `http://192.168.60.18` in your browser.
 2. Click **Add node**, choose **Gateway** › **Actuator gateway** and click **Next**. Name it `wheels` and click **Add node** ([Quick Start › Step 1](../../get_started/quick_start/index.md#step-1-add-the-gateway)).
-3. Select `rc.actuator_gateway.wheels`. In its inspector, click the upload icon in **DEFINITION** (**Import .gw**), choose `wheels.gw` on **From your PC** and click **Import**.
+3. Select `sodero.actuator_gateway.wheels`. In its inspector, click the upload icon in **DEFINITION** (**Import .gw**), choose `wheels.gw` on **From your PC** and click **Import**.
 4. Click **Edit Stellar Gateway Designer** to check the document.
 
     <figure markdown="span">
@@ -110,7 +114,7 @@ The cable order is the actuator order of the gateway, and the Strider document a
 2. In its **LOGS** (stream **Gateway events**) ③, check that all four drives answered and reached operation:
 
     ```text
-    Gateway rc.actuator_gateway.wheels starting: EtherCAT, 4 actuator(s), 1.0 ms cycle.
+    Gateway sodero.actuator_gateway.wheels starting: EtherCAT, 4 actuator(s), 1.0 ms cycle.
     EtherCAT: starting on network port 'eth0' (4 drive(s) expected).
     EtherCAT: found drive 1 (…).
     EtherCAT: found drive 2 (…).
