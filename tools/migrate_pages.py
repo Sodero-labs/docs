@@ -18,8 +18,10 @@ overrides/, stellarx/, sitemap and llms files) are removed, and home/ is publish
     python3 tools/migrate_pages.py --push             # commit and push
 """
 import argparse
+import gzip
 import json
 import os
+import re
 import shutil
 
 from pages import ROOT, commit, copy_home, git, worktree
@@ -65,6 +67,36 @@ def write_redirects(root, old, new):
     return count
 
 
+PRODUCT_MENU = '<select class="product-select" aria-label="Product"><option value="sodero-cloud">Sodero Cloud</option><option value="stellar-x" selected>Stellar X</option></select>'
+PRODUCT_STYLE = '<style id="product-navigation">.product-select{background:#1a1a1a;color:#fff;border:1px solid #333;padding:4px 8px;font-size:.75rem;border-radius:4px;cursor:pointer}.mobile-header-inner>.product-select{margin-left:auto}</style>'
+
+
+def update_version_pages(root, version):
+    """Keep archived content while updating its URLs and product navigation."""
+    version_root = root / PRODUCT / version
+    old_base = f'https://docs.sodero.io/{version}/'
+    new_base = f'https://docs.sodero.io/{PRODUCT}/{version}/'
+    for path in version_root.rglob('*'):
+        if not path.is_file() or path.suffix not in {'.html', '.xml', '.txt', '.json'}:
+            continue
+        text = path.read_text()
+        updated = text.replace(old_base, new_base)
+        if path.suffix == '.html' and 'class="header-left"' in updated and 'class="product-select"' not in updated:
+            for container in ('header-left', 'mobile-header-inner pc-only', 'mobile-header-inner mobile-only'):
+                # Legacy headers contain links and labels, with no nested divs.
+                pattern = r'(<div class="' + re.escape(container) + r'">)(.*?)(</div>)'
+                updated = re.sub(pattern, lambda m: m[1] + m[2] + PRODUCT_MENU + m[3], updated, flags=re.S)
+            # The older templates use mobile-header-inner without an extra class.
+            updated = re.sub(r'(<div class="mobile-header-inner">)(.*?)(</div>)', lambda m: m[1] + m[2] + PRODUCT_MENU + m[3], updated, flags=re.S)
+            updated = updated.replace('</head>', PRODUCT_STYLE + '</head>', 1)
+            updated = updated.replace('<select class="version-select">', '<select class="version-select" aria-label="Version">')
+        if updated != text:
+            path.write_text(updated)
+    sitemap = version_root / 'sitemap.xml'
+    if sitemap.exists() and (version_root / 'sitemap.xml.gz').exists():
+        (version_root / 'sitemap.xml.gz').write_bytes(gzip.compress(sitemap.read_bytes(), mtime=0))
+
+
 def migrate(root):
     versions = json.loads((root / 'versions.json').read_text())
     (root / PRODUCT).mkdir(exist_ok=True)
@@ -73,6 +105,7 @@ def migrate(root):
         version = entry['version']
         git('mv', version, f'{PRODUCT}/{version}', cwd=root)
         shutil.copy2(VERSION_JS, root / PRODUCT / version / 'javascripts' / 'version.js')
+        update_version_pages(root, version)
         for alias in entry.get('aliases', []):
             git('rm', '--quiet', alias, cwd=root)
             os.symlink(version, root / PRODUCT / alias)

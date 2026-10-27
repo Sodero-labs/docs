@@ -36,7 +36,13 @@ jobs:
           VERSION="${GITHUB_REF_NAME#*/}"
 
           # Sync the gh-pages branch
-          git fetch origin gh-pages:gh-pages || true
+          git fetch origin gh-pages:gh-pages
+
+          # Preserve pre-split releases under Stellar X before the first product deploy.
+          if git cat-file -e gh-pages:versions.json 2>/dev/null && \
+             ! git cat-file -e gh-pages:stellar-x/versions.json 2>/dev/null; then
+            python3 tools/migrate_pages.py
+          fi
 
           # Deploy the version under /<product>/ and point the product's latest alias to it
           mike deploy --config-file "$PRODUCT/mkdocs.yml" --push --update-aliases "$VERSION" latest
