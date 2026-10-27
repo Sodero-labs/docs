@@ -49,13 +49,37 @@ Check two more things before you go on:
 
 1. **Add node** › **Gateway** › **Camera gateway**, name it `cam0` ([Sensors and Cameras](../../gateways/sensors_and_cameras/index.md#1-camera-gateway)).
 2. In its inspector, set **Camera name** `cam0` (the camera prim's name in the scene) and **Camera host** (the Isaac Sim computer). The port is `53335`.
-3. Under **CAMERA SETTINGS**, set **fps** `5`, **frame id** `cam0_optical`, intrinsics mode `fov` with a horizontal field of view of `90`, and click **Save settings**.
-4. Click **Start node**, then **Camera view** on its card to check the image. If the image stays empty, see [Camera Timing](#camera-timing).
+3. With the camera node stopped, open **CAMERA SETTINGS** and enter the values in the table below. Expand **Intrinsics** to find **horizontal fov deg**; a new gateway shows this field directly, without a mode selector.
+4. Click **Save settings**, then **Start node**. Open **Camera view** on its card and check that frames arrive at `320 × 240`, about `5 fps`. If the image stays empty, see [Camera Timing](#camera-timing).
+
+!!! warning "Change the camera defaults before localization"
+
+    A new camera gateway starts with **horizontal fov deg = 60** and **fps = 15**. The Jackal camera in `jackal_warehouse.usd` has a **90°** horizontal field of view, and this tutorial uses **5 fps**. Change both values before starting the Localizer. A visible image confirms reception; it does not confirm correct camera calibration. A wrong field of view distorts the 3D points reconstructed from depth, so the Localizer can remain **Initializing**, **Relocalizing** or **Lost** even while the image looks normal.
+
+| Setting in CAMERA SETTINGS | New gateway default | Value for this tutorial |
+| :--- | :--- | :--- |
+| **Intrinsics › horizontal fov deg** | `60` | **`90` — change this** |
+| **General › fps** | `15` | **`5` — change this** |
+| **General › frame id** | `cam0_optical` | `cam0_optical` |
+| **General › width**, **height** | `0`, `0` | Keep `0`, `0`: detect `320 × 240` from incoming frames |
+| **Simulation camera › capture latency ns** | `0` | Keep `0` for this example |
+| **Simulation camera › recv timeout ms** | `1000` | Keep `1000` |
+
+The gateway's **fps** setting does not change Isaac Sim's rendering rate. Set the source to `320 × 240` at `5 fps` in [Step 1](#step-1-prepare-isaac-sim). For a different scene or camera, enter its actual field of view; `90` is the value for this example. Isaac Bridge prints the field of view when the scene starts.
 
 <figure markdown="span">
   ![Camera view](../../gateways/sensors_and_cameras/images/camera_view.png){ width="800" }
   <figcaption>The Jackal's camera</figcaption>
 </figure>
+
+### Correct Settings on a Running Setup
+
+If you already started navigation with the defaults:
+
+1. Cancel any active navigation goal and wait for the robot to stop.
+2. Stop **Navigator → Localizer → Camera gateway**. The camera settings become editable after the camera node stops.
+3. Set **horizontal fov deg** to `90` and **fps** to `5`, then click **Save settings**.
+4. Start **Camera gateway → Localizer → Navigator**. Check the camera image and wait for **Localization Status: Healthy**. If it still needs an initial pose, set the robot's actual position and direction as described in [Step 6](#step-6-start-and-localize).
 
 ---
 
@@ -112,7 +136,7 @@ Drag these five connections (from the required port on the left of a card to the
 3. In the gateway's log, after *Simulator connected again*, open Strider and switch **Twist** and **Servo On** again (a simulation restart turns the servo off).
 4. Open Strider's **Navigation** page (the **Strider** link on the Navigator's card). **Localization Status** shows **Healthy** once the camera view matches the map.
 
-If the status stays **Initializing** or **Lost**, or the robot is shown at the wrong place on the map, set the initial pose: click **Set Initial Pose** ①, press on the map where the robot is and drag in the direction it faces ②, then click **Set initial pose** (**Relocalize here** ③ when a pose was set before).
+If the status stays **Initializing**, **Relocalizing** or **Lost** while the camera image is visible, first check the saved **horizontal fov deg = 90** and **fps = 5** settings from [Step 2](#step-2-add-the-camera-gateway). If they are correct and the robot still cannot localize or appears at the wrong place, set the initial pose: click **Set Initial Pose** ①, press on the map where the robot is and drag in the direction it faces ②, then click **Set initial pose** (**Relocalize here** ③ when a pose was set before).
 
 <figure markdown="span">
   ![Initial pose](images/initial_pose.png){ width="1000" }

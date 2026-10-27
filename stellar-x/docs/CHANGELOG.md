@@ -7,6 +7,28 @@
 
 <div class="version-info" markdown="1">
 
+<div class="display-version">v2.0.2</div>
+<div class="display-date">2026.10.27</div>
+
+</div>
+
+<div class="version-content" markdown="1">
+
+## v2.0.2 { #v2-0-2 }
+
+#### Documentation
+
+* [Navigate in Simulation](navigation/simulation_tutorial/index.md#step-2-add-the-camera-gateway): added a comparison of the camera gateway defaults (60° field of view, 15 fps) with the Jackal example settings (90°, 5 fps), the exact inspector field labels, and the stop/save/restart sequence for an existing setup.
+* [Sensors and Cameras](gateways/sensors_and_cameras/index.md#camera-settings): explained automatic image-size detection and why a visible camera image does not establish correct calibration for localization. Added troubleshooting for a Localizer that remains Initializing, Relocalizing or Lost.
+
+</div>
+
+</div>
+
+<div class="version-block" markdown="1">
+
+<div class="version-info" markdown="1">
+
 <div class="display-version">v2.0.1</div>
 <div class="display-date">2026.10.27</div>
 

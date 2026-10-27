@@ -45,7 +45,11 @@ In the **CAMERA GATEWAY** section of the inspector:
 
 ### Camera Settings
 
-Stop the node, change the values and click **Save settings**.
+Stop the camera node to enable its settings, change the values, click **Save settings**, then start it again. If navigation is already running, cancel its active goal and stop Navigator, Localizer and the camera in that order; restart the camera, Localizer and Navigator after saving ([full procedure](../../navigation/simulation_tutorial/index.md#correct-settings-on-a-running-setup)).
+
+!!! warning "Default field of view is 60°"
+
+    A new camera gateway starts with **horizontal fov deg = 60**, **fps = 15** and **width = height = 0** (automatic size detection). Match the field of view to the source camera before using localization. For the [Jackal warehouse tutorial](../../navigation/simulation_tutorial/index.md#step-2-add-the-camera-gateway), change the field of view to **90** and fps to **5**, keeping width and height at **0**. A different camera needs its own calibration; do not apply 90° to every camera.
 
 | Setting | Meaning |
 | :--- | :--- |
@@ -97,4 +101,5 @@ Sensor data is in the sensor's own frame. Where the camera is mounted on the rob
 | Camera log: *Waiting for simulator at …:53335 (World not running?)* | Isaac Sim is not playing, the camera host is wrong, or a firewall blocks port 53335 |
 | Camera log: *…publishes frames of camera(s) … but none of camera 'cam0'* | **Camera name** does not match a camera in the scene |
 | Camera log: *Frames … are stale or carry capture times that do not match this Station's clock* | The clocks of the two computers differ. Synchronize them (NTP), or stop sending capture times at the source (Isaac Sim: start it with `RC_CAMERA_CAPTURE_TIME=0`; Device Bridge: `send_capture_time: false`) so that the Station uses arrival times. |
+| Camera image is visible, but the Localizer remains Initializing, Relocalizing or Lost | Check **horizontal fov deg** against the source camera. A new gateway defaults to 60°, while the Jackal warehouse example uses 90°. Incorrect intrinsics distort the depth points used to match the map, even when the image looks normal. Follow the [settings correction procedure](../../navigation/simulation_tutorial/index.md#correct-settings-on-a-running-setup), then check the initial pose if needed. |
 | Camera view is black or frozen | The camera prim looks at nothing, or the scene is paused |
