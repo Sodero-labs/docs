@@ -1,0 +1,3094 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.sodero.io/stellar-x/v2.0.1/station/nodes_and_connections/">
+      
+      
+        <link rel="prev" href="../overview/">
+      
+      
+        <link rel="next" href="../design_documents/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/tab_icon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+  
+    <title>Nodes and Connections - Stellar X Docs</title>
+  
+
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../styles/layout.css">
+    
+      <link rel="stylesheet" href="../../styles/color.css">
+    
+      <link rel="stylesheet" href="../../styles/font.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="white">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nodes-and-connections" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden="">
+        
+      </div>
+    
+    
+  <style>
+    .md-header {
+      height: 60px !important;
+      background: #111 !important;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #333;
+    }
+
+    /* --- [1] Mobile --- */
+    @media (max-width: 76.24em) {
+      .pc-only { display: none !important; }
+      .mobile-header-inner {
+        display: flex; align-items: center;
+        height: 100%; width: 100%; padding: 0 12px; gap: 10px;
+      }
+      .md-header__button.md-icon { color: #fff; cursor: pointer; display: flex; align-items: center; margin-left: -8px; }
+      .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
+      .header-selects { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+      .header-selects .version-dropdown { margin-right: 0; }
+    }
+
+    /* Product and version menus */
+    .product-select, .version-select {
+      background: #1a1a1a;
+      color: #fff;
+      border: 1px solid #333;
+      padding: 4px 8px;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .product-select:hover, .version-select:hover { border-color: #555; }
+    .version-dropdown[hidden] { display: none; }
+
+    /* --- [2] Desktop --- */
+    @media (min-width: 76.25em) {
+      .mobile-only { display: none !important; }
+      .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
+
+      .custom-header-inner {
+        height: 100%; display: grid; grid-template-columns: 280px 1fr 600px;
+        align-items: center; width: 100%; box-sizing: border-box;
+      }
+
+      .header-left, .header-center, .header-right { height: 100%; display: flex; align-items: center; padding: 0 12px; }
+      .header-left { gap: 15px; border-right: 1px solid #333; }
+      .header-icon-link, .header-home-btn { display: flex; align-items: center; height: 100%; text-decoration: none; color: #fff; }
+      .site-title { font-size: 0.8rem; font-weight: 500; }
+      .header-breadcrumbs { font-size: 14px; color: #bdbdbd; display: flex; gap: 6px; }
+      .header-breadcrumbs a { color: #bdbdbd; text-decoration: none; }
+      .header-right { justify-content: flex-end; gap: 10px; }
+
+      .md-search { position: relative; transition: all 0.3s; }
+
+      .md-search:focus-within {
+        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0, 0, 0, 0.85); display: flex; flex-direction: column;
+        align-items: center; padding-top: 40px; z-index: 999;
+      }
+
+      .md-search__form {
+        position: relative; display: flex; align-items: center;
+        width: 280px; height: 36px;
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid #333; 
+        border-radius: 4px;
+        transition: all 0.3s;
+        overflow: visible; 
+      }
+
+      .md-search:focus-within .md-search__form {
+        width: 100%; max-width: 760px; height: 54px;
+        background-color: #1a1a1a; border: 1px solid #444;
+      }
+
+      .md-search__input {
+        width: 100%; height: 100%; background: transparent !important;
+        border: none !important; outline: none !important;
+        color: #fff; font-size: 0.75rem; 
+        padding: 0 40px !important; 
+      }
+
+      .md-search:focus-within .md-search__input { font-size: 1.1rem; padding: 0 60px !important; }
+
+      .md-search__icon {
+        position: absolute !important;
+        left: 8px !important;
+        top: 50% !important;
+        transform: translateY(-45%) !important;
+        color: #bdbdbd !important;
+        opacity: 1 !important; 
+        visibility: visible !important; 
+        cursor: pointer;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        z-index: 5; 
+      }
+
+      .md-search:focus-within .md-search__icon[data-md-component="search-reset"] {
+        opacity: 1 !important;
+        left: 15px !important;
+
+        pointer-events: auto;
+      }
+
+      .md-search__output { display: none; }
+      .md-search:focus-within .md-search__output {
+        display: block; position: static; width: 100%; max-width: 760px;
+        background: #1a1a1a; margin-top: 2px; border-radius: 0 0 8px 8px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      }
+
+      .md-search-result__list {
+        display: flex;
+        flex-direction: column; 
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .md-search-result__item {
+        border-bottom: 1px solid #333; 
+      }
+
+      .md-search-result__link {
+        padding: 10px 15px !important;
+        display: block !important;
+      }
+
+      .md-search-result__article h1,
+      .md-search-result__article h2,
+      .md-search-result__article h3 {
+        font-size: 20px !important; 
+        font-weight: 600 !important;
+        margin: 0 0 4px 0 !important;
+        color: #e0e0e0 !important;
+        line-height: 1.2 !important;
+      }
+
+      .md-search-result__teaser {
+        font-size: 14px !important;
+        color: #999 !important;
+        line-height: 1.4 !important;
+        max-height: 2.8em; 
+        overflow: hidden;
+      }
+
+      /* Highlight color of matched keywords */
+      .md-search-result mark {
+        background-color: #0070dd;
+        color: #f0f1f2;
+        text-decoration: underline;
+      }
+
+      .md-search__scrollwrap {
+        max-height: 60vh; 
+        scrollbar-width: thin;
+        scrollbar-color: #444 transparent;
+      }
+    }
+
+    .md-search-result__icon {
+      width: 1.2rem !important; 
+      height: 1.2rem !important;
+      margin-top: 0.1rem !important;
+    }
+
+    .md-search-result__icon svg {
+      width: 0.8rem !important;  
+      height: 0.8rem !important;
+      opacity: 0.6;       
+    }
+
+    .md-search-result__link {
+      display: flex !important;
+      align-items: flex-start !important; 
+      gap: 10px !important;    
+      padding: 10px 15px !important;
+    }
+
+    .md-search-result__article {
+      width: 760px;
+      margin-left: 0 !important;
+    }
+  </style>
+
+  <header class="md-header" data-md-component="header">
+    <div class="md-header__inner" style="width: 100%;">
+      
+      <div class="mobile-header-inner mobile-only">
+        <label class="md-header__button md-icon" for="__drawer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+        </label>
+        <a href="../.." class="header-home-btn">
+          <img src="../../assets/docs.svg" alt="Sodero Docs">
+        </a>
+        <div class="header-selects">
+          <select class="product-select" aria-label="Product">
+            
+              <option value="sodero-cloud">Sodero Cloud</option>
+            
+              <option value="stellar-x" selected="">Stellar X</option>
+            
+          </select>
+          <div class="version-dropdown">
+            <select class="version-select" aria-label="Version"></select>
+          </div>
+        </div>
+      </div>
+
+      <div class="custom-header-inner pc-only">
+        <div class="header-left">
+          <a href="https://www.sodero.io" class="header-icon-link" title="Sodero Home" target="_blank" rel="noopener">
+            <img src="../../assets/main_icon.svg" alt="Sodero Docs">
+          </a>
+          <a href="../.." class="header-home-btn">
+            <img src="../../assets/docs.svg" alt="Sodero Docs">
+          </a>
+          <select class="product-select" aria-label="Product">
+            
+              <option value="sodero-cloud">Sodero Cloud</option>
+            
+              <option value="stellar-x" selected="">Stellar X</option>
+            
+          </select>
+        </div>
+
+        <div class="header-center">
+          <nav class="header-breadcrumbs">
+            
+              
+                <a href="#">Stellar Station</a>
+                <span class="sep">/</span>
+              
+            
+            <span class="current">Nodes and Connections</span>
+          </nav>
+        </div>
+
+        <div class="header-right">
+          <div class="md-search" data-md-component="search">
+            <form class="md-search__form" name="search">
+              <label class="md-search__icon md-icon" for="__search">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M9.5 3a6.5 6.5 0 015.2 10.5l4.4 4.4-1.4 1.4-4.4-4.4A6.5 6.5 0 119.5 3m0 2a4.5 4.5 0 100 9 4.5 4.5 0 000-9z"></path>
+                </svg>
+              </label>
+
+              <input type="text" class="md-search__input" placeholder="Search" aria-label="Search" data-md-component="search-query" required="">
+
+              <button type="submit" class="md-search__icon md-icon" data-md-component="search-reset" aria-label="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M9.5 3a6.5 6.5 0 015.2 10.5l4.4 4.4-1.4 1.4-4.4-4.4A6.5 6.5 0 119.5 3m0 2a4.5 4.5 0 100 9 4.5 4.5 0 000-9z"></path>
+                </svg>
+              </button>
+            </form>
+            <div class="md-search__output">
+              <div class="md-search__scrollwrap" data-md-scrollfix="">
+                <div class="md-search-result" data-md-component="search-result">
+                  <div class="md-search-result__meta"></div>
+                  <ol class="md-search-result__list"></ol>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="version-dropdown">
+            <select class="version-select" aria-label="Version"></select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Stellar X" class="md-nav__button md-logo" aria-label="Stellar X" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Stellar X
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1">
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Get Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../get_started/sodero_ecosystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sodero Ecosystem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../get_started/key_concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Key Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../get_started/quick_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware &amp; Network
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardware &amp; Network
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware_setup/stellar_series/stellar_x/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stellar X
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware_setup/stellar_series/network_settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware_setup/stop_controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stop Controls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stellar Station
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stellar Station
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nodes and Connections
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nodes and Connections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-add-a-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Add a Node
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Add a Node">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#node-types-and-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node Types and Modules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-node-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The Node Card
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-connect-ports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Connect Ports
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Connect Ports">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-connections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Connections
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-the-inspector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The Inspector
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-rename-and-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Rename and Delete
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-find-nodes-in-a-large-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Find Nodes in a Large Graph
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../running_nodes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backup_restore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup and Restore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stellar Designer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stellar Designer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateways/gateway_designer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gateway Designer (.gw)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/manipulator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manipulator (.sdd)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/mobile_robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot (.sddm)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulated Robot (.sdda)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3D Model (.glb, Optional)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gateways &amp; Sensors
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gateways &amp; Sensors
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateways/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateways/ethercat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EtherCAT Gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateways/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulation Gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateways/test_console/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test Console
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateways/sensors_and_cameras/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sensors and Cameras
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateways/device_bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Device Bridge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operate Robots
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Operate Robots
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../controllers/strider/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strider
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../controllers/motion_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Motion Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../controllers/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Simulation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual_simulation/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual_simulation/extension_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Isaac Bridge Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual_simulation/robot_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../virtual_simulation/connect_station/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connect to Stellar Station
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Localization &amp; Navigation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Localization &amp; Navigation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../navigation/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../navigation/map_bundle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Load and Configure a Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../navigation/create_map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create a Map from Your Site
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/learning_path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning Path
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../navigation/simulation_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigate in Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/ethercat_mobile_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EtherCAT Mobile Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10">
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extend &amp; Automate
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Extend &amp; Automate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ssh_workspace/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH Workspace
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ssh_workspace/sodero_cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sodero CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ssh_workspace/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Coding Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extend/custom_modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create Custom Modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extend/device_bridge_drivers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Write Device Bridge Drivers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11">
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../navigation/map_bundle_format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Map Bundle Format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compatibility and Downloads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChangeLog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-add-a-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Add a Node
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Add a Node">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#node-types-and-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node Types and Modules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-node-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The Node Card
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-connect-ports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Connect Ports
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Connect Ports">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-connections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Connections
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-the-inspector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The Inspector
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-rename-and-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Rename and Delete
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-find-nodes-in-a-large-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Find Nodes in a Large Graph
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  <div id="breadcrumb-source" hidden="">
+    
+      
+        <a href="#">Stellar Station</a>
+        <span class="sep">/</span>
+      
+    
+    <span class="current">Nodes and Connections</span>
+  </div>
+  
+                  
+
+
+
+<h1 id="nodes-and-connections">Nodes and Connections<a class="headerlink" href="#nodes-and-connections" title="Permanent link">¶</a></h1>
+<p>A Station is a graph of <strong>nodes</strong> connected through <strong>ports</strong>. This page shows how to add nodes, connect them, and rename or delete them. See <a href="../../get_started/key_concepts/">Key Concepts</a> for what the node types mean.</p>
+<hr>
+<h2 id="1-add-a-node">1. Add a Node<a class="headerlink" href="#1-add-a-node" title="Permanent link">¶</a></h2>
+<ol>
+<li>Click <strong>Add node</strong> in the toolbar (or right-click the empty canvas).</li>
+<li>
+<p>Choose a node type ①, select a module ② and click <strong>Next</strong> ③.</p>
+<p></p><figure markdown="span">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/add_node_gateway.png" data-desc-position="bottom"><img alt="Add node: type and module" src="images/add_node_gateway.png" width="620"></a>
+  <figcaption>Gateway › Actuator gateway</figcaption>
+</figure><p></p>
+</li>
+<li>
+<p>Enter a node name ① and click <strong>Add node</strong> ②. You can rename the node later in the inspector.</p>
+<p></p><figure markdown="span">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/add_node_name.png" data-desc-position="bottom"><img alt="Add node: name" src="images/add_node_name.png" width="460"></a>
+  <figcaption>Naming the node</figcaption>
+</figure><p></p>
+</li>
+</ol>
+<p>The new node appears on the canvas in the <strong>Planned</strong> state. It is saved with the graph, but nothing runs until you start it.</p>
+<h3 id="node-types-and-modules">Node Types and Modules<a class="headerlink" href="#node-types-and-modules" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Module</th>
+<th style="text-align: left;">Node ID</th>
+<th style="text-align: left;">Typical use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Gateway</strong></td>
+<td style="text-align: left;">Actuator gateway</td>
+<td style="text-align: left;"><code>sodero.actuator_gateway.NAME</code></td>
+<td style="text-align: left;">Motors and drives, real (EtherCAT) or simulated (Isaac Sim)</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">IMU gateway</td>
+<td style="text-align: left;"><code>sodero.imu_gateway.NAME</code></td>
+<td style="text-align: left;">IMU and foot-contact data</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Camera gateway</td>
+<td style="text-align: left;"><code>sodero.camera_gateway.NAME</code></td>
+<td style="text-align: left;">An RGB-D camera</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Controller</strong></td>
+<td style="text-align: left;">Motion Studio</td>
+<td style="text-align: left;"><code>sodero.mmc.NAME</code></td>
+<td style="text-align: left;">Manipulators</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Strider</td>
+<td style="text-align: left;"><code>sodero.mlc.NAME</code></td>
+<td style="text-align: left;">Wheeled mobile bases</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Articulation</td>
+<td style="text-align: left;"><code>sodero.amc.NAME</code></td>
+<td style="text-align: left;">Articulated robots with direct joint control</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Legged locomotion</td>
+<td style="text-align: left;"><code>rc.legged_locomotion.NAME</code></td>
+<td style="text-align: left;">Walking robots driven by a walking policy</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Localizer</td>
+<td style="text-align: left;"><code>sodero.localizer</code></td>
+<td style="text-align: left;">Map-based localization (one per Station)</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Visual odometry</td>
+<td style="text-align: left;"><code>sodero.visual_odometry</code></td>
+<td style="text-align: left;">Camera-based odometry (one per Station)</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Navigator</td>
+<td style="text-align: left;"><code>sodero.navigator</code></td>
+<td style="text-align: left;">Path planning and goal following (one per Station)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Compound</strong></td>
+<td style="text-align: left;">Your compound modules</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Several robot units combined into one system</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Application</strong></td>
+<td style="text-align: left;">Your application modules</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Robot behaviors and task logic</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title"><strong>Legged locomotion</strong> and <strong>Visual odometry</strong> need preparation that this documentation does not cover step by step. Legged locomotion runs a walking policy made for your robot, whose joint names and order must match the robot's Articulation document. Visual odometry needs a calibrated camera, and an IMU for walking robots. This documentation describes their connections and settings; ask Sodero support before you use them on your robot.</p>
+</div>
+<p>Modules marked <strong>SODERO</strong> are built in. Modules you installed on the <a href="../modules/">Modules</a> page are marked <strong>CUSTOM</strong> and appear under the type they declare. Each type also lists a <strong>… subsystem</strong> entry (<em>Empty draft subsystem</em>): it adds an empty placeholder node with no program behind it, for sketching a system, and that node cannot be started.</p>
+<figure>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/add_node_strider.png" data-desc-position="bottom"><img alt="Add node: controller modules" src="images/add_node_strider.png" width="620"></a>
+<br>
+<figcaption>Choosing a controller module: ① Controller ② Strider ③ Next (the list scrolls)</figcaption>
+</figure>
+<div class="admonition info">
+<p class="admonition-title"><strong>Name rules.</strong> Gateway names are converted to lowercase. Controller names (Motion Studio, Strider, Articulation, Legged locomotion) start with a lowercase letter and use lowercase letters, digits and <code>_</code>, at most 20 characters. The Localizer, Visual odometry and Navigator have fixed names.</p>
+</div>
+<div class="admonition idea">
+<p class="admonition-title"><strong>Tip:</strong> Give a robot's gateway and controller the same name, for example <code>sodero.actuator_gateway.jackal</code> and <code>sodero.mlc.jackal</code>. The graph stays easy to read, and <strong>Auto-connect</strong> finds the right partner.</p>
+</div>
+<hr>
+<h2 id="2-the-node-card">2. The Node Card<a class="headerlink" href="#2-the-node-card" title="Permanent link">¶</a></h2>
+<figure>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/station_overview.png" data-desc-position="bottom"><img alt="Node cards" src="images/station_overview.png" width="650"></a>
+<br>
+<figcaption>A gateway and a Strider connected through servo_link</figcaption>
+</figure>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Part</th>
+<th style="text-align: left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Title and module</td>
+<td style="text-align: left;">The node ID and its module, for example <code>sodero.actuator_gateway.jackal</code> / Stellar actuator gateway. A running controller shows a link to its UI here.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>REQUIRES n/m</strong></td>
+<td style="text-align: left;">Ports this node needs from other nodes: connected / total. Required ports sit on the left edge of the card.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PROVIDES n/m</strong></td>
+<td style="text-align: left;">Ports this node offers: ports with at least one connection / total. They sit on the right edge.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Status</td>
+<td style="text-align: left;">The node's state, such as <strong>Planned</strong>, <strong>Operating</strong> or <strong>Error</strong> (<a href="../running_nodes/#3-node-states">Running Nodes</a>).</td>
+</tr>
+</tbody>
+</table>
+<p>The card border has the color of the node type: orange for gateways, blue-violet for controllers, purple for compounds and mint for applications.</p>
+<hr>
+<h2 id="3-connect-ports">3. Connect Ports<a class="headerlink" href="#3-connect-ports" title="Permanent link">¶</a></h2>
+<p>Connect a required port to a provided port of another node. There are three ways:</p>
+<ul>
+<li><strong>Drag</strong> from one port dot to another. While you drag, compatible ports pulse blue and incompatible ones turn red.</li>
+<li><strong>Click</strong> one port, then the other.</li>
+<li>In the inspector of the node that requires the port, click <strong>Auto-connect</strong> next to the port. The Station picks the matching provider.</li>
+</ul>
+<p>The Station accepts a connection only when the two ports are on different nodes, one requires and the other provides, and both use the same contract (the interface type shown under the port name in the inspector, for example <code>api.actuator.servo.v1</code>). It also enforces the system structure:</p>
+<ul>
+<li>Only a <strong>controller</strong> may use a gateway.</li>
+<li>An <strong>application</strong> uses controllers or compounds, never gateways directly.</li>
+<li>An actuator gateway serves one robot controller (Motion Studio, Strider or Articulation) at a time.</li>
+</ul>
+<h3 id="common-connections">Common Connections<a class="headerlink" href="#common-connections" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Node (requires)</th>
+<th style="text-align: left;">Port</th>
+<th style="text-align: left;">Connect to (provides)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Motion Studio, Strider, Articulation</td>
+<td style="text-align: left;"><code>servo_link</code></td>
+<td style="text-align: left;">Actuator gateway <code>servo_link</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Legged locomotion</td>
+<td style="text-align: left;"><code>servo</code>, <code>imu</code></td>
+<td style="text-align: left;">Articulation <code>articulation</code>, IMU gateway <code>imu</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Localizer</td>
+<td style="text-align: left;"><code>camera</code>, <code>odometry</code></td>
+<td style="text-align: left;">Camera gateway <code>camera</code>; Strider or Visual odometry <code>odometry</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Visual odometry</td>
+<td style="text-align: left;"><code>camera</code>, <code>imu</code> (optional)</td>
+<td style="text-align: left;">Camera gateway <code>camera</code>; IMU gateway <code>imu</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Navigator</td>
+<td style="text-align: left;"><code>mobile_base</code>, <code>localization</code>, <code>map</code></td>
+<td style="text-align: left;">Strider <code>mobile_base</code>; Localizer <code>localization</code> and <code>map</code></td>
+</tr>
+</tbody>
+</table>
+<p>To remove a connection, select the node and click <strong>Disconnect</strong> next to the port in the inspector.</p>
+<div class="admonition idea">
+<p class="admonition-title"><strong>Tip:</strong> A Motion Studio node can drive actuators of several gateways. Click <strong>+ Gateway link</strong> in its inspector to add another <code>servo_link</code> port.</p>
+</div>
+<hr>
+<h2 id="4-the-inspector">4. The Inspector<a class="headerlink" href="#4-the-inspector" title="Permanent link">¶</a></h2>
+<p>Click a node to open its inspector. The sections depend on the node type.</p>
+<div class="grid">
+<figure>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/gw_inspector.png" data-desc-position="bottom"><img alt="Gateway inspector" src="images/gw_inspector.png" width="320"></a>
+<br>
+<figcaption>A gateway node: ① Start node ② its document ③ import ④ Gateway Designer ⑤ TARGET ⑥ CONNECTION ⑦ LOGS</figcaption>
+</figure>
+<figure>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/strider_inspector.png" data-desc-position="bottom"><img alt="Strider inspector" src="images/strider_inspector.png" width="320"></a>
+<br>
+<figcaption>A Strider node: ① Start node ② its controller UI ③ its document ④ Stellar Designer ⑤ import. The box shows the gateway it drives.</figcaption>
+</figure>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Header</td>
+<td style="text-align: left;">Node name (pencil icon to rename), module, state, and <strong>Start node</strong> / <strong>Stop node</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CONTROL</strong></td>
+<td style="text-align: left;">Buttons that open the node's tool: <strong>Stellar Motion Studio</strong>, <strong>Strider</strong>, <strong>Articulation</strong> for controllers; <strong>Test Stellar Gateway</strong> for gateways. They unlock once the node runs.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>DEFINITION</strong></td>
+<td style="text-align: left;">The node's design document: file name and when it was imported, <strong>Edit Stellar Designer</strong> / <strong>Edit Stellar Gateway Designer</strong>, and the upload icon to import a file (<a href="../design_documents/">Design Documents</a>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TARGET</strong></td>
+<td style="text-align: left;">Simulation gateways only: the robot name in Isaac Sim and the simulator address (<a href="../../gateways/simulation/">Simulation Gateway</a>)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Settings</td>
+<td style="text-align: left;">Camera, IMU, visual odometry, localizer, navigator and legged locomotion nodes: their settings form</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CONNECTION</strong></td>
+<td style="text-align: left;">Requires and Provides ports with their contracts, <strong>Auto-connect</strong> and <strong>Disconnect</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>LOGS</strong></td>
+<td style="text-align: left;">Output and events of the node (<a href="../running_nodes/#5-logs">Running Nodes</a>)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="5-rename-and-delete">5. Rename and Delete<a class="headerlink" href="#5-rename-and-delete" title="Permanent link">¶</a></h2>
+<ul>
+<li><strong>Rename:</strong> stop the node, then click the pencil icon next to the node name in the inspector.</li>
+<li><strong>Delete:</strong> stop the node, then right-click it and choose <strong>Delete node</strong>. The node and its connections are removed from the graph.</li>
+</ul>
+<div class="grid">
+<figure>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/node_context_menu.png" data-desc-position="bottom"><img alt="Node menu" src="images/node_context_menu.png" width="352"></a>
+<br>
+<figcaption>Right-click menu of a node</figcaption>
+</figure>
+<figure>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/delete_node_confirm.png" data-desc-position="bottom"><img alt="Delete node" src="images/delete_node_confirm.png" width="420"></a>
+<br>
+<figcaption>Delete confirmation</figcaption>
+</figure>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Deleting a node cannot be undone. Export the Station first if you may need the node again (<a href="../backup_restore/">Backup and Restore</a>).</p>
+</div>
+<hr>
+<h2 id="6-find-nodes-in-a-large-graph">6. Find Nodes in a Large Graph<a class="headerlink" href="#6-find-nodes-in-a-large-graph" title="Permanent link">¶</a></h2>
+<ul>
+<li><strong>Filter</strong> shows nodes of one type or status.</li>
+<li><strong>Fit view</strong> zooms to show every node; <strong>Auto layout</strong> arranges the nodes by their connections.</li>
+<li>The <strong>N issues</strong> chip at the left of the toolbar lists problems such as unconnected required ports; <strong>Locate</strong> jumps to the node.</li>
+</ul>
+<figure>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/filter_popover.png" data-desc-position="bottom"><img alt="Filter" src="images/filter_popover.png" width="260"></a>
+<br>
+<figcaption>Filter by node type and status</figcaption>
+</figure>
+
+
+
+
+
+
+
+
+
+
+
+
+    <h2></h2>
+    <script src="https://giscus.app/client.js" data-repo="Sodero-labs/docs" data-repo-id="R_kgDOQiK7fQ" data-category="Q&amp;A" data-category-id="DIC_kwDOQiK7fc4C3JkV" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="dark" data-lang="en" crossorigin="anonymous" async="">
+    </script>
+
+    <script>
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+            var theme = palette.color.scheme === "slate" ? "dark" : "light"
+            var script = document.querySelector("script[src^='https://giscus.app/client.js']")
+            script.setAttribute("data-theme", theme)
+        }
+
+        var ref = document.querySelector("[data-md-component=config]")
+        var observer = new MutationObserver(function() {
+            var palette = __md_get("__palette")
+            var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+            var frame = document.querySelector(".giscus-frame")
+            if (frame) {
+                frame.contentWindow.postMessage(
+                    { giscus: { setConfig: { theme } } },
+                    "https://giscus.app"
+                )
+            }
+        })
+        observer.observe(ref, { attributes: true })
+    </script>         
+    <style>
+        .custom-btn-gray {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            font-size: 14px;
+            
+            color: #9e9e9e !important;
+            border: 1px solid #9e9e9e !important;
+            background-color: transparent !important;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        .custom-btn-gray:hover {
+            color: #ffffff !important;
+            border-color: #ffffff !important;
+        }
+
+        .custom-btn-gray .twemoji svg {
+            fill: currentColor;
+        }
+    </style>
+
+    <div style="margin-top: 2rem; display: flex; gap: 10px; flex-wrap: wrap;">
+        
+        <a href="https://github.com/Sodero-labs/docs/issues/new?title=[BUG] Nodes%20and%20Connections&amp;body=Path: https%3A//docs.sodero.io/stellar-x/v2.0.1/station/nodes_and_connections/" class="custom-btn-gray" target="_blank" rel="noopener noreferrer">
+            <span class="twemoji">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
+            </span>
+            Report an Issue
+        </a>
+
+    </div>
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.path", "navigation.sections", "navigation.tracking", "navigation.instant", "navigation.instant.progress", "content.code.copy", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/select-all.js"></script>
+      
+        <script src="../../javascripts/nav-state.js"></script>
+      
+        <script src="../../javascripts/version.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
