@@ -1,0 +1,2906 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.sodero.io/stellar-x/v2.0.2/virtual_simulation/connect_station/">
+      
+      
+        <link rel="prev" href="../robot_setup/">
+      
+      
+        <link rel="next" href="../../navigation/overview/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/tab_icon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+  
+    <title>Connect to Stellar Station - Stellar X Docs</title>
+  
+
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../styles/layout.css">
+    
+      <link rel="stylesheet" href="../../styles/color.css">
+    
+      <link rel="stylesheet" href="../../styles/font.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="white">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#connect-to-stellar-station" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden="">
+        
+      </div>
+    
+    
+  <style>
+    .md-header {
+      height: 60px !important;
+      background: #111 !important;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #333;
+    }
+
+    /* --- [1] Mobile --- */
+    @media (max-width: 76.24em) {
+      .pc-only { display: none !important; }
+      .mobile-header-inner {
+        display: flex; align-items: center;
+        height: 100%; width: 100%; padding: 0 12px; gap: 10px;
+      }
+      .md-header__button.md-icon { color: #fff; cursor: pointer; display: flex; align-items: center; margin-left: -8px; }
+      .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
+      .header-selects { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+      .header-selects .version-dropdown { margin-right: 0; }
+    }
+
+    /* Product and version menus */
+    .product-select, .version-select {
+      background: #1a1a1a;
+      color: #fff;
+      border: 1px solid #333;
+      padding: 4px 8px;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .product-select:hover, .version-select:hover { border-color: #555; }
+    .version-dropdown[hidden] { display: none; }
+
+    /* --- [2] Desktop --- */
+    @media (min-width: 76.25em) {
+      .mobile-only { display: none !important; }
+      .md-header__inner { height: 100%; width: 100% !important; margin: 0 !important; padding: 0 !important; }
+
+      .custom-header-inner {
+        height: 100%; display: grid; grid-template-columns: 280px 1fr 600px;
+        align-items: center; width: 100%; box-sizing: border-box;
+      }
+
+      .header-left, .header-center, .header-right { height: 100%; display: flex; align-items: center; padding: 0 12px; }
+      .header-left { gap: 15px; border-right: 1px solid #333; }
+      .header-icon-link, .header-home-btn { display: flex; align-items: center; height: 100%; text-decoration: none; color: #fff; }
+      .site-title { font-size: 0.8rem; font-weight: 500; }
+      .header-breadcrumbs { font-size: 14px; color: #bdbdbd; display: flex; gap: 6px; }
+      .header-breadcrumbs a { color: #bdbdbd; text-decoration: none; }
+      .header-right { justify-content: flex-end; gap: 10px; }
+
+      .md-search { position: relative; transition: all 0.3s; }
+
+      .md-search:focus-within {
+        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0, 0, 0, 0.85); display: flex; flex-direction: column;
+        align-items: center; padding-top: 40px; z-index: 999;
+      }
+
+      .md-search__form {
+        position: relative; display: flex; align-items: center;
+        width: 280px; height: 36px;
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid #333; 
+        border-radius: 4px;
+        transition: all 0.3s;
+        overflow: visible; 
+      }
+
+      .md-search:focus-within .md-search__form {
+        width: 100%; max-width: 760px; height: 54px;
+        background-color: #1a1a1a; border: 1px solid #444;
+      }
+
+      .md-search__input {
+        width: 100%; height: 100%; background: transparent !important;
+        border: none !important; outline: none !important;
+        color: #fff; font-size: 0.75rem; 
+        padding: 0 40px !important; 
+      }
+
+      .md-search:focus-within .md-search__input { font-size: 1.1rem; padding: 0 60px !important; }
+
+      .md-search__icon {
+        position: absolute !important;
+        left: 8px !important;
+        top: 50% !important;
+        transform: translateY(-45%) !important;
+        color: #bdbdbd !important;
+        opacity: 1 !important; 
+        visibility: visible !important; 
+        cursor: pointer;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        z-index: 5; 
+      }
+
+      .md-search:focus-within .md-search__icon[data-md-component="search-reset"] {
+        opacity: 1 !important;
+        left: 15px !important;
+
+        pointer-events: auto;
+      }
+
+      .md-search__output { display: none; }
+      .md-search:focus-within .md-search__output {
+        display: block; position: static; width: 100%; max-width: 760px;
+        background: #1a1a1a; margin-top: 2px; border-radius: 0 0 8px 8px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      }
+
+      .md-search-result__list {
+        display: flex;
+        flex-direction: column; 
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .md-search-result__item {
+        border-bottom: 1px solid #333; 
+      }
+
+      .md-search-result__link {
+        padding: 10px 15px !important;
+        display: block !important;
+      }
+
+      .md-search-result__article h1,
+      .md-search-result__article h2,
+      .md-search-result__article h3 {
+        font-size: 20px !important; 
+        font-weight: 600 !important;
+        margin: 0 0 4px 0 !important;
+        color: #e0e0e0 !important;
+        line-height: 1.2 !important;
+      }
+
+      .md-search-result__teaser {
+        font-size: 14px !important;
+        color: #999 !important;
+        line-height: 1.4 !important;
+        max-height: 2.8em; 
+        overflow: hidden;
+      }
+
+      /* Highlight color of matched keywords */
+      .md-search-result mark {
+        background-color: #0070dd;
+        color: #f0f1f2;
+        text-decoration: underline;
+      }
+
+      .md-search__scrollwrap {
+        max-height: 60vh; 
+        scrollbar-width: thin;
+        scrollbar-color: #444 transparent;
+      }
+    }
+
+    .md-search-result__icon {
+      width: 1.2rem !important; 
+      height: 1.2rem !important;
+      margin-top: 0.1rem !important;
+    }
+
+    .md-search-result__icon svg {
+      width: 0.8rem !important;  
+      height: 0.8rem !important;
+      opacity: 0.6;       
+    }
+
+    .md-search-result__link {
+      display: flex !important;
+      align-items: flex-start !important; 
+      gap: 10px !important;    
+      padding: 10px 15px !important;
+    }
+
+    .md-search-result__article {
+      width: 760px;
+      margin-left: 0 !important;
+    }
+  </style>
+
+  <header class="md-header" data-md-component="header">
+    <div class="md-header__inner" style="width: 100%;">
+      
+      <div class="mobile-header-inner mobile-only">
+        <label class="md-header__button md-icon" for="__drawer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+        </label>
+        <a href="../.." class="header-home-btn">
+          <img src="../../assets/docs.svg" alt="Sodero Docs">
+        </a>
+        <div class="header-selects">
+          <select class="product-select" aria-label="Product">
+            
+              <option value="sodero-cloud">Sodero Cloud</option>
+            
+              <option value="stellar-x" selected="">Stellar X</option>
+            
+          </select>
+          <div class="version-dropdown">
+            <select class="version-select" aria-label="Version"></select>
+          </div>
+        </div>
+      </div>
+
+      <div class="custom-header-inner pc-only">
+        <div class="header-left">
+          <a href="https://www.sodero.io" class="header-icon-link" title="Sodero Home" target="_blank" rel="noopener">
+            <img src="../../assets/main_icon.svg" alt="Sodero Docs">
+          </a>
+          <a href="../.." class="header-home-btn">
+            <img src="../../assets/docs.svg" alt="Sodero Docs">
+          </a>
+          <select class="product-select" aria-label="Product">
+            
+              <option value="sodero-cloud">Sodero Cloud</option>
+            
+              <option value="stellar-x" selected="">Stellar X</option>
+            
+          </select>
+        </div>
+
+        <div class="header-center">
+          <nav class="header-breadcrumbs">
+            
+              
+                <a href="#">Simulation</a>
+                <span class="sep">/</span>
+              
+            
+            <span class="current">Connect to Stellar Station</span>
+          </nav>
+        </div>
+
+        <div class="header-right">
+          <div class="md-search" data-md-component="search">
+            <form class="md-search__form" name="search">
+              <label class="md-search__icon md-icon" for="__search">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M9.5 3a6.5 6.5 0 015.2 10.5l4.4 4.4-1.4 1.4-4.4-4.4A6.5 6.5 0 119.5 3m0 2a4.5 4.5 0 100 9 4.5 4.5 0 000-9z"></path>
+                </svg>
+              </label>
+
+              <input type="text" class="md-search__input" placeholder="Search" aria-label="Search" data-md-component="search-query" required="">
+
+              <button type="submit" class="md-search__icon md-icon" data-md-component="search-reset" aria-label="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M9.5 3a6.5 6.5 0 015.2 10.5l4.4 4.4-1.4 1.4-4.4-4.4A6.5 6.5 0 119.5 3m0 2a4.5 4.5 0 100 9 4.5 4.5 0 000-9z"></path>
+                </svg>
+              </button>
+            </form>
+            <div class="md-search__output">
+              <div class="md-search__scrollwrap" data-md-scrollfix="">
+                <div class="md-search-result" data-md-component="search-result">
+                  <div class="md-search-result__meta"></div>
+                  <ol class="md-search-result__list"></ol>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="version-dropdown">
+            <select class="version-select" aria-label="Version"></select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Stellar X" class="md-nav__button md-logo" aria-label="Stellar X" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Stellar X
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1">
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Get Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../get_started/sodero_ecosystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sodero Ecosystem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../get_started/key_concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Key Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../get_started/quick_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware &amp; Network
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardware &amp; Network
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware_setup/stellar_series/stellar_x/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stellar X
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware_setup/stellar_series/network_settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware_setup/stop_controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stop Controls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stellar Station
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stellar Station
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../station/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../station/nodes_and_connections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nodes and Connections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../station/design_documents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../station/running_nodes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../station/modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../station/backup_restore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup and Restore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stellar Designer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stellar Designer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateways/gateway_designer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gateway Designer (.gw)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/manipulator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manipulator (.sdd)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/mobile_robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile Robot (.sddm)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulated Robot (.sdda)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3D Model (.glb, Optional)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gateways &amp; Sensors
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gateways &amp; Sensors
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateways/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateways/ethercat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EtherCAT Gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateways/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulation Gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateways/test_console/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test Console
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateways/sensors_and_cameras/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sensors and Cameras
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gateways/device_bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Device Bridge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operate Robots
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Operate Robots
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../controllers/strider/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strider
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../controllers/motion_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Motion Studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../controllers/articulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Articulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Simulation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extension_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Isaac Bridge Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../robot_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connect to Stellar Station
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connect to Stellar Station
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-play-the-scene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Play the Scene
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-set-the-gateways-on-the-station" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Set the Gateways on the Station
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-start-and-drive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Start and Drive
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-stop-pause-and-play" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Stop, Pause and Play
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-several-robots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Several Robots
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-real-time-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Real-Time Performance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Localization &amp; Navigation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Localization &amp; Navigation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../navigation/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../navigation/map_bundle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Load and Configure a Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../navigation/create_map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create a Map from Your Site
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/learning_path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning Path
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../navigation/simulation_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigate in Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/ethercat_mobile_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EtherCAT Mobile Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10">
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extend &amp; Automate
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Extend &amp; Automate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ssh_workspace/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH Workspace
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ssh_workspace/sodero_cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sodero CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ssh_workspace/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Coding Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extend/custom_modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create Custom Modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extend/device_bridge_drivers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Write Device Bridge Drivers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11">
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../navigation/map_bundle_format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Map Bundle Format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compatibility and Downloads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChangeLog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1-play-the-scene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Play the Scene
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-set-the-gateways-on-the-station" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Set the Gateways on the Station
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-start-and-drive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Start and Drive
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-stop-pause-and-play" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Stop, Pause and Play
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-several-robots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Several Robots
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-real-time-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Real-Time Performance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  <div id="breadcrumb-source" hidden="">
+    
+      
+        <a href="#">Simulation</a>
+        <span class="sep">/</span>
+      
+    
+    <span class="current">Connect to Stellar Station</span>
+  </div>
+  
+                  
+
+
+
+<h1 id="connect-to-stellar-station">Connect to Stellar Station<a class="headerlink" href="#connect-to-stellar-station" title="Permanent link">¶</a></h1>
+<p>With Isaac Bridge installed and the robot prepared, point the Station's gateways at Isaac Sim and drive the robot.</p>
+<hr>
+<h2 id="1-play-the-scene">1. Play the Scene<a class="headerlink" href="#1-play-the-scene" title="Permanent link">¶</a></h2>
+<ol>
+<li>Open the scene in Isaac Sim and press <strong>Play</strong>.</li>
+<li>Open <strong>Window › Isaac Bridge</strong> and check that the ports are <strong>serving</strong> and your robot is <strong>bound</strong>.</li>
+</ol>
+<figure>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/isaac_bridge_window.png" data-desc-position="bottom"><img alt="Isaac Bridge window" src="images/isaac_bridge_window.png" width="560"></a>
+<br>
+<figcaption>① ports serving ② robots bound ③ cameras served ④ Rescan</figcaption>
+</figure>
+<hr>
+<h2 id="2-set-the-gateways-on-the-station">2. Set the Gateways on the Station<a class="headerlink" href="#2-set-the-gateways-on-the-station" title="Permanent link">¶</a></h2>
+<p>Set the Station nodes to match Isaac Sim:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Isaac Sim</th>
+<th style="text-align: left;">Station node</th>
+<th style="text-align: left;">Field</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Robot <code>jackal</code></td>
+<td style="text-align: left;">Actuator gateway (simulation)</td>
+<td style="text-align: left;"><strong>TARGET › Robot name</strong> <code>jackal</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">The Isaac Sim computer</td>
+<td style="text-align: left;">Actuator gateway (simulation)</td>
+<td style="text-align: left;"><strong>TARGET › Sim host</strong>: the computer's IP address</td>
+</tr>
+<tr>
+<td style="text-align: left;">Camera <code>cam0</code></td>
+<td style="text-align: left;">Camera gateway</td>
+<td style="text-align: left;"><strong>Camera name</strong> <code>cam0</code>, <strong>Camera host</strong>: the computer's IP address, <strong>Port</strong> 53335</td>
+</tr>
+<tr>
+<td style="text-align: left;">Robot <code>jackal</code> (with an IMU)</td>
+<td style="text-align: left;">IMU gateway</td>
+<td style="text-align: left;"><strong>Robot in World</strong> <code>jackal</code></td>
+</tr>
+</tbody>
+</table>
+<p>The IMU gateway has no host field: it connects to the simulator address configured for your controller, which Sodero support sets (<a href="../../gateways/sensors_and_cameras/#2-imu-gateway">Sensors and Cameras</a>).</p>
+<div class="admonition warning">
+<p class="admonition-title"><strong>The Robot name on the Station must be exactly the robot's prim name in Isaac Sim.</strong> Names are case-sensitive. If they differ, the gateway keeps waiting and the robot never moves.</p>
+</div>
+<figure>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../get_started/quick_start/images/target.png" data-desc-position="bottom"><img alt="Target" src="../../get_started/quick_start/images/target.png" width="331"></a>
+<br>
+<figcaption>Robot name and Sim host of a simulation gateway</figcaption>
+</figure>
+<p>How to create the gateways and their documents: <a href="../../gateways/simulation/">Simulation Gateway</a>, <a href="../../gateways/sensors_and_cameras/">Sensors and Cameras</a>.</p>
+<hr>
+<h2 id="3-start-and-drive">3. Start and Drive<a class="headerlink" href="#3-start-and-drive" title="Permanent link">¶</a></h2>
+<ol>
+<li>Start the gateways, then the controllers (<a href="../../station/running_nodes/">Running Nodes</a>).</li>
+<li>Each simulation gateway logs <em>Simulator connected.</em></li>
+<li>Open the controller's UI, switch the servo on, and jog: <a href="../../controllers/strider/">Strider</a> for mobile bases, <a href="../../controllers/motion_studio/">Motion Studio</a> for manipulators.</li>
+</ol>
+<figure>
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/jackal_jog_isaac.png" data-desc-position="bottom"><img alt="Jackal in Isaac Sim" src="images/jackal_jog_isaac.png" width="900"></a>
+<br>
+<figcaption>The Jackal jogged from Strider</figcaption>
+</figure>
+<hr>
+<h2 id="4-stop-pause-and-play">4. Stop, Pause and Play<a class="headerlink" href="#4-stop-pause-and-play" title="Permanent link">¶</a></h2>
+<p>The gateways treat Isaac Sim like a power supply of real drives:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">In Isaac Sim</th>
+<th style="text-align: left;">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Pause</strong></td>
+<td style="text-align: left;">The robots stay where they are. The gateways see the simulator stop and switch the servo off; switch it on again after you resume.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Stop</strong>, then <strong>Play</strong></td>
+<td style="text-align: left;">A new session: the robots start again at their authored pose, as after a power cycle. Switch the servo on again.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Editing the scene while it plays</td>
+<td style="text-align: left;">Takes effect at the next <strong>Play</strong>, or click <strong>Rescan</strong> in the Isaac Bridge window</td>
+</tr>
+<tr>
+<td style="text-align: left;">Closing Isaac Sim and starting it again</td>
+<td style="text-align: left;">The gateways lose the simulator, and the controllers stop the robots. When the scene plays again, restart the robot's nodes from the toolbar: <strong>Stop all nodes</strong>, then <strong>Start all nodes</strong> (<a href="../../station/running_nodes/#2-start-all-nodes">Running Nodes</a>). Switch the servo on again.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">After the simulation restarts, the robot is back at its starting pose, but the Localizer may still hold its last pose. If Strider's Navigation page shows a wrong pose, set the initial pose again.</p>
+</div>
+<hr>
+<h2 id="5-several-robots">5. Several Robots<a class="headerlink" href="#5-several-robots" title="Permanent link">¶</a></h2>
+<p>One scene can hold several robots. Add one gateway (and controller) per robot on the Station, each with its own <strong>Robot name</strong>. All gateways use the same Isaac Sim computer and ports; the status window lists every robot it serves.</p>
+<p>A robot can also be driven by several gateways, for example an arm and its gripper. Each gateway drives its own range of joints, set by its <strong>DOF offset</strong> (<a href="../../gateways/gateway_designer/#5-simulation-gateways">Gateway Designer</a>).</p>
+<hr>
+<h2 id="6-real-time-performance">6. Real-Time Performance<a class="headerlink" href="#6-real-time-performance" title="Permanent link">¶</a></h2>
+<p>The simulation runs in real time while the computer keeps up with the render rate. The controllers follow the simulation's time, but camera-based localization runs on wall-clock time, so a simulation that runs slower than real time degrades localization.</p>
+<ul>
+<li>Use moderate camera sizes and frame rates; each camera is rendered in addition to the viewport.</li>
+<li>Close viewports and windows you do not need.</li>
+<li>Do not run other heavy GPU programs (such as training) on the same computer at the same time.</li>
+<li>Keep the clocks of both computers synchronized (NTP). The camera gateway accepts frames at most 20 ms ahead of and 2 s behind its own clock. If you cannot synchronize them, start Isaac Sim with <code>RC_CAMERA_CAPTURE_TIME=0</code>: the camera gateway then stamps each frame when it arrives.</li>
+</ul>
+<hr>
+<h2 id="7-troubleshooting">7. Troubleshooting<a class="headerlink" href="#7-troubleshooting" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Symptom</th>
+<th style="text-align: left;">Cause and fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">The status window does not show <strong>serving</strong></td>
+<td style="text-align: left;">Another program (for example a second Isaac Sim) holds ports 53333–53335. Close it and press <strong>Play</strong> again.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Gateway log stays at <em>waiting for it to start</em></td>
+<td style="text-align: left;">Isaac Sim is not playing, <strong>Sim host</strong> is wrong, or a firewall blocks the ports (<a href="../extension_installation/#4-allow-the-ports-in-the-firewall">Isaac Bridge Installation</a>)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Isaac Sim console: <em>'sim_command' for 'X', which is no robot or tracked object of this stage</em></td>
+<td style="text-align: left;">The gateway's <strong>Robot name</strong> <code>X</code> is not the prim name of a robot in the scene</td>
+</tr>
+<tr>
+<td style="text-align: left;">The robot is listed but never <strong>bound</strong></td>
+<td style="text-align: left;">It is not a valid PhysX articulation, or its name is used twice (<a href="../robot_setup/#9-check-the-robot">Robot Setup</a>)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Camera gateway: <em>publishes frames of camera(s) … but none of camera …</em></td>
+<td style="text-align: left;">The camera gateway's <strong>Camera name</strong> is not the camera's prim name</td>
+</tr>
+<tr>
+<td style="text-align: left;">Camera gateway: frames <em>stale</em> or with capture times that do not match</td>
+<td style="text-align: left;">The clocks of the two computers differ. Synchronize them, or start Isaac Sim with <code>RC_CAMERA_CAPTURE_TIME=0</code> so that the camera gateway uses arrival times.</td>
+</tr>
+<tr>
+<td style="text-align: left;">The robot moves too fast or too slow</td>
+<td style="text-align: left;">The computer cannot keep up with the render rate. Lower camera sizes or rates, or close viewports.</td>
+</tr>
+</tbody>
+</table>
+<p>The Isaac Sim console shows the bridge's messages, prefixed with the robot or camera name.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+    <h2></h2>
+    <script src="https://giscus.app/client.js" data-repo="Sodero-labs/docs" data-repo-id="R_kgDOQiK7fQ" data-category="Q&amp;A" data-category-id="DIC_kwDOQiK7fc4C3JkV" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="dark" data-lang="en" crossorigin="anonymous" async="">
+    </script>
+
+    <script>
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+            var theme = palette.color.scheme === "slate" ? "dark" : "light"
+            var script = document.querySelector("script[src^='https://giscus.app/client.js']")
+            script.setAttribute("data-theme", theme)
+        }
+
+        var ref = document.querySelector("[data-md-component=config]")
+        var observer = new MutationObserver(function() {
+            var palette = __md_get("__palette")
+            var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+            var frame = document.querySelector(".giscus-frame")
+            if (frame) {
+                frame.contentWindow.postMessage(
+                    { giscus: { setConfig: { theme } } },
+                    "https://giscus.app"
+                )
+            }
+        })
+        observer.observe(ref, { attributes: true })
+    </script>         
+    <style>
+        .custom-btn-gray {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            font-size: 14px;
+            
+            color: #9e9e9e !important;
+            border: 1px solid #9e9e9e !important;
+            background-color: transparent !important;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        .custom-btn-gray:hover {
+            color: #ffffff !important;
+            border-color: #ffffff !important;
+        }
+
+        .custom-btn-gray .twemoji svg {
+            fill: currentColor;
+        }
+    </style>
+
+    <div style="margin-top: 2rem; display: flex; gap: 10px; flex-wrap: wrap;">
+        
+        <a href="https://github.com/Sodero-labs/docs/issues/new?title=[BUG] Connect%20to%20Stellar%20Station&amp;body=Path: https%3A//docs.sodero.io/stellar-x/v2.0.2/virtual_simulation/connect_station/" class="custom-btn-gray" target="_blank" rel="noopener noreferrer">
+            <span class="twemoji">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"></path></svg>
+            </span>
+            Report an Issue
+        </a>
+
+    </div>
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.path", "navigation.sections", "navigation.tracking", "navigation.instant", "navigation.instant.progress", "content.code.copy", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/select-all.js"></script>
+      
+        <script src="../../javascripts/nav-state.js"></script>
+      
+        <script src="../../javascripts/version.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
