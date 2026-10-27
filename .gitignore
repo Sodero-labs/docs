@@ -1,2 +1,4 @@
 .vscode
 .claude
+site/
+__pycache__/

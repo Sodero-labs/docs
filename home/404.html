@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found - Sodero Docs</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/tab_icon.svg">
+  <script>
+    // Addresses from before the manuals were split by product (/v2.0.0/..., /latest/...)
+    // belong to the Stellar X manual, which now lives under /stellar-x/.
+    (function () {
+      var path = window.location.pathname;
+      var rest = window.location.search + window.location.hash;
+      var old = path.match(/^\/(v\d+\.\d+\.\d+|latest)(\/.*)?$/);
+      if (old) {
+        window.location.replace("/stellar-x/" + old[1] + (old[2] || "/") + rest);
+      } else if (/^\/stellarx(\/|$)/.test(path)) {
+        window.location.replace("/stellar-x/latest/" + rest);
+      }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/home.css">
+</head>
+<body>
+  <header class="top">
+    <a href="https://www.sodero.io" class="top__icon" title="Sodero Home" target="_blank" rel="noopener">
+      <img src="/assets/main_icon.svg" alt="Sodero" width="20" height="20">
+    </a>
+    <a href="/" class="top__docs"><img src="/assets/docs.svg" alt="Sodero Docs" width="44" height="15"></a>
+  </header>
+
+  <main class="page">
+    <h1>Page not found</h1>
+    <p class="lead">The page may have moved to another version of the manual. Open a manual and use search to find it.</p>
+
+    <div class="products">
+      <a class="product" href="/sodero-cloud/">
+        <img class="product__icon" src="https://unpkg.com/lucide-static@0.577.0/icons/cloud.svg" alt="">
+        <h2>Sodero Cloud</h2>
+        <p>Projects, Robot Worlds and Stellar Station in the cloud.</p>
+        <span class="product__meta">Open the manual</span>
+      </a>
+      <a class="product" href="/stellar-x/">
+        <img class="product__icon" src="https://unpkg.com/lucide-static@0.577.0/icons/cpu.svg" alt="">
+        <h2>Stellar X</h2>
+        <p>The Stellar X robot controller and Stellar Station.</p>
+        <span class="product__meta">Open the manual</span>
+      </a>
+    </div>
+  </main>
+</body>
+</html>

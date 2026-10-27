@@ -2,15 +2,20 @@ name: publish site
 on:
   push:
     tags:
-      - 'v*'
+      # <product folder>/<version>, for example sodero-cloud/v1.0.0 or stellar-x/v2.0.0
+      - 'sodero-cloud/v*'
+      - 'stellar-x/v*'
 permissions:
   contents: write
+concurrency:
+  group: gh-pages
+  cancel-in-progress: false
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Configure Python
         uses: actions/setup-python@v5
         with:
@@ -27,14 +32,18 @@ jobs:
 
       - name: Deploy with mike
         run: |
-          # Use the pushed tag name as the version name (e.g. v2.0.0)
-          TAG_NAME=${GITHUB_REF_NAME}
-          
+          PRODUCT="${GITHUB_REF_NAME%%/*}"
+          VERSION="${GITHUB_REF_NAME#*/}"
+
           # Sync the gh-pages branch
           git fetch origin gh-pages:gh-pages || true
-          
-          # Deploy the tag as a version and point the latest alias to it
-          mike deploy --push --update-aliases $TAG_NAME latest
-          
-          # Make the latest version the default page
-          mike set-default --push latest
+
+          # Deploy the version under /<product>/ and point the product's latest alias to it
+          mike deploy --config-file "$PRODUCT/mkdocs.yml" --push --update-aliases "$VERSION" latest
+
+          # /<product>/ opens the latest version
+          mike set-default --config-file "$PRODUCT/mkdocs.yml" --push latest
+
+      - name: Publish the home page
+        run: |
+          python3 tools/publish_home.py --push

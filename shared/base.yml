@@ -1,0 +1,82 @@
+# Settings shared by every product manual on docs.sodero.io.
+# Each product folder has its own mkdocs.yml that inherits this file and adds
+# site_name, site_url, extra.product, nav and plugins.
+theme:
+  name: material
+  favicon: assets/tab_icon.svg
+  custom_dir: ../shared/theme
+  font:
+    text: "Inter"
+    code: "JetBrains Mono"
+  palette:
+    - scheme: slate
+      primary: black
+      accent: white
+  features:
+    - navigation.path
+    - navigation.sections
+    - navigation.tracking
+    - navigation.instant
+    - navigation.instant.progress
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+    - search.share
+
+extra:
+  version:
+    provider: mike
+  # The product menu in the header. The slug is the product's folder on docs.sodero.io.
+  products:
+    - name: Sodero Cloud
+      slug: sodero-cloud
+    - name: Stellar X
+      slug: stellar-x
+  comments:
+    provider: giscus
+    options:
+      repo: Sodero-labs/docs
+      repo_id: R_kgDOQiK7fQ
+      category: Q&A
+      category_id: DIC_kwDOQiK7fc4C3JkV
+      mapping: pathname
+      strict: 0
+      reactions_enabled: 1
+      emit_metadata: 0
+      input_position: bottom
+      theme: dark
+      lang: en
+
+extra_css:
+  - styles/layout.css
+  - styles/color.css
+  - styles/font.css
+extra_javascript:
+  - javascripts/mathjax.js
+  - javascripts/select-all.js
+  - javascripts/nav-state.js
+  - javascripts/version.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.keys
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.blocks.caption
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format

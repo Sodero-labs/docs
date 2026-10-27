@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sodero Docs</title>
+  <meta name="description" content="Manuals for Sodero products: Sodero Cloud and the Stellar X robot controller.">
+  <link rel="canonical" href="https://docs.sodero.io/">
+  <link rel="icon" href="/assets/tab_icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/home.css">
+</head>
+<body>
+  <header class="top">
+    <a href="https://www.sodero.io" class="top__icon" title="Sodero Home" target="_blank" rel="noopener">
+      <img src="/assets/main_icon.svg" alt="Sodero" width="20" height="20">
+    </a>
+    <a href="/" class="top__docs"><img src="/assets/docs.svg" alt="Sodero Docs" width="44" height="15"></a>
+  </header>
+
+  <main class="page">
+    <h1>Sodero Documentation</h1>
+    <p class="lead">Choose a product to open its manual. Each manual has its own versions.</p>
+
+    <div class="products">
+      <a class="product" href="/sodero-cloud/">
+        <img class="product__icon" src="https://unpkg.com/lucide-static@0.577.0/icons/cloud.svg" alt="">
+        <h2>Sodero Cloud</h2>
+        <p>Build, simulate and operate robot systems in your browser. Create projects, design Robot Worlds in Studio, watch them run in Theater and drive the robots with Stellar Station in the cloud.</p>
+        <span class="product__meta" data-versions="sodero-cloud">Open the manual</span>
+      </a>
+      <a class="product" href="/stellar-x/">
+        <img class="product__icon" src="https://unpkg.com/lucide-static@0.577.0/icons/cpu.svg" alt="">
+        <h2>Stellar X</h2>
+        <p>The Stellar X robot controller. Set up the hardware and network, build the robot system in Stellar Station, connect EtherCAT drives and sensors, and simulate with NVIDIA Isaac Sim.</p>
+        <span class="product__meta" data-versions="stellar-x">Open the manual</span>
+      </a>
+    </div>
+
+    <h3>Support</h3>
+    <div class="links">
+      <a class="link" href="https://www.sodero.io/contact">
+        <img src="https://unpkg.com/lucide-static@0.577.0/icons/headset.svg" alt="">
+        <span><strong>Contact Support</strong>Reach our robotics engineering team for technical help or product questions.</span>
+      </a>
+      <a class="link" href="https://github.com/Sodero-labs/docs/discussions">
+        <img src="https://unpkg.com/lucide-static@0.577.0/icons/github.svg" alt="">
+        <span><strong>GitHub Discussions</strong>Ask questions and share ideas with the Sodero community.</span>
+      </a>
+    </div>
+  </main>
+
+  <footer class="foot">&copy; Sodero. All rights reserved.</footer>
+
+  <script>
+    // Show the latest version of each manual from the product's versions.json.
+    document.querySelectorAll("[data-versions]").forEach(function (el) {
+      fetch("/" + el.dataset.versions + "/versions.json")
+        .then(function (res) { return res.ok ? res.json() : []; })
+        .then(function (versions) {
+          var latest = versions.find(function (v) { return (v.aliases || []).indexOf("latest") !== -1; }) || versions[0];
+          if (latest) el.textContent = "Open the manual · " + (latest.title || latest.version);
+        })
+        .catch(function () {});
+    });
+  </script>
+</body>
+</html>
