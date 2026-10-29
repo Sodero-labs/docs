@@ -1,0 +1,80 @@
+# Stellar X
+
+## Get Started
+
+- [Sodero Ecosystem](https://docs.sodero.io/stellar-x/v2.0.3/get_started/sodero_ecosystem/index.md)
+- [Key Concepts](https://docs.sodero.io/stellar-x/v2.0.3/get_started/key_concepts/index.md)
+- [Quick Start](https://docs.sodero.io/stellar-x/v2.0.3/get_started/quick_start/index.md)
+- [Learning Path](https://docs.sodero.io/stellar-x/v2.0.3/tutorials/learning_path/index.md)
+
+## Hardware and Network
+
+- [Stellar X](https://docs.sodero.io/stellar-x/v2.0.3/hardware_setup/stellar_series/stellar_x/index.md)
+- [Network Settings](https://docs.sodero.io/stellar-x/v2.0.3/hardware_setup/stellar_series/network_settings/index.md)
+- [Stop Controls](https://docs.sodero.io/stellar-x/v2.0.3/hardware_setup/stop_controls/index.md)
+
+## Stellar Station
+
+- [Overview](https://docs.sodero.io/stellar-x/v2.0.3/station/overview/index.md)
+- [Nodes and Connections](https://docs.sodero.io/stellar-x/v2.0.3/station/nodes_and_connections/index.md)
+- [Design Documents](https://docs.sodero.io/stellar-x/v2.0.3/station/design_documents/index.md)
+- [Running Nodes](https://docs.sodero.io/stellar-x/v2.0.3/station/running_nodes/index.md)
+- [Modules](https://docs.sodero.io/stellar-x/v2.0.3/station/modules/index.md)
+- [Backup and Restore](https://docs.sodero.io/stellar-x/v2.0.3/station/backup_restore/index.md)
+
+## Stellar Designer
+
+- [Overview](https://docs.sodero.io/stellar-x/v2.0.3/tutorials/stellar_designer/introduction/index.md)
+- [Gateway Designer (.gw)](https://docs.sodero.io/stellar-x/v2.0.3/gateways/gateway_designer/index.md)
+- [Manipulator (.sdd)](https://docs.sodero.io/stellar-x/v2.0.3/tutorials/stellar_designer/manipulator/index.md)
+- [Mobile Robot (.sddm)](https://docs.sodero.io/stellar-x/v2.0.3/tutorials/stellar_designer/mobile_robot/index.md)
+- [Articulated Robot (.sdda)](https://docs.sodero.io/stellar-x/v2.0.3/tutorials/stellar_designer/articulation/index.md)
+- [3D Model (.glb, Optional)](https://docs.sodero.io/stellar-x/v2.0.3/tutorials/stellar_designer/3dmodel_creation/index.md)
+
+## Gateways and Sensors
+
+- [Overview](https://docs.sodero.io/stellar-x/v2.0.3/gateways/overview/index.md)
+- [EtherCAT Gateway](https://docs.sodero.io/stellar-x/v2.0.3/gateways/ethercat/index.md)
+- [Simulation Gateway](https://docs.sodero.io/stellar-x/v2.0.3/gateways/simulation/index.md)
+- [Test Console](https://docs.sodero.io/stellar-x/v2.0.3/gateways/test_console/index.md)
+- [Sensors and Cameras](https://docs.sodero.io/stellar-x/v2.0.3/gateways/sensors_and_cameras/index.md)
+- [Device Bridge](https://docs.sodero.io/stellar-x/v2.0.3/gateways/device_bridge/index.md)
+
+## Simulation
+
+- [Overview](https://docs.sodero.io/stellar-x/v2.0.3/virtual_simulation/introduction/index.md)
+- [Isaac Bridge Installation](https://docs.sodero.io/stellar-x/v2.0.3/virtual_simulation/extension_installation/index.md)
+- [Robot Setup](https://docs.sodero.io/stellar-x/v2.0.3/virtual_simulation/robot_setup/index.md)
+- [Connect to Stellar Station](https://docs.sodero.io/stellar-x/v2.0.3/virtual_simulation/connect_station/index.md)
+
+## Operate Robots
+
+- [Strider](https://docs.sodero.io/stellar-x/v2.0.3/controllers/strider/index.md)
+- [Motion Studio](https://docs.sodero.io/stellar-x/v2.0.3/controllers/motion_studio/index.md)
+- [Articulation](https://docs.sodero.io/stellar-x/v2.0.3/controllers/articulation/index.md)
+
+## Localization and Navigation
+
+- [Overview](https://docs.sodero.io/stellar-x/v2.0.3/navigation/overview/index.md)
+- [Load and Configure a Map](https://docs.sodero.io/stellar-x/v2.0.3/navigation/map_bundle/index.md)
+- [Create a Map from Your Site](https://docs.sodero.io/stellar-x/v2.0.3/navigation/create_map/index.md)
+
+## Tutorials
+
+- [Navigate in Simulation](https://docs.sodero.io/stellar-x/v2.0.3/navigation/simulation_tutorial/index.md)
+- [EtherCAT Mobile Base](https://docs.sodero.io/stellar-x/v2.0.3/tutorials/ethercat_mobile_base/index.md)
+
+## Extend and Automate
+
+- [SSH Workspace](https://docs.sodero.io/stellar-x/v2.0.3/ssh_workspace/overview/index.md)
+- [sodero CLI](https://docs.sodero.io/stellar-x/v2.0.3/ssh_workspace/sodero_cli/index.md)
+- [AI Coding Agents](https://docs.sodero.io/stellar-x/v2.0.3/ssh_workspace/ai_agents/index.md)
+- [Create Custom Modules](https://docs.sodero.io/stellar-x/v2.0.3/extend/custom_modules/index.md)
+- [Write Device Bridge Drivers](https://docs.sodero.io/stellar-x/v2.0.3/extend/device_bridge_drivers/index.md)
+
+## Reference
+
+- [Map Bundle Format](https://docs.sodero.io/stellar-x/v2.0.3/navigation/map_bundle_format/index.md)
+- [Compatibility and Downloads](https://docs.sodero.io/stellar-x/v2.0.3/reference/compatibility/index.md)
+- [ChangeLog](https://docs.sodero.io/stellar-x/v2.0.3/CHANGELOG/index.md)
+
