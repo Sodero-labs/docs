@@ -11,6 +11,7 @@ nav:
     - Sodero Ecosystem: get_started/sodero_ecosystem/index.md
     - Key Concepts: get_started/key_concepts/index.md
     - Quick Start: get_started/quick_start/index.md
+    - Learning Path: tutorials/learning_path/index.md
   - Hardware & Network:
     - Stellar X: hardware_setup/stellar_series/stellar_x/index.md
     - Network Settings: hardware_setup/stellar_series/network_settings/index.md
@@ -36,21 +37,20 @@ nav:
     - Test Console: gateways/test_console/index.md
     - Sensors and Cameras: gateways/sensors_and_cameras/index.md
     - Device Bridge: gateways/device_bridge/index.md
-  - Operate Robots:
-    - Strider: controllers/strider/index.md
-    - Motion Studio: controllers/motion_studio/index.md
-    - Articulation: controllers/articulation/index.md
   - Simulation:
     - Overview: virtual_simulation/introduction/index.md
     - Isaac Bridge Installation: virtual_simulation/extension_installation/index.md
     - Robot Setup: virtual_simulation/robot_setup/index.md
     - Connect to Stellar Station: virtual_simulation/connect_station/index.md
+  - Operate Robots:
+    - Strider: controllers/strider/index.md
+    - Motion Studio: controllers/motion_studio/index.md
+    - Articulation: controllers/articulation/index.md
   - Localization & Navigation:
     - Overview: navigation/overview/index.md
     - Load and Configure a Map: navigation/map_bundle/index.md
     - Create a Map from Your Site: navigation/create_map/index.md
   - Tutorials:
-    - Learning Path: tutorials/learning_path/index.md
     - Navigate in Simulation: navigation/simulation_tutorial/index.md
     - EtherCAT Mobile Base: tutorials/ethercat_mobile_base/index.md
   - Extend & Automate:
@@ -76,10 +76,18 @@ plugins:
           - get_started/sodero_ecosystem/index.md
           - get_started/key_concepts/index.md
           - get_started/quick_start/index.md
+          - tutorials/learning_path/index.md
         Hardware and Network:
-          - hardware_setup/**/*.md
+          - hardware_setup/stellar_series/stellar_x/index.md
+          - hardware_setup/stellar_series/network_settings/index.md
+          - hardware_setup/stop_controls/index.md
         Stellar Station:
-          - station/**/*.md
+          - station/overview/index.md
+          - station/nodes_and_connections/index.md
+          - station/design_documents/index.md
+          - station/running_nodes/index.md
+          - station/modules/index.md
+          - station/backup_restore/index.md
         Stellar Designer:
           - tutorials/stellar_designer/introduction/index.md
           - gateways/gateway_designer/index.md
@@ -94,23 +102,29 @@ plugins:
           - gateways/test_console/index.md
           - gateways/sensors_and_cameras/index.md
           - gateways/device_bridge/index.md
-        Operate Robots:
-          - controllers/**/*.md
         Simulation:
-          - virtual_simulation/**/*.md
+          - virtual_simulation/introduction/index.md
+          - virtual_simulation/extension_installation/index.md
+          - virtual_simulation/robot_setup/index.md
+          - virtual_simulation/connect_station/index.md
+        Operate Robots:
+          - controllers/strider/index.md
+          - controllers/motion_studio/index.md
+          - controllers/articulation/index.md
         Localization and Navigation:
           - navigation/overview/index.md
           - navigation/map_bundle/index.md
           - navigation/create_map/index.md
         Tutorials:
-          - tutorials/learning_path/index.md
           - navigation/simulation_tutorial/index.md
           - tutorials/ethercat_mobile_base/index.md
         Extend and Automate:
           - ssh_workspace/overview/index.md
           - ssh_workspace/sodero_cli/index.md
           - ssh_workspace/ai_agents/index.md
-          - extend/**/*.md
+          - extend/custom_modules/index.md
+          - extend/device_bridge_drivers/index.md
         Reference:
           - navigation/map_bundle_format/index.md
-          - reference/**/*.md
+          - reference/compatibility/index.md
+          - CHANGELOG.md

@@ -7,6 +7,30 @@
 
 <div class="version-info" markdown="1">
 
+<div class="display-version">v2.0.3</div>
+<div class="display-date">2026.10.29</div>
+
+</div>
+
+<div class="version-content" markdown="1">
+
+## v2.0.3 { #v2-0-3 }
+
+#### Documentation and Navigation
+
+* The navigation follows the order of use: [Learning Path](tutorials/learning_path/index.md) is under **Get Started**, and **Simulation** comes before **Operate Robots**.
+* The [Quick Start](get_started/quick_start/index.md) and [EtherCAT Mobile Base](tutorials/ethercat_mobile_base/index.md) begin with the tutorial itself; the notes on the example files are in [Compatibility and Downloads](reference/compatibility/index.md#example-files).
+* [Isaac Bridge Installation](virtual_simulation/extension_installation/index.md#5-update-or-remove): update steps for a copy cloned from a release tag.
+* Fixed the address of `llms-full.txt` in [AI Coding Agents](ssh_workspace/ai_agents/index.md#give-the-agent-the-documentation) and the links to [Create Custom Modules](extend/custom_modules/index.md).
+
+</div>
+
+</div>
+
+<div class="version-block" markdown="1">
+
+<div class="version-info" markdown="1">
+
 <div class="display-version">v2.0.2</div>
 <div class="display-date">2026.10.27</div>
 
@@ -42,9 +66,8 @@
 
 This is a Stellar X documentation release, not a change to the software installed on your controller.
 
-* Updated `jackal.gw`, `jackal.sddm`, `wheels.gw` and `base.sddm` to use current `sodero.actuator_gateway.*` IDs. Download both files of each pair again; older copies can be rejected or fail to connect on current Station builds.
-* Aligned gateway, camera, IMU and Navigator node IDs in the tutorials, connection diagrams and CLI examples. Older screenshots may still display `rc.*` IDs.
-* Checked gateway imports, robot document loading and the unchanged warehouse map bundle against the document loaders used by the 2026-10-26 Station build. Robot geometry, actuator order, EtherCAT settings and safety limits are unchanged. Hardware motion and simulation runs were not part of this compatibility check. See [Compatibility and Downloads](reference/compatibility/index.md).
+* Updated `jackal.gw`, `jackal.sddm`, `wheels.gw` and `base.sddm` to use current `sodero.actuator_gateway.*` IDs. Download both files of each pair again; the Station can refuse older copies. Robot geometry, actuator order, EtherCAT settings and safety limits are unchanged. See [Compatibility and Downloads](reference/compatibility/index.md#example-files).
+* Aligned gateway, camera, IMU and Navigator node IDs in the tutorials, connection diagrams and CLI examples.
 
 </div>
 

@@ -1,9 +1,5 @@
 # Quick Start
 
-!!! info "Updated example pair (2026-10-27)"
-
-    Download both the `.gw` and `.sddm` files from this page again if you have older copies. They use the current `sodero.*` node IDs; older screenshots may still show `rc.*`. See [Compatibility and Downloads](../../reference/compatibility/index.md#example-files).
-
 You will build a small robot system on Stellar X and drive a simulated **Clearpath Jackal** in NVIDIA Isaac Sim with Strider. It takes about 15 minutes once Stellar X is on your network and Isaac Sim with the Isaac Bridge extension is installed (see **Before You Start**). You will:
 
 1. add an actuator gateway and a Strider controller on Stellar Station,

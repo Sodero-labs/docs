@@ -49,7 +49,7 @@ Check two more things before you go on:
 
 1. **Add node** › **Gateway** › **Camera gateway**, name it `cam0` ([Sensors and Cameras](../../gateways/sensors_and_cameras/index.md#1-camera-gateway)).
 2. In its inspector, set **Camera name** `cam0` (the camera prim's name in the scene) and **Camera host** (the Isaac Sim computer). The port is `53335`.
-3. With the camera node stopped, open **CAMERA SETTINGS** and enter the values in the table below. Expand **Intrinsics** to find **horizontal fov deg**; a new gateway shows this field directly, without a mode selector.
+3. With the camera node stopped, open **CAMERA SETTINGS** and enter the values of the table below. **horizontal fov deg** is under **Intrinsics**; a new gateway shows it without a mode selector.
 4. Click **Save settings**, then **Start node**. Open **Camera view** on its card and check that frames arrive at `320 × 240`, about `5 fps`. If the image stays empty, see [Camera Timing](#camera-timing).
 
 !!! warning "Change the camera defaults before localization"

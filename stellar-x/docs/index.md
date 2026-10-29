@@ -46,17 +46,17 @@ show_intro: true
   </a>
 </div>
 
-### Operate and Simulate
+### Simulate and Operate
 <div class="box-container">
-  <a href="controllers/strider" class="card-box">
-    <img src="https://unpkg.com/lucide-static@0.577.0/icons/gamepad-2.svg" class="external-icon" alt="Icon">
-    <h4>Operate Robots</h4>
-    <p>Jog mobile bases, manipulators and articulated robots with Strider, Motion Studio and Articulation.</p>
-  </a>
   <a href="virtual_simulation/introduction" class="card-box">
     <img src="https://unpkg.com/lucide-static@0.577.0/icons/square-mouse-pointer.svg" class="external-icon" alt="Icon">
     <h4>Simulation</h4>
     <p>Drive robots in NVIDIA Isaac Sim with the same controllers and controller documents as the real robot.</p>
+  </a>
+  <a href="controllers/strider" class="card-box">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/gamepad-2.svg" class="external-icon" alt="Icon">
+    <h4>Operate Robots</h4>
+    <p>Jog mobile bases, manipulators and articulated robots with Strider, Motion Studio and Articulation.</p>
   </a>
   <a href="navigation/overview" class="card-box">
     <img src="https://unpkg.com/lucide-static@0.577.0/icons/map.svg" class="external-icon" alt="Icon">

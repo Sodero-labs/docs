@@ -1,9 +1,5 @@
 # EtherCAT Mobile Base
 
-!!! info "Updated example pair (2026-10-27)"
-
-    Download both the `.gw` and `.sddm` files from this page again if you have older copies. They use the current `sodero.*` node IDs; older screenshots may still show `rc.*`. See [Compatibility and Downloads](../../reference/compatibility/index.md#example-files).
-
 This tutorial drives a four-wheel skid-steer base with four EtherCAT servo drives from Stellar X. It is the [Quick Start](../../get_started/quick_start/index.md) system on real motors: Strider still drives the base, and an EtherCAT gateway takes the place of the simulation gateway. You will:
 
 1. wire the four drives to Stellar X,

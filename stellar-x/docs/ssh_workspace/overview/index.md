@@ -114,4 +114,4 @@ Where to go next:
 | Command reference and examples | [sodero CLI](../sodero_cli/index.md) |
 | Let an AI agent work on the robot | [AI Coding Agents](../ai_agents/index.md) |
 | Load a whole design document (`.gw`, `.sdd`, `.sddm`, `.sdda`) | Station page: [Design Documents](../../station/design_documents/index.md) |
-| Write your own module | [Modules](../../station/modules/index.md) |
+| Write your own module | [Create Custom Modules](../../extend/custom_modules/index.md) |

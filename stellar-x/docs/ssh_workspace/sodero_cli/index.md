@@ -73,8 +73,8 @@ sodero tools call strider.get_state --input '{"target":"sodero.mlc.jackal"}'
 ### Start and Stop Nodes
 
 ```sh
-sodero runtime node start sodero.actuator_gateway.jackal --execute          # gateway first
-sodero runtime node start sodero.mlc.jackal --execute # then its controller
+sodero runtime node start sodero.actuator_gateway.jackal --execute   # gateway first
+sodero runtime node start sodero.mlc.jackal --execute                # then its controller
 sodero runtime node stop sodero.mlc.jackal --execute
 ```
 
@@ -130,7 +130,7 @@ sodero apps start NODE --execute
 sodero apps logs NODE --lines 100
 ```
 
-See [Modules](../../station/modules/index.md) for the package format.
+See [Create Custom Modules](../../extend/custom_modules/index.md) for the package format.
 
 ### Robot Tools
 

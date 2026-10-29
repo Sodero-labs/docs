@@ -139,4 +139,4 @@ The agent runs commands such as `sodero topology get` and `sodero runtime status
 ## Give the Agent the Documentation
 
 - Inside the workspace, `sodero-help` prints every guide and `/opt/sodero/docs/examples` holds runnable examples. The robot's `AGENTS.md` points the agent to them.
-- This documentation is also published in a form made for language models: `llms.txt` (an index) and `llms-full.txt` (all pages in one file) at the root of each documentation version, for example `https://docs.sodero.io/latest/llms-full.txt`.
+- This documentation is also published in a form made for language models: `llms.txt` (an index) and `llms-full.txt` (all pages in one file) at the root of each documentation version, for example `https://docs.sodero.io/stellar-x/latest/llms-full.txt`.

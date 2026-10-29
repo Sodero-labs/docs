@@ -14,8 +14,6 @@ git clone --branch v1.0.0 https://github.com/Sodero-labs/isaac_bridge.git
 
 Or download the source ZIP file of release v1.0.0 from the repository's **Releases** page, extract it, and rename the extracted folder `isaac_bridge-1.0.0` to `isaac_bridge`. Either way you get a folder `isaac_bridge`. Remember the folder that **contains** it, for example `~/isaac_extensions` when the extension is in `~/isaac_extensions/isaac_bridge`.
 
-!!! info "**Updating.** When you install another release, replace the folder, restart Isaac Sim and check the connection again: the [status window](#3-open-the-status-window) shows the ports **serving** and your robots **bound**, and each simulation gateway logs *Simulator connected.*"
-
 ---
 
 ## 2. Add the Extension to Isaac Sim
@@ -96,7 +94,7 @@ Stellar X connects to the Isaac Sim computer on **TCP ports 53333, 53334 and 533
 
 ## 5. Update or Remove
 
-- **Update:** run `git pull` in the `isaac_bridge` folder (or replace the folder with a newer release) and restart Isaac Sim.
+- **Update:** put the new release into the same `isaac_bridge` folder: run `git fetch --tags` and `git checkout RELEASE_TAG` in the folder (a clone of a release tag cannot `git pull`), or replace the folder with the new release's ZIP as in [step 1](#1-download-the-extension). Restart Isaac Sim and check the connection again: the [status window](#3-open-the-status-window) shows the ports **serving** and your robots **bound**, and each simulation gateway logs *Simulator connected.* Check [Compatibility](../../reference/compatibility/index.md) for the versions this documentation is verified with.
 - **Remove:** switch the extension off in **Window › Extensions**, untick **AUTOLOAD**, and remove its folder from **Extension Search Paths**.
 
 The extension's README describes advanced settings, such as camera sizes and rates, which cameras to publish, and the ports.
