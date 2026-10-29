@@ -19,7 +19,6 @@ Theater shows an active Robot World live in your browser: the simulation as it r
 
 ## 2. The Theater Window
 
-
 | Area | What it holds |
 | :--- | :--- |
 | **Header** | The project and World names; the status, *Ready* once the World is shown; the renderer menu (**RTX Real-Time** ▾ or **WebGPU** ▾); a timer; **Start Theater** or **Stop Theater**; **Resources** ▾; **Share** (link icon); the **Active users** who are watching |

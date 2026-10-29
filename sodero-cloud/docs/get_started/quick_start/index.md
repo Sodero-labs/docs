@@ -1,6 +1,6 @@
 # Quick Start
 
-Create a warehouse World, view its simulation in Theater, then stop and deactivate it. This first exercise introduces the complete World lifecycle. Robot driving is a separate task that requires a configured Station and an available controller app.
+Create a warehouse World, watch its simulation in Theater, then stop and deactivate it. This first exercise walks through the whole life of a World; driving its robots from a Station comes next ([Next: Connect a Robot System](#next-connect-a-robot-system)).
 
 ## Before You Start
 
@@ -17,6 +17,11 @@ Create a warehouse World, view its simulation in Theater, then stop and deactiva
 3. In the project, click **New file**, choose **Robot World**, and click **Next**.
 4. Enter `warehouse` as the **File Name**, then click **Create**.
 
+<figure markdown="span">
+  ![Create new file](images/new_world.png){ width="480" }
+  <figcaption>Naming the new Robot World</figcaption>
+</figure>
+
 The World appears as **Inactive**. Its **Studio** link opens the editor.
 
 ## Step 2: Import and Save the Scene { #step-2-import-and-save-the-scene }
@@ -24,6 +29,12 @@ The World appears as **Inactive**. Its **Studio** link opens the editor.
 1. Click **Studio** on the World row. Choose **RTX Real-time** or **WebGPU**, then click **Open Cosmic Studio**.
 2. Open the logo menu and choose **World › Replace scene…**.
 3. On **This PC**, select `jackal_warehouse.zip`, click **Replace**, and confirm replacement.
+
+    <figure markdown="span">
+      ![Replace scene](images/replace_scene.png){ width="520" }
+      <figcaption>The Replace scene dialog</figcaption>
+    </figure>
+
 4. Check that **Hierarchy** contains the warehouse and robots. If the old default scene remains after the replacement confirmation, reload Studio.
 5. Click **Save now** and wait for *Saved just now*.
 
@@ -57,12 +68,12 @@ Stopping a World leaves its environment active and using credits. Deactivating a
 
 ## Next: Connect a Robot System { #next-connect-a-robot-system }
 
-Use the following sequence when compatible controller apps and robot documents are available:
+To drive the robots of this World, add a Robot System to the same project:
 
-1. Create a [Robot System](../../projects/files/index.md) in the same project.
-2. Check its [Store apps](../../station/apps/index.md), then [add and connect nodes](../../station/graph/index.md).
-3. Go live without starting the nodes. [Upload and confirm the robot documents](../../station/documents/index.md).
-4. Confirm the [robot name and actuator mapping](../../station/world_connection/index.md), run the World, and [start the nodes](../../station/run/index.md).
-5. If the running controller provides an operator UI, follow [Strider](../../operate/strider/index.md), [Motion Studio](../../operate/motion_studio/index.md), or [Articulation](../../operate/articulation/index.md).
+1. Create a [Robot System](../../projects/files/index.md) in the project.
+2. Install the apps its nodes run from the [Store](../../station/apps/index.md), then [add and connect the nodes](../../station/graph/index.md).
+3. Go live, and [upload the gateway and robot documents](../../station/documents/index.md) while the nodes are stopped.
+4. Check the [robot name and the actuator mapping](../../station/world_connection/index.md), run the World, and [start the nodes](../../station/run/index.md).
+5. Drive the robot from its controller's UI: [Strider](../../operate/strider/index.md), [Motion Studio](../../operate/motion_studio/index.md) or [Articulation](../../operate/articulation/index.md).
 
-Use documents supplied or exported for the Station version you are using. Check [Compatibility](../../reference/compatibility/index.md) before moving files from Stellar X.
+Use gateway and robot documents made for this Station release, such as the documents in **Sodero Assets** ([Compatibility](../../reference/compatibility/index.md)).

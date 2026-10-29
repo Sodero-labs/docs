@@ -1,9 +1,5 @@
 # Strider
 
-!!! info "Availability"
-    These instructions apply when the required app is installed, its nodes run, and its operator UI is available. Check [Compatibility](../../reference/compatibility/index.md) first.
-
-
 **Strider** is the operator UI for wheeled mobile bases. With it you jog the base, watch its state and odometry, and send navigation goals. It works with every drive type that a mobile robot document (`.sddm`) can describe: differential drive, skid steer 4WD, mecanum 4WD, swerve 4WD and Ackermann.
 
 ---
@@ -29,17 +25,17 @@ flowchart LR
 
 ## 1. Set Up the Nodes
 
-1. Check that `sodero.actuator_gateway` and `sodero.mlc` are available in the Store, and select them. For Strider, also select `sodero.strider`.
-2. Add the gateway and controller nodes, then connect the controller’s `servo_link` to the gateway. For Strider, connect its `mobile_base` to the base controller.
-3. Go live and wait for app installation to finish. Keep the nodes stopped.
-4. Upload the gateway’s `.gw` and the controller’s `.sddm` document. Reopen each node and confirm the selected document ([Documents and Settings](../../station/documents/index.md)).
-5. Check the robot name and mapping, run the World, then start the gateway, controller and any dependent app.
+1. In the Station's **Store**, install `sodero.actuator_gateway`, `sodero.mlc` and `sodero.strider` ([Apps and Packages](../../station/apps/index.md)).
+2. Add the gateway, the base controller and Strider. Connect the controller's `servo_link` to the gateway, and Strider's `mobile_base` to the base controller ([Build the Graph](../../station/graph/index.md)).
+3. Go live and wait until the apps are installed. Keep the nodes stopped.
+4. Upload the gateway's `.gw` and the controller's `.sddm` document ([Documents and Settings](../../station/documents/index.md)).
+5. Check the robot name and the actuator mapping ([Drive Robots in the World](../../station/world_connection/index.md)), run the World, then start the gateway, the controller and Strider, in this order.
 
 ---
 
 ## 2. Open Strider
 
-If the running node provides a UI link or an **Open …** action, use it to open the app. If neither is available, check the installed app and supported version before continuing. If the session expires, reopen the UI from Station.
+On the Live page, right-click the running `sodero.strider` node and choose **Open …** ([Run and Monitor Nodes](../../station/run/index.md#3-start-restart-or-stop-one-node)). Strider opens in a new tab. If its session expires, open it again from the node.
 
 ---
 

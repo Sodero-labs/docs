@@ -1,26 +1,22 @@
 # Motion Studio
 
-!!! info "Availability"
-    These instructions apply when the required app is installed, its nodes run, and its operator UI is available. Check [Compatibility](../../reference/compatibility/index.md) first.
-
-
 **Motion Studio** is the operator UI for manipulators. The manipulator controller node, `sodero.mmc.<name>`, runs the arm's real-time controller: kinematics, dynamics, trajectory generation and safety limits, from the arm's `.sdd` document. Motion Studio belongs to that node. It shows the arm in 3D, jogs it, defines tools and teaches poses.
 
 ---
 
 ## 1. Set Up the Nodes
 
-1. Check that `sodero.actuator_gateway` and `sodero.mmc` are available in the Store, and select them.
-2. Add the gateway and controller nodes, then connect the controller’s `servo_link` to the gateway.
-3. Go live and wait for app installation to finish. Keep the nodes stopped.
-4. Upload the gateway’s `.gw` and the controller’s `.sdd` document. Reopen each node and confirm the selected document ([Documents and Settings](../../station/documents/index.md)).
-5. Check the robot name and mapping, run the World, then start the gateway, controller and any dependent app.
+1. In the Station's **Store**, install `sodero.actuator_gateway` and `sodero.mmc` ([Apps and Packages](../../station/apps/index.md)).
+2. Add the gateway and the manipulator controller, and connect the controller's `servo_link` to the gateway ([Build the Graph](../../station/graph/index.md)).
+3. Go live and wait until the apps are installed. Keep the nodes stopped.
+4. Upload the gateway's `.gw` and the controller's `.sdd` document ([Documents and Settings](../../station/documents/index.md)).
+5. Check the robot name and the actuator mapping ([Drive Robots in the World](../../station/world_connection/index.md)), run the World, then start the gateway and the controller, in this order.
 
 ---
 
 ## 2. Open Motion Studio
 
-If the running node provides a UI link or an **Open …** action, use it to open the app. If neither is available, check the installed app and supported version before continuing. If the session expires, reopen the UI from Station.
+On the Live page, right-click the running `sodero.mmc.<name>` node and choose **Open …** ([Run and Monitor Nodes](../../station/run/index.md#3-start-restart-or-stop-one-node)). Motion Studio opens in a new tab. If its session expires, open it again from the node.
 
 ---
 
@@ -67,7 +63,7 @@ Click **Jog** in the header to open the jog panel.
 
 The **POSE** section of the panel shows the current TCP pose and joint positions.
 
-!!! warning "**Stop motion explicitly before leaving the UI.** A continuous jog depends on delivery of the button-release command. If the browser or connection fails, do not assume motion has stopped. Stop the controller from Station and confirm the robot has stopped in Theater. For physical robots, follow the hardware stop procedure in the Stellar X manual."
+!!! warning "**Stop the motion before you leave the UI.** A continuous jog stops when the release of the button reaches the controller. If the browser or the connection fails while you jog, do not assume that the arm has stopped: stop the controller node in the Station and check in Theater that the arm stands still. For a real arm, see [Stop Controls](https://docs.sodero.io/stellar-x/latest/hardware_setup/stop_controls/) in the Stellar X manual."
 
 ---
 

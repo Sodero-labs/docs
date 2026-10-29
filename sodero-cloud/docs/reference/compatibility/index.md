@@ -1,34 +1,30 @@
 # Compatibility
 
-Sodero Cloud and Stellar X share robot-system concepts and document types. Their deployed Station versions, installed apps and operator interfaces can differ.
+Sodero Cloud and Stellar X share the robot-system concepts and the document types. Each product runs its own release of Stellar Station, so their Store apps, menus, node names and accepted document versions can differ.
 
-## Before You Configure a Robot
+## Robot Documents and Apps
 
-1. Check that the required app is available in the current Station's **Store** and can be installed for this environment.
-2. Use gateway and robot documents exported for that Station version. An app listing or an upload confirmation alone does not confirm that the controller is ready to operate.
-3. After going live, check the selected documents, port connections and node states before issuing motion commands.
-4. Open an operator UI only when the running app provides its link or **Open …** action. If unavailable, stop here and contact Sodero for supported packages and instructions.
-
-The controller chapters describe their functions when these prerequisites are met. The Quick Start covers World creation and viewing; it does not require a controller UI.
+- Use gateway and robot documents (`.gw`, `.sdd`, `.sddm`, `.sdda`) made for the Station release you work with, such as the documents in **Sodero Assets**. Documents with old node names are refused: export them again from a current Stellar Designer ([Documents with Old Node Names](../../station/documents/index.md#documents-with-old-node-names)).
+- Do not edit the files inside a document to make a Station accept it. Export it again, or ask Sodero for a document of the current format.
+- Install the apps that your nodes run from the Station's **Store** before you start the nodes ([Apps and Packages](../../station/apps/index.md)).
 
 ## Move Files Between Products
 
-An `.sdr` is a transfer container, not a guarantee of compatibility with every Station release. Check document format, node names, required apps and destination architecture before importing. Installed packages are not included in the file.
+An `.sdr` file carries a Robot System between Sodero Cloud and Stellar X. It holds the graph, the documents and the settings, but not the installed packages. Before you import one, check that the destination runs a Station release that accepts its node names and documents, and that the apps its nodes need are available there. Keep the original file until the imported system works ([Move Robot Systems Between Stellar X and Sodero Cloud](../../projects/files/index.md#move-robot-systems-between-stellar-x-and-sodero-cloud)).
 
-A Robot World's `.sdr` is for Sodero Cloud. For a Robot System, follow [Import an .sdr File](../../projects/files/index.md#2-import-an-sdr-file) and the destination product's documentation. Keep the original backup until the imported system has been checked.
+A Robot World's `.sdr` opens in Sodero Cloud only.
 
-Cloud instructions use **Store**, **Station · Edit**, **Go live** and **Station · Live**. A Stellar X manual for an earlier device release may use different menus and node names. Use it for the concepts and device-specific steps that match your installed version; do not copy old graph identifiers into Cloud unchanged.
+The [Stellar X manual](https://docs.sodero.io/stellar-x/latest/) describes the Station on the controller. Use it for the concepts and the device steps; this manual's menus, such as **Store**, **Station · Edit**, **Go live** and **Station · Live**, apply to Sodero Cloud.
 
-## Example Scene and Robot Documents
+## Example Scene
 
-The [Quick Start](../../get_started/quick_start/index.md) includes a warehouse scene and its accompanying license notice. A scene alone does not configure its robot controller.
-
-Obtain compatible `.gw`, `.sdd`, `.sddm` or `.sdda` documents from the current product's supported asset collection or from Sodero. Keep required metadata and license notices intact. Do not edit an archive's internal files to force acceptance by a different Station version.
+The [Quick Start](../../get_started/quick_start/index.md) scene `jackal_warehouse.zip` contains a Clearpath Jackal and a Clearpath Dingo with their license notice. Keep the license file with the scene when you pass it on.
 
 ## Browser and Rendering
 
-Use an up-to-date supported browser. **WebGPU** requires browser, operating-system and GPU support; a browser version number alone does not guarantee availability. **RTX Real-time** renders in the cloud and needs a working streaming connection. Check the rendering choices available on your device.
+Use an up-to-date desktop browser. **WebGPU** needs support from the browser, the operating system and the GPU; when it is not available on your device, use **RTX Real-time**, which renders in the cloud and streams the picture ([Choose Rendering Mode](../../projects/activate_run/index.md#choose-rendering-mode)).
 
 ## External Tools
 
-Install Project VPN only when the portal offers an installer for your operating system. Follow the prompts of that release. Connect AI agents using the endpoint and configuration shown in the project's **AI agents** panel.
+- **Project VPN:** install the Sodero VPN toolkit with the command that the **Project VPN** panel shows for your operating system ([Project VPN](../../connect/project_vpn/index.md)).
+- **AI agents:** connect them with the address and settings of the project's **AI agents** panel ([AI Agents](../../connect/ai_agents/index.md)).

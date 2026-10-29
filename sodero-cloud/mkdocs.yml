@@ -9,10 +9,11 @@ nav:
   - What Is Sodero Cloud: get_started/sodero_cloud/index.md
   - Key Concepts: get_started/key_concepts/index.md
   - Quick Start: get_started/quick_start/index.md
-- Account and Projects:
+- Account and Workspaces:
   - Sign In and Account: account/sign_in/index.md
   - Workspaces and People: account/workspaces/index.md
   - Credits and Usage: account/billing/index.md
+- Projects and Files:
   - Projects: projects/projects/index.md
   - Robot Systems and Robot Worlds: projects/files/index.md
   - Libraries: projects/libraries/index.md
@@ -25,7 +26,7 @@ nav:
   - Apps and Packages: station/apps/index.md
   - Build the Graph: station/graph/index.md
   - Documents and Settings: station/documents/index.md
-  - Connect Robots to the World: station/world_connection/index.md
+  - Drive Robots in the World: station/world_connection/index.md
 - Run and Monitor:
   - Activate and Run: projects/activate_run/index.md
   - Run and Monitor Nodes: station/run/index.md
@@ -54,10 +55,11 @@ plugins:
       - get_started/sodero_cloud/index.md
       - get_started/key_concepts/index.md
       - get_started/quick_start/index.md
-      Account and Projects:
+      Account and Workspaces:
       - account/sign_in/index.md
       - account/workspaces/index.md
       - account/billing/index.md
+      Projects and Files:
       - projects/projects/index.md
       - projects/files/index.md
       - projects/libraries/index.md

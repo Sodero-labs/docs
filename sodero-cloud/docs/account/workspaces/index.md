@@ -90,7 +90,6 @@ Click **Save** to apply the changes; **Cancel** discards them. Nobody can change
 
 Only the owner sees **Workspace settings** in the workspace menu.
 
-
 | Section | What you can do |
 | :--- | :--- |
 | **Profile** | **Change color** sets the color behind the workspace's initial; **Remove** resets it. |

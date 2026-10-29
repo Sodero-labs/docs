@@ -1,4 +1,4 @@
-# Run and Monitor
+# Run and Monitor Nodes
 
 Nodes run only on the Live page, and only when you start them. This page covers starting and stopping nodes, reading their state and logs, and what to do when a node does not start.
 
@@ -15,7 +15,6 @@ Starting and stopping nodes needs the **Can edit** or **Can manage** role in the
 ## 2. Start All Nodes
 
 Click **Start all nodes** in the toolbar. The Station starts every node that is not running, in dependency order: *Nodes start in dependency order: gateway → controller → compound → application.* A node waits until the nodes it requires are up.
-
 
 - A banner follows the progress. **Cancel start** stops the run; nodes that already started stay up.
 - The result shows as a banner: *Runtime topology is up.*, or *Runtime topology is up; stopped during startup: …* when some nodes stopped again ([When a Node Does Not Start](#6-when-a-node-does-not-start)).
@@ -44,7 +43,7 @@ Right-click a node on the Live page:
 
 Start a robot's nodes in order: the gateway first, then its controller, then the nodes that use the controller. Stop them in the reverse order.
 
-When a running app exposes its operator UI, open it from that node. See [Compatibility](../../reference/compatibility/index.md) and the relevant controller chapter.
+The operator UIs that open from nodes are described in [Strider](../../operate/strider/index.md), [Motion Studio](../../operate/motion_studio/index.md) and [Articulation](../../operate/articulation/index.md).
 
 ---
 

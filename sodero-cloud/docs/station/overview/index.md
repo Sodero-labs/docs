@@ -35,7 +35,7 @@ The Station has two pages for the same Robot System:
 | :--- | :--- | :--- |
 | Badge | **EDIT** | **LIVE**, with how long the Station has been live |
 | The Station | Inactive: nothing runs and no credits are used | Active: it uses credits ([Credits and Usage](../../account/billing/index.md)) |
-| What you can do | Add, connect, rename and delete nodes; set parameters; select Store apps | Upload and confirm controller documents while their nodes are stopped, then start nodes, inspect logs and open available operator UIs |
+| What you can do | Add, connect, rename and delete nodes; set parameters; select Store apps | Upload controller documents while their nodes are stopped, start nodes, read their logs and open the operator UIs |
 | Button | **Go live** | **Stop live** |
 
 <figure markdown="span">
@@ -50,7 +50,6 @@ The Station has two pages for the same Robot System:
 ---
 
 ## 2. Screen Layout
-
 
 | Area | Contents |
 | :--- | :--- |
@@ -95,7 +94,7 @@ flowchart LR
  B --> C["Go live"]
  C --> D["Upload and confirm documents"]
  D --> E["Run World and start nodes"]
- E --> F["Open available operator UI"]
+ E --> F["Open the operator UI"]
 ```
 
 | Step | Page |

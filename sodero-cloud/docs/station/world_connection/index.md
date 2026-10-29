@@ -25,7 +25,7 @@ flowchart LR
 
 ## 2. Name the Robot
 
-Use a simulation gateway document configured for the robot in the World. Its robot name must match the articulation prim name. Depending on the document and app release, the name can be supplied in the document or in the supported node settings. Check the applied name before starting; do not assume renaming a node changes its simulation target.
+The robot name is part of the simulation gateway's document. Use a gateway document whose robot name is the name of the robot's articulation prim, for example `jackal.gw` with the robot name `jackal` for `/World/jackal`. When the gateway's app also shows the robot name in the node's settings, check it there before you start the gateway. Renaming the node does not change the robot it drives.
 
 !!! warning "**The robot name must be exactly the name of the robot's articulation prim in the World.**"
 

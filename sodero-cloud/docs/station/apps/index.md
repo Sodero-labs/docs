@@ -1,8 +1,5 @@
 # Apps and Packages
 
-Check the app itself in **Store**. A **Starting apps** bundle is a selection of apps, not confirmation that every required app is installed or available for the current environment. Verify the gateway and controller separately after going live.
-
-
 Every node of a Station runs an app or module that is installed on that Station. **Add node** offers only what is installed, plus empty drafts. Apps come from the **Store**; your own programs are uploaded as module packages. Both are kept with the Robot System and installed each time its Station starts.
 
 | Source | What it is | Badge in **Add node** | Where you install it |
@@ -15,6 +12,8 @@ Every node of a Station runs an app or module that is installed on that Station.
 ## 1. Starting Apps
 
 When you create a Robot System, **Starting apps** offers bundles of Store apps, for example for a manipulator or a mobile robot. **Empty** has none ([Create a File](../../projects/files/index.md#1-create-a-file)). The apps of the chosen bundle are recorded with the Robot System and install when the Station first starts.
+
+A bundle is a starting point, not a complete system. Before you add nodes, check in the **Store** that every app your nodes run, such as the actuator gateway and the robot's controller, shows **Installed**.
 
 If **Add node** lists only **Empty gateway**, **Empty controller** and the other drafts, no app is installed yet. Install the apps you need from the Store.
 

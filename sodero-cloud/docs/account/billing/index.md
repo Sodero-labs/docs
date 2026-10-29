@@ -36,7 +36,6 @@ Storage, AI agent tool calls and the Project VPN do not use credits; they count 
 
 Open the workspace menu and choose **Billing & Usage**. Everyone in the workspace can open it. It shows the current workspace and updates while it is open. It calls a Robot System a *System*, a Robot World a *World*, and the time one of them is active a *run*.
 
-
 The top line shows your workspace's plan and, next to **Renews**, the date of the next renewal. A red **Out of credits** badge appears when the balance is zero.
 
 ### Credits

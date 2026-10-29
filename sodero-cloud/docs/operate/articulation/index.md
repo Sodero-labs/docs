@@ -1,9 +1,5 @@
 # Articulation
 
-!!! info "Availability"
-    These instructions apply when the required app is installed, its nodes run, and its operator UI is available. Check [Compatibility](../../reference/compatibility/index.md) first.
-
-
 The **Articulation** controller drives an articulated robot joint by joint: legged robots, humanoids, grippers, pan-tilt heads, or any set of joints that receives joint targets. Unlike the manipulator controller, it uses no arm kinematics (no DH parameters, no Cartesian motions). It bounds and forwards the joint targets of an upper controller, such as a walking policy in your own module, and its **Articulation** UI lets you jog the joints by hand.
 
 | Item | Value |
@@ -42,17 +38,17 @@ An `.sdda` document lists the joints and how the gateway's actuators drive them.
 
 ## 2. Set Up the Nodes
 
-1. Check that `sodero.actuator_gateway` and `sodero.amc` are available in the Store, and select them.
-2. Add the gateway and controller nodes, then connect the controller’s `servo_link` to the gateway.
-3. Go live and wait for app installation to finish. Keep the nodes stopped.
-4. Upload the gateway’s `.gw` and the controller’s `.sdda` document. Reopen each node and confirm the selected document ([Documents and Settings](../../station/documents/index.md)).
-5. Check the robot name and mapping, run the World, then start the gateway, controller and any dependent app.
+1. In the Station's **Store**, install `sodero.actuator_gateway` and `sodero.amc` ([Apps and Packages](../../station/apps/index.md)).
+2. Add the gateway and the Articulation controller, and connect the controller's `servo_link` to the gateway ([Build the Graph](../../station/graph/index.md)).
+3. Go live and wait until the apps are installed. Keep the nodes stopped.
+4. Upload the gateway's `.gw` and the controller's `.sdda` document ([Documents and Settings](../../station/documents/index.md)).
+5. Check the robot name and the actuator mapping ([Drive Robots in the World](../../station/world_connection/index.md)), run the World, then start the gateway, the controller and the program that sends joint targets, in this order.
 
 ---
 
 ## 3. Open the Articulation UI
 
-If the running node provides a UI link or an **Open …** action, use it to open the app. If neither is available, check the installed app and supported version before continuing. If the session expires, reopen the UI from Station.
+On the Live page, right-click the running `sodero.amc.<name>` node and choose **Open …** ([Run and Monitor Nodes](../../station/run/index.md#3-start-restart-or-stop-one-node)). The Articulation UI opens in a new tab. If its session expires, open it again from the node.
 
 | Area | Contents |
 | :--- | :--- |

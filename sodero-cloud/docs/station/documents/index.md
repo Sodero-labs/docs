@@ -10,10 +10,10 @@ Select the node. The **Parameters** section of its inspector has one field for e
 
 <figure markdown="span">
   ![Gateway inspector](images/gateway_inspector.png){ width="300" }
-  <figcaption>The inspector of a new actuator gateway: no document yet</figcaption>
+  <figcaption>The inspector of an actuator gateway with its gateway document jackal under Parameters</figcaption>
 </figure>
 
-- The dropdown lists existing documents and may offer **Built-in default (no document)**. For robot operation, select the document intended for that robot; do not treat an empty document field as proof that its controller is configured.
+- The dropdown lists the existing documents and may offer **Built-in default (no document)**. Built-in defaults do not describe your robot: give every gateway and controller the document made for it.
 - The line under it tells where the document came from, for example *Uploaded: jackal.gw · 1 KB · …*, or *Not uploaded*.
 - **Upload** brings in a new document.
 
@@ -46,9 +46,7 @@ The Station confirms the upload, for example *jackal.gw uploaded as the gateway-
 - A new document is named after the last part of the node name: for `sodero.actuator_gateway.jackal` it is `jackal` ([Name the Node](../graph/index.md#name-the-node)).
 - If the field already names a document, the upload replaces that document.
 
-!!! info "**Upload robot documents from the Live page.** Go live first, then upload `.sdd`, `.sddm` and `.sdda` documents in the controller's inspector."
-
-After the upload, reopen the node and confirm that the intended document is still selected. Upload controller documents on the Live page, while the node is stopped, before starting it.
+!!! info "**Upload robot documents from the Live page.** Go live first, then upload `.sdd`, `.sddm` and `.sdda` documents in the controller's inspector while the node is stopped. Before you start the node, check that its field names the new document."
 
 ### Rules
 

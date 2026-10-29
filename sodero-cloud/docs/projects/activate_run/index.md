@@ -22,7 +22,7 @@ flowchart LR
 | Action | Robot System | Robot World | Credits |
 | :--- | :--- | :--- | :--- |
 | **Activate** | Starts the environment and restores the Station's saved data and apps. No node starts. | Starts the environment and loads the World's scene. The simulation does not play yet. | Use begins |
-| **Run** | Starts every saved node, like **Start all nodes** on Stellar X | Plays the simulation | No change |
+| **Run** | Starts every saved node, like **Start all nodes** in the Station | Plays the simulation | No change |
 | **Stop** | Stops the nodes | Stops the simulation and resets the World's pose and clock | Use goes on |
 | **Deactivate** | Stops the nodes, saves the Station's data, then tears the environment down | Tears the environment down | Use ends |
 
@@ -95,7 +95,6 @@ Opening a file never starts nodes or plays a World. To edit an active World in S
 ### Choose Rendering Mode
 
 Before Studio or Theater opens, the portal asks how to draw the World on your screen.
-
 
 | Mode | Draws the World |
 | :--- | :--- |

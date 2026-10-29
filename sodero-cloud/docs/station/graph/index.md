@@ -61,7 +61,6 @@ The name field proposes the app's own name, for example `sodero.actuator_gateway
 
 ## 2. Node Cards
 
-
 | Part | Meaning |
 | :--- | :--- |
 | Title | The node name |

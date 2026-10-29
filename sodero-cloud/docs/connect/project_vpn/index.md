@@ -1,9 +1,5 @@
 # Project VPN
 
-!!! info "Availability"
-    Continue only if the **Project VPN** panel provides an installer for your operating system and your project role allows a connection. If no installer is available, contact Sodero. The installed release determines the exact approval prompts.
-
-
 The Project VPN connects your own computer to the Stations of a project, so you can use a Station's API from a terminal, your own scripts or your IDE. You approve every connection yourself, and a connection lasts at most 8 hours.
 
 !!! info "**AI agents don't need the Project VPN.** To work on a project with Claude Code or another AI agent, see [AI Agents](../ai_agents/index.md)."
@@ -33,7 +29,7 @@ Install the toolkit once on each computer you want to connect. The portal calls 
   <figcaption>The Project VPN panel of Warehouse Demo</figcaption>
 </figure>
 
-!!! info "**No install command?** If the panel says *A pinned toolkit installer has not been published on this server yet.*, the Project VPN cannot be set up yet. Contact Sodero."
+!!! info "**No install command?** If the panel shows no install command for your operating system, contact Sodero."
 
 On Linux, the installer supports Debian and Ubuntu. On Windows, it also installs WireGuard for Windows, which Sodero VPN uses.
 

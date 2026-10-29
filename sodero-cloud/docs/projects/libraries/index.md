@@ -19,7 +19,6 @@ Click **Library** in the left navigation bar. The **Library** window has two tab
 - **My Library**: your personal files.
 - **Workspace Library**: the libraries of the workspace's projects. Click a project to see its files; the back arrow returns to the list of projects.
 
-
 Both tabs have a search box, a type filter, a sort button and **Add file**. Each file has an **Export** button, which saves a copy on your computer, and a **Delete** button.
 
 ---
