@@ -2,7 +2,7 @@
 
 Nodes run only when you start them. This page covers starting and stopping nodes, reading their state and logs, and opening the controller UIs.
 
-**Real hardware moves.** Starting a gateway or controller that drives real motors can energize them. Before you start such nodes, make sure the robot's surroundings are clear and someone can reach the emergency stop ([Stop Controls](https://docs.sodero.io/v2.0.0/hardware_setup/stop_controls/index.md)).
+**Real hardware moves.** Starting a gateway or controller that drives real motors can energize them. Before you start such nodes, make sure the robot's surroundings are clear and someone can reach the emergency stop ([Stop Controls](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stop_controls/index.md)).
 
 ______________________________________________________________________
 
@@ -22,11 +22,11 @@ ______________________________________________________________________
 
 ## 2. Start All Nodes
 
-The **Start all nodes** button starts every node that is down, in dependency order: gateways → controllers → compounds → applications. Its menu also offers **Stop all nodes**, which stops consumers first.
+The **Start all nodes** button starts every node that is down, in dependency order: gateways → controllers → compounds → applications. Its menu also offers **Stop all nodes**, which stops consumers first. Once every node is up, the button itself reads **Stop all nodes**.
 
 The run menu
 
-- While a run is in progress, a banner shows the progress, and the menu offers **Cancel**. Nodes already started stay up when you cancel.
+- While a run is in progress, a banner shows its progress (*Starting all nodes…* or *Stopping all nodes…*). To cancel, click **Cancel** on the banner, or the button, which reads **Cancel start** or **Cancel stop** during the run. Nodes already started stay up when you cancel.
 - The run continues even if you close the browser. The page shows its progress again when you reopen it.
 - The result appears as a banner, for example *Runtime topology is up.*
 
@@ -64,14 +64,14 @@ ______________________________________________________________________
 
 When a node runs, its tools unlock, in the inspector's **CONTROL** section or as a link on the node card:
 
-| Node             | Button                           | Opens                                                                                                                               |
-| ---------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Motion Studio    | **Stellar Motion Studio**        | [Motion Studio](https://docs.sodero.io/v2.0.0/controllers/motion_studio/index.md) for the manipulator                               |
-| Strider          | **Strider**                      | [Strider](https://docs.sodero.io/v2.0.0/controllers/strider/index.md) for the mobile base                                           |
-| Articulation     | **Articulation**                 | [Articulation](https://docs.sodero.io/v2.0.0/controllers/articulation/index.md) for joint control                                   |
-| Navigator        | **Strider** link on the card     | Strider's Navigation page                                                                                                           |
-| Camera gateway   | **Camera view** link on the card | The camera image                                                                                                                    |
-| Actuator gateway | **Test Stellar Gateway**         | The [Test Console](https://docs.sodero.io/v2.0.0/gateways/test_console/index.md), which moves single actuators without a controller |
+| Node             | Button                           | Opens                                                                                                                                         |
+| ---------------- | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Motion Studio    | **Stellar Motion Studio**        | [Motion Studio](https://docs.sodero.io/stellar-x/v2.0.0/controllers/motion_studio/index.md) for the manipulator                               |
+| Strider          | **Strider**                      | [Strider](https://docs.sodero.io/stellar-x/v2.0.0/controllers/strider/index.md) for the mobile base                                           |
+| Articulation     | **Articulation**                 | [Articulation](https://docs.sodero.io/stellar-x/v2.0.0/controllers/articulation/index.md) for joint control                                   |
+| Navigator        | **Strider** link on the card     | Strider's Navigation page                                                                                                                     |
+| Camera gateway   | **Camera view** link on the card | The camera image                                                                                                                              |
+| Actuator gateway | **Test Stellar Gateway**         | The [Test Console](https://docs.sodero.io/stellar-x/v2.0.0/gateways/test_console/index.md), which moves single actuators without a controller |
 
 A running Motion Studio node: the CONTROL button is unlocked
 
@@ -100,10 +100,10 @@ ______________________________________________________________________
 
 ## 6. Troubleshooting
 
-| Symptom                                               | What to check                                                                                                                                                                                                                                  |
-| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A controller stays in **Waiting binding**             | Its `servo_link` (or another required port) is not connected                                                                                                                                                                                   |
-| A simulation gateway runs but the robot does not move | The gateway's **Robot name** must equal the articulation prim name in Isaac Sim; Isaac Sim must be playing; the **Sim host** must be the Isaac Sim computer ([Simulation Gateway](https://docs.sodero.io/v2.0.0/gateways/simulation/index.md)) |
-| An EtherCAT gateway fails to start                    | Cable to the first drive's IN port, drive power, number of drives ([EtherCAT Gateway](https://docs.sodero.io/v2.0.0/gateways/ethercat/#6-troubleshooting))                                                                                     |
-| *Process stopped during topology startup*             | A node stopped right after **Start all nodes**. Read its logs, fix the cause, then start again                                                                                                                                                 |
-| Changes to a document are refused                     | Stop the node first. A gateway document is also refused while the gateway's test is open: click **Stop test** before you stop the gateway ([Test Console](https://docs.sodero.io/v2.0.0/gateways/test_console/#change-the-gateway-document)).  |
+| Symptom                                               | What to check                                                                                                                                                                                                                                            |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A controller stays in **Waiting binding**             | Its `servo_link` (or another required port) is not connected                                                                                                                                                                                             |
+| A simulation gateway runs but the robot does not move | The gateway's **Robot name** must equal the articulation prim name in Isaac Sim; Isaac Sim must be playing; the **Sim host** must be the Isaac Sim computer ([Simulation Gateway](https://docs.sodero.io/stellar-x/v2.0.0/gateways/simulation/index.md)) |
+| An EtherCAT gateway fails to start                    | Cable to the first drive's IN port, drive power, number of drives ([EtherCAT Gateway](https://docs.sodero.io/stellar-x/v2.0.0/gateways/ethercat/#6-troubleshooting))                                                                                     |
+| *Process stopped during topology startup*             | A node stopped right after **Start all nodes**. Read its logs, fix the cause, then start again                                                                                                                                                           |
+| Changes to a document are refused                     | Stop the node first. A gateway document is also refused while the gateway's test is open: click **Stop test** before you stop the gateway ([Test Console](https://docs.sodero.io/stellar-x/v2.0.0/gateways/test_console/#change-the-gateway-document)).  |

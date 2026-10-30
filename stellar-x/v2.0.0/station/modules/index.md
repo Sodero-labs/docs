@@ -2,15 +2,15 @@
 
 A **module** is a program packaged to run on the Station as a node. The built-in modules (gateways, controllers, navigation) come with Stellar X. You can install your own modules to add robot behaviors, task logic or custom device interfaces; they run next to the built-in ones and use the same interfaces.
 
-This page installs, updates and removes module packages. To build a package yourself, see [Create Custom Modules](https://docs.sodero.io/v2.0.0/extend/custom_modules/index.md).
+This page installs, updates and removes module packages. To build a package yourself, see [Create Custom Modules](https://docs.sodero.io/stellar-x/v2.0.0/extend/custom_modules/index.md).
 
 ______________________________________________________________________
 
 ## 1. The Modules Page
 
-Click **Modules** in the left sidebar. The page lists the modules that the nodes of your system use.
+Click **Modules** in the left sidebar. The page lists the built-in modules and the module packages you installed, including modules that no node uses yet.
 
-Modules used in this system
+The Modules page
 
 | No. | Item                  | Description                                                                      |
 | --- | --------------------- | -------------------------------------------------------------------------------- |
@@ -34,7 +34,7 @@ Installing a module package
 
 ### Add and Start the Module's Node
 
-1. Click **Add node** and choose the type that the module declares: **Gateway**, **Controller**, **Compound** or **Application** (the `role` in its `subsystem.yaml`: `gateway`, `component`, `compound` or `app`). Your module appears in the list with the **CUSTOM** badge. The status module of [Create Custom Modules](https://docs.sodero.io/v2.0.0/extend/custom_modules/index.md), for example, is a `component` and appears under **Controller**.
+1. Click **Add node** and choose the type that the module declares: **Gateway**, **Controller**, **Compound** or **Application** (the `role` in its `subsystem.yaml`: `gateway`, `component`, `compound` or `app`). Your module appears in the list with the **CUSTOM** badge. The status module of [Create Custom Modules](https://docs.sodero.io/stellar-x/v2.0.0/extend/custom_modules/index.md), for example, is a `component` and appears under **Controller**.
 1. Connect its required ports, for example to a Strider's `mobile_base` or a Motion Studio's `manipulator`.
 1. Right-click the node and choose **Start node**, or use **Start all nodes**.
 

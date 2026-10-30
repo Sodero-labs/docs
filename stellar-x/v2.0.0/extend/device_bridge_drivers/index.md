@@ -1,8 +1,8 @@
 # Write Device Bridge Drivers
 
-The [Device Bridge](https://docs.sodero.io/v2.0.0/gateways/device_bridge/index.md) runs on a small computer next to the sensors and serves their data to Stellar X. It connects any RGB-D camera, IMU or wheel board for which it has a driver: one Python class on the sensor computer. The drivers that come with the bridge, for Intel RealSense D400 cameras, the TurtleBot3 OpenCR board and simulated devices, are examples; write a driver of the same kind for your own device. Nothing on the controller is rebuilt or modified.
+The [Device Bridge](https://docs.sodero.io/stellar-x/v2.0.0/gateways/device_bridge/index.md) runs on a small computer next to the sensors and serves their data to Stellar X. It connects any RGB-D camera, IMU or wheel board for which it has a driver: one Python class on the sensor computer. The drivers that come with the bridge, for Intel RealSense D400 cameras, the TurtleBot3 OpenCR board and simulated devices, are examples; write a driver of the same kind for your own device. Nothing on the controller is rebuilt or modified.
 
-This page is for developers. To install the bridge and connect it to the Station, see [Device Bridge](https://docs.sodero.io/v2.0.0/gateways/device_bridge/index.md).
+This page is for developers. To install the bridge and connect it to the Station, see [Device Bridge](https://docs.sodero.io/stellar-x/v2.0.0/gateways/device_bridge/index.md).
 
 ______________________________________________________________________
 

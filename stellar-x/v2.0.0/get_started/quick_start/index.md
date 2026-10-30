@@ -1,6 +1,6 @@
 # Quick Start
 
-You will build a small robot system on Stellar X and drive a simulated **Clearpath Jackal** in NVIDIA Isaac Sim with Strider. It takes about 15 minutes once Stellar X is on your network and Isaac Sim with the Isaac Bridge extension is installed (see **Before You Start**). You will:
+You will build a small robot system on Stellar X and drive a simulated **Clearpath Jackal** in NVIDIA Isaac Sim with Strider. It takes about 15 minutes once Stellar X is on your network and Isaac Sim with the Isaac Bridge extension is installed (see [Before You Start](#before-you-start)). You will:
 
 1. add an actuator gateway and a Strider controller on Stellar Station,
 1. load their design documents,
@@ -11,7 +11,7 @@ You will build a small robot system on Stellar X and drive a simulated **Clearpa
 flowchart TB
     B["Your browser<br>Stellar Station · Strider"]
     subgraph SX ["Stellar X"]
-        S["Strider<br>sodero.mlc.jackal"] -- servo_link --> G["Actuator gateway<br>rc.actuator_gateway.jackal"]
+        S["Strider<br>sodero.mlc.jackal"] -- servo_link --> G["Actuator gateway<br>sodero.actuator_gateway.jackal"]
     end
     I["Isaac Sim + Isaac Bridge<br>robot /World/jackal"]
     B --> S
@@ -22,11 +22,15 @@ ______________________________________________________________________
 
 ## Before You Start
 
-| You need                   | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Stellar X                  | Powered on and reachable from your PC ([Stellar X › Network Configuration](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/stellar_x/#4-network-configuration), [Network Settings](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/network_settings/index.md)). In this guide its address is `192.168.60.18`, an example address on a lab network; use your controller's address instead, for example `10.0.0.1` on a direct cable. |
-| A PC with NVIDIA Isaac Sim | Isaac Sim 6.0 with the Isaac Bridge 1.0.0 extension installed and enabled ([Isaac Bridge Installation](https://docs.sodero.io/v2.0.0/virtual_simulation/extension_installation/index.md)), on the same network as Stellar X. In this guide its address is `192.168.60.20`.                                                                                                                                                                                  |
-| Example files              | [jackal.gw](https://docs.sodero.io/v2.0.0/get_started/quick_start/files/jackal.gw) (gateway), [jackal.sddm](https://docs.sodero.io/v2.0.0/get_started/quick_start/files/jackal.sddm) (Strider) and [jackal_warehouse.zip](https://docs.sodero.io/v2.0.0/get_started/quick_start/files/jackal_warehouse.zip) (Isaac Sim scene, 6 MB). Download all three and extract the scene.                                                                              |
+| You need                   | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Stellar X                  | Powered on and reachable from your PC ([Stellar X › Network Configuration](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stellar_series/stellar_x/#4-network-configuration), [Network Settings](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stellar_series/network_settings/index.md)). In this guide its address is `192.168.60.18`, an example address on a lab network; use your controller's address instead, for example `10.0.0.1` on a direct cable. |
+| A PC with NVIDIA Isaac Sim | Isaac Sim 6.0 with the Isaac Bridge 1.0.0 extension installed and enabled ([Install Isaac Bridge](https://docs.sodero.io/stellar-x/v2.0.0/virtual_simulation/extension_installation/index.md)), on the same network as Stellar X. In this guide its address is `192.168.60.20`.                                                                                                                                                                                                 |
+| Example files              | [jackal.gw](https://docs.sodero.io/stellar-x/v2.0.0/get_started/quick_start/files/jackal.gw) (gateway), [jackal.sddm](https://docs.sodero.io/stellar-x/v2.0.0/get_started/quick_start/files/jackal.sddm) (Strider) and [jackal_warehouse.zip](https://docs.sodero.io/stellar-x/v2.0.0/get_started/quick_start/files/jackal_warehouse.zip) (Isaac Sim scene, 6 MB). Download all three and extract the scene.                                                                    |
+
+The Isaac Sim PC must accept TCP connections from Stellar X on ports 53333–53335. Allow them in its firewall ([Install Isaac Bridge](https://docs.sodero.io/stellar-x/v2.0.0/virtual_simulation/extension_installation/#4-allow-the-ports-in-the-firewall)).
+
+**Tip:** If you will continue with [Navigate in Simulation](https://docs.sodero.io/stellar-x/v2.0.0/navigation/simulation_tutorial/index.md), start Isaac Sim for this guide with the camera setting of its [Step 1](https://docs.sodero.io/stellar-x/v2.0.0/navigation/simulation_tutorial/#step-1-prepare-isaac-sim). Then you do not need to restart Isaac Sim later.
 
 ______________________________________________________________________
 
@@ -44,16 +48,18 @@ ______________________________________________________________________
 
 ## Step 2: Load the Gateway Document
 
-1. Select the new node `rc.actuator_gateway.jackal`. In its inspector, click the upload icon in **DEFINITION** (**Import .gw**).
+1. Select the new node `sodero.actuator_gateway.jackal`. In its inspector, click the upload icon in **DEFINITION** (**Import .gw**).
 
 1. On **From your PC** ①, choose `jackal.gw` ② and click **Import** ③.
 
 1. In **TARGET**, click **Change** and set the two values:
 
-   - **Robot name**: `jackal`. It must equal the robot's prim name in Isaac Sim (`/World/jackal`).
-   - **Sim host**: the IP address of your Isaac Sim PC.
+   - **Robot name** ①: `jackal`. It must equal the robot's prim name in Isaac Sim (`/World/jackal`).
+   - **Sim host** ②: the IP address of your Isaac Sim PC.
 
-   Click **Done**.
+   Click **Done** ③.
+
+   TARGET: ① Robot name ② Sim host ③ Done
 
 If the robot name differs from the prim name in Isaac Sim, the gateway waits forever and the robot never moves.
 
@@ -77,11 +83,7 @@ ______________________________________________________________________
 
 Isaac Bridge status: ① ports serving ② robots bound ③ cameras ④ Rescan
 
-The Isaac Sim PC must accept TCP connections from Stellar X on ports 53333–53335. Allow them in its firewall ([Isaac Bridge Installation](https://docs.sodero.io/v2.0.0/virtual_simulation/extension_installation/#4-allow-the-ports-in-the-firewall)).
-
-**Tip:** To use your own robot instead, prepare its scene as described in [Robot Setup](https://docs.sodero.io/v2.0.0/virtual_simulation/robot_setup/index.md): its articulation prim name is its robot name, and its joints, in order, are the gateway's actuators.
-
-**Tip:** If you will continue with [Navigate in Simulation](https://docs.sodero.io/v2.0.0/navigation/simulation_tutorial/index.md), start Isaac Sim with the camera setting of its [Step 1](https://docs.sodero.io/v2.0.0/navigation/simulation_tutorial/#step-1-prepare-isaac-sim) now. Then you do not need to restart Isaac Sim later.
+**Tip:** To use your own robot instead, prepare its scene as described in [Prepare the Robot](https://docs.sodero.io/stellar-x/v2.0.0/virtual_simulation/robot_setup/index.md): its articulation prim name is its robot name, and its joints, in order, are the gateway's actuators.
 
 ______________________________________________________________________
 
@@ -93,7 +95,7 @@ ______________________________________________________________________
 In the gateway's **LOGS** (stream **Gateway events**) you see the connection to Isaac Sim:
 
 ```
-Gateway rc.actuator_gateway.jackal starting: simulation, 4 actuator(s), 1.0 ms cycle.
+Gateway sodero.actuator_gateway.jackal starting: simulation, 4 actuator(s), 1.0 ms cycle.
 Simulation: robot 'jackal', simulator at 192.168.60.20; waiting for it to start.
 Simulator connected.
 ```
@@ -120,10 +122,10 @@ ______________________________________________________________________
 
 ## What's Next
 
-| Next step                                                  | Page                                                                                                                                                                                     |
-| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Let the Jackal localize itself on a map and drive to goals | [Navigate in Simulation](https://docs.sodero.io/v2.0.0/navigation/simulation_tutorial/index.md)                                                                                          |
-| Learn every part of the Station page                       | [Stellar Station](https://docs.sodero.io/v2.0.0/station/overview/index.md)                                                                                                               |
-| Build your own robot documents                             | [Stellar Designer](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/introduction/index.md), [Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md) |
-| Move from simulation to real motors                        | [EtherCAT Mobile Base](https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/index.md), [EtherCAT Gateway](https://docs.sodero.io/v2.0.0/gateways/ethercat/index.md)              |
-| Let an AI coding agent do it for you                       | [AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md)                                                                                                       |
+| Next step                                                  | Page                                                                                                                                                                                                         |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Let the Jackal localize itself on a map and drive to goals | [Navigate in Simulation](https://docs.sodero.io/stellar-x/v2.0.0/navigation/simulation_tutorial/index.md)                                                                                                    |
+| Learn every part of the Station page                       | [Stellar Station](https://docs.sodero.io/stellar-x/v2.0.0/station/overview/index.md)                                                                                                                         |
+| Build your own robot documents                             | [Stellar Designer](https://docs.sodero.io/stellar-x/v2.0.0/tutorials/stellar_designer/introduction/index.md), [Gateway Designer](https://docs.sodero.io/stellar-x/v2.0.0/gateways/gateway_designer/index.md) |
+| Move from simulation to real motors                        | [EtherCAT Mobile Base](https://docs.sodero.io/stellar-x/v2.0.0/tutorials/ethercat_mobile_base/index.md), [EtherCAT Gateway](https://docs.sodero.io/stellar-x/v2.0.0/gateways/ethercat/index.md)              |
+| Let an AI coding agent do it for you                       | [AI Coding Agents](https://docs.sodero.io/stellar-x/v2.0.0/ssh_workspace/ai_agents/index.md)                                                                                                                 |

@@ -1,6 +1,6 @@
 # Create Custom Modules
 
-A module is your own program packaged to run on the Station as a node, next to the built-in gateways and controllers. This page describes the package and how to build and install one from the [SSH workspace](https://docs.sodero.io/v2.0.0/ssh_workspace/overview/index.md). To install a finished package from your PC and manage installed modules, see [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md).
+A module is your own program packaged to run on the Station as a node, next to the built-in gateways and controllers. This page describes the package and how to build and install one from the [SSH workspace](https://docs.sodero.io/stellar-x/v2.0.0/ssh_workspace/overview/index.md). To install a finished package from your PC and manage installed modules, see [Modules](https://docs.sodero.io/stellar-x/v2.0.0/station/modules/index.md).
 
 ______________________________________________________________________
 
@@ -24,7 +24,7 @@ my-module-1.0.0.tar.gz
 
 Limits: 64 MiB per package (128 MiB unpacked).
 
-**Complete guide and examples.** The SSH workspace of Stellar X contains the full package guide and runnable examples, including a status module, a navigation-goal client and a custom input gateway. Run `sodero-help packages` and see `/opt/sodero/docs/examples/` ([SSH Workspace](https://docs.sodero.io/v2.0.0/ssh_workspace/overview/index.md)).
+**Complete guide and examples.** The SSH workspace of Stellar X contains the full package guide and runnable examples, including a status module, a navigation-goal client and a custom input gateway. Run `sodero-help packages` and see `/opt/sodero/docs/examples/` ([SSH Workspace](https://docs.sodero.io/stellar-x/v2.0.0/ssh_workspace/overview/index.md)).
 
 ______________________________________________________________________
 
@@ -42,6 +42,6 @@ tar -czf ../status-module.tar.gz package.yaml subsystem.yaml run.py README.md
 sodero packages upload ../status-module.tar.gz --execute
 ```
 
-Then add its node on the Station page ([Modules › Add and Start the Module's Node](https://docs.sodero.io/v2.0.0/station/modules/#add-and-start-the-modules-node)), or with `sodero topology add-node --kind package --package NAME --if-version N --execute`, and start it. `NAME` is the `name` in `package.yaml`; `N` is the graph version that `sodero topology get` returns ([sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)).
+Then add its node on the Station page ([Modules › Add and Start the Module's Node](https://docs.sodero.io/stellar-x/v2.0.0/station/modules/#add-and-start-the-modules-node)), or with `sodero topology add-node --kind package --package NAME --if-version N --execute`, and start it. `NAME` is the `name` in `package.yaml`; `N` is the graph version that `sodero topology get` returns ([sodero CLI](https://docs.sodero.io/stellar-x/v2.0.0/ssh_workspace/sodero_cli/index.md)).
 
-**Tip:** An AI coding agent can write, check, package and install a module for you through the SSH workspace. See [AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md).
+**Tip:** An AI coding agent can write, check, package and install a module for you through the SSH workspace. See [AI Coding Agents](https://docs.sodero.io/stellar-x/v2.0.0/ssh_workspace/ai_agents/index.md).

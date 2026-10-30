@@ -1,12 +1,12 @@
 # Manipulator (.sdd)
 
-This guide walks through the four steps of a manipulator document. The document belongs to a Motion Studio node (`sodero.mmc.NAME`), which drives the arm through an actuator gateway. The pictures show a 6-axis arm; there is no downloadable example arm, so you enter the data of your own arm.
+This guide walks through the four steps of a manipulator document. The document belongs to a Motion Studio node (`sodero.mmc.NAME`), which drives the arm through an actuator gateway. The pictures show a 6-axis arm, the same arm whose 3D model is assembled in [3D Model Creation](https://docs.sodero.io/stellar-x/v2.0.0/tutorials/stellar_designer/3dmodel_creation/index.md). No `.sdd` document of this arm is provided: enter the data of your own arm.
 
 ______________________________________________________________________
 
 ## Before You Start
 
-1. On the Station, add a **Controller › Motion Studio** node, for example `arm`, and an **Actuator gateway** for its motors ([Nodes and Connections](https://docs.sodero.io/v2.0.0/station/nodes_and_connections/index.md)).
+1. On the Station, add a **Controller › Motion Studio** node, for example `arm`, and an **Actuator gateway** for its motors ([Nodes and Connections](https://docs.sodero.io/stellar-x/v2.0.0/station/nodes_and_connections/index.md)).
 1. Select the Motion Studio node and click **Edit Stellar Designer**. For a new node, choose a template or **Blank robot** in **Create robot definition**.
 
 You need the arm's kinematics as **DH parameters** (from its datasheet or CAD), its joint limits, and, for accurate gravity compensation and collision detection, the mass properties of its links.
@@ -37,7 +37,7 @@ Step **01 Robot Structure** ① shows the **Joint Section**: the joints from the
 | **COLLISION THRESHOLD** | Collision Threshold            | Residual torque above which the controller detects a collision and stops |
 | **GOAL TOLERANCE**      | Joint Goal                     | How close a joint must be for a motion to count as finished              |
 
-**Display** ⑦ switches the 3D view between the skeleton and the robot's 3D model ([Stellar Designer](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/introduction/#display-menu)).
+**Display** ⑦ switches the 3D view between the skeleton and the robot's 3D model ([Stellar Designer](https://docs.sodero.io/stellar-x/v2.0.0/tutorials/stellar_designer/introduction/#display-menu)).
 
 ______________________________________________________________________
 
@@ -77,7 +77,7 @@ The canvas shows the gateway's actuators (top) and the robot's joints (bottom).
 1. In the right panel, set the **INFLUENCE FACTOR** of each connection: how many joint units one actuator unit moves, after the gear. Use `1` for a direct joint, a negative value to reverse the direction, and several connections for coupled joints (such as a differential wrist).
 1. The trash icon removes a connection.
 
-The gear ratio of each motor belongs to the gateway's document, not here ([Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md)).
+The gear ratio of each motor belongs to the gateway's document, not here ([Gateway Designer](https://docs.sodero.io/stellar-x/v2.0.0/gateways/gateway_designer/index.md)).
 
 ______________________________________________________________________
 
@@ -95,6 +95,6 @@ ______________________________________________________________________
 ## Try the Arm
 
 1. Return to the Station, connect the Motion Studio node's `servo_link` to the gateway, and start the gateway and the Motion Studio node.
-1. Open **Stellar Motion Studio** from the node and jog each joint slowly. Check that every joint moves in the direction and by the angle you expect ([Motion Studio](https://docs.sodero.io/v2.0.0/controllers/motion_studio/index.md)).
+1. Open **Stellar Motion Studio** from the node and jog each joint slowly. Check that every joint moves in the direction and by the angle you expect ([Motion Studio](https://docs.sodero.io/stellar-x/v2.0.0/controllers/motion_studio/index.md)).
 
-**Tip:** Try a new document in Isaac Sim first ([Virtual Simulation](https://docs.sodero.io/v2.0.0/virtual_simulation/introduction/index.md)). Errors in DH parameters or joint directions are easy to see there and harmless.
+**Tip:** Try a new document in Isaac Sim first ([Virtual Simulation](https://docs.sodero.io/stellar-x/v2.0.0/virtual_simulation/introduction/index.md)). Errors in DH parameters or joint directions are easy to see there and harmless.

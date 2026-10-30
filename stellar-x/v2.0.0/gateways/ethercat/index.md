@@ -2,9 +2,9 @@
 
 Stellar X is an EtherCAT master. An actuator gateway of type **EtherCAT** drives CiA 402 servo drives on the controller's EtherCAT port with distributed-clock synchronization at the gateway's control period (1 ms by default). This page covers wiring, the gateway document, parameters, bring-up and troubleshooting.
 
-For a complete example from wiring to driving, see [EtherCAT Mobile Base](https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/index.md): four drives on a skid-steer base, with example files.
+For a complete example from wiring to driving, see [EtherCAT Mobile Base](https://docs.sodero.io/stellar-x/v2.0.0/tutorials/ethercat_mobile_base/index.md): four drives on a skid-steer base, with example files.
 
-**Real motors move.** Bring up a new EtherCAT system with the robot clear of people and obstacles, the drives' safe torque off (STO) and emergency stop wired, and someone at the emergency stop ([Stop Controls](https://docs.sodero.io/v2.0.0/hardware_setup/stop_controls/index.md)).
+**Real motors move.** Bring up a new EtherCAT system with the robot clear of people and obstacles, the drives' safe torque off (STO) and emergency stop wired, and someone at the emergency stop ([Stop Controls](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stop_controls/index.md)).
 
 ______________________________________________________________________
 
@@ -42,8 +42,8 @@ ______________________________________________________________________
 
 ## 3. Create the Gateway Document
 
-1. On the Station, add an **Actuator gateway** node, for example `arm` ([Nodes and Connections](https://docs.sodero.io/v2.0.0/station/nodes_and_connections/index.md)).
-1. Click **Edit Stellar Gateway Designer**. In **Create gateway definition**, choose **EtherCAT** and click **Next** › **Create** ([Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md)).
+1. On the Station, add an **Actuator gateway** node, for example `arm` ([Nodes and Connections](https://docs.sodero.io/stellar-x/v2.0.0/station/nodes_and_connections/index.md)).
+1. Click **Edit Stellar Gateway Designer**. In **Create gateway definition**, choose **EtherCAT** and click **Next** › **Create** ([Gateway Designer](https://docs.sodero.io/stellar-x/v2.0.0/gateways/gateway_designer/index.md)).
 1. Click **Add Actuator** once per drive, in cable order.
 1. For each actuator, fill in the **Motor** tab and the **EtherCAT** tab as described below.
 1. Open **02 Verification**, click **Verify** and fix any errors.
@@ -58,16 +58,16 @@ Click **Brand**, **Series** or **Model** ① to open **Motor Select**: search by
 
 Motor Select catalog: search ①, or pick Brand ② › Series ③ › Model ④, then Accept ⑤
 
-The fields of the **Motor** tab:
+The fields of the **Motor** tab (simulation gateways show only **Max torque**, **Max speed** and **Gear ratio**):
 
-| Section                 | Field              | Unit   | Meaning                                                                                                                                                                                                    |
-| ----------------------- | ------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ② TORQUE                | **Rated torque**   | Nm     | Continuous motor torque. Torque commands are sent to the drive in per mille of this value.                                                                                                                 |
-|                         | **Max torque**     | Nm     | Peak torque of the motor itself, at the motor shaft (the motor's datasheet value, not the torque after the reducer). The gateway limits torque commands to *Max torque × Gear ratio* at the joint.         |
-| ③ SPEED                 | **Max speed**      | rpm    | Maximum speed of the motor itself, at the motor shaft (the motor's datasheet value, not the joint speed after the reducer). The gateway limits velocity commands to *Max speed ÷ Gear ratio* at the joint. |
-| ④ MOTOR CHARACTERISTICS | **Resolution**     | PPR    | Encoder pulses (counts) per motor revolution, **before** the gear, e.g. 1,048,576 (2²⁰) or 8,388,608 (2²³)                                                                                                 |
-| ⑤ ENCODER CONFIGURATION | **Encoder offset** | pulses | Absolute encoder zero. Set by origin calibration in Motion Studio; leave 0 for a new robot.                                                                                                                |
-| ⑥ REDUCER               | **Gear ratio**     | –      | Motor turns per joint turn                                                                                                                                                                                 |
+| Section                 | Field              | Unit  | Meaning                                                                                                                                                                                                    |
+| ----------------------- | ------------------ | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ② TORQUE                | **Rated torque**   | Nm    | Continuous motor torque. Torque commands are sent to the drive in per mille of this value.                                                                                                                 |
+|                         | **Max torque**     | Nm    | Peak torque of the motor itself, at the motor shaft (the motor's datasheet value, not the torque after the reducer). The gateway limits torque commands to *Max torque × Gear ratio* at the joint.         |
+| ③ SPEED                 | **Max speed**      | rpm   | Maximum speed of the motor itself, at the motor shaft (the motor's datasheet value, not the joint speed after the reducer). The gateway limits velocity commands to *Max speed ÷ Gear ratio* at the joint. |
+| ④ MOTOR CHARACTERISTICS | **Resolution**     | PPR   | Encoder pulses (counts) per motor revolution, **before** the gear, e.g. 1,048,576 (2²⁰) or 8,388,608 (2²³)                                                                                                 |
+| ⑤ ENCODER CONFIGURATION | **Encoder offset** | pulse | Zero offset of the absolute encoder. Origin calibration (**Set origin** in Motion Studio) sets it; leave 0 for a new robot and do not enter it by hand.                                                    |
+| ⑥ REDUCER               | **Gear ratio**     | ratio | Reduction between motor and joint: motor turns per joint turn                                                                                                                                              |
 
 **Rated torque**, **Max torque** and **Max speed** are the motor's own values at the motor shaft, as in the motor's datasheet, whatever reducer follows it. Do not convert them to the joint side: the gateway applies the **Gear ratio** itself.
 
@@ -93,6 +93,8 @@ IDENTIFICATION ①, SDOS ②, PDOS ③
 | **PDOS**           | **Rx PDO** / **Tx PDO** index                | The PDO mapping objects, typically `0x1600` and `0x1A00`                                                                                                                                                                                         |
 |                    | Entries                                      | The objects exchanged every cycle (see below). **Init Value** sets a constant for extra RxPDO entries.                                                                                                                                           |
 
+**Absolute Encoder Reset needs the drive's own object.** In the built-in catalog, the *Absolute Encoder Reset* entry of some drives, such as the MINAS A6BE, has the index `0x0000`, a placeholder. Before you use origin calibration (**Set origin** in Motion Studio), enter the drive's encoder reset object from its manual: index, subindex, value and size. Keep the entry's name: the gateway finds the entry by it.
+
 ### Process Data
 
 The gateway uses these CiA 402 objects:
@@ -104,7 +106,7 @@ The gateway uses these CiA 402 objects:
 |                    | 0x60FF | Target velocity            | For velocity control (**mobile bases**) |
 |                    | 0x6071 | Target torque              | For torque control                      |
 |                    | 0x60B2 | Torque offset              | Optional (feed-forward)                 |
-|                    | 0x6060 | Modes of operation         | Optional (also written by SDO)          |
+|                    | 0x6060 | Modes of operation         | Optional: carries the mode every cycle  |
 | TxPDO (from drive) | 0x6041 | Statusword                 | Yes                                     |
 |                    | 0x6064 | Position actual value      | Yes                                     |
 |                    | 0x606C | Velocity actual value      | Recommended                             |
@@ -112,7 +114,9 @@ The gateway uses these CiA 402 objects:
 |                    | 0x6061 | Modes of operation display | Recommended                             |
 |                    | 0x603F | Error code                 | Recommended (fault messages)            |
 
-When a controller drives the gateway, you do not choose the mode of operation: the controller selects it per command. Position commands use CSP (8), velocity commands CSV (9), torque and impedance commands CST (10). In the [test console](https://docs.sodero.io/v2.0.0/gateways/test_console/index.md) you choose the drive mode yourself.
+The gateway writes the mode of operation (0x6060) to each drive itself, by SDO after the drive reaches SAFE-OP, and every cycle when 0x6060 is in the RxPDO. A 0x6060 entry under **SDOS** is ignored.
+
+When a controller drives the gateway, you do not choose the mode of operation: the controller selects it per command. Position commands use CSP (8), velocity commands CSV (9), torque and impedance commands CST (10). In the [test console](https://docs.sodero.io/stellar-x/v2.0.0/gateways/test_console/index.md) you choose the drive mode yourself.
 
 ### Verify
 
@@ -126,7 +130,7 @@ ______________________________________________________________________
 
 ## 4. Connect a Controller
 
-1. Add the controller node (Motion Studio, Strider or Articulation) and import its document. The document must name this gateway and its actuator indices ([Design Documents](https://docs.sodero.io/v2.0.0/station/design_documents/#5-rules-for-documents)).
+1. Add the controller node (Motion Studio, Strider or Articulation) and import its document. The document must name this gateway and its actuator indices ([Design Documents](https://docs.sodero.io/stellar-x/v2.0.0/station/design_documents/#5-rules-for-documents)).
 1. Connect the controller's `servo_link` to the gateway's `servo_link`.
 
 ______________________________________________________________________
@@ -144,7 +148,7 @@ ______________________________________________________________________
    EtherCAT ready: 2 drive(s) operational, 1.0 ms cycle.
    ```
 
-1. Optional: before you start a controller, click **Test Stellar Gateway** in the gateway's **CONTROL** section to open the [test console](https://docs.sodero.io/v2.0.0/gateways/test_console/index.md) and move single actuators. When the test is done, click **Servo OFF** in the console and **Stop test** in the gateway's **CONTROL** section. [EtherCAT Mobile Base › Step 5](https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/#step-5-test-the-wheels-with-the-test-console) shows a complete test of four wheels.
+1. Optional: before you start a controller, click **Test Stellar Gateway** in the gateway's **CONTROL** section to open the [test console](https://docs.sodero.io/stellar-x/v2.0.0/gateways/test_console/index.md) and move single actuators. When the test is done, click **Servo OFF** in the console and **Stop test** in the gateway's **CONTROL** section. [EtherCAT Mobile Base › Step 5](https://docs.sodero.io/stellar-x/v2.0.0/tutorials/ethercat_mobile_base/#step-5-test-the-wheels-with-the-test-console) shows a complete test of four wheels.
 
 1. Start the controller node, open its UI and switch **Servo On**. Jog slowly first and check each joint's direction.
 

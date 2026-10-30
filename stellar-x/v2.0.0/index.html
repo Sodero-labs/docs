@@ -20,7 +20,7 @@
     
     
   
-    <title>Sodero Docs</title>
+    <title>Stellar X Docs</title>
   
 
     
@@ -68,7 +68,7 @@
             body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
             body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
             body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
-        </style><style id="product-navigation">.product-select{background:#1a1a1a;color:#fff;border:1px solid #333;padding:4px 8px;font-size:.75rem;border-radius:4px;cursor:pointer}.mobile-header-inner>.product-select{margin-left:auto}</style></head>
+        </style></head>
   
   
     
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sodero-documents" class="md-skip">
+        <a href="#stellar-x-documentation" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,22 @@
       }
       .md-header__button.md-icon { color: #fff; cursor: pointer; display: flex; align-items: center; margin-left: -8px; }
       .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
+      .header-selects { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+      .header-selects .version-dropdown { margin-right: 0; }
     }
+
+    /* Product and version menus */
+    .product-select, .version-select {
+      background: #1a1a1a;
+      color: #fff;
+      border: 1px solid #333;
+      padding: 4px 8px;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .product-select:hover, .version-select:hover { border-color: #555; }
+    .version-dropdown[hidden] { display: none; }
 
     /* --- [2] Desktop --- */
     @media (min-width: 76.25em) {
@@ -286,7 +301,19 @@
         <a href="." class="header-home-btn">
           <img src="assets/docs.svg" alt="Sodero Docs">
         </a>
-      <select class="product-select" aria-label="Product"><option value="sodero-cloud">Sodero Cloud</option><option value="stellar-x" selected>Stellar X</option></select></div>
+        <div class="header-selects">
+          <select class="product-select" aria-label="Product">
+            
+              <option value="sodero-cloud">Sodero Cloud</option>
+            
+              <option value="stellar-x" selected="">Stellar X</option>
+            
+          </select>
+          <div class="version-dropdown">
+            <select class="version-select" aria-label="Version"></select>
+          </div>
+        </div>
+      </div>
 
       <div class="custom-header-inner pc-only">
         <div class="header-left">
@@ -296,7 +323,14 @@
           <a href="." class="header-home-btn">
             <img src="assets/docs.svg" alt="Sodero Docs">
           </a>
-        <select class="product-select" aria-label="Product"><option value="sodero-cloud">Sodero Cloud</option><option value="stellar-x" selected>Stellar X</option></select></div>
+          <select class="product-select" aria-label="Product">
+            
+              <option value="sodero-cloud">Sodero Cloud</option>
+            
+              <option value="stellar-x" selected="">Stellar X</option>
+            
+          </select>
+        </div>
 
         <div class="header-center">
           <nav class="header-breadcrumbs">
@@ -365,13 +399,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Sodero Documents" class="md-nav__button md-logo" aria-label="Sodero Documents" data-md-component="logo">
+    <a href="." title="Stellar X" class="md-nav__button md-logo" aria-label="Stellar X" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
 
     </a>
-    Sodero Documents
+    Stellar X
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix="">
@@ -519,10 +553,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#operate-and-simulate" class="md-nav__link">
+  <a href="#simulate-and-operate" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Operate and Simulate
+        Simulate and Operate
       
     </span>
   </a>
@@ -623,6 +657,34 @@
   
   
     <li class="md-nav__item">
+      <a href="tutorials/learning_path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning Path
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="get_started/quick_start/" class="md-nav__link">
         
   
@@ -681,7 +743,7 @@
   <span class="md-ellipsis">
     
   
-    Hardware &amp; Network
+    Hardware and Network
   
 
     
@@ -697,7 +759,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Hardware &amp; Network
+    Hardware and Network
   
 
           </label>
@@ -1051,7 +1113,7 @@
   <span class="md-ellipsis">
     
   
-    Stellar Designer
+    Gateways and Sensors
   
 
     
@@ -1067,7 +1129,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Stellar Designer
+    Gateways and Sensors
   
 
           </label>
@@ -1080,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="tutorials/stellar_designer/introduction/" class="md-nav__link">
+      <a href="gateways/overview/" class="md-nav__link">
         
   
   
@@ -1116,6 +1178,233 @@
     
   
     Gateway Designer (.gw)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gateways/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulation Gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gateways/ethercat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EtherCAT Gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gateways/test_console/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test Console
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gateways/sensors_and_cameras/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cameras and IMUs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gateways/device_bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Device Bridge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stellar Designer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stellar Designer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/stellar_designer/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
   
 
     
@@ -1268,17 +1557,17 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    Gateways &amp; Sensors
+    Simulation
   
 
     
@@ -1289,12 +1578,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Gateways &amp; Sensors
+    Simulation
   
 
           </label>
@@ -1307,7 +1596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="gateways/overview/" class="md-nav__link">
+      <a href="virtual_simulation/introduction/" class="md-nav__link">
         
   
   
@@ -1335,14 +1624,14 @@
   
   
     <li class="md-nav__item">
-      <a href="gateways/ethercat/" class="md-nav__link">
+      <a href="virtual_simulation/extension_installation/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    EtherCAT Gateway
+    Install Isaac Bridge
   
 
     
@@ -1363,14 +1652,14 @@
   
   
     <li class="md-nav__item">
-      <a href="gateways/simulation/" class="md-nav__link">
+      <a href="virtual_simulation/robot_setup/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Simulation Gateway
+    Prepare the Robot
   
 
     
@@ -1391,70 +1680,14 @@
   
   
     <li class="md-nav__item">
-      <a href="gateways/test_console/" class="md-nav__link">
+      <a href="virtual_simulation/connect_station/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Test Console
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="gateways/sensors_and_cameras/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sensors and Cameras
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="gateways/device_bridge/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Device Bridge
+    Connect to Stellar Station
   
 
     
@@ -1495,10 +1728,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
             
   
   
@@ -1516,8 +1749,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1638,177 +1871,6 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
-        
-          
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Simulation
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Simulation
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix="">
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="virtual_simulation/introduction/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Overview
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="virtual_simulation/extension_installation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Isaac Bridge Installation
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="virtual_simulation/robot_setup/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Robot Setup
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="virtual_simulation/connect_station/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Connect to Stellar Station
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8">
         
           
@@ -1819,7 +1881,7 @@
   <span class="md-ellipsis">
     
   
-    Localization &amp; Navigation
+    Localization and Navigation
   
 
     
@@ -1835,7 +1897,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Localization &amp; Navigation
+    Localization and Navigation
   
 
           </label>
@@ -1876,14 +1938,14 @@
   
   
     <li class="md-nav__item">
-      <a href="navigation/map_bundle/" class="md-nav__link">
+      <a href="navigation/create_map/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Load and Configure a Map
+    Create a Map from Your Site
   
 
     
@@ -1904,14 +1966,14 @@
   
   
     <li class="md-nav__item">
-      <a href="navigation/create_map/" class="md-nav__link">
+      <a href="navigation/map_bundle/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Create a Map from Your Site
+    Load and Configure a Map
   
 
     
@@ -1983,34 +2045,6 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="tutorials/learning_path/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Learning Path
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -2105,7 +2139,7 @@
   <span class="md-ellipsis">
     
   
-    Extend &amp; Automate
+    Extend and Automate
   
 
     
@@ -2121,7 +2155,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Extend &amp; Automate
+    Extend and Automate
   
 
           </label>
@@ -2396,7 +2430,7 @@
   <span class="md-ellipsis">
     
   
-    ChangeLog
+    Changelog
   
 
     
@@ -2466,10 +2500,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#operate-and-simulate" class="md-nav__link">
+  <a href="#simulate-and-operate" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Operate and Simulate
+        Simulate and Operate
       
     </span>
   </a>
@@ -2531,10 +2565,10 @@
 
 
 
-<h1 id="sodero-documents">Sodero Documents<a class="headerlink" href="#sodero-documents" title="Permanent link">¶</a></h1>
-<p>Get an overview of Sodero's products, features and integrations, and learn how to use them.</p>
+<h1 id="stellar-x-documentation">Stellar X Documentation<a class="headerlink" href="#stellar-x-documentation" title="Permanent link">¶</a></h1>
+<p>Set up the Stellar X controller, build your robot system in Stellar Station and operate robots in simulation and on real hardware.</p>
 
-<h3 id="get-started">Get Started<a class="headerlink" href="#get-started" title="Permanent link">¶</a></h3>
+<h2 id="get-started">Get Started<a class="headerlink" href="#get-started" title="Permanent link">¶</a></h2>
 <div class="box-container">
   <a href="get_started/quick_start" class="card-box">
     <img src="https://unpkg.com/lucide-static@0.577.0/icons/rocket.svg" class="external-icon" alt="Icon">
@@ -2553,7 +2587,7 @@
   </a>
 </div>
 
-<h3 id="build-the-system">Build the System<a class="headerlink" href="#build-the-system" title="Permanent link">¶</a></h3>
+<h2 id="build-the-system">Build the System<a class="headerlink" href="#build-the-system" title="Permanent link">¶</a></h2>
 <div class="box-container">
   <a href="station/overview" class="card-box">
     <img src="https://unpkg.com/lucide-static@0.577.0/icons/layout-dashboard.svg" class="external-icon" alt="Icon">
@@ -2572,17 +2606,17 @@
   </a>
 </div>
 
-<h3 id="operate-and-simulate">Operate and Simulate<a class="headerlink" href="#operate-and-simulate" title="Permanent link">¶</a></h3>
+<h2 id="simulate-and-operate">Simulate and Operate<a class="headerlink" href="#simulate-and-operate" title="Permanent link">¶</a></h2>
 <div class="box-container">
-  <a href="controllers/strider" class="card-box">
-    <img src="https://unpkg.com/lucide-static@0.577.0/icons/gamepad-2.svg" class="external-icon" alt="Icon">
-    <h4>Operate Robots</h4>
-    <p>Jog mobile bases, manipulators and articulated robots with Strider, Motion Studio and Articulation.</p>
-  </a>
   <a href="virtual_simulation/introduction" class="card-box">
     <img src="https://unpkg.com/lucide-static@0.577.0/icons/square-mouse-pointer.svg" class="external-icon" alt="Icon">
     <h4>Simulation</h4>
     <p>Drive robots in NVIDIA Isaac Sim with the same controllers and controller documents as the real robot.</p>
+  </a>
+  <a href="controllers/strider" class="card-box">
+    <img src="https://unpkg.com/lucide-static@0.577.0/icons/gamepad-2.svg" class="external-icon" alt="Icon">
+    <h4>Operate Robots</h4>
+    <p>Jog mobile bases, manipulators and articulated robots with Strider, Motion Studio and Articulation.</p>
   </a>
   <a href="navigation/overview" class="card-box">
     <img src="https://unpkg.com/lucide-static@0.577.0/icons/map.svg" class="external-icon" alt="Icon">
@@ -2591,7 +2625,7 @@
   </a>
 </div>
 
-<h3 id="extend-automate">Extend &amp; Automate<a class="headerlink" href="#extend-automate" title="Permanent link">¶</a></h3>
+<h2 id="extend-automate">Extend &amp; Automate<a class="headerlink" href="#extend-automate" title="Permanent link">¶</a></h2>
 <div class="box-container">
   <a href="ssh_workspace/overview" class="card-box">
     <img src="https://unpkg.com/lucide-static@0.577.0/icons/square-terminal.svg" class="external-icon" alt="Icon">
@@ -2610,7 +2644,7 @@
   </a>
 </div>
 
-<h3 id="reference-support">Reference &amp; Support<a class="headerlink" href="#reference-support" title="Permanent link">¶</a></h3>
+<h2 id="reference-support">Reference &amp; Support<a class="headerlink" href="#reference-support" title="Permanent link">¶</a></h2>
 <div class="box-container">
   <a href="https://www.sodero.io/contact" class="card-box">
     <img src="https://unpkg.com/lucide-static@0.577.0/icons/headset.svg" class="external-icon" alt="Icon">

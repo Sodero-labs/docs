@@ -1,20 +1,20 @@
 # Sodero Ecosystem
 
-## One Platform from Design to the Real Robot
-
 Sodero connects robot design, simulation and operation on one controller. You describe the robot in Stellar Designer, run it on Stellar X with the built-in controllers, and drive it in NVIDIA Isaac Sim or on real motors through a gateway.
 
 The same controller and application structure can be reused in simulation and on supported hardware. Before operating the physical robot, configure its gateway and verify actuator mapping, calibration, limits and sensor settings.
 
-### Core Architecture
+______________________________________________________________________
+
+## Core Architecture
 
 **Gateways separate controllers from hardware.** Controllers never talk to hardware directly. A gateway connects them to EtherCAT drives, to a robot in NVIDIA Isaac Sim, or to sensors, so the same controller and controller document can drive a simulated robot and a real one.
 
-**One Station for every node.** Gateways, controllers, navigation and your own modules run as nodes of one Station on Stellar X. They are connected through ports with defined interfaces, so built-in nodes and your own work together in the same way on every robot.
+**One Station runs every node.** Gateways, controllers, navigation and your own modules run as nodes of one Station on Stellar X. They are connected through ports with defined interfaces, so built-in nodes and your own work together in the same way on every robot.
 
 ______________________________________________________________________
 
-### From Design to the Real Robot
+## From Design to the Real Robot
 
 The Sodero ecosystem connects the entire process, from robot design and validation to physical deployment, into a single pipeline.
 
@@ -36,13 +36,15 @@ flowchart TB
 
 In simulation and on the real robot alike, you operate the robot from the same built-in controller UIs: **Motion Studio** for manipulators, **Strider** for mobile bases and **Articulation** for articulated and legged robots.
 
-**Tip:** Every tool runs in the browser and is served by Stellar X itself. Connect a PC to the controller's network and open its address; there is nothing to install on your PC except Isaac Sim and the Isaac Bridge extension for simulation.
+**Tip:** The Station, Stellar Designer and the controller UIs run in the browser and are served by Stellar X itself: connect a PC to the controller's network and open its address. Other software is installed only where you use it: Isaac Sim with the Isaac Bridge extension for simulation, an SSH client for the SSH workspace, and the Device Bridge on a computer next to its sensors.
+
+**Sodero Cloud.** The same Stellar Station, design documents and controller UIs also run in Sodero Cloud, where robots are simulated in Robot Worlds in the browser instead of Isaac Sim on your PC. See the [Sodero Cloud manual](https://docs.sodero.io/sodero-cloud/latest/).
 
 ______________________________________________________________________
 
-### Integration and Extensibility
+## Integration and Extensibility
 
-Beyond controlling a single robot, Sodero fits into complex system integration (SI) environments.
+Beyond controlling a single robot, Sodero works with your own programs and tools.
 
 **Modules.** Package your own programs and install them on the Station. They run as nodes next to the built-in ones and use the same interfaces to command robots, read sensors and send navigation goals.
 
@@ -50,14 +52,4 @@ Beyond controlling a single robot, Sodero fits into complex system integration (
 
 ______________________________________________________________________
 
-### What's New in 2.0
-
-Version 2.0 turns Stellar X from a single-robot motion controller into a complete robot system on one controller:
-
-- **Stellar Station**: build the robot system as a graph of nodes (gateways, controllers, sensors, navigation and your own modules) and run it from the browser.
-- **One Stellar Designer** for every design document: manipulators (`.sdd`), mobile bases (`.sddm`), articulated robots (`.sdda`) and gateways (`.gw`).
-- **Mobile robots and navigation**: Strider drives wheeled bases; the Localizer and Navigator add map-based localization and autonomous navigation.
-- **Isaac Bridge**: connect robots in NVIDIA Isaac Sim to the Station over the network, with cameras and IMUs.
-- **SSH Workspace and AI agents**: develop on the controller over SSH and let AI coding agents operate the Station with the `sodero` CLI.
-
-Continue with [Key Concepts](https://docs.sodero.io/v2.0.0/get_started/key_concepts/index.md), then try the [Quick Start](https://docs.sodero.io/v2.0.0/get_started/quick_start/index.md).
+Continue with [Key Concepts](https://docs.sodero.io/stellar-x/v2.0.0/get_started/key_concepts/index.md), then follow the [Learning Path](https://docs.sodero.io/stellar-x/v2.0.0/tutorials/learning_path/index.md).

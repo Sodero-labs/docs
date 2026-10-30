@@ -1,8 +1,8 @@
 # Test Console
 
-The test console moves the actuators of one actuator gateway without a robot controller. You switch the servo on and off, choose a drive mode, and send position, velocity or torque targets to each actuator. Use it to check the wiring, the directions, the gear ratios and the encoder settings of a gateway before a controller drives the robot. [EtherCAT Mobile Base › Step 5](https://docs.sodero.io/v2.0.0/tutorials/ethercat_mobile_base/#step-5-test-the-wheels-with-the-test-console) shows a complete test of four wheels in velocity mode.
+The test console moves the actuators of one actuator gateway without a robot controller. You switch the servo on and off, choose a drive mode, and send position, velocity or torque targets to each actuator. Use it to check the wiring, the directions, the gear ratios and the encoder settings of a gateway before a controller drives the robot. [EtherCAT Mobile Base › Step 5](https://docs.sodero.io/stellar-x/v2.0.0/tutorials/ethercat_mobile_base/#step-5-test-the-wheels-with-the-test-console) shows a complete test of four wheels in velocity mode.
 
-**Real motors move.** Test one actuator at a time, with small values, with the mechanism free to move and the hardware emergency stop within reach. The console does not limit position targets, and its **EMERGENCY STOP** does not replace the hardware emergency stop ([Stop Controls](https://docs.sodero.io/v2.0.0/hardware_setup/stop_controls/index.md)).
+**Real motors move.** Test one actuator at a time, with small values, with the mechanism free to move and the hardware emergency stop within reach. The console does not limit position targets, and its **EMERGENCY STOP** does not replace the hardware emergency stop ([Stop Controls](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stop_controls/index.md)).
 
 ______________________________________________________________________
 
@@ -10,7 +10,7 @@ ______________________________________________________________________
 
 The test console is for a gateway that no robot controller uses.
 
-1. Stop the robot controllers on the Station. The Station does not open a test while a Motion Studio node runs (*a robot controller (CM) is running — stop the robot before opening the test console*), and starting a robot controller (Motion Studio, Strider or Articulation) ends every running test.
+1. Stop the robot controllers on the Station. While a Motion Studio node runs, the Station does not open a test and reports that a robot controller is running. Starting a robot controller (Motion Studio, Strider or Articulation) ends every running test.
 1. Select the gateway and click **Start node**. **Test Stellar Gateway** in its **CONTROL** section unlocks when the gateway runs.
 1. Click **Test Stellar Gateway**. The console opens in a new browser tab.
 1. If the console shows **Gateway not connected**, click **Connect**. The console always connects with the servo off.
@@ -50,7 +50,7 @@ ______________________________________________________________________
 
 Only the slider of the actuator's drive mode commands it. The gateway limits velocity and torque commands to the limits of its document; position targets are not limited, so keep them inside the range the mechanism can move. In TORQUE mode nothing limits the speed: use small torques.
 
-When a controller drives the gateway, it chooses the drive mode itself for each command. In the test console you choose it ([EtherCAT Gateway › Process Data](https://docs.sodero.io/v2.0.0/gateways/ethercat/#process-data)).
+When a controller drives the gateway, it chooses the drive mode itself for each command. In the test console you choose it ([EtherCAT Gateway › Process Data](https://docs.sodero.io/stellar-x/v2.0.0/gateways/ethercat/#process-data)).
 
 ______________________________________________________________________
 
@@ -81,7 +81,7 @@ The Station refuses to save a gateway document while the gateway runs and while 
 1. Click **Servo OFF** in the console.
 1. Click **Stop test** in the gateway's **CONTROL** section.
 1. Click **Stop node** on the gateway.
-1. Change the document in the [Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md), or import a new `.gw`.
+1. Change the document in the [Gateway Designer](https://docs.sodero.io/stellar-x/v2.0.0/gateways/gateway_designer/index.md), or import a new `.gw`.
 1. Click **Start node** on the gateway, then **Test Stellar Gateway**, and test again.
 
 Stop the test before you stop the gateway. While the gateway is stopped, its **CONTROL** section shows no **Stop test**, and saves stay refused (*Gateway '…' has a test console open*). In that case, start the gateway again, click **Stop test**, and then stop the gateway.
@@ -90,11 +90,11 @@ ______________________________________________________________________
 
 ## Troubleshooting
 
-| Symptom                                                                                                                                | Cause and fix                                                                                                                              |
-| -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| The Station refuses to open the test: *a robot controller (CM) is running …*, or the console shows **A controller is already running** | A Motion Studio node runs. Stop it, then click **Connect** in the console.                                                                 |
-| The console shows **Gateway not connected**                                                                                            | Click **Connect**. If it does not connect, check that the gateway is **Operating**.                                                        |
-| The cards show **Enable**, but the gateway's log shows *Servo ON failed*                                                               | A drive did not enable. Check its STO and enable inputs, the emergency stop and its main power, then click **Servo OFF** and **Servo ON**. |
-| An actuator does not react to a slider                                                                                                 | The slider does not belong to the actuator's drive mode, or the servo is off.                                                              |
-| After **EMERGENCY STOP** is released, a drive does not enable again                                                                    | Click **Servo ON**. If the drive still does not enable, click **Stop test**, stop and start the gateway, and open the test again.          |
-| The test ended by itself                                                                                                               | A robot controller was started on the Station.                                                                                             |
+| Symptom                                                                                                                              | Cause and fix                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| The Station refuses to open the test because a robot controller is running, or the console shows **A controller is already running** | A Motion Studio node runs. Stop it, then click **Connect** in the console.                                                                 |
+| The console shows **Gateway not connected**                                                                                          | Click **Connect**. If it does not connect, check that the gateway is **Operating**.                                                        |
+| The cards show **Enable**, but the gateway's log shows *Servo ON failed*                                                             | A drive did not enable. Check its STO and enable inputs, the emergency stop and its main power, then click **Servo OFF** and **Servo ON**. |
+| An actuator does not react to a slider                                                                                               | The slider does not belong to the actuator's drive mode, or the servo is off.                                                              |
+| After **EMERGENCY STOP** is released, a drive does not enable again                                                                  | Click **Servo ON**. If the drive still does not enable, click **Stop test**, stop and start the gateway, and open the test again.          |
+| The test ended by itself                                                                                                             | A robot controller was started on the Station.                                                                                             |

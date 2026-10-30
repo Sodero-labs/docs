@@ -3,7 +3,7 @@
 Stellar X serves a small settings page on **port 3000**. Use it for the two things you need before anything else:
 
 - the IP address of the controller's LAN port **Eth1**, and
-- SSH access to the controller's [SSH workspace](https://docs.sodero.io/v2.0.0/ssh_workspace/overview/index.md).
+- SSH access to the controller's [SSH workspace](https://docs.sodero.io/stellar-x/v2.0.0/ssh_workspace/overview/index.md).
 
 Open the page from any computer on the same network:
 
@@ -13,7 +13,7 @@ http://ROBOT_ADDRESS:3000
 
 In this guide the controller's address is `192.168.60.18`, an example address on a lab network, so the page is `http://192.168.60.18:3000`. Replace it with your controller's address.
 
-**Initial address: static `10.0.0.1`.** Eth1 starts with the static address `10.0.0.1` (subnet mask `255.255.255.0`). To reach it the first time, connect your PC with a cable and give the PC a static address in the same subnet, such as `10.0.0.2` ([Stellar X](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/stellar_x/#4-network-configuration)). Then open `http://10.0.0.1:3000` and change the address under [IP Configuration](#1-ip-configuration).
+**Initial address: static `10.0.0.1`.** Eth1 starts with the static address `10.0.0.1` (subnet mask `255.255.255.0`). To reach it the first time, connect your PC with a cable and give the PC a static address in the same subnet, such as `10.0.0.2` ([Stellar X](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stellar_series/stellar_x/#4-network-configuration)). Then open `http://10.0.0.1:3000` and change the address under [IP Configuration](#1-ip-configuration).
 
 The page needs no sign-in: anyone on the same network can change the address and register SSH keys. Connect Stellar X only to networks you trust.
 
@@ -52,7 +52,7 @@ Your PC must be on the same subnet to reach the new address. For example, after 
 
 ### Notes
 
-- The page changes **Eth1 only**. Eth2 keeps using DHCP. The EtherCAT port is reserved for EtherCAT devices; it never gets an IP address and is not shown here ([Stellar X › Device Overview](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/stellar_x/#2-device-overview)).
+- The page changes **Eth1 only**. Eth2 keeps using DHCP. The EtherCAT port is reserved for EtherCAT devices; it never gets an IP address and is not shown here ([Stellar X › Device Overview](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stellar_series/stellar_x/#2-device-overview)).
 - No default gateway is configured. Stellar X works on the local network and does not need Internet access.
 - With **DHCP**, find the controller's address in your router's client list; its host name is `stellar-x`.
 
@@ -100,4 +100,4 @@ Paste only the **public** key (the `.pub` file). The page refuses private keys a
 
 Each person or computer should have its own key. The key's comment (for example `user@laptop`) is shown in the list, so you can tell the keys apart.
 
-Continue with [SSH Workspace](https://docs.sodero.io/v2.0.0/ssh_workspace/overview/index.md) to learn what you can do once you are connected.
+Continue with [SSH Workspace](https://docs.sodero.io/stellar-x/v2.0.0/ssh_workspace/overview/index.md) to learn what you can do once you are connected.

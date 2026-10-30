@@ -19,13 +19,13 @@ ______________________________________________________________________
 
 ## Built-in Gateways
 
-| Module           | Node ID                    | Connects                                                                                                                                            | Configured with                                                                                                                  |
-| ---------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Actuator gateway | `rc.actuator_gateway.NAME` | EtherCAT drives, or the joints of a robot in Isaac Sim                                                                                              | A `.gw` document ([Gateway Designer](https://docs.sodero.io/v2.0.0/gateways/gateway_designer/index.md))                          |
-| Camera gateway   | `rc.camera_gateway.NAME`   | An RGB-D camera: a camera in Isaac Sim, or a real camera through the [Device Bridge](https://docs.sodero.io/v2.0.0/gateways/device_bridge/index.md) | Camera settings in the inspector ([Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/index.md))    |
-| IMU gateway      | `rc.imu_gateway.NAME`      | An IMU (and foot contacts in Isaac Sim): in Isaac Sim, or through the Device Bridge                                                                 | IMU settings in the inspector ([Sensors and Cameras](https://docs.sodero.io/v2.0.0/gateways/sensors_and_cameras/#2-imu-gateway)) |
+| Module           | Node ID                        | Connects                                                                                                                                                      | Configured with                                                                                                                         |
+| ---------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Actuator gateway | `sodero.actuator_gateway.NAME` | EtherCAT drives, or the joints of a robot in Isaac Sim                                                                                                        | A `.gw` document ([Gateway Designer](https://docs.sodero.io/stellar-x/v2.0.0/gateways/gateway_designer/index.md))                       |
+| Camera gateway   | `sodero.camera_gateway.NAME`   | An RGB-D camera: a camera in Isaac Sim, or a real camera through the [Device Bridge](https://docs.sodero.io/stellar-x/v2.0.0/gateways/device_bridge/index.md) | Camera settings in the inspector ([Cameras and IMUs](https://docs.sodero.io/stellar-x/v2.0.0/gateways/sensors_and_cameras/index.md))    |
+| IMU gateway      | `sodero.imu_gateway.NAME`      | An IMU (and foot contacts in Isaac Sim): in Isaac Sim, or through the Device Bridge                                                                           | IMU settings in the inspector ([Cameras and IMUs](https://docs.sodero.io/stellar-x/v2.0.0/gateways/sensors_and_cameras/#2-imu-gateway)) |
 
-For devices the built-in gateways do not cover, you can write your own gateway as a module with the role `gateway` ([Create Custom Modules](https://docs.sodero.io/v2.0.0/extend/custom_modules/index.md)). Once installed, it appears in **Add node** › **Gateway** with the **CUSTOM** badge.
+For devices the built-in gateways do not cover, you can write your own gateway as a module with the role `gateway` ([Create Custom Modules](https://docs.sodero.io/stellar-x/v2.0.0/extend/custom_modules/index.md)). Once installed, it appears in **Add node** › **Gateway** with the **CUSTOM** badge.
 
 ______________________________________________________________________
 
@@ -33,10 +33,10 @@ ______________________________________________________________________
 
 The `.gw` document chooses how the actuator gateway reaches its actuators:
 
-| Type          | `hardware.type` | Use                                                                                        | Page                                                                             |
-| ------------- | --------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
-| **EtherCAT**  | `ethercat`      | CiA 402 servo drives on the controller's EtherCAT port, synchronized by distributed clocks | [EtherCAT Gateway](https://docs.sodero.io/v2.0.0/gateways/ethercat/index.md)     |
-| **Isaac Sim** | `simulation`    | The joints of a robot in NVIDIA Isaac Sim, through the Isaac Bridge extension              | [Simulation Gateway](https://docs.sodero.io/v2.0.0/gateways/simulation/index.md) |
+| Type          | `hardware.type` | Use                                                                                        | Page                                                                                       |
+| ------------- | --------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| **EtherCAT**  | `ethercat`      | CiA 402 servo drives on the controller's EtherCAT port, synchronized by distributed clocks | [EtherCAT Gateway](https://docs.sodero.io/stellar-x/v2.0.0/gateways/ethercat/index.md)     |
+| **Isaac Sim** | `simulation`    | The joints of a robot in NVIDIA Isaac Sim, through the Isaac Bridge extension              | [Simulation Gateway](https://docs.sodero.io/stellar-x/v2.0.0/gateways/simulation/index.md) |
 
 ______________________________________________________________________
 
@@ -59,6 +59,8 @@ ______________________________________________________________________
 
 - **Watchdog.** If a controller stops sending commands while the servo is on, the gateway keeps the last command for 3 s, then switches the servo off.
 - **Limits.** The gateway clamps velocity and torque commands to the actuator limits of its document. Position limits come from the controller's document.
-- **Emergency stop.** When a controller or the [test console](https://docs.sodero.io/v2.0.0/gateways/test_console/index.md) requests an emergency stop, the gateway sends a quick stop to the EtherCAT drives and switches the servo off. How the drives slow down depends on their quick stop settings. These software stops do not replace the hardware emergency stop ([Stop Controls](https://docs.sodero.io/v2.0.0/hardware_setup/stop_controls/index.md)).
-- **Fault reporting.** Drive faults, lost communication and missing devices are reported in the gateway's **Gateway events** log with a hint about what to check ([Running Nodes](https://docs.sodero.io/v2.0.0/station/running_nodes/#5-logs)).
+- **Emergency stop.** When a controller or the [test console](https://docs.sodero.io/stellar-x/v2.0.0/gateways/test_console/index.md) requests an emergency stop, the gateway sends a quick stop to the EtherCAT drives and switches the servo off. How the drives slow down depends on their quick stop settings. These software stops do not replace the hardware emergency stop ([Stop Controls](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stop_controls/index.md)).
+- **Fault reporting.** Drive faults, lost communication and missing devices are reported in the gateway's **Gateway events** log with a hint about what to check ([Running Nodes](https://docs.sodero.io/stellar-x/v2.0.0/station/running_nodes/#5-logs)).
 - **One hardware type per gateway.** A gateway drives either real drives on one bus or one simulated robot. Use separate gateways for separate buses.
+
+Next: [Gateway Designer](https://docs.sodero.io/stellar-x/v2.0.0/gateways/gateway_designer/index.md), to make the `.gw` document of an actuator gateway.

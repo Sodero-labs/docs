@@ -14,19 +14,19 @@
         
       
       
-      <link rel="icon" href="/v2.0.0/assets/tab_icon.svg">
+      <link rel="icon" href="/stellar-x/v2.0.0/assets/tab_icon.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
   
-    <title>Sodero Documents</title>
+    <title>Stellar X Docs</title>
   
 
     
-      <link rel="stylesheet" href="/v2.0.0/assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="/stellar-x/v2.0.0/assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="/v2.0.0/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="/stellar-x/v2.0.0/assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -45,19 +45,19 @@
       
     
     
-      <link rel="stylesheet" href="/v2.0.0/styles/layout.css">
+      <link rel="stylesheet" href="/stellar-x/v2.0.0/styles/layout.css">
     
-      <link rel="stylesheet" href="/v2.0.0/styles/color.css">
+      <link rel="stylesheet" href="/stellar-x/v2.0.0/styles/color.css">
     
-      <link rel="stylesheet" href="/v2.0.0/styles/font.css">
+      <link rel="stylesheet" href="/stellar-x/v2.0.0/styles/font.css">
     
-    <script>__md_scope=new URL("/v2.0.0",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("/stellar-x/v2.0.0",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
-  <style id="product-navigation">.product-select{background:#1a1a1a;color:#fff;border:1px solid #333;padding:4px 8px;font-size:.75rem;border-radius:4px;cursor:pointer}.mobile-header-inner>.product-select{margin-left:auto}</style></head>
+  </head>
   
   
     
@@ -104,7 +104,22 @@
       }
       .md-header__button.md-icon { color: #fff; cursor: pointer; display: flex; align-items: center; margin-left: -8px; }
       .mobile-site-title { font-size: 0.8rem; font-weight: 500; color: #fff; }
+      .header-selects { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+      .header-selects .version-dropdown { margin-right: 0; }
     }
+
+    /* Product and version menus */
+    .product-select, .version-select {
+      background: #1a1a1a;
+      color: #fff;
+      border: 1px solid #333;
+      padding: 4px 8px;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .product-select:hover, .version-select:hover { border-color: #555; }
+    .version-dropdown[hidden] { display: none; }
 
     /* --- [2] Desktop --- */
     @media (min-width: 76.25em) {
@@ -267,20 +282,39 @@
         <label class="md-header__button md-icon" for="__drawer">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
         </label>
-        <a href="/v2.0.0/." class="header-home-btn">
-          <img src="/v2.0.0/assets/docs.svg" alt="Sodero Docs" >
+        <a href="/stellar-x/v2.0.0/." class="header-home-btn">
+          <img src="/stellar-x/v2.0.0/assets/docs.svg" alt="Sodero Docs" >
         </a>
-      <select class="product-select" aria-label="Product"><option value="sodero-cloud">Sodero Cloud</option><option value="stellar-x" selected>Stellar X</option></select></div>
+        <div class="header-selects">
+          <select class="product-select" aria-label="Product">
+            
+              <option value="sodero-cloud">Sodero Cloud</option>
+            
+              <option value="stellar-x" selected>Stellar X</option>
+            
+          </select>
+          <div class="version-dropdown">
+            <select class="version-select" aria-label="Version"></select>
+          </div>
+        </div>
+      </div>
 
       <div class="custom-header-inner pc-only">
         <div class="header-left">
           <a href="https://www.sodero.io" class="header-icon-link" title="Sodero Home" target="_blank" rel="noopener">
-            <img src="/v2.0.0/assets/main_icon.svg" alt="Sodero Docs" >
+            <img src="/stellar-x/v2.0.0/assets/main_icon.svg" alt="Sodero Docs" >
           </a>
-          <a href="/v2.0.0/." class="header-home-btn">
-            <img src="/v2.0.0/assets/docs.svg" alt="Sodero Docs" >
+          <a href="/stellar-x/v2.0.0/." class="header-home-btn">
+            <img src="/stellar-x/v2.0.0/assets/docs.svg" alt="Sodero Docs" >
           </a>
-        <select class="product-select" aria-label="Product"><option value="sodero-cloud">Sodero Cloud</option><option value="stellar-x" selected>Stellar X</option></select></div>
+          <select class="product-select" aria-label="Product">
+            
+              <option value="sodero-cloud">Sodero Cloud</option>
+            
+              <option value="stellar-x" selected>Stellar X</option>
+            
+          </select>
+        </div>
 
         <div class="header-center">
           <nav class="header-breadcrumbs">
@@ -344,13 +378,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/v2.0.0/." title="Sodero Documents" class="md-nav__button md-logo" aria-label="Sodero Documents" data-md-component="logo">
+    <a href="/stellar-x/v2.0.0/." title="Stellar X" class="md-nav__button md-logo" aria-label="Stellar X" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    Sodero Documents
+    Stellar X
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -414,7 +448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/." class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/." class="md-nav__link">
         
   
   
@@ -442,7 +476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/get_started/sodero_ecosystem/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/get_started/sodero_ecosystem/" class="md-nav__link">
         
   
   
@@ -470,7 +504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/get_started/key_concepts/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/get_started/key_concepts/" class="md-nav__link">
         
   
   
@@ -498,7 +532,35 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/get_started/quick_start/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/tutorials/learning_path/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning Path
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/stellar-x/v2.0.0/get_started/quick_start/" class="md-nav__link">
         
   
   
@@ -556,7 +618,7 @@
   <span class="md-ellipsis">
     
   
-    Hardware & Network
+    Hardware and Network
   
 
     
@@ -572,7 +634,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Hardware & Network
+    Hardware and Network
   
 
           </label>
@@ -585,7 +647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/hardware_setup/stellar_series/stellar_x/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/hardware_setup/stellar_series/stellar_x/" class="md-nav__link">
         
   
   
@@ -613,7 +675,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/hardware_setup/stellar_series/network_settings/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/hardware_setup/stellar_series/network_settings/" class="md-nav__link">
         
   
   
@@ -641,7 +703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/hardware_setup/stop_controls/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/hardware_setup/stop_controls/" class="md-nav__link">
         
   
   
@@ -728,7 +790,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/station/overview/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/station/overview/" class="md-nav__link">
         
   
   
@@ -756,7 +818,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/station/nodes_and_connections/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/station/nodes_and_connections/" class="md-nav__link">
         
   
   
@@ -784,7 +846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/station/design_documents/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/station/design_documents/" class="md-nav__link">
         
   
   
@@ -812,7 +874,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/station/running_nodes/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/station/running_nodes/" class="md-nav__link">
         
   
   
@@ -840,7 +902,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/station/modules/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/station/modules/" class="md-nav__link">
         
   
   
@@ -868,7 +930,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/station/backup_restore/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/station/backup_restore/" class="md-nav__link">
         
   
   
@@ -926,7 +988,7 @@
   <span class="md-ellipsis">
     
   
-    Stellar Designer
+    Gateways and Sensors
   
 
     
@@ -942,7 +1004,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Stellar Designer
+    Gateways and Sensors
   
 
           </label>
@@ -955,7 +1017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/tutorials/stellar_designer/introduction/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/gateways/overview/" class="md-nav__link">
         
   
   
@@ -983,7 +1045,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/gateways/gateway_designer/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/gateways/gateway_designer/" class="md-nav__link">
         
   
   
@@ -1011,14 +1073,14 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/tutorials/stellar_designer/manipulator/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/gateways/simulation/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Manipulator (.sdd)
+    Simulation Gateway
   
 
     
@@ -1039,14 +1101,14 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/tutorials/stellar_designer/mobile_robot/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/gateways/ethercat/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Mobile Robot (.sddm)
+    EtherCAT Gateway
   
 
     
@@ -1067,14 +1129,14 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/tutorials/stellar_designer/articulation/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/gateways/test_console/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Articulated Robot (.sdda)
+    Test Console
   
 
     
@@ -1095,14 +1157,42 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/gateways/sensors_and_cameras/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    3D Model (.glb, Optional)
+    Cameras and IMUs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/stellar-x/v2.0.0/gateways/device_bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Device Bridge
   
 
     
@@ -1153,7 +1243,7 @@
   <span class="md-ellipsis">
     
   
-    Gateways & Sensors
+    Stellar Designer
   
 
     
@@ -1169,7 +1259,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Gateways & Sensors
+    Stellar Designer
   
 
           </label>
@@ -1182,7 +1272,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/gateways/overview/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/tutorials/stellar_designer/introduction/" class="md-nav__link">
         
   
   
@@ -1210,14 +1300,14 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/gateways/ethercat/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/tutorials/stellar_designer/manipulator/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    EtherCAT Gateway
+    Manipulator (.sdd)
   
 
     
@@ -1238,14 +1328,14 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/gateways/simulation/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/tutorials/stellar_designer/mobile_robot/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Simulation Gateway
+    Mobile Robot (.sddm)
   
 
     
@@ -1266,14 +1356,14 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/gateways/test_console/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/tutorials/stellar_designer/articulation/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Test Console
+    Articulated Robot (.sdda)
   
 
     
@@ -1294,42 +1384,14 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/gateways/sensors_and_cameras/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/tutorials/stellar_designer/3dmodel_creation/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Sensors and Cameras
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="/v2.0.0/gateways/device_bridge/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Device Bridge
+    3D Model (.glb, Optional)
   
 
     
@@ -1380,7 +1442,7 @@
   <span class="md-ellipsis">
     
   
-    Operate Robots
+    Simulation
   
 
     
@@ -1396,7 +1458,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Operate Robots
+    Simulation
   
 
           </label>
@@ -1409,14 +1471,14 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/controllers/strider/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/virtual_simulation/introduction/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Strider
+    Overview
   
 
     
@@ -1437,14 +1499,14 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/controllers/motion_studio/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/virtual_simulation/extension_installation/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Motion Studio
+    Install Isaac Bridge
   
 
     
@@ -1465,14 +1527,42 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/controllers/articulation/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/virtual_simulation/robot_setup/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Articulation
+    Prepare the Robot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/stellar-x/v2.0.0/virtual_simulation/connect_station/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connect to Stellar Station
   
 
     
@@ -1523,7 +1613,7 @@
   <span class="md-ellipsis">
     
   
-    Simulation
+    Operate Robots
   
 
     
@@ -1539,7 +1629,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Simulation
+    Operate Robots
   
 
           </label>
@@ -1552,14 +1642,14 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/virtual_simulation/introduction/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/controllers/strider/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Overview
+    Strider
   
 
     
@@ -1580,14 +1670,14 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/virtual_simulation/extension_installation/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/controllers/motion_studio/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Isaac Bridge Installation
+    Motion Studio
   
 
     
@@ -1608,42 +1698,14 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/virtual_simulation/robot_setup/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/controllers/articulation/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Robot Setup
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="/v2.0.0/virtual_simulation/connect_station/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Connect to Stellar Station
+    Articulation
   
 
     
@@ -1694,7 +1756,7 @@
   <span class="md-ellipsis">
     
   
-    Localization & Navigation
+    Localization and Navigation
   
 
     
@@ -1710,7 +1772,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Localization & Navigation
+    Localization and Navigation
   
 
           </label>
@@ -1723,7 +1785,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/navigation/overview/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/navigation/overview/" class="md-nav__link">
         
   
   
@@ -1751,14 +1813,14 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/navigation/map_bundle/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/navigation/create_map/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Load and Configure a Map
+    Create a Map from Your Site
   
 
     
@@ -1779,14 +1841,14 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/navigation/create_map/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/navigation/map_bundle/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Create a Map from Your Site
+    Load and Configure a Map
   
 
     
@@ -1866,35 +1928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/tutorials/learning_path/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Learning Path
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="/v2.0.0/navigation/simulation_tutorial/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/navigation/simulation_tutorial/" class="md-nav__link">
         
   
   
@@ -1922,7 +1956,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/tutorials/ethercat_mobile_base/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/tutorials/ethercat_mobile_base/" class="md-nav__link">
         
   
   
@@ -1980,7 +2014,7 @@
   <span class="md-ellipsis">
     
   
-    Extend & Automate
+    Extend and Automate
   
 
     
@@ -1996,7 +2030,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Extend & Automate
+    Extend and Automate
   
 
           </label>
@@ -2009,7 +2043,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/ssh_workspace/overview/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/ssh_workspace/overview/" class="md-nav__link">
         
   
   
@@ -2037,7 +2071,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/ssh_workspace/sodero_cli/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/ssh_workspace/sodero_cli/" class="md-nav__link">
         
   
   
@@ -2065,7 +2099,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/ssh_workspace/ai_agents/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/ssh_workspace/ai_agents/" class="md-nav__link">
         
   
   
@@ -2093,7 +2127,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/extend/custom_modules/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/extend/custom_modules/" class="md-nav__link">
         
   
   
@@ -2121,7 +2155,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/extend/device_bridge_drivers/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/extend/device_bridge_drivers/" class="md-nav__link">
         
   
   
@@ -2208,7 +2242,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/navigation/map_bundle_format/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/navigation/map_bundle_format/" class="md-nav__link">
         
   
   
@@ -2236,7 +2270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/reference/compatibility/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/reference/compatibility/" class="md-nav__link">
         
   
   
@@ -2264,14 +2298,14 @@
   
   
     <li class="md-nav__item">
-      <a href="/v2.0.0/CHANGELOG/" class="md-nav__link">
+      <a href="/stellar-x/v2.0.0/CHANGELOG/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    ChangeLog
+    Changelog
   
 
     
@@ -2367,18 +2401,18 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/v2.0.0", "features": ["navigation.path", "navigation.sections", "navigation.tracking", "navigation.instant", "navigation.instant.progress", "content.code.copy", "search.suggest", "search.highlight", "search.share"], "search": "/v2.0.0/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "/stellar-x/v2.0.0", "features": ["navigation.path", "navigation.sections", "navigation.tracking", "navigation.instant", "navigation.instant.progress", "content.code.copy", "search.suggest", "search.highlight", "search.share"], "search": "/stellar-x/v2.0.0/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="/v2.0.0/assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="/stellar-x/v2.0.0/assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="/v2.0.0/javascripts/mathjax.js"></script>
+        <script src="/stellar-x/v2.0.0/javascripts/mathjax.js"></script>
       
-        <script src="/v2.0.0/javascripts/select-all.js"></script>
+        <script src="/stellar-x/v2.0.0/javascripts/select-all.js"></script>
       
-        <script src="/v2.0.0/javascripts/nav-state.js"></script>
+        <script src="/stellar-x/v2.0.0/javascripts/nav-state.js"></script>
       
-        <script src="/v2.0.0/javascripts/version.js"></script>
+        <script src="/stellar-x/v2.0.0/javascripts/version.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       

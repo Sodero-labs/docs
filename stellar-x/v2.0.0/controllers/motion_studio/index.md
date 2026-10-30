@@ -6,7 +6,7 @@ ______________________________________________________________________
 
 ## 1. Open Motion Studio
 
-1. On the Station, add a **Motion Studio** node and an **Actuator gateway**, load the `.sdd` and `.gw` documents and connect `servo_link` ([Nodes and Connections](https://docs.sodero.io/v2.0.0/station/nodes_and_connections/index.md)).
+1. On the Station, add a **Motion Studio** node and an **Actuator gateway**, load the `.sdd` and `.gw` documents and connect `servo_link` ([Nodes and Connections](https://docs.sodero.io/stellar-x/v2.0.0/station/nodes_and_connections/index.md)).
 1. Start the gateway, then the Motion Studio node.
 1. Click **Stellar Motion Studio** in the node's **CONTROL** section. Motion Studio opens in a new tab for that arm.
 
@@ -63,7 +63,7 @@ The jog panel
 
 The **POSE** section ① shows the current TCP pose and joint positions.
 
-**Keep the hardware emergency stop within reach.** Motion Studio has no on-screen emergency stop ([Stop Controls](https://docs.sodero.io/v2.0.0/hardware_setup/stop_controls/index.md)). A continuous jog moves until the page receives the release of the button: if the browser or the connection fails while you hold it, the motion continues. Do not leave the window while jogging, and make sure the payload is set correctly before you use **Hand** mode.
+**Keep the hardware emergency stop within reach.** Motion Studio has no on-screen emergency stop ([Stop Controls](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stop_controls/index.md)). A continuous jog moves until the page receives the release of the button: if the browser or the connection fails while you hold it, the motion continues. Do not leave the window while jogging, and make sure the payload is set correctly before you use **Hand** mode.
 
 ______________________________________________________________________
 
@@ -107,10 +107,10 @@ ______________________________________________________________________
 
 Motion Studio is for setup and teaching. Programs run outside the UI and call the same controller:
 
-| From                    | How                                                                                                                                                                                      |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The SSH workspace       | `sodero tools call motion.move_j`, `motion.move_l`, `motion.get_tcp_pose` and the other `motion.*` tools ([sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)) |
-| A module on the Station | A module node connected to the Motion Studio node's `manipulator` port ([Create Custom Modules](https://docs.sodero.io/v2.0.0/extend/custom_modules/index.md))                           |
+| From                    | How                                                                                                                                                                                                |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The SSH workspace       | `sodero tools call motion.move_j`, `motion.move_l`, `motion.get_tcp_pose` and the other `motion.*` tools ([sodero CLI](https://docs.sodero.io/stellar-x/v2.0.0/ssh_workspace/sodero_cli/index.md)) |
+| A module on the Station | A module node connected to the Motion Studio node's `manipulator` port ([Create Custom Modules](https://docs.sodero.io/stellar-x/v2.0.0/extend/custom_modules/index.md))                           |
 
 ```
 sodero tools call motion.get_tcp_pose --input '{"target": "sodero.mmc.arm"}'

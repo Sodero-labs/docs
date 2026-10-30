@@ -22,12 +22,12 @@ The network and power ports are on the rear panel.
 
 Rear panel: ① Eth1 ② Eth2 ③ EtherCAT Out ④ 24V DC In
 
-| Port                | Initial setting                                        | How to change it                                                                                                                                      | Use                                                                                |
-| ------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| **1. Eth1**         | Static address `10.0.0.1`, subnet mask `255.255.255.0` | On the [Network Settings](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/network_settings/index.md) page: DHCP or another static address | First connection with a cable from your PC; afterwards your office or lab network  |
-| **2. Eth2**         | DHCP                                                   | Not changed by the Network Settings page                                                                                                              | A router or switch that assigns addresses by DHCP                                  |
-| **3. EtherCAT Out** | No IP address                                          | —                                                                                                                                                     | EtherCAT master output. Connect it to the **IN** port of the first EtherCAT drive. |
-| **4. 24V DC In**    | —                                                      | —                                                                                                                                                     | Power input                                                                        |
+| Port                | Initial setting                                        | How to change it                                                                                                                                                | Use                                                                                |
+| ------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **1. Eth1**         | Static address `10.0.0.1`, subnet mask `255.255.255.0` | On the [Network Settings](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stellar_series/network_settings/index.md) page: DHCP or another static address | First connection with a cable from your PC; afterwards your office or lab network  |
+| **2. Eth2**         | DHCP                                                   | Not changed by the Network Settings page                                                                                                                        | A router or switch that assigns addresses by DHCP                                  |
+| **3. EtherCAT Out** | No IP address                                          | —                                                                                                                                                               | EtherCAT master output. Connect it to the **IN** port of the first EtherCAT drive. |
+| **4. 24V DC In**    | —                                                      | —                                                                                                                                                               | Power input                                                                        |
 
 ______________________________________________________________________
 
@@ -84,8 +84,8 @@ Your PC must be on the same subnet as Stellar X.
 
 1. **Verify the Connection:** Open your preferred web browser (Chrome, Edge, etc.) and type the following into the address bar: `http://10.0.0.1`
 
-1. **Success!** If **Stellar Station** appears, you are ready to start your project. Continue with the [Quick Start](https://docs.sodero.io/v2.0.0/get_started/quick_start/index.md).
+1. **Success!** If **Stellar Station** appears, you are ready to start your project. Continue with the [Quick Start](https://docs.sodero.io/stellar-x/v2.0.0/get_started/quick_start/index.md).
 
    Stellar Station with an example robot system
 
-   To change Eth1's address or to connect it to your office network, use the [Network Settings](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/network_settings/index.md) page on port 3000. The rest of this documentation uses the example address `192.168.60.18` for Stellar X; replace it with your controller's address, for example `10.0.0.1` while you use the direct cable.
+   To change Eth1's address or to connect it to your office network, use the [Network Settings](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stellar_series/network_settings/index.md) page on port 3000. The rest of this documentation uses the example address `192.168.60.18` for Stellar X; replace it with your controller's address, for example `10.0.0.1` while you use the direct cable.

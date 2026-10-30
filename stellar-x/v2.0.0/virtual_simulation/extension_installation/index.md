@@ -1,4 +1,4 @@
-# Isaac Bridge Installation
+# Install Isaac Bridge
 
 **Isaac Bridge** is the Isaac Sim extension that connects Isaac Sim to the gateways of Stellar Station. Install it once on the computer that runs Isaac Sim.
 
@@ -6,15 +6,13 @@ ______________________________________________________________________
 
 ## 1. Download the Extension
 
-Isaac Bridge is open source. Download release **v1.0.0**, the version this documentation is verified with ([Compatibility](https://docs.sodero.io/v2.0.0/reference/compatibility/index.md)), from GitHub:
+The source of Isaac Bridge is published on GitHub. Download release **v1.0.0**, the version this documentation is verified with ([Compatibility](https://docs.sodero.io/stellar-x/v2.0.0/reference/compatibility/index.md)):
 
 ```
 git clone --branch v1.0.0 https://github.com/Sodero-labs/isaac_bridge.git
 ```
 
 Or download the source ZIP file of release v1.0.0 from the repository's **Releases** page, extract it, and rename the extracted folder `isaac_bridge-1.0.0` to `isaac_bridge`. Either way you get a folder `isaac_bridge`. Remember the folder that **contains** it, for example `~/isaac_extensions` when the extension is in `~/isaac_extensions/isaac_bridge`.
-
-**Updating.** When you install another release, replace the folder, restart Isaac Sim and check the connection again: the [status window](#3-open-the-status-window) shows the ports **serving** and your robots **bound**, and each simulation gateway logs *Simulator connected.*
 
 ______________________________________________________________________
 
@@ -62,7 +60,7 @@ The Isaac Bridge status window while a scene plays
 | 3   | **Cameras** | Every camera served: name, resolution, frame rate and frames sent                                                                                                      |
 | 4   | **Rescan**  | Looks for robots and cameras again after you changed the scene while it plays                                                                                          |
 
-The ports open when the scene plays and close when it stops.
+The command and state ports (53333, 53334) open at the first **Play** and stay open until the scene is closed. The camera port (53335) opens at each **Play** when the scene has cameras, and closes at **Stop**.
 
 ______________________________________________________________________
 
@@ -82,9 +80,9 @@ ______________________________________________________________________
 
 ## 5. Update or Remove
 
-- **Update:** run `git pull` in the `isaac_bridge` folder (or replace the folder with a newer release) and restart Isaac Sim.
+- **Update:** put the new release into the same `isaac_bridge` folder: run `git fetch --tags` and `git checkout RELEASE_TAG` in the folder (a clone of a release tag cannot `git pull`), or replace the folder with the new release's ZIP as in [step 1](#1-download-the-extension). Restart Isaac Sim and check the connection again: the [status window](#3-open-the-status-window) shows the ports **serving** and your robots **bound**, and each simulation gateway logs *Simulator connected.* Check [Compatibility](https://docs.sodero.io/stellar-x/v2.0.0/reference/compatibility/index.md) for the versions this documentation is verified with.
 - **Remove:** switch the extension off in **Window › Extensions**, untick **AUTOLOAD**, and remove its folder from **Extension Search Paths**.
 
-The extension's README describes advanced settings, such as camera sizes and rates, which cameras to publish, and the ports.
+The extension's [README](https://github.com/Sodero-labs/isaac_bridge/blob/v1.0.0/docs/README.md) describes advanced settings, such as camera sizes and rates, which cameras to publish, and the ports.
 
-Next: [Robot Setup](https://docs.sodero.io/v2.0.0/virtual_simulation/robot_setup/index.md).
+Next: [Prepare the Robot](https://docs.sodero.io/stellar-x/v2.0.0/virtual_simulation/robot_setup/index.md).

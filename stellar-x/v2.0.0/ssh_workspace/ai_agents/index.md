@@ -1,4 +1,4 @@
-# Working with AI Coding Agents
+# AI Coding Agents
 
 The SSH workspace is built for people and AI coding agents alike. Every `sodero` command prints JSON, every change is previewed before it is applied, and the workspace ships its own operating rules for agents. With an agent such as **Claude Code** or **OpenAI Codex**, you describe a task in plain language and the agent runs the commands, reads the results and reports back:
 
@@ -6,10 +6,6 @@ The SSH workspace is built for people and AI coding agents alike. Every `sodero`
 - *"Add a camera gateway named cam0 and connect it to the localizer."*
 - *"Lower the navigator's top speed to 0.3 m/s."*
 - *"Write a module that drives the robot through these three waypoints."*
-
-______________________________________________________________________
-
-## How It Works
 
 ```
 flowchart TB
@@ -27,7 +23,7 @@ ______________________________________________________________________
 
 ## 1. Prepare SSH Access
 
-1. Register your computer's SSH key on the robot's [Network Settings](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/network_settings/#2-ssh-access) page.
+1. Register your computer's SSH key on the robot's [Network Settings](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stellar_series/network_settings/#2-ssh-access) page.
 
 1. Add a host alias to `~/.ssh/config` on your computer, so the agent can use a short name:
 
@@ -81,7 +77,7 @@ Before you change anything, read the robot's own rules and follow them:
 
 The robot's own rules (`/workspace/AGENTS.md`) tell the agent how to read results and exit codes, how to wait for long operations without polling loops, which nodes drive real hardware on this robot, and what it must never do. They are maintained with the robot's software, so you do not need to copy them.
 
-These rules are instructions to the agent, not a safety function. An agent can misread them or make mistakes, and the `sodero` commands it runs have the same effect as your own clicks on the Station page. Approve every command that changes the robot yourself, and keep the robot's stop controls and the hardware emergency stop ready ([Stop Controls](https://docs.sodero.io/v2.0.0/hardware_setup/stop_controls/index.md)).
+These rules are instructions to the agent, not a safety function. An agent can misread them or make mistakes, and the `sodero` commands it runs have the same effect as your own clicks on the Station page. Approve every command that changes the robot yourself, and keep the robot's stop controls and the hardware emergency stop ready ([Stop Controls](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stop_controls/index.md)).
 
 ______________________________________________________________________
 
@@ -111,20 +107,20 @@ The agent runs commands such as `sodero topology get` and `sodero runtime status
 
 ______________________________________________________________________
 
-## Example Tasks
+## 4. Example Tasks
 
 | You ask                                                         | What the agent does                                                                                                                                                                      |
 | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | *"Why did the Strider node fail?"*                              | `sodero runtime status` to find the failed node and its reason, then `sodero runtime logs NODE`                                                                                          |
 | *"Add a camera gateway cam0 and connect it to the localizer."*  | `sodero topology get`, then `sodero topology add-node` and `sodero topology connect`, each previewed first                                                                               |
-| *"Lower the navigator's maximum speed to 0.3 m/s."*             | `sodero navigation get --node rc.navigator`, edits the value, `sodero navigation apply` with the returned SHA-256                                                                        |
+| *"Lower the navigator's maximum speed to 0.3 m/s."*             | `sodero navigation get --node sodero.navigator`, edits the value, `sodero navigation apply` with the returned SHA-256                                                                    |
 | *"Attach warehouse.nav to the localizer and the navigator."*    | `sodero navigation get --node sodero.localizer` for its SHA-256, then `sodero maps upload warehouse.nav --node sodero.localizer` with it, previewed first (one upload serves both nodes) |
 | *"Write a module that drives to these three points in a loop."* | Writes a package under `/workspace/my-work`, checks it, `sodero packages upload`, adds its node and starts it with `sodero apps start`                                                   |
 | *"Drive the simulated robot forward 1 m."*                      | `sodero tools call strider.set_mode`, `strider.servo_on`, `strider.set_twist` and `strider.stop` on the **simulated** robot's target                                                     |
 
 ______________________________________________________________________
 
-## Stay in Control
+## 5. Stay in Control
 
 - **Review previews.** Ask the agent to show the preview of every change. Nothing changes until a command runs with `--execute`.
 - **Set approval rules in your agent.** Most agents can require your approval before they run a command. A practical setup: allow read-only commands (`status`, `get`, `list`, `logs`) freely, and ask for approval for anything with `--execute`, `tools call` or `apps call`.
@@ -132,7 +128,7 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
-## Give the Agent the Documentation
+## 6. Give the Agent the Documentation
 
 - Inside the workspace, `sodero-help` prints every guide and `/opt/sodero/docs/examples` holds runnable examples. The robot's `AGENTS.md` points the agent to them.
-- This documentation is also published in a form made for language models: `llms.txt` (an index) and `llms-full.txt` (all pages in one file) at the root of each documentation version, for example `https://docs.sodero.io/latest/llms-full.txt`.
+- This documentation is also published in a form made for language models: `llms.txt` (an index) and `llms-full.txt` (all pages in one file) at the root of each documentation version, for example `https://docs.sodero.io/stellar-x/latest/llms-full.txt`.

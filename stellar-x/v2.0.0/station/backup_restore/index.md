@@ -42,10 +42,11 @@ Loading is refused while any node runs: *Stop all nodes before loading a .sdr.*
 
 ### Files That Cannot Be Loaded
 
-| Message                                                              | Cause                                                             |
-| -------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| *This .sdr holds a simulation, not a Station.*                       | The file is a World (simulation) export. Open it in Sodero Cloud. |
-| *This robot does not have enough free disk space to load this .sdr.* | The unpacked file is too large for the controller's storage.      |
+| Message                                                              | Cause                                                                                                                                                                           |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *This .sdr holds a simulation, not a Station.*                       | The file is a World (simulation) export. Open it in Sodero Cloud.                                                                                                               |
+| *This robot does not have enough free disk space to load this .sdr.* | The unpacked file is too large for the controller's storage.                                                                                                                    |
+| *This .sdr uses an obsolete document format (…).*                    | Documents in the file, named in the message, use the format of an earlier Stellar software version. Nothing is loaded. Contact [Sodero support](https://www.sodero.io/contact). |
 
 ______________________________________________________________________
 
@@ -54,6 +55,6 @@ ______________________________________________________________________
 An `.sdr` file carries the Station, not the software of the unit. Before you load it on another Stellar X:
 
 1. Make sure that the other unit runs the same version of the Stellar software as the unit the file comes from.
-1. Install the module packages that the Station's nodes use, in the same versions, on the other unit's [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md) page. Built-in modules come with the unit.
+1. Install the module packages that the Station's nodes use, in the same versions, on the other unit's [Modules](https://docs.sodero.io/stellar-x/v2.0.0/station/modules/index.md) page. Built-in modules come with the unit.
 1. Load the file as described in [Load an `.sdr` File](#2-load-an-sdr-file).
 1. Check each node before you start it: the simulator address (**Sim host**) and camera addresses, which belong to the original site, and on real hardware the EtherCAT wiring and the drives, which must match the gateway documents. Start the gateways first and test real hardware as on a new robot.

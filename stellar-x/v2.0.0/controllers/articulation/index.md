@@ -1,13 +1,13 @@
 # Articulation
 
-The **Articulation** controller drives an articulated robot joint by joint: legged robots, humanoids, grippers, pan-tilt heads, or any set of joints that receives joint targets. Unlike Motion Studio, it uses no arm kinematics (no DH parameters, no Cartesian motions). It bounds and forwards joint targets from an upper controller, such as the [**Legged locomotion**](https://docs.sodero.io/v2.0.0/station/nodes_and_connections/#node-types-and-modules) node that runs a walking policy, and it lets you jog and calibrate the joints by hand.
+The **Articulation** controller drives an articulated robot joint by joint: legged robots, humanoids, grippers, pan-tilt heads, or any set of joints that receives joint targets. Unlike Motion Studio, it uses no arm kinematics (no DH parameters, no Cartesian motions). It bounds and forwards joint targets from an upper controller, such as the [**Legged locomotion**](https://docs.sodero.io/stellar-x/v2.0.0/station/nodes_and_connections/#node-types-and-modules) node that runs a walking policy, and it lets you jog and calibrate the joints by hand.
 
-| Item     | Value                                                                                                        |
-| -------- | ------------------------------------------------------------------------------------------------------------ |
-| Node     | `sodero.amc.NAME`                                                                                            |
-| Document | `.sdda` ([Stellar Designer](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/articulation/index.md)) |
-| Joints   | 1 to 64, driven by one actuator gateway                                                                      |
-| Units    | rad, rad/s, N·m                                                                                              |
+| Item     | Value                                                                                                                  |
+| -------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Node     | `sodero.amc.NAME`                                                                                                      |
+| Document | `.sdda` ([Stellar Designer](https://docs.sodero.io/stellar-x/v2.0.0/tutorials/stellar_designer/articulation/index.md)) |
+| Joints   | 1 to 64, driven by one actuator gateway                                                                                |
+| Units    | rad, rad/s, N·m                                                                                                        |
 
 ```
 flowchart TB
@@ -91,8 +91,8 @@ ______________________________________________________________________
 
 ## 6. Control from Programs
 
-| From                    | How                                                                                                                                                                                                                                                                                         |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A walking robot         | The **Legged locomotion** node runs a walking policy and sends joint targets to this node                                                                                                                                                                                                   |
-| The SSH workspace       | `sodero tools call articulation.get_status`, `articulation.get_joint_state`, `articulation.servo_on`, `articulation.uc_pos`, `articulation.stop` ([sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)); `sodero articulations get` shows the joints and actuators |
-| A module on the Station | A module node connected to the Articulation node ([Create Custom Modules](https://docs.sodero.io/v2.0.0/extend/custom_modules/index.md))                                                                                                                                                    |
+| From                    | How                                                                                                                                                                                                                                                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A walking robot         | The **Legged locomotion** node runs a walking policy and sends joint targets to this node                                                                                                                                                                                                             |
+| The SSH workspace       | `sodero tools call articulation.get_status`, `articulation.get_joint_state`, `articulation.servo_on`, `articulation.uc_pos`, `articulation.stop` ([sodero CLI](https://docs.sodero.io/stellar-x/v2.0.0/ssh_workspace/sodero_cli/index.md)); `sodero articulations get` shows the joints and actuators |
+| A module on the Station | A module node connected to the Articulation node ([Create Custom Modules](https://docs.sodero.io/stellar-x/v2.0.0/extend/custom_modules/index.md))                                                                                                                                                    |

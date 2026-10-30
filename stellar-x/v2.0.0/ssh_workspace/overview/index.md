@@ -7,7 +7,7 @@ From the workspace you can:
 - inspect and change the Station with the `sodero` command-line tool: nodes, connections, design documents, settings, maps and packages;
 - read the status and logs of every node, as the Station page shows them, and call robot tools such as Strider, Motion Studio and navigation;
 - write and test your own programs and install them on the Station as modules;
-- let an AI coding agent do all of the above for you (see [AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md)).
+- let an AI coding agent do all of the above for you (see [AI Coding Agents](https://docs.sodero.io/stellar-x/v2.0.0/ssh_workspace/ai_agents/index.md)).
 
 The workspace performs the same operations as the Station page: a node added with `sodero topology add-node` is the same node you would add with **Add node**.
 
@@ -15,7 +15,7 @@ ______________________________________________________________________
 
 ## 1. Register Your SSH Key
 
-The workspace accepts SSH keys only; there is no password sign-in. Register the public key of every computer that should connect, in the **SSH ACCESS** card of the robot's Network Settings page (`http://ROBOT_ADDRESS:3000`): copy the key command for your operating system, run it on your computer, paste the line it prints and click **Add key**. The steps and the commands are in [Network Settings › SSH Access](https://docs.sodero.io/v2.0.0/hardware_setup/stellar_series/network_settings/#2-ssh-access).
+The workspace accepts SSH keys only; there is no password sign-in. Register the public key of every computer that should connect, in the **SSH ACCESS** card of the robot's Network Settings page (`http://ROBOT_ADDRESS:3000`): copy the key command for your operating system, run it on your computer, paste the line it prints and click **Add key**. The steps and the commands are in [Network Settings › SSH Access](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stellar_series/network_settings/#2-ssh-access).
 
 To revoke a computer's access, click the trash icon next to its key on the same page.
 
@@ -55,19 +55,19 @@ ______________________________________________________________________
 
 ## 3. What Is in the Workspace
 
-| Path                   | Contents                                                                                                                  |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `/workspace`           | Your files. They stay on the robot across restarts and software updates.                                                  |
-| `/workspace/README.md` | The workspace guide: terms, a five-minute start and the guide map                                                         |
-| `/workspace/AGENTS.md` | Operating rules for AI coding agents ([AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md)) |
-| `/opt/sodero/docs/`    | All workspace guides and examples, read-only. Also linked as `/workspace/docs`.                                           |
+| Path                   | Contents                                                                                                                            |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `/workspace`           | Your files. They stay on the robot across restarts and software updates.                                                            |
+| `/workspace/README.md` | The workspace guide: terms, a five-minute start and the guide map                                                                   |
+| `/workspace/AGENTS.md` | Operating rules for AI coding agents ([AI Coding Agents](https://docs.sodero.io/stellar-x/v2.0.0/ssh_workspace/ai_agents/index.md)) |
+| `/opt/sodero/docs/`    | All workspace guides and examples, read-only. Also linked as `/workspace/docs`.                                                     |
 
-| Tool                                | Purpose                                                                                                   |
-| ----------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `sodero`                            | Station command-line tool ([sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)) |
-| `sodero-help`                       | Prints the guides: `sodero-help` lists them, `sodero-help navigation` opens one                           |
-| Python 3.12                         | With numpy, PyYAML, requests, aiohttp and onnxruntime                                                     |
-| `git`, `gcc`, `make`, `scp`, `sftp` | Standard development tools                                                                                |
+| Tool                                | Purpose                                                                                                             |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `sodero`                            | Station command-line tool ([sodero CLI](https://docs.sodero.io/stellar-x/v2.0.0/ssh_workspace/sodero_cli/index.md)) |
+| `sodero-help`                       | Prints the guides: `sodero-help` lists them, `sodero-help navigation` opens one                                     |
+| Python 3.12                         | With numpy, PyYAML, requests, aiohttp and onnxruntime                                                               |
+| `git`, `gcc`, `make`, `scp`, `sftp` | Standard development tools                                                                                          |
 
 The robot's workspace has **no Internet access**. Copy the dependencies your code needs from your computer (for example as wheel files) with `scp`.
 
@@ -110,9 +110,9 @@ ______________________________________________________________________
 
 Where to go next:
 
-| Task                                                           | Where                                                                                             |
-| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| Command reference and examples                                 | [sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)                     |
-| Let an AI agent work on the robot                              | [AI Coding Agents](https://docs.sodero.io/v2.0.0/ssh_workspace/ai_agents/index.md)                |
-| Load a whole design document (`.gw`, `.sdd`, `.sddm`, `.sdda`) | Station page: [Design Documents](https://docs.sodero.io/v2.0.0/station/design_documents/index.md) |
-| Write your own module                                          | [Modules](https://docs.sodero.io/v2.0.0/station/modules/index.md)                                 |
+| Task                                                           | Where                                                                                                       |
+| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Command reference and examples                                 | [sodero CLI](https://docs.sodero.io/stellar-x/v2.0.0/ssh_workspace/sodero_cli/index.md)                     |
+| Let an AI agent work on the robot                              | [AI Coding Agents](https://docs.sodero.io/stellar-x/v2.0.0/ssh_workspace/ai_agents/index.md)                |
+| Load a whole design document (`.gw`, `.sdd`, `.sddm`, `.sdda`) | Station page: [Design Documents](https://docs.sodero.io/stellar-x/v2.0.0/station/design_documents/index.md) |
+| Write your own module                                          | [Create Custom Modules](https://docs.sodero.io/stellar-x/v2.0.0/extend/custom_modules/index.md)             |

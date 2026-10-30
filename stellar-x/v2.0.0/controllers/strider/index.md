@@ -8,7 +8,7 @@ ______________________________________________________________________
 
 ## 1. Open Strider
 
-On the Station, start the gateway first, then the Strider node ([Running Nodes](https://docs.sodero.io/v2.0.0/station/running_nodes/index.md)). Click **Strider** in the node's **CONTROL** section, or the **Strider** link on the node card. Strider opens in a new tab for that robot.
+On the Station, start the gateway first, then the Strider node ([Running Nodes](https://docs.sodero.io/stellar-x/v2.0.0/station/running_nodes/index.md)). Click **Strider** in the node's **CONTROL** section, or the **Strider** link on the node card. Strider opens in a new tab for that robot.
 
 A running Strider node
 
@@ -20,14 +20,14 @@ ______________________________________________________________________
 
 The left rail has three pages: **Status**, **Drive** and **Navigation**. The top bar shows the readiness pill, **System Log**, **Motion Alarm**, **E-STOP** and the units on every page, plus the actions of the current page: **Jog** on Status, **Stop Motion** on Drive, **Set Goal** and **Start Navigation** on Navigation.
 
-| Item                         | Description                                                                                                                                                                                                                                                                                                                                            |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Readiness pill               | The current state in one line, for example *Manual Drive Ready* or *Servo Off*. Click it for the **CHECKS** list: Connection, Mobile base, Servo, Localization, Navigation.                                                                                                                                                                            |
-| **System Log**               | Events of this browser session, with filters for System, Drive, Navigation and Localization                                                                                                                                                                                                                                                            |
-| **Motion Alarm**             | Active alarms and recent errors                                                                                                                                                                                                                                                                                                                        |
-| **Stop Motion** (Drive page) | Stops manual driving and cancels a running goal                                                                                                                                                                                                                                                                                                        |
-| **E-STOP**                   | Software stop of the base: cancels driving and the navigation goal and sets the wheel speeds to zero at once, with the servo still on. It latches until **Clear E-Stop**, which switches the base to **Idle**. It does not replace the hardware emergency stop ([Stop Controls](https://docs.sodero.io/v2.0.0/hardware_setup/stop_controls/index.md)). |
-| Units                        | `m / m/s / deg` or `m / m/s / rad`. Display only; commands are always SI.                                                                                                                                                                                                                                                                              |
+| Item                         | Description                                                                                                                                                                                                                                                                                                                                                      |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Readiness pill               | The current state in one line, for example *Manual Drive Ready* or *Servo Off*. Click it for the **CHECKS** list: Connection, Mobile base, Servo, Localization, Navigation.                                                                                                                                                                                      |
+| **System Log**               | Events of this browser session, with filters for System, Drive, Navigation and Localization                                                                                                                                                                                                                                                                      |
+| **Motion Alarm**             | Active alarms and recent errors                                                                                                                                                                                                                                                                                                                                  |
+| **Stop Motion** (Drive page) | Stops manual driving and cancels a running goal                                                                                                                                                                                                                                                                                                                  |
+| **E-STOP**                   | Software stop of the base: cancels driving and the navigation goal and sets the wheel speeds to zero at once, with the servo still on. It latches until **Clear E-Stop**, which switches the base to **Idle**. It does not replace the hardware emergency stop ([Stop Controls](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stop_controls/index.md)). |
+| Units                        | `m / m/s / deg` or `m / m/s / rad`. Display only; commands are always SI.                                                                                                                                                                                                                                                                                        |
 
 The readiness checks
 
@@ -72,7 +72,7 @@ The Drive page
 | 4   | Velocity limits    | Upper limits for manual driving                                                                                                                                                                                   |
 | 5   | Drive pad          | Hold-to-drive buttons                                                                                                                                                                                             |
 | 6   | **Stop Motion**    | Stops manual driving and any navigation goal                                                                                                                                                                      |
-| 7   | **E-STOP**         | Software stop that latches ([Stop Controls](https://docs.sodero.io/v2.0.0/hardware_setup/stop_controls/index.md))                                                                                                 |
+| 7   | **E-STOP**         | Software stop that latches ([Stop Controls](https://docs.sodero.io/stellar-x/v2.0.0/hardware_setup/stop_controls/index.md))                                                                                       |
 | 8   | Readiness pill     | Why driving is or is not possible right now                                                                                                                                                                       |
 
 Manual commands take priority over navigation: jogging during a navigation goal overrides the navigator and can end the goal. Every manual command expires after about a second, so manual driving stops by itself if the connection drops. A navigation goal does not: cancel it with **Stop Motion**, **Cancel** or **E-STOP**.
@@ -93,7 +93,7 @@ ______________________________________________________________________
 
 ## 5. Navigation Page
 
-The Navigation page appears when a Localizer and a Navigator run on the Station ([Localization and Navigation](https://docs.sodero.io/v2.0.0/navigation/overview/index.md)).
+The Navigation page appears when a Localizer and a Navigator run on the Station ([Localization and Navigation](https://docs.sodero.io/stellar-x/v2.0.0/navigation/overview/index.md)).
 
 The Navigation page after a goal was reached
 
@@ -134,8 +134,8 @@ ______________________________________________________________________
 
 The main functions are also available to programs:
 
-- From the SSH workspace with `sodero tools call strider.set_mode`, `strider.servo_on`, `strider.set_twist`, `strider.stop` and `strider.get_state` ([sodero CLI](https://docs.sodero.io/v2.0.0/ssh_workspace/sodero_cli/index.md)).
-- From your own modules on the Station through the `mobile_base` interface ([Create Custom Modules](https://docs.sodero.io/v2.0.0/extend/custom_modules/index.md)).
+- From the SSH workspace with `sodero tools call strider.set_mode`, `strider.servo_on`, `strider.set_twist`, `strider.stop` and `strider.get_state` ([sodero CLI](https://docs.sodero.io/stellar-x/v2.0.0/ssh_workspace/sodero_cli/index.md)).
+- From your own modules on the Station through the `mobile_base` interface ([Create Custom Modules](https://docs.sodero.io/stellar-x/v2.0.0/extend/custom_modules/index.md)).
 
 ```
 sodero tools call strider.get_state --input '{"target": "sodero.mlc.jackal"}'

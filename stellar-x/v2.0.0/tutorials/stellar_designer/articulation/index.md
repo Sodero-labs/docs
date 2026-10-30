@@ -1,12 +1,12 @@
 # Articulated Robot (.sdda)
 
-This tutorial builds the document of a robot whose joints are driven one by one, using a four-legged robot with twelve joints as the example. The document belongs to an Articulation node (`sodero.amc.NAME`). Unlike a manipulator or mobile base document, it describes no kinematics: only the joints, their limits and how the gateway's actuators drive them. How the controller uses the document is described in [Articulation](https://docs.sodero.io/v2.0.0/controllers/articulation/index.md).
+This tutorial builds the document of a robot whose joints are driven one by one, using a four-legged robot with twelve joints as the example. The document belongs to an Articulation node (`sodero.amc.NAME`). Unlike a manipulator or mobile base document, it describes no kinematics: only the joints, their limits and how the gateway's actuators drive them. How the controller uses the document is described in [Articulation](https://docs.sodero.io/stellar-x/v2.0.0/controllers/articulation/index.md).
 
 ______________________________________________________________________
 
 ## Before You Start
 
-1. On the Station, add a **Controller › Articulation** node, for example `quadruped`, and an **Actuator gateway** for its motors ([Nodes and Connections](https://docs.sodero.io/v2.0.0/station/nodes_and_connections/index.md)).
+1. On the Station, add a **Controller › Articulation** node, for example `quadruped`, and an **Actuator gateway** for its motors ([Nodes and Connections](https://docs.sodero.io/stellar-x/v2.0.0/station/nodes_and_connections/index.md)).
 1. Connect the Articulation node's `servo_link` to the gateway.
 1. Select the Articulation node and click **Edit Stellar Designer**.
 
@@ -62,7 +62,7 @@ Twelve actuators, each driving one joint
 
 The canvas ① shows the gateway's actuators (top) and the joints (bottom); the right panel ② lists the **INFLUENCE FACTOR** of each connection. Every joint you add starts connected to the actuator with the same number, with factor `1`.
 
-Change the mapping as for a manipulator ([Manipulator › Actuator Mapping](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/manipulator/#step-3-actuator-mapping)): drag from an actuator's connector to a joint's connector, set the influence factor, and use a negative factor to reverse a direction. Several connections describe coupled joints. The mapping uses as many actuators as there are joints, and it must be invertible: every set of joint targets must correspond to exactly one set of actuator commands.
+Change the mapping as for a manipulator ([Manipulator › Actuator Mapping](https://docs.sodero.io/stellar-x/v2.0.0/tutorials/stellar_designer/manipulator/#step-3-actuator-mapping)): drag from an actuator's connector to a joint's connector, set the influence factor, and use a negative factor to reverse a direction. Several connections describe coupled joints. The mapping uses as many actuators as there are joints, and it must be invertible: every set of joint targets must correspond to exactly one set of actuator commands.
 
 Actuator *n* here is actuator *n* of the gateway. The gateway must provide at least as many actuators as the document has joints.
 
@@ -70,7 +70,7 @@ ______________________________________________________________________
 
 ## Save a Copy
 
-To save the document to your computer, click the Stellar mark at the top left and choose **Definition › Download .sdda**. You can import the file into another Articulation node with **Import .sdda** ([Design Documents](https://docs.sodero.io/v2.0.0/station/design_documents/index.md)).
+To save the document to your computer, click the Stellar mark at the top left and choose **Definition › Download .sdda**. You can import the file into another Articulation node with **Import .sdda** ([Design Documents](https://docs.sodero.io/stellar-x/v2.0.0/station/design_documents/index.md)).
 
 ______________________________________________________________________
 
@@ -78,7 +78,7 @@ ______________________________________________________________________
 
 **Real hardware moves.** Support a legged robot so that its feet are off the ground, keep the area clear and keep the emergency stop within reach.
 
-Start the gateway, then the Articulation node, and click **Articulation** in the node's **CONTROL** section ([Articulation](https://docs.sodero.io/v2.0.0/controllers/articulation/index.md)). Switch the servo on and jog each joint at a low speed. Check that:
+Start the gateway, then the Articulation node, and click **Articulation** in the node's **CONTROL** section ([Articulation](https://docs.sodero.io/stellar-x/v2.0.0/controllers/articulation/index.md)). Switch the servo on and jog each joint at a low speed. Check that:
 
 - each joint moves in the expected direction,
 - each joint stops at its limits,

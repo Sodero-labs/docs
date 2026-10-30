@@ -1,12 +1,12 @@
 # Mobile Robot (.sddm)
 
-This tutorial builds the document of a wheeled mobile base, using the Clearpath Jackal (skid steer, four wheels) of the [Quick Start](https://docs.sodero.io/v2.0.0/get_started/quick_start/index.md). The document belongs to a Strider node (`sodero.mlc.NAME`).
+This tutorial builds the document of a wheeled mobile base, using the Clearpath Jackal (skid steer, four wheels) of the [Quick Start](https://docs.sodero.io/stellar-x/v2.0.0/get_started/quick_start/index.md). The document belongs to a Strider node (`sodero.mlc.NAME`).
 
 ______________________________________________________________________
 
 ## Before You Start
 
-1. On the Station, add a **Controller › Strider** node, for example `jackal`, and an **Actuator gateway** for its wheel motors ([Nodes and Connections](https://docs.sodero.io/v2.0.0/station/nodes_and_connections/index.md)).
+1. On the Station, add a **Controller › Strider** node, for example `jackal`, and an **Actuator gateway** for its wheel motors ([Nodes and Connections](https://docs.sodero.io/stellar-x/v2.0.0/station/nodes_and_connections/index.md)).
 1. Select the Strider node and click **Edit Stellar Designer**.
 1. In **Create robot definition**, choose the template that matches your drive:
 
@@ -33,18 +33,25 @@ Step **01 Chassis Structure** ① shows the body and the wheels of the base.
 
 | Field                             | Meaning                                                                      |
 | --------------------------------- | ---------------------------------------------------------------------------- |
-| **Template**                      | The drive type                                                               |
+| **Template**                      | The drive type of the template, for example `skid_steer_4` (read-only)       |
 | **Length**, **Width**, **Height** | Outer dimensions of the body                                                 |
 | **Base Origin Z**                 | Height of the robot's base frame above the floor (normally the wheel radius) |
 | **Track Width**                   | Distance between the left and right wheels of a differential drive           |
 
-**Wheels** ③ (`Wheel-fl`, `Wheel-fr`, `Wheel-rl`, `Wheel-rr`):
+**Wheels** ③: one card per wheel, for example **Wheel-fl**. The template sets the wheel names and their roles:
 
-| Field                                    | Meaning                                                                        |
-| ---------------------------------------- | ------------------------------------------------------------------------------ |
-| **Role**                                 | `drive` (driven), `steer` (steered), `drive + steering`, or `caster` (passive) |
-| **Radius**, **Width**                    | Wheel size                                                                     |
-| **Offset X**, **Offset Y**, **Offset Z** | Wheel position relative to the base frame (X forward, Y left)                  |
+| Template                                    | Wheels                                                 | Role                                      |
+| ------------------------------------------- | ------------------------------------------------------ | ----------------------------------------- |
+| Differential drive 2WD, MiR250 differential | `left`, `right`                                        | `drive`                                   |
+| Skid steer 4WD, Mecanum 4WD                 | `fl`, `fr`, `rl`, `rr`                                 | `drive`                                   |
+| Swerve 4WD                                  | `fl`, `fr`, `rl`, `rr`                                 | `drive_steer`                             |
+| Ackermann                                   | `front_left`, `front_right`, `rear_left`, `rear_right` | `steer` at the front, `drive` at the rear |
+
+| Field                                    | Meaning                                                                                                   |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Role**                                 | Read-only, set by the template: `drive` (driven), `steer` (steered) or `drive_steer` (driven and steered) |
+| **Radius**, **Width**                    | Wheel size                                                                                                |
+| **Offset X**, **Offset Y**, **Offset Z** | Wheel position relative to the base frame (X forward, Y left)                                             |
 
 **Constraints** ④ opens the wheel's drive limits in the right panel ⑥: **max_speed** and **max_accel** of the wheel.
 
@@ -72,9 +79,9 @@ ______________________________________________________________________
 
 Four actuators driving the four wheels
 
-Connect each actuator of the gateway to the wheel it drives (or steers), as for a manipulator ([Manipulator › Actuator Mapping](https://docs.sodero.io/v2.0.0/tutorials/stellar_designer/manipulator/#step-3-actuator-mapping)). The order must match the gateway: in the Jackal's gateway, actuator 1 is the front-left wheel, 2 front-right, 3 rear-left, 4 rear-right.
+Connect each actuator of the gateway to the wheel it drives (or steers), as for a manipulator ([Manipulator › Actuator Mapping](https://docs.sodero.io/stellar-x/v2.0.0/tutorials/stellar_designer/manipulator/#step-3-actuator-mapping)). The order must match the gateway: in the Jackal's gateway, actuator 1 is the front-left wheel, 2 front-right, 3 rear-left, 4 rear-right.
 
-A mobile base uses the mapping only to know which actuator drives which wheel; leave the **INFLUENCE FACTOR** at `1`. The wheel kinematics already account for the left and right side. If a real wheel still turns the wrong way, invert the motor's direction in its drive, for example by writing the drive's polarity parameter as a start-up SDO ([EtherCAT Gateway](https://docs.sodero.io/v2.0.0/gateways/ethercat/#ethercat-tab)).
+A mobile base uses the mapping only to know which actuator drives which wheel; leave the **INFLUENCE FACTOR** at `1`. The wheel kinematics already account for the left and right side. If a real wheel still turns the wrong way, invert the motor's direction in its drive, for example by writing the drive's polarity parameter as a start-up SDO ([EtherCAT Gateway](https://docs.sodero.io/stellar-x/v2.0.0/gateways/ethercat/#ethercat-tab)).
 
 ______________________________________________________________________
 
@@ -90,7 +97,7 @@ ______________________________________________________________________
 
 ## Try the Robot
 
-Start the gateway and the Strider node, open Strider, choose **Twist**, switch the servo on and drive slowly ([Strider](https://docs.sodero.io/v2.0.0/controllers/strider/index.md)). Check that:
+Start the gateway and the Strider node, open Strider, choose **Twist**, switch the servo on and drive slowly ([Strider](https://docs.sodero.io/stellar-x/v2.0.0/controllers/strider/index.md)). Check that:
 
 - **Forward** drives forward and every wheel turns the right way,
 - **Turn Left** turns counterclockwise (seen from above),
