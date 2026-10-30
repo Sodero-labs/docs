@@ -12,8 +12,12 @@
     (function () {
       var path = window.location.pathname;
       var rest = window.location.search + window.location.hash;
+      // A version that is no longer published opens the same page of the product's latest version.
+      var removed = path.match(/^\/(stellar-x|sodero-cloud)\/v\d+\.\d+\.\d+(\/.*)?$/);
       var old = path.match(/^\/(v\d+\.\d+\.\d+|latest)(\/.*)?$/);
-      if (old) {
+      if (removed) {
+        window.location.replace("/" + removed[1] + "/latest" + (removed[2] || "/") + rest);
+      } else if (old) {
         window.location.replace("/stellar-x/" + old[1] + (old[2] || "/") + rest);
       } else if (/^\/stellarx(\/|$)/.test(path)) {
         window.location.replace("/stellar-x/latest/" + rest);
