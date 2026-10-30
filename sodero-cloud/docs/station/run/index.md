@@ -1,4 +1,4 @@
-# Run and Monitor Nodes
+# Start and Monitor Nodes
 
 Nodes run only on the Live page, and only when you start them. This page covers starting and stopping nodes, reading their state and logs, and what to do when a node does not start.
 
@@ -17,7 +17,7 @@ Starting and stopping nodes needs the **Can edit** or **Can manage** role in the
 Click **Start all nodes** in the toolbar. The Station starts every node that is not running, in dependency order: *Nodes start in dependency order: gateway → controller → compound → application.* A node waits until the nodes it requires are up.
 
 - A banner follows the progress. **Cancel start** stops the run; nodes that already started stay up.
-- The result shows as a banner: *Runtime topology is up.*, or *Runtime topology is up; stopped during startup: …* when some nodes stopped again ([When a Node Does Not Start](#6-when-a-node-does-not-start)).
+- The result shows as a banner: *Runtime topology is up.*, or *Runtime topology is up; stopped during startup: …* when some nodes stopped again ([Troubleshooting](#6-troubleshooting)).
 - The arrow next to the button opens its menu: **Start all nodes** and **Stop all nodes**.
 - *Nothing in this topology can be launched from here.* means that the graph holds only empty drafts.
 
@@ -95,7 +95,7 @@ Each stream shows its last 200 lines and when it was last updated, for example *
 
 ---
 
-## 6. When a Node Does Not Start
+## 6. Troubleshooting
 
 | Message | What to do |
 | :--- | :--- |
@@ -108,7 +108,7 @@ Each stream shows its last 200 lines and when it was last updated, for example *
 | *Gateway … cannot be driven by both … and …; choose one controller before starting all nodes.* | Two controllers are connected to one gateway. Disconnect one of them. |
 | *Project edit access is required to start or cancel the topology.* | Your role is **Can view**. Ask a manager for **Can edit**. |
 
-A gateway that cannot reach its robot in the World does not fail: it waits. See [Drive Robots in the World](../world_connection/index.md#7-troubleshooting).
+A gateway that cannot reach its robot in the World does not fail: it waits. See [Connect to the World](../world_connection/index.md#7-troubleshooting).
 
 ---
 

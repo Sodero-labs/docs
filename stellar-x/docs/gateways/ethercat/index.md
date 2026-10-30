@@ -67,7 +67,7 @@ Click **Brand**, **Series** or **Model** ① to open **Motor Select**: search by
   <figcaption>Motor Select catalog: search ①, or pick Brand ② › Series ③ › Model ④, then Accept ⑤</figcaption>
 </figure>
 
-The fields of the **Motor** tab:
+The fields of the **Motor** tab (simulation gateways show only **Max torque**, **Max speed** and **Gear ratio**):
 
 | Section | Field | Unit | Meaning |
 | :--- | :--- | :--- | :--- |
@@ -75,8 +75,8 @@ The fields of the **Motor** tab:
 | | **Max torque** | Nm | Peak torque of the motor itself, at the motor shaft (the motor's datasheet value, not the torque after the reducer). The gateway limits torque commands to *Max torque × Gear ratio* at the joint. |
 | ③ SPEED | **Max speed** | rpm | Maximum speed of the motor itself, at the motor shaft (the motor's datasheet value, not the joint speed after the reducer). The gateway limits velocity commands to *Max speed ÷ Gear ratio* at the joint. |
 | ④ MOTOR CHARACTERISTICS | **Resolution** | PPR | Encoder pulses (counts) per motor revolution, **before** the gear, e.g. 1,048,576 (2²⁰) or 8,388,608 (2²³) |
-| ⑤ ENCODER CONFIGURATION | **Encoder offset** | pulses | Absolute encoder zero. Set by origin calibration in Motion Studio; leave 0 for a new robot. |
-| ⑥ REDUCER | **Gear ratio** | – | Motor turns per joint turn |
+| ⑤ ENCODER CONFIGURATION | **Encoder offset** | pulse | Zero offset of the absolute encoder. Origin calibration (**Set origin** in Motion Studio) sets it; leave 0 for a new robot and do not enter it by hand. |
+| ⑥ REDUCER | **Gear ratio** | ratio | Reduction between motor and joint: motor turns per joint turn |
 
 !!! info "**Rated torque**, **Max torque** and **Max speed** are the motor's own values at the motor shaft, as in the motor's datasheet, whatever reducer follows it. Do not convert them to the joint side: the gateway applies the **Gear ratio** itself."
 
@@ -108,6 +108,8 @@ Click the gear icon in the actuator panel to open **Servo Driver Select**:
 | **PDOS** | **Rx PDO** / **Tx PDO** index | The PDO mapping objects, typically `0x1600` and `0x1A00` |
 | | Entries | The objects exchanged every cycle (see below). **Init Value** sets a constant for extra RxPDO entries. |
 
+!!! warning "**Absolute Encoder Reset needs the drive's own object.** In the built-in catalog, the *Absolute Encoder Reset* entry of some drives, such as the MINAS A6BE, has the index `0x0000`, a placeholder. Before you use origin calibration (**Set origin** in Motion Studio), enter the drive's encoder reset object from its manual: index, subindex, value and size. Keep the entry's name: the gateway finds the entry by it."
+
 ### Process Data
 
 The gateway uses these CiA 402 objects:
@@ -119,13 +121,15 @@ The gateway uses these CiA 402 objects:
 | | 0x60FF | Target velocity | For velocity control (**mobile bases**) |
 | | 0x6071 | Target torque | For torque control |
 | | 0x60B2 | Torque offset | Optional (feed-forward) |
-| | 0x6060 | Modes of operation | Optional (also written by SDO) |
+| | 0x6060 | Modes of operation | Optional: carries the mode every cycle |
 | TxPDO (from drive) | 0x6041 | Statusword | Yes |
 | | 0x6064 | Position actual value | Yes |
 | | 0x606C | Velocity actual value | Recommended |
 | | 0x6077 | Torque actual value | Recommended |
 | | 0x6061 | Modes of operation display | Recommended |
 | | 0x603F | Error code | Recommended (fault messages) |
+
+The gateway writes the mode of operation (0x6060) to each drive itself, by SDO after the drive reaches SAFE-OP, and every cycle when 0x6060 is in the RxPDO. A 0x6060 entry under **SDOS** is ignored.
 
 When a controller drives the gateway, you do not choose the mode of operation: the controller selects it per command. Position commands use CSP (8), velocity commands CSV (9), torque and impedance commands CST (10). In the [test console](../test_console/index.md) you choose the drive mode yourself.
 

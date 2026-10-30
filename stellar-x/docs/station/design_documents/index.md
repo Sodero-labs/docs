@@ -52,13 +52,13 @@ A simulation gateway also needs to know **which robot** in Isaac Sim it drives a
 
 <figure markdown="span">
   ![Target](images/inspector_target_edit.png){ width="331" }
-  <figcaption>Robot name and simulator address of a simulation gateway</figcaption>
+  <figcaption>Robot name and Sim host of a simulation gateway</figcaption>
 </figure>
 
 | No. | Field | Value |
 | :---: | :--- | :--- |
 | 1 | **Robot name** | The name of the robot's articulation prim in the Isaac Sim scene, for example `jackal` for `/World/jackal` |
-| 2 | **Sim host** | The IP address of the computer that runs Isaac Sim |
+| 2 | **Sim host** | The IP address of the computer that runs Isaac Sim. A simulator address set for the controller replaces it ([Addresses Set for the Controller](../../gateways/simulation/index.md#addresses-set-for-the-controller)). |
 | 3 | **Done** | Saves both values. They take effect when the gateway starts next time. |
 
 !!! warning "**The robot name must match exactly.** The gateway finds its robot in Isaac Sim by name only. If the names differ, the gateway keeps waiting for the simulator and the robot never moves. See [Simulation Gateway](../../gateways/simulation/index.md)."
@@ -80,6 +80,6 @@ The same settings can be read and written from the SSH workspace with `sodero na
 ## 5. Rules for Documents
 
 - A Motion Studio, Strider or Articulation document names the gateway it drives and the gateway's actuator indices (zero-based). Connect the node's `servo_link` to that same gateway.
-- A simulation gateway document has `hardware.type: simulation`. Its robot name and simulator address are set on the node ([section 3](#3-point-a-simulation-gateway-at-its-robot)).
+- A simulation gateway document has `hardware.type: simulation`. Its robot name and **Sim host** are set on the node ([section 3](#3-point-a-simulation-gateway-at-its-robot)).
 - The gateway must have enough actuators: the controller document maps every actuator it uses to a joint or wheel, and the gateway must provide at least that many.
 - Connect one robot controller to a gateway. To drive one manipulator through several gateways, use **+ Gateway link** on its Motion Studio node.

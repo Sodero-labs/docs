@@ -10,9 +10,9 @@ nav:
     - Overview: index.md
     - Sodero Ecosystem: get_started/sodero_ecosystem/index.md
     - Key Concepts: get_started/key_concepts/index.md
-    - Quick Start: get_started/quick_start/index.md
     - Learning Path: tutorials/learning_path/index.md
-  - Hardware & Network:
+    - Quick Start: get_started/quick_start/index.md
+  - Hardware and Network:
     - Stellar X: hardware_setup/stellar_series/stellar_x/index.md
     - Network Settings: hardware_setup/stellar_series/network_settings/index.md
     - Stop Controls: hardware_setup/stop_controls/index.md
@@ -23,37 +23,37 @@ nav:
     - Running Nodes: station/running_nodes/index.md
     - Modules: station/modules/index.md
     - Backup and Restore: station/backup_restore/index.md
+  - Gateways and Sensors:
+    - Overview: gateways/overview/index.md
+    - Gateway Designer (.gw): gateways/gateway_designer/index.md
+    - Simulation Gateway: gateways/simulation/index.md
+    - EtherCAT Gateway: gateways/ethercat/index.md
+    - Test Console: gateways/test_console/index.md
+    - Cameras and IMUs: gateways/sensors_and_cameras/index.md
+    - Device Bridge: gateways/device_bridge/index.md
   - Stellar Designer:
     - Overview: tutorials/stellar_designer/introduction/index.md
-    - Gateway Designer (.gw): gateways/gateway_designer/index.md
     - Manipulator (.sdd): tutorials/stellar_designer/manipulator/index.md
     - Mobile Robot (.sddm): tutorials/stellar_designer/mobile_robot/index.md
     - Articulated Robot (.sdda): tutorials/stellar_designer/articulation/index.md
     - 3D Model (.glb, Optional): tutorials/stellar_designer/3dmodel_creation/index.md
-  - Gateways & Sensors:
-    - Overview: gateways/overview/index.md
-    - EtherCAT Gateway: gateways/ethercat/index.md
-    - Simulation Gateway: gateways/simulation/index.md
-    - Test Console: gateways/test_console/index.md
-    - Sensors and Cameras: gateways/sensors_and_cameras/index.md
-    - Device Bridge: gateways/device_bridge/index.md
   - Simulation:
     - Overview: virtual_simulation/introduction/index.md
-    - Isaac Bridge Installation: virtual_simulation/extension_installation/index.md
-    - Robot Setup: virtual_simulation/robot_setup/index.md
+    - Install Isaac Bridge: virtual_simulation/extension_installation/index.md
+    - Prepare the Robot: virtual_simulation/robot_setup/index.md
     - Connect to Stellar Station: virtual_simulation/connect_station/index.md
   - Operate Robots:
     - Strider: controllers/strider/index.md
     - Motion Studio: controllers/motion_studio/index.md
     - Articulation: controllers/articulation/index.md
-  - Localization & Navigation:
+  - Localization and Navigation:
     - Overview: navigation/overview/index.md
-    - Load and Configure a Map: navigation/map_bundle/index.md
     - Create a Map from Your Site: navigation/create_map/index.md
+    - Load and Configure a Map: navigation/map_bundle/index.md
   - Tutorials:
     - Navigate in Simulation: navigation/simulation_tutorial/index.md
     - EtherCAT Mobile Base: tutorials/ethercat_mobile_base/index.md
-  - Extend & Automate:
+  - Extend and Automate:
     - SSH Workspace: ssh_workspace/overview/index.md
     - sodero CLI: ssh_workspace/sodero_cli/index.md
     - AI Coding Agents: ssh_workspace/ai_agents/index.md
@@ -62,7 +62,7 @@ nav:
   - Reference:
     - Map Bundle Format: navigation/map_bundle_format/index.md
     - Compatibility and Downloads: reference/compatibility/index.md
-    - ChangeLog: CHANGELOG.md
+    - Changelog: CHANGELOG.md
 
 plugins:
   - mike:
@@ -75,8 +75,8 @@ plugins:
         Get Started:
           - get_started/sodero_ecosystem/index.md
           - get_started/key_concepts/index.md
-          - get_started/quick_start/index.md
           - tutorials/learning_path/index.md
+          - get_started/quick_start/index.md
         Hardware and Network:
           - hardware_setup/stellar_series/stellar_x/index.md
           - hardware_setup/stellar_series/network_settings/index.md
@@ -88,20 +88,20 @@ plugins:
           - station/running_nodes/index.md
           - station/modules/index.md
           - station/backup_restore/index.md
+        Gateways and Sensors:
+          - gateways/overview/index.md
+          - gateways/gateway_designer/index.md
+          - gateways/simulation/index.md
+          - gateways/ethercat/index.md
+          - gateways/test_console/index.md
+          - gateways/sensors_and_cameras/index.md
+          - gateways/device_bridge/index.md
         Stellar Designer:
           - tutorials/stellar_designer/introduction/index.md
-          - gateways/gateway_designer/index.md
           - tutorials/stellar_designer/manipulator/index.md
           - tutorials/stellar_designer/mobile_robot/index.md
           - tutorials/stellar_designer/articulation/index.md
           - tutorials/stellar_designer/3dmodel_creation/index.md
-        Gateways and Sensors:
-          - gateways/overview/index.md
-          - gateways/ethercat/index.md
-          - gateways/simulation/index.md
-          - gateways/test_console/index.md
-          - gateways/sensors_and_cameras/index.md
-          - gateways/device_bridge/index.md
         Simulation:
           - virtual_simulation/introduction/index.md
           - virtual_simulation/extension_installation/index.md
@@ -113,8 +113,8 @@ plugins:
           - controllers/articulation/index.md
         Localization and Navigation:
           - navigation/overview/index.md
-          - navigation/map_bundle/index.md
           - navigation/create_map/index.md
+          - navigation/map_bundle/index.md
         Tutorials:
           - navigation/simulation_tutorial/index.md
           - tutorials/ethercat_mobile_base/index.md

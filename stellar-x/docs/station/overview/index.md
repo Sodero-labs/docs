@@ -23,7 +23,7 @@ In this guide the address is `192.168.60.18`. On the controller's own network th
 
 | No. | Item | Description |
 | :---: | :--- | :--- |
-| 1 | **Runtime** / **Modules** | The two pages of the Station. **Runtime** is the node graph shown here; **Modules** lists the modules used in the system and installs your own ([Modules](../modules/index.md)). |
+| 1 | **Runtime** / **Modules** | The two pages of the Station. **Runtime** is the node graph shown here; **Modules** lists the available modules and installs your own ([Modules](../modules/index.md)). |
 | 2 | **LIVE** and uptime | The Station is running, and how long it has been running. |
 | 3 | Save state | **Saved** / **Saving…**. Every change to the graph is saved to the controller automatically. If a save fails, the label turns into **Retry save**. |
 | 4 | **Filter** | Shows only nodes of a type (Gateway, Controller, Compound, Application) or a status. Nodes connected to a match stay visible but dimmed. |

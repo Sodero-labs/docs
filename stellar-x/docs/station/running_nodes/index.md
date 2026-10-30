@@ -22,14 +22,14 @@ A controller refuses to start until it has a document and its `servo_link` is co
 
 ## 2. Start All Nodes
 
-The **Start all nodes** button starts every node that is down, in dependency order: gateways → controllers → compounds → applications. Its menu also offers **Stop all nodes**, which stops consumers first.
+The **Start all nodes** button starts every node that is down, in dependency order: gateways → controllers → compounds → applications. Its menu also offers **Stop all nodes**, which stops consumers first. Once every node is up, the button itself reads **Stop all nodes**.
 
 <figure markdown="span">
   ![Start all nodes](images/start_all_menu.png){ width="460" }
   <figcaption>The run menu</figcaption>
 </figure>
 
-- While a run is in progress, a banner shows the progress, and the menu offers **Cancel**. Nodes already started stay up when you cancel.
+- While a run is in progress, a banner shows its progress (*Starting all nodes…* or *Stopping all nodes…*). To cancel, click **Cancel** on the banner, or the button, which reads **Cancel start** or **Cancel stop** during the run. Nodes already started stay up when you cancel.
 - The run continues even if you close the browser. The page shows its progress again when you reopen it.
 - The result appears as a banner, for example *Runtime topology is up.*
 

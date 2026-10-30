@@ -1,4 +1,4 @@
-# Sensors and Cameras
+# Cameras and IMUs { #sensors-and-cameras }
 
 Stellar Station has built-in gateways for the two sensors its navigation and walking controllers use: an **RGB-D camera** and an **IMU**. In simulation they read the cameras and IMUs of Isaac Sim. For real sensors, a small computer next to the sensors runs the [Device Bridge](../device_bridge/index.md), which serves real devices exactly as Isaac Sim serves simulated ones.
 
@@ -40,7 +40,7 @@ In the **CAMERA GATEWAY** section of the inspector:
 | Field | Value |
 | :--- | :--- |
 | **Camera name** | The name of the camera: in Isaac Sim, the camera prim's name (for example `cam0` for `/World/jackal/links/base_link/cam0`); with the Device Bridge, the bridge's robot name |
-| **Camera host** | The address of the Isaac Sim computer or the sensor computer. The field is greyed out when a camera address is configured for the unit; the gateway then uses that address at every start, even if an uploaded YAML names another. To change it, contact Sodero support. |
+| **Camera host** | The address of the Isaac Sim computer or the sensor computer. When a camera address is set for the controller, the field is greyed out and the gateway uses that address at every start, even if an uploaded YAML names another ([Addresses Set for the Controller](../simulation/index.md#addresses-set-for-the-controller)). |
 | **Port** | `53335` |
 
 ### Camera Settings
@@ -82,9 +82,9 @@ Add the node with **Add node** › **Gateway** › **IMU gateway**. Nodes that u
 | **Sample rate (Hz)** | IMU sample rate (default 250) |
 | **Sensor event rate (Hz)** | Rate of the published IMU events (default 20) |
 
-The IMU gateway connects to the controller's configured simulator or sensor address. To set or change that address for your controller, contact Sodero support.
+The IMU gateway has no address field: it connects to the simulator address set for the controller, which must be the Isaac Sim computer or the sensor computer of the Device Bridge ([Addresses Set for the Controller](../simulation/index.md#addresses-set-for-the-controller)).
 
-In Isaac Sim, a robot publishes IMU data when its robot prim names the link that carries the IMU in `rc:imuLink` ([Robot Setup](../../virtual_simulation/robot_setup/index.md#7-imu)).
+In Isaac Sim, a robot publishes IMU data when its robot prim names the link that carries the IMU in `rc:imuLink` ([Prepare the Robot › IMU](../../virtual_simulation/robot_setup/index.md#7-imu)).
 
 ---
 

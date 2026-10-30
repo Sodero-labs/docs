@@ -14,6 +14,8 @@ The hardware emergency stop and the drives' STO inputs are part of your machine,
 
 ## 2. Stops in the UIs
 
+The UIs are described in Operate Robots: [Strider](../../controllers/strider/index.md), [Motion Studio](../../controllers/motion_studio/index.md) and [Articulation](../../controllers/articulation/index.md); the test console in [Test Console](../../gateways/test_console/index.md).
+
 | Control | What it does | Servo afterwards | To continue |
 | :--- | :--- | :--- | :--- |
 | **E-STOP** (Strider, top bar) | Cancels manual driving and the navigation goal and sets the wheel speeds to zero at once. The drives stay enabled and hold zero speed. The stop latches. | On | **Clear E-Stop** (the base switches to **Idle**), then **Twist** |
@@ -34,11 +36,11 @@ Motion Studio has no on-screen emergency stop. Use the hardware emergency stop, 
 | Situation | What happens | To continue |
 | :--- | :--- | :--- |
 | A controller stops sending commands while the servo is on | The gateway keeps the last command for 3 s, then switches the servo off (*No commands from the robot controller for 3.0 s: servo turned OFF for safety.*). | Start the controller and switch the servo on |
-| EtherCAT communication is lost | The gateway switches the servo off and reports *EtherCAT communication lost*. | Fix the cable or the drive's power, then restart the gateway |
+| EtherCAT communication is lost | Each drive reacts as its own communication watchdog is configured. The gateway reports *EtherCAT communication lost* in **Gateway events** with the likely cause, and asks for a restart if communication does not come back by itself. | Fix the cable or the drive's power, then restart the gateway |
 | A drive reports a fault | The gateway reports the fault in **Gateway events**. | Fix the cause, **Fault Reset** or **Error Reset**, then switch the servo on |
 | Motion Studio: a joint limit, a speed or torque limit, or a collision | Protective stop: the arm holds its position with the servo on ([Manipulator › Robot System Parameters](../../tutorials/stellar_designer/manipulator/index.md#step-2-robot-system-parameters)). | **Error Reset** |
 | Motion Studio: no feedback from the gateway, or a critical drive fault | Emergency stop: the controller requests a quick stop and the servo switches off. | Stop and start the Motion Studio node |
-| Articulation: feedback older than 100 ms, or no new target for 200 ms | The servo switches off and a stop latches. | **Clear stop**, then **Servo on** |
+| Articulation: feedback older than 100 ms, or no new target for 200 ms (by default) | The servo switches off and a stop latches. | **Clear stop**, then **Servo on** |
 | Strider: no manual command for about 1 s | The base slows to a stop. | Drive again |
 
 ---

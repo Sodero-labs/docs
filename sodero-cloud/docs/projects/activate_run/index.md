@@ -2,7 +2,7 @@
 
 Each Robot System and Robot World has its own cloud environment. **Activate** prepares it, **Run** starts its work, **Stop** ends the work, and **Deactivate** releases the environment. Stopping a World resets its pose and clock; it is not a pause that preserves progress.
 
-!!! warning "**An active environment uses credits.** It is billed for every minute it is active, whether or not anybody uses it or anything runs in it. Stop does not end that; Deactivate does ([Credits and Usage](../../account/billing/index.md))."
+!!! warning "**An active environment uses credits.** It is billed for every minute it is active, whether or not anybody uses it or anything runs in it. Stop does not end that; Deactivate does ([Billing and Usage](../../account/billing/index.md))."
 
 ---
 
@@ -72,7 +72,7 @@ A World without a scene cannot run: build it in [Studio](../../worlds/studio/ind
 | State | Meaning |
 | :--- | :--- |
 | **Running** | Operations are running |
-| **Partly running** | Robot System only: some nodes did not start. A **Failed** badge and a banner above the tables explain why. Open **Station · Live** and read that node's log ([Run and Monitor](../../station/run/index.md)). |
+| **Partly running** | Robot System only: some nodes did not start. A **Failed** badge and a banner above the tables explain why. Open **Station · Live** and read that node's log ([Start and Monitor Nodes](../../station/run/index.md)). |
 | **Stopped** | Operations are stopped. Also shown while the file is not active. |
 | **Error** | The World reported an error |
 | **-** | The state cannot be read. People with **Can view** always see **-**. |
@@ -99,7 +99,7 @@ Before Studio or Theater opens, the portal asks how to draw the World on your sc
 | Mode | Draws the World |
 | :--- | :--- |
 | **RTX Real-time** | On a cloud GPU, with advanced materials and lighting. Each Studio or Theater tab in this mode runs its own cloud renderer, which uses credits. |
-| **WebGPU** | In your browser, on this device's GPU. Performance depends on your hardware. |
+| **WebGPU** | In your browser, on this device's GPU, with no cloud GPU. Performance depends on your hardware. Your plan may still count WebGPU sessions ([Billing and Usage](../../account/billing/index.md)). |
 
 Pick a mode and click **Open Cosmic Studio** or **Open Cosmic Theater**. **Remember on this device.** preselects your choice next time. The mode only changes how you see the World, not the simulation, and each person chooses their own.
 
@@ -154,7 +154,7 @@ The file then stays active, and keeps using credits, until somebody deactivates 
 
 ---
 
-## 6. Messages and Errors
+## 6. Troubleshooting
 
 | Message | What to do |
 | :--- | :--- |

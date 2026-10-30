@@ -2,6 +2,8 @@
 
 Stellar Station includes a complete navigation stack for mobile robots: it knows where the robot is on a map (**localization**) and drives it to goals around obstacles (**navigation**). Both run on Stellar X as built-in nodes and work with the base's Strider node: the localizer reads its odometry, and the navigator drives the base through it.
 
+!!! idea "**Tip:** Start with [Navigate in Simulation](../simulation_tutorial/index.md). It sets up the whole stack on the simulated Jackal of the Quick Start, with a finished map, before you make the map of your own site."
+
 ---
 
 ## 1. How It Works
@@ -34,14 +36,23 @@ By default the localizer works in the plane: it estimates x, y and heading on th
 
 | Frame | Meaning |
 | :--- | :--- |
-| `map` | The fixed frame of the map |
-| `odom` | The odometry frame; drifts slowly as the wheels slip |
-| `base_link` | The robot, **on the floor** below its center |
-| Camera optical frame | The camera (for example `cam0_optical`): x right, y down, z forward |
+| `map` | The fixed frame of the site: x and y horizontal, z up, the floor at z = 0, in meters. The point cloud, the grid, the initial pose and goals use it. |
+| `odom` | The odometry frame: continuous motion measured by Strider's wheel odometry or by Visual odometry. It drifts slowly, for example as the wheels slip; the localizer corrects the drift. |
+| `base_link` | The robot, **on the floor** below its center: x forward, y left, z up |
+| Camera optical frame | The camera (for example `cam0_optical`): x right, y down, z forward along the view |
 
-The localizer publishes the correction `map → odom`; Strider publishes `odom → base_link`; the map bundle's extrinsics give `base_link → camera`.
+```mermaid
+flowchart TB
+    M["map"] -- "Localizer<br>(drift correction)" --> O["odom"]
+    O -- "odometry<br>(Strider or Visual odometry)" --> B["base_link<br>(on the floor)"]
+    B -- "extrinsics.yaml<br>(fixed)" --> C["cam0_optical<br>(x right, y down, z forward)"]
+```
 
-!!! warning "Because `base_link` is on the floor, the camera's mounting height in the extrinsics is its height **above the floor**, not above the robot's body frame. A wrong height makes the camera's view sink into or float above the map, and localization fails."
+The localizer publishes the correction `map → odom`; Strider (or Visual odometry) publishes `odom → base_link`; the map bundle's extrinsics give `base_link → camera`.
+
+Because the localizer is planar by default (`icp.planar: true`) and holds the height, roll and pitch of `base_link` at zero, `base_link` lies on the floor.
+
+!!! warning "Because `base_link` is on the floor, the camera's mounting height in the extrinsics is its height **above the floor**, not above the robot's body frame. Measure the camera's x and y from the base origin that your odometry tracks, but its z from the floor, even when your robot model places `base_link` higher, for example at the wheel axles. A height taken from a raised base puts every camera point too low by that offset: the fit error exceeds `icp.max_rmse`, and the localization status stays **Initializing** (`initializing`)."
 
 ---
 
@@ -50,7 +61,7 @@ The localizer publishes the correction `map → odom`; Strider publishes `odom �
 | Step | Where |
 | :--- | :--- |
 | 1. Drive the base with Strider | [Quick Start](../../get_started/quick_start/index.md) |
-| 2. Add a camera gateway and check its image | [Sensors and Cameras](../../gateways/sensors_and_cameras/index.md) |
+| 2. Add a camera gateway and check its image | [Cameras and IMUs](../../gateways/sensors_and_cameras/index.md) |
 | 3. Prepare the map bundle of the site | [Create a Map from Your Site](../create_map/index.md), or use a finished bundle |
 | 4. Add the Localizer and the Navigator, upload the map once to the Localizer, connect the ports | [Load and Configure a Map](../map_bundle/index.md), [Navigate in Simulation](../simulation_tutorial/index.md) |
 | 5. Set the initial pose and send goals | [Strider › Navigation Page](../../controllers/strider/index.md#5-navigation-page) |

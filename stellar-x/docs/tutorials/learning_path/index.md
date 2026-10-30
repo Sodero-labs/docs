@@ -1,6 +1,6 @@
 # Learning Path
 
-The tutorials of this documentation build on each other: first connection, a simulated robot, navigation, then real motors. Follow them in this order, or start where your project is.
+The tutorials of this documentation build on each other: first connection, a simulated robot, navigation, then real motors. Follow them in this order, or start where your project is. The first hands-on tutorial is the [Quick Start](../../get_started/quick_start/index.md); its [Before You Start](../../get_started/quick_start/index.md#before-you-start) section lists what to prepare.
 
 ```mermaid
 flowchart TB
@@ -28,7 +28,7 @@ flowchart TB
 
 | What you do | Page | You need |
 | :--- | :--- | :--- |
-| Install Isaac Sim and the Isaac Bridge extension | [Isaac Bridge Installation](../../virtual_simulation/extension_installation/index.md) | A PC with an NVIDIA GPU ([Compatibility](../../reference/compatibility/index.md)) |
+| Install Isaac Sim and the Isaac Bridge extension | [Install Isaac Bridge](../../virtual_simulation/extension_installation/index.md) | A PC with an NVIDIA GPU ([Compatibility](../../reference/compatibility/index.md)) |
 | Add a gateway and Strider, load the example documents and jog the Jackal | [Quick Start](../../get_started/quick_start/index.md) | The Quick Start's example files |
 
 ---
@@ -50,7 +50,7 @@ flowchart TB
 | A manipulator: DH parameters, limits, actuator mapping | [Manipulator (.sdd)](../stellar_designer/manipulator/index.md) | Your arm's kinematics and limits |
 | A robot driven joint by joint, such as a legged robot | [Articulated Robot (.sdda)](../stellar_designer/articulation/index.md) | Your robot's joints and limits |
 | The gateway of its motors | [Gateway Designer](../../gateways/gateway_designer/index.md) | Motor and drive data |
-| Try the documents in Isaac Sim first | [Robot Setup](../../virtual_simulation/robot_setup/index.md), [Connect to Stellar Station](../../virtual_simulation/connect_station/index.md) | Your robot's scene in Isaac Sim |
+| Try the documents in Isaac Sim first | [Prepare the Robot](../../virtual_simulation/robot_setup/index.md), [Connect to Stellar Station](../../virtual_simulation/connect_station/index.md) | Your robot's scene in Isaac Sim |
 
 ---
 

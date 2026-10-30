@@ -1,4 +1,4 @@
-# Working with AI Coding Agents
+# AI Coding Agents
 
 The SSH workspace is built for people and AI coding agents alike. Every `sodero` command prints JSON, every change is previewed before it is applied, and the workspace ships its own operating rules for agents. With an agent such as **Claude Code** or **OpenAI Codex**, you describe a task in plain language and the agent runs the commands, reads the results and reports back:
 
@@ -6,10 +6,6 @@ The SSH workspace is built for people and AI coding agents alike. Every `sodero`
 - *"Add a camera gateway named cam0 and connect it to the localizer."*
 - *"Lower the navigator's top speed to 0.3 m/s."*
 - *"Write a module that drives the robot through these three waypoints."*
-
----
-
-## How It Works
 
 ```mermaid
 flowchart TB
@@ -20,6 +16,7 @@ flowchart TB
 ```
 
 The robot's workspace has **no Internet access**, and an AI agent needs the Internet to reach its language model. So the agent runs **on your computer** and works on the robot through SSH: it sends each command with `ssh`, reads the JSON that comes back and decides the next step.
+{: #how-it-works }
 
 !!! info "The agent changes the robot only through `sodero`, which performs exactly the operations of the Station page. Whatever the agent builds, you can inspect and change on the Station page, and the other way round."
 
@@ -115,7 +112,7 @@ The agent runs commands such as `sodero topology get` and `sodero runtime status
 
 ---
 
-## Example Tasks
+## 4. Example Tasks { #example-tasks }
 
 | You ask | What the agent does |
 | :--- | :--- |
@@ -128,7 +125,7 @@ The agent runs commands such as `sodero topology get` and `sodero runtime status
 
 ---
 
-## Stay in Control
+## 5. Stay in Control { #stay-in-control }
 
 - **Review previews.** Ask the agent to show the preview of every change. Nothing changes until a command runs with `--execute`.
 - **Set approval rules in your agent.** Most agents can require your approval before they run a command. A practical setup: allow read-only commands (`status`, `get`, `list`, `logs`) freely, and ask for approval for anything with `--execute`, `tools call` or `apps call`.
@@ -136,7 +133,7 @@ The agent runs commands such as `sodero topology get` and `sodero runtime status
 
 ---
 
-## Give the Agent the Documentation
+## 6. Give the Agent the Documentation { #give-the-agent-the-documentation }
 
 - Inside the workspace, `sodero-help` prints every guide and `/opt/sodero/docs/examples` holds runnable examples. The robot's `AGENTS.md` points the agent to them.
 - This documentation is also published in a form made for language models: `llms.txt` (an index) and `llms-full.txt` (all pages in one file) at the root of each documentation version, for example `https://docs.sodero.io/stellar-x/latest/llms-full.txt`.

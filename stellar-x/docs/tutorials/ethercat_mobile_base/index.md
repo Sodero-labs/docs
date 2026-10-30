@@ -127,18 +127,16 @@ If the gateway stops before *EtherCAT ready*, its log says why: no cable link, a
 
 ## Step 5: Test the Wheels with the Test Console
 
-The gateway's [test console](../../gateways/test_console/index.md) moves single actuators without a controller. This step uses its velocity mode to check every wheel before Strider drives them.
+Check every wheel with the gateway's [test console](../../gateways/test_console/index.md) before Strider drives them. That page describes the console and how to open and end a test; this step gives the values for the four wheels.
 
-1. Select the gateway and click **Test Stellar Gateway** in its **CONTROL** section. The test console opens in a new browser tab.
+1. Select the gateway and click **Test Stellar Gateway** in its **CONTROL** section. The test console opens in a new browser tab. While the test runs, the graph shows it as `sodero.actuator_test.wheels` ①, and the gateway's **CONTROL** section shows **Open test console** and **Stop test** ②.
 
     <figure markdown="span">
       ![The test console in the Station graph](images/test_console_node.png){ width="1000" }
       <figcaption>① the test console, connected to the gateway's servo_link ② the gateway's test console buttons</figcaption>
     </figure>
 
-    While the test runs, the console is a node of the graph, `sodero.actuator_test.wheels` ①, and the gateway's **CONTROL** section shows **Open test console** and **Stop test** ②. The node has a red dashed outline because it is not part of your saved graph. It goes away when the test ends; do not add it to the graph with **Adopt running**.
-
-2. In the console, check that the top bar shows **Gateway Connected** and that there is one card per actuator, **A1** to **A4**. Card **A1** is actuator 1, the first drive on the cable.
+2. In the console, check that the top bar shows **Gateway Connected** and that there are four cards, **A1** to **A4**. Card **A1** is actuator 1, the first drive on the cable.
 
     <figure markdown="span">
       ![The test console](images/test_console.png){ width="760" }
@@ -146,8 +144,8 @@ The gateway's [test console](../../gateways/test_console/index.md) moves single 
     </figure>
 
 3. Under **DRIVE MODE — APPLY TO ALL AXES** ③, choose **VELOCITY** and click **Apply**.
-4. Click **Servo ON** ②. The indicator on every card changes from **Disable** to **Enable**. Check the gateway's log on the Station page for *Servo ON: all 4 drive(s) enabled.* The cards show the requested state; only this log line confirms that all four drives are enabled.
-5. On card **A1**, press and hold the **dqa_d · Target Velocity** slider ④ and drag it to the right, to about 60 deg/s. The wheel turns while you hold the mouse button and stops when you release it. Keep the console's tab open while a wheel turns ([Test Console › End the Test](../../gateways/test_console/index.md#end-the-test)).
+4. Click **Servo ON** ②. Check the gateway's log on the Station page for *Servo ON: all 4 drive(s) enabled.*
+5. On card **A1**, press and hold the **dqa_d · Target Velocity** slider ④ and drag it to the right, to about 60 deg/s. The wheel turns while you hold the mouse button and stops when you release it. Keep the console's tab open while a wheel turns.
 6. Do the same on cards **A2**, **A3** and **A4**.
 
 Each card must turn its own wheel ([Step 1](#step-1-wire-the-drives)) forward, the way the base drives forward. At 60 deg/s a wheel needs 6 s for one turn.
@@ -157,13 +155,10 @@ Each card must turn its own wheel ([Step 1](#step-1-wire-the-drives)) forward, t
 | A different wheel turns | The cable order does not match the wheel order. Rewire the drives in the order of [Step 1](#step-1-wire-the-drives). |
 | The wheel turns backward | The motor is mounted the other way round. Invert its direction in the drive, for example with the drive's polarity parameter as a start-up SDO in the **EtherCAT** tab. Leave the influence factor in the Strider document at `1` ([Mobile Robot › Actuator Mapping](../stellar_designer/mobile_robot/index.md#step-3-actuator-mapping)). |
 | One turn takes clearly more or less than 6 s | **Gear ratio** or **Resolution** in the gateway is wrong. |
-| The gateway's log shows *Servo ON failed* (the cards can still show **Enable**) | A drive does not enable: check its STO and enable inputs, the emergency stop and its main power. Then click **Servo OFF** and **Servo ON**. |
 
-To change the gateway document, for example a drive's polarity, end the test first: click **Servo OFF** in the console and **Stop test** in the gateway's **CONTROL** section, then **Stop node** on the gateway. Edit and save the document, start the gateway, and open the test again ([Test Console › Change the Gateway Document](../../gateways/test_console/index.md#change-the-gateway-document)).
+Other problems, such as a drive that does not enable, are in [Test Console › Troubleshooting](../../gateways/test_console/index.md#troubleshooting). To change the gateway document, for example a drive's polarity, end the test first ([Test Console › Change the Gateway Document](../../gateways/test_console/index.md#change-the-gateway-document)).
 
-When every wheel passes, click **Servo OFF**. Then click **Stop test** in the gateway's **CONTROL** section. Closing the console's tab does not end the test.
-
-!!! info "Open the test while no robot controller runs: the Station does not open a test while a Motion Studio node runs, and starting a robot controller (Motion Studio, Strider or Articulation) ends every running test. **EMERGENCY STOP** ① stops all drives of the gateway and switches their servo off; click it again to release it. It does not replace the hardware emergency stop ([Stop Controls](../../hardware_setup/stop_controls/index.md))."
+When every wheel passes, click **Servo OFF** in the console, then **Stop test** in the gateway's **CONTROL** section ([Test Console › End the Test](../../gateways/test_console/index.md#end-the-test)).
 
 ---
 

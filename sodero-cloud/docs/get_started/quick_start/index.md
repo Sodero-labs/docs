@@ -5,10 +5,10 @@ Create a warehouse World, watch its simulation in Theater, then stop and deactiv
 ## Before You Start
 
 - Sign in to [Sodero Cloud](https://app.sodero.io) with access to create a project and edit its files.
-- Check the workspace's credits and active-file allowance in **Billing & Usage**.
+- In the workspace menu, open **Billing & Usage** and check the credits left and **Systems and Worlds running at once**.
 - Download [jackal_warehouse.zip](files/jackal_warehouse.zip), the example scene with a Jackal and a Dingo. Keep the ZIP intact. It includes the accompanying Clearpath license notice.
 
-**Credits:** an active World uses credits until you deactivate it. Studio and Theater sessions in **RTX Real-time** use credits too. Check your plan's rates before opening them ([Credits and Usage](../../account/billing/index.md)).
+**Credits:** an active World uses credits until you deactivate it, and Studio and Theater sessions can use credits while they are open. **Billing & Usage** shows your plan's rates ([Billing and Usage](../../account/billing/index.md)).
 
 ## Step 1: Create the Project and World { #step-1-create-the-project-and-world }
 
@@ -26,7 +26,7 @@ The World appears as **Inactive**. Its **Studio** link opens the editor.
 
 ## Step 2: Import and Save the Scene { #step-2-import-and-save-the-scene }
 
-1. Click **Studio** on the World row. Choose **RTX Real-time** or **WebGPU**, then click **Open Cosmic Studio**.
+1. Click **Studio** on the World row. Choose **RTX Real-time** or **WebGPU**, then click **Open Cosmic Studio**. Studio opens in a new tab. Keep the Sodero Cloud tab open while you work: Studio uses it to keep you signed in and to read library files.
 2. Open the logo menu and choose **World › Replace scene…**.
 3. On **This PC**, select `jackal_warehouse.zip`, click **Replace**, and confirm replacement.
 
@@ -35,15 +35,15 @@ The World appears as **Inactive**. Its **Studio** link opens the editor.
       <figcaption>The Replace scene dialog</figcaption>
     </figure>
 
-4. Check that **Hierarchy** contains the warehouse and robots. If the old default scene remains after the replacement confirmation, reload Studio.
-5. Click **Save now** and wait for *Saved just now*.
+4. Check that the **Hierarchy** shows `dingo_d`, `jackal` and `warehouse`.
+5. Click **Save now** in the left rail and wait for *Saved just now*.
 
 <figure markdown="span">
   ![Warehouse in Studio](images/studio_warehouse.png){ width="900" }
   <figcaption>The example scene in Studio. It contains a Jackal and a Dingo.</figcaption>
 </figure>
 
-Choose **Back to Sodero Cloud** from the logo menu to close Studio. Keep the portal tab open while using the editor.
+Choose **Back to Sodero Cloud** from the logo menu to close Studio.
 
 ## Step 3: Activate the World { #step-3-activate-the-world }
 
@@ -52,28 +52,29 @@ On the project page, set the World's **Activation** to **Active**. Wait until **
 ## Step 4: View and Run the Simulation { #step-4-view-and-run-the-simulation }
 
 1. Click **Theater**, choose a rendering mode, and click **Open Cosmic Theater**.
-2. Wait for *Ready*. If the view fails to load, use **Retry**; repeated failures should be reported through **Help**.
-3. On the project page, set the World's **Running** state to **Running**. Alternatively, the editor who has control in Theater can use **Start Theater**.
+2. Wait for *Ready*.
+3. On the project page, set the World's **Running** state to **Running**. You can also click **Start Theater** in Theater when you control it: the first person with edit access who opened Theater controls **Start Theater** and **Stop Theater** ([Start and Stop](../../worlds/theater/index.md#start-and-stop)).
 4. Select **jackal** in **Scene assets**; double-click the row to bring the camera to it.
 
-Check that the scene loads and the robots remain on the ground. **Physics RTF** near 1.00 means the simulation keeps up with elapsed time; **FPS** describes display updates. These are different measurements. A robot does not start driving simply because the World is running.
+The readout at the bottom of the viewport shows **FPS**, the rate at which your view is drawn, and **Physics RTF**, the real-time factor of the simulation: simulated time divided by wall-clock time. Near 1.00, the simulation keeps up with real time. The robots stay where they are until a Robot System drives them.
 
 ## Step 5: Stop and End the Session { #step-5-stop-and-end-the-session }
 
 1. Set the World's **Running** state to **Stopped**. Stopping resets its pose and clock; it is not a pause that preserves progress.
 2. Set **Activation** to **Inactive** and wait for deactivation to finish.
-3. Close Studio and Theater views you no longer need. In **Billing & Usage › Recent runs**, check for remaining active sessions.
+3. Close the Theater tab. In **Billing & Usage**, a green dot under **Recent runs** marks anything that is still active.
 
-Stopping a World leaves its environment active and using credits. Deactivating a World does not deactivate separate Robot Systems. End each resource that you started.
+A stopped World stays active and keeps using credits until you deactivate it. Deactivating a World does not deactivate the project's Robot Systems: deactivate each file you activated.
 
 ## Next: Connect a Robot System { #next-connect-a-robot-system }
 
-To drive the robots of this World, add a Robot System to the same project:
+To drive the Jackal of this World, add a Robot System to the same project. Download its two documents first: [jackal.gw](files/jackal.gw), the simulation gateway document, and [jackal.sddm](files/jackal.sddm), the mobile robot document.
 
-1. Create a [Robot System](../../projects/files/index.md) in the project.
-2. Install the apps its nodes run from the [Store](../../station/apps/index.md), then [add and connect the nodes](../../station/graph/index.md).
-3. Go live, and [upload the gateway and robot documents](../../station/documents/index.md) while the nodes are stopped.
-4. Check the [robot name and the actuator mapping](../../station/world_connection/index.md), run the World, and [start the nodes](../../station/run/index.md).
-5. Drive the robot from its controller's UI: [Strider](../../operate/strider/index.md), [Motion Studio](../../operate/motion_studio/index.md) or [Articulation](../../operate/articulation/index.md).
+1. In the project, create a Robot System named `jackal` and open it with **Station · Edit** ([Create a File](../../projects/files/index.md#1-create-a-file)). In the **Store**, install `sodero.actuator_gateway`, `sodero.mlc` and `sodero.strider` ([Apps and Packages](../../station/apps/index.md)).
+2. Add a **Gateway** node that runs `sodero.actuator_gateway` and name it `sodero.actuator_gateway.jackal` ([Add a Node](../../station/graph/index.md#1-add-a-node)). In its inspector, click **Upload** under **Gateway project** and import `jackal.gw` ([Documents and Settings](../../station/documents/index.md)).
+3. Under the gateway document, set **Robot name** to `jackal`, the name of the robot's prim in the World. `jackal.gw` already fills it in ([Name the Robot](../../station/world_connection/index.md#2-name-the-robot)).
+4. Add a **Controller** node that runs `sodero.mlc` and name it `sodero.mlc.jackal`. Click **Upload** under **document (robot)** and import `jackal.sddm`. Connect the node's `servo_link` port to the gateway ([Connect Ports](../../station/graph/index.md#3-connect-ports)).
+5. Add `sodero.strider` and connect its `mobile_base` port to `sodero.mlc.jackal` ([Set Up the Nodes](../../operate/strider/index.md#1-set-up-the-nodes)).
+6. Activate and run the World again (Steps 3 and 4). In the Station, click **Go live**, then **Start all nodes** ([Start and Monitor Nodes](../../station/run/index.md)). Right-click `sodero.strider`, open Strider and drive the Jackal ([Strider](../../operate/strider/index.md)).
 
-Use gateway and robot documents made for this Station release, such as the documents in **Sodero Assets** ([Compatibility](../../reference/compatibility/index.md)).
+For other robots, use documents made for this Station release, such as those in **Sodero Assets** ([Compatibility](../../reference/compatibility/index.md)).

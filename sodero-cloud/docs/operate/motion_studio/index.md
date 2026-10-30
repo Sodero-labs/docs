@@ -8,15 +8,15 @@
 
 1. In the Station's **Store**, install `sodero.actuator_gateway` and `sodero.mmc` ([Apps and Packages](../../station/apps/index.md)).
 2. Add the gateway and the manipulator controller, and connect the controller's `servo_link` to the gateway ([Build the Graph](../../station/graph/index.md)).
-3. Go live and wait until the apps are installed. Keep the nodes stopped.
-4. Upload the gateway's `.gw` and the controller's `.sdd` document ([Documents and Settings](../../station/documents/index.md)).
-5. Check the robot name and the actuator mapping ([Drive Robots in the World](../../station/world_connection/index.md)), run the World, then start the gateway and the controller, in this order.
+3. Upload the gateway's `.gw` and the controller's `.sdd` document ([Documents and Settings](../../station/documents/index.md)).
+4. Set the gateway's **Robot name** and check the actuator mapping ([Connect to the World](../../station/world_connection/index.md)).
+5. Run the World, go live, then start the gateway and the controller, in this order ([Start and Monitor Nodes](../../station/run/index.md)).
 
 ---
 
 ## 2. Open Motion Studio
 
-On the Live page, right-click the running `sodero.mmc.<name>` node and choose **Open …** ([Run and Monitor Nodes](../../station/run/index.md#3-start-restart-or-stop-one-node)). Motion Studio opens in a new tab. If its session expires, open it again from the node.
+On the Live page, right-click the running `sodero.mmc.<name>` node and choose **Open …** ([Start and Monitor Nodes](../../station/run/index.md#3-start-restart-or-stop-one-node)). Motion Studio opens in a new tab. If its session expires, open it again from the node.
 
 ---
 
@@ -38,7 +38,7 @@ On the Live page, right-click the running `sodero.mmc.<name>` node and choose **
 | Robot and role | The controller node, and whether this window has control (*Pilot - Control Active*) |
 | **Manual** / **Auto** | **Manual** limits the linear speed of the TCP in the controller's own motions and jogs, 0.25 m/s by default; it does not limit rotations or **Hand** mode. **Auto** runs at the programmed speed. |
 | Feed rate | Speed override in percent (10–150 %), applied to motion in progress |
-| **Error Reset** | Clears a protective stop (a joint at its limit, a speed or torque limit, a detected collision) and resets drive faults. Switch the servo on again afterwards. If the arm stays stopped, stop and start its controller node. |
+| **Error Reset** | Clears a protective stop (a joint at its limit, a speed or torque limit, a detected collision) and resets drive faults. Switch the servo on again afterwards. |
 | Units | `mm / g / deg` or `m / kg / radian` |
 | **Jog** | Opens the jog panel |
 | **Command log** | Commands sent from this window |
@@ -99,7 +99,7 @@ Motion Studio is for setup and teaching. Programs run outside it and use the sam
 
 | From | How |
 | :--- | :--- |
-| AI agents | The `motion` tools: state, servo, moves, stops and fault reset ([AI Agents](../../connect/ai_agents/index.md)) |
+| AI agents | The `station.motion` tools: state, servo, moves, stops and fault reset ([AI Agents](../../connect/ai_agents/index.md)) |
 | Your own module | A module node on the Station, connected to the manipulator controller node ([Apps and Packages](../../station/apps/index.md)) |
 | Your own tools | The Station API, through the [Project VPN](../../connect/project_vpn/index.md) |
 

@@ -1,5 +1,4 @@
-
-# ChangeLog
+# Changelog
 
 <div class="changelog-container" markdown="1">
 
@@ -7,78 +6,8 @@
 
 <div class="version-info" markdown="1">
 
-<div class="display-version">v2.0.3</div>
-<div class="display-date">2026.10.29</div>
-
-</div>
-
-<div class="version-content" markdown="1">
-
-## v2.0.3 { #v2-0-3 }
-
-#### Documentation and Navigation
-
-* The navigation follows the order of use: [Learning Path](tutorials/learning_path/index.md) is under **Get Started**, and **Simulation** comes before **Operate Robots**.
-* The [Quick Start](get_started/quick_start/index.md) and [EtherCAT Mobile Base](tutorials/ethercat_mobile_base/index.md) begin with the tutorial itself; the notes on the example files are in [Compatibility and Downloads](reference/compatibility/index.md#example-files).
-* [Isaac Bridge Installation](virtual_simulation/extension_installation/index.md#5-update-or-remove): update steps for a copy cloned from a release tag.
-* Fixed the address of `llms-full.txt` in [AI Coding Agents](ssh_workspace/ai_agents/index.md#give-the-agent-the-documentation) and the links to [Create Custom Modules](extend/custom_modules/index.md).
-
-</div>
-
-</div>
-
-<div class="version-block" markdown="1">
-
-<div class="version-info" markdown="1">
-
-<div class="display-version">v2.0.2</div>
-<div class="display-date">2026.10.27</div>
-
-</div>
-
-<div class="version-content" markdown="1">
-
-## v2.0.2 { #v2-0-2 }
-
-#### Documentation
-
-* [Navigate in Simulation](navigation/simulation_tutorial/index.md#step-2-add-the-camera-gateway): added a comparison of the camera gateway defaults (60° field of view, 15 fps) with the Jackal example settings (90°, 5 fps), the exact inspector field labels, and the stop/save/restart sequence for an existing setup.
-* [Sensors and Cameras](gateways/sensors_and_cameras/index.md#camera-settings): explained automatic image-size detection and why a visible camera image does not establish correct calibration for localization. Added troubleshooting for a Localizer that remains Initializing, Relocalizing or Lost.
-
-</div>
-
-</div>
-
-<div class="version-block" markdown="1">
-
-<div class="version-info" markdown="1">
-
-<div class="display-version">v2.0.1</div>
-<div class="display-date">2026.10.27</div>
-
-</div>
-
-<div class="version-content" markdown="1">
-
-## v2.0.1 { #v2-0-1 }
-
-#### Documentation and Example Files
-
-This is a Stellar X documentation release, not a change to the software installed on your controller.
-
-* Updated `jackal.gw`, `jackal.sddm`, `wheels.gw` and `base.sddm` to use current `sodero.actuator_gateway.*` IDs. Download both files of each pair again; the Station can refuse older copies. Robot geometry, actuator order, EtherCAT settings and safety limits are unchanged. See [Compatibility and Downloads](reference/compatibility/index.md#example-files).
-* Aligned gateway, camera, IMU and Navigator node IDs in the tutorials, connection diagrams and CLI examples.
-
-</div>
-
-</div>
-
-<div class="version-block" markdown="1">
-
-<div class="version-info" markdown="1">
-
 <div class="display-version">v2.0.0</div>
-<div class="display-date">2026.10.16</div>
+<div class="display-date">2026.10.30</div>
 
 </div>
 
@@ -102,14 +31,10 @@ This is a Stellar X documentation release, not a change to the software installe
 * **Stellar Designer** opens from a controller node on the Station and edits that node's document: manipulators (`.sdd`), mobile robots (`.sddm`) and articulated robots (`.sdda`). Motor and EtherCAT settings moved to the Gateway Designer.
 * **Stellar Motion Studio** has a new interface with the Home, Tool and Pose pages. Programs run from the SSH Workspace or as modules on the Station.
 
-#### Documentation Revisions
+#### Documentation
 
-The software version stays 2.0.0; these are revisions of this documentation and its example files ([Compatibility and Downloads](reference/compatibility/index.md)).
-
-* **2026.10.21.** New pages: [Learning Path](tutorials/learning_path/index.md), [Test Console](gateways/test_console/index.md), [Stop Controls](hardware_setup/stop_controls/index.md) and [Compatibility and Downloads](reference/compatibility/index.md). The map bundle page is split into [Load and Configure a Map](navigation/map_bundle/index.md), [Create a Map from Your Site](navigation/create_map/index.md) and [Map Bundle Format](navigation/map_bundle_format/index.md); writing Device Bridge drivers and building modules moved to **Extend & Automate**. The LAN ports and the test console conditions are described the same way on every page. Example files: `jackal.sddm` and `base.sddm` no longer carry run-time settings that the controller does not use. Copies downloaded before this date keep working.
-* **2026.10.21.** [EtherCAT Mobile Base](tutorials/ethercat_mobile_base/index.md): a step that tests each wheel with the test console before Strider drives them.
-* **2026.10.20.** New tutorial [EtherCAT Mobile Base](tutorials/ethercat_mobile_base/index.md) with the example files `wheels.gw` and `base.sddm`.
-* **2026.10.19.** The Quick Start files `jackal.gw` and `jackal.sddm` use the current document format. If the Station refuses a copy you downloaded before this date, download the files again.
+* This documentation describes the Stellar X 2.0 software. The pages follow the order of use: [Learning Path](tutorials/learning_path/index.md) and [Quick Start](get_started/quick_start/index.md), then hardware, Stellar Station, gateways and sensors, Stellar Designer, simulation, operation and navigation.
+* Example files ([Compatibility and Downloads](reference/compatibility/index.md#example-files)): `jackal.gw` and `jackal.sddm` for the [Quick Start](get_started/quick_start/index.md), `wheels.gw` and `base.sddm` for the [EtherCAT Mobile Base](tutorials/ethercat_mobile_base/index.md) tutorial, and the map bundle of [Navigate in Simulation](navigation/simulation_tutorial/index.md). If the Station refuses a copy you downloaded earlier, download the file again.
 
 </div>
 
@@ -130,7 +55,7 @@ The software version stays 2.0.0; these are revisions of this documentation and 
 
 #### Release
 
-* Stellar Designer for manipulators, Stellar Motion Studio, and NVIDIA Isaac Sim integration. The v1 documentation remains available in the version selector.
+* Stellar Designer for manipulators, Stellar Motion Studio, and NVIDIA Isaac Sim integration.
 
 </div>
 

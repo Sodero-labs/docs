@@ -8,7 +8,7 @@ show_intro: true
 # Stellar X Documentation
 <p>Set up the Stellar X controller, build your robot system in Stellar Station and operate robots in simulation and on real hardware.</p>
 
-### Get Started
+## Get Started
 <div class="box-container">
   <a href="get_started/quick_start" class="card-box">
     <img src="https://unpkg.com/lucide-static@0.577.0/icons/rocket.svg" class="external-icon" alt="Icon">
@@ -27,7 +27,7 @@ show_intro: true
   </a>
 </div>
 
-### Build the System
+## Build the System
 <div class="box-container">
   <a href="station/overview" class="card-box">
     <img src="https://unpkg.com/lucide-static@0.577.0/icons/layout-dashboard.svg" class="external-icon" alt="Icon">
@@ -46,7 +46,7 @@ show_intro: true
   </a>
 </div>
 
-### Simulate and Operate
+## Simulate and Operate
 <div class="box-container">
   <a href="virtual_simulation/introduction" class="card-box">
     <img src="https://unpkg.com/lucide-static@0.577.0/icons/square-mouse-pointer.svg" class="external-icon" alt="Icon">
@@ -65,7 +65,7 @@ show_intro: true
   </a>
 </div>
 
-### Extend & Automate
+## Extend & Automate
 <div class="box-container">
   <a href="ssh_workspace/overview" class="card-box">
     <img src="https://unpkg.com/lucide-static@0.577.0/icons/square-terminal.svg" class="external-icon" alt="Icon">
@@ -84,7 +84,7 @@ show_intro: true
   </a>
 </div>
 
-### Reference & Support
+## Reference & Support
 <div class="box-container">
   <a href="https://www.sodero.io/contact" class="card-box">
     <img src="https://unpkg.com/lucide-static@0.577.0/icons/headset.svg" class="external-icon" alt="Icon">

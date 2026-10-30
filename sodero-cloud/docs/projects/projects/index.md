@@ -40,7 +40,7 @@ Click a project to open it. The **⋯** button at the end of a row opens the pro
 </figure>
 
 - If **+ Project** is dimmed, only the workspace's owner and admins can create projects there. The owner can turn on **Members can create projects** ([Workspaces and People](../../account/workspaces/index.md#6-change-workspace-settings)).
-- Your workspace's plan limits how many projects the workspace can hold; projects in Trash do not count ([Credits and Usage](../../account/billing/index.md#limits)).
+- Your workspace's plan limits how many projects the workspace can hold; projects in Trash do not count ([Billing and Usage](../../account/billing/index.md#limits)).
 
 ---
 
@@ -81,7 +81,8 @@ The person who created a project can manage it, and so can the workspace's owner
 
 | Action | Can view | Can edit | Can manage |
 | :--- | :---: | :---: | :---: |
-| Open the project; see its files, their states and active users | ✓ | ✓ | ✓ |
+| Open the project; see its files, their **Activation** state and active users | ✓ | ✓ | ✓ |
+| See the **Running** state of an active file | — | ✓ | ✓ |
 | Open **Station · Edit**, **Station · Live**, **Studio** and **Theater** | view only | ✓ | ✓ |
 | Create, import, duplicate, rename and trash files | — | ✓ | ✓ |
 | Activate, run, stop and deactivate files; change **Auto off** | — | ✓ | ✓ |
@@ -115,7 +116,7 @@ Choose **⋯ › Duplicate project**. The copy, for example *Warehouse Demo copy
 
 Managers can keep a Robot System or Robot World outside Sodero: open the file's **⋯** menu on the project page and choose **Download local copy**. The browser saves an `.sdr` file named after the file, for example `jackal.sdr`. To keep a whole project, download each of its files.
 
-Use the copy to keep a backup, to [import it](../files/index.md#2-import-an-sdr-file) into another project, or to load a Robot System on a Stellar X controller with **Load SDR** ([Backup and Restore](https://docs.sodero.io/stellar-x/latest/station/backup_restore/) in the Stellar X manual).
+Use the copy to keep a backup, to [import it](../files/index.md#2-import-an-sdr-file) into another project, or to move a Robot System to Stellar X ([Move Robot Systems Between Stellar X and Sodero Cloud](../files/index.md#move-robot-systems-between-stellar-x-and-sodero-cloud)).
 
 !!! idea "**Tip:** A Station saves its data when it deactivates. Deactivate the Robot System before you download it, so that the copy holds your latest changes."
 
@@ -134,4 +135,4 @@ Click **Trash** in the left navigation bar to see the trashed projects, Robot Sy
 
 Workspace owners and admins also have **Empty all trash**: after asking, it permanently deletes every entry they can manage.
 
-!!! warning "**Library files do not go to Trash.** Deleting a file from My Library or from a project's library removes it at once ([Libraries](../libraries/index.md))."
+!!! warning "**Library files do not go to Trash.** Deleting a file from a project's library removes it at once ([Libraries](../libraries/index.md))."

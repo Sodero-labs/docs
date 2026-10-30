@@ -20,7 +20,7 @@ The CLI is its own best reference:
 - **Preview first.** A command that changes something only previews until you add `--execute`. Read the preview, then repeat the command with `--execute`.
 - **Versions.** Changes to the node graph take `--if-version N`, the `expected_version` from `sodero topology get`. Changes to settings and documents take `--if-sha256 SHA256` from the matching `get`. Each saved change returns the next value. If someone changed the Station page in the meantime, the change is refused with a conflict (exit code 6): read again and retry.
 - **One Station.** On a robot, the only item is the Station `station`. `--item` defaults to it and can be left out.
-- **Node IDs.** A node's ID comes from its module, not from the `--kind` option of `topology add-node`: `--kind camera --name cam0` creates `sodero.camera_gateway.cam0`. Strider, Motion Studio and Articulation nodes are `sodero.mlc.<name>`, `sodero.mmc.<name>` and `sodero.amc.<name>` (for example `sodero.mlc.jackal`); gateways and the other modules are `sodero.<kind>.<name>` (for example `sodero.actuator_gateway.jackal`). The localizer, navigator and visual odometry have fixed IDs: `sodero.localizer`, `sodero.navigator`, `sodero.visual_odometry`.
+- **Node IDs.** A node's ID comes from its module, not from the `--kind` option of `topology add-node`: `--kind camera --name cam0` creates `sodero.camera_gateway.cam0`, and `--kind strider --name jackal` creates `sodero.mlc.jackal`. The IDs of all built-in modules are listed in [Key Concepts › Station and Nodes](../../get_started/key_concepts/index.md#station-and-nodes).
 
 ### Exit Codes
 
@@ -56,7 +56,7 @@ The CLI is its own best reference:
 | `files` | `upload` | Stage a file on the robot for `documents.apply` (kept for at most 6 hours) |
 | `run`, `programs` | `run`; `programs list`, `programs logs` | Run a program in the workspace and keep its output |
 
-!!! info "Worlds, project items, the project Library and the official asset catalog belong to Sodero Cloud. On a robot these commands answer `NOT_AVAILABLE_ON_DEVICE`."
+!!! info "Worlds, project items, the project Library and Sodero Assets belong to Sodero Cloud. On a robot these commands answer `NOT_AVAILABLE_ON_DEVICE`."
 
 ---
 
@@ -94,7 +94,7 @@ sodero topology connect --source sodero.localizer.camera \
     --target sodero.camera_gateway.cam0.camera --if-version 13 --execute
 ```
 
-`sodero topology catalog` lists the node kinds (`gateway`, `strider`, `motion_studio`, `articulation`, `camera`, `imu`, `vo`, `localizer`, `navigator`, `legged_locomotion`, `legged_navigator`, `package`) with their ports.
+`sodero topology catalog` lists the node kinds with their ports: `gateway`, `strider`, `motion_studio`, `articulation`, `camera`, `imu`, `vo`, `localizer`, `navigator` and `package`. For legged robots, which are prepared with Sodero support, it also lists `legged_locomotion` and `legged_navigator`, a navigator that drives a Legged locomotion node.
 
 ### Change Settings of Built-in Nodes
 

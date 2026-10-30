@@ -1,6 +1,6 @@
 # Stellar Station
 
-Every Robot System is one **Stellar Station** ("the Station"). In the Station you build the robot system as a graph of nodes, give the nodes their documents, start them, and watch their state and logs. This manual describes the Station opened from the Sodero Cloud portal; device versions may differ.
+Every Robot System is one **Stellar Station** ("the Station"). In the Station you build the robot system as a graph of nodes, give the nodes their documents, start them, and watch their state and logs.
 
 ---
 
@@ -14,7 +14,7 @@ A Robot System holds one Station and everything it needs:
 | Documents and settings | Gateway and robot documents, camera files, map bundles and node settings ([Documents and Settings](../documents/index.md)) |
 | Apps and modules | The Store apps and your own module packages that the nodes run ([Apps and Packages](../apps/index.md)) |
 
-A Robot System drives robots in the project's active Robot World ([Drive Robots in the World](../world_connection/index.md)). You create it on the project page ([Robot Systems and Robot Worlds](../../projects/files/index.md)). Nodes, ports and node types are explained in [Key Concepts](../../get_started/key_concepts/index.md).
+A Robot System drives robots in the project's active Robot World ([Connect to the World](../world_connection/index.md)). You create it on the project page ([Robot Systems and Robot Worlds](../../projects/files/index.md)). Nodes, ports and node types are explained in [Key Concepts](../../get_started/key_concepts/index.md).
 
 ---
 
@@ -34,8 +34,8 @@ The Station has two pages for the same Robot System:
 | | Edit page | Live page |
 | :--- | :--- | :--- |
 | Badge | **EDIT** | **LIVE**, with how long the Station has been live |
-| The Station | Inactive: nothing runs and no credits are used | Active: it uses credits ([Credits and Usage](../../account/billing/index.md)) |
-| What you can do | Add, connect, rename and delete nodes; set parameters; select Store apps | Upload controller documents while their nodes are stopped, start nodes, read their logs and open the operator UIs |
+| The Station | Inactive: nothing runs and no credits are used | Active: it uses credits ([Billing and Usage](../../account/billing/index.md)) |
+| What you can do | Add, connect, rename and delete nodes; give them their documents and settings; select Store apps | The same, while the nodes concerned are stopped; start and stop nodes, read their logs and open the operator UIs |
 | Button | **Go live** | **Stop live** |
 
 <figure markdown="span">
@@ -59,7 +59,7 @@ The Station has two pages for the same Robot System:
 | Canvas | The node cards and their connections. At the bottom: zoom, **Fit view**, **Auto layout**, and folding or unfolding all cards. |
 | Inspector | The selected node: name, module and state, **Connection**, **Parameters** and settings, **Logs** (Live page only) and **Activity** |
 
-The Sodero mark at the top left opens the Station menu: **Back to Sodero Cloud**, **Libraries** (**My Library**, **Project Library**), **Theme** (**Midnight** or **Twilight**), **Help & Feedback** and **About Stellar Station**.
+The Sodero mark at the top left opens the Station menu: **Back to Sodero Cloud**, **Libraries › Project Library**, **Theme** (**Midnight** or **Twilight**), **Help & Feedback** and **About Stellar Station**. **Project Library** opens the project library: the files that everyone in the project shares, such as documents and graph files ([Libraries](../../projects/libraries/index.md)).
 
 !!! idea "**Tip:** Right-click the empty canvas to add a node, and right-click a node for its actions."
 
@@ -70,7 +70,7 @@ The Sodero mark at the top left opens the Station menu: **Back to Sodero Cloud**
 | What | Where it is kept |
 | :--- | :--- |
 | Changes to the graph | Saved automatically on both pages. The toolbar shows **Saving…**, then **Saved**; if a save fails, it shows **Retry save**. Changes made on the Live page stay after **Stop live**. |
-| Documents and settings | With the Robot System. The Station saves them when it is deactivated and restores them when it is activated. Upload robot documents from the Live page ([Documents and Settings](../documents/index.md)). |
+| Documents and settings | With the Robot System, whether you give them on the Edit page or on the Live page. The Station saves them when it is deactivated and restores them when it is activated ([Documents and Settings](../documents/index.md)). |
 | Store apps and your modules | Recorded with the Robot System and installed each time the Station starts ([Apps and Packages](../apps/index.md)) |
 | The whole Robot System | **Download local copy** on the project page saves it as an `.sdr` file ([Download a Local Copy](../../projects/projects/index.md#6-download-a-local-copy)) |
 
@@ -91,9 +91,9 @@ Sodero Cloud gives each Station its own share of CPU and memory. The project pag
 ```mermaid
 flowchart LR
  A["Select apps"] --> B["Add and connect nodes"]
- B --> C["Go live"]
- C --> D["Upload and confirm documents"]
- D --> E["Run World and start nodes"]
+ B --> C["Give the nodes their documents"]
+ C --> D["Connect to the World"]
+ D --> E["Go live and start nodes"]
  E --> F["Open the operator UI"]
 ```
 
@@ -102,8 +102,8 @@ flowchart LR
 | Install the apps that your nodes run | [Apps and Packages](../apps/index.md) |
 | Add nodes and connect their ports | [Build the Graph](../graph/index.md) |
 | Give the nodes their documents and settings | [Documents and Settings](../documents/index.md) |
-| Start nodes, read their state and logs | [Run and Monitor](../run/index.md) |
-| Connect the robots to the World | [Drive Robots in the World](../world_connection/index.md) |
+| Name the robots and match their joints to the World | [Connect to the World](../world_connection/index.md) |
+| Go live, run the World, start nodes, read their state and logs | [Start and Monitor Nodes](../run/index.md) |
 | Drive and teach the robots | [Strider](../../operate/strider/index.md), [Motion Studio](../../operate/motion_studio/index.md), [Articulation](../../operate/articulation/index.md) |
 
-For a first walkthrough with a simulated robot, follow the [Quick Start](../../get_started/quick_start/index.md).
+The [Quick Start](../../get_started/quick_start/index.md) builds and runs a World. Its last section, [Next: Connect a Robot System](../../get_started/quick_start/index.md#next-connect-a-robot-system), and the pages above take you on to a Robot System that drives a robot in that World.

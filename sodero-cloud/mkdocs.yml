@@ -12,10 +12,11 @@ nav:
 - Account and Workspaces:
   - Sign In and Account: account/sign_in/index.md
   - Workspaces and People: account/workspaces/index.md
-  - Credits and Usage: account/billing/index.md
+  - Billing and Usage: account/billing/index.md
 - Projects and Files:
   - Projects: projects/projects/index.md
   - Robot Systems and Robot Worlds: projects/files/index.md
+  - Activate and Run: projects/activate_run/index.md
   - Libraries: projects/libraries/index.md
   - Share and Collaborate: projects/sharing/index.md
 - Build a World:
@@ -26,10 +27,9 @@ nav:
   - Apps and Packages: station/apps/index.md
   - Build the Graph: station/graph/index.md
   - Documents and Settings: station/documents/index.md
-  - Drive Robots in the World: station/world_connection/index.md
+  - Connect to the World: station/world_connection/index.md
 - Run and Monitor:
-  - Activate and Run: projects/activate_run/index.md
-  - Run and Monitor Nodes: station/run/index.md
+  - Start and Monitor Nodes: station/run/index.md
   - Theater: worlds/theater/index.md
 - Operate Robots:
   - Strider: operate/strider/index.md
@@ -41,7 +41,7 @@ nav:
 - Reference:
   - Compatibility: reference/compatibility/index.md
   - Limits and Defaults: reference/limits/index.md
-  - Documentation Changes: CHANGELOG.md
+  - Changelog: CHANGELOG.md
 plugins:
 - mike:
     deploy_prefix: sodero-cloud
@@ -62,6 +62,7 @@ plugins:
       Projects and Files:
       - projects/projects/index.md
       - projects/files/index.md
+      - projects/activate_run/index.md
       - projects/libraries/index.md
       - projects/sharing/index.md
       Build a World:
@@ -74,7 +75,6 @@ plugins:
       - station/documents/index.md
       - station/world_connection/index.md
       Run and Monitor:
-      - projects/activate_run/index.md
       - station/run/index.md
       - worlds/theater/index.md
       Operate Robots:

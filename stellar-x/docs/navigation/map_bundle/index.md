@@ -6,7 +6,7 @@ A **map bundle** (`.nav`) is one file that carries the map of one site together 
 | :--- | :--- |
 | Load a finished bundle, such as the warehouse example | This page |
 | Make a bundle for your own site | [Create a Map from Your Site](../create_map/index.md) |
-| Look up every file, key and message of the format | [Map Bundle Format](../map_bundle_format/index.md) |
+| Look up every file and key of the format, and the messages of its check | [Map Bundle Format](../map_bundle_format/index.md) |
 
 Stellar Station does not build maps on the robot; there is no SLAM. A bundle is made beforehand from a 3D model or a 3D scan of the site.
 
@@ -14,7 +14,7 @@ Stellar Station does not build maps on the robot; there is no SLAM. A bundle is 
 
 ## 1. What You Need
 
-- **The bundle file**, for example [warehouse.nav.tgz](../simulation_tutorial/files/warehouse.nav.tgz) of [Navigate in Simulation](../simulation_tutorial/index.md). The Station page accepts names ending in `.tgz`; the CLI needs a name ending in `.nav`. Both are the same gzip-compressed tar, so you can copy `site.nav.tgz` to `site.nav`.
+- **The bundle file**, for example [warehouse.nav.tgz](../simulation_tutorial/files/warehouse.nav.tgz) of [Navigate in Simulation](../simulation_tutorial/index.md). The Station page accepts an archive of the bundle folder with a name ending in `.tar.gz`, `.tgz`, `.tar` or `.zip`. The CLI needs a gzip-compressed tar with a name ending in `.nav`: a `.tgz` bundle is such a file, so you can copy `site.nav.tgz` to `site.nav`.
 - **A Localizer node** (`sodero.localizer`) and, to drive to goals, a **Navigator node** (`sodero.navigator`), connected as in [Localization and Navigation › Set Up Navigation](../overview/index.md#3-set-up-navigation).
 
 The bundle contains five settings files and three map files:

@@ -1,6 +1,6 @@
 # 3D Model Creation
 
-This tutorial assembles the 3D model of a robot arm for display in Stellar Designer, Motion Studio and the Station. **It is optional.** The model is for visualization only: the kinematics come from the DH parameters of the `.sdd` document, not from the model, and every robot runs without one. You can skip this page and add a model later.
+This tutorial assembles the 3D model of a robot arm for display in Stellar Designer and Motion Studio. **It is optional.** The model is for visualization only: the kinematics come from the DH parameters of the `.sdd` document, not from the model, and every robot runs without one. You can skip this page and add a model later.
 
 The example is a 6-axis manipulator. Download its parts and unzip them:
 
@@ -148,7 +148,7 @@ For your own robot, the parts may not line up with the joint axes of the DH para
 
 ### Joint Axes
 
-- Set the rotation axis of each joint `Jn` according to its DH parameters.
+- Stellar Designer turns each `Jn` about one of its own local axes: the axis of the joint's **Joint Type** in Stellar Designer (**Rotation X**, **Rotation Y** or **Rotation Z**). Orient each `Jn` so that this axis is the joint's axis of rotation.
 - Rotate in the joint's local axes, not in the world axes.
 
 ---
@@ -175,6 +175,6 @@ The finished files of this example: **[.blend](models/example_manipulator_assemb
 
 ## 5. Load the Model in Stellar Designer
 
-Open the robot's document in Stellar Designer, click **Display** in the 3D view and choose **Load.glb** ([Stellar Designer](../introduction/index.md#display-menu)). Switch **Representation** to **3D Model**: each link moves with its joint when you jog the joints in **Robot Structure**. Motion Studio and the Station then show the robot with this model.
+Open the robot's document in Stellar Designer, click **Display** in the 3D view and choose **Load.glb** ([Stellar Designer](../introduction/index.md#display-menu)). Switch **Representation** to **3D Model**: each link moves with its joint when you jog the joints in **Robot Structure**. Motion Studio then shows the robot with this model.
 
 !!! info "Stellar Designer uses only the `.glb` file."

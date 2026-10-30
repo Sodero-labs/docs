@@ -1,4 +1,4 @@
-# Isaac Bridge Installation
+# Install Isaac Bridge { #isaac-bridge-installation }
 
 **Isaac Bridge** is the Isaac Sim extension that connects Isaac Sim to the gateways of Stellar Station. Install it once on the computer that runs Isaac Sim.
 
@@ -6,7 +6,7 @@
 
 ## 1. Download the Extension
 
-Isaac Bridge is open source. Download release **v1.0.0**, the version this documentation is verified with ([Compatibility](../../reference/compatibility/index.md)), from GitHub:
+The source of Isaac Bridge is published on GitHub. Download release **v1.0.0**, the version this documentation is verified with ([Compatibility](../../reference/compatibility/index.md)):
 
 ```sh
 git clone --branch v1.0.0 https://github.com/Sodero-labs/isaac_bridge.git
@@ -70,7 +70,7 @@ Open **Window › Isaac Bridge**. The window shows what the bridge serves. Befor
 | 3 | **Cameras** | Every camera served: name, resolution, frame rate and frames sent |
 | 4 | **Rescan** | Looks for robots and cameras again after you changed the scene while it plays |
 
-The ports open when the scene plays and close when it stops.
+The command and state ports (53333, 53334) open at the first **Play** and stay open until the scene is closed. The camera port (53335) opens at each **Play** when the scene has cameras, and closes at **Stop**.
 
 ---
 
@@ -97,6 +97,6 @@ Stellar X connects to the Isaac Sim computer on **TCP ports 53333, 53334 and 533
 - **Update:** put the new release into the same `isaac_bridge` folder: run `git fetch --tags` and `git checkout RELEASE_TAG` in the folder (a clone of a release tag cannot `git pull`), or replace the folder with the new release's ZIP as in [step 1](#1-download-the-extension). Restart Isaac Sim and check the connection again: the [status window](#3-open-the-status-window) shows the ports **serving** and your robots **bound**, and each simulation gateway logs *Simulator connected.* Check [Compatibility](../../reference/compatibility/index.md) for the versions this documentation is verified with.
 - **Remove:** switch the extension off in **Window › Extensions**, untick **AUTOLOAD**, and remove its folder from **Extension Search Paths**.
 
-The extension's README describes advanced settings, such as camera sizes and rates, which cameras to publish, and the ports.
+The extension's [README](https://github.com/Sodero-labs/isaac_bridge/blob/v1.0.0/docs/README.md){:target="_blank"} describes advanced settings, such as camera sizes and rates, which cameras to publish, and the ports.
 
-Next: [Robot Setup](../robot_setup/index.md).
+Next: [Prepare the Robot](../robot_setup/index.md).

@@ -10,7 +10,7 @@ The test console moves the actuators of one actuator gateway without a robot con
 
 The test console is for a gateway that no robot controller uses.
 
-1. Stop the robot controllers on the Station. The Station does not open a test while a Motion Studio node runs (*a robot controller (CM) is running — stop the robot before opening the test console*), and starting a robot controller (Motion Studio, Strider or Articulation) ends every running test.
+1. Stop the robot controllers on the Station. While a Motion Studio node runs, the Station does not open a test and reports that a robot controller is running. Starting a robot controller (Motion Studio, Strider or Articulation) ends every running test.
 2. Select the gateway and click **Start node**. **Test Stellar Gateway** in its **CONTROL** section unlocks when the gateway runs.
 3. Click **Test Stellar Gateway**. The console opens in a new browser tab.
 4. If the console shows **Gateway not connected**, click **Connect**. The console always connects with the servo off.
@@ -98,7 +98,7 @@ Stop the test before you stop the gateway. While the gateway is stopped, its **C
 
 | Symptom | Cause and fix |
 | :--- | :--- |
-| The Station refuses to open the test: *a robot controller (CM) is running …*, or the console shows **A controller is already running** | A Motion Studio node runs. Stop it, then click **Connect** in the console. |
+| The Station refuses to open the test because a robot controller is running, or the console shows **A controller is already running** | A Motion Studio node runs. Stop it, then click **Connect** in the console. |
 | The console shows **Gateway not connected** | Click **Connect**. If it does not connect, check that the gateway is **Operating**. |
 | The cards show **Enable**, but the gateway's log shows *Servo ON failed* | A drive did not enable. Check its STO and enable inputs, the emergency stop and its main power, then click **Servo OFF** and **Servo ON**. |
 | An actuator does not react to a slider | The slider does not belong to the actuator's drive mode, or the servo is off. |

@@ -8,11 +8,11 @@ This page installs, updates and removes module packages. To build a package your
 
 ## 1. The Modules Page
 
-Click **Modules** in the left sidebar. The page lists the modules that the nodes of your system use.
+Click **Modules** in the left sidebar. The page lists the built-in modules and the module packages you installed, including modules that no node uses yet.
 
 <figure markdown="span">
   ![Modules page](images/modules_page.png){ width="1000" }
-  <figcaption>Modules used in this system</figcaption>
+  <figcaption>The Modules page</figcaption>
 </figure>
 
 | No. | Item | Description |

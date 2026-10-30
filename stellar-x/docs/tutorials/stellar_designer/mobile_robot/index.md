@@ -36,16 +36,23 @@ Step **01 Chassis Structure** ① shows the body and the wheels of the base.
 
 | Field | Meaning |
 | :--- | :--- |
-| **Template** | The drive type |
+| **Template** | The drive type of the template, for example `skid_steer_4` (read-only) |
 | **Length**, **Width**, **Height** | Outer dimensions of the body |
 | **Base Origin Z** | Height of the robot's base frame above the floor (normally the wheel radius) |
 | **Track Width** | Distance between the left and right wheels of a differential drive |
 
-**Wheels** ③ (`Wheel-fl`, `Wheel-fr`, `Wheel-rl`, `Wheel-rr`):
+**Wheels** ③: one card per wheel, for example **Wheel-fl**. The template sets the wheel names and their roles:
+
+| Template | Wheels | Role |
+| :--- | :--- | :--- |
+| Differential drive 2WD, MiR250 differential | `left`, `right` | `drive` |
+| Skid steer 4WD, Mecanum 4WD | `fl`, `fr`, `rl`, `rr` | `drive` |
+| Swerve 4WD | `fl`, `fr`, `rl`, `rr` | `drive_steer` |
+| Ackermann | `front_left`, `front_right`, `rear_left`, `rear_right` | `steer` at the front, `drive` at the rear |
 
 | Field | Meaning |
 | :--- | :--- |
-| **Role** | `drive` (driven), `steer` (steered), `drive + steering`, or `caster` (passive) |
+| **Role** | Read-only, set by the template: `drive` (driven), `steer` (steered) or `drive_steer` (driven and steered) |
 | **Radius**, **Width** | Wheel size |
 | **Offset X**, **Offset Y**, **Offset Z** | Wheel position relative to the base frame (X forward, Y left) |
 

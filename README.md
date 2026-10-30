@@ -33,27 +33,24 @@ manual go to `shared/base.yml`; the header and page templates are in `shared/the
 
 Push a tag named `<product>/<version>`. The `publish site` workflow builds that product's manual
 with mike, deploys it to `/<product>/<version>/`, points `/<product>/latest/` to it, and publishes
-`home/` to the root. On the first product release, it also moves the three legacy Stellar X versions under `/stellar-x/`, preserving their version list and redirecting the old addresses. The existing Git tags are unchanged.
+`home/` to the root.
 
 ```bash
-git tag sodero-cloud/v1.0.0 && git push origin sodero-cloud/v1.0.0
 git tag stellar-x/v2.0.1 && git push origin stellar-x/v2.0.1
+git tag sodero-cloud/v1.0.1 && git push origin sodero-cloud/v1.0.1
 ```
 
-To publish a corrected build of an existing version, move its tag (`git tag -f …` and
-`git push -f origin <tag>`). The tags `v1.0.0`, `v1.0.1` and `v2.0.0` are the Stellar X releases from
-before the split and no longer trigger a build.
-
-### Moving the site to product folders (once)
-
-The first product release performs this migration automatically when the legacy root version list exists. The following commands are for a local preview or manual recovery.
-
-Before the split, the Stellar X versions were deployed at the root of `gh-pages`
-(`/v2.0.0/`, `/latest/`). `tools/migrate_pages.py` moves them under `/stellar-x/`, leaves a redirect
-page at every old page address, and publishes `home/`; `home/404.html` forwards any other old
-address. Try it on a copy of the branch before running it with `--push`:
+Publish every change as a new version: raise the patch number and add an entry to the product's
+`CHANGELOG.md`. To take a version off the site, delete it with mike:
 
 ```bash
-git fetch origin gh-pages && git branch -f preview origin/gh-pages
-python3 tools/migrate_pages.py --branch preview
+mike delete --config-file stellar-x/mkdocs.yml --push v2.0.1
 ```
+
+`home/404.html` sends the addresses of a removed version to the same page of the latest version.
+
+### Addresses from before the product split
+
+Before the split, the Stellar X manual was deployed at the root of `gh-pages` (`/v2.0.0/`, `/latest/`).
+Those addresses now forward to `/stellar-x/`. `tools/migrate_pages.py` made that move once and is kept
+for recovery. The tags `v1.0.0`, `v1.0.1` and `v2.0.0` are from that time and no longer trigger a build.

@@ -65,7 +65,7 @@ The bridge **listens** on three ports and the controller's gateways **connect** 
 | Network | The sensor computer and Stellar X on the same LAN; a wired link is recommended |
 | Clocks | Synchronized to within about 20 ms while frames carry their capture time (the default) |
 | Firewall | Inbound TCP ports 53333–53335 on the sensor computer open to the controller |
-| IMU address | Only for an IMU stream: the controller's IMU gateway connects to a sensor address that Sodero support sets for the unit. Ask Sodero support to set it to the sensor computer before you connect the IMU ([IMU](#imu)). |
+| Simulator address | Only for an IMU stream: the IMU gateway has no address field and connects to the simulator address set for the controller, which must be the sensor computer ([Addresses Set for the Controller](../simulation/index.md#addresses-set-for-the-controller)). |
 
 **Bandwidth.** RGB-D frames travel uncompressed: about 61 Mbit/s at 424 × 240 and 15 fps, about 185 Mbit/s at 640 × 480 and 15 fps, and about 370 Mbit/s at 640 × 480 and 30 fps. IMU samples and wheel messages add only a few Mbit/s. Use a wired link, ideally Gigabit Ethernet, for the higher settings.
 
@@ -285,7 +285,7 @@ Start with the bridge running and `listen` showing its streams, then open the St
 2. In **IMU SETTINGS**, check that **Robot in World** is the bridge's `robot_name` (a new IMU gateway starts with its node name) and click **Save settings**.
 3. Start the gateway.
 
-!!! info "The IMU gateway has no address field: it connects to the sensor address that Sodero support sets for the unit ([Requirements](#2-requirements))."
+!!! info "The IMU gateway has no address field: it connects to the simulator address set for the controller, which must be the sensor computer ([Requirements](#2-requirements))."
 
 ### Wheels (Optional)
 
@@ -317,9 +317,9 @@ The bridge sends camera and IMU data in the sensors' own frames. Where the senso
 | Camera gateway: `… publishes frames of camera(s) 'tb3' but none of camera '…'` | **Camera name** differs from `robot_name` | Set **Camera name** to `robot_name`, then Stop and Start |
 | Camera gateway: `Frames … are stale or carry capture times that do not match this Station's clock (clock skew?)` | The clocks differ: frames look more than 20 ms in the future or more than 2 s old | Synchronize the clocks with NTP, or set `send_capture_time: false` and restart the bridge |
 | Visual odometry drifts or the Localizer does not fit the map | Field-of-view intrinsics instead of the calibrated ones, or values for another resolution | Upload the intrinsics from the bridge's log line for the current resolution |
-| The IMU gateway does not start: `Start the project World to provide the simulation IMU endpoint.` | No simulator/sensor address is configured for the unit | Ask Sodero support to set it to the sensor computer |
-| The IMU gateway runs, but no IMU data arrives | **Robot in World** differs from `robot_name`, the bridge has no `imu` stream (`state -`), or the unit's address points to another computer | Fix the name or the stream; check the address with Sodero support |
+| The IMU gateway does not start: `Start the project World to provide the simulation IMU endpoint.` | No simulator address is set for the controller | Have it set to the sensor computer ([Addresses Set for the Controller](../simulation/index.md#addresses-set-for-the-controller)) |
+| The IMU gateway runs, but no IMU data arrives | **Robot in World** differs from `robot_name`, the bridge has no `imu` stream (`state -`), or the controller's simulator address is another computer | Fix the name or the stream. The IMU gateway's log shows the address it connects to. |
 | The wheels do not move | No `wheels` stream (`command -`), a different **Robot name**, commands that are not velocity commands (`modes … are not velocity control`), or the OpenCR motor power is off (`wheel motors are not powered`) | Add the stream, fix the name, drive Strider in **Twist** mode, switch on the motor power |
 | The wheels stop while driving; log: `no wheel command for 0.50 s: wheels stopped` | The safety watchdog: commands paused longer than `command_timeout_s` | Use a wired link; raise `command_timeout_s` only with care |
 | The `camera_pair` rate stays below `fps` | Not enough bandwidth (Wi-Fi), a USB 2 port or a busy sensor computer | Use a wired link and a USB 3 port, or lower `width`, `height` or `fps` |
-| **Camera host** cannot be edited | The camera address is set for this unit | Ask Sodero support to point it at the sensor computer |
+| **Camera host** cannot be edited | A camera address is set for the controller; the gateway uses it in place of **Camera host** | Have it set to the sensor computer ([Addresses Set for the Controller](../simulation/index.md#addresses-set-for-the-controller)) |

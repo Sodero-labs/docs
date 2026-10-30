@@ -1,6 +1,6 @@
 # Quick Start
 
-You will build a small robot system on Stellar X and drive a simulated **Clearpath Jackal** in NVIDIA Isaac Sim with Strider. It takes about 15 minutes once Stellar X is on your network and Isaac Sim with the Isaac Bridge extension is installed (see **Before You Start**). You will:
+You will build a small robot system on Stellar X and drive a simulated **Clearpath Jackal** in NVIDIA Isaac Sim with Strider. It takes about 15 minutes once Stellar X is on your network and Isaac Sim with the Isaac Bridge extension is installed (see [Before You Start](#before-you-start)). You will:
 
 1. add an actuator gateway and a Strider controller on Stellar Station,
 2. load their design documents,
@@ -25,8 +25,12 @@ flowchart TB
 | You need | Details |
 | :--- | :--- |
 | Stellar X | Powered on and reachable from your PC ([Stellar X › Network Configuration](../../hardware_setup/stellar_series/stellar_x/index.md#4-network-configuration), [Network Settings](../../hardware_setup/stellar_series/network_settings/index.md)). In this guide its address is `192.168.60.18`, an example address on a lab network; use your controller's address instead, for example `10.0.0.1` on a direct cable. |
-| A PC with NVIDIA Isaac Sim | Isaac Sim 6.0 with the Isaac Bridge 1.0.0 extension installed and enabled ([Isaac Bridge Installation](../../virtual_simulation/extension_installation/index.md)), on the same network as Stellar X. In this guide its address is `192.168.60.20`. |
+| A PC with NVIDIA Isaac Sim | Isaac Sim 6.0 with the Isaac Bridge 1.0.0 extension installed and enabled ([Install Isaac Bridge](../../virtual_simulation/extension_installation/index.md)), on the same network as Stellar X. In this guide its address is `192.168.60.20`. |
 | Example files | [jackal.gw](files/jackal.gw) (gateway), [jackal.sddm](files/jackal.sddm) (Strider) and [jackal_warehouse.zip](files/jackal_warehouse.zip) (Isaac Sim scene, 6 MB). Download all three and extract the scene. |
+
+!!! info "The Isaac Sim PC must accept TCP connections from Stellar X on ports 53333–53335. Allow them in its firewall ([Install Isaac Bridge](../../virtual_simulation/extension_installation/index.md#4-allow-the-ports-in-the-firewall))."
+
+!!! idea "**Tip:** If you will continue with [Navigate in Simulation](../../navigation/simulation_tutorial/index.md), start Isaac Sim for this guide with the camera setting of its [Step 1](../../navigation/simulation_tutorial/index.md#step-1-prepare-isaac-sim). Then you do not need to restart Isaac Sim later."
 
 ---
 
@@ -58,13 +62,14 @@ flowchart TB
     </figure>
 
 3. In **TARGET**, click **Change** and set the two values:
-    - **Robot name**: `jackal`. It must equal the robot's prim name in Isaac Sim (`/World/jackal`).
-    - **Sim host**: the IP address of your Isaac Sim PC.
+    - **Robot name** ①: `jackal`. It must equal the robot's prim name in Isaac Sim (`/World/jackal`).
+    - **Sim host** ②: the IP address of your Isaac Sim PC.
 
-    Click **Done**.
+    Click **Done** ③.
 
     <figure markdown="span">
       ![Target](images/target.png){ width="331" }
+      <figcaption>TARGET: ① Robot name ② Sim host ③ Done</figcaption>
     </figure>
 
 !!! warning "If the robot name differs from the prim name in Isaac Sim, the gateway waits forever and the robot never moves."
@@ -105,11 +110,7 @@ flowchart TB
   <figcaption>Isaac Bridge status: ① ports serving ② robots bound ③ cameras ④ Rescan</figcaption>
 </figure>
 
-!!! info "The Isaac Sim PC must accept TCP connections from Stellar X on ports 53333–53335. Allow them in its firewall ([Isaac Bridge Installation](../../virtual_simulation/extension_installation/index.md#4-allow-the-ports-in-the-firewall))."
-
-!!! idea "**Tip:** To use your own robot instead, prepare its scene as described in [Robot Setup](../../virtual_simulation/robot_setup/index.md): its articulation prim name is its robot name, and its joints, in order, are the gateway's actuators."
-
-!!! idea "**Tip:** If you will continue with [Navigate in Simulation](../../navigation/simulation_tutorial/index.md), start Isaac Sim with the camera setting of its [Step 1](../../navigation/simulation_tutorial/index.md#step-1-prepare-isaac-sim) now. Then you do not need to restart Isaac Sim later."
+!!! idea "**Tip:** To use your own robot instead, prepare its scene as described in [Prepare the Robot](../../virtual_simulation/robot_setup/index.md): its articulation prim name is its robot name, and its joints, in order, are the gateway's actuators."
 
 ---
 

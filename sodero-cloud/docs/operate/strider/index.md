@@ -17,7 +17,7 @@ Two nodes are involved:
 flowchart LR
     S["sodero.strider"] -- mobile_base --> M["sodero.mlc.jackal<br>jackal.sddm"]
     M -- servo_link --> G["sodero.actuator_gateway.jackal<br>jackal.gw"]
-    S -. localization .-> L["sodero.localizer"]
+    S -. localization .-> L["sodero.icp_localizer"]
     S -. navigation .-> N["sodero.navigator"]
 ```
 
@@ -27,15 +27,15 @@ flowchart LR
 
 1. In the Station's **Store**, install `sodero.actuator_gateway`, `sodero.mlc` and `sodero.strider` ([Apps and Packages](../../station/apps/index.md)).
 2. Add the gateway, the base controller and Strider. Connect the controller's `servo_link` to the gateway, and Strider's `mobile_base` to the base controller ([Build the Graph](../../station/graph/index.md)).
-3. Go live and wait until the apps are installed. Keep the nodes stopped.
-4. Upload the gateway's `.gw` and the controller's `.sddm` document ([Documents and Settings](../../station/documents/index.md)).
-5. Check the robot name and the actuator mapping ([Drive Robots in the World](../../station/world_connection/index.md)), run the World, then start the gateway, the controller and Strider, in this order.
+3. Upload the gateway's `.gw` and the controller's `.sddm` document ([Documents and Settings](../../station/documents/index.md)).
+4. Set the gateway's **Robot name** and check the actuator mapping ([Connect to the World](../../station/world_connection/index.md)).
+5. Run the World, go live, then start the gateway, the controller and Strider, in this order ([Start and Monitor Nodes](../../station/run/index.md)).
 
 ---
 
 ## 2. Open Strider
 
-On the Live page, right-click the running `sodero.strider` node and choose **Open …** ([Run and Monitor Nodes](../../station/run/index.md#3-start-restart-or-stop-one-node)). Strider opens in a new tab. If its session expires, open it again from the node.
+On the Live page, right-click the running `sodero.strider` node and choose **Open …** ([Start and Monitor Nodes](../../station/run/index.md#3-start-restart-or-stop-one-node)). Strider opens in a new tab. If its session expires, open it again from the node.
 
 ---
 
@@ -91,7 +91,7 @@ On the **Drive** page:
 
 ## 5. Navigation Page
 
-The **Navigation** page works when Strider's `localization` and `navigation` ports are connected to a running localizer and navigator, and the Station has a map bundle ([Documents and Settings](../../station/documents/index.md#2-kinds-of-documents)).
+The **Navigation** page works when Strider's `localization` and `navigation` ports are connected to a running localizer and navigator, and the Station has a map bundle. To set them up, install `sodero.icp_localizer` and `sodero.navigator` from the Store, connect the localizer's `camera` port to the robot's camera gateway and the navigator's `mobile_base` and `localization` ports to the base controller and the localizer, and upload the map bundle ([Build the Graph › Common Connections](../../station/graph/index.md#common-connections), [Documents and Settings](../../station/documents/index.md#2-kinds-of-documents)).
 
 | Card | Contents |
 | :--- | :--- |
@@ -121,6 +121,6 @@ If the localization status is not **Healthy**:
 
 ## 6. Control Strider from Programs
 
-- **AI agents** drive the base with the `strider` tools: state, servo, velocities, stops and fault reset ([AI Agents](../../connect/ai_agents/index.md)).
+- **AI agents** drive the base with the `station.strider` tools: state, servo, velocities, stops and fault reset ([AI Agents](../../connect/ai_agents/index.md)).
 - **Your own module** on the Station connects to the base controller's `mobile_base` port ([Apps and Packages](../../station/apps/index.md)).
 - **Your own tools** on your computer reach the Station API through the [Project VPN](../../connect/project_vpn/index.md).

@@ -1,8 +1,8 @@
 # Map Bundle Format
 
-This page specifies the map bundle (`.nav`) completely: its layout, every file, every accepted key with its type, range and default, and the messages of the bundle check. It is a reference for people who build bundles. To load a finished bundle, see [Load and Configure a Map](../map_bundle/index.md); to make a bundle for your own site, see [Create a Map from Your Site](../create_map/index.md).
+This page specifies the map bundle (`.nav`): its layout, every file, every accepted key with its type, range and default, and the messages of the bundle check. It is a reference for people who build bundles. To load a finished bundle, see [Load and Configure a Map](../map_bundle/index.md); to make a bundle for your own site, see [Create a Map from Your Site](../create_map/index.md).
 
-The frames `map`, `odom`, `base_link` and the camera's optical frame are explained in [Create a Map from Your Site › Coordinate Frames](../create_map/index.md#1-choose-the-coordinate-frames).
+The frames `map`, `odom`, `base_link` and the camera's optical frame are explained in [Localization and Navigation › Coordinate Frames](../overview/index.md#2-coordinate-frames).
 
 ---
 
@@ -30,7 +30,7 @@ site.nav/              optional top folder, any name
 | `map/MAP_ID.pgm`, `map/MAP_ID.yaml` | Navigator and the map views |
 
 - **All eight files are required**, and no other file is accepted. `MAP_ID` is the `map_id` of `meta.yaml`: the Localizer and the Navigator open the grid files by this name.
-- **Archive:** a gzip-compressed tar. The files sit at its root or in one top folder, which is dropped on upload. The file name does not change the format: `site.nav` and `site.nav.tgz` can be the same file.
+- **Archive:** a gzip-compressed tar. The files sit at its root or in one top folder, which is dropped on upload. The file name does not change the format: `site.nav` and `site.nav.tgz` can be the same file. The Station page also accepts the bundle folder as a `.tar` or `.zip` archive; the CLI accepts only the gzip-compressed tar.
 - **Limits:** the archive and its unpacked contents at most 64 MiB each, each YAML file at most 1 MiB, at most 128 archive entries including folders.
 - **Names:** at most 160 characters of letters, digits, `_`, `-`, `.` and `/`; no hidden names (starting with `.`) and no links. Map files sit directly in `map/` and end in `.ply`, `.pgm` or `.yaml` (`.yml` is refused).
 - **YAML:** plain mappings with unique keys; unknown keys are refused. Quote dates and times, and write exponents with a decimal point: `1.0e-6` is a number, `1e-6` is read as text.
@@ -138,7 +138,7 @@ y: 2.3881
 yaw: 0.0
 ```
 
-The Localizer starts from this pose when it has no confirmed pose on this map. Once it has localized, it restarts from its last confirmed pose on the same `map_id`. A pose set with **Set Initial Pose** on Strider's Navigation page, or with the `localization.set_initial_pose` tool, replaces both. Give a changed map a new `map_id` so that an old pose is not reused.
+The Localizer uses this pose only when it has no confirmed pose on the bundle's `map_id`, so give a changed map a new `map_id` ([Load and Configure a Map › Start and Set the Initial Pose](../map_bundle/index.md#4-start-and-set-the-initial-pose)).
 
 ### localizer.yaml
 
@@ -321,7 +321,8 @@ The **Template** column lists the values of the reference navigator configuratio
 
 | Message | Cause | Fix |
 | :--- | :--- | :--- |
-| `Use a gzip .nav archive no larger than 64 MiB.`, `Navigation data exceeds 64 MiB.` | Not gzip-compressed (zip, plain tar), or too large | Pack with `tar -czf`; fewer points, `float` instead of `double` |
+| `Use a gzip .nav archive no larger than 64 MiB.`, `Navigation data exceeds 64 MiB.`, `Expanded navigation archive exceeds 65 MiB.` | Not gzip-compressed (zip, plain tar), or too large, packed or unpacked | Pack with `tar -czf`; fewer points, `float` instead of `double` |
+| `Malformed navigation archive.`, `Incomplete navigation archive.`, `Archive metadata exceeds supported bounds.` | The archive is damaged or cut short, or its tar headers are too large | Pack the folder again with `tar -czf` and copy the whole file |
 | `Unsafe, duplicate or unsupported navigation archive member.` | A `./` entry, hidden name, link, unsupported character, name over 160 characters or more than 128 entries | Pack the folder by name; remove hidden files and links |
 | `A .nav bundle needs meta, localizer, navigator, extrinsics and initial_pose YAML files.` | A YAML file is missing, or the files sit in more than one top folder | Add the file; use one top folder |
 | `Navigation bundles accept only their five YAML documents and map PLY/PGM/YAML data.`, `Include exactly the referenced PLY, PGM and occupancy YAML map files.` | An extra or unreferenced file, a `.yml` or upper-case extension, or a folder inside `map/` | Remove it, or fix the reference |
@@ -330,16 +331,25 @@ The **Template** column lists the values of the reference navigator configuratio
 | `Occupancy image or threshold values are inconsistent.` | The grid YAML `image` names another file, or `free_thresh` is not below `occupied_thresh` | Fix the name (no folder) or the thresholds |
 | `map: unknown or missing fields.` | The grid YAML has an extra key such as `mode`, or lacks one | Use exactly the six keys |
 | `Use a P2/P5 PGM with at most 16 million pixels and maximum 255.`, `PGM pixel count does not match its dimensions.` | Not an 8-bit PGM, too many pixels, or missing or extra bytes | Save an 8-bit P5 PGM |
-| `PLY must contain only point vertices, optional normals and RGB.`, `PLY requires XYZ and 1–2 million points.` | Faces, other elements or properties, an `obj_info` line, no x, y, z, or too many points | Export points only, with supported properties; downsample |
+| `Invalid PGM header.`, `Invalid PGM comment.`, `Invalid PGM dimensions.`, `Missing PGM pixels.`, `Invalid PGM pixels.` | A damaged header, a comment line without a line end, a width or height that is not a number, no pixel data, or a P2 pixel value outside 0 to 255 | Save the grid again as an 8-bit P5 PGM |
+| `PLY must contain only point vertices, optional normals and RGB.`, `PLY requires XYZ and 1–2 million points.`, `Duplicate PLY property.`, `Invalid PLY point count.` | Faces, other elements or properties, an `obj_info` line, a property listed twice, no x, y, z, a point count that is not a number, or too many points | Export points only, with supported properties; downsample |
 | `PLY requires a bounded LF header.`, `PLY point data length is inconsistent.` | CRLF line endings, or point data that does not match the header | Export again with LF line endings |
+| `PLY header must be ASCII.`, `Use ASCII or little-endian binary PLY 1.0.` | Characters other than ASCII in the header, or another format such as `binary_big_endian` | Export a binary little-endian (or ASCII) PLY |
+| `PLY point count is inconsistent.`, `PLY point data must be ASCII.`, `Invalid PLY point value.`, `PLY points must contain finite bounded values.` | An ASCII PLY whose number of lines differs from `element vertex`, or that holds text that is not a number; a point with missing or extra values, NaN, infinity or a value beyond ±1,000,000 | Export again; remove invalid points |
 | `Use plain YAML data types.`, `Each YAML document must be a mapping.`, `Invalid YAML document.` | An unquoted date or time (for example in `created`), an empty file or a syntax error | Quote dates and times; fix the file |
+| `A YAML member exceeds 1 MiB.` | A YAML file larger than 1 MiB | Keep each YAML file under 1 MiB |
+| `YAML keys must be unique strings.` | A key written twice in one mapping, or a key that is not text, such as a number | Write each key once, as text |
+| `Use finite bounded numbers.` | `.inf`, `.nan` or a number beyond ±1,000,000,000 | Use the ranges on this page |
+| `Configuration nesting or aliases exceed supported bounds.`, `Configuration text exceeds supported bounds.` | YAML nested more than 20 levels deep or with more than 20,000 values, an alias that refers to itself, or a text value over 1,024 characters or with control characters such as tabs | Write plain YAML |
 | `KEY: number outside supported bounds.` | A value out of range, or a number read as text, such as `1e-6` | Use the ranges on this page; write `1.0e-6` |
 | `KEY: unknown or missing fields.` | A misspelled or unsupported key, such as `rpy` in an edge or `footprint` in a costmap | Use only the keys on this page |
 | `KEY: unsupported value.` | A fixed text value changed, `negate` other than 0 or 1, or an unknown `drive` | Restore the value |
+| `KEY: expected boolean.` | A setting that takes `true` or `false` has another value, such as `1` | Write `true` or `false` |
 | `KEY: invalid text.`, `KEY: invalid list length.` | A name with unsupported characters or not starting with a letter; a list with the wrong number of entries | Use letters, digits, `_`, `.` and `-`; 3 entries for `xyz`, `origin` and velocities, 4 for `quat` |
 | `Calibration edges require unique children and unit quaternions.`, `Calibration frames must not contain a cycle.` | A frame is the child of two edges, a parent equals its child, `quat` is not unit length, or the edges form a loop | One edge per child, chained from `base_link`; normalize `quat` |
 | `Minimum depth must be below maximum depth.`, `Lost timeout must follow degraded timeout.`, `Obstacle height bounds are inverted.` | An inconsistent pair of values | Correct the pair |
 | `Navigation metadata requires schema_version: 1.`, `Unknown navigation metadata field.`, `Metadata source.ply must be a filename, not a path.` | Wrong version, an unknown key or a folder in `meta.yaml` | Use the keys above; write file names only |
+| `Metadata must describe its occupancy grid.`, `Metadata provenance must not contain local paths or private platform details.` | `meta.yaml` has no `grid`, or an unknown key under `grid` or `source` | Use only the keys of [meta.yaml](#metayaml) |
 | `Read the current navigation SHA-256 before applying a map.` | The SHA-256 is out of date | Run `sodero navigation get` again |
 | `Use the matching document extension, node ID, current SHA-256 and execute flag.` | The CLI file name does not end in `.nav` | Rename the file, for example to `site.nav` |
 | `… the file name must end with .tar.gz or .tgz or .tar or .zip` | A `.nav` file name on the Station page | Rename the file to `site.nav.tgz` |

@@ -45,8 +45,9 @@ What you can do in simulation:
 | Item | Requirement |
 | :--- | :--- |
 | Isaac Sim | 6.0, on Linux or Windows ([Isaac Sim requirements and installation](https://docs.isaacsim.omniverse.nvidia.com/latest/installation/index.html){:target="_blank"}). Isaac Bridge 1.0.0 is verified with Isaac Sim 6.0 ([Compatibility](../../reference/compatibility/index.md)). |
-| Isaac Bridge | The Sodero extension for Isaac Sim ([Isaac Bridge Installation](../extension_installation/index.md)) |
+| Isaac Bridge | The Sodero extension for Isaac Sim ([Install Isaac Bridge](../extension_installation/index.md)) |
 | Network | Stellar X and the Isaac Sim computer on the same network; Stellar X must reach the Isaac Sim computer on TCP ports 53333–53335 |
+| Simulator address | Only for simulated IMUs. The IMU gateway has no address field: it connects to the simulator address set for the controller, which must be the Isaac Sim computer ([Addresses Set for the Controller](../../gateways/simulation/index.md#addresses-set-for-the-controller)). Actuator and camera gateways have their own address fields. |
 | Clock | Both computers synchronized with a time server (NTP), when you use cameras |
 
 ---
@@ -55,8 +56,8 @@ What you can do in simulation:
 
 | Step | Page |
 | :--- | :--- |
-| 1. Install Isaac Sim and the Isaac Bridge extension | [Isaac Bridge Installation](../extension_installation/index.md) |
-| 2. Prepare the robot in the scene: articulation, name, joint order, cameras | [Robot Setup](../robot_setup/index.md) |
+| 1. Install Isaac Sim and the Isaac Bridge extension | [Install Isaac Bridge](../extension_installation/index.md) |
+| 2. Prepare the robot in the scene: articulation, name, joint order, cameras | [Prepare the Robot](../robot_setup/index.md) |
 | 3. Point the Station's gateways at Isaac Sim and run | [Connect to Stellar Station](../connect_station/index.md) |
 
 !!! idea "**Tip:** The [Quick Start](../../get_started/quick_start/index.md) uses a prepared Jackal scene and its example files. Do step 1 first; the Quick Start then covers steps 2 and 3 for the Jackal."

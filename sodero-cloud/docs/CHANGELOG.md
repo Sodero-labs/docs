@@ -1,20 +1,32 @@
-# Documentation Changes
+# Changelog
 
-## v1.0.1
+<div class="changelog-container" markdown="1">
 
-Documentation release: 29 October 2026.
+<div class="version-block" markdown="1">
 
-- Navigation: **Account and Workspaces** and **Projects and Files** are separate sections.
-- [Strider](operate/strider/index.md), [Motion Studio](operate/motion_studio/index.md) and [Articulation](operate/articulation/index.md): set-up steps from the Store to the operator UI, which opens from the node's menu.
-- [Compatibility](reference/compatibility/index.md): robot documents and apps, moving Robot Systems between Sodero Cloud and Stellar X, browser and rendering.
-- [Quick Start](get_started/quick_start/index.md): pictures of the new World and of the Replace scene dialog, and the steps that connect a Robot System to the World.
+<div class="version-info" markdown="1">
 
-## v1.0.0
+<div class="display-version">v1.0.0</div>
+<div class="display-date">2026.10.30</div>
 
-Documentation release: 27 October 2026.
+</div>
 
-This documentation release introduces the Sodero Cloud portal, World editing and viewing, Station configuration, account and project management, and optional connections.
+<div class="version-content" markdown="1">
 
-- [Quick Start](get_started/quick_start/index.md): create, view, stop and deactivate a World.
-- [Operate Robots](operate/strider/index.md): Strider, Motion Studio and Articulation with robots in a Robot World.
-- [Compatibility](reference/compatibility/index.md): Station releases, documents, and moving Robot Systems between Sodero Cloud and Stellar X.
+## v1.0.0 { #v1-0-0 }
+
+#### Release
+
+* **Get started.** What Sodero Cloud is, its key concepts, and a [Quick Start](get_started/quick_start/index.md) that creates, runs and stops a Robot World. Example files to connect a Robot System to it.
+* **Account, workspaces and projects.** [Sign-in](account/sign_in/index.md), [workspaces and people](account/workspaces/index.md), [billing and usage](account/billing/index.md), [projects](projects/projects/index.md), [Robot Systems and Robot Worlds](projects/files/index.md), [activation](projects/activate_run/index.md), [libraries](projects/libraries/index.md) and [sharing](projects/sharing/index.md).
+* **Worlds.** Build a Robot World in [Studio](worlds/studio/index.md), [prepare it for simulation](worlds/prepare_world/index.md) and watch it run in [Theater](worlds/theater/index.md).
+* **Robot Systems.** Configure [Stellar Station](station/overview/index.md) in the cloud: apps and packages, the node graph, documents and settings, the connection to the World, and running nodes.
+* **Operate robots.** [Strider](operate/strider/index.md), [Motion Studio](operate/motion_studio/index.md) and [Articulation](operate/articulation/index.md) with robots in a Robot World.
+* **Connect and automate.** The [Project VPN](connect/project_vpn/index.md) and [AI agents](connect/ai_agents/index.md).
+* **Reference.** [Compatibility](reference/compatibility/index.md) and [Limits and Defaults](reference/limits/index.md).
+
+</div>
+
+</div>
+
+</div>

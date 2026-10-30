@@ -49,6 +49,7 @@ The Station replaces its graph, robot documents and Station data with the file's
 | :--- | :--- |
 | *This .sdr holds a simulation, not a Station.* | The file is a World (simulation) export. Open it in Sodero Cloud. |
 | *This robot does not have enough free disk space to load this .sdr.* | The unpacked file is too large for the controller's storage. |
+| *This .sdr uses an obsolete document format (…).* | Documents in the file, named in the message, use the format of an earlier Stellar software version. Nothing is loaded. Contact [Sodero support](https://www.sodero.io/contact). |
 
 ---
 

@@ -21,7 +21,7 @@ Theater shows an active Robot World live in your browser: the simulation as it r
 
 | Area | What it holds |
 | :--- | :--- |
-| **Header** | The project and World names; the status, *Ready* once the World is shown; the renderer menu (**RTX Real-Time** ▾ or **WebGPU** ▾); a timer; **Start Theater** or **Stop Theater**; **Resources** ▾; **Share** (link icon); the **Active users** who are watching |
+| **Header** | The project and World names; the status, *Ready* once the World is shown; the renderer menu (**RTX Real-time** ▾ or **WebGPU** ▾); a timer; **Start Theater** or **Stop Theater**; **Resources** ▾; **Share** (link icon); the **Active users** who are watching |
 | **Scene assets** | The top levels of the World, with **Search assets** and the number of assets. **Hide panel** folds it away. |
 | **Viewport** | The running World. **Perspective** ▾ holds camera presets (Perspective, Top, Bottom, Front, Back, Left, Right). **View** ▾ holds **Grid**, **Quality** (resolution and frame rate), **Fit** and **Presentation mode**, which shows the viewport full screen until you press `Esc`. |
 | **Readout** | At the bottom of the viewport, for example *1920x1080 · 60 FPS · Physics RTF 1.00* |
@@ -71,7 +71,7 @@ The **Runtime** dock opens on the right by itself when you select a robot that a
 
 - Everyone who opens an active World watches the same simulation. **Active users** in the header shows who is watching.
 - Each person chooses their own rendering mode and moves their own camera.
-- Each viewer in **RTX Real-time** has a cloud renderer of their own, which uses credits; a viewer in **WebGPU** draws with their own computer's GPU ([Credits and Usage](../../account/billing/index.md)).
+- Each viewer in **RTX Real-time** has a cloud renderer of their own, which uses credits. A viewer in **WebGPU** draws with their own computer's GPU, and your plan may still count that view ([Billing and Usage](../../account/billing/index.md)).
 - **Share** shows the link to this Theater, and **Copy** copies it. The link opens for people who are signed in and have access to the project ([Share and Collaborate](../../projects/sharing/index.md)).
 
 ---

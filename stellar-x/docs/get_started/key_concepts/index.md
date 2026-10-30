@@ -1,6 +1,6 @@
 # Key Concepts
 
-This page explains the building blocks you will meet everywhere in Stellar: the Station, nodes, ports, gateways, controllers and design documents. Read it once before the [Quick Start](../quick_start/index.md); the rest of the documentation uses these terms without explaining them again.
+This page explains the building blocks you will meet everywhere in Stellar: the Station, nodes, ports, gateways, controllers and design documents. Read it once before you follow the [Learning Path](../../tutorials/learning_path/index.md); the rest of the documentation uses these terms without explaining them again.
 
 ---
 
@@ -42,7 +42,7 @@ When you click **Add node** on the Station page, you choose one of four node typ
 | Type | Purpose | Built-in modules |
 | :--- | :--- | :--- |
 | **Gateway** | Connects simulation or hardware to the system | Actuator gateway, IMU gateway, Camera gateway |
-| **Controller** | Defines a robot unit and its control | Motion Studio, Strider, Articulation, Legged locomotion, Localizer, Visual odometry, Navigator |
+| **Controller** | Defines a robot unit and its control | Motion Studio, Strider, Articulation, Localizer, Visual odometry, Navigator, and Legged locomotion (prepared with Sodero support) |
 | **Compound** | Combines several robot units into one system | Your own compound modules |
 | **Application** | Defines robot behaviors and task logic | Your own modules |
 
@@ -56,8 +56,9 @@ Most built-in nodes have an ID of the form `sodero.<kind>.<name>`. You choose th
 | Motion Studio | `sodero.mmc.NAME` |
 | Strider | `sodero.mlc.NAME` |
 | Articulation | `sodero.amc.NAME` |
-| Legged locomotion | `rc.legged_locomotion.NAME` |
 | Visual odometry, Localizer, Navigator | `sodero.visual_odometry`, `sodero.localizer`, `sodero.navigator` (one of each per Station) |
+
+The rules for `NAME` are in [Nodes and Connections › Node Types and Modules](../../station/nodes_and_connections/index.md#node-types-and-modules).
 
 ---
 
@@ -84,7 +85,6 @@ flowchart TB
 | Localizer `odometry` | Strider `odometry` (or Visual odometry) | The localizer follows the robot's motion |
 | Navigator `localization`, `map` | Localizer `localization`, `map` | Where the robot is, and the map to plan on |
 | Navigator `mobile_base` | Strider `mobile_base` | The base the navigator drives |
-| Legged locomotion `imu` | IMU gateway `imu` | Body orientation for walking |
 
 The Station only connects compatible ports, so a wrong connection is refused at once instead of failing later.
 
@@ -114,7 +114,7 @@ Actuator gateways and robot controllers are configured by a **design document**.
 | `.sddm` | Strider | Mobile base: drive type, wheels, limits, actuator mapping |
 | `.sdda` | Articulation | Articulated robot: joints and actuator mapping |
 
-Camera and IMU gateways, visual odometry, the localizer, the navigator and legged locomotion have no design document. They have **settings** that you edit in the node's inspector on the Station page ([Design Documents](../../station/design_documents/index.md#4-settings-of-sensor-and-navigation-nodes)). The localizer and the navigator also use a **map bundle** (`.nav`): one file with the map of the site and their settings ([Load and Configure a Map](../../navigation/map_bundle/index.md)).
+Camera and IMU gateways, visual odometry, the localizer and the navigator have no design document. They have **settings** that you edit in the node's inspector on the Station page ([Design Documents](../../station/design_documents/index.md#4-settings-of-sensor-and-navigation-nodes)). The localizer and the navigator also use a **map bundle** (`.nav`): one file with the map of the site and their settings ([Load and Configure a Map](../../navigation/map_bundle/index.md)).
 
 Your own programs are installed as **modules** (packages) on the [Modules](../../station/modules/index.md) page and run as nodes on the Station.
 
@@ -138,7 +138,7 @@ The recommended workflow follows the same order every time:
 | Node | One program in the Station, such as a gateway, a controller, a sensor or your module |
 | Port | A connection point of a node: REQUIRES (needs) or PROVIDES (offers) |
 | Gateway | A node that connects controllers to actuators or sensors, real or simulated |
-| Controller | A node that controls a robot unit: Motion Studio, Strider, Articulation, Legged locomotion |
+| Controller | A node of the Controller type: a robot controller, such as Motion Studio, Strider or Articulation, or a navigation node (Localizer, Visual odometry, Navigator) |
 | Design document | The configuration file of an actuator gateway or a robot controller: `.gw`, `.sdd`, `.sddm`, `.sdda` |
 | Map bundle | A `.nav` file with the map of a site and the settings of the localizer and the navigator |
 | Module | A program that runs as a node: built in, or your own package installed on the Modules page |

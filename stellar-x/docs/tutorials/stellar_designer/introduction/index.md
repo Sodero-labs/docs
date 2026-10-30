@@ -9,7 +9,7 @@
 | `.sddm` | Wheeled mobile base | Strider | [Mobile Robot (.sddm)](../mobile_robot/index.md) |
 | `.sdda` | Articulated robot driven joint by joint (legged robots, humanoids) | Articulation | [Articulated Robot (.sdda)](../articulation/index.md) |
 
-A 3D model (`.glb`) for display is optional ([3D Model Creation](../3dmodel_creation/index.md)). This page covers the controller documents; gateway documents are edited in the Gateway Designer, the part of Stellar Designer for `.gw` files.
+A 3D model (`.glb`) for display is optional ([3D Model Creation](../3dmodel_creation/index.md)). This page covers the controller documents. Gateway documents (`.gw`) are edited in the [Gateway Designer](../../../gateways/gateway_designer/index.md), the part of Stellar Designer for `.gw` files, described with the gateways.
 
 ---
 
@@ -20,7 +20,7 @@ A 3D model (`.glb`) for display is optional ([3D Model Creation](../3dmodel_crea
 
 Stellar Designer opens in a new tab with the node's document. Changes are saved back to the node automatically; in an Articulation document, click **Save configuration**. **Stop the node before you edit its document**; the new document takes effect the next time the node starts.
 
-If a Motion Studio or Strider node has no document yet, Stellar Designer opens **Create robot definition**: choose a template of the robot type, or **Blank robot** for a manipulator, and click **Create**. An Articulation node starts with a document of one joint.
+If a Motion Studio or Strider node has no document yet, Stellar Designer opens **Create robot definition**: choose a template of the robot type, or **Blank robot** for a manipulator, click **Next**, then **Create**. An Articulation node starts with a document of one joint.
 
 | Robot type | Templates |
 | :--- | :--- |
@@ -54,7 +54,7 @@ You can also import a document you already have with **Import** in the node's **
   <figcaption>The Display menu</figcaption>
 </figure>
 
-**Display** in the 3D view switches between **Skeleton** (joint frames and links as lines) and **3D Model**, and shows or hides **Joint frames**, **Grid** and **Axis gizmo**. **Load.glb** attaches the robot's 3D model, a GLB file, to the document; Motion Studio and the Station then show the robot with it ([3D Model Creation](../3dmodel_creation/index.md)).
+**Display** in the 3D view switches between **Skeleton** (joint frames and links as lines) and **3D Model**, and shows or hides **Joint frames**, **Grid** and **Axis gizmo**. **Load.glb** attaches the robot's 3D model, a GLB file, to the document; Motion Studio then shows the robot with it ([3D Model Creation](../3dmodel_creation/index.md)).
 
 ---
 

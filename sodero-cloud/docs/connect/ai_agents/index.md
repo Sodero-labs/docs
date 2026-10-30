@@ -14,11 +14,11 @@ Connect Claude Code or another AI agent to your Sodero account, then ask it in p
 flowchart TB
     You(["You"]) --> Agent["AI agent<br>on your computer"]
     Agent -- "MCP, with its own sign-in" --> Cloud["Sodero Cloud"]
-    Cloud --> Projects["The projects you approved:<br>Robot Systems, Robot Worlds, files"]
+    Cloud --> Projects["The workspaces and projects of your account:<br>Robot Systems, Robot Worlds, files"]
 ```
 
 - You register Sodero once in your agent, as a remote MCP server. The registration belongs to your account, not to one project.
-- The agent signs in through your browser with your Sodero account, and on a consent page you choose what it may do and in which projects. It never sees your password, and you can revoke its access at any time.
+- The agent signs in through your browser with your Sodero account, and on a consent page you allow it to access your account. It never sees your password, and you can revoke its access at any time.
 - The agent never gets more than your own project roles allow.
 
 ---
@@ -54,24 +54,23 @@ Open any project and click **AI agents** in the top bar. The **AI agents (MCP)**
 
 ---
 
-## 2. Sign In and Choose What the Agent May Do
+## 2. Sign In and Allow Access
 
 1. Start the sign-in. In Claude Code, start `claude`, type `/mcp`, select **sodero** and choose **Authenticate**. Other clients have a **Connect** or **Sign in** action.
 2. Your browser opens the Sodero sign-in. Sign in with your **Sodero** account, not with the account of your AI provider.
-3. On the consent page *Allow … to connect?*, choose what the agent may do and click **Allow selected access**:
-
-    | Option | What the agent may do |
-    | :--- | :--- |
-    | **Read project data** | Read the selected projects: status, items, files and jobs. Selected by default. |
-    | **Change project data and run commands (includes read access)** | Also make changes, such as uploading files, activating Stations and Worlds and running the Station and World tools |
-    | **Projects** | The projects the agent may use. Select at least one project or workspace. |
-    | **Optional workspace grants** | All current and future projects of a workspace in which you have a role |
-
+3. The consent page *Allow … to connect?* shows the permissions the agent requested and says: *This agent can access all workspaces and projects available to your account, including those you gain access to later. Current membership and roles always apply.* Click **Allow access**, or **Cancel** to refuse.
 4. Return to your agent: Sodero is connected.
+
+There is nothing to select: the consent covers your account, and the agent can use every project in which you have a role, now and later. What the agent may do depends on the access its client requests, which the consent page shows:
+
+| Requested permissions | What the agent may do |
+| :--- | :--- |
+| *read project data* | Read your projects: status, items, files and jobs. This is the access a client gets when it requests no other. |
+| *read project data and change project data or run commands* | Also make changes, such as uploading files, activating Stations and Worlds and running the Station and World tools |
 
 !!! warning "**Approve only your own agent.** The consent page shows the name the agent gives itself; Sodero can't verify it. Allow access only right after you started the sign-in from your own agent."
 
-**Changes also need a project role that allows them:** people who can manage the project and, where enabled, editors. The **AI agents** panel of each project says which applies to you.
+**Changes also need a project role that allows them.** The project's owner and people with **Can manage** can change a project through an agent; people with **Can view** can only read. The **AI agents** panel of each project says what your role permits there.
 
 A connection lasts up to 30 days. To renew it or change its access, sign the agent in again (in Claude Code, from `/mcp`), then [revoke](#review-and-revoke-agents) the entries you no longer need.
 
@@ -81,30 +80,34 @@ A connection lasts up to 30 days. To renew it or change its access, sign the age
 
 Every request names a project. In the **AI agents** panel, click **Copy project link** and paste the link into your request, or give the project's name, for example *"List files in Warehouse Demo"*. When two projects have the same name, use `workspace/name`.
 
-A project you joined after you signed the agent in is not part of its consent, unless you granted its whole workspace. Sign the agent in again and select the project.
-
 ---
 
 ## What Agents Can Do
 
-| Area | The agent can |
-| :--- | :--- |
-| Projects and status | List the projects it may use; read their Robot Systems and Robot Worlds with their states, the Trash and the jobs |
-| Run (write access) | Activate or stop up to 8 Stations and Worlds at once, or activate and start them as one job |
-| Items (write access) | Create, duplicate, rename and trash Robot Systems and Robot Worlds. Restoring and permanently deleting from the Trash need **Can manage**. |
-| Files | List and download library files, and list Sodero's official assets. With write access, upload files of up to 64 MiB, such as Station packages, World scenes and maps. |
-| Station and World tools (write access) | Run tools from a catalog of more than 100: Station status and logs, the node graph, documents, Store apps, robot control through [Motion Studio](../../operate/motion_studio/index.md), [Strider](../../operate/strider/index.md) and [Articulation](../../operate/articulation/index.md), navigation, cameras, and the World |
+The agent works through Sodero's tools. Each tool name has three parts, for example `project.item.start`.
 
-!!! info "**Every Station and World tool needs write access**, even one that only reads. Tools for a running Station or World need it to be active."
+| Area | Tools | The agent can |
+| :--- | :--- | :--- |
+| Account | `account.workspace.list`, `account.project.list` | List your workspaces, and the projects it may use with read or write permission for each |
+| Projects and jobs | `project.info.get`, `project.item.list`, `project.job.list`, `project.job.status`, `project.history.list` | Read a project's Robot Systems and Robot Worlds with their states, its jobs, and the actions agents took in it. Listing the Trash needs **Can manage**. |
+| Run | `project.item.start`, `project.item.stop`, `project.job.start`, `project.job.cancel` | Activate or stop up to 8 Stations and Worlds at once, or activate and start them as one job |
+| Items | `project.item.create`, `project.item.duplicate`, `project.item.rename`, `project.item.trash`, `project.item.restore`, `project.item.delete_permanently` | Create, duplicate, rename and trash Robot Systems and Robot Worlds. Restoring and permanently deleting from the Trash need **Can manage**. |
+| Workspaces and projects | `workspace.project.create`, `workspace.history.list`, `project.manage.copy`, `project.manage.trash` | Create a project in a workspace where you may create projects, and list those requests. Copying a project and moving it to the Trash need **Can manage**. |
+| Files | `project.file.list`, `project.file.download`, `project.asset.list`, `project.package.list` | List and download library files, search the robot and gateway documents of Sodero Assets, and list a Station's apps and packages |
+| File changes | `project.upload.begin`, `project.upload.finish`, `project.upload.abort`, `project.file.rename`, `project.file.delete` | Upload files, and rename and delete library files ([Usage Limits](#usage-limits)) |
+| Station and World tools | `system.tools.list`, `system.tools.describe`, `system.tools.call` | Run tools from a catalog of more than 100: Station status and logs, the node graph, documents, Store apps, robot control through [Motion Studio](../../operate/motion_studio/index.md), [Strider](../../operate/strider/index.md) and [Articulation](../../operate/articulation/index.md), navigation, cameras, and the World |
 
-The agent cannot go beyond your consent and your roles, use the Project VPN, read files on your computer through Sodero, or download the contents of Sodero's official assets. Cancelling a job stops further steps but doesn't undo changes.
+!!! info "**Changes need write access.** So does `system.tools.call`, even for a tool that only reads. Tools for a running Station or World need it to be active."
+
+The agent cannot go beyond your roles, use the Project VPN, read files on your computer through Sodero, or download the contents of Sodero Assets. Cancelling a job stops further steps but doesn't undo changes.
 
 ---
 
 ## Stay in Control
 
-- **Approve changes yourself.** Most agents can ask before they use a tool. A practical setup: allow the read-only tools freely (`projects_list`, `project_status`, `items_list`, `files_list`, `assets_list`, `packages_list`, `jobs_list`, `job_status`, `tools_list`, `tool_describe`, `file_download`) and keep approval on for every other tool, especially `tool_call`, `items_start`, `items_stop` and `jobs_start`. In Claude Code, they are named `mcp__sodero__` plus the tool name.
-- **Review previews.** Most changes are previewed first. `item_create`, `item_duplicate`, `items_start`, `items_stop` and `jobs_start` act at once.
+- **Approve changes yourself.** Most agents can ask before they use a tool. A practical setup: allow the read-only tools freely (`account.workspace.list`, `account.project.list`, `project.info.get`, `project.item.list`, `project.history.list`, `project.job.list`, `project.job.status`, `project.file.list`, `project.file.download`, `project.asset.list`, `project.package.list`, `workspace.history.list`, `system.tools.list`, `system.tools.describe`) and keep approval on for every other tool, especially `system.tools.call`, `project.item.start`, `project.item.stop` and `project.job.start`.
+- **Your client shows the tool names its own way.** A client may add a prefix and replace the dots: Claude Code shows `project.item.start` as `mcp__sodero__project_item_start`.
+- **Review previews.** Most changes are previewed first. `project.item.create`, `project.item.duplicate`, `project.item.start`, `project.item.stop` and `project.job.start` act at once.
 - **The agent acts as you.** What it changes is changed for everyone in the project.
 - **Watch your credits.** A Station or World that an agent activated uses credits until it is deactivated. [Auto off](../../projects/activate_run/index.md#5-auto-off) still applies.
 
@@ -114,7 +117,9 @@ The agent cannot go beyond your consent and your roles, use the Project VPN, rea
 
 ## Usage Limits
 
-Agent tool calls count against your workspace's plan, per minute and per calendar month (UTC). **Billing & Usage** shows the calls used this month ([Credits and Usage](../../account/billing/index.md)). At the monthly limit, calls are refused until the renewal date that the **AI agents** panel shows. At the per-minute limit, the agent is told how long to wait.
+Agent tool calls count against your workspace's plan, per minute and per calendar month (UTC). **Billing & Usage** shows the calls used this month ([Billing and Usage](../../account/billing/index.md)). At the monthly limit, calls are refused until the renewal date that the **AI agents** panel shows. At the per-minute limit, the agent is told how long to wait.
+
+An upload can be up to 1 GiB for a library file and up to 64 MiB for other kinds, such as Station packages, World scenes, map bundles and Station documents.
 
 A tool call ends after 100 seconds. A change may still have been applied: have the agent check the state before it repeats the change.
 
@@ -123,8 +128,8 @@ A tool call ends after 100 seconds. A change may still have been applied: have t
 ## Review and Revoke Agents
 
 1. Click your avatar at the bottom of the left navigation bar and choose **Account Settings**.
-2. Under **Connected AI agents**, each agent shows its name, when it connected, its scopes (*Read* or *Read, Write*) and its workspace and project grants.
-3. To disconnect an agent, click **Revoke**, then **Confirm revoke**.
+2. Under **Connected AI agents**, each agent shows its name, when it connected, its scopes (*Read* or *Read, Write*) and its **Current workspaces**.
+3. To disconnect an agent, click **Revoke** followed by the agent's name, then **Confirm revoke**.
 
 <figure markdown="span">
   ![Connected AI agents](images/connected_agents.png){ width="560" }
@@ -139,10 +144,12 @@ Revoking stops the agent's further calls and job steps but doesn't undo what was
 
 | Message or symptom | What to do |
 | :--- | :--- |
-| The sign-in ends without the consent page, and the agent reports that access was denied | Start the sign-in again and finish it within 10 minutes, with your Sodero account. If it keeps happening, report it with **Help › Report a bug**. |
-| A project is missing from the consent page | You aren't a member of the project. Ask a person who can manage it to add you. |
+| The sign-in ends without the consent page, and the agent reports that access was denied | Start the sign-in again and finish it within 10 minutes, with your Sodero account. |
 | `AUTH_REQUIRED`, `AUTH_EXPIRED` or `CONNECTION_REVOKED` | Sign the agent in again (Claude Code: `/mcp`). |
-| `GRANT_MISSING` or `NOT_FOUND` for a project | The project isn't part of this connection's consent. Sign the agent in again and select it. |
-| `WRITE_NOT_GRANTED` | The connection may only read. Sign the agent in again and select **Change project data and run commands**. |
+| `GRANT_MISSING` | Your account no longer has access to that workspace or project. Ask a person who manages it to add you again. |
+| `NOT_FOUND` for a project | No project you can use matches the name or link. Check the name, or use `workspace/name` or the project link. |
+| `WRITE_NOT_GRANTED` | The connection may only read. Connect the agent again with a client that requests write access. |
+| `FORBIDDEN` | Your project role does not allow this action. Ask a person who can manage the project. |
+| `RENAMED` | The agent called a tool by a former name. The message names the current tool: the agent calls that one instead. |
 | `STATION_NOT_RUNNING` or `WORLD_NOT_RUNNING` | Activate the Station or World first. |
 | `QUOTA_EXCEEDED` | Your workspace reached its plan's limit for agent calls. The message says when to try again. |

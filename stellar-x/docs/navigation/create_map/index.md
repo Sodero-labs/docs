@@ -10,29 +10,13 @@ Any point-cloud tool, such as CloudCompare or Open3D, can do the steps below.
 
 ## 1. Choose the Coordinate Frames
 
-| Frame | Meaning |
-| :--- | :--- |
-| `map` | The site: x and y horizontal, z up, the floor at z = 0, in meters. The point cloud, the grid, the initial pose and goals use it. |
-| `odom` | Continuous motion measured by odometry (Strider wheel odometry or Visual odometry). It drifts; the Localizer corrects the drift. |
-| `base_link` | The robot, **on the floor**: x forward, y left, z up. |
-| Camera optical frame, for example `cam0_optical` | x right, y down, z forward along the view. |
-
-```mermaid
-flowchart TB
-    M["map"] -- "Localizer<br>(drift correction)" --> O["odom"]
-    O -- "odometry<br>(Strider or Visual odometry)" --> B["base_link<br>(on the floor)"]
-    B -- "extrinsics.yaml<br>(fixed)" --> C["cam0_optical<br>(x right, y down, z forward)"]
-```
-
-The Localizer is planar by default (`icp.planar: true`): it estimates x, y and yaw of `base_link` and holds its height, roll and pitch at zero. `base_link` therefore lies on the floor, and the camera height in `extrinsics.yaml` is its height **above the floor**.
-
-!!! warning "Measure the camera's x and y from the base origin that your odometry tracks, but its z from the floor, even when your robot model places `base_link` higher, for example at the wheel axles. A height taken from a raised base puts every camera point too low by that offset: the fit error exceeds `icp.max_rmse` and the localization status stays **Initializing** (`initializing`)."
+Choose the `map` frame of your site: x and y horizontal, z up, the floor at z = 0, in meters. All frames, and why the camera height is measured from the floor, are explained in [Localization and Navigation › Coordinate Frames](../overview/index.md#2-coordinate-frames).
 
 ---
 
 ## 2. Get a Point Cloud
 
-Choose the `map` frame first: x and y horizontal, z up, the floor at z = 0, in meters. Then collect points on every surface the camera will see:
+Collect points on every surface the camera will see, in the `map` frame of [step 1](#1-choose-the-coordinate-frames):
 
 - **3D model:** sample points on the surfaces of the site's model, for example the USD world of your Isaac Sim scene, with normals and colors where available. When the map frame is the world frame, poses in the simulator and on the map are the same.
 - **3D scan:** scan the real site with a laser scanner or by photogrammetry, and level the scan so that the floor lies at z = 0.
