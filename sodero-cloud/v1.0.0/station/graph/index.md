@@ -20,7 +20,7 @@ ______________________________________________________________________
 
    Naming the node
 
-The node appears on the canvas as **Planned**. Nothing runs until you start it on the Live page ([Run and Monitor](https://docs.sodero.io/sodero-cloud/v1.0.0/station/run/index.md)).
+The node appears on the canvas as **Planned**. Nothing runs until you start it on the Live page ([Start and Monitor Nodes](https://docs.sodero.io/sodero-cloud/v1.0.0/station/run/index.md)).
 
 ### The Module List
 
@@ -87,14 +87,19 @@ To remove a connection, select the node and click **Disconnect** next to the por
 
 ### Common Connections
 
-| Node (requires)                                               | Port           | Connect to (provides)                                                            |
-| ------------------------------------------------------------- | -------------- | -------------------------------------------------------------------------------- |
-| `sodero.mmc.<name>`, `sodero.mlc.<name>`, `sodero.amc.<name>` | `servo_link`   | The robot's actuator gateway `sodero.actuator_gateway.<name>`, port `servo_link` |
-| `sodero.strider`                                              | `mobile_base`  | The mobile base controller `sodero.mlc.<name>`, port `mobile_base`               |
-| `sodero.strider`                                              | `localization` | The localizer, `sodero.localizer`                                                |
-| `sodero.strider`                                              | `navigation`   | The navigator, `sodero.navigator`                                                |
+| Node (requires)                                               | Port                | Connect to (provides)                                                            |
+| ------------------------------------------------------------- | ------------------- | -------------------------------------------------------------------------------- |
+| `sodero.mmc.<name>`, `sodero.mlc.<name>`, `sodero.amc.<name>` | `servo_link`        | The robot's actuator gateway `sodero.actuator_gateway.<name>`, port `servo_link` |
+| `sodero.strider`                                              | `mobile_base`       | The mobile base controller `sodero.mlc.<name>`, port `mobile_base`               |
+| `sodero.strider`                                              | `localization`      | The localizer `sodero.icp_localizer`, port `localization`                        |
+| `sodero.strider`                                              | `navigation`        | The navigator `sodero.navigator`, port `navigation`                              |
+| `sodero.icp_localizer`                                        | `camera` (required) | The robot's camera gateway `sodero.camera_gateway.<name>`, port `camera`         |
+| `sodero.navigator`                                            | `mobile_base`       | The mobile base controller `sodero.mlc.<name>`, port `mobile_base`               |
+| `sodero.navigator`                                            | `localization`      | The localizer `sodero.icp_localizer`, port `localization`                        |
 
 Strider drives what its ports are connected to ([Strider](https://docs.sodero.io/sodero-cloud/v1.0.0/operate/strider/index.md)).
+
+**For navigation**, install `sodero.icp_localizer` and `sodero.navigator` from the Store ([Apps and Packages](https://docs.sodero.io/sodero-cloud/v1.0.0/station/apps/index.md)) and add them. The localizer needs its `camera` port connected; the navigator drives the base connected to its `mobile_base` port and follows the robot's position from the localizer connected to its `localization` port. Both read the Station's map bundle ([Documents and Settings](https://docs.sodero.io/sodero-cloud/v1.0.0/station/documents/#2-kinds-of-documents)).
 
 ______________________________________________________________________
 
@@ -120,6 +125,6 @@ ______________________________________________________________________
 ## 6. Load and Export the Graph
 
 - **Export** downloads the graph as a `.yaml` file. If something runs on the Live page that the graph does not show, it asks first: **Planned topology only** or **Also include what is running**.
-- **Load YAML** loads such a file from your PC, **My Library** or the **Project Library**. It replaces the nodes and connections of the Station (*… loaded — N nodes now in the system.*).
+- **Load YAML** loads such a file from your PC (**From your PC**) or from the project library (**Project Library**). It replaces the nodes and connections of the Station (*… loaded — N nodes now in the system.*).
 
 The file holds the graph only: nodes, their parameters and their connections. Documents, settings and apps are not part of it. To copy a whole Robot System, use **Duplicate file**, or **Download local copy** and **Import**, on the project page ([Robot Systems and Robot Worlds](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/files/index.md)).

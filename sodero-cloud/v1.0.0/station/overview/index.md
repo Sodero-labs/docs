@@ -1,6 +1,6 @@
 # Stellar Station
 
-Every Robot System is one **Stellar Station** ("the Station"). In the Station you build the robot system as a graph of nodes, give the nodes their documents, start them, and watch their state and logs. This manual describes the Station opened from the Sodero Cloud portal; device versions may differ.
+Every Robot System is one **Stellar Station** ("the Station"). In the Station you build the robot system as a graph of nodes, give the nodes their documents, start them, and watch their state and logs.
 
 ______________________________________________________________________
 
@@ -14,7 +14,7 @@ A Robot System holds one Station and everything it needs:
 | Documents and settings | Gateway and robot documents, camera files, map bundles and node settings ([Documents and Settings](https://docs.sodero.io/sodero-cloud/v1.0.0/station/documents/index.md))        |
 | Apps and modules       | The Store apps and your own module packages that the nodes run ([Apps and Packages](https://docs.sodero.io/sodero-cloud/v1.0.0/station/apps/index.md))                            |
 
-A Robot System drives robots in the project's active Robot World ([Drive Robots in the World](https://docs.sodero.io/sodero-cloud/v1.0.0/station/world_connection/index.md)). You create it on the project page ([Robot Systems and Robot Worlds](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/files/index.md)). Nodes, ports and node types are explained in [Key Concepts](https://docs.sodero.io/sodero-cloud/v1.0.0/get_started/key_concepts/index.md).
+A Robot System drives robots in the project's active Robot World ([Connect to the World](https://docs.sodero.io/sodero-cloud/v1.0.0/station/world_connection/index.md)). You create it on the project page ([Robot Systems and Robot Worlds](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/files/index.md)). Nodes, ports and node types are explained in [Key Concepts](https://docs.sodero.io/sodero-cloud/v1.0.0/get_started/key_concepts/index.md).
 
 ______________________________________________________________________
 
@@ -31,12 +31,12 @@ The Station opens in a new browser tab and uses your portal sign-in. The header 
 
 The Station has two pages for the same Robot System:
 
-|                 | Edit page                                                                | Live page                                                                                                                             |
-| --------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Badge           | **EDIT**                                                                 | **LIVE**, with how long the Station has been live                                                                                     |
-| The Station     | Inactive: nothing runs and no credits are used                           | Active: it uses credits ([Credits and Usage](https://docs.sodero.io/sodero-cloud/v1.0.0/account/billing/index.md))                    |
-| What you can do | Add, connect, rename and delete nodes; set parameters; select Store apps | Upload and confirm controller documents while their nodes are stopped, then start nodes, inspect logs and open available operator UIs |
-| Button          | **Go live**                                                              | **Stop live**                                                                                                                         |
+|                 | Edit page                                                                                        | Live page                                                                                                          |
+| --------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| Badge           | **EDIT**                                                                                         | **LIVE**, with how long the Station has been live                                                                  |
+| The Station     | Inactive: nothing runs and no credits are used                                                   | Active: it uses credits ([Billing and Usage](https://docs.sodero.io/sodero-cloud/v1.0.0/account/billing/index.md)) |
+| What you can do | Add, connect, rename and delete nodes; give them their documents and settings; select Store apps | The same, while the nodes concerned are stopped; start and stop nodes, read their logs and open the operator UIs   |
+| Button          | **Go live**                                                                                      | **Stop live**                                                                                                      |
 
 The Edit page of a new Robot System
 
@@ -56,7 +56,7 @@ ______________________________________________________________________
 | Canvas    | The node cards and their connections. At the bottom: zoom, **Fit view**, **Auto layout**, and folding or unfolding all cards.                                                                                                                                     |
 | Inspector | The selected node: name, module and state, **Connection**, **Parameters** and settings, **Logs** (Live page only) and **Activity**                                                                                                                                |
 
-The Sodero mark at the top left opens the Station menu: **Back to Sodero Cloud**, **Libraries** (**My Library**, **Project Library**), **Theme** (**Midnight** or **Twilight**), **Help & Feedback** and **About Stellar Station**.
+The Sodero mark at the top left opens the Station menu: **Back to Sodero Cloud**, **Libraries › Project Library**, **Theme** (**Midnight** or **Twilight**), **Help & Feedback** and **About Stellar Station**. **Project Library** opens the project library: the files that everyone in the project shares, such as documents and graph files ([Libraries](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/libraries/index.md)).
 
 **Tip:** Right-click the empty canvas to add a node, and right-click a node for its actions.
 
@@ -64,12 +64,12 @@ ______________________________________________________________________
 
 ## 3. What Is Saved Where
 
-| What                        | Where it is kept                                                                                                                                                                                                                                          |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Changes to the graph        | Saved automatically on both pages. The toolbar shows **Saving…**, then **Saved**; if a save fails, it shows **Retry save**. Changes made on the Live page stay after **Stop live**.                                                                       |
-| Documents and settings      | With the Robot System. The Station saves them when it is deactivated and restores them when it is activated. Upload robot documents from the Live page ([Documents and Settings](https://docs.sodero.io/sodero-cloud/v1.0.0/station/documents/index.md)). |
-| Store apps and your modules | Recorded with the Robot System and installed each time the Station starts ([Apps and Packages](https://docs.sodero.io/sodero-cloud/v1.0.0/station/apps/index.md))                                                                                         |
-| The whole Robot System      | **Download local copy** on the project page saves it as an `.sdr` file ([Download a Local Copy](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/projects/#6-download-a-local-copy))                                                                   |
+| What                        | Where it is kept                                                                                                                                                                                                                                                           |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Changes to the graph        | Saved automatically on both pages. The toolbar shows **Saving…**, then **Saved**; if a save fails, it shows **Retry save**. Changes made on the Live page stay after **Stop live**.                                                                                        |
+| Documents and settings      | With the Robot System, whether you give them on the Edit page or on the Live page. The Station saves them when it is deactivated and restores them when it is activated ([Documents and Settings](https://docs.sodero.io/sodero-cloud/v1.0.0/station/documents/index.md)). |
+| Store apps and your modules | Recorded with the Robot System and installed each time the Station starts ([Apps and Packages](https://docs.sodero.io/sodero-cloud/v1.0.0/station/apps/index.md))                                                                                                          |
+| The whole Robot System      | **Download local copy** on the project page saves it as an `.sdr` file ([Download a Local Copy](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/projects/#6-download-a-local-copy))                                                                                    |
 
 **Export** in the toolbar saves the graph only, not the documents or apps ([Load and Export the Graph](https://docs.sodero.io/sodero-cloud/v1.0.0/station/graph/#6-load-and-export-the-graph)).
 
@@ -88,19 +88,19 @@ ______________________________________________________________________
 ```
 flowchart LR
  A["Select apps"] --> B["Add and connect nodes"]
- B --> C["Go live"]
- C --> D["Upload and confirm documents"]
- D --> E["Run World and start nodes"]
- E --> F["Open available operator UI"]
+ B --> C["Give the nodes their documents"]
+ C --> D["Connect to the World"]
+ D --> E["Go live and start nodes"]
+ E --> F["Open the operator UI"]
 ```
 
-| Step                                        | Page                                                                                                                                                                                                                                                                 |
-| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Install the apps that your nodes run        | [Apps and Packages](https://docs.sodero.io/sodero-cloud/v1.0.0/station/apps/index.md)                                                                                                                                                                                |
-| Add nodes and connect their ports           | [Build the Graph](https://docs.sodero.io/sodero-cloud/v1.0.0/station/graph/index.md)                                                                                                                                                                                 |
-| Give the nodes their documents and settings | [Documents and Settings](https://docs.sodero.io/sodero-cloud/v1.0.0/station/documents/index.md)                                                                                                                                                                      |
-| Start nodes, read their state and logs      | [Run and Monitor](https://docs.sodero.io/sodero-cloud/v1.0.0/station/run/index.md)                                                                                                                                                                                   |
-| Connect the robots to the World             | [Drive Robots in the World](https://docs.sodero.io/sodero-cloud/v1.0.0/station/world_connection/index.md)                                                                                                                                                            |
-| Drive and teach the robots                  | [Strider](https://docs.sodero.io/sodero-cloud/v1.0.0/operate/strider/index.md), [Motion Studio](https://docs.sodero.io/sodero-cloud/v1.0.0/operate/motion_studio/index.md), [Articulation](https://docs.sodero.io/sodero-cloud/v1.0.0/operate/articulation/index.md) |
+| Step                                                           | Page                                                                                                                                                                                                                                                                 |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Install the apps that your nodes run                           | [Apps and Packages](https://docs.sodero.io/sodero-cloud/v1.0.0/station/apps/index.md)                                                                                                                                                                                |
+| Add nodes and connect their ports                              | [Build the Graph](https://docs.sodero.io/sodero-cloud/v1.0.0/station/graph/index.md)                                                                                                                                                                                 |
+| Give the nodes their documents and settings                    | [Documents and Settings](https://docs.sodero.io/sodero-cloud/v1.0.0/station/documents/index.md)                                                                                                                                                                      |
+| Name the robots and match their joints to the World            | [Connect to the World](https://docs.sodero.io/sodero-cloud/v1.0.0/station/world_connection/index.md)                                                                                                                                                                 |
+| Go live, run the World, start nodes, read their state and logs | [Start and Monitor Nodes](https://docs.sodero.io/sodero-cloud/v1.0.0/station/run/index.md)                                                                                                                                                                           |
+| Drive and teach the robots                                     | [Strider](https://docs.sodero.io/sodero-cloud/v1.0.0/operate/strider/index.md), [Motion Studio](https://docs.sodero.io/sodero-cloud/v1.0.0/operate/motion_studio/index.md), [Articulation](https://docs.sodero.io/sodero-cloud/v1.0.0/operate/articulation/index.md) |
 
-For a first walkthrough with a simulated robot, follow the [Quick Start](https://docs.sodero.io/sodero-cloud/v1.0.0/get_started/quick_start/index.md).
+The [Quick Start](https://docs.sodero.io/sodero-cloud/v1.0.0/get_started/quick_start/index.md) builds and runs a World. Its last section, [Next: Connect a Robot System](https://docs.sodero.io/sodero-cloud/v1.0.0/get_started/quick_start/#next-connect-a-robot-system), and the pages above take you on to a Robot System that drives a robot in that World.

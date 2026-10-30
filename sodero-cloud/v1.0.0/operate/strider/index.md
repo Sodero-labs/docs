@@ -1,9 +1,5 @@
 # Strider
 
-Availability
-
-These instructions apply when the required app is installed, its nodes run, and its operator UI is available. Check [Compatibility](https://docs.sodero.io/sodero-cloud/v1.0.0/reference/compatibility/index.md) first.
-
 **Strider** is the operator UI for wheeled mobile bases. With it you jog the base, watch its state and odometry, and send navigation goals. It works with every drive type that a mobile robot document (`.sddm`) can describe: differential drive, skid steer 4WD, mecanum 4WD, swerve 4WD and Ackermann.
 
 ______________________________________________________________________
@@ -21,7 +17,7 @@ Two nodes are involved:
 flowchart LR
     S["sodero.strider"] -- mobile_base --> M["sodero.mlc.jackal<br>jackal.sddm"]
     M -- servo_link --> G["sodero.actuator_gateway.jackal<br>jackal.gw"]
-    S -. localization .-> L["sodero.localizer"]
+    S -. localization .-> L["sodero.icp_localizer"]
     S -. navigation .-> N["sodero.navigator"]
 ```
 
@@ -29,17 +25,17 @@ ______________________________________________________________________
 
 ## 1. Set Up the Nodes
 
-1. Check that `sodero.actuator_gateway` and `sodero.mlc` are available in the Store, and select them. For Strider, also select `sodero.strider`.
-1. Add the gateway and controller nodes, then connect the controller’s `servo_link` to the gateway. For Strider, connect its `mobile_base` to the base controller.
-1. Go live and wait for app installation to finish. Keep the nodes stopped.
-1. Upload the gateway’s `.gw` and the controller’s `.sddm` document. Reopen each node and confirm the selected document ([Documents and Settings](https://docs.sodero.io/sodero-cloud/v1.0.0/station/documents/index.md)).
-1. Check the robot name and mapping, run the World, then start the gateway, controller and any dependent app.
+1. In the Station's **Store**, install `sodero.actuator_gateway`, `sodero.mlc` and `sodero.strider` ([Apps and Packages](https://docs.sodero.io/sodero-cloud/v1.0.0/station/apps/index.md)).
+1. Add the gateway, the base controller and Strider. Connect the controller's `servo_link` to the gateway, and Strider's `mobile_base` to the base controller ([Build the Graph](https://docs.sodero.io/sodero-cloud/v1.0.0/station/graph/index.md)).
+1. Upload the gateway's `.gw` and the controller's `.sddm` document ([Documents and Settings](https://docs.sodero.io/sodero-cloud/v1.0.0/station/documents/index.md)).
+1. Set the gateway's **Robot name** and check the actuator mapping ([Connect to the World](https://docs.sodero.io/sodero-cloud/v1.0.0/station/world_connection/index.md)).
+1. Run the World, go live, then start the gateway, the controller and Strider, in this order ([Start and Monitor Nodes](https://docs.sodero.io/sodero-cloud/v1.0.0/station/run/index.md)).
 
 ______________________________________________________________________
 
 ## 2. Open Strider
 
-If the running node provides a UI link or an **Open …** action, use it to open the app. If neither is available, check the installed app and supported version before continuing. If the session expires, reopen the UI from Station.
+On the Live page, right-click the running `sodero.strider` node and choose **Open …** ([Start and Monitor Nodes](https://docs.sodero.io/sodero-cloud/v1.0.0/station/run/#3-start-restart-or-stop-one-node)). Strider opens in a new tab. If its session expires, open it again from the node.
 
 ______________________________________________________________________
 
@@ -95,7 +91,7 @@ ______________________________________________________________________
 
 ## 5. Navigation Page
 
-The **Navigation** page works when Strider's `localization` and `navigation` ports are connected to a running localizer and navigator, and the Station has a map bundle ([Documents and Settings](https://docs.sodero.io/sodero-cloud/v1.0.0/station/documents/#2-kinds-of-documents)).
+The **Navigation** page works when Strider's `localization` and `navigation` ports are connected to a running localizer and navigator, and the Station has a map bundle. To set them up, install `sodero.icp_localizer` and `sodero.navigator` from the Store, connect the localizer's `camera` port to the robot's camera gateway and the navigator's `mobile_base` and `localization` ports to the base controller and the localizer, and upload the map bundle ([Build the Graph › Common Connections](https://docs.sodero.io/sodero-cloud/v1.0.0/station/graph/#common-connections), [Documents and Settings](https://docs.sodero.io/sodero-cloud/v1.0.0/station/documents/#2-kinds-of-documents)).
 
 | Card                                                                         | Contents                                                                                                              |
 | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
@@ -125,6 +121,6 @@ ______________________________________________________________________
 
 ## 6. Control Strider from Programs
 
-- **AI agents** drive the base with the `strider` tools: state, servo, velocities, stops and fault reset ([AI Agents](https://docs.sodero.io/sodero-cloud/v1.0.0/connect/ai_agents/index.md)).
+- **AI agents** drive the base with the `station.strider` tools: state, servo, velocities, stops and fault reset ([AI Agents](https://docs.sodero.io/sodero-cloud/v1.0.0/connect/ai_agents/index.md)).
 - **Your own module** on the Station connects to the base controller's `mobile_base` port ([Apps and Packages](https://docs.sodero.io/sodero-cloud/v1.0.0/station/apps/index.md)).
 - **Your own tools** on your computer reach the Station API through the [Project VPN](https://docs.sodero.io/sodero-cloud/v1.0.0/connect/project_vpn/index.md).

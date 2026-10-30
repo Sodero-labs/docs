@@ -38,9 +38,9 @@ ______________________________________________________________________
 Use it for a scene built elsewhere, for example in NVIDIA Isaac Sim.
 
 1. In the Cosmic Studio menu, choose **World › Replace scene…**.
-1. On **This PC**, drag a USD file (`.usd`, `.usda`, `.usdc`) or a zipped USD folder (`.zip`) onto the dialog, or click **Choose file**. **My Library** and **Workspace Library** offer the USD files of your libraries.
+1. On **This PC**, drag a USD file (`.usd`, `.usda`, `.usdc`), a USDZ package (`.usdz`) or a zipped USD folder (`.zip`) onto the dialog, or click **Choose file**. **Workspace Library** offers the USD files of the project library ([Libraries](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/libraries/index.md)).
 1. Click **Replace** and confirm in the browser's dialog.
-1. Studio says *Replaced with …*. If the **Hierarchy** still shows the old scene, reload the Studio page. Then click **Save now**.
+1. Studio says *Replaced with …*. Check the new scene in the **Hierarchy**, then click **Save now**.
 
 The Replace scene dialog
 
@@ -59,7 +59,7 @@ The Asset Browser on the mobile robots of Sodero Assets
 
 - For a material, select the object first, then open the browser and choose **Bind Material**.
 - **Upload from PC** uploads a single USD file to the browser's **Workspace** library, from which you add it the same way. For a scene made of several files, use **Replace scene…** with a zip.
-- Sodero Assets are official Sodero content: you can view, edit and simulate them in Sodero, but exports and downloads leave them out ([Libraries](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/libraries/#5-sodero-assets)).
+- Sodero Assets are published by Sodero: you can view, edit and simulate them in Sodero, but exports and downloads leave them out ([Libraries](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/libraries/#5-sodero-assets)).
 
 ______________________________________________________________________
 
@@ -89,7 +89,7 @@ ______________________________________________________________________
 
 - Activating a World loads its last saved state, so save before you activate. If the World is active while you save, the running World is updated.
 - Restoring a revision first keeps the current state as a revision.
-- An official Sodero World cannot be exported. When a World uses Sodero Assets, the export leaves those files out and says how many.
+- A World whose scene Sodero provides cannot be exported. When a World uses Sodero Assets, the export leaves those files out and says how many.
 
 ______________________________________________________________________
 

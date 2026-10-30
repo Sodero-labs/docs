@@ -1,26 +1,22 @@
 # Motion Studio
 
-Availability
-
-These instructions apply when the required app is installed, its nodes run, and its operator UI is available. Check [Compatibility](https://docs.sodero.io/sodero-cloud/v1.0.0/reference/compatibility/index.md) first.
-
 **Motion Studio** is the operator UI for manipulators. The manipulator controller node, `sodero.mmc.<name>`, runs the arm's real-time controller: kinematics, dynamics, trajectory generation and safety limits, from the arm's `.sdd` document. Motion Studio belongs to that node. It shows the arm in 3D, jogs it, defines tools and teaches poses.
 
 ______________________________________________________________________
 
 ## 1. Set Up the Nodes
 
-1. Check that `sodero.actuator_gateway` and `sodero.mmc` are available in the Store, and select them.
-1. Add the gateway and controller nodes, then connect the controller’s `servo_link` to the gateway.
-1. Go live and wait for app installation to finish. Keep the nodes stopped.
-1. Upload the gateway’s `.gw` and the controller’s `.sdd` document. Reopen each node and confirm the selected document ([Documents and Settings](https://docs.sodero.io/sodero-cloud/v1.0.0/station/documents/index.md)).
-1. Check the robot name and mapping, run the World, then start the gateway, controller and any dependent app.
+1. In the Station's **Store**, install `sodero.actuator_gateway` and `sodero.mmc` ([Apps and Packages](https://docs.sodero.io/sodero-cloud/v1.0.0/station/apps/index.md)).
+1. Add the gateway and the manipulator controller, and connect the controller's `servo_link` to the gateway ([Build the Graph](https://docs.sodero.io/sodero-cloud/v1.0.0/station/graph/index.md)).
+1. Upload the gateway's `.gw` and the controller's `.sdd` document ([Documents and Settings](https://docs.sodero.io/sodero-cloud/v1.0.0/station/documents/index.md)).
+1. Set the gateway's **Robot name** and check the actuator mapping ([Connect to the World](https://docs.sodero.io/sodero-cloud/v1.0.0/station/world_connection/index.md)).
+1. Run the World, go live, then start the gateway and the controller, in this order ([Start and Monitor Nodes](https://docs.sodero.io/sodero-cloud/v1.0.0/station/run/index.md)).
 
 ______________________________________________________________________
 
 ## 2. Open Motion Studio
 
-If the running node provides a UI link or an **Open …** action, use it to open the app. If neither is available, check the installed app and supported version before continuing. If the session expires, reopen the UI from Station.
+On the Live page, right-click the running `sodero.mmc.<name>` node and choose **Open …** ([Start and Monitor Nodes](https://docs.sodero.io/sodero-cloud/v1.0.0/station/run/#3-start-restart-or-stop-one-node)). Motion Studio opens in a new tab. If its session expires, open it again from the node.
 
 ______________________________________________________________________
 
@@ -37,16 +33,16 @@ ______________________________________________________________________
 
 ### Header
 
-| Item                  | Description                                                                                                                                                                                                                 |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Robot and role        | The controller node, and whether this window has control (*Pilot - Control Active*)                                                                                                                                         |
-| **Manual** / **Auto** | **Manual** limits the linear speed of the TCP in the controller's own motions and jogs, 0.25 m/s by default; it does not limit rotations or **Hand** mode. **Auto** runs at the programmed speed.                           |
-| Feed rate             | Speed override in percent (10–150 %), applied to motion in progress                                                                                                                                                         |
-| **Error Reset**       | Clears a protective stop (a joint at its limit, a speed or torque limit, a detected collision) and resets drive faults. Switch the servo on again afterwards. If the arm stays stopped, stop and start its controller node. |
-| Units                 | `mm / g / deg` or `m / kg / radian`                                                                                                                                                                                         |
-| **Jog**               | Opens the jog panel                                                                                                                                                                                                         |
-| **Command log**       | Commands sent from this window                                                                                                                                                                                              |
-| **Alarm**             | Active alarms and notifications                                                                                                                                                                                             |
+| Item                  | Description                                                                                                                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Robot and role        | The controller node, and whether this window has control (*Pilot - Control Active*)                                                                                                               |
+| **Manual** / **Auto** | **Manual** limits the linear speed of the TCP in the controller's own motions and jogs, 0.25 m/s by default; it does not limit rotations or **Hand** mode. **Auto** runs at the programmed speed. |
+| Feed rate             | Speed override in percent (10–150 %), applied to motion in progress                                                                                                                               |
+| **Error Reset**       | Clears a protective stop (a joint at its limit, a speed or torque limit, a detected collision) and resets drive faults. Switch the servo on again afterwards.                                     |
+| Units                 | `mm / g / deg` or `m / kg / radian`                                                                                                                                                               |
+| **Jog**               | Opens the jog panel                                                                                                                                                                               |
+| **Command log**       | Commands sent from this window                                                                                                                                                                    |
+| **Alarm**             | Active alarms and notifications                                                                                                                                                                   |
 
 The mark at the top left opens the menu, with **File** to import and export tools and poses.
 
@@ -67,7 +63,7 @@ Click **Jog** in the header to open the jog panel.
 
 The **POSE** section of the panel shows the current TCP pose and joint positions.
 
-**Stop motion explicitly before leaving the UI.** A continuous jog depends on delivery of the button-release command. If the browser or connection fails, do not assume motion has stopped. Stop the controller from Station and confirm the robot has stopped in Theater. For physical robots, follow the hardware stop procedure in the Stellar X manual.
+**Stop the motion before you leave the UI.** A continuous jog stops when the release of the button reaches the controller. If the browser or the connection fails while you jog, do not assume that the arm has stopped: stop the controller node in the Station and check in Theater that the arm stands still. For a real arm, see [Stop Controls](https://docs.sodero.io/stellar-x/latest/hardware_setup/stop_controls/) in the Stellar X manual.
 
 ______________________________________________________________________
 
@@ -103,7 +99,7 @@ Motion Studio is for setup and teaching. Programs run outside it and use the sam
 
 | From            | How                                                                                                                                                                |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| AI agents       | The `motion` tools: state, servo, moves, stops and fault reset ([AI Agents](https://docs.sodero.io/sodero-cloud/v1.0.0/connect/ai_agents/index.md))                |
+| AI agents       | The `station.motion` tools: state, servo, moves, stops and fault reset ([AI Agents](https://docs.sodero.io/sodero-cloud/v1.0.0/connect/ai_agents/index.md))        |
 | Your own module | A module node on the Station, connected to the manipulator controller node ([Apps and Packages](https://docs.sodero.io/sodero-cloud/v1.0.0/station/apps/index.md)) |
 | Your own tools  | The Station API, through the [Project VPN](https://docs.sodero.io/sodero-cloud/v1.0.0/connect/project_vpn/index.md)                                                |
 

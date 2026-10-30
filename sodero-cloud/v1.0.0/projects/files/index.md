@@ -21,7 +21,7 @@ ______________________________________________________________________
 
 ### Starting Apps
 
-**Starting apps** offers bundles of Store apps for the new Station: **Empty** (*No apps; install what you need from the Store.*), **Manipulator**, **Mobile robot** and **Legged (MMC)**. The apps install when the Station first starts. If some apps could not be added, the portal names them: install them from the Station's Store ([Apps and Packages](https://docs.sodero.io/sodero-cloud/v1.0.0/station/apps/index.md)).
+**Starting apps** offers bundles of Store apps for the new Station: **Empty** (*No apps; install what you need from the Store.*), **Manipulator**, **Mobile robot** and **Legged**. The apps install when the Station first starts. If some apps could not be added, the portal names them: install them from the Station's Store ([Apps and Packages](https://docs.sodero.io/sodero-cloud/v1.0.0/station/apps/index.md)).
 
 A new Robot World has no scene yet. Open it with **Studio** to build one ([Studio](https://docs.sodero.io/sodero-cloud/v1.0.0/worlds/studio/index.md)); until then it has nothing to run.
 
@@ -32,7 +32,7 @@ ______________________________________________________________________
 A Sodero file (`.sdr`) holds one Robot System or one Robot World. Importing it creates a **new** file in the project, with the name and description stored in the `.sdr`.
 
 1. In the project, click **Import**. An empty project also offers **Import file**.
-1. Choose the source: **From your PC** (drag the file onto the dialog, or click **Choose file**), **My Library** or **Project Library**.
+1. Choose the source: **From your PC** (drag the file onto the dialog, or click **Choose file**) or **Project Library** (the `.sdr` files in this project's [library](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/libraries/index.md)).
 1. Click **Import**.
 
 Importing an .sdr file from your PC
@@ -41,16 +41,12 @@ The new file appears under **Robot Systems** or **Robot Worlds**, depending on w
 
 ### Move Robot Systems Between Stellar X and Sodero Cloud
 
-Check compatibility before transfer
-
-The `.sdr` extension does not guarantee that every Station version accepts the same graph and document formats. Check the destination release and its installed apps ([Compatibility](https://docs.sodero.io/sodero-cloud/v1.0.0/reference/compatibility/index.md)).
-
-For compatible Station releases, export and import Robot Systems with **Export SDR** and **Load SDR** on Stellar X, and **Download local copy** and **Import** in Sodero Cloud. Consult the destination product’s instructions before proceeding:
+A Robot System moves as an `.sdr` file between Sodero Cloud (**Download local copy**, **Import**) and a Stellar X controller (**Export SDR**, **Load SDR**):
 
 - **From Stellar X:** export the Station on the controller with **Export SDR**, then import the file into a project.
-- **To Stellar X:** [download a local copy](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/projects/#6-download-a-local-copy) of the Robot System, then load it on the controller with **Load SDR**.
+- **To Stellar X:** [download a local copy](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/projects/#6-download-a-local-copy) of the Robot System, then load it on the controller with **Load SDR** ([Backup and Restore](https://docs.sodero.io/stellar-x/latest/station/backup_restore/) in the Stellar X manual).
 
-**Check apps and packages after a move.** An `.sdr` does not contain installed packages. After importing one from Stellar X, install the apps its nodes need. Before loading one on Stellar X, install the packages the Station uses on the controller.
+**Check the release and the apps.** The destination must run a Station release that accepts the file's graph and documents ([Compatibility](https://docs.sodero.io/sodero-cloud/v1.0.0/reference/compatibility/index.md)). An `.sdr` does not contain installed packages: after importing one from Stellar X, install the apps its nodes need; before loading one on Stellar X, install the packages the Station uses on the controller. Keep the original file until the moved Robot System works.
 
 A Robot World's `.sdr` opens in Sodero Cloud only.
 
@@ -81,7 +77,7 @@ The Robot Systems of a project drive the robots in the project's active Robot Wo
 
 - **One active World per project.** A project can hold several Robot Worlds, but while one is active, the others cannot be activated (*Another Robot World is already running in this project*).
 - **Active Stations connect automatically** to the project's active World, including their camera and IMU gateways. A Station activated before the World connects once the World is up.
-- **Robots are matched by name.** A simulation gateway drives the robot named in its gateway document (**Robot name**): the name of the robot's articulation prim in the World, for example `jackal`. Use one gateway per independently controlled robot or joint group, and avoid overlapping actuator ranges.
+- **Robots are matched by name.** A simulation gateway drives the robot set as its node's **Robot name**: the name of the robot's articulation prim in the World, for example `jackal`. Use one gateway per independently controlled robot or joint group, and avoid overlapping actuator ranges.
 - **Projects stay apart.** A Station never reaches a World in another project. Keep the World and the Robot Systems that drive it in the same project.
 
-Step by step: [Drive Robots in the World](https://docs.sodero.io/sodero-cloud/v1.0.0/station/world_connection/index.md).
+Step by step: [Connect to the World](https://docs.sodero.io/sodero-cloud/v1.0.0/station/world_connection/index.md).

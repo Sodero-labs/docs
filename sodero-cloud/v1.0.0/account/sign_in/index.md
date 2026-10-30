@@ -39,11 +39,13 @@ ______________________________________________________________________
 
 People invite you by email. The email has a **Review access** button that opens the portal with the invitation.
 
-| Invitation to         | Email subject                   | In the portal                                                                                                                                                                 |
-| --------------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A project             | *Sodero project access: NAME*   | **Accept invitation** (steps below)                                                                                                                                           |
-| A Stellar design file | *Sodero access: NAME*           | **Accept invitation** or **Decline**, on a page titled *Invite received*                                                                                                      |
-| A workspace           | *Sodero workspace access: NAME* | Accepted when you open the link ([Join a Workspace from an Invitation](https://docs.sodero.io/sodero-cloud/v1.0.0/account/workspaces/#4-join-a-workspace-from-an-invitation)) |
+| Invitation to         | Email subject                   | In the portal                                                                                                                                                                                 |
+| --------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A project             | *Sodero project access: NAME*   | **Accept invitation** (steps below)                                                                                                                                                           |
+| A Stellar design file | *Sodero access: NAME*           | **Accept invitation** or **Decline**, on a page titled *Invite received*                                                                                                                      |
+| A workspace           | *Sodero workspace access: NAME* | Accepted when you open the link while signed in ([Join a Workspace from an Invitation](https://docs.sodero.io/sodero-cloud/v1.0.0/account/workspaces/#4-join-a-workspace-from-an-invitation)) |
+
+A Stellar design file is a robot or gateway document saved in Stellar Designer ([Make Documents in Stellar Designer](https://docs.sodero.io/sodero-cloud/v1.0.0/station/documents/#4-make-documents-in-stellar-designer)).
 
 To accept a project invitation:
 
@@ -68,11 +70,12 @@ Click your avatar at the bottom of the left navigation bar and choose **Account 
 
 The Account settings dialog
 
-| To change          | Do this                                                                                                                                                                                                          |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Your name          | Under **Basic info**, click **Edit** next to **Name**, type the name and click **Save**.                                                                                                                         |
-| Your photo         | Under **Profile**, click **Change photo**, then **Upload photo** (PNG, JPEG or WebP) or pick a color. **Remove** goes back to a plain color.                                                                     |
-| Your email address | Click **Edit** next to **Email**, type the new address and click **Save**. Then type the code sent to the new address in the **Code** row and click **Confirm**. Until then, your account keeps the old address. |
+| To change           | Do this                                                                                                                                                                                                          |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Your name           | Under **Basic info**, click **Edit** next to **Name**, type the name and click **Save**.                                                                                                                         |
+| Your photo          | Under **Profile**, click **Change photo**, then **Upload photo** (PNG, JPEG or WebP) or pick a color. **Remove** goes back to a plain color.                                                                     |
+| Your email address  | Click **Edit** next to **Email**, type the new address and click **Save**. Then type the code sent to the new address in the **Code** row and click **Confirm**. Until then, your account keeps the old address. |
+| Emails about Sodero | Under **Email preferences**, turn **Product updates & news** on or off.                                                                                                                                          |
 
 Your name and photo are shown to the people in your workspaces.
 
@@ -103,7 +106,7 @@ ______________________________________________________________________
 
 **Deleting your account cannot be undone.** It also deletes every workspace you own, with all its projects, and every project you created in other people's workspaces, for everyone who works in them.
 
-Deleting your account also removes your profile, your **My Library**, your Stellar design files, your memberships, and the Robot Systems and Robot Worlds you created in other people's projects. A workspace you own is deleted with every project in it, including projects that other members created.
+Deleting your account also removes your profile, your Stellar design files, your memberships, and the Robot Systems and Robot Worlds you created in other people's projects. A workspace you own is deleted with every project in it, including projects that other members created.
 
 Before you delete your account:
 

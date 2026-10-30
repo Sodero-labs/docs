@@ -21,7 +21,7 @@ The person receives an email titled *Sodero project access: Warehouse Demo* with
 
 **People with access** lists everyone in the project with their role.
 
-- To change a role, use the person's role menu. To remove someone, click **X**.
+- To change a role, use the person's role menu. To remove someone, click **×** on their row.
 - **Project access** at the top of the dialog switches between **Restricted** and **Workspace**.
 - Click **Save** to apply these changes. **Cancel** drops them; invitations already sent stay.
 
@@ -61,7 +61,7 @@ The **Active users** column of the project page shows who is working in each fil
 | *Theater viewer*              | Watching the World in **Theater**                        |
 | *Studio collaboration*        | Editing the World in **Studio**                          |
 
-For recent activity in the whole workspace, such as projects created or files started and stopped, see [Notifications](https://docs.sodero.io/sodero-cloud/v1.0.0/account/workspaces/#notifications).
+For recent activity in the whole workspace, such as projects created or files started and stopped, see [Notifications](https://docs.sodero.io/sodero-cloud/v1.0.0/get_started/sodero_cloud/#notifications).
 
 ______________________________________________________________________
 
@@ -71,7 +71,7 @@ Several people can work in the same file at the same time:
 
 - **Station.** Everyone who opens a Robot System works on the same Station.
 - **Studio.** Everyone who opens a World in Studio joins the same editing session ([Studio](https://docs.sodero.io/sodero-cloud/v1.0.0/worlds/studio/index.md)).
-- **Theater.** Everyone who opens an active World watches the same simulation, each in their own [rendering mode](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/activate_run/#choose-rendering-mode). Each **RTX Real-time** viewer has its own cloud renderer, which uses credits.
+- **Theater.** Everyone who opens an active World watches the same simulation, each in their own [rendering mode](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/activate_run/#choose-rendering-mode). Each viewer can use credits while Theater is open ([Billing and Usage](https://docs.sodero.io/sodero-cloud/v1.0.0/account/billing/#what-uses-credits)).
 
 People with **Can view** can look but not change anything. For example, **Go live** is disabled for them in **Station · Edit**.
 

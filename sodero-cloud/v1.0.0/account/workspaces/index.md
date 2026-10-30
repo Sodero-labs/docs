@@ -1,6 +1,6 @@
 # Workspaces and People
 
-A workspace is where a team works together in the Sodero Cloud portal. It holds the team's projects and people, the project libraries, and one plan with its credits ([Credits and Usage](https://docs.sodero.io/sodero-cloud/v1.0.0/account/billing/index.md)). This page also covers the portal's navigation and help.
+A workspace is where a team works together in the Sodero Cloud portal. It holds the team's projects and people, the project libraries, and one plan with its credits ([Billing and Usage](https://docs.sodero.io/sodero-cloud/v1.0.0/account/billing/index.md)).
 
 ______________________________________________________________________
 
@@ -10,7 +10,7 @@ You can belong to several workspaces. The portal shows one at a time: its name i
 
 The workspace menu of Acme Robotics
 
-The menu holds **Switch workspace**, **Create workspace**, **Workspace settings** (owner only), **People**, **Billing & Usage** ([Credits and Usage](https://docs.sodero.io/sodero-cloud/v1.0.0/account/billing/index.md)) and **Leave workspace**. Everyone in the workspace can open **People** and **Billing & Usage**.
+The menu holds **Switch workspace**, **Create workspace**, **Workspace settings** (owner only), **People**, **Billing & Usage** ([Billing and Usage](https://docs.sodero.io/sodero-cloud/v1.0.0/account/billing/index.md)) and **Leave workspace**. Everyone in the workspace can open **People** and **Billing & Usage**.
 
 ______________________________________________________________________
 
@@ -24,7 +24,7 @@ Everyone in a workspace has one role: **Owner**, **Admin** or **Member**. A work
 | Remove people                                                                                         | Yes   | Members only   | No                                                        |
 | Change roles, cancel invitations, change workspace settings, transfer ownership, delete the workspace | Yes   | No             | No                                                        |
 | Create projects                                                                                       | Yes   | Yes            | When **Members can create projects** is on                |
-| Upload and delete files in project libraries                                                          | Yes   | Yes            | When **Members can manage the Library** is on             |
+| Add, export and delete files in project libraries                                                     | Yes   | Yes            | When **Members can manage the Library** is on             |
 | Manage every project in the workspace, **Empty all trash**                                            | Yes   | Yes            | No: members have the role they were given in each project |
 
 ______________________________________________________________________
@@ -84,11 +84,11 @@ ______________________________________________________________________
 
 Only the owner sees **Workspace settings** in the workspace menu.
 
-| Section         | What you can do                                                                                                                                  |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Profile**     | **Change color** sets the color behind the workspace's initial; **Remove** resets it.                                                            |
-| **Basic info**  | Edit **Name** (up to 30 characters) and click **Save**                                                                                           |
-| **Permissions** | **Members can create projects**, and **Members can manage the Library** (upload and delete files in project libraries). Both are off by default. |
+| Section         | What you can do                                                                                                                                       |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Profile**     | **Change color** sets the color behind the workspace's initial; **Remove** resets it.                                                                 |
+| **Basic info**  | Edit **Name** (up to 30 characters) and click **Save**                                                                                                |
+| **Permissions** | **Members can create projects**, and **Members can manage the Library** (add, export and delete files in project libraries). Both are off by default. |
 
 The color and the permissions are saved as soon as you change them. The dialog also holds [Transfer ownership](#7-transfer-ownership) and [Delete workspace](#8-delete-a-workspace).
 
@@ -131,34 +131,4 @@ In this view, the top bar reads **Guest workspace**, and **Trash** and **Notific
 
 ______________________________________________________________________
 
-## Notifications
-
-Click the bell (**Notifications**) in the left navigation bar to see recent activity in the current workspace, such as projects created or trashed, people added or removed, and Robot Systems and Robot Worlds started, stopped or failed. A red badge counts the unread entries; **Read All** marks them read.
-
-______________________________________________________________________
-
-## The Left Navigation Bar
-
-The left navigation bar is the column of icons on the left of every portal page.
-
-| Item                        | Opens                                                                                                                                                                 |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sodero logo, **Home**       | Your **Recent** and **Favorites** projects, Robot Systems and Robot Worlds                                                                                            |
-| **Projects**                | The projects of the current workspace, or your guest projects                                                                                                         |
-| **Library**                 | My Library and the project libraries ([Libraries](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/libraries/index.md))                                            |
-| **Trash**                   | Items moved to Trash in this workspace ([Projects](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/projects/#7-move-to-trash-restore-and-delete))                 |
-| **Notifications**, **Help** | See below                                                                                                                                                             |
-| Your avatar                 | **Account Settings**, **Sign-in & Security**, **Theme** and **Sign out** ([Sign In and Account](https://docs.sodero.io/sodero-cloud/v1.0.0/account/sign_in/index.md)) |
-
-______________________________________________________________________
-
-## Help and Feedback
-
-Click **Help** in the left navigation bar. The menu has **Documentation**, **Report a bug**, **Share an idea** and **Contact support**.
-
-The Help menu
-
-- **Report a bug** or **Share an idea**: fill in the fields, attach up to 10 PNG, JPG or PDF files (20 MB in total) if you like, and click **Submit report** or **Submit idea**. Sodero receives it with your name, email address and account ID, the page you were on and your browser details.
-- **Contact support** opens the Sodero website in a new tab.
-
-Do not include passwords, access keys or other sensitive information in the text or in the attachments.
+The left navigation bar, **Notifications** and the **Help** menu are described in [Find Your Way in the Portal](https://docs.sodero.io/sodero-cloud/v1.0.0/get_started/sodero_cloud/#find-your-way-in-the-portal).

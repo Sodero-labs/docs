@@ -1,9 +1,5 @@
 # Articulation
 
-Availability
-
-These instructions apply when the required app is installed, its nodes run, and its operator UI is available. Check [Compatibility](https://docs.sodero.io/sodero-cloud/v1.0.0/reference/compatibility/index.md) first.
-
 The **Articulation** controller drives an articulated robot joint by joint: legged robots, humanoids, grippers, pan-tilt heads, or any set of joints that receives joint targets. Unlike the manipulator controller, it uses no arm kinematics (no DH parameters, no Cartesian motions). It bounds and forwards the joint targets of an upper controller, such as a walking policy in your own module, and its **Articulation** UI lets you jog the joints by hand.
 
 | Item     | Value                                                                                                                                                             |
@@ -42,17 +38,17 @@ ______________________________________________________________________
 
 ## 2. Set Up the Nodes
 
-1. Check that `sodero.actuator_gateway` and `sodero.amc` are available in the Store, and select them.
-1. Add the gateway and controller nodes, then connect the controller’s `servo_link` to the gateway.
-1. Go live and wait for app installation to finish. Keep the nodes stopped.
-1. Upload the gateway’s `.gw` and the controller’s `.sdda` document. Reopen each node and confirm the selected document ([Documents and Settings](https://docs.sodero.io/sodero-cloud/v1.0.0/station/documents/index.md)).
-1. Check the robot name and mapping, run the World, then start the gateway, controller and any dependent app.
+1. In the Station's **Store**, install `sodero.actuator_gateway` and `sodero.amc` ([Apps and Packages](https://docs.sodero.io/sodero-cloud/v1.0.0/station/apps/index.md)).
+1. Add the gateway and the Articulation controller, and connect the controller's `servo_link` to the gateway ([Build the Graph](https://docs.sodero.io/sodero-cloud/v1.0.0/station/graph/index.md)).
+1. Upload the gateway's `.gw` and the controller's `.sdda` document ([Documents and Settings](https://docs.sodero.io/sodero-cloud/v1.0.0/station/documents/index.md)).
+1. Set the gateway's **Robot name** and check the actuator mapping ([Connect to the World](https://docs.sodero.io/sodero-cloud/v1.0.0/station/world_connection/index.md)).
+1. Run the World, go live, then start the gateway, the controller and the program that sends joint targets, in this order ([Start and Monitor Nodes](https://docs.sodero.io/sodero-cloud/v1.0.0/station/run/index.md)).
 
 ______________________________________________________________________
 
 ## 3. Open the Articulation UI
 
-If the running node provides a UI link or an **Open …** action, use it to open the app. If neither is available, check the installed app and supported version before continuing. If the session expires, reopen the UI from Station.
+On the Live page, right-click the running `sodero.amc.<name>` node and choose **Open …** ([Start and Monitor Nodes](https://docs.sodero.io/sodero-cloud/v1.0.0/station/run/#3-start-restart-or-stop-one-node)). The Articulation UI opens in a new tab. If its session expires, open it again from the node.
 
 | Area              | Contents                                                                                                                                                                                                        |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -95,8 +91,8 @@ ______________________________________________________________________
 
 ## 7. Control from Programs
 
-| From            | How                                                                                                                                                       |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A walking robot | Your module runs the walking policy and sends joint targets to the Articulation node                                                                      |
-| AI agents       | The `articulation` tools: state, servo, moves, stops and fault reset ([AI Agents](https://docs.sodero.io/sodero-cloud/v1.0.0/connect/ai_agents/index.md)) |
-| Your own tools  | The Station API, through the [Project VPN](https://docs.sodero.io/sodero-cloud/v1.0.0/connect/project_vpn/index.md)                                       |
+| From            | How                                                                                                                                                                       |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A walking robot | Your module runs the walking policy and sends joint targets to the Articulation node                                                                                      |
+| AI agents       | The `station.articulation` tools: state, servo, joint targets, stops and fault reset ([AI Agents](https://docs.sodero.io/sodero-cloud/v1.0.0/connect/ai_agents/index.md)) |
+| Your own tools  | The Station API, through the [Project VPN](https://docs.sodero.io/sodero-cloud/v1.0.0/connect/project_vpn/index.md)                                                       |

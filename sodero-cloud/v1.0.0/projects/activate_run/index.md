@@ -2,7 +2,7 @@
 
 Each Robot System and Robot World has its own cloud environment. **Activate** prepares it, **Run** starts its work, **Stop** ends the work, and **Deactivate** releases the environment. Stopping a World resets its pose and clock; it is not a pause that preserves progress.
 
-**An active environment uses credits.** It is billed for every minute it is active, whether or not anybody uses it or anything runs in it. Stop does not end that; Deactivate does ([Credits and Usage](https://docs.sodero.io/sodero-cloud/v1.0.0/account/billing/index.md)).
+**An active environment uses credits.** It is billed for every minute it is active, whether or not anybody uses it or anything runs in it. Stop does not end that; Deactivate does ([Billing and Usage](https://docs.sodero.io/sodero-cloud/v1.0.0/account/billing/index.md)).
 
 ______________________________________________________________________
 
@@ -22,7 +22,7 @@ flowchart LR
 | Action         | Robot System                                                                           | Robot World                                                                           | Credits     |
 | -------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ----------- |
 | **Activate**   | Starts the environment and restores the Station's saved data and apps. No node starts. | Starts the environment and loads the World's scene. The simulation does not play yet. | Use begins  |
-| **Run**        | Starts every saved node, like **Start all nodes** on Stellar X                         | Plays the simulation                                                                  | No change   |
+| **Run**        | Starts every saved node, like **Start all nodes** in the Station                       | Plays the simulation                                                                  | No change   |
 | **Stop**       | Stops the nodes                                                                        | Stops the simulation and resets the World's pose and clock                            | Use goes on |
 | **Deactivate** | Stops the nodes, saves the Station's data, then tears the environment down             | Tears the environment down                                                            | Use ends    |
 
@@ -63,13 +63,13 @@ Once a file is **Active**, click the state in its **Running** column and choose 
 
 A World without a scene cannot run: build it in [Studio](https://docs.sodero.io/sodero-cloud/v1.0.0/worlds/studio/index.md) first. **Stopped** keeps the file active, so it keeps using credits.
 
-| State              | Meaning                                                                                                                                                                                                                                           |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Running**        | Operations are running                                                                                                                                                                                                                            |
-| **Partly running** | Robot System only: some nodes did not start. A **Failed** badge and a banner above the tables explain why. Open **Station · Live** and read that node's log ([Run and Monitor](https://docs.sodero.io/sodero-cloud/v1.0.0/station/run/index.md)). |
-| **Stopped**        | Operations are stopped. Also shown while the file is not active.                                                                                                                                                                                  |
-| **Error**          | The World reported an error                                                                                                                                                                                                                       |
-| **-**              | The state cannot be read. People with **Can view** always see **-**.                                                                                                                                                                              |
+| State              | Meaning                                                                                                                                                                                                                                                   |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Running**        | Operations are running                                                                                                                                                                                                                                    |
+| **Partly running** | Robot System only: some nodes did not start. A **Failed** badge and a banner above the tables explain why. Open **Station · Live** and read that node's log ([Start and Monitor Nodes](https://docs.sodero.io/sodero-cloud/v1.0.0/station/run/index.md)). |
+| **Stopped**        | Operations are stopped. Also shown while the file is not active.                                                                                                                                                                                          |
+| **Error**          | The World reported an error                                                                                                                                                                                                                               |
+| **-**              | The state cannot be read. People with **Can view** always see **-**.                                                                                                                                                                                      |
 
 ______________________________________________________________________
 
@@ -90,10 +90,10 @@ Opening a file never starts nodes or plays a World. To edit an active World in S
 
 Before Studio or Theater opens, the portal asks how to draw the World on your screen.
 
-| Mode              | Draws the World                                                                                                                                |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| **RTX Real-time** | On a cloud GPU, with advanced materials and lighting. Each Studio or Theater tab in this mode runs its own cloud renderer, which uses credits. |
-| **WebGPU**        | In your browser, on this device's GPU. Performance depends on your hardware.                                                                   |
+| Mode              | Draws the World                                                                                                                                                                                                                       |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **RTX Real-time** | On a cloud GPU, with advanced materials and lighting. Each Studio or Theater tab in this mode runs its own cloud renderer, which uses credits.                                                                                        |
+| **WebGPU**        | In your browser, on this device's GPU, with no cloud GPU. Performance depends on your hardware. Your plan may still count WebGPU sessions ([Billing and Usage](https://docs.sodero.io/sodero-cloud/v1.0.0/account/billing/index.md)). |
 
 Pick a mode and click **Open Cosmic Studio** or **Open Cosmic Theater**. **Remember on this device.** preselects your choice next time. The mode only changes how you see the World, not the simulation, and each person chooses their own.
 
@@ -142,7 +142,7 @@ The file then stays active, and keeps using credits, until somebody deactivates 
 
 ______________________________________________________________________
 
-## 6. Messages and Errors
+## 6. Troubleshooting
 
 | Message                                                          | What to do                                                                                                    |
 | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |

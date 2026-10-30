@@ -34,7 +34,7 @@ ______________________________________________________________________
 The Create project dialog
 
 - If **+ Project** is dimmed, only the workspace's owner and admins can create projects there. The owner can turn on **Members can create projects** ([Workspaces and People](https://docs.sodero.io/sodero-cloud/v1.0.0/account/workspaces/#6-change-workspace-settings)).
-- Your workspace's plan limits how many projects the workspace can hold; projects in Trash do not count ([Credits and Usage](https://docs.sodero.io/sodero-cloud/v1.0.0/account/billing/#limits)).
+- Your workspace's plan limits how many projects the workspace can hold; projects in Trash do not count ([Billing and Usage](https://docs.sodero.io/sodero-cloud/v1.0.0/account/billing/#limits)).
 
 ______________________________________________________________________
 
@@ -70,16 +70,17 @@ Each person in a project has one of three roles, shown in lists as Manager, Edit
 
 The person who created a project can manage it, and so can the workspace's owner and admins.
 
-| Action                                                                  | Can view  | Can edit | Can manage |
-| ----------------------------------------------------------------------- | --------- | -------- | ---------- |
-| Open the project; see its files, their states and active users          | ✓         | ✓        | ✓          |
-| Open **Station · Edit**, **Station · Live**, **Studio** and **Theater** | view only | ✓        | ✓          |
-| Create, import, duplicate, rename and trash files                       | —         | ✓        | ✓          |
-| Activate, run, stop and deactivate files; change **Auto off**           | —         | ✓        | ✓          |
-| Download a local copy of a file                                         | —         | —        | ✓          |
-| Invite people, change roles, set the project access                     | —         | —        | ✓          |
-| Duplicate the project, change its settings, move it to Trash            | —         | —        | ✓          |
-| Restore or permanently delete the project's items in Trash              | —         | —        | ✓          |
+| Action                                                                       | Can view  | Can edit | Can manage |
+| ---------------------------------------------------------------------------- | --------- | -------- | ---------- |
+| Open the project; see its files, their **Activation** state and active users | ✓         | ✓        | ✓          |
+| See the **Running** state of an active file                                  | —         | ✓        | ✓          |
+| Open **Station · Edit**, **Station · Live**, **Studio** and **Theater**      | view only | ✓        | ✓          |
+| Create, import, duplicate, rename and trash files                            | —         | ✓        | ✓          |
+| Activate, run, stop and deactivate files; change **Auto off**                | —         | ✓        | ✓          |
+| Download a local copy of a file                                              | —         | —        | ✓          |
+| Invite people, change roles, set the project access                          | —         | —        | ✓          |
+| Duplicate the project, change its settings, move it to Trash                 | —         | —        | ✓          |
+| Restore or permanently delete the project's items in Trash                   | —         | —        | ✓          |
 
 Controls you cannot use are dimmed and give the reason on hover. Creating projects, managing project libraries and **Empty all trash** depend on your [workspace role](https://docs.sodero.io/sodero-cloud/v1.0.0/account/workspaces/#roles).
 
@@ -106,7 +107,7 @@ ______________________________________________________________________
 
 Managers can keep a Robot System or Robot World outside Sodero: open the file's **⋯** menu on the project page and choose **Download local copy**. The browser saves an `.sdr` file named after the file, for example `jackal.sdr`. To keep a whole project, download each of its files.
 
-Use the copy to keep a backup, to [import it](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/files/#2-import-an-sdr-file) into another project, or to load a Robot System on a Stellar X controller with **Load SDR** ([Backup and Restore](https://docs.sodero.io/stellar-x/latest/station/backup_restore/) in the Stellar X manual).
+Use the copy to keep a backup, to [import it](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/files/#2-import-an-sdr-file) into another project, or to move a Robot System to Stellar X ([Move Robot Systems Between Stellar X and Sodero Cloud](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/files/#move-robot-systems-between-stellar-x-and-sodero-cloud)).
 
 **Tip:** A Station saves its data when it deactivates. Deactivate the Robot System before you download it, so that the copy holds your latest changes.
 
@@ -125,4 +126,4 @@ Click **Trash** in the left navigation bar to see the trashed projects, Robot Sy
 
 Workspace owners and admins also have **Empty all trash**: after asking, it permanently deletes every entry they can manage.
 
-**Library files do not go to Trash.** Deleting a file from My Library or from a project's library removes it at once ([Libraries](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/libraries/index.md)).
+**Library files do not go to Trash.** Deleting a file from a project's library removes it at once ([Libraries](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/libraries/index.md)).

@@ -1,7 +1,5 @@
 # Apps and Packages
 
-Check the app itself in **Store**. A **Starting apps** bundle is a selection of apps, not confirmation that every required app is installed or available for the current environment. Verify the gateway and controller separately after going live.
-
 Every node of a Station runs an app or module that is installed on that Station. **Add node** offers only what is installed, plus empty drafts. Apps come from the **Store**; your own programs are uploaded as module packages. Both are kept with the Robot System and installed each time its Station starts.
 
 | Source          | What it is                                                                        | Badge in **Add node** | Where you install it                                             |
@@ -15,6 +13,8 @@ ______________________________________________________________________
 
 When you create a Robot System, **Starting apps** offers bundles of Store apps, for example for a manipulator or a mobile robot. **Empty** has none ([Create a File](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/files/#1-create-a-file)). The apps of the chosen bundle are recorded with the Robot System and install when the Station first starts.
 
+A bundle is a starting point, not a complete system. Before you add nodes, check in the **Store** that every app your nodes run, such as the actuator gateway and the robot's controller, shows **Installed**.
+
 If **Add node** lists only **Empty gateway**, **Empty controller** and the other drafts, no app is installed yet. Install the apps you need from the Store.
 
 ______________________________________________________________________
@@ -25,13 +25,13 @@ Click **Store** in the left rail. The Store lists the apps that Sodero publishes
 
 The Store of a new Robot System, on the Edit page
 
-| Part of a row | Shows                                                                                                                                                                                                                                      |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Name          | The app and a short description, for example **Gateway Designer** (*Gateway control and setup workspace*)                                                                                                                                  |
-| **Included**  | Every Store app is included in Sodero Cloud; there is nothing to buy                                                                                                                                                                       |
-| State         | **Not Installed** or **Installed**                                                                                                                                                                                                         |
-| Versions      | *Current* (the Store's release), *Installed version*, *New* when a newer release is out, and *Installed* (the date). An installed app also lists its *Cloud permissions*: what its own UI may use in Sodero Cloud, such as your libraries. |
-| Buttons       | **Install** or **Uninstall**, and **Update** when a newer release is out                                                                                                                                                                   |
+| Part of a row | Shows                                                                                                                                                                                                                                                           |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name          | The app and a short description, for example **Gateway Designer** (*Gateway control and setup workspace*)                                                                                                                                                       |
+| **Included**  | Every Store app is included in Sodero Cloud; there is nothing to buy                                                                                                                                                                                            |
+| State         | **Not Installed** or **Installed**                                                                                                                                                                                                                              |
+| Versions      | *Current* (the Store's release), *Installed version*, *New* when a newer release is out, and *Installed* (the date). An installed app also lists its *Cloud permissions*: what its own UI may use in Sodero Cloud, such as your profile or the project library. |
+| Buttons       | **Install** or **Uninstall**, and **Update** when a newer release is out                                                                                                                                                                                        |
 
 ### Install
 
@@ -79,7 +79,7 @@ Stop and delete the nodes that use the module, then choose **⋯ › Remove modu
 
 ______________________________________________________________________
 
-## 4. Messages
+## 4. Troubleshooting
 
 | Message                                                                                       | What to do                                                                                                                                                |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -91,5 +91,5 @@ ______________________________________________________________________
 | *Install the package of … (…) from the Store first. Nothing was started.*                     | A node's app is not installed on this Station. Install it, then start the nodes again.                                                                    |
 | *It is installed now but may be gone after this Station stops and starts again: …*            | The app runs now, but Sodero Cloud could not record it for the Robot System. After the next start, check the Store and install it again if it is missing. |
 | *It is removed now but may come back after this Station stops and starts again: …*            | After the next start, check the Store and uninstall it again if it is back                                                                                |
-| *Install failed*, *Update failed* or *Uninstall failed*                                       | Try again. If it fails again, reload the page.                                                                                                            |
+| *Install failed*, *Update failed* or *Uninstall failed*                                       | Try again.                                                                                                                                                |
 | **Package error** with *Could not load the Store.* or *Could not load the item's packages.*   | The Edit page could not read the apps. Reload the page.                                                                                                   |

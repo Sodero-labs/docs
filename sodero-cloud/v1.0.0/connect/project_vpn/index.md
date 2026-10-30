@@ -1,10 +1,6 @@
 # Project VPN
 
-Availability
-
-Continue only if the **Project VPN** panel provides an installer for your operating system and your project role allows a connection. If no installer is available, contact Sodero. The installed release determines the exact approval prompts.
-
-The Project VPN connects your own computer to the Stations of a project, so you can use a Station's API from a terminal, your own scripts or your IDE. You approve every connection yourself, and a connection lasts at most 8 hours.
+The Project VPN connects a device of yours, such as your computer or a robot PC, to the Stations of a project, so you can use a Station's API from a terminal, your own scripts or your IDE. You approve every connection yourself, and a connection lasts at most 8 hours.
 
 **AI agents don't need the Project VPN.** To work on a project with Claude Code or another AI agent, see [AI Agents](https://docs.sodero.io/sodero-cloud/v1.0.0/connect/ai_agents/index.md).
 
@@ -12,129 +8,130 @@ ______________________________________________________________________
 
 ## What the Project VPN Reaches
 
-A connection reaches one thing: the **Station API on port 8001** of each Station (Robot System) that was active when you connected. It does not reach other ports, Robot Worlds, Stations activated or restarted after you connected, or other projects. Your computer can call a Station, but a Station cannot connect to your computer.
+A connection reaches each Station (Robot System) of the project that was active when you connected: its API on port 8001, and the extra TCP ports opened for it ([VPN Ports](#4-vpn-ports)). It does not reach Robot Worlds, Stations activated or restarted after you connected, or other projects. Your device can call a Station, but a Station cannot connect to your device.
 
 The Project VPN doesn't start anything: activate the Stations you want to use first ([Activate and Run](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/activate_run/index.md)). An active Station uses credits whether or not you are connected, and your tools' calls to it count as use for [Auto off](https://docs.sodero.io/sodero-cloud/v1.0.0/projects/activate_run/#5-auto-off).
 
-People who can manage the project (and, where enabled, editors) can connect computers and copy Station API keys. Others see *Your project role can't use the Project VPN. Ask the project owner for access.*
+The project's owner and people with **Can manage** can connect devices and copy Station API keys. When your role doesn't allow it, the panel says *Your project role can't use the Project VPN. Ask the project owner for access.*
 
 ______________________________________________________________________
 
-## 1. Install the Sodero VPN Toolkit
+## 1. Install Connector
 
-Install the toolkit once on each computer you want to connect. The portal calls the installed program **SoderoConnector**; your system lists it as **Sodero VPN**.
+Install the Connector once on each device you want to connect. It adds the `sodero` command, which connects the device.
 
 1. Open the project and click **Project VPN** in the top bar.
-1. In the **This PC** row, under **Install the Sodero VPN toolkit**, the panel shows the install command for your computer. Copy it from there with **Copy**.
-1. Run the command: on Linux or macOS in a terminal, as your normal user; on Windows in PowerShell. Approve the administrator prompt.
+1. Expand **Install Connector**. It shows an install command for **Linux**, **macOS** and **Windows** in two groups:
+   - **Desktop PC**, for a computer with a desktop;
+   - **Robot or server PC (headless)**, for a device without a desktop: the command installs without prompts and starts no tray app.
+1. Copy the command for the device's system and run it on the device: on Linux or macOS in a terminal, as your normal user; on Windows in PowerShell. Approve the administrator prompt.
+1. Sign in once on the device: run `sodero login`. It opens the Sodero sign-in in your browser; without a desktop, it prints the sign-in address and explains how to open it. Finish within 5 minutes.
 
 The Project VPN panel of Warehouse Demo
 
-**No install command?** If the panel says *A pinned toolkit installer has not been published on this server yet.*, the Project VPN cannot be set up yet. Contact Sodero.
+The command checks the installer before it runs it. On Linux, the installer supports Debian and Ubuntu. On Windows, it also installs WireGuard for Windows, which the Connector uses. Your system lists the Connector as **Sodero VPN**; on a desktop PC it also adds an optional status icon (**Sodero VPN** in your app menu, or `sodero tray`).
 
-On Linux, the installer supports Debian and Ubuntu. On Windows, it also installs WireGuard for Windows, which Sodero VPN uses.
-
-The toolkit also adds the `sodero` command and an optional status icon (**Sodero VPN** in your app menu, or `sodero tray`).
+This `sodero` command belongs to the Connector. It is not the [sodero CLI](https://docs.sodero.io/stellar-x/latest/ssh_workspace/sodero_cli/) of the Stellar X SSH workspace.
 
 ______________________________________________________________________
 
-## 2. Connect This Computer
+## 2. Connect a Device
 
-1. Activate at least one Station of the project. In **Project VPN**, click **Connect this PC**.
-1. Your browser asks whether to open SoderoConnector. Allow it.
-1. The connection window **Sodero — connect and approve** opens. If it asks you to sign in, sign in with your Sodero account in the browser tab that opens.
-1. SoderoConnector shows the project, this computer's name and a six-character **Confirmation code**. Check the project, then approve as the prompts ask: type the code in SoderoConnector, or check that the portal shows the same code, tick the box and click **Approve this device**. When both sides ask, do both.
+Every device connects the same way, this computer included.
+
+1. Activate at least one Station of the project. In **Project VPN**, click **Connect a device**. A new row shows the steps and the command for the device, `sodero vpn connect '…'`, with a link in it.
+1. Click **Copy** next to the command, then run the command on the device and keep it running. The link works once, for one device, and only for 60 seconds (*Link expires in … · one device*); **Get a new link** replaces it.
+1. The command shows the project, the device and a six-character **Confirmation code**. Check that the code matches the one in the portal row, type `y` at *Connect this device to this project? [y/N]*, then type the code when the command asks for it.
 1. The row shows **Connected**. **Details** lists the Stations in this connection.
 
-**Approve only a connection you started.** If a confirmation code appears that you didn't expect, cancel the request and don't approve it.
+The device must be approved within 5 minutes after you click **Connect a device**. When a request ends before the device connected, the row says *Ended before the device connected: …*; click **Connect a device** again.
 
-**Keep SoderoConnector running.** The connection stays open only while the program that made it runs: the connection window, or the terminal command. Once the portal says *The device manages this connection; the browser can close.*, you can close the portal tab.
+**Approve only a connection you started.** If the portal shows a code that differs from the one on your device, another device used the link: cancel it in the portal and don't approve it.
 
-______________________________________________________________________
-
-## 3. Connect from a Terminal
-
-You can connect without the portal page, for example on a computer you reach over SSH:
-
-```
-sodero login                                # once: sign in through your browser
-sodero vpn connect --project PROJECT_ID     # stays in the foreground
-```
-
-1. `sodero login` opens the Sodero sign-in in your browser. Without a desktop, it prints the sign-in address and explains how to open it; finish within 5 minutes.
-1. Replace `PROJECT_ID` with the project's identifier: in the project, open **AI agents** and expand **Advanced: project identifier**.
-1. Answer `y` to *Connect this device to this project? [y/N]*, then type the **Confirmation code** that the command prints.
-1. Leave the command running: `Ctrl+C` or closing the terminal disconnects. To keep the connection after you log out of SSH, run it inside `tmux` or `screen`.
+**Keep the command running.** The device holds the connection: `Ctrl+C` or closing the terminal disconnects it. Once the row says *Connected — the device manages this connection.*, you can close the portal tab. To keep the connection after you log out of an SSH session, run the command inside `tmux` or `screen`.
 
 `sodero vpn status` shows the connection, `sodero vpn disconnect` ends it, and `sodero --help` lists all commands.
 
-This `sodero` command belongs to the Sodero VPN toolkit. It is not the [sodero CLI](https://docs.sodero.io/stellar-x/latest/ssh_workspace/sodero_cli/) of the Stellar X SSH workspace.
-
 ______________________________________________________________________
 
-## 4. Connect Another Device
+## 3. Use a Station's Address and API Key
 
-**Connect another device** connects a different computer, for example a Linux machine without a desktop.
+Each Station has its own address on the Project VPN. It stays the same when the Station is deactivated and activated again. You find it under **Station addresses** in the **Project VPN** panel and in the **IP address** column of the project's Robot Systems.
 
-1. In **Project VPN**, click **Connect another device** and choose **CLI terminal** or **Desktop app**.
-1. On the device, install the toolkit with the command shown in the row.
-1. **CLI terminal:** run `sodero login` with the same Sodero account, then the connect command from the row, and keep it running. **Desktop app:** paste the link from the row into the device's browser.
-1. Approve with the confirmation code, as in [step 2](#2-connect-this-computer).
-
-The link works once, for one device, and only for 60 seconds; **Get a new link** makes a new one. The device must connect within 5 minutes.
-
-______________________________________________________________________
-
-## 5. Use a Station's Address and API Key
-
-Each Station has its own address on the Project VPN. It stays the same when the Station is deactivated and activated again. You find it in **Station addresses** in the **Project VPN** panel and in the **IP address** column of the project's Robot Systems.
-
-1. Connect this computer while the Station is active.
+1. Connect your device while the Station is active.
 1. Click the copy icon next to the Station's address. It copies `http://ADDRESS:8001/`.
-1. In **Station addresses**, click the key icon (*Copy the Station's API key*). The key is copied to your clipboard; it is never shown on screen.
+1. Click the key icon (*Copy the Station's API key*). The key is copied to your clipboard; it is never shown on screen.
 1. In your tools, use the address and send the key with each request. The message that confirms the copy names the request header to use.
 
 **The key changes each time the Station starts.** After the Station is deactivated and activated again, connect again and copy the new key.
 
 **Keep the key private.** Treat it like a password: don't paste it into shared documents and don't commit it with your code.
 
+### Addresses for a Control Station
+
+A control app that runs on one of the project's Stations reaches the other Stations at their **address inside the cloud**, which your devices can't reach. It changes when the Station restarts.
+
+- The network icon next to a Station copies its address inside the cloud.
+- **Copy for a control Station** copies one line for each running Station: its name, its address inside the cloud and its API key.
+
 ______________________________________________________________________
 
-## 6. Disconnect
+## 4. VPN Ports
 
-Click **Disconnect** in the portal, **Disconnect and close window** in the connection window or **Disconnect VPN** in the status icon. In a terminal, press `Ctrl+C` where `sodero vpn connect` runs, or run `sodero vpn disconnect`.
+Besides its API port 8001, a Station can open more TCP ports on the Project VPN, for example for a service of your own module.
 
-A connection also ends on its own after 8 hours; about a minute after the program that holds it stops, for example when the computer sleeps; when all its Stations are deactivated or restarted; when you lose access to the project; or when your workspace has used its Project VPN time or data for the month. The toolkit never reconnects on its own.
+1. In **Station addresses**, click the **VPN ports** button (sliders icon) next to the Station. The dialog **VPN ports — *name*** opens.
+1. Under **Extra TCP ports**, enter the ports, for example `9000, 9001`, and click **Save**.
+1. You can open up to 16 TCP ports from 1024 to 65535. The dialog names the ports that the Station uses itself; they are refused.
+1. The ports apply the next time the Station starts (*VPN ports saved. They apply the next time the Station starts.*). **Open now** lists the ports of the current run. A connected device must connect again to use newly opened ports.
+1. Only the project's owner and people with **Can manage** can change VPN ports. Others see them read-only.
+1. One connection carries at most 64 Station ports. In a project with many Stations, each Station's API port comes first, and some extra ports may be left out.
+
+**Protect the services on extra ports.** Anyone with an approved connection to the project can reach these ports: the services on them must check their own sign-in.
 
 ______________________________________________________________________
 
-## 7. Update or Uninstall the Toolkit
+## 5. Disconnect
 
-To update, run the install command from the panel with `update` in place of `install`, then connect again. To uninstall, run `sodero uninstall` (add `--purge` to also remove the VPN settings and the device identity), or on Windows uninstall **Sodero VPN** in **Installed apps**. WireGuard for Windows stays installed.
+Click **Disconnect** in the device's row in the portal. On the device, press `Ctrl+C` where `sodero vpn connect` runs, or run `sodero vpn disconnect`. On a desktop PC, the status icon also has **Disconnect VPN**.
+
+A connection also ends on its own after 8 hours; about a minute after the command that holds it stops, for example when the device sleeps; when all its Stations are deactivated or restarted; when you lose access to the project; or when your workspace has used its Project VPN time or data for the month. The Connector never reconnects on its own.
+
+______________________________________________________________________
+
+## 6. Update or Uninstall the Connector
+
+To update, run the install command from **Install Connector** with `update` in place of `install`, then connect again. To uninstall, run `sodero uninstall` (add `--purge` to also remove the VPN settings and the device identity), or on Windows uninstall **Sodero VPN** in **Installed apps**. WireGuard for Windows stays installed.
 
 ______________________________________________________________________
 
 ## Limits
 
-| What                        | Limit                                                        |
-| --------------------------- | ------------------------------------------------------------ |
-| Open connections per person | 3, across all your projects                                  |
-| Connections per computer    | 1 at a time                                                  |
-| Length of a connection      | 8 hours                                                      |
-| Monthly use                 | Project VPN time and data per workspace, as your plan allows |
+| What                          | Limit                                                        |
+| ----------------------------- | ------------------------------------------------------------ |
+| Open connections per person   | 3, across all your projects                                  |
+| Connections per device        | 1 at a time                                                  |
+| Length of a connection        | 8 hours                                                      |
+| Link for **Connect a device** | 60 seconds, one device                                       |
+| Approving a device            | Within 5 minutes                                             |
+| Extra TCP ports per Station   | 16, from 1024 to 65535                                       |
+| Station ports per connection  | 64                                                           |
+| Monthly use                   | Project VPN time and data per workspace, as your plan allows |
 
-**Billing & Usage** shows the Project VPN time and data used this month ([Credits and Usage](https://docs.sodero.io/sodero-cloud/v1.0.0/account/billing/index.md)). When they are used up, new connections are refused until the counters reset.
+**Billing & Usage** shows the Project VPN time and data used this month ([Billing and Usage](https://docs.sodero.io/sodero-cloud/v1.0.0/account/billing/index.md)). When they are used up, new connections are refused until the counters reset.
 
 ______________________________________________________________________
 
 ## Troubleshooting
 
-| Message or symptom                                                | What to do                                                                                                                                                                                     |
-| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| *No running Station is available for this project.*               | Activate at least one Station, then connect.                                                                                                                                                   |
-| *You have 3 connections, the maximum. …*                          | Disconnect a connection you don't need, here or in another project.                                                                                                                            |
-| *No response from SoderoConnector. …*                             | Install or start the toolkit, allow your browser to open it, then click **Open SoderoConnector again**. If this computer is connected from another tab, click **Use here** on that connection. |
-| A Station is missing, or *Some Stations stopped or changed. …*    | The Station was activated or restarted after you connected. Disconnect, then connect again.                                                                                                    |
-| *A local network or another VPN already routes a target address.* | Disconnect the other VPN, or connect from a different network.                                                                                                                                 |
-| *Not signed in to Sodero …* or *Your Sodero sign-in has ended …*  | Run `sodero login`.                                                                                                                                                                            |
-| A checksum, size or signature mismatch during installation        | Don't work around it. Copy the command from the panel again; if the message comes back, report it to Sodero.                                                                                   |
+| Message or symptom                                                   | What to do                                                                                                             |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| *No running Station is available for this project.*                  | Activate at least one Station, then connect.                                                                           |
+| *You have 3 connections, the maximum. …*                             | Disconnect a connection you don't need, here or in another project.                                                    |
+| *The link expired. Get a new one to continue.*                       | Click **Get a new link** and run the new command on the device within 60 seconds.                                      |
+| *The confirmation code did not match. This device was not approved.* | Click **Connect a device** again, run the new command, and type the code exactly as the command shows it.              |
+| *Ended before the device connected: …*                               | The device was not approved within 5 minutes, or the command stopped. Click **Connect a device** again.                |
+| A Station is missing, or *Some Stations stopped or changed. …*       | The Station was activated or restarted after you connected. Disconnect, then connect again.                            |
+| *A local network or another VPN already routes a target address.*    | Disconnect the other VPN, or connect from a different network.                                                         |
+| *Not signed in to Sodero …* or *Your Sodero sign-in has ended …*     | Run `sodero login` on the device.                                                                                      |
+| A checksum, size or signature mismatch during installation           | Don't work around it. Copy the command from **Install Connector** again; if the mismatch remains, report it to Sodero. |

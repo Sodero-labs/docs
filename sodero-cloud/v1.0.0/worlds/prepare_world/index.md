@@ -2,20 +2,20 @@
 
 The Stations of a project can drive a robot in its Robot World only when the World follows a few rules. They are the rules for a robot in NVIDIA Isaac Sim on Stellar X, plus two more: a purpose for robot cameras and a schema on fixed joints. The scene of the [Quick Start](https://docs.sodero.io/sodero-cloud/v1.0.0/get_started/quick_start/index.md) follows all of them: use it as a model.
 
-Studio has no tools to create articulations, joints, colliders or cameras. Prepare robots in a USD tool such as Isaac Sim ([Robot Setup](https://docs.sodero.io/stellar-x/latest/virtual_simulation/robot_setup/) in the Stellar X manual), then bring the scene into the World with **Replace scene…**. A robot in a single USD file can also come in through **Upload from PC** ([Studio](https://docs.sodero.io/sodero-cloud/v1.0.0/worlds/studio/#2-bring-content-in)).
+Studio has no tools to create articulations, joints, colliders or cameras. Prepare robots in a USD tool such as Isaac Sim ([Prepare the Robot](https://docs.sodero.io/stellar-x/latest/virtual_simulation/robot_setup/) in the Stellar X manual), then bring the scene into the World with **Replace scene…**. A robot in a single USD file can also come in through **Upload from PC** ([Studio](https://docs.sodero.io/sodero-cloud/v1.0.0/worlds/studio/#2-bring-content-in)).
 
 ______________________________________________________________________
 
 ## The Rules
 
-| Rule                                                                                                              | Why                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| **The World is Z-up, in meters, and has a PhysicsScene.**                                                         | Studio refuses Y-up scenes, and the simulation needs a physics scene.                               |
-| **Each robot is one articulation.** Its top prim carries an **Articulation Root**.                                | A robot is simulated and driven as one articulation.                                                |
-| **The prim name is the robot name.** It is unique in the World and equals the robot name in the gateway document. | A simulation gateway finds its robot by this name.                                                  |
-| **Confirm the actuator mapping against the simulated joint order.**                                               | Each actuator index must address the intended movable joint.                                        |
-| **Robot cameras have unique names and the purpose `guide`.**                                                      | A camera gateway reads its camera by name, and Sodero renders robot cameras that have this purpose. |
-| **Fixed joints carry a physics joint schema.**                                                                    | A fixed joint without one takes no part in the simulation.                                          |
+| Rule                                                                                                                                     | Why                                                                                                 |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| **The World is Z-up, in meters, and has a PhysicsScene.**                                                                                | Studio refuses Y-up scenes, and the simulation needs a physics scene.                               |
+| **Each robot is one articulation.** Its top prim carries an **Articulation Root**.                                                       | A robot is simulated and driven as one articulation.                                                |
+| **The prim name is the robot name.** It is unique in the World and equals the **Robot name** set on the robot's simulation gateway node. | A simulation gateway finds its robot by this name.                                                  |
+| **Actuators follow the USD joint order.** Actuator *i* of a gateway drives the robot's *i*-th movable joint in USD order.                | The gateway addresses joints by actuator index.                                                     |
+| **Robot cameras have unique names and the purpose `guide`.**                                                                             | A camera gateway reads its camera by name, and Sodero renders robot cameras that have this purpose. |
+| **Fixed joints carry a physics joint schema.**                                                                                           | A fixed joint without one takes no part in the simulation.                                          |
 
 ______________________________________________________________________
 
@@ -31,17 +31,23 @@ ______________________________________________________________________
 - The robot's top prim carries the **Articulation Root**. A robot has exactly one.
 - Its links are rigid bodies with colliders and realistic masses. Studio can correct a body's mass or density ([Studio](https://docs.sodero.io/sodero-cloud/v1.0.0/worlds/studio/#3-arrange-and-edit)).
 - The prim's name is the robot name: letters, digits and `_`, not starting with a digit. It must be unique in the World, and case matters.
-- The robot's simulation gateway uses the same name, from its gateway document (`.gw`). For the example scene, the Jackal articulation is `/World/jackal`.
+- The robot's simulation gateway node uses the same name as its **Robot name** ([Connect to the World](https://docs.sodero.io/sodero-cloud/v1.0.0/station/world_connection/#2-name-the-robot)). For the example scene, the Jackal articulation is `/World/jackal`.
 
-**Names must match.** If the robot name in the gateway document differs from the robot's prim name, the robot never moves. Rename the prim, or use a gateway document with the right robot name.
+**Names must match.** If the gateway node's **Robot name** differs from the robot's prim name, the robot never moves. Rename the prim, or change the **Robot name**.
 
 ______________________________________________________________________
 
-## 3. Check the Actuator Mapping
+## 3. Actuators Follow the USD Joint Order
 
-Match each gateway actuator index to the intended movable joint in the simulation. Do not infer that mapping from an alphabetical list of joint names.
+A simulation gateway drives the robot's joints by actuator index:
 
-Select the robot in Studio and inspect **Joints (n)** to check its joint names and count. That list is alphabetical; it is not sufficient to establish the controller’s actuator order. Use robot documents prepared and validated for this scene and Station version ([Compatibility](https://docs.sodero.io/sodero-cloud/v1.0.0/reference/compatibility/index.md)).
+- Actuator 1 (index 0) drives the first movable joint under the robot prim, actuator 2 the second, and so on. Movable joints are revolute and prismatic joints; fixed joints are not actuators.
+- The order is the order in which the robot's USD file defines the joints, for example the order of the joint prims in a `.usda` file.
+- A joint marked `rc:passive = true` is not an actuator and is skipped.
+
+The robot document maps its joints or wheels to the gateway's actuators: that mapping must match this order. Use robot documents prepared for this scene and Station release ([Compatibility](https://docs.sodero.io/sodero-cloud/v1.0.0/reference/compatibility/index.md)).
+
+Studio's **Joints (n)** list shows a robot's joint names and their number, in alphabetical order: it does not show the actuator order.
 
 Before normal operation, test one joint or wheel at a time with a small command and confirm that the intended part moves in the intended direction. Stop and correct the actuator mapping or axis configuration if it does not. Keep joint limits consistent with the robot model.
 
@@ -57,7 +63,7 @@ ______________________________________________________________________
 
 While the World is active, Sodero renders its robot cameras for the camera gateways of the project's Stations. Theater's loading screen shows their progress under **Robot cameras**.
 
-**IMUs.** An IMU gateway reads an IMU on a link of the robot. Declare it on the robot prim with `rc:imuLink`, the name of the link, and `rc:imuOffset`, its position on that link in meters, as for Isaac Sim ([Robot Setup › IMU](https://docs.sodero.io/stellar-x/latest/virtual_simulation/robot_setup/#7-imu)).
+**IMUs.** An IMU gateway reads an IMU on a link of the robot. Declare it on the robot prim with `rc:imuLink`, the name of the link, and `rc:imuOffset`, its position on that link in meters, as for Isaac Sim ([Prepare the Robot › IMU](https://docs.sodero.io/stellar-x/latest/virtual_simulation/robot_setup/#7-imu)).
 
 ______________________________________________________________________
 
@@ -106,7 +112,7 @@ Check the World on its own before you connect Stations to it:
    - the robots rest on the ground and do not fall through it or drift away;
    - a fixed-base robot stays in place;
    - **Physics RTF** is near 1.00;
-   - each robot appears in **Scene assets** under the name its gateway document uses.
+   - each robot appears in **Scene assets** under the **Robot name** of its gateway node.
 1. Click **Stop Theater**. To change the World, deactivate it and open it in Studio.
 
-Next: [Drive Robots in the World](https://docs.sodero.io/sodero-cloud/v1.0.0/station/world_connection/index.md).
+Next: [Connect to the World](https://docs.sodero.io/sodero-cloud/v1.0.0/station/world_connection/index.md).
